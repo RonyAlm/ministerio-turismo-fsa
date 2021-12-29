@@ -54,23 +54,28 @@
     width: 226px !important;
 }
 
+.grafico {
+    width: 77%;
+    margin: 0 auto;
+}
+
 .grafico .h5_r_vertical {
     transform: rotateZ(-90deg);
     position: absolute;
     left: -4rem;
-    top: 25rem;
+    top: 14rem;
 }
 
-.grafico .h5_r_vertical h5 {
-    color: #c4c4c4;
+.grafico .h5_r_vertical h5,
+.grafico .h5_r_vertical_2 h5 {
+    color: #c4c4c4 !important;
 }
 
 .grafico .h5_r_vertical_2 {
     transform: rotateZ(-90deg);
     position: absolute;
     left: -9rem;
-    top: 25rem;
-    color: #c4c4c4 !important;
+    top: 12rem;
 }
 
 .grafico .h5_r {
@@ -161,4 +166,8 @@
 
 .header-area .academy-main-menu .calling-info .call-center {
     padding: 0 28px;
+}
+
+.header-area .academy-main-menu .classynav {
+    padding-left: 1.9em;
 }
