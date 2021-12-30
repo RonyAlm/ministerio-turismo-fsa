@@ -137,6 +137,28 @@
     margin-left: 1rem;
 }
 
+.call-to-action-area .container .row .col-12 .cta-content div h6 {
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 0;
+    color: #ffffff;
+    margin-top: 10px;
+    text-transform: uppercase;
+    margin-left: 1rem;
+}
+
+.call-to-action-area .container .row .col-12 .cta-content div i {
+    font-weight: 400;
+    color: white;
+    font-size: 25px;
+    margin-top: 6px;
+}
+
+.call-to-action-area .container .row .col-12 .cta-content .item-contacto {
+    margin-bottom: 45px;
+    display: flex;
+}
+
 .tarjeta-inicio {
     min-height: 23rem;
 }
@@ -170,4 +192,21 @@
 
 .header-area .academy-main-menu .classynav {
     padding-left: 1.9em;
+}
+
+.call-to-action-area {
+    padding: 3px;
+    padding-top: 46px;
+}
+
+
+/* FOOTER */
+
+.footer-area .main-footer-area .container .row .logo-r {
+    margin: 0 auto !important;
+    width: 70% !important;
+}
+
+.footer-area .section-padding-100-0 {
+    padding: 0.5rem;
 }
