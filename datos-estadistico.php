@@ -9,7 +9,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>Ministerio - Datos Estadistico</title>
+    <title>Datos Estadistico</title>
 
     <!-- Favicon -->
     <link rel="icon" href="img/FSA_HSA_ISO_HI_RES.png">
@@ -23,112 +23,10 @@
 </head>
 
 <body>
-    <!-- ##### Preloader ##### -->
-    <div id="preloader">
-        <i class="circle-preloader"></i>
-    </div>
-
-    <!-- ##### Header Area Start ##### -->
-    <header class="header-area">
-
-        <!-- Top Header Area -->
-        <div class="top-header">
-            <div class="container h-100">
-                <div class="row h-100">
-                    <div class="col-12 h-100">
-                        <div class="header-content h-100 d-flex align-items-center justify-content-between">
-                            <div class="turismo-logo academy-logo">
-                                <a href="index.html">
-                                    <img src="img/M-Turismo-verde.png" alt="">
-                                </a>
-                            </div>
-                            <!-- <div class="login-content">
-                                <a href="#">Register / Login</a>
-                            </div> -->
-                            <div class="login-content">
-                                <a href="#">
-                                    <img src="img/FSA_HSA_LOGO-COLOR.png" alt="">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Navbar Area -->
-        <div class="academy-main-menu">
-            <div class="classy-nav-container breakpoint-off">
-                <div class="container">
-                    <!-- Menu -->
-                    <nav class="classy-navbar justify-content-between" id="academyNav">
-
-                        <!-- Navbar Toggler -->
-                        <div class="classy-navbar-toggler">
-                            <span class="navbarToggler"><span></span><span></span><span></span></span>
-                        </div>
-
-                        <!-- Menu -->
-                        <div class="classy-menu">
-
-                            <!-- close btn -->
-                            <div class="classycloseIcon">
-                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-                            </div>
-
-                            <!-- Nav Start -->
-                            <div class="classynav">
-                                <ul>
-                                    <li><a href="index.html">Inicio</a></li>
-                                    <li><a href="alojamiento.html">Alojamientos</a>
-                                        <!-- <ul class="dropdown dropdown_r">
-                                            <li><a href="#">Capital</a></li>
-                                            <li><a href="#">Interior</a></li>
-                                        </ul> -->
-                                    </li>
-
-                                    <li><a href="#">Circuitos turisticos</a>
-                                        <ul class="dropdown dropdown_r_2">
-                                            <li><a href="#">Circuito Oeste</a></li>
-                                            <li><a href="#">Microregión Bañado Estrella</a></li>
-                                            <li><a href="#">Circuito Norte</a></li>
-                                            <li><a href="#">Circuito Ciudad de Formosa y Herradura</a></li>
-                                            <li><a href="#">Circuito Sur</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Actractivos turisticos</a></li>
-                                    <li><a href="datos-estadistico.html">Datos Estadisticos</a></li>
-                                    <li><a href="#">Otros</a>
-                                        <ul class="dropdown dropdown_r_3">
-                                            <li><a href="referente-municipal.html">Referente Municipal</a></li>
-                                            <li><a href="#">Prestadores</a></li>
-                                            <li><a href="#">Distancia de Formosa</a></li>
-                                            <li><a href="#">Eventos</a></li>
-                                            <li><a href="#">Actividades</a></li>
-                                            <li><a href="#">Agencia de Turismo</a></li>
-                                            <li><a href="#">Piletas</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- Nav End -->
-
-                        </div>
-
-                        <!-- Calling Info -->
-                        <div class="calling-info">
-                            <div class="call-center">
-                                <a href="#">
-                                    <i class="far fa-search"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- ##### Header Area End ##### -->
+    <!-- ##### Header ##### -->
+    <?php 
+        require_once('./layout/header.php');
+    ?>
 
     <!-- ##### Breadcumb Area Start ##### -->
     <div class="breadcumb-area bg-img" style="background-image: url(img/bg-img/breadcumb.jpg);">
@@ -270,104 +168,10 @@
     </section>
     <!-- ***** Elements Area End ***** -->
 
-    <!-- ##### 1 - Footer  Start ##### -->
-    <div class="call-to-action-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="cta-content d-flex align-items-center justify-content-between flex-wrap">
-                        <div class="item-contacto">
-                            <i class=" far_r far fa-map-marker-alt "></i>
-                            <h6>José Uriburo N° 820, Formosa, Argentina</h6>
-                        </div>
-                        <div class="item-contacto">
-                            <i class=" fal_r fal fa-phone-alt"></i>
-                            <h6>(+54) 0370-4425192</h6>
-                        </div>
-                        <div class="item-contacto">
-                            <i class="far_r far fa-envelope"></i>
-                            <h6>formosahermosaoficial@gmail.com</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ##### 1 - Footer End ##### -->
-
-    <!-- ##### Footer Area Start ##### -->
-    <footer class="footer-area">
-        <div class="main-footer-area section-padding-100-0">
-            <div class="container">
-                <div class="row" style="justify-content: space-between;">
-                    <div class="logo-r">
-                        <a href="#">
-                            <img src="img/M-Turismo-todos-unidos-gobierno-blanco.png" alt="" srcset="">
-                        </a>
-                    </div>
-                    <!-- <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="footer-widget mb-100">
-                            <div class="widget-title">
-                                <i class=" far_r far fa-map-marker-alt "></i>
-                                <h6>José Uriburo N° 820, Formosa, Argentina</h6>
-                            </div>
-                            <div class="logo-r">
-                                <a href="#">
-                                    <img src="img/M-Turismo-blanco.png" alt="" srcset="">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="footer-widget mb-100">
-                            <div class="widget-title">
-                                <i class=" fal_r fal fa-phone-alt"></i>
-                                <h6>(+54) 0370-4425192</h6>
-                            </div>
-                            <div class="logo-r-2">
-                                <a href="#">
-                                    <img src="img/Todos-unidos-blanco.png" alt="" srcset="">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="footer-widget mb-100">
-                            <div class="widget-title">
-                                <i class="far_r far fa-envelope"></i>
-                                <h6>formosahermosaoficial@gmail.com</h6>
-                            </div>
-                            <div class="logo-r-3">
-                                <a href="#">
-                                    <img src="img/gobierno-blanco.png" alt="" srcset="">
-                                </a>
-                            </div>
-                        </div>
-                    </div> -->
-
-                </div>
-            </div>
-        </div>
-        <div class="bottom-footer-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <p>
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy;
-                            <script>
-                                document.write(new Date().getFullYear());
-                            </script> Todos los derechos reservados | Ministerio de Turismo Formosa
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- ##### Footer Area Start ##### -->
+    <!-- ##### Footer ##### -->
+    <?php 
+        require_once('./layout/footer.php');
+    ?>
 
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->

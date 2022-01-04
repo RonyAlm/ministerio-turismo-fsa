@@ -1,29 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Core Stylesheet -->
-    <link rel="stylesheet" href="style.css">
-    <!-- CSS personalizado -->
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <!-- CMD TABLAS  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
-
-    <!-- Title -->
-    <title>Ministerio</title>
-
-    <!-- Favicon -->
-    <link rel="icon" href="img/FSA_HSA_ISO_HI_RES.png">
-</head>
-
-<body>
     <!-- ##### Preloader ##### -->
     <div id="preloader">
         <i class="circle-preloader"></i>
@@ -80,8 +55,8 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul style="margin-bottom: 0rem;">
-                                    <li><a href="index.html">Inicio</a></li>
-                                    <li><a href="alojamiento.html">Alojamientos</a>
+                                    <li><a href="index.php">Inicio</a></li>
+                                    <li><a href="alojamiento.php">Alojamientos</a>
                                         <!-- <ul class="dropdown dropdown_r">
                                             <li><a href="#">Capital</a></li>
                                             <li><a href="#">Interior</a></li>
@@ -98,10 +73,10 @@
                                         </ul>
                                     </li>
                                     <li><a href="#">Actractivos turisticos</a></li>
-                                    <li><a href="datos-estadistico.html">Datos Estadisticos</a></li>
+                                    <li><a href="datos-estadistico.php">Datos Estadisticos</a></li>
                                     <li><a href="#">Otros</a>
                                         <ul class="dropdown dropdown_r_3">
-                                            <li><a href="referente-municipal.html">Referente Municipal</a></li>
+                                            <li><a href="referente-municipal.php">Referente Municipal</a></li>
                                             <li><a href="#">Prestadores</a></li>
                                             <li><a href="#">Distancia de Formosa</a></li>
                                             <li><a href="#">Eventos</a></li>
