@@ -12,24 +12,24 @@
     <title>Datos Estadistico</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="img/FSA_HSA_ISO_HI_RES.png">
+    <link rel="icon" href="assets/img/FSA_HSA_ISO_HI_RES.png">
 
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="style.css">
     <!-- CSS personalizado -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
 </head>
 
 <body>
     <!-- ##### Header ##### -->
-    <?php 
-        require_once('./layout/header.php');
+    <?php
+    require_once('./layout/header.php');
     ?>
 
     <!-- ##### Breadcumb Area Start ##### -->
-    <div class="breadcumb-area bg-img" style="background-image: url(img/bg-img/breadcumb.jpg);">
+    <div class="breadcumb-area bg-img" style="background-image: url(assets/img/bg-img/breadcumb.jpg);">
         <div class="bradcumbContent">
             <h2>DATOS ESTADISTICOS</h2>
         </div>
@@ -104,7 +104,7 @@
                             <h6><a class="centrar-text" role="button" class="" aria-expanded="true" aria-controls="collapseOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">HERRADURA - CRECIMIENTO DE CABAÑA
                                     <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
                                     <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                            </a></h6>
+                                </a></h6>
                             <div id="collapseOne" class="accordion-content collapse show">
                                 <div class="col-12 grafico">
                                     <!-- <div class="elements-title mb-50">
@@ -124,7 +124,7 @@
                             <h6><a class="centrar-text" role="button" class="collapsed" aria-expanded="true" aria-controls="collapseTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">HERRADURA - CRECIMIENTO DE PLAZAS
                                     <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
                                     <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                            </a></h6>
+                                </a></h6>
                             <div id="collapseTwo" class="accordion-content collapse show">
                                 <div class="col-12 grafico">
                                     <!-- <div class="elements-title mb-50">
@@ -144,7 +144,7 @@
                             <h6><a class="centrar-text" role="button" class="collapsed" aria-expanded="true" aria-controls="collapseThree" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">INCREMENTO DE VISITANTES AL BAÑADO LA ESTRELLA
                                     <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
                                     <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                            </a></h6>
+                                </a></h6>
                             <div id="collapseThree" class="accordion-content collapse show">
                                 <div class="col-12 grafico">
                                     <div class="h5_r_vertical_2">
@@ -169,21 +169,21 @@
     <!-- ***** Elements Area End ***** -->
 
     <!-- ##### Footer ##### -->
-    <?php 
-        require_once('./layout/footer.php');
+    <?php
+    require_once('./layout/footer.php');
     ?>
 
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="assets/js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
-    <script src="js/bootstrap/popper.min.js"></script>
+    <script src="assets/js/bootstrap/popper.min.js"></script>
     <!-- Bootstrap js -->
-    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap/bootstrap.min.js"></script>
     <!-- All Plugins js -->
-    <script src="js/plugins/plugins.js"></script>
+    <script src="assets/js/plugins/plugins.js"></script>
     <!-- Active js -->
-    <script src="js/active.js"></script>
+    <script src="assets/js/active.js"></script>
     <!-- Chart js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>

@@ -1,3 +1,33 @@
+<?php
+
+include_once("./admin/conexion.php");
+
+$conexionBD = BD::crearInstancia();
+
+$listaReferente = [];
+
+$sql = $conexionBD->query("SELECT `id_referentes`, `idoneo_referente`, direccion.id_direccion,localidad.nombre_localidad,
+                                            tipo_encargado.descripcion_tipo_encargado,departamentos_fsa.descripcion_departamentos,
+                                        (SELECT contacto.descripcion_contacto 
+                                        FROM contacto 
+                                        WHERE referentes_municipal.id_referentes = contacto.rela_contacto_referente
+                                        and contacto.rela_tipo_contacto_cont = 2
+                                        LIMIT 1) descripcion_contacto
+                                        FROM `referentes_municipal`
+                                        INNER JOIN direccion ON referentes_municipal.rela_direccion = direccion.id_direccion
+                                        INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad
+                                        INNER JOIN tipo_encargado on tipo_encargado.id_tipo_encargado = referentes_municipal.rela_tipo_encargado
+                                        INNER JOIN departamentos_fsa on departamentos_fsa.id_departamentos_fsa = localidad.rela_departamento");
+
+//recuperamos los datos y los retornamos
+
+while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
+    $listaReferentes[] = $filas;
+    // print_r($listaReferentes);
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -12,12 +42,12 @@
     <title>Referente Municipal</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="img/FSA_HSA_ISO_HI_RES.png">
+    <link rel="icon" href="assets/img/FSA_HSA_ISO_HI_RES.png">
 
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="style.css">
     <!-- CSS personalizado -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <!-- CMD TABLAS  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
@@ -26,14 +56,14 @@
 </head>
 
 <body>
-    
-   <!-- ##### Header ##### -->
-   <?php 
-        require_once('./layout/header.php');
+
+    <!-- ##### Header ##### -->
+    <?php
+    require_once('./layout/header.php');
     ?>
 
     <!-- ##### Breadcumb Area Start ##### -->
-    <div class="breadcumb-area bg-img" style="background-image: url(img/FSA-BRILLA-3-1.jpeg); background-position: top;">
+    <div class="breadcumb-area bg-img" style="background-image: url(assets/img/FSA-BRILLA-3-1.jpeg); background-position: top;">
         <div class="bradcumbContent">
             <h2>REFERENTES MUNICIPAL</h2>
         </div>
@@ -52,84 +82,20 @@
                                 <th>Localidad</th>
                                 <th>Nombre y Apellido</th>
                                 <th>Celular</th>
-                                <th>Email</th>
+                                <th>tipo</th>
                             </tr>
                         </thead>
                         <tbody>
                             <!--TR BERMEJO-->
-                            <tr>
-                                <td> BERMEJO - Luguna Yema</td>
-                                <td>Gilgo Martiarena</td>
-                                <td>3704262569</td>
-                                <td>miguelatanasio2015@gmail.com</td>
-                            </tr>
-                            <tr>
-                                <td>BERMEJO - Los Chiriguanos</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>BERMEJO - Pozo de Maza</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>BERMEJO - Pozo Mortero</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <!--TR FORMOSA-->
-                            <tr>
-                                <td>FORMOSA - Ciudad de Formosa</td>
-                                <td>Cristina Salomon</td>
-                                <td>3704671555</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>FORMOSA - Colonia Pastoril</td>
-                                <td>Danilo</td>
-                                <td>3718629209</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>FORMOSA - Mojon de Fierro</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>FORMOSA - Gran Guardia</td>
-                                <td></td>
-                                <td>3704544126</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>FORMOSA - San Hilario</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>FORMOSA - Mariano Boedo</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>FORMOSA - Villa del Carmen</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>FORMOSA - Villa Trinidad</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                            <?php foreach ($listaReferentes as $referente) { ?>
+                                <tr>
+                                    <td><?php echo $referente["descripcion_departamentos"]; ?> - <?php echo $referente["nombre_localidad"]; ?></td>
+                                    <td><?php echo $referente["idoneo_referente"]; ?></td>
+                                    <td><?php echo $referente["descripcion_contacto"]; ?></td>
+                                    <td><?php echo $referente["descripcion_tipo_encargado"]; ?></td>
+                                </tr>
+                            <?php } ?>
+
                         </tbody>
                         <tfoot>
                             <tr>
@@ -148,21 +114,21 @@
     <!-- ***** Elements Area End ***** -->
 
     <!-- ##### Footer ##### -->
-    <?php 
-        require_once('./layout/footer.php');
+    <?php
+    require_once('./layout/footer.php');
     ?>
 
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="assets/js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
-    <script src="js/bootstrap/popper.min.js"></script>
+    <script src="assets/js/bootstrap/popper.min.js"></script>
     <!-- Bootstrap js -->
-    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap/bootstrap.min.js"></script>
     <!-- All Plugins js -->
-    <script src="js/plugins/plugins.js"></script>
+    <script src="assets/js/plugins/plugins.js"></script>
     <!-- Active js -->
-    <script src="js/active.js"></script>
+    <script src="assets/js/active.js"></script>
     <!-- Script tabla DataTable -->
     <script>
         $(document).ready(function() {

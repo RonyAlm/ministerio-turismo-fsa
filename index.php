@@ -12,19 +12,19 @@
     <title>Ministerio - Inicio</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="img/FSA_HSA_ISO_HI_RES.png">
+    <link rel="icon" href="assets/img/FSA_HSA_ISO_HI_RES.png">
 
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="style.css">
     <!-- CSS personalizado -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 </head>
 
 <body>
     <!-- ##### Header ##### -->
-   <?php 
-        require_once('./layout/header.php');
+    <?php
+    require_once('./layout/header.php');
     ?>
 
     <!-- ##### Hero Area Start ##### -->
@@ -32,7 +32,7 @@
         <div class="hero-slides owl-carousel">
 
             <!-- Single Hero Slide -->
-            <div class="single-hero-slide bg-img" style="background-image: url(img//HERMOSA-16.jpg);">
+            <div class="single-hero-slide bg-img" style="background-image: url(assets/img/HERMOSA-16.jpg);">
                 <div class="container h-100">
                     <div class="row h-100 align-items-center">
                         <div class="col-12">
@@ -47,7 +47,7 @@
             </div>
 
             <!-- Single Hero Slide -->
-            <div class="single-hero-slide bg-img" style="background-image: url(img/FSA-BRILLA-3-1.jpeg);">
+            <div class="single-hero-slide bg-img" style="background-image: url(assets/img/FSA-BRILLA-3-1.jpeg);">
                 <div class="container h-100">
                     <div class="row h-100 align-items-center">
                         <div class="col-12 slider-text-r">
@@ -62,7 +62,7 @@
             </div>
 
             <!-- Single Hero Slide -->
-            <div class="single-hero-slide bg-img" style="background-image: url(img/Bañado-la-estrella.jpg);">
+            <div class="single-hero-slide bg-img" style="background-image: url(assets/img/Bañado-la-estrella.jpg);">
                 <div class="container h-100">
                     <div class="row h-100 align-items-center">
                         <div class="col-12 slider-text-r">
@@ -77,7 +77,7 @@
             </div>
 
 
-            <div class="single-hero-slide bg-img" style="background-image: url(img/bañado-3.jpg);">
+            <div class="single-hero-slide bg-img" style="background-image: url(assets/img/bañado-3.jpg);">
                 <div class="container h-100">
                     <div class="row h-100 align-items-center">
                         <div class="col-12 slider-text-r">
@@ -91,7 +91,7 @@
                 </div>
             </div>
 
-            <div class="single-hero-slide bg-img" style="background-image: url(img/bañado-2.jpg);">
+            <div class="single-hero-slide bg-img" style="background-image: url(assets/img/bañado-2.jpg);">
                 <div class="container h-100">
                     <div class="row h-100 align-items-center">
                         <div class="col-12 slider-text-r">
@@ -163,7 +163,7 @@
                         <div class="tarjeta-inicio">
                             <div>
                                 <a href="#">
-                                    <img src="img/foto-blog-2-1.jpg" alt="" class="bg-img">
+                                    <img src="assets/img/foto-blog-2-1.jpg" alt="" class="bg-img">
                                 </a>
                             </div>
                             <div class="descripcion-r">
@@ -181,7 +181,7 @@
                         <div class="tarjeta-inicio">
                             <div>
                                 <a href="#">
-                                    <img src="img/bañado-3.jpg" class="bg-img" alt="" srcset="">
+                                    <img src="assets/img/bañado-3.jpg" class="bg-img" alt="" srcset="">
                                 </a>
                             </div>
                             <div class="descripcion-r">
@@ -201,7 +201,7 @@
                         <div class="tarjeta-inicio">
                             <div>
                                 <a href="#">
-                                    <img src="img/botones-inicio-web-formosa-hermosa-5.jpg" class="bg-img" alt="" srcset="">
+                                    <img src="assets/img/botones-inicio-web-formosa-hermosa-5.jpg" class="bg-img" alt="" srcset="">
                                 </a>
                             </div>
                             <div class="descripcion-r" style="margin-top: 31px;">
@@ -219,7 +219,7 @@
                         <div class="tarjeta-inicio">
                             <div>
                                 <a href="#">
-                                    <img src="img/herradura-2.png" class="bg-img" alt="" srcset="">
+                                    <img src="assets/img/herradura-2.png" class="bg-img" alt="" srcset="">
                                 </a>
                             </div>
                             <div class="descripcion-r">
@@ -254,21 +254,21 @@
     <!-- ##### Partner Area End ##### -->
 
     <!-- ##### Footer ##### -->
-    <?php 
-        require_once('./layout/footer.php');
+    <?php
+    require_once('./layout/footer.php');
     ?>
 
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="assets/js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
-    <script src="js/bootstrap/popper.min.js"></script>
+    <script src="assets/js/bootstrap/popper.min.js"></script>
     <!-- Bootstrap js -->
-    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap/bootstrap.min.js"></script>
     <!-- All Plugins js -->
-    <script src="js/plugins/plugins.js"></script>
+    <script src="assets/js/plugins/plugins.js"></script>
     <!-- Active js -->
-    <script src="js/active.js"></script>
+    <script src="assets/js/active.js"></script>
 </body>
 
 </html>
