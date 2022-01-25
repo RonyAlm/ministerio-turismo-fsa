@@ -31,9 +31,9 @@
                             <label for="tipoServiGeneral">Tipo</label>
                             <input type="hidden" id="tipoServiGeneralID" name="tipoServiGeneralID" value="<?php echo $editar->id_tipo_lugar; ?>">
                             <select id="tipoServiGeneral" name="tipoServiGeneral" class="form-control custom-select" required>
-                                <option value="0"><?php echo $editar->descripcion_lugar; ?></option>
+                                <?php $id_tipo_lugar_actual = $editar->id_tipo_lugar; ?>
                                 <?php foreach ($buscarSelectLugar as $k) : ?>
-                                    <option value="<?php echo $k->id_tipo_lugar; ?>"> <?php echo $k->descripcion_lugar; ?></option>
+                                    <option value="<?= $k->id_tipo_lugar; ?>" <?= ($k->id_tipo_lugar == $id_tipo_lugar_actual) ? 'selected="selected"' : ''; ?>> <?= $k->descripcion_lugar; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -41,9 +41,9 @@
                             <label for="estacion">Estación</label>
                             <input type="hidden" id="estacionID" name="estacionID" value="<?php echo $editar->id_tipo_estacion; ?>">
                             <select id="estacion" name="estacion" class="form-control custom-select" required>
-                                <option value="0"><?php echo $editar->descripcion_estacion; ?></option>
+                                <?php $id_tipo_estacion_actual = $editar->id_tipo_estacion; ?>
                                 <?php foreach ($buscarSelectEstacion as $k) : ?>
-                                    <option value="<?php echo $k->id_tipo_estacion; ?>"> <?php echo $k->descripcion_estacion; ?></option>
+                                    <option value="<?= $k->id_tipo_estacion; ?>" <?= ($k->id_tipo_estacion == $id_tipo_estacion_actual) ? 'selected="selected"' : ''; ?>> <?= $k->descripcion_estacion; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -57,9 +57,9 @@
                             <label for="localidad">Localidad</label>
                             <input type="hidden" id="localidadID" name="localidadID" value="<?php echo $editar->id_direccion; ?>">
                             <select id="localidad" name="localidad" class="form-control custom-select" required>
-                                <option value="0"><?php echo $editar->nombre_localidad; ?></option>
+                                <?php $id_localidad_actual = $editar->id_localidad; ?>
                                 <?php foreach ($buscarSelectLocalidad as $k) : ?>
-                                    <option value="<?php echo $k->id_localidad; ?>"> <?php echo $k->nombre_localidad; ?></option>
+                                    <option value="<?= $k->id_localidad; ?>" <?= ($k->id_localidad == $id_localidad_actual) ? 'selected="selected"' : ''; ?>> <?= $k->nombre_localidad; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -82,9 +82,9 @@
                             <label for="tipoServicio">Tipo servicio</label>
                             <input type="hidden" id="tipoServicioID" name="tipoServicioID" value="<?php echo $editar->id_tipo_servicio; ?>">
                             <select id="tipoServicio" name="tipoServicio" class="form-control custom-select" required>
-                                <option value="0"><?php echo $editar->descripcion_servicio; ?></option>
+                                <?php $id_tipo_servicio_actual = $editar->id_tipo_servicio; ?>
                                 <?php foreach ($buscarSelectTipoServicio as $k) : ?>
-                                    <option value="<?php echo $k->id_tipo_servicio; ?>"> <?php echo $k->descripcion_servicio; ?></option>
+                                    <option value="<?= $k->id_tipo_servicio; ?>" <?= ($k->id_tipo_servicio == $id_tipo_servicio_actual) ? 'selected="selected"' : ''; ?>> <?= $k->descripcion_servicio; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
