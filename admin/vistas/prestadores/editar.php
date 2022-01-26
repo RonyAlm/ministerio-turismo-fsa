@@ -1,3 +1,18 @@
+<!-- Para ordenar alfabeticamente los select -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script>
+  function ordenarSelect(id_componente) {
+    var selectToSort = jQuery('#' + id_componente);
+    var optionActual = selectToSort.val();
+    selectToSort.html(selectToSort.children('option').sort(function(a, b) {
+      return a.text === b.text ? 0 : a.text < b.text ? -1 : 1;
+    })).val(optionActual);
+  }
+  $(document).ready(function() {
+    ordenarSelect('localidadPrestador');
+  });
+</script>
+
 <div class="card card-success">
 
   <div class="card-header">
@@ -34,10 +49,10 @@
             <div class="form-group">
               <label for="categoriaPrestador">Categoría:</label>
               <input type="hidden" id="IDcategoriaPrestador" name="IDcategoriaPrestador" value="<?php echo $insertar->id_tipo_prestador; ?>">
+              <?php $id_tipo_prestador_actual = $insertar->id_tipo_prestador; ?>
               <select id="categoriaPrestador" name="categoriaPrestador" class="form-control custom-select" required>
-                <option value="0" selected disabled><?php echo $insertar->descripcion_tipo_prestador; ?></option>
                 <?php foreach ($buscarCategoriaPrestador as $k) : ?>
-                  <option value="<?php echo $k->id_tipo_prestador; ?>"> <?php echo $k->descripcion_tipo_prestador; ?></option>
+                  <option value="<?= $k->id_tipo_prestador; ?>" <?= ($k->id_tipo_prestador == $id_tipo_prestador_actual) ? 'selected="selected"' : ''; ?>> <?= $k->descripcion_tipo_prestador; ?></option>
                 <?php endforeach; ?>
               </select>
             </div>
@@ -49,10 +64,10 @@
             <div class="form-group">
               <label for="localidadPrestador">Localidad:</label>
               <input type="hidden" id="IDlocalidad" name="IDlocalidad" value="<?php echo $insertar->id_direccion; ?>">
+              <?php $nombre_localidad_actual = $insertar->nombre_localidad; ?>
               <select id="localidadPrestador" name="localidadPrestador" class="form-control custom-select" required>
-                <option value="0" selected disabled><?php echo $insertar->nombre_localidad; ?></option>
                 <?php foreach ($buscarSelectLocalidad as $k) : ?>
-                  <option value="<?php echo $k->id_localidad; ?>"> <?php echo $k->nombre_localidad; ?></option>
+                  <option value="<?php echo $k->id_localidad; ?>" <?= ($k->nombre_localidad == $nombre_localidad_actual) ? 'selected="selected"' : ''; ?>> <?php echo $k->nombre_localidad; ?></option>
                 <?php endforeach; ?>
               </select>
             </div>
@@ -84,10 +99,10 @@
             <div class="form-group">
               <label for="estadoPrestador">Estado</label>
               <input type="hidden" id="IDestado" name="IDestado" value="<?php echo $insertar->id_estado; ?>">
+              <?php $desc_tipo_estado_actual = $insertar->descripcion_tipo_estado; ?>
               <select id="estadoPrestador" name="estadoPrestador" class="form-control custom-select" required>
-                <option value="0" selected disabled><?php echo $insertar->descripcion_tipo_estado; ?></option>
                 <?php foreach ($buscarSelectEstado as $k) : ?>
-                  <option value="<?php echo $k->id_tipo_estado; ?>"> <?php echo $k->descripcion_tipo_estado; ?></option>
+                  <option value="<?= $k->id_tipo_estado; ?>" <?= ($k->descripcion_tipo_estado == $desc_tipo_estado_actual) ? 'selected="selected"' : ''; ?>> <?= $k->descripcion_tipo_estado; ?></option>
                 <?php endforeach; ?>
               </select>
             </div>

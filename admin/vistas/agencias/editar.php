@@ -1,3 +1,19 @@
+<!-- Para ordenar alfabeticamente los select -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script>
+  function ordenarSelect(id_componente) {
+    var selectToSort = jQuery('#' + id_componente);
+    var optionActual = selectToSort.val();
+    selectToSort.html(selectToSort.children('option').sort(function(a, b) {
+      return a.text === b.text ? 0 : a.text < b.text ? -1 : 1;
+    })).val(optionActual);
+  }
+  $(document).ready(function() {
+    ordenarSelect('localidadAgencia');
+    ordenarSelect('estadoAgencia');
+  });
+</script>
+
 <div class="card card-success">
 
   <div class="card-header">
@@ -34,12 +50,12 @@
             </div>
 
             <div class="form-group">
+              <input type="hidden" id="agenciaLocalidadID" name="agenciaLocalidadID" value="<?= $InsertarID->id_direccion ?>">
               <label for="localidadAgencia">Localidad</label>
-              <input type="hidden" id="agenciaLocalidadID" name="agenciaLocalidadID" value="<?php echo $insertar->id_direccion; ?>">
+              <?php $nombre_localidad_actual = $editar->nombre_localidad; ?>
               <select id="localidadAgencia" name="localidadAgencia" class="form-control custom-select" required>
-                <option value="0"><?php echo $editar->nombre_localidad; ?></option>
                 <?php foreach ($buscarSelectLocalidad as $k) : ?>
-                  <option value="<?php echo $k->id_localidad; ?>"> <?php echo $k->nombre_localidad; ?></option>
+                  <option value="<?php echo $k->id_localidad; ?>" <?= ($k->nombre_localidad == $nombre_localidad_actual) ? 'selected="selected"' : ''; ?>> <?php echo $k->nombre_localidad; ?></option>
                 <?php endforeach; ?>
               </select>
             </div>
@@ -89,10 +105,10 @@
             <div class="form-group">
               <label for="estadoAgencia">Estado</label>
               <input type="hidden" id="agenciaEstadoID" name="agenciaEstadoID" value="<?php echo $InsertarID->id_estado; ?>">
-              <select id="estadoAgencia" name="estadoAgencia" class="form-control custom-select" required>
-                <option value="0"><?php echo $editar->descripcion_tipo_estado; ?></option>
+              <?php $des_tipo_estado_actual = $editar->descripcion_tipo_estado; ?>
+              <select id="estadoAgencia" name="estadoAgencia" class="form-control custom-select ordenarSelect" required>
                 <?php foreach ($buscarSelectEstado as $k) : ?>
-                  <option value="<?php echo $k->id_tipo_estado; ?>"> <?php echo $k->descripcion_tipo_estado; ?></option>
+                  <option value="<?= $k->id_tipo_estado; ?>" <?= ($k->descripcion_tipo_estado == $des_tipo_estado_actual) ? 'selected="selected"' : ''; ?>> <?= $k->descripcion_tipo_estado; ?></option>
                 <?php endforeach; ?>
               </select>
             </div>

@@ -21,6 +21,21 @@ $rol_id = $_SESSION['rol_id'];
   </div>
 
 
+  <!-- Para ordenar alfabeticamente los select -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+  <script>
+    function ordenarSelect(id_componente) {
+      var selectToSort = jQuery('#' + id_componente);
+      var optionActual = selectToSort.val();
+      selectToSort.html(selectToSort.children('option').sort(function(a, b) {
+        return a.text === b.text ? 0 : a.text < b.text ? -1 : 1;
+      })).val(optionActual);
+    }
+    $(document).ready(function() {
+      ordenarSelect('categoriaAlojamiento');
+      ordenarSelect('localidadAlojamiento');
+    });
+  </script>
   <!-- Main content -->
 
   <form action="" method="post">
@@ -43,10 +58,10 @@ $rol_id = $_SESSION['rol_id'];
             <div class="form-group">
               <label for="categoriaAlojamiento">Categoría</label>
               <input type="hidden" id="IDcategoriaAlojamiento" name="IDcategoriaAlojamiento" value="<?php echo $insertar->id_tipo_alojamiento; ?>">
+              <?php $id_tipo_alojamiento_actual = $insertar->id_tipo_alojamiento; ?>
               <select id="categoriaAlojamiento" name="categoriaAlojamiento" class="form-control custom-select" required>
-                <option value="0"><?php echo $insertar->descripcion_tipo_alojamiento; ?></option>
                 <?php foreach ($buscarSelectTipoAlojamiento as $k) : ?>
-                  <option value="<?php echo $k->id_tipo_alojamiento; ?>"> <?php echo $k->descripcion_tipo_alojamiento; ?></option>
+                  <option value="<?= $k->id_tipo_alojamiento; ?>" <?= ($k->id_tipo_alojamiento == $id_tipo_alojamiento_actual) ? 'selected="selected"' : ''; ?>> <?= $k->descripcion_tipo_alojamiento; ?></option>
                 <?php endforeach; ?>
               </select>
             </div>
@@ -58,10 +73,10 @@ $rol_id = $_SESSION['rol_id'];
             <div class="form-group">
               <label for="localidadAlojamiento">Localidad</label>
               <input type="hidden" id="localidadIDAlojamiento" name="localidadIDAlojamiento" value="<?php echo $insertar->id_direccion; ?>">
+              <?php $nombre_localidad_actual = $insertar->nombre_localidad; ?>
               <select id="localidadAlojamiento" name="localidadAlojamiento" class="form-control custom-select" required>
-                <option value="0"><?php echo $insertar->nombre_localidad; ?></option>
                 <?php foreach ($buscarSelectLocalidad as $k) : ?>
-                  <option value="<?php echo $k->id_localidad; ?>"> <?php echo $k->nombre_localidad; ?></option>
+                  <option value="<?php echo $k->id_localidad; ?>" <?= ($k->nombre_localidad == $nombre_localidad_actual) ? 'selected="selected"' : ''; ?>> <?php echo $k->nombre_localidad; ?></option>
                 <?php endforeach; ?>
               </select>
             </div>
@@ -80,10 +95,10 @@ $rol_id = $_SESSION['rol_id'];
             <div class="form-group">
               <label for="rubroAlojamiento">Rubro</label>
               <input type="hidden" id="" name="" value="<?php echo $insertar->id_alojamientos; ?>">
+              <?php $descri_rubro_actual = $insertar->descripcion_rubro; ?>
               <select id="rubroAlojamiento" name="rubroAlojamiento" class="form-control custom-select">
-                <option value="0"><?php echo $insertar->descripcion_rubro; ?></option>
                 <?php foreach ($buscarSelectRubro as $k) : ?>
-                  <option value="<?php echo $k->id_rubro_alojamiento; ?>"> <?php echo $k->descripcion_rubro; ?></option>
+                  <option value="<?= $k->id_rubro_alojamiento; ?>" <?= ($k->descripcion_rubro == $descri_rubro_actual) ? 'selected="selected"' : ''; ?>> <?= $k->descripcion_rubro; ?></option>
                 <?php endforeach; ?>
               </select>
             </div>
@@ -109,10 +124,10 @@ $rol_id = $_SESSION['rol_id'];
               <label for="habilitacionAlojamiento">Habilitación Municipal</label>
               <input type="hidden" id="IDhabilitacionAlojamiento" name="IDhabilitacionAlojamiento" value="<?php echo $insertar->id_habi_municipal; ?>">
 
+              <?php $id_habi_municipal_actual = $insertar->id_habi_municipal; ?>
               <select id="habilitacionAlojamiento" name="habilitacionAlojamiento" class="form-control custom-select" required>
-                <option value="0"><?php echo $insertar->descripcion; ?></option>
                 <?php foreach ($buscarSelecthabilitacion as $k) : ?>
-                  <option value="<?php echo $k->id_habi_municipal; ?>"> <?php echo $k->descripcion; ?></option>
+                  <option value="<?= $k->id_habi_municipal; ?>" <?= ($k->id_habi_municipal == $id_habi_municipal_actual) ? 'selected="selected"' : ''; ?>> <?= $k->descripcion; ?></option>
                 <?php endforeach; ?>
               </select>
             </div>
@@ -120,10 +135,10 @@ $rol_id = $_SESSION['rol_id'];
             <div class="form-group">
               <label for="estadoAlojamiento">Estado</label>
               <input type="hidden" id="IDestadoAlojamiento" name="IDestadoAlojamiento" value="<?php echo $insertar->id_estado; ?>">
+              <?php $desc_tipo_estado_actual = $insertar->descripcion_tipo_estado; ?>
               <select id="estadoAlojamiento" name="estadoAlojamiento" class="form-control custom-select" required>
-                <option value="0"><?php echo $insertar->descripcion_tipo_estado; ?></option>
                 <?php foreach ($buscarSelectEstado as $k) : ?>
-                  <option value="<?php echo $k->id_tipo_estado; ?>"> <?php echo $k->descripcion_tipo_estado; ?></option>
+                  <option value="<?= $k->id_tipo_estado; ?>" <?= ($k->descripcion_tipo_estado == $desc_tipo_estado_actual) ? 'selected="selected"' : ''; ?>> <?= $k->descripcion_tipo_estado; ?></option>
                 <?php endforeach; ?>
               </select>
             </div>

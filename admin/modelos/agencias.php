@@ -371,8 +371,7 @@ class AgenciaModelo
         $conexionBD = BD::crearInstancia();
 
 
-        $sqlLocalidad = $conexionBD->query("SELECT id_localidad, `nombre_localidad`, rela_provincia, rela_departamento
-                                                       FROM localidad");
+        $sqlLocalidad = $conexionBD->query("SELECT id_localidad, nombre_localidad, rela_provincia, rela_departamento FROM localidad");
 
         $sqlLocalidad->execute();
 
