@@ -1,3 +1,18 @@
+<!-- Para ordenar alfabeticamente los select -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script>
+  function ordenarSelect(id_componente) {
+    var selectToSort = jQuery('#' + id_componente);
+    var optionActual = selectToSort.val();
+    selectToSort.html(selectToSort.children('option').sort(function(a, b) {
+      return a.text === b.text ? 0 : a.text < b.text ? -1 : 1;
+    })).val(optionActual);
+  }
+  $(document).ready(function() {
+    ordenarSelect('localidadMuseo');
+  });
+</script>
+
 <div class="card card-success">
   <div class="card-header">Editar Museos</div>
 
@@ -32,10 +47,10 @@
             <div class="form-group">
               <label for="localidadMuseo">Localidad</label>
               <input type="hidden" id="museoLocalidadID" name="museoLocalidadID" value="<?php echo $editar->id_direccion; ?>">
+              <?php $nombre_localidad_actual = $editar->nombre_localidad; ?>
               <select id="localidadMuseo" name="localidadMuseo" class="form-control custom-select" required>
-                <option value="0"><?php echo $editar->nombre_localidad; ?></option>
                 <?php foreach ($buscarSelectLocalidad as $k) : ?>
-                  <option value="<?php echo $k->id_localidad; ?>"> <?php echo $k->nombre_localidad; ?></option>
+                  <option value="<?= $k->id_localidad; ?>" <?= ($k->nombre_localidad == $nombre_localidad_actual) ? 'selected="selected"' : ''; ?>> <?= $k->nombre_localidad; ?></option>
                 <?php endforeach; ?>
               </select>
             </div>
