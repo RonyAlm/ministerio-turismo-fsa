@@ -78,7 +78,7 @@
                                         <li><a href="referente-municipal.php">Referente Municipal</a></li>
                                         <li><a href="#">Prestadores</a></li>
                                         <li><a href="#">Distancia de Formosa</a></li>
-                                        <li><a href="#">Eventos</a></li>
+                                        <li><a href="evento.php">Eventos</a></li>
                                         <li><a href="#">Actividades</a></li>
                                         <li><a href="#">Agencia de Turismo</a></li>
                                         <li><a href="#">Piletas</a></li>
