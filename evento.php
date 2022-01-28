@@ -15,21 +15,23 @@
 
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="style.css">
+    <!-- fullCalendar -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales/es.js"></script>
     <!-- CSS personalizado -->
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales/es.js"></script>
+
 
 </head>
 
 <body>
 
     <!-- ##### Header ##### -->
-    <?php 
-        require_once('./layout/header.php');
+    <?php
+    require_once('./layout/header.php');
     ?>
 
     <!-- ##### Breadcumb Area Start ##### -->
@@ -55,21 +57,21 @@
                             </div>
                             <!-- Single Blog Start -->
                             <div class="col-12">
-                                <div class="single-blog-post mb-50 wow fadeInUp" data-wow-delay="300ms">
+                                <div class="eventos single-blog-post mb-50 wow fadeInUp" data-wow-delay="300ms">
                                     <!-- Post Thumb -->
                                     <div class="blog-post-thumb mb-50">
                                         <img src="img/blog-img/1.jpg" alt="">
                                     </div>
                                     <!-- Post Title -->
-                                    <a href="#" class="post-title">Eventos Recientes</a>
+                                    <a href="#" class="post-title">Encuentro Internacional del Muralismo</a>
                                     <!-- Post Meta -->
                                     <div class="post-meta">
-                                        <p>By <a href="#">Simon Smith</a> | <a href="#">March 18, 2018</a> | <a href="#">3 comments</a></p>
+                                        <p>Desde el | <a href="#">Enero 14, 2022</a> | al | <a href="#">Enero 16, 2022</a></p>
                                     </div>
                                     <!-- Post Excerpt -->
-                                    <p>Cras vitae turpis lacinia, lacinia lacus non, fermentum nisi. Donec et sollicitudin est, in euismod. Vitae turpis lacinia, lacinia lacus non, fermentum nisi. Donec et sollicitudin est.</p>
+                                    <p>formosa rod - Cras vitae turpis lacinia, lacinia lacus non, fermentum nisi. Donec et sollicitudin est, in euismod. Vitae turpis lacinia, lacinia lacus non, fermentum nisi. Donec et sollicitudin est.</p>
                                     <!-- Read More btn -->
-                                    <a href="#" class="btn academy-btn btn-sm mt-15">Read More</a>
+                                    <a href="#" class="btn academy-btn btn-sm mt-15">Leer más</a>
                                 </div>
                             </div>
 
@@ -143,71 +145,65 @@
                             <ul>
                                 <li><a href="#">Deportivos</a></li>
                                 <li><a href="#">Festivales</a></li>
-                                <li><a href="#">Teachers</a></li>
-                                <li><a href="#">Uncategorized</a></li>
+                                <li><a href="#">Cultural y Religioso</a></li>
                             </ul>
                         </div>
 
-                        <!-- Add Widget -->
-                        <!-- <div class="calendario add-widget">
-                            
-                            <div id="calendar"></div>
-                        </div> -->
-   
+
                         <!-- Latest Blog Posts Area -->
                         <div class="latest-blog-posts mb-30">
-                            <h5>Latest Posts</h5>
+                            <h5>Eventos Recientes</h5>
                             <!-- Single Latest Blog Post -->
-                            <div class="single-latest-blog-post d-flex mb-30">
+                            <!-- <div class="single-latest-blog-post d-flex mb-30">
                                 <div class="latest-blog-post-thumb">
-                                    <img src="img/blog-img/lb-1.jpg" alt="">
+                                    <img src="https://picsum.photos/100/100.jpg" alt="">
                                 </div>
                                 <div class="latest-blog-post-content">
                                     <a href="#" class="post-title">
-                                        <h6>New Courses for you</h6>
+                                        <h6>Encuentro Internacional del Muralismo</h6>
                                     </a>
-                                    <a href="#" class="post-date">March 18, 2018</a>
+                                    <a href="#" class="post-date">Enero 14, 2022</a>
+                                </div>
+                            </div> -->
+                            <!-- Single Latest Blog Post -->
+                            <div class="single-latest-blog-post d-flex mb-30">
+                                <div class="latest-blog-post-thumb">
+                                    <img src="https://picsum.photos/100/100.jpg" alt="">
+                                </div>
+                                <div class="latest-blog-post-content">
+                                    <a href="#" class="post-title">
+                                        <h6>Muralismo</h6>
+                                    </a>
+                                    <a href="#" class="post-date">Enero 14, 2022</a>
                                 </div>
                             </div>
                             <!-- Single Latest Blog Post -->
                             <div class="single-latest-blog-post d-flex mb-30">
                                 <div class="latest-blog-post-thumb">
-                                    <img src="img/blog-img/lb-2.jpg" alt="">
+                                    <img src="https://picsum.photos/100/100.jpg" alt="">
                                 </div>
                                 <div class="latest-blog-post-content">
                                     <a href="#" class="post-title">
-                                        <h6>A great way to start</h6>
+                                        <h6>San hilario</h6>
                                     </a>
-                                    <a href="#" class="post-date">March 18, 2018</a>
-                                </div>
-                            </div>
-                            <!-- Single Latest Blog Post -->
-                            <div class="single-latest-blog-post d-flex mb-30">
-                                <div class="latest-blog-post-thumb">
-                                    <img src="img/blog-img/lb-3.jpg" alt="">
-                                </div>
-                                <div class="latest-blog-post-content">
-                                    <a href="#" class="post-title">
-                                        <h6>New Courses for you</h6>
-                                    </a>
-                                    <a href="#" class="post-date">March 18, 2018</a>
+                                    <a href="#" class="post-date">Enero 20, 2022</a>
                                 </div>
                             </div>
                             <!-- Single Latest Blog Post -->
                             <div class="single-latest-blog-post d-flex">
                                 <div class="latest-blog-post-thumb">
-                                    <img src="img/blog-img/lb-4.jpg" alt="">
+                                    <img src="https://picsum.photos/100/100.jpg" alt="">
                                 </div>
                                 <div class="latest-blog-post-content">
                                     <a href="#" class="post-title">
-                                        <h6>Start your training</h6>
+                                        <h6>Rio Mate y terere</h6>
                                     </a>
-                                    <a href="#" class="post-date">March 18, 2018</a>
+                                    <a href="#" class="post-date">Enero 25, 2022</a>
                                 </div>
                             </div>
                         </div>
 
-                        
+
                     </div>
                 </div>
             </div>
@@ -216,8 +212,8 @@
     <!-- ##### Blog Area End ##### -->
 
     <!-- ##### Footer ##### -->
-    <?php 
-        require_once('./layout/footer.php');
+    <?php
+    require_once('./layout/footer.php');
     ?>
 
     <!-- ##### All Javascript Script ##### -->
@@ -231,26 +227,24 @@
     <script src="assets/js/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="assets/js/active.js"></script>
-    
-    
+
+
     <script>
-
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          locale: 'es',
-          initialView: 'dayGridMonth',
-          themeSystem: 'bootstrap',
-          dayMaxEventRows: true, // for all non-TimeGrid views
-          views: {
-              timeGrid: {
-              dayMaxEventRows: 6 // adjust to 6 only for timeGridWeek/timeGridDay
-              }
-          }
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                locale: 'es',
+                initialView: 'dayGridMonth',
+                themeSystem: 'bootstrap',
+                dayMaxEventRows: true, // for all non-TimeGrid views
+                views: {
+                    timeGrid: {
+                        dayMaxEventRows: 6 // adjust to 6 only for timeGridWeek/timeGridDay
+                    }
+                }
+            });
+            calendar.render();
         });
-        calendar.render();
-      });
-
     </script>
 </body>
 
