@@ -76,7 +76,8 @@ while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
             <div class="row" style="margin-bottom: 4rem;">
                 <!-- ========== Inicio de DataTable ========== -->
                 <div class="col-12">
-                    <table id="example" class="table table-striped" style="width:100%">
+                    <i class="iconBuscar fas fa-search"></i>
+                    <table id="tblReferentes" class="table table-striped" style="width:100%">
                         <thead>
                             <tr style="background: linear-gradient(to right, #61ba6d, #83c331); text-align: center;">
                                 <th>Localidad</th>
@@ -132,7 +133,7 @@ while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
     <!-- Script tabla DataTable -->
     <script>
         $(document).ready(function() {
-            $('#example').DataTable({
+            $('#tblReferentes').DataTable({
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
                 }
@@ -140,7 +141,7 @@ while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
         });
     </script>
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
-    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="assets/js/DataTables-1.11.4/js/jquery.dataTables.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 
 </body>
