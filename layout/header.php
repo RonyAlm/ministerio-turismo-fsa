@@ -17,9 +17,6 @@
                                 <img src="assets/img/M-Turismo-verde.png" alt="">
                             </a>
                         </div>
-                        <!-- <div class="login-content">
-                                <a href="#">Register / Login</a>
-                            </div> -->
                         <div class="login-content">
                             <a href="#">
                                 <img src="assets/img/FSA_HSA_LOGO-COLOR.png" alt="">
@@ -89,14 +86,20 @@
                         <!-- Nav End -->
                     </div>
 
-                    <!-- Calling Info -->
+                    <!-- Buscador-->
                     <div class="calling-info">
                         <div class="call-center">
-                            <a href="#">
-                                <i class="far fa-search"></i>
+                            <a href="#" id="buscador">
+                                <i class="far fa-search" id="search-btn"></i>
                             </a>
                         </div>
                     </div>
+
+                    <form action="" class="search-bar-container">
+                        <input type="search" id="search-bar" class="form-control form-control-sm" placeholder="buscar...">
+                        <label for="search-bar" class="far fa-search"></label>
+                    </form>
+
                 </nav>
             </div>
         </div>

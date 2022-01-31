@@ -269,6 +269,8 @@
     <script src="assets/js/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="assets/js/active.js"></script>
+
+    <script src="assets/js/buscador.js"></script>
 </body>
 
 </html>

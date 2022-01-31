@@ -11,7 +11,7 @@
   max-width: 10rem;
 }
 
-.header-area .academy-main-menu .calling-info .call-center::before {
+/* .header-area .academy-main-menu .calling-info .call-center::before {
   position: absolute;
   width: 43px;
   height: 120%;
@@ -23,20 +23,69 @@
   -webkit-transform: rotate(30deg);
   transform: rotate(30deg);
 }
-
-.header-area .academy-main-menu .calling-info .call-center a i {
+*/
+/* .header-area .academy-main-menu .calling-info .call-center a i {
   width: 20px;
   height: 1px;
   border: 0 !important;
   border-radius: 0;
   display: inline-block;
   line-height: 41px;
-  font-size: 27px;
-  text-align: center;
+
   margin-right: -4px;
   margin-left: 1px;
   margin-top: 23px;
+} */
+
+/*BUSCADOR*/
+#buscador {
+  position: absolute;
+  font-size: 27px;
+  text-align: center;
+  z-index: 1;
+  left: 12%;
 }
+
+.search-bar-container {
+  position: absolute;
+  width: 82.4%;
+  margin: 0 auto;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding: 1rem 2rem;
+  background: linear-gradient(to right, #61ba6d, #83c331);
+  display: flex;
+  align-items: center;
+  z-index: 1001;
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+}
+
+.search-bar-container.active {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.search-bar-container #search-bar {
+  width: 100%;
+  padding: 1rem;
+  text-transform: none;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  height: 2rem;
+  border: none;
+  background-color: #eef3f6;
+  padding: 0 30px;
+  font-style: italic;
+}
+
+.search-bar-container label {
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.5rem;
+  margin-left: 1.5rem;
+}
+
+/*END BUSCADOR*/
 
 .slider-text-r div {
   text-align: center !important;
@@ -188,6 +237,20 @@
 
 .header-area .academy-main-menu .calling-info .call-center {
   padding: 0 28px;
+}
+
+.header-area .academy-main-menu .calling-info .call-center::before {
+  position: absolute;
+  width: 50px;
+  height: 120%;
+  top: 3px;
+  left: -28px;
+  z-index: 1;
+  background-color: #61ba6d;
+  content: "";
+  -webkit-transform: rotate(30deg);
+  transform: rotate(30deg);
+  background: linear-gradient(to right, #61ba6d, #83c331);
 }
 
 .header-area .academy-main-menu .classynav {
