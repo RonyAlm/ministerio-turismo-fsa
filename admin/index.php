@@ -1,55 +1,56 @@
 <?php
 
-  session_start();
+session_start();
 
-  include_once "controladores/controlador_login.php";
-  include_once("conexion.php");
+include_once "controladores/controlador_login.php";
+include_once("conexion.php");
 
-  $controlador= new ControladorLogin();
+$controlador = new ControladorLogin();
 
-  $conexion= BD::crearInstancia();
+$conexion = BD::crearInstancia();
 
-  if (!isset($_REQUEST['c'])) {
-    $controlador->index();
-  }else { // aca esta diciendo que si hay una peticion
-    $accion = $_REQUEST['c'];//recuperamos la peticion
-    call_user_func(array($Controller,$accion));//pasamos al controlador la peticion $accion
-  }
+if (!isset($_REQUEST['c'])) {
+  $controlador->index();
+} else { // aca esta diciendo que si hay una peticion
+  $accion = $_REQUEST['c']; //recuperamos la peticion
+  call_user_func(array($Controller, $accion)); //pasamos al controlador la peticion $accion
+}
 
-  if ($_POST) {
-    $usuario= $_POST['usuario'];
-    $contraseña= $_POST['contraseña'];
+if ($_POST) {
+  $usuario = $_POST['usuario'];
+  $contraseña = $_POST['contraseña'];
 
-    $sql = "SELECT id_usuario, usuario, contraseña, rela_rol_id from usuario_contra where usuario='$usuario'";
+  $sql = "SELECT id_usuario, usuario, contraseña, rela_rol_id from usuario_contra where usuario='$usuario'";
 
-    $resultado = $conexion->prepare($sql);
-    $resultado->execute(array());
+  $resultado = $conexion->prepare($sql);
+  $resultado->execute(array());
 
-    $num = $resultado->rowCount();
+  $num = $resultado->rowCount();
 
-    if ($num > 0) {
-      $row = $resultado->fetch(PDO::FETCH_ASSOC);
-      $contraseña_bd = $row['contraseña'];
-      if ($contraseña_bd == $contraseña) {
-        $_SESSION['id'] = $row['id_usuario'];
-        $_SESSION['usuarios'] = $row['usuario'];
-        $_SESSION['contraseña'] = $row['contraseña'];
-        $_SESSION['rol_id'] = $row['rela_rol_id'];
+  $error = "";
+  if ($num > 0) {
+    $row = $resultado->fetch(PDO::FETCH_ASSOC);
+    $contraseña_bd = $row['contraseña'];
+    if ($contraseña_bd == $contraseña) {
+      $_SESSION['id'] = $row['id_usuario'];
+      $_SESSION['usuarios'] = $row['usuario'];
+      $_SESSION['contraseña'] = $row['contraseña'];
+      $_SESSION['rol_id'] = $row['rela_rol_id'];
 
-        header ("Location: index2.php");
-      }else {
-        echo "La contraseña no coincide";
-      }
+      header("Location: index2.php");
     } else {
-      echo "no existe el usuario";
+      $error = "La contraseña no coincide";
+      // echo "La contraseña no coincide";
     }
-
-
+  } else {
+    $error = "no existe el usuario";
   }
+}
 
- ?>
+?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -63,65 +64,120 @@
   <link rel="stylesheet" href="vistas/recursos/dist/css/adminlte.min.css">
 
   <!--<link rel="stylesheet" href="vistas/modulos/estilos.css">-->
+  <link rel="stylesheet" href="../assets/css/styles.css">
   <style media="screen">
-    body{
-      margin: 0;
-      padding: 0;
-      background: url(bañado.jpg);
-      background-size: cover;
-      background-position: center;
-      font-family: sans-serif;
+    body {
+      background: #76b852;
+      /* fallback for old browsers */
+      background: -webkit-linear-gradient(right, #76b852, #8DC26F);
+      background: -moz-linear-gradient(right, #76b852, #8DC26F);
+      background: -o-linear-gradient(right, #76b852, #8DC26F);
+      background: linear-gradient(to left, #76b852, #8DC26F);
+      font-family: "Roboto", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      font-family: "Roboto", sans-serif;
+      outline: 0;
+      background: #f2f2f2;
+      width: 100%;
+      border: 0;
+      margin: 0 0 15px;
+      padding: 15px;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+
+    .input-group-append {
+      background: #f2f2f2;
+    }
+
+    .input-group-text {
+      border: none;
+      background: #f2f2f2;
+    }
+
+    .col-8 {
+      flex: 0 0 100%;
+      max-width: 100%;
+      margin-bottom: 1.5rem;
+    }
+
+
+    .col-8 .btn:hover,
+    .col-8 .btn:focus,
+    .col-8 .btn:active {
+      border-color: #61ba6d !important;
     }
   </style>
+
 </head>
+
 <body class="hold-transition login-page">
-<div class="login-box">
-  <div class="login-logo login-card-body">
-    <b>Ministerio de Turismo</b>
-  </div>
-  <!-- /.login-logo -->
-  <div class="card">
-    <div class="card-body login-card-body">
-      <p class="login-box-msg">Ingresar Usuario y Contraseña</p>
-
-      <form action="?controlador_login.php" method="POST">
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Usuario" name="usuario" >
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-user"></span>
-            </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Contraseña" name="contraseña" >
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-4">
-          </div>
-          <!-- /.col -->
-          <div class="col-8">
-            <button type="submit" value="login" name="btnLogin" class="btn btn-primary btn-block">Iniciar Sesión</button>
-          </div>
-          <!-- /.col -->
-        </div>
-      </form>
-
+  <div class="login-box">
+    <div class="login-logo login-card-body">
+      <div class="turismo-logo academy-logo">
+        <a href="index.php">
+          <img src="../assets/img/M-Turismo-verde.png" alt="">
+        </a>
+      </div>
+      <!-- <b>Ministerio de Turismo</b> -->
     </div>
-    <!-- /.login-card-body -->
-  </div>
-</div>
-<!-- /.login-box -->
+    <!-- /.login-logo -->
+    <div class="card">
+      <div class="card-body login-card-body">
 
-<script src="vistas/recursos/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="vistas/recursos/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="vistas/recursos/dist/js/adminlte.min.js"></script>
+        <p class="login-box-msg">Ingresar Usuario y Contraseña</p>
+
+        <form action="?controlador_login.php" method="POST">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Usuario" name="usuario">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Contraseña" name="contraseña">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+
+            </div>
+            <!-- /.col -->
+            <div class="col-8">
+              <button type="submit" value="login" name="btnLogin" class="btn btn-primary btn-block">Iniciar Sesión</button>
+            </div>
+            <!-- /.col -->
+
+
+          </div>
+        </form>
+
+        <?php if (!empty($error)) : ?>
+          <p class="login-box-msg"><?= $error ?></p>
+        <?php endif; ?>
+
+      </div>
+      <!-- /.login-card-body -->
+    </div>
+  </div>
+  <!-- /.login-box -->
+
+  <script src="vistas/recursos/plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="vistas/recursos/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="vistas/recursos/dist/js/adminlte.min.js"></script>
 </body>
+
 </html>

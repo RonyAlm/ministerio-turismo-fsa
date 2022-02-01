@@ -11,6 +11,10 @@
   max-width: 10rem;
 }
 
+.login-logo .turismo-logo a img {
+  max-width: 86%;
+}
+
 /* .header-area .academy-main-menu .calling-info .call-center::before {
   position: absolute;
   width: 43px;

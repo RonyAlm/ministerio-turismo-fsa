@@ -247,7 +247,6 @@ while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
     <script>
         $(document).ready(function() {
             $('#tblAlojamientos').DataTable({
-                // "searching": false,
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
                 },

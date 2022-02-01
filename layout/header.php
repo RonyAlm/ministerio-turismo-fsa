@@ -13,7 +13,7 @@
                 <div class="col-12 h-100">
                     <div class="header-content h-100 d-flex align-items-center justify-content-between">
                         <div class="turismo-logo academy-logo">
-                            <a href="index.html">
+                            <a href="index.php">
                                 <img src="assets/img/M-Turismo-verde.png" alt="">
                             </a>
                         </div>
