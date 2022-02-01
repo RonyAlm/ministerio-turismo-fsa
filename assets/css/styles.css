@@ -332,3 +332,14 @@
   border-radius: 2px;
   z-index: 1;
 }
+
+/*Datatable*/
+.page-link {
+  color: #83c331 !important;
+}
+
+.page-item.active .page-link {
+  background-color: #83c331 !important;
+  border-color: #83c331 !important;
+  color: #fff !important;
+}
