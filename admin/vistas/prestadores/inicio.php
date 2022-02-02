@@ -92,6 +92,7 @@ $rol_id = $_SESSION['rol_id'];
           <tr>
             <th>Localidad</th>
             <th>Apellido y Nombre</th>
+            <th>Institución / Emprendimiento</th>
             <th>Contacto</th>
             <th>Dirección</th>
             <th>Institución</th>
@@ -99,7 +100,7 @@ $rol_id = $_SESSION['rol_id'];
           </tr>
         </thead>
         <tbody>
-
+          
 
           <?php foreach ($tablaPrestadores as $prestadore) { ?>
 
@@ -107,6 +108,7 @@ $rol_id = $_SESSION['rol_id'];
 
               <td><?php echo $prestadore["nombre_localidad"]; ?></td>
               <td><?php echo $prestadore["descripcion_prestador"]; ?></td>
+              <td><?php echo $prestadore["institucion_prestador"]; ?></td>
               <td><?php echo $prestadore["descripcion_contacto"]; ?></td>
               <td><?php echo $prestadore["calle_direccion"]; ?></td>
               <td><?php echo $prestadore["descripcion_tipo_estado"]; ?></td>
