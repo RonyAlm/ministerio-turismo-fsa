@@ -154,7 +154,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                   </li>
                 <?php }
-              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3 and $usuario == "matias") { ?>
+              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
                   <li class="nav-item">
                     <a href="?controlador=agencias&accion=inicio" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
@@ -162,7 +162,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                   </li>
                 <?php }
-              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3 and $usuario == "matias") { ?>
+              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
                   <li class="nav-item">
                     <a href="?controlador=prestadores&accion=inicio" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
@@ -170,7 +170,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                   </li>
                 <?php }
-              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3 and $usuario == "matias") { ?>
+              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
                   <li class="nav-item">
                     <a href="?controlador=referentes&accion=inicio" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
@@ -178,7 +178,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                   </li>
                 <?php }
-              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3 and $usuario == "matias") { ?>
+              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
                   <li class="nav-item">
                     <a href="?controlador=servigenerales&accion=inicio" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
@@ -190,7 +190,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
               <!-- CALENDARIO -->
             <?php }
-              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3 and $usuario == "matias") { ?>
+              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon far fa-calendar-alt"></i>

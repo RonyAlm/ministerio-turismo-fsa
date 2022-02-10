@@ -11,7 +11,7 @@ $rol_id = $_SESSION['rol_id'];
 
 ?>
 <div class="card">
-  <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") { ?>
+  <?php if ($rol_id == 1 or $rol_id == 3) { ?>
     <div class="card-header">
 
       <a name="" id="" class="btn btn-success" href="?controlador=referentes&accion=crear" role="button">Agregar Referente</a>
