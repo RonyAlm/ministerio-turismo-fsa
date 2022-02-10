@@ -77,11 +77,11 @@
           <div class="card-body">
             <div class="form-group">
               <label for="telefonoReferente">Teléfono Celular</label>
-              <input type="number" id="telefonoReferente" name="telefonoReferente[]" class="form-control">
+              <input type="number" id="telefonoReferente" name="telefonoReferente" class="form-control">
             </div>
             <div class="form-group">
               <label for="telefonoFijoReferente">Teléfono Fijo</label>
-              <input type="number" id="telefonoFijoReferente" name="telefonoFijoReferente[]" class="form-control">
+              <input type="number" id="telefonoFijoReferente" name="telefonoFijoReferente" class="form-control">
             </div>
             <div class="form-group">
               <label for="correoReferente">Correo</label>

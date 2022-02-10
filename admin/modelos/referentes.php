@@ -132,7 +132,8 @@ class ReferenteModelo
         $sqlTelefono = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
                                                                             `rela_contacto_referente`) 
                                                     VALUES (?,?,?)");
-        $sqlTelefono->execute(array($telefonoReferente, 2, $lastInsertIDReferentes));
+        $arrayTel = array($telefonoReferente, 2, $lastInsertIDReferentes);
+        $sqlTelefono->execute($arrayTel);
 
         /*-------- INSERTAMOS EL TELEFONO FIJO--------*/
 
