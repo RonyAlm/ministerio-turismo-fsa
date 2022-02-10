@@ -112,7 +112,7 @@ class PrestadoresModelo
         return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function buscarSelectServicio2($id_prestador)
+    public static function buscarSelectServicio2($id_prestador)
     {
 
         $conexionBD = BD::crearInstancia();
