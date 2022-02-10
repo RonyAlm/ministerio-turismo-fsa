@@ -12,7 +12,7 @@ $rol_id = $_SESSION['rol_id'];
 ?>
 
 <div class="card">
-  <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") { ?>
+  <?php if ($rol_id == 1 or $rol_id == 3) { ?>
     <div class="card-header">
 
       <a name="" id="" class="btn btn-success" href="?controlador=prestadores&accion=crear" role="button">Agregar Prestador</a>
@@ -100,7 +100,7 @@ $rol_id = $_SESSION['rol_id'];
           </tr>
         </thead>
         <tbody>
-          
+
 
           <?php foreach ($tablaPrestadores as $prestadore) { ?>
 
@@ -119,7 +119,7 @@ $rol_id = $_SESSION['rol_id'];
                 <div class="btn-group" role="group" aria-label="">
 
                   <a href="?controlador=prestadores&accion=info&id=<?php echo $prestadore["id_prestador"]; ?>" class="btn btn-warning">Más Info</a>
-                  <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") { ?>
+                  <?php if ($rol_id == 1 or $rol_id == 3) { ?>
                     <a href="?controlador=prestadores&accion=editar&id=<?php echo $prestadore["id_prestador"]; ?>" class="btn btn-info">Editar</a>
                     <a href="?controlador=prestadores&accion=borrar&id=<?php echo $prestadore["id_prestador"]; ?>
                                                                             &idDireccion=<?php echo $prestadore["id_direccion"]; ?>" class="btn btn-danger">Borrar</a>

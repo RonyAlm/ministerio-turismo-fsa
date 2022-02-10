@@ -163,7 +163,7 @@ $rol_id = $_SESSION['rol_id'];
                       <i class="fas fa-folder">
                       </i>Más Info
                     </a>
-                    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") { ?>
+                    <?php if ($rol_id == 1 or $rol_id == 3) { ?>
                       <a href="?controlador=Alojamientos&accion=editar&id=<?php echo $alojamiento["id_alojamientos"]; ?>" <a class="btn btn-info btn-sm">
                         <i class="fas fa-pencil-alt">
                         </i>Editar
