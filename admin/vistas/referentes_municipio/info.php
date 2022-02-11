@@ -24,6 +24,8 @@
                   <dd><?php echo $referenteInfo->calle_direccion; ?></dd>
                   <dt>Departamento:</dt>
                   <dd><?php echo $referenteInfo->descripcion_departamentos; ?></dd>
+                  <dt>Última actualización:</dt>
+                  <dd><?php echo $referenteInfo->fecha_edit_referente; ?></dd>
                 </dl>
               </div>
               <!-- /.card-body -->

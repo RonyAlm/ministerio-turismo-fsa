@@ -17,7 +17,7 @@ class PrestadoresModelo
     {
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->query(" SELECT `id_prestador`, `descripcion_prestador`, `institucion_prestador`,direccion.calle_direccion,
+        $sql = $conexionBD->query(" SELECT `id_prestador`, `descripcion_prestador`, `institucion_prestador`, fecha_edit_prestador, direccion.calle_direccion,
                                         localidad.nombre_localidad,tipo_estado.descripcion_tipo_estado,direccion.id_direccion,
                                         (SELECT contacto.descripcion_contacto 
                                         FROM contacto 
@@ -166,8 +166,8 @@ class PrestadoresModelo
 
         $sqlPrestador = $conexionBD->prepare("INSERT INTO `prestadores`(`descripcion_prestador`,`cuit_prestador`,
                                                                              `dni_prestador`, `institucion_prestador`,
-                                                                               `rela_prestador_direccion`,`rela_tipo_prestador`)
-                                            VALUES (?,?,?,?,?,?)");
+                                                                               `rela_prestador_direccion`,`rela_tipo_prestador`, fecha_edit_prestador)
+                                            VALUES (?,?,?,?,?,?,CURRENT_TIMESTAMP())");
         $sqlPrestador->execute(array(
             $nombrePrestador, $cuitPrestador,
             $dniPrestador, $institucionPrestador,
@@ -262,7 +262,7 @@ class PrestadoresModelo
         $conexionBD = BD::crearInstancia();
 
         $sql = $conexionBD->query("SELECT `id_prestador`, `descripcion_prestador`, `cuit_prestador`,
-            `dni_prestador`, `institucion_prestador`, `rela_razon_social_prestador`,
+            `dni_prestador`, `institucion_prestador`, `rela_razon_social_prestador`, fecha_edit_prestador,
             `rela_persona_prestrador`,
             direccion.id_direccion,direccion.calle_direccion,
             estado_actividad.id_estado,tipo_estado.descripcion_tipo_estado,estado_actividad.rela_tipo_estado,
@@ -338,7 +338,8 @@ class PrestadoresModelo
             echo "rubro igual a 0        /// ";
             $sql = $conexionBD->prepare("UPDATE `prestadores` SET `descripcion_prestador`='$nombrePrestador',
                                                                         `cuit_prestador`='$cuitPrestador',`dni_prestador`=$dniPrestador,
-                                                                        `institucion_prestador`='$institucionPrestador'
+                                                                        `institucion_prestador`='$institucionPrestador',
+                                                                        fecha_edit_prestador= CURRENT_TIMESTAMP()
                                                                         
                                             WHERE id_prestador=$IDnombre");
 
@@ -347,7 +348,8 @@ class PrestadoresModelo
             echo "rubro igual conectado   ///        ";
             $sql = $conexionBD->prepare("UPDATE `prestadores` SET `descripcion_prestador`='$nombrePrestador',
                                                                             `cuit_prestador`='$cuitPrestador',`dni_prestador`=$dniPrestador,
-                                                                            `institucion_prestador`='$institucionPrestador',`rela_tipo_prestador`=$categoriaPrestador
+                                                                            `institucion_prestador`='$institucionPrestador',`rela_tipo_prestador`=$categoriaPrestador,
+                                                                            fecha_edit_prestador= CURRENT_TIMESTAMP()
                     
                                                 WHERE id_prestador=$IDnombre");
 

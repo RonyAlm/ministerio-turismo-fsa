@@ -33,6 +33,8 @@
                         <dd><?php echo $informacion->idoneo_servicio_general; ?></dd>
                         <dt>Descripción:</dt>
                         <dd><?php echo $informacion->descripcion_servicio_general; ?></dd>
+                        <dt>Última actualización:</dt>
+                        <dd><?=$informacion->fecha_edit_general; ?></dd>
 
 
                     </dl>

@@ -27,6 +27,7 @@ class ServigeneralModelo
         tipo_de_servicio.descripcion_servicio,
         tipo_lugar.descripcion_lugar,
         `descripcion_servicio_general`,
+        fecha_edit_general,
         (SELECT contacto.descripcion_contacto 
         FROM contacto 
         WHERE servicios_generales.id_servicios_generales = contacto.rela_servicios_generales
@@ -103,7 +104,7 @@ class ServigeneralModelo
 
         /*-------- INSERTAMOS EL SERVICIO GENERAL--------*/
 
-        $sql = $conexionBD->prepare("INSERT INTO `servicios_generales`( `nombre_servicio_general`,`idoneo_servicio_general`, `rela_direccion`, `rela_estacion`, `rela_tipo_servicio`, `rela_tipo_lugar`, `descripcion_servicio_general`) VALUES (?,?,?,?,?,?,?)");
+        $sql = $conexionBD->prepare("INSERT INTO `servicios_generales`( `nombre_servicio_general`,`idoneo_servicio_general`, `rela_direccion`, `rela_estacion`, `rela_tipo_servicio`, `rela_tipo_lugar`, `descripcion_servicio_general`, fecha_edit_general) VALUES (?,?,?,?,?,?,?,CURRENT_TIMESTAMP())");
         $sql->execute(array(
             $nombre, $idoneo, $lastInsertIDdireccion,
             $estacion, $tipoServicio, $tipoServiGeneral,
@@ -181,7 +182,8 @@ class ServigeneralModelo
         tipo_estacion.descripcion_estacion,tipo_estacion.id_tipo_estacion,
         tipo_de_servicio.descripcion_servicio,tipo_de_servicio.id_tipo_servicio,
         tipo_lugar.descripcion_lugar,tipo_lugar.id_tipo_lugar,
-        `descripcion_servicio_general` 
+        `descripcion_servicio_general`,
+        fecha_edit_general 
         FROM `servicios_generales`
         INNER JOIN direccion ON servicios_generales.rela_direccion = direccion.id_direccion
         INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad
@@ -233,7 +235,7 @@ class ServigeneralModelo
         $conexionBD = BD::crearInstancia();
 
         /*---------------SE ACTUALIZA EL SERVICIO GENERAL-------------------*/
-        $sql = $conexionBD->prepare("UPDATE `servicios_generales` SET `nombre_servicio_general`='$nombre',`idoneo_servicio_general`='$idoneo',`rela_estacion`=$estacion,`rela_tipo_servicio`=$tipoServicio,`rela_tipo_lugar`=$tipoServiGeneral,`descripcion_servicio_general`='$descripcion' 
+        $sql = $conexionBD->prepare("UPDATE `servicios_generales` SET `nombre_servicio_general`='$nombre',`idoneo_servicio_general`='$idoneo',`rela_estacion`=$estacion,`rela_tipo_servicio`=$tipoServicio,`rela_tipo_lugar`=$tipoServiGeneral,`descripcion_servicio_general`='$descripcion', fecha_edit_general= CURRENT_TIMESTAMP() 
         WHERE servicios_generales.id_servicios_generales =  $id;");
         $sql->execute();
 

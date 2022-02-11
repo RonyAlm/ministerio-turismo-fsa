@@ -20,7 +20,7 @@ class AgenciaModelo
 
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->query("SELECT `id_agencias`, `descripcion_agencias`, direccion.calle_direccion,
+        $sql = $conexionBD->query("SELECT `id_agencias`, `descripcion_agencias`, direccion.calle_direccion, fecha_edit_agencia,
                                         (SELECT contacto.descripcion_contacto 
                                         FROM contacto 
                                         WHERE agencias.id_agencias = contacto.rela_contacto_agencia
@@ -108,10 +108,10 @@ class AgenciaModelo
         /*-------- INSERTAMOS LA AGENCIA--------*/
 
         $sql = $conexionBD->prepare("INSERT INTO agencias (descripcion_agencias,matricula_agencia,
-                                                                legajo_agencia,cuit_agencia,categoria_agencia,
+                                                                legajo_agencia,cuit_agencia,categoria_agencia, fecha_edit_agencia,
                                                                 rela_agencia_direccion,rela_razon_social_agencia
                                                                 ,idoneo_agencia) 
-                                            VALUES (?,?,?,?,?,?,?,?)");
+                                            VALUES (?,?,?,?,?,CURRENT_TIMESTAMP(),?,?,?)");
         $sql->execute(array(
             $descripcion_agencias, $matricula_agencia,
             $legajo_agencia, $cuit_agencia, $categoria_agencia, $lastInsertIDdireccion,
@@ -203,7 +203,7 @@ class AgenciaModelo
     {
         $conexionBD = BD::crearInstancia();
         $sql = $conexionBD->prepare("SELECT id_agencias, descripcion_agencias , `idoneo_agencia`, `matricula_agencia`,
-                                                    `legajo_agencia`, `cuit_agencia`, `categoria_agencia`, razon_social.descripcion_razon_social,
+                                                    `legajo_agencia`, `cuit_agencia`, `categoria_agencia`, fecha_edit_agencia, razon_social.descripcion_razon_social,
                                                      direccion.calle_direccion,
                                                     contacto.descripcion_contacto, tipo_estado.descripcion_tipo_estado,localidad.nombre_localidad
                                                     ,estado_actividad.rela_tipo_estado,departamentos_fsa.descripcion_departamentos 
@@ -262,7 +262,8 @@ class AgenciaModelo
         $sql = $conexionBD->prepare("UPDATE `agencias` SET `descripcion_agencias` = '$descripcion_agencias',
                                                     idoneo_agencia = '$idoneoAgencia', matricula_agencia ='$matricula_agencia',
                                                     legajo_agencia = '$legajo_agencia', cuit_agencia= '$cuit_agencia',
-                                                    categoria_agencia= '$categoria_agencia'
+                                                    categoria_agencia= '$categoria_agencia',
+                                                    fecha_edit_agencia= CURRENT_TIMESTAMP()
                                             WHERE `agencias`.`id_agencias` = $idAgencia;");
         $sql->execute();
 

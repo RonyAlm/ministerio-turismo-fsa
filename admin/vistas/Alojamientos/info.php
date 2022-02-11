@@ -89,6 +89,8 @@
                     <dd><?php echo $infoAlojamiento->descripcion_rubro; ?></dd>
                     <dt>Habilitación Municipal:</dt>
                     <dd><?php echo $infoAlojamiento->descripcion; ?></dd>
+                    <dt>Última actualización:</dt>
+                    <dd><?=$infoAlojamiento->fecha_edit_alojamiento; ?></dd>
                   </dl>
                 </div>
                 <!-- /.card-body -->

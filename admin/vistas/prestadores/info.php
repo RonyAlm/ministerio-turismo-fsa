@@ -76,6 +76,8 @@
             <dd><?php echo $infoPrestador->institucion_prestador; ?></dd>
             <dt>CUIT / CUIL:</dt>
             <dd><?php echo $infoPrestador->cuit_prestador; ?></dd>
+            <dt>Última actualización:</dt>
+            <dd><?=$infoPrestador->fecha_edit_prestador; ?></dd>
 
           </dl>
         </div>

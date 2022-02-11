@@ -71,6 +71,8 @@
                   <dd><?php echo $agenciasInfomacion->categoria_agencia; ?></dd>
                   <dt>Cuit:</dt>
                   <dd><?php echo $agenciasInfomacion->cuit_agencia; ?></dd>
+                  <dt>Última actualización:</dt>
+                  <dd><?=$agenciasInfomacion->fecha_edit_agencia; ?></dd>
                 </dl>
               </div>
               <!-- /.card-body -->

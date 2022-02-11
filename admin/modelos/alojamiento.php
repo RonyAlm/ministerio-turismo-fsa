@@ -19,7 +19,7 @@ class Alojamientos
 
 
         $sql = $conexionBD->query("  SELECT alojamientos.id_alojamientos, alojamientos.descripcion_alojamientos, tipo_alojamiento.descripcion_tipo_alojamiento,
-                                        direccion.calle_direccion,localidad.nombre_localidad,
+                                        direccion.calle_direccion,localidad.nombre_localidad, alojamientos.fecha_edit_alojamiento,
                                         (SELECT contacto.descripcion_contacto 
                                         FROM contacto 
                                         WHERE alojamientos.id_alojamientos = contacto.rela_alojamiento_contacto 
@@ -32,7 +32,8 @@ class Alojamientos
                                         INNER JOIN localidad on localidad.id_localidad = direccion.rela_localidad_direccion
                                         INNER JOIN estado_actividad on estado_actividad.rela_estado_alojamiento = alojamientos.id_alojamientos
                                         INNER JOIN tipo_estado on tipo_estado.id_tipo_estado = estado_actividad.rela_tipo_estado
-                                        INNER JOIN razon_social on razon_social.id_razon_social = alojamientos.rela_razon_social_alo");
+                                        INNER JOIN razon_social on razon_social.id_razon_social = alojamientos.rela_razon_social_alo
+                                        ORDER BY alojamientos.id_alojamientos DESC;");
 
         //recuperamos los datos y los retornamos
 
@@ -146,8 +147,8 @@ class Alojamientos
                                                                       rela_tipo_alojamiento_aloja,rela_razon_social_alo,
                                                                       rela_alojamiento_direccion,rela_alojamiento_rubro,
                                                                       rela_aloja_servicios,rela_aloja_serv_adicionales,
-                                                                      rela_habilitaciones) 
-                                                        VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+                                                                      rela_habilitaciones, fecha_edit_alojamiento) 
+                                                        VALUES (?,?,?,?,?,?,?,?,?,?,?, CURRENT_TIMESTAMP())");
         $sql->execute(array(
             $nombreAlojamiento, $cuitAlojamiento,
             $idoneoAlojamiento, $estrellaAlojamiento,
@@ -337,8 +338,8 @@ class Alojamientos
             echo "rubro igual a 0        /// ";
             $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
                                                                     `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
-                                                                    `estrella_alojamiento`=$estrellaAlojamiento
-                                                                    
+                                                                    `estrella_alojamiento`=$estrellaAlojamiento,
+                                                                    `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()
                                         WHERE id_alojamientos=$IDAlojamiento");
 
             $sql->execute();
@@ -346,8 +347,8 @@ class Alojamientos
             echo "rubro igual conectado   ///        ";
             $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
                                                                     `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
-                                                                    `estrella_alojamiento`=$estrellaAlojamiento,`rela_alojamiento_rubro`=$rubroAlojamiento
-                                                                    
+                                                                    `estrella_alojamiento`=$estrellaAlojamiento,`rela_alojamiento_rubro`=$rubroAlojamiento,
+                                                                    `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()
                                         WHERE id_alojamientos=$IDAlojamiento");
 
             $sql->execute();
@@ -356,7 +357,8 @@ class Alojamientos
             echo "categoria igual a 0    ///  ";
             $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
                                                                     `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
-                                                                    `estrella_alojamiento`=$estrellaAlojamiento
+                                                                    `estrella_alojamiento`=$estrellaAlojamiento,
+                                                                    `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()
                                         WHERE id_alojamientos=$IDAlojamiento");
 
             $sql->execute();
@@ -365,7 +367,8 @@ class Alojamientos
             $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
                                                                     `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
                                                                     `estrella_alojamiento`=$estrellaAlojamiento
-                                                                    ,`rela_tipo_alojamiento_aloja`=$categoriaAlojamiento
+                                                                    ,`rela_tipo_alojamiento_aloja`=$categoriaAlojamiento,
+                                                                    `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()
                                         WHERE id_alojamientos=$IDAlojamiento");
 
             $sql->execute();
@@ -375,7 +378,8 @@ class Alojamientos
             echo "habilitacion igual a 0    ///  ";
             $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
                                                                     `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
-                                                                    `estrella_alojamiento`=$estrellaAlojamiento
+                                                                    `estrella_alojamiento`=$estrellaAlojamiento,
+                                                                    `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()
                                         WHERE id_alojamientos=$IDAlojamiento");
 
             $sql->execute();
@@ -384,7 +388,8 @@ class Alojamientos
             $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
                                                                     `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
                                                                     `estrella_alojamiento`=$estrellaAlojamiento
-                                                                    ,`rela_habilitaciones`=$habilitacionAlojamiento
+                                                                    ,`rela_habilitaciones`=$habilitacionAlojamiento,
+                                                                    `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()
                                         WHERE id_alojamientos=$IDAlojamiento");
 
             $sql->execute();
@@ -598,6 +603,7 @@ class Alojamientos
 
         $sql = $conexionBD->query("SELECT alojamientos.id_alojamientos,alojamientos.descripcion_alojamientos,alojamientos.cuit_alojamiento,
             alojamientos.idoneo_alojamiento,alojamientos.estrella_alojamiento,
+            alojamientos.fecha_edit_alojamiento,
             razon_social.id_razon_social,razon_social.descripcion_razon_social,
             direccion.id_direccion,direccion.calle_direccion,
             estado_actividad.id_estado,estado_actividad.rela_tipo_estado,

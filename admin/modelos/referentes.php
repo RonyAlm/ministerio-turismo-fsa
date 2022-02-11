@@ -18,7 +18,7 @@ class ReferenteModelo
 
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->query("SELECT `id_referentes`, `idoneo_referente`, direccion.id_direccion,localidad.nombre_localidad,
+        $sql = $conexionBD->query("SELECT `id_referentes`, `idoneo_referente`, fecha_edit_referente, direccion.id_direccion,localidad.nombre_localidad,
                                             tipo_encargado.descripcion_tipo_encargado,
                                         (SELECT contacto.descripcion_contacto 
                                         FROM contacto 
@@ -121,8 +121,8 @@ class ReferenteModelo
 
         /*-------- INSERTAMOS EL REFERENTE--------*/
 
-        $sql = $conexionBD->prepare("INSERT INTO `referentes_municipal`(`idoneo_referente`, `rela_direccion`,rela_tipo_encargado) 
-                                            VALUES (?,?,?)");
+        $sql = $conexionBD->prepare("INSERT INTO `referentes_municipal`(`idoneo_referente`, `rela_direccion`,rela_tipo_encargado, fecha_edit_referente) 
+                                            VALUES (?,?,?,CURRENT_TIMESTAMP())");
         $sql->execute(array($nombreReferente, $lastInsertIDdireccion, $referenteEncargado));
 
         $lastInsertIDReferentes = $conexionBD->lastInsertId();
@@ -188,7 +188,7 @@ class ReferenteModelo
     public function buscar($idReferente)
     {
         $conexionBD = BD::crearInstancia();
-        $sql = $conexionBD->prepare("SELECT `id_referentes`, `idoneo_referente`,contacto.descripcion_contacto,
+        $sql = $conexionBD->prepare("SELECT `id_referentes`, `idoneo_referente`,fecha_edit_referente ,contacto.descripcion_contacto,
                                         direccion.calle_direccion,direccion.id_direccion,
                                         localidad.nombre_localidad,departamentos_fsa.descripcion_departamentos,
                                         tipo_encargado.id_tipo_encargado, tipo_encargado.descripcion_tipo_encargado
@@ -258,14 +258,16 @@ class ReferenteModelo
 
         if ($referenteEncargado == 0) {
             echo "se actualiza sin el encargado";
-            $sql = $conexionBD->prepare("UPDATE `referentes_municipal` SET `idoneo_referente`='$nombreReferente'
+            $sql = $conexionBD->prepare("UPDATE `referentes_municipal` SET `idoneo_referente`='$nombreReferente',
+                                                                            fecha_edit_referente= CURRENT_TIMESTAMP()
                                         
                                         WHERE id_referentes = $referenteID");
             $sql->execute();
         } else {
             echo "se actualiza con el encargado";
             $sql = $conexionBD->prepare("UPDATE `referentes_municipal` 
-                SET`rela_tipo_encargado`=$referenteEncargado ,`idoneo_referente`='$nombreReferente'
+                SET`rela_tipo_encargado`=$referenteEncargado ,`idoneo_referente`='$nombreReferente',
+                fecha_edit_referente= CURRENT_TIMESTAMP()
                 WHERE id_referentes = $referenteID");
             $sql->execute();
         }
