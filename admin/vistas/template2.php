@@ -346,7 +346,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="?controlador=Alojamientos&accion=inicio" class="nav-link">
+                    <a href="?controlador=transporte&accion=inicio" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Colectivos</p>
                     </a>
