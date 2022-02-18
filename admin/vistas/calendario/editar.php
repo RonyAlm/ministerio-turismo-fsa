@@ -1,6 +1,6 @@
 <?php
-include_once("/xampp/htdocs/ministeriotur/modelos/calendario.php");
-include_once("/xampp/htdocs/ministeriotur/conexion.php");
+include_once("/xampp/htdocs/ministeriotur/admin/modelos/calendario.php");
+include_once("/xampp/htdocs/ministeriotur/admin/conexion.php");
 
 $eliminar = new CalendarioModelo();
 
