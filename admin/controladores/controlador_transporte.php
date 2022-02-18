@@ -15,7 +15,7 @@ class ControladorTransporte
         // $tablaServigeneral = $consultaServigeneral->consultar();
         // $datosEstadisticos = new estadistica();
 
-        $cantidadPiletas = $datosEstadisticos->cantidadPiletas();
+        // $cantidadPiletas = $datosEstadisticos->cantidadPiletas();
         // $cantidadPlayas = $datosEstadisticos->cantidadPlayas();
         // $cantidadCamping = $datosEstadisticos->cantidadCamping();
         // $cantidadParqueAcuaticos = $datosEstadisticos->cantidadParqueAcuaticos();

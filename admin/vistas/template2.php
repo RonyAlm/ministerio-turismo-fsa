@@ -42,6 +42,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- fullCalendar -->
   <link rel="stylesheet" href="vistas/recursos/plugins/fullcalendar1/lib/main.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
+  <!-- style transporte -->
+  <link rel="stylesheet" href="vistas/recursos/dist/transporte.css">
 
 
 
