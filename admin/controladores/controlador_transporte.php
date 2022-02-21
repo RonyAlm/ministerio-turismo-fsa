@@ -26,12 +26,12 @@ class ControladorTransporte
     public function crear()
     {
 
-        $select_tipo_servigeneral = new ServigeneralModelo();
+        // $select_tipo_servigeneral = new ServigeneralModelo();
 
-        $buscarSelectLocalidad = $select_tipo_servigeneral->buscarSelectLocalidad();
-        $buscarSelectEstacion = $select_tipo_servigeneral->buscarSelectEstacion();
-        $buscarSelectLugar = $select_tipo_servigeneral->buscarSelectLugar();
-        $buscarSelectTipoServicio = $select_tipo_servigeneral->buscarSelectTipoServicio();
+        // $buscarSelectLocalidad = $select_tipo_servigeneral->buscarSelectLocalidad();
+        // $buscarSelectEstacion = $select_tipo_servigeneral->buscarSelectEstacion();
+        // $buscarSelectLugar = $select_tipo_servigeneral->buscarSelectLugar();
+        // $buscarSelectTipoServicio = $select_tipo_servigeneral->buscarSelectTipoServicio();
 
         if ($_POST) {
             //print_r($_POST);
@@ -86,11 +86,11 @@ class ControladorTransporte
             // print_r($insertar);
 
 
-            header("Location:index2.php?controlador=servigenerales&accion=inicio");
+            header("Location:index2.php?controlador=transporte&accion=inicio");
         }
 
 
-        include_once("vistas/servigenerales/crear.php");
+        include_once("vistas/transporte/crear.php");
     }
     public function editar()
     {
