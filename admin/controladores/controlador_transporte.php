@@ -10,7 +10,7 @@ class ControladorTransporte
     public function inicio()
     { //aca se muestra las tablas
 
-        // $consultaServigeneral = new ServigeneralModelo();
+        // $consultaServigeneral = new TransporteModelo();
 
         // $tablaServigeneral = $consultaServigeneral->consultar();
         // $datosEstadisticos = new estadistica();
@@ -26,17 +26,17 @@ class ControladorTransporte
     public function crear()
     {
 
-        // $select_tipo_servigeneral = new ServigeneralModelo();
+        $select = new TransporteModelo();
 
-        // $buscarSelectLocalidad = $select_tipo_servigeneral->buscarSelectLocalidad();
-        // $buscarSelectEstacion = $select_tipo_servigeneral->buscarSelectEstacion();
-        // $buscarSelectLugar = $select_tipo_servigeneral->buscarSelectLugar();
-        // $buscarSelectTipoServicio = $select_tipo_servigeneral->buscarSelectTipoServicio();
+        $buscarSelectLocalidad = $select->buscarSelectLocalidad();
+        $buscarSelectProvincia = $select->buscarSelectProvincia();
+        // $buscarSelectLugar = $select->buscarSelectLugar();
+        // $buscarSelectTipoServicio = $select->buscarSelectTipoServicio();
 
         if ($_POST) {
             //print_r($_POST);
 
-            $insertar = new ServigeneralModelo();
+            $insertar = new TransporteModelo();
 
 
             $nombre = $_POST['nombre'];
@@ -97,7 +97,7 @@ class ControladorTransporte
 
         $id = $_GET["id"];
 
-        $select_tipo_servigeneral = new ServigeneralModelo();
+        $select_tipo_servigeneral = new TransporteModelo();
 
         $buscarSelectLocalidad = $select_tipo_servigeneral->buscarSelectLocalidad();
         $buscarSelectEstacion = $select_tipo_servigeneral->buscarSelectEstacion();
@@ -108,7 +108,7 @@ class ControladorTransporte
         /*----------BUSCA LOS POST QUE SE ENCUENTRA EN EDITAR.PHP PARA PODER EDITARLO----------*/
 
         if ($_POST) {
-            $EditarAgencia = new ServigeneralModelo();
+            $EditarAgencia = new TransporteModelo();
 
 
             $id =  $_POST['nombreID'];
@@ -214,7 +214,7 @@ class ControladorTransporte
         $agenciaOtro = $contactosDeagencia->consultarOtro($id);
 
 
-        $buscarID = new ServigeneralModelo();
+        $buscarID = new TransporteModelo();
 
         $editar = $buscarID->buscar($id);
 
@@ -231,7 +231,7 @@ class ControladorTransporte
         $idServigeneralBorrar = $_GET["id"];
         $id_direccion = $_GET['idDireccion'];
 
-        $borrarAgencias = new ServigeneralModelo();
+        $borrarAgencias = new TransporteModelo();
 
         $buscarIDBorrado = $borrarAgencias->consultarID($idServigeneralBorrar);
 
@@ -244,7 +244,7 @@ class ControladorTransporte
     {
         $id = $_GET['id'];
 
-        $info = new ServigeneralModelo();
+        $info = new TransporteModelo();
 
         $informacion = $info->buscar($id);
 
