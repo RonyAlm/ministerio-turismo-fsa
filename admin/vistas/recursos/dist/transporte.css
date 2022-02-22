@@ -1,137 +1,142 @@
-.select2-container--default
-  .select2-results__option--highlighted[aria-selected],
-.select2-container--default
-  .select2-results__option--highlighted[aria-selected]:hover {
-  background-color: #83c331;
-  color: #fff;
+.select2-container--default .select2-results__option--highlighted[aria-selected],
+.select2-container--default .select2-results__option--highlighted[aria-selected]:hover {
+    background-color: #83c331;
+    color: #fff;
 }
 
-.select2-container--default
-  .select2-results__option--highlighted[aria-selected] {
-  background-color: #83c331;
-  color: white;
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #83c331;
+    color: white;
 }
 
 .select2-container--default .select2-results__option--highlighted {
-  background-color: #83c331;
-  color: #fff;
+    background-color: #83c331;
+    color: #fff;
 }
 
-.select2-container--default.select2-container--focus
-  .select2-selection--multiple,
-.select2-container--default.select2-container--focus
-  .select2-selection--single {
-  border-color: #83c331;
+.select2-container--default.select2-container--focus .select2-selection--multiple,
+.select2-container--default.select2-container--focus .select2-selection--single {
+    border-color: #83c331;
 }
 
 .form-control:focus {
-  border: 1px solid #83c331;
+    border: 1px solid #83c331;
 }
 
 .select2-container--default .select2-dropdown .select2-search__field:focus,
-.select2-container--default
-  .select2-search--inline
-  .select2-search__field:focus {
-  border: 1px solid #83c331;
+.select2-container--default .select2-search--inline .select2-search__field:focus {
+    border: 1px solid #83c331;
 }
 
 .btn-default {
-  background: linear-gradient(to right, #61ba6d, #83c331);
-  border-color: #83c331;
-  color: white;
+    background: linear-gradient(to right, #61ba6d, #83c331);
+    border-color: #83c331;
+    color: white;
 }
+
 
 /* CSS DE RESULTADOS*/
 
 .list-group-item {
-  position: relative;
-  display: block;
-  padding: 0.5rem;
-  padding-top: 1.5rem;
-  padding-bottom: 0;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  background: linear-gradient(to right, #61ba6d, #83c331);
-  margin-top: 1rem;
+    position: relative;
+    display: block;
+    padding: 0.5rem;
+    padding-top: 1.5rem;
+    padding-bottom: 0;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    background: linear-gradient(to right, #61ba6d, #83c331);
+    margin-top: 1rem;
 }
 
 .list-group-item:first-child {
-  margin-top: 0;
+    margin-top: 0;
 }
 
 .list-group-item:last-child {
-  margin-bottom: 2rem;
+    margin-bottom: 2rem;
 }
 
 .card-info-colectivo-header {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: -1rem;
-  margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -1rem;
+    margin-bottom: 0.5rem;
 }
 
 .card-info-colectivo-header a {
-  margin-left: 0.4rem;
+    margin-left: 0.4rem;
 }
 
 .list-group-item .row {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  background-color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    background-color: #fff;
 }
 
 .card-info-colectivo-top,
 .card-info-colectivo-button {
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: row;
 }
 
 .card-info-colectivo-top {
-  justify-content: space-between;
+    justify-content: space-between;
 }
 
 .card-info-colectivo-button {
-  justify-content: stretch;
+    justify-content: stretch;
 }
 
 .card-info-colectivo-item {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  border: 2px solid #83c331;
-  flex-wrap: wrap;
-  width: 25%;
-  align-items: center;
-  max-height: 190px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border: 2px solid #83c331;
+    flex-wrap: wrap;
+    width: 25%;
+    align-items: center;
+    max-height: 190px;
 }
 
 .card-info-colectivo-item h3 {
-  padding-left: 1rem;
-  padding-right: 1rem;
-  text-align: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: center;
+}
+
+.card-info-colectivo-item h5 {
+    color: #83c331;
+}
+
+.card-info-colectivo-item:nth-child(3) p {
+    padding-left: 4rem;
+    padding-right: 1rem;
+    color: #83c331;
+    align-self: flex-start;
 }
 
 .card-info-colectivo-top .card-info-colectivo-item:last-child p:first-child {
-  margin-top: 1rem;
+    margin-top: 1rem;
 }
 
 .card-info-colectivo-button .card-info-colectivo-item:first-child {
-  width: 75%;
+    width: 75%;
 }
 
 .card-info-colectivo-button .card-info-colectivo-item:last-child {
-  width: 25%;
+    width: 25%;
 }
 
 .card-info-colectivo-item h3 {
-  color: #83c331;
+    color: #83c331;
 }
 
 .card-info-colectivo-item span {
-  color: red;
+    color: red;
 }
 
 .card-info-colectivo-button .card-info-colectivo-item p {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }
