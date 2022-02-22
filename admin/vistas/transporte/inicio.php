@@ -95,9 +95,9 @@
                                           <p>Dom 20 Feb 12:05hs. </p>
                                       </div>
                                       <div class="card-info-colectivo-item">
-                                          <p>Cama</p>
-                                          <p>Semi Cama</p>
-                                          <p>Ejecutivo</p>
+                                          <p>Cama: <span>$1800</span> </p>
+                                          <p>Semi Cama: <span>$3200</span> </p>
+                                          <p>Ejecutivo: <span>$1300</span> </p>
                                       </div>
                                       <div class="card-info-colectivo-item">
                                           <p>Duracion: 18:10hs.</p>

@@ -110,7 +110,7 @@
 }
 
 .card-info-colectivo-item:nth-child(3) p {
-    padding-left: 4rem;
+    padding-left: 2rem;
     padding-right: 1rem;
     color: #83c331;
     align-self: flex-start;
@@ -132,7 +132,11 @@
     color: #83c331;
 }
 
-.card-info-colectivo-item span {
+.card-info-colectivo-item:nth-child(3) span {
+    color: #333;
+}
+
+.card-info-colectivo-item:last-child span {
     color: red;
 }
 
