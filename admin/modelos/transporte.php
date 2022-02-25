@@ -391,6 +391,21 @@ class TransporteModelo
 
         return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
     }
+    public function obtenerProvincia()
+    {
+
+        $conexionBD = BD::crearInstancia();
+        $listaReferente = [];
+        $query = $conexionBD->query("SELECT * FROM `provincia`");
+
+
+        while ($filas = $query->fetch(PDO::FETCH_ASSOC)) {
+            $listaReferentes[] = $filas;
+            // print_r($listaReferentes);
+        }
+        $jsonstring = json_encode($listaReferente);
+        return $jsonstring;
+    }
 }
 
 class ContactosAgencia
