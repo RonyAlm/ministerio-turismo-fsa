@@ -1,7 +1,7 @@
 <?php
 function obtenerProvincia()
 {
-    include "./admin/conexion.php";
+    include_once("/xampp/htdocs/ministeriotur/admin/conexion.php");
     $conexionBD = BD::crearInstancia();
     $listaReferente = [];
     $query = $conexionBD->query("SELECT * FROM `provincia`");
