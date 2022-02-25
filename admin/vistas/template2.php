@@ -139,7 +139,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Brand Logo -->
       <a href="?controlador=paginas&accion=inicio" class="brand-link">
           <i class="far fa-circle nav-icon" style="margin-left: 1rem; color: transparent;"></i>
-          <img class="brand-text" src="../../../Projects/ministerio-turismo-fsa/assets/img/M-Turismo-verde.png" alt="" style="width: 60%;">
+          <img class="brand-text" src="vistas/recursos/dist/img/M-Turismo-verde.png" alt="" style="width: 60%;">
       </a>
 
       <!-- Sidebar -->
