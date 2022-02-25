@@ -62,7 +62,7 @@
                                             <div class="form-group">
                                                 <label for="provincia">Destino:</label>
                                                 <select id="provincia" name="provincia" class="form-control custom-select" required>
-                                                    <option value=""></option>
+
                                                 </select>
                                             </div>
                                         </div>
