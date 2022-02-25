@@ -62,10 +62,7 @@
                                             <div class="form-group">
                                                 <label for="provincia">Destino:</label>
                                                 <select id="provincia" name="provincia" class="form-control custom-select" required>
-                                                    <option value="0" selected disabled>Seleccionar la Provincia</option>
-                                                    <?php foreach ($buscarSelectProvincia as $k) : ?>
-                                                        <option value="<?php echo $k->id_provincia; ?>"> <?php echo $k->nombre_provincia; ?></option>
-                                                    <?php endforeach; ?>
+                                                    <option value=""></option>
                                                 </select>
                                             </div>
                                         </div>
