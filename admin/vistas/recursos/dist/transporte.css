@@ -144,3 +144,11 @@
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
 }
+
+.dropdown-item.active,
+.dropdown-item:active,
+.dropdown-item:focus {
+    color: #fff;
+    text-decoration: none;
+    background-color: #83c331 !important;
+}
