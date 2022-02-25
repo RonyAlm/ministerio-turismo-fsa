@@ -33,7 +33,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="vistas/recursos/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="vistas/recursos/dist/css/adminlte.min.css">
-  
+
   <!-- DataTables -->
   <link rel="stylesheet" href="vistas/recursos/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="vistas/recursos/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -44,7 +44,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="vistas/recursos/plugins/fullcalendar1/lib/main.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
   <!-- style transporte -->
-  
+
   <link rel="stylesheet" href="vistas/recursos/dist/transporte.css">
   <!-- Favicon -->
   <link rel="icon" href="vistas/recursos/dist/img/favicon.png">
@@ -488,6 +488,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="vistas/recursos/script/validacion_prestador.js"></script>
   <script src="vistas/recursos/script/filas_contacto.js"></script>
   <script src="vistas/recursos/script/agregarTransporte.js"></script>
+  <script src="vistas/recursos/script/selectDinamico.js"></script>
 
 
 

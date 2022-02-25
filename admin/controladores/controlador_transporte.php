@@ -6,7 +6,6 @@ include_once("conexion.php");
 
 class ControladorTransporte
 {
-
     public function inicio()
     { //aca se muestra las tablas
 
@@ -22,6 +21,21 @@ class ControladorTransporte
 
 
         include_once("vistas/transporte/inicio.php");
+    }
+    public function select()
+    {
+        $conexionBD = BD::crearInstancia();
+
+        $id_provincia = $_POST['id_provincia'];
+
+        $queryP = $conexionBD->query("SELECT `id_localidad`, `nombre_localidad`
+         FROM `localidad` 
+         WHERE rela_provincia = $id_provincia ");
+
+        while ($filas = $queryP->fetch(PDO::FETCH_ASSOC)) {
+            $html = "<option value='" . $filas['id_localidad'] . "'>" . $filas['nombre_localidad'] . "</option>";
+        };
+        echo $html;
     }
     public function crear()
     {

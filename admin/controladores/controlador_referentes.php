@@ -170,12 +170,19 @@ class ControladorReferentes
     public function borrar()
     { //aca se muestra las tablas
 
+        print_r($_GET);
+
+        $borradoReferente = new ReferenteModelo();
+
+        $id = $_GET['id'];
+        $id_direccion = $_GET['idDireccion'];
+
+        $borrado = $borradoReferente->borrar($id, $id_direccion);
 
 
 
 
-
-        include_once("vistas/referentes_municipio/borrar.php");
+        header("Location:index2.php?controlador=Referentes&accion=inicio");
     }
 
     public function info()

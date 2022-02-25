@@ -73,10 +73,7 @@
                                             <div class="form-group">
                                                 <label for="localidad">Localidad:</label>
                                                 <select id="localidad" name="localidad" class="form-control custom-select" required>
-                                                    <option value="0" selected disabled>Seleccionar la localidad</option>
-                                                    <?php foreach ($buscarSelectLocalidad as $k) : ?>
-                                                        <option value="<?php echo $k->id_localidad; ?>"> <?php echo $k->nombre_localidad; ?></option>
-                                                    <?php endforeach; ?>
+
                                                 </select>
                                             </div>
                                         </div>
@@ -123,6 +120,6 @@
         </div>
         <input name="" id="" class="btn btn-success" type="submit" value="AgregarTransportes">
 
-        <a href="?controlador=agencias&accion=inicio" class="btn btn-primary">Cancelar</a>
+        <a href="?controlador=transporte&accion=inicio" class="btn btn-primary">Cancelar</a>
     </form>
 </div>

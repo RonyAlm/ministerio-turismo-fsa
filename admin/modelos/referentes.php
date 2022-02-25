@@ -354,6 +354,16 @@ class ReferenteModelo
                                                 WHERE id_contacto = $referenteOtroID ");
         $sqlOtro->execute();
     }
+    public static function borrar($id_referente, $id_direccion)
+    {
+        $conexionBD = BD::crearInstancia();
+
+        $sql = $conexionBD->prepare("DELETE FROM `referentes_municipal` WHERE id_referentes =?");
+        $sql->execute(array($id_referente));
+
+        $sqlDireccionBorrar = $conexionBD->prepare("DELETE FROM direccion WHERE id_direccion =?");
+        $sqlDireccionBorrar->execute(array($id_direccion));
+    }
 
 
     /*-----FIN DE LA CLASE MODELO */
