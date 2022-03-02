@@ -341,7 +341,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <p>Museos</p>
                     </a>
                   </li>
-                  <li class="nav-item">
+                  <!-- <li class="nav-item">
                     <a href="?controlador=agencias&accion=inicio" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Festividades</p>
@@ -352,41 +352,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <i class="far fa-circle nav-icon"></i>
                       <p>Iglesías</p>
                     </a>
-                  </li>
+                  </li> -->
 
                 </ul>
               </li>
               <!-- FESTIVALES -->
             <?php }
-              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3 and $usuario == "liz") { ?>
-              <li class="nav-item menu-close">
-                <a href="#" class="nav-link false">
-                  <i class="nav-icon far fa-calendar-alt"></i>
+              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3 and $usuario == "matias") { ?>
+              <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'festivales')) ? 'menu-open' : '' ?>">
+                <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'festivales')) ? 'active' : '' ?>">
+                  <i class="nav-icon fas fa-columns"></i>
                   <p>
-                    Festivales
+                    Festividades
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="?controlador=Alojamientos&accion=inicio" class="nav-link">
+                    <a href="?controlador=museos&accion=inicio" class="nav-link 
+                    <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'festivales')) ? 'active' : '' ?>">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Provincial</p>
+                      <p>Registro</p>
                     </a>
                   </li>
-                  <li class="nav-item">
-                    <a href="?controlador=agencias&accion=inicio" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Municipal</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="?controlador=prestadores&accion=inicio" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Barrial</p>
-                    </a>
-                  </li>
-
                 </ul>
               </li>
               <!-- TRANSPORTE -->
