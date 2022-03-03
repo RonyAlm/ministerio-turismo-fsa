@@ -9,7 +9,8 @@ function obtenerProvincia()
 
     while ($filas = $query->fetch(PDO::FETCH_ASSOC)) {
         $listaReferentes[] = $filas;
-        // print_r($listaReferentes);
+
+        print_r($listaReferentes);
     }
     $jsonstring = json_encode($listaReferente);
     echo $jsonstring;
