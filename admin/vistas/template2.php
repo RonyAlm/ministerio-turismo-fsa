@@ -279,7 +279,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
               <!-- CIRCUITOS TURISTICOS -->
             <?php }
-              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3 and $usuario == "liz") { ?>
+              if ($rol_id == 1 or $rol_id == 3 and $usuario == "liz") { ?>
               <li class="nav-item">
                 <a href="pages/calendar.html" class="nav-link">
                   <i class="nav-icon fas fa-tree"></i>
