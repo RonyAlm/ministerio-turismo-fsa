@@ -180,7 +180,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </p>
               </a>
             </li>
-
+            <!-- REGISTRO -->
             <?php if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
 
               <li class="nav-item 
@@ -370,7 +370,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="?controlador=museos&accion=inicio" class="nav-link 
+                    <a href="?controlador=festivales&accion=inicio" class="nav-link 
                     <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'festivales')) ? 'active' : '' ?>">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Registro</p>
