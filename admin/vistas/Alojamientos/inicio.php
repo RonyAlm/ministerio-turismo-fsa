@@ -99,7 +99,7 @@ $rol_id = $_SESSION['rol_id'];
       <div class="col-lg-12">
         <table id="example1" class="table table-bordered table-striped" cellspacing="0" width="100%">
           <thead>
-            <tr>
+            <tr style="background: linear-gradient(to right, #61ba6d, #83c331)" align="center">
 
               <th>Localidad</th>
               <th>Categoría</th>
