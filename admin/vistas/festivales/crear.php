@@ -1,7 +1,7 @@
 <div class="card card-success">
 
     <div class="card-header">
-        Agregar Servicio
+        Agregar Festival
     </div>
 
     <div class="mb-1">
@@ -27,26 +27,9 @@
                         </div>
                     </div>
                     <div class="card-body">
+
                         <div class="form-group">
-                            <label for="tipoServiGeneral">Tipo</label>
-                            <select id="tipoServiGeneral" name="tipoServiGeneral" class="form-control custom-select" required>
-                                <option value="0" selected disabled>Seleccionar el tipo</option>
-                                <?php foreach ($buscarSelectLugar as $k) : ?>
-                                    <option value="<?php echo $k->id_tipo_lugar; ?>"> <?php echo $k->descripcion_lugar; ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="estacion">Estación</label>
-                            <select id="estacion" name="estacion" class="form-control custom-select" required>
-                                <option value="0" selected disabled>Seleccionar el tipo</option>
-                                <?php foreach ($buscarSelectEstacion as $k) : ?>
-                                    <option value="<?php echo $k->id_tipo_estacion; ?>"> <?php echo $k->descripcion_estacion; ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="nombre">Nombre:</label>
+                            <label for="nombre">Festival:</label>
                             <input type="text" id="nombre" name="nombre" class="form-control" required>
                         </div>
 
@@ -66,11 +49,16 @@
                             <input type="text" id="idoneo" name="idoneo" class="form-control"></input>
                         </div>
 
-
                         <div class="form-group">
+                            <label for="fecha">fecha:</label>
+                            <input type="date" id="fecha" name="fecha" class="form-control"></input>
+                        </div>
+
+
+                        <!-- <div class="form-group">
                             <label for="domicilio">Domicilio</label>
                             <input type="text" id="domicilio" name="domicilio" class="form-control">
-                        </div>
+                        </div> -->
 
                         <div class="form-group">
                             <label for="tipoServicio">Tipo servicio</label>
@@ -148,7 +136,7 @@
         </div>
         <input name="" id="" class="btn btn-success" type="submit" value="Agregar Servicio">
 
-        <a href="?controlador=servigenerales&accion=inicio" class="btn btn-primary">Cancelar</a>
+        <a href="?controlador=festivales&accion=inicio" class="btn btn-primary">Cancelar</a>
     </form>
 
 

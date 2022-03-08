@@ -152,10 +152,6 @@ $rol_id = $_SESSION['rol_id'];
                 <?php } ?>
 
 
-
-
-
-
                 <td class="project-actions text-right">
                   <div class="btn-group" role="group" aria-label="">
 

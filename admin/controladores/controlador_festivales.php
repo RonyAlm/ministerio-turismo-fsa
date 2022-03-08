@@ -21,7 +21,7 @@ class ControladorFestivales
         // $cantidadParqueAcuaticos = $datosEstadisticos->cantidadParqueAcuaticos();
 
 
-        include_once("vistas/festividades/inicio.php");
+        include_once("vistas/festivales/inicio.php");
     }
     public function crear()
     {
@@ -42,15 +42,11 @@ class ControladorFestivales
             $nombre = $_POST['nombre'];
             $descripcion = $_POST['descripcion'];
             $idoneo = $_POST['idoneo'];
-
-            $tipoServiGeneral = $_POST['tipoServiGeneral'];
-
-            $estacion = $_POST['estacion'];
+            $fecha = $_POST['fecha'];
 
             $tipoServicio = $_POST['tipoServicio'];
 
             $localidad = $_POST['localidad'];
-            $domicilio = $_POST['domicilio'];
 
             $telefonoAgencia = $_POST['telefonoAgencia'];
             $telefonoFijoAgencia = $_POST['telefonoFijoAgencia'];
@@ -69,11 +65,9 @@ class ControladorFestivales
                 $nombre,
                 $descripcion,
                 $idoneo,
+                $fecha,
                 $localidad,
-                $tipoServiGeneral,
                 $tipoServicio,
-                $domicilio,
-                $estacion,
                 $telefonoAgencia,
                 $telefonoFijoAgencia,
                 $correoAgencia,
@@ -86,11 +80,11 @@ class ControladorFestivales
             // print_r($insertar);
 
 
-            header("Location:index2.php?controlador=servigenerales&accion=inicio");
+            header("Location:index2.php?controlador=festivales&accion=inicio");
         }
 
 
-        include_once("vistas/servigenerales/crear.php");
+        include_once("vistas/festivales/crear.php");
     }
     public function editar()
     {
@@ -194,7 +188,7 @@ class ControladorFestivales
 
 
 
-            header("Location:index2.php?controlador=servigenerales&accion=inicio");
+            header("Location:index2.php?controlador=festivales&accion=inicio");
         }
 
 
@@ -221,7 +215,7 @@ class ControladorFestivales
         $InsertarID = $buscarID->consultarID($id);
 
 
-        include_once("vistas/servigenerales/editar.php");
+        include_once("vistas/festivales/editar.php");
     }
 
     public function borrar()
@@ -237,7 +231,7 @@ class ControladorFestivales
 
         $borrado = $borrarAgencias->borrar($idServigeneralBorrar, $id_direccion);
 
-        header("Location:index2.php?controlador=servigenerales&accion=inicio");
+        header("Location:index2.php?controlador=festivales&accion=inicio");
     }
 
     public function info()
@@ -259,6 +253,6 @@ class ControladorFestivales
         $agenciaWeb = $contactosDeagencia->consultarWeb($id);
         $agenciaOtro = $contactosDeagencia->consultarOtro($id);
 
-        include_once("vistas/servigenerales/info.php");
+        include_once("vistas/festivales/info.php");
     }
 }

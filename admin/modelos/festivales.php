@@ -30,7 +30,7 @@ class FestivalesModelo
         fecha_edit_general,
         (SELECT contacto.descripcion_contacto 
         FROM contacto 
-        WHERE servicios_generales.id_servicios_generales = contacto.rela_servicios_generales
+        WHERE servicios_generales.id_servicios_generales = contacto.rela_festivales 
         and contacto.rela_tipo_contacto_cont = 2
         LIMIT 1) descripcion_contacto
         FROM `servicios_generales` 
@@ -78,11 +78,9 @@ class FestivalesModelo
         $nombre,
         $descripcion,
         $idoneo,
+        $fecha,
         $localidad,
-        $tipoServiGeneral,
         $tipoServicio,
-        $domicilio,
-        $estacion,
         $telefonoAgencia,
         $telefonoFijoAgencia,
         $correoAgencia,
@@ -98,20 +96,19 @@ class FestivalesModelo
 
         /*-------- INSERTAMOS LA DIRECCION--------*/
 
-        $sqlDireccion = $conexionBD->prepare("INSERT INTO direccion (calle_direccion,rela_localidad_direccion)
-                                                    VALUES(?,?)");
-        $sqlDireccion->execute(array($domicilio, $localidad));
+        $sqlDireccion = $conexionBD->prepare("INSERT INTO direccion (rela_localidad_direccion)
+                                                    VALUES(?)");
+        $sqlDireccion->execute(array($localidad));
 
         $lastInsertIDdireccion = $conexionBD->lastInsertId();
 
 
-        /*-------- INSERTAMOS EL SERVICIO GENERAL--------*/
+        /*-------- INSERTAMOS EL FESTIVAL--------*/
 
-        $sql = $conexionBD->prepare("INSERT INTO `servicios_generales`( `nombre_servicio_general`,`idoneo_servicio_general`, `rela_direccion`, `rela_estacion`, `rela_tipo_servicio`, `rela_tipo_lugar`, `descripcion_servicio_general`, fecha_edit_general) VALUES (?,?,?,?,?,?,?,CURRENT_TIMESTAMP())");
+        $sql = $conexionBD->prepare("INSERT INTO `festivales`(`nombre_festival`, `descripcion`, `fecha`, `rela_localidad`, `rela_tipo_servicio`, `idoneo`,`fecha_edit_general`) VALUES (?,?,?,?,?,?,CURRENT_TIMESTAMP())");
         $sql->execute(array(
-            $nombre, $idoneo, $lastInsertIDdireccion,
-            $estacion, $tipoServicio, $tipoServiGeneral,
-            $descripcion
+            $nombre, $descripcion, $fecha, $lastInsertIDdireccion, $tipoServicio, $idoneo
+
         ));
 
         $lastInsertIDAgencias = $conexionBD->lastInsertId();
@@ -122,7 +119,7 @@ class FestivalesModelo
 
         foreach ($telefonoAgencia as $telefonoAgencia1) {
 
-            $sqlTelefono = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_servicios_generales`) VALUES (?,?,?)");
+            $sqlTelefono = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_festivales`) VALUES (?,?,?)");
             // print_r($sqlTelefono);
             $sqlTelefono->execute(array($telefonoAgencia1, 2, $lastInsertIDAgencias));
             // $sqlTelefono->execute();
@@ -130,38 +127,38 @@ class FestivalesModelo
 
         /*-------- INSERTAMOS EL TELEFONO FIJO--------*/
 
-        $sqlFijo = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_servicios_generales`) VALUES (?,?,?)");
+        $sqlFijo = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_festivales`) VALUES (?,?,?)");
         $sqlFijo->execute(array($telefonoFijoAgencia, 9,  $lastInsertIDAgencias));
-        print_r($sqlFijo);
+        // print_r($sqlFijo);
 
         /*-------- INSERTAMOS EL CORREO-------*/
 
-        $sqlCorreo = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_servicios_generales`) VALUES (?,?,?)");
+        $sqlCorreo = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_festivales`) VALUES (?,?,?)");
         $sqlCorreo->execute(array($correoAgencia, 1, $lastInsertIDAgencias));
 
         /*-------- INSERTAMOS EL FACEBOOK--------*/
 
-        $sqlFacebook = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_servicios_generales`) VALUES (?,?,?)");
+        $sqlFacebook = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_festivales`) VALUES (?,?,?)");
         $sqlFacebook->execute(array($facebookAgencia, 4, $lastInsertIDAgencias));
 
         /*-------- INSERTAMOS EL INSTAGRAM--------*/
 
-        $sqlInstagram = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_servicios_generales`) VALUES (?,?,?)");
+        $sqlInstagram = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_festivales`) VALUES (?,?,?)");
         $sqlInstagram->execute(array($instagramAgencia, 5, $lastInsertIDAgencias));
 
         /*-------- INSERTAMOS EL TWITTER--------*/
 
-        $sqlTwitter = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_servicios_generales`) VALUES (?,?,?)");
+        $sqlTwitter = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_festivales`) VALUES (?,?,?)");
         $sqlTwitter->execute(array($twitterAgencia, 6, $lastInsertIDAgencias));
 
         /*-------- INSERTAMOS EL SITIO WEB--------*/
 
-        $sqlWeb = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_servicios_generales`) VALUES (?,?,?)");
+        $sqlWeb = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_festivales`) VALUES (?,?,?)");
         $sqlWeb->execute(array($webAgencia, 7, $lastInsertIDAgencias));
 
         /*-------- INSERTAMOS OTRO--------*/
 
-        $sqlOtro = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_servicios_generales`) VALUES (?,?,?)");
+        $sqlOtro = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_festivales`) VALUES (?,?,?)");
         $sqlOtro->execute(array($otroAgencia, 8, $lastInsertIDAgencias));
     }
 
@@ -340,7 +337,8 @@ class FestivalesModelo
 
 
         $sqlLocalidad = $conexionBD->query("SELECT id_localidad, `nombre_localidad`, rela_provincia, rela_departamento
-                                                       FROM localidad");
+                                            FROM localidad
+                                            WHERE rela_provincia = 1");
 
         $sqlLocalidad->execute();
 
@@ -412,7 +410,7 @@ class ContactosAgencia
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 2
-                                            and contacto.rela_servicios_generales  = $id_agencia");
+                                            and contacto.rela_festivales   = $id_agencia");
 
         $consulta->execute();
 
@@ -425,7 +423,7 @@ class ContactosAgencia
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 9
-                                            and contacto.rela_servicios_generales  = $id_agencia");
+                                            and contacto.rela_festivales   = $id_agencia");
 
         $consulta->execute();
 
@@ -438,7 +436,7 @@ class ContactosAgencia
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 1
-                                            and contacto.rela_servicios_generales  = $id_agencia");
+                                            and contacto.rela_festivales   = $id_agencia");
 
         $consulta->execute();
 
@@ -451,7 +449,7 @@ class ContactosAgencia
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 4
-                                            and contacto.rela_servicios_generales  = $id_agencia");
+                                            and contacto.rela_festivales   = $id_agencia");
 
         $consulta->execute();
 
@@ -464,7 +462,7 @@ class ContactosAgencia
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 5
-                                            and contacto.rela_servicios_generales  = $id_agencia");
+                                            and contacto.rela_festivales   = $id_agencia");
 
         $consulta->execute();
 
@@ -477,7 +475,7 @@ class ContactosAgencia
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 6
-                                            and contacto.rela_servicios_generales  = $id_agencia");
+                                            and contacto.rela_festivales   = $id_agencia");
 
         $consulta->execute();
 
@@ -490,7 +488,7 @@ class ContactosAgencia
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 7
-                                            and contacto.rela_servicios_generales  = $id_agencia");
+                                            and contacto.rela_festivales   = $id_agencia");
 
         $consulta->execute();
 
@@ -503,7 +501,7 @@ class ContactosAgencia
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 8
-                                            and contacto.rela_servicios_generales  = $id_agencia");
+                                            and contacto.rela_festivales   = $id_agencia");
 
         $consulta->execute();
 
@@ -546,7 +544,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 2
-                                            and contacto.rela_servicios_generales  = $id_agencia");
+                                            and contacto.rela_festivales   = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->telefonoAgenciaInfo[] = $filas;
@@ -560,7 +558,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 9
-                                            and contacto.rela_servicios_generales  = $id_agencia");
+                                            and contacto.rela_festivales   = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->telefonoFijoAgencia[] = $filas;
@@ -574,7 +572,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 1
-                                            and contacto.rela_servicios_generales  = $id_agencia");
+                                            and contacto.rela_festivales   = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->correoAgencia[] = $filas;
@@ -588,7 +586,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 4
-                                            and contacto.rela_servicios_generales  = $id_agencia");
+                                            and contacto.rela_festivales   = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->facebookAgencia[] = $filas;
@@ -602,7 +600,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 5
-                                            and contacto.rela_servicios_generales  = $id_agencia");
+                                            and contacto.rela_festivales   = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->instagramAgencia[] = $filas;
@@ -616,7 +614,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 6
-                                            and contacto.rela_servicios_generales  = $id_agencia");
+                                            and contacto.rela_festivales   = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->twitterAgencia[] = $filas;
@@ -630,7 +628,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 7
-                                            and contacto.rela_servicios_generales  = $id_agencia");
+                                            and contacto.rela_festivales   = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->webAgencia[] = $filas;
@@ -644,7 +642,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 8
-                                            and contacto.rela_servicios_generales  = $id_agencia");
+                                            and contacto.rela_festivales   = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->otroAgencia[] = $filas;

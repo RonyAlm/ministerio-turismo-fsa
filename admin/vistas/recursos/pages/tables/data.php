@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include_once("../../../../conexion.php");
 
@@ -46,7 +46,7 @@ $listaContacto = [];
 
 while ($filas = $sqlContactos->fetch(PDO::FETCH_ASSOC)) {
     $listaContacto[] = $filas;
-    //print_r($listaAlojamientos);
+    // print_r($listaContacto);
 }
 
 
@@ -61,7 +61,7 @@ while ($filas = $sqlContactos->fetch(PDO::FETCH_ASSOC)) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ministerio de Turismo | Alojamientos</title>
-  
+
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
@@ -101,10 +101,10 @@ while ($filas = $sqlContactos->fetch(PDO::FETCH_ASSOC)) {
                                 <input class="form-control form-control-navbar" type="search" placeholder="Buscar" aria-label="Search">
                                 <div class="input-group-append">
                                     <button class="btn btn-navbar" type="submit">
-                                     <i class="fas fa-search"></i>
+                                        <i class="fas fa-search"></i>
                                     </button>
                                     <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                     <i class="fas fa-times"></i>
+                                        <i class="fas fa-times"></i>
                                     </button>
                                 </div>
                             </div>
@@ -112,7 +112,7 @@ while ($filas = $sqlContactos->fetch(PDO::FETCH_ASSOC)) {
                     </div>
                 </li>
 
-         
+
 
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
@@ -149,7 +149,7 @@ while ($filas = $sqlContactos->fetch(PDO::FETCH_ASSOC)) {
                         <input class="form-control form-control-sidebar" type="search" placeholder="Buscar" aria-label="Search">
                         <div class="input-group-append">
                             <button class="btn btn-sidebar">
-                            <i class="fas fa-search fa-fw"></i>
+                                <i class="fas fa-search fa-fw"></i>
                             </button>
                         </div>
                     </div>
@@ -189,7 +189,7 @@ while ($filas = $sqlContactos->fetch(PDO::FETCH_ASSOC)) {
                                 </li>
                             </ul>
                         </li>
-                        
+
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -242,30 +242,31 @@ while ($filas = $sqlContactos->fetch(PDO::FETCH_ASSOC)) {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                       <?php foreach ($listaAlojamientos as $alojamiento): ?>
-                                            <tr>
-                                                <td><?=$alojamiento['nombre_localidad']?></td>
-                                                <td><?=$alojamiento['descripcion_alojamientos']?></td>
-                                                <td><?=$alojamiento['descripcion_tipo_alojamiento']?></td>
-                                                <td><?=$alojamiento['calle_direccion']?></td>
-                                                
-                                                <!-- <td><?php //($alojamiento['cuit_alojamiento'] == 0 ) ? '' : $alojamiento['cuit_alojamiento']; ?></td> -->
-                                                <td><?php 
-                                                    foreach ($listaContacto as $contacto):
-                                                            echo ($alojamiento['id_alojamientos'] == $contacto['id_alojamientos'] && $contacto['rela_tipo_contacto_cont'] == 2) ? $contacto['descripcion_contacto'].'   ' :'';
-                                                    endforeach; 
-                                                    ?>
-                                                </td>
-                                                <td><?php 
-                                                    foreach ($listaContacto as $contacto):
-                                                            echo ($alojamiento['id_alojamientos'] == $contacto['id_alojamientos'] && $contacto['rela_tipo_contacto_cont'] == 9) ? $contacto['descripcion_contacto'].'   ' :'';
-                                                    endforeach; 
-                                                    ?>
-                                                </td>
-                                                <td><?=$alojamiento['cantidad_total_hab']?></td>
-                                                <td><?=$alojamiento['cantidad_plazas']?></td>
-                                            </tr>
-                                            <?php endforeach; ?> 
+                                            <?php foreach ($listaAlojamientos as $alojamiento) : ?>
+                                                <tr>
+                                                    <td><?= $alojamiento['nombre_localidad'] ?></td>
+                                                    <td><?= $alojamiento['descripcion_alojamientos'] ?></td>
+                                                    <td><?= $alojamiento['descripcion_tipo_alojamiento'] ?></td>
+                                                    <td><?= $alojamiento['calle_direccion'] ?></td>
+
+                                                    <!-- <td><?php //($alojamiento['cuit_alojamiento'] == 0 ) ? '' : $alojamiento['cuit_alojamiento']; 
+                                                                ?></td> -->
+                                                    <td><?php
+                                                        foreach ($listaContacto as $contacto) :
+                                                            echo ($alojamiento['id_alojamientos'] == $contacto['id_alojamientos'] && $contacto['rela_tipo_contacto_cont'] == 2) ? $contacto['descripcion_contacto'] . '   ' : '';
+                                                        endforeach;
+                                                        ?>
+                                                    </td>
+                                                    <td><?php
+                                                        foreach ($listaContacto as $contacto) :
+                                                            echo ($alojamiento['id_alojamientos'] == $contacto['id_alojamientos'] && $contacto['rela_tipo_contacto_cont'] == 9) ? $contacto['descripcion_contacto'] . '   ' : '';
+                                                        endforeach;
+                                                        ?>
+                                                    </td>
+                                                    <td><?= $alojamiento['cantidad_total_hab'] ?></td>
+                                                    <td><?= $alojamiento['cantidad_plazas'] ?></td>
+                                                </tr>
+                                            <?php endforeach; ?>
                                         </tbody>
                                         <!-- <tfoot>
                                             <tr>
