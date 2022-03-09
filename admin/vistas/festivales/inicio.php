@@ -71,8 +71,6 @@ $rol_id = $_SESSION['rol_id'];
                             <?php } ?>
 
 
-
-
                             <td>
                                 <div class="btn-group" role="group" aria-label="">
 

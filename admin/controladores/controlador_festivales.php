@@ -95,8 +95,8 @@ class ControladorFestivales
         $select_tipo_servigeneral = new FestivalesModelo();
 
         $buscarSelectLocalidad = $select_tipo_servigeneral->buscarSelectLocalidad();
-        $buscarSelectEstacion = $select_tipo_servigeneral->buscarSelectEstacion();
-        $buscarSelectLugar = $select_tipo_servigeneral->buscarSelectLugar();
+        // $buscarSelectEstacion = $select_tipo_servigeneral->buscarSelectEstacion();
+        // $buscarSelectLugar = $select_tipo_servigeneral->buscarSelectLugar();
         $buscarSelectTipoServicio = $select_tipo_servigeneral->buscarSelectTipoServicio();
 
         //print_r("$id");
@@ -195,7 +195,7 @@ class ControladorFestivales
 
         /*----------BUSCA LOS ID Y LOS PONE EN EL FORMULARIO----------*/
 
-        $contactosDeagencia = new ContactosAgencia();
+        $contactosDeagencia = new Contactos();
 
         $contactosDeagencia1 = new ContactosInfo();
 

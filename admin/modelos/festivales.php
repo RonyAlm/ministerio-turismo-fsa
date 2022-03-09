@@ -60,20 +60,19 @@ class FestivalesModelo
 
     }
 
-    public function consultarID($id_agencia)
+    public function consultarID($id)
     {
 
         // hacemos una consulta a la BD del ID
 
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->query("SELECT id_agencias, razon_social.id_razon_social, direccion.id_direccion,
-                                                estado_actividad.id_estado
-                                        FROM `agencias`                                    
-                                        INNER JOIN razon_social on razon_social.id_razon_social = agencias.rela_razon_social_agencia
-                                        INNER JOIN direccion ON agencias.rela_agencia_direccion = direccion.id_direccion
-                                        INNER JOIN estado_actividad on estado_actividad.rela_estado_agencia = agencias.id_agencias
-                                        WHERE agencias.id_agencias = $id_agencia");
+        $sql = $conexionBD->query("SELECT `id_festivales`,direccion.id_direccion,localidad.id_localidad
+        FROM `festivales`
+        INNER JOIN direccion ON festivales.rela_localidad = direccion.id_direccion
+        INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad
+        INNER JOIN tipo_de_servicio on tipo_de_servicio.id_tipo_servicio = festivales.rela_tipo_servicio
+        WHERE id_festivales =$id");
 
         //recuperamos los datos y los retornamos
 
@@ -187,23 +186,15 @@ class FestivalesModelo
     public function buscar($id)
     {
         $conexionBD = BD::crearInstancia();
-        $sql = $conexionBD->prepare("SELECT `id_servicios_generales`, `nombre_servicio_general`, `idoneo_servicio_general`,
-        direccion.id_direccion,direccion.calle_direccion,
-        localidad.nombre_localidad,localidad.id_localidad,
-        departamentos_fsa.descripcion_departamentos,
-        tipo_estacion.descripcion_estacion,tipo_estacion.id_tipo_estacion,
-        tipo_de_servicio.descripcion_servicio,tipo_de_servicio.id_tipo_servicio,
-        tipo_lugar.descripcion_lugar,tipo_lugar.id_tipo_lugar,
-        `descripcion_servicio_general`,
-        fecha_edit_general 
-        FROM `servicios_generales`
-        INNER JOIN direccion ON servicios_generales.rela_direccion = direccion.id_direccion
+        $sql = $conexionBD->prepare("SELECT `id_festivales`,festivales.nombre_festival,festivales.descripcion,festivales.fecha,festivales.idoneo,
+        direccion.id_direccion,direccion.rela_localidad_direccion,
+        localidad.id_localidad,localidad.nombre_localidad,
+        tipo_de_servicio.id_tipo_servicio,tipo_de_servicio.descripcion_servicio
+        FROM `festivales`
+        INNER JOIN direccion ON festivales.rela_localidad = direccion.id_direccion
         INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad
-        INNER JOIN departamentos_fsa on localidad.rela_departamento = departamentos_fsa.id_departamentos_fsa
-        INNER JOIN tipo_estacion on tipo_estacion.id_tipo_estacion= servicios_generales.rela_estacion
-        INNER JOIN tipo_de_servicio on tipo_de_servicio.id_tipo_servicio = servicios_generales.rela_tipo_servicio
-        INNER JOIN tipo_lugar on tipo_lugar.id_tipo_lugar = servicios_generales.rela_tipo_lugar
-        WHERE servicios_generales.id_servicios_generales = $id");
+        INNER JOIN tipo_de_servicio on tipo_de_servicio.id_tipo_servicio = festivales.rela_tipo_servicio
+        WHERE id_festivales = $id");
 
         $sql->execute();
 
@@ -396,7 +387,7 @@ class FestivalesModelo
     }
 }
 
-class ContactosAgencia
+class Contactos
 {
     public $telefonoAgencia;
     public $correoAgencia;
