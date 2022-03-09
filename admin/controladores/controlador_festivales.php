@@ -10,9 +10,10 @@ class ControladorFestivales
     public function inicio()
     { //aca se muestra las tablas
 
-        // $consulta = new FestivalesModelo();
+        $consulta = new FestivalesModelo();
 
-        // $tabla = $consulta->consultar();
+        $tabla = $consulta->consultar();
+        $tablaContacto = $consulta->consultarContactos();
         // $datosEstadisticos = new estadistica();
 
         // $cantidadFestivales = $datosEstadisticos->cantidadPiletas();
