@@ -138,8 +138,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <aside class="main-sidebar sidebar-dark-success elevation-4">
       <!-- Brand Logo -->
       <a href="?controlador=paginas&accion=inicio" class="brand-link">
-          <i class="far fa-circle nav-icon" style="margin-left: 1rem; color: transparent;"></i>
-          <img class="brand-text" src="vistas/recursos/dist/img/M-Turismo-verde.png" alt="" style="width: 60%;">
+        <i class="far fa-circle nav-icon" style="margin-left: 1rem; color: transparent;"></i>
+        <img class="brand-text" src="vistas/recursos/dist/img/M-Turismo-verde.png" alt="" style="width: 60%;">
       </a>
 
       <!-- Sidebar -->
@@ -165,6 +165,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </button>
             </div>
           </div>
+
         </div>
 
         <!-- Sidebar Menu -->
@@ -179,7 +180,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </p>
               </a>
             </li>
-
+            <!-- REGISTRO -->
             <?php if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
 
               <li class="nav-item 
@@ -278,7 +279,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
               <!-- CIRCUITOS TURISTICOS -->
             <?php }
-              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3 and $usuario == "liz") { ?>
+              if ($rol_id == 1 or $rol_id == 3 and $usuario == "liz") { ?>
               <li class="nav-item">
                 <a href="pages/calendar.html" class="nav-link">
                   <i class="nav-icon fas fa-tree"></i>
@@ -369,7 +370,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="?controlador=museos&accion=inicio" class="nav-link 
+                    <a href="?controlador=festivales&accion=inicio" class="nav-link 
                     <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'festivales')) ? 'active' : '' ?>">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Registro</p>

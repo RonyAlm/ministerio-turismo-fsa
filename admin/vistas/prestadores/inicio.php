@@ -89,7 +89,7 @@ $rol_id = $_SESSION['rol_id'];
     <div id="acordeon">
       <table id="example1" class="table table-bordered table-striped" cellspacing="0" width="100%">
         <thead>
-          <tr>
+          <tr style="background: linear-gradient(to right, #61ba6d, #83c331)" align="center">
             <th>Localidad</th>
             <th>Apellido y Nombre</th>
             <th>Institución / Emprendimiento</th>

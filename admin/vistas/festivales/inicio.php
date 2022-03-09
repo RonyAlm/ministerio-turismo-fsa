@@ -7,14 +7,13 @@ if (!isset($_SESSION['id'])) {
 $usuario = $_SESSION['usuarios'];
 $rol_id = $_SESSION['rol_id'];
 
-
-
 ?>
+
 <div class="card">
     <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") { ?>
         <div class="card-header">
 
-            <a name="" id="" class="btn btn-success" href="?controlador=museos&accion=crear" role="button">Agregar Museos</a>
+            <a name="" id="" class="btn btn-success" href="?controlador=festivales&accion=crear" role="button">Agregar Festival</a>
 
         </div>
     <?php } ?>
@@ -25,8 +24,8 @@ $rol_id = $_SESSION['rol_id'];
                 <span class="info-box-icon bg-info"><i class="fas fa-hotel"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text text-center">Museos</span>
-                    <?php foreach ($cantidad_museos as $estadistica) { ?>
+                    <span class="info-box-text text-center">Festival</span>
+                    <?php foreach ($cantidadPiletas as $estadistica) { ?>
                         <span class="info-box-text">Cantidad Total: <?php echo $estadistica->conteo; ?> </span>
                     <?php } ?>
                 </div>
@@ -34,50 +33,48 @@ $rol_id = $_SESSION['rol_id'];
             </div>
             <!-- /.info-box -->
         </div>
-        <!-- /.col -->
 
     </div>
+
 
     <div class="card-body">
 
         <div id="acordeon">
-            <table id="example1" class="table table-bordered table-striped">
+            <table id="example1" class="table table-bordered table-striped" cellspacing="0" width="100%">
                 <thead>
                     <tr style="background: linear-gradient(to right, #61ba6d, #83c331)" align="center">
 
                         <th>Localidad</th>
-                        <th>Nombre del Museo</th>
+                        <th>Festival</th>
                         <th>Contacto</th>
-                        <th>Dirección</th>
                         <th>Acción</th>
-
                     </tr>
                 </thead>
                 <tbody>
 
 
-                    <?php foreach ($tablaMuseo as $museos) { ?>
+                    <?php foreach ($tablaServigeneral as $servigeneral) { ?>
 
                         <tr>
-                            <td><?php echo $museos["nombre_localidad"]; ?></td>
-                            <td><?php echo $museos["nombre_museo"]; ?></td>
-                            <td><?php echo $museos["descripcion_contacto"]; ?></td>
-                            <td><?php echo $museos["calle_direccion"]; ?></td>
+                            <td><?php echo $servigeneral["nombre_localidad"]; ?></td>
+                            <td><?php echo $servigeneral["nombre_servicio_general"]; ?></td>
+                            <td><?php echo $servigeneral["descripcion_contacto"]; ?></td>
 
 
 
                             <td>
                                 <div class="btn-group" role="group" aria-label="">
 
-                                    <a id="btn1" href="?controlador=museos&accion=info&id=<?php echo $museos["id_museo"]; ?>" class="btn btn-warning">Más Info</a>
+                                    <a id="btn1" href="?controlador=festivales&accion=info&id=<?php echo $servigeneral["id_servicios_generales"]; ?>" class="btn btn-warning">Más Info</a>
                                     <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") { ?>
-                                        <a href="?controlador=museos&accion=editar&id=<?php echo $museos["id_museo"]; ?>" class="btn btn-info">Editar</a>
-                                        <a href="?controlador=museos&accion=borrar&id=<?php echo $museos["id_museo"]; ?> &idDireccion=<?php echo $museos["id_direccion"]; ?>" class="btn btn-danger">Borrar</a>
+                                        <a href="?controlador=festivales&accion=editar&id=<?php echo $servigeneral["id_servicios_generales"]; ?>" class="btn btn-info">Editar</a>
+                                        <a href="?controlador=festivales&accion=borrar&id=<?php echo $servigeneral["id_servicios_generales"]; ?> &idDireccion=<?php echo $servigeneral["id_direccion"]; ?>" class="btn btn-danger">Borrar</a>
 
+                                    <?php } ?>
                                 </div>
 
                             </td>
-                        <?php } ?>
+
                         </tr>
 
 

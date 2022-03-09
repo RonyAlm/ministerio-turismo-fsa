@@ -99,7 +99,7 @@ $rol_id = $_SESSION['rol_id'];
       <div class="col-lg-12">
         <table id="example1" class="table table-bordered table-striped" cellspacing="0" width="100%">
           <thead>
-            <tr>
+            <tr style="background: linear-gradient(to right, #61ba6d, #83c331)" align="center">
 
               <th>Localidad</th>
               <th>Categoría</th>
@@ -136,24 +136,20 @@ $rol_id = $_SESSION['rol_id'];
                   <td class="badge badge-secondary"><?php echo $alojamiento["descripcion_tipo_estado"]; ?></td>
                 <?php } ?>
                 <?php if ($alojamiento["descripcion_tipo_estado"] == "Cambio de domicilio") { ?>
-                  <td class="badge badge-lime"><?php echo $alojamiento["descripcion_tipo_estado"]; ?></td>
+                  <td class="badge bg-lime"><?php echo $alojamiento["descripcion_tipo_estado"]; ?></td>
                 <?php } ?>
                 <?php if ($alojamiento["descripcion_tipo_estado"] == "Se desconoce situación") { ?>
-                  <td class="badge badge-gray"><?php echo $alojamiento["descripcion_tipo_estado"]; ?></td>
+                  <td class="badge bg-orange"><?php echo $alojamiento["descripcion_tipo_estado"]; ?></td>
                 <?php } ?>
                 <?php if ($alojamiento["descripcion_tipo_estado"] == "Cierre temporario") { ?>
-                  <td class="badge badge-maroon"><?php echo $alojamiento["descripcion_tipo_estado"]; ?></td>
+                  <td class="badge bg-purple"><?php echo $alojamiento["descripcion_tipo_estado"]; ?></td>
                 <?php } ?>
                 <?php if ($alojamiento["descripcion_tipo_estado"] == "No Fiscalizadas") { ?>
-                  <td class="badge badge-secondary"><?php echo $alojamiento["descripcion_tipo_estado"]; ?></td>
+                  <td class="badge bg-navy"><?php echo $alojamiento["descripcion_tipo_estado"]; ?></td>
                 <?php } ?>
                 <?php if ($alojamiento["descripcion_tipo_estado"] == "Domicilio Virtual") { ?>
-                  <td class="badge badge-info"><?php echo $alojamiento["descripcion_tipo_estado"]; ?></td>
+                  <td class="badge bg-info"><?php echo $alojamiento["descripcion_tipo_estado"]; ?></td>
                 <?php } ?>
-
-
-
-
 
 
                 <td class="project-actions text-right">
