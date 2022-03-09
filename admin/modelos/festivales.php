@@ -4,6 +4,7 @@ class FestivalesModelo
 {
 
     public $lista;
+    public $listaContacto;
     public $listaID;
     public $listaBuscar;
 
@@ -11,6 +12,7 @@ class FestivalesModelo
     public function __construct()
     {
         $this->lista = array();
+        $this->listaContacto = array();
         $this->listaID = array();
         $this->listaBuscar = array();
     }
@@ -20,25 +22,14 @@ class FestivalesModelo
         // se ingresa los datos para luego ver en el datetable
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->query("SELECT `id_servicios_generales`, `nombre_servicio_general`, `idoneo_servicio_general`,
-        direccion.calle_direccion,direccion.id_direccion,
-        localidad.nombre_localidad,localidad.id_localidad,
-        tipo_estacion.descripcion_estacion,
-        tipo_de_servicio.descripcion_servicio,
-        tipo_lugar.descripcion_lugar,
-        `descripcion_servicio_general`,
-        fecha_edit_general,
-        (SELECT contacto.descripcion_contacto 
-        FROM contacto 
-        WHERE servicios_generales.id_servicios_generales = contacto.rela_festivales 
-        and contacto.rela_tipo_contacto_cont = 2
-        LIMIT 1) descripcion_contacto
-        FROM `servicios_generales` 
-        INNER JOIN direccion ON servicios_generales.rela_direccion = direccion.id_direccion
+        $sql = $conexionBD->query("SELECT `id_festivales`, `nombre_festival`, `descripcion`, `fecha`, `fecha_edit_general`, `idoneo`,
+        localidad.nombre_localidad,localidad.id_localidad,direccion.id_direccion,
+        tipo_de_servicio.descripcion_servicio,tipo_de_servicio.id_tipo_servicio
+        FROM `festivales` 
+        INNER JOIN direccion ON festivales.rela_localidad = direccion.id_direccion
         INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad
-        INNER JOIN tipo_estacion on tipo_estacion.id_tipo_estacion= servicios_generales.rela_estacion
-        INNER JOIN tipo_de_servicio on tipo_de_servicio.id_tipo_servicio = servicios_generales.rela_tipo_servicio
-        INNER JOIN tipo_lugar on tipo_lugar.id_tipo_lugar = servicios_generales.rela_tipo_lugar");
+        INNER JOIN tipo_de_servicio on tipo_de_servicio.id_tipo_servicio = festivales.rela_tipo_servicio
+        ");
 
         //recuperamos los datos y los retornamos
 
@@ -46,6 +37,26 @@ class FestivalesModelo
             $this->lista[] = $filas;
         }
         return $this->lista; //este return se va a llamar en el controlador_alojamiento.php clase inicio
+
+    }
+
+    public function consultarContactos()
+    {
+        // se ingresa los datos para luego ver en el datetable
+        $conexionBD = BD::crearInstancia();
+
+        $sql = $conexionBD->query("SELECT contacto.descripcion_contacto, contacto.rela_festivales,
+        contacto.rela_tipo_contacto_cont, festivales.nombre_festival FROM contacto
+        INNER JOIN festivales ON festivales.id_festivales = contacto.rela_festivales
+        WHERE contacto.rela_tipo_contacto_cont = 2 or rela_tipo_contacto_cont = 9 
+        LIMIT 1");
+
+        //recuperamos los datos y los retornamos
+
+        while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
+            $this->listaContacto[] = $filas;
+        }
+        return $this->listaContacto; //este return se va a llamar en el controlador_alojamiento.php clase inicio
 
     }
 
