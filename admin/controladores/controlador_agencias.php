@@ -190,7 +190,7 @@ class ControladorAgencias
 
 
 
-            header("Location:index2.php?controlador=agencias&accion=inicio");
+            header("Location:admin/index2.php?controlador=agencias&accion=inicio");
         }
 
 
