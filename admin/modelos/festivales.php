@@ -206,14 +206,11 @@ class FestivalesModelo
         $descripcion,
         $id,
         $idoneo,
+        $fecha,
+        $LocalidadID,
         $localidad,
-        $domicilio,
         $tipoServicioID,
         $tipoServicio,
-        $estacionID,
-        $estacion,
-        $tipoServiGeneralID,
-        $tipoServiGeneral,
 
         $telefonoAgencia,
         $telefonoFijoAgencia,
@@ -224,7 +221,6 @@ class FestivalesModelo
         $webAgencia,
         $otroAgencia,
 
-        $domicilioID,
         $idtelefonoAgencia,
         $idtelefonoFijoAgencia,
         $idcorreoAgencia,
@@ -239,20 +235,15 @@ class FestivalesModelo
         $conexionBD = BD::crearInstancia();
 
         /*---------------SE ACTUALIZA EL SERVICIO GENERAL-------------------*/
-        $sql = $conexionBD->prepare("UPDATE `servicios_generales` SET `nombre_servicio_general`='$nombre',`idoneo_servicio_general`='$idoneo',`rela_estacion`=$estacion,`rela_tipo_servicio`=$tipoServicio,`rela_tipo_lugar`=$tipoServiGeneral,`descripcion_servicio_general`='$descripcion', fecha_edit_general= CURRENT_TIMESTAMP() 
-        WHERE servicios_generales.id_servicios_generales =  $id;");
+        $sql = $conexionBD->prepare("UPDATE `festivales` SET `nombre_festival`='$nombre',`descripcion`='$descripcion',`fecha`='$fecha',`rela_tipo_servicio`=$tipoServicio,`fecha_edit_general`= CURRENT_TIMESTAMP(),`idoneo`='$idoneo' WHERE id_festivales = $id;");
         $sql->execute();
 
         /*---------------SE ACTUALIZA LA DIRECCION CON LA LOCALIDAD-------------------*/
 
         if ($localidad == 0) {
-            $sqlDireccion = $conexionBD->prepare("UPDATE `direccion` SET `calle_direccion`='$domicilio'
-                                                        WHERE id_direccion = $domicilioID ");
-            $sqlDireccion->execute();
         } else {
-            $sqlDireccion = $conexionBD->prepare("UPDATE `direccion` SET `calle_direccion`='$domicilio',
-                                                        `rela_localidad_direccion`=$localidad 
-                                                        WHERE id_direccion = $domicilioID ");
+            $sqlDireccion = $conexionBD->prepare("UPDATE `direccion` SET `rela_localidad_direccion`=$localidad 
+                                                    WHERE id_direccion = $LocalidadID ");
             $sqlDireccion->execute();
         }
 
