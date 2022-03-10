@@ -103,6 +103,7 @@ class ControladorFestivales
         /*----------BUSCA LOS POST QUE SE ENCUENTRA EN EDITAR.PHP PARA PODER EDITARLO----------*/
 
         if ($_POST) {
+            // print_r($_POST);
             $EditarAgencia = new FestivalesModelo();
 
 
@@ -110,19 +111,16 @@ class ControladorFestivales
             $nombre = $_POST['nombre'];
             $descripcion = $_POST['descripcion'];
             $idoneo = $_POST['idoneo'];
+            $fecha = $_POST['fecha'];
 
-            $tipoServiGeneralID = $_POST['tipoServiGeneralID'];
-            $tipoServiGeneral = $_POST['tipoServiGeneral'];
 
-            $estacionID = $_POST['estacionID'];
-            $estacion = $_POST['estacion'];
+
 
             $tipoServicioID = $_POST['tipoServicioID'];
             $tipoServicio = $_POST['tipoServicio'];
 
-            $domicilioID = $_POST['domicilioID'];
+            $LocalidadID = $_POST['LocalidadID'];
             $localidad = $_POST['localidad'];
-            $domicilio = $_POST['domicilio'];
 
 
             $idtelefonoAgencia = $_POST['agenciatelefonoID'];
@@ -156,14 +154,11 @@ class ControladorFestivales
                 $descripcion,
                 $id,
                 $idoneo,
+                $fecha,
+                $LocalidadID,
                 $localidad,
-                $domicilio,
                 $tipoServicioID,
                 $tipoServicio,
-                $estacionID,
-                $estacion,
-                $tipoServiGeneralID,
-                $tipoServiGeneral,
 
                 $telefonoAgencia,
                 $telefonoFijoAgencia,
@@ -174,7 +169,6 @@ class ControladorFestivales
                 $webAgencia,
                 $otroAgencia,
 
-                $domicilioID,
                 $idtelefonoAgencia,
                 $idtelefonoFijoAgencia,
                 $idcorreoAgencia,
@@ -189,7 +183,8 @@ class ControladorFestivales
 
 
 
-            header("Location:index2.php?controlador=festivales&accion=inicio");
+            // header("Location:?controlador=festivales&accion=inicio");
+            echo "<script>location.href='index2.php?controlador=festivales&accion=inicio';</script>";
         }
 
 
