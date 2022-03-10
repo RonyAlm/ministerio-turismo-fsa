@@ -289,7 +289,8 @@ class ControladorAlojamientos
 
 
 
-            header("Location:index2.php?controlador=Alojamientos&accion=inicio");
+            // header("Location:index2.php?controlador=Alojamientos&accion=inicio");
+            echo "<script>location.href='index2.php?controlador=Alojamientos&accion=inicio';</script>";
         }
 
         $contactosDelAlojamiento = new ContactosAlojamiento();
