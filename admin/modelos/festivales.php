@@ -186,13 +186,15 @@ class FestivalesModelo
     public function buscar($id)
     {
         $conexionBD = BD::crearInstancia();
-        $sql = $conexionBD->prepare("SELECT `id_festivales`,festivales.nombre_festival,festivales.descripcion,festivales.fecha,festivales.idoneo,
+        $sql = $conexionBD->prepare("SELECT `id_festivales`,festivales.nombre_festival,festivales.descripcion,festivales.fecha,festivales.idoneo,`fecha_edit_general`,
         direccion.id_direccion,direccion.rela_localidad_direccion,
         localidad.id_localidad,localidad.nombre_localidad,
+        departamentos_fsa.descripcion_departamentos,
         tipo_de_servicio.id_tipo_servicio,tipo_de_servicio.descripcion_servicio
         FROM `festivales`
         INNER JOIN direccion ON festivales.rela_localidad = direccion.id_direccion
         INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad
+        INNER JOIN departamentos_fsa on localidad.rela_departamento = departamentos_fsa.id_departamentos_fsa
         INNER JOIN tipo_de_servicio on tipo_de_servicio.id_tipo_servicio = festivales.rela_tipo_servicio
         WHERE id_festivales = $id");
 
