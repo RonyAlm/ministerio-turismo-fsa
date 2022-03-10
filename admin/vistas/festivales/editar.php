@@ -30,12 +30,12 @@
 
                         <div class="form-group">
                             <label for="nombre">Festival:</label>
-                            <input type="text" id="nombreID" name="nombreID" value="<?= $InsertarID->id_festivales ?>">
+                            <input type="hidden" id="nombreID" name="nombreID" value="<?= $InsertarID->id_festivales ?>">
                             <input type="text" id="nombre" value="<?php echo $editar->nombre_festival; ?>" name="nombre" class="form-control" required>
                         </div>
 
                         <div class="form-group">
-                            <input type="text" id="LocalidadID" name="LocalidadID" value="<?= $InsertarID->id_direccion ?>">
+                            <input type="hidden" id="LocalidadID" name="LocalidadID" value="<?= $InsertarID->id_direccion ?>">
                             <label for="localidad">Localidad</label>
                             <?php $nombre_localidad_actual = $editar->nombre_localidad; ?>
                             <select id="localidad" name="localidad" class="form-control custom-select" required>
@@ -96,7 +96,7 @@
                         <?php foreach ($agenciaTelefono as $telefonos) { ?>
                             <div class="form-group">
                                 <label for="telefonoAgencia">Teléfono Celular</label>
-                                <input type="text" id="agenciatelefonoID" name="agenciatelefonoID[]" value="<?php echo $telefonos['id_contacto']; ?>">
+                                <input type="hidden" id="agenciatelefonoID" name="agenciatelefonoID[]" value="<?php echo $telefonos['id_contacto']; ?>">
                                 <input type="number" id="telefonoAgencia" value="<?php echo $telefonos['descripcion_contacto']; ?>" name="telefonoAgencia[]" class="form-control">
                             </div>
                         <?php  } ?>
@@ -142,7 +142,7 @@
                 <!-- /.card -->
             </div>
         </div>
-        <input name="" id="" class="btn btn-success" type="submit" value="Agregar Servicio">
+        <input name="" id="" class="btn btn-success" type="submit" value="Editar Servicio">
 
         <a href="?controlador=festivales&accion=inicio" class="btn btn-primary">Cancelar</a>
     </form>

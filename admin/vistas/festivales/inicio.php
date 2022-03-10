@@ -54,7 +54,6 @@ $rol_id = $_SESSION['rol_id'];
 
 
                     <?php foreach ($tabla as $festival) { ?>
-                        f
 
                         <tr>
                             <td><?php echo $festival["nombre_localidad"]; ?></td>
