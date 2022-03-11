@@ -14,6 +14,8 @@ class ControladorFestivales
 
         $tabla = $consulta->consultar();
         $tablaContacto = $consulta->consultarContactos();
+        $tablaContacto2 = $consulta->consultarContactos2();
+        $contacto = $consulta->contacto();
         // $datosEstadisticos = new estadistica();
 
         // $cantidadFestivales = $datosEstadisticos->cantidadPiletas();

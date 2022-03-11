@@ -46,9 +46,25 @@ class FestivalesModelo
         $conexionBD = BD::crearInstancia();
 
         $sql = $conexionBD->query("SELECT contacto.descripcion_contacto, contacto.rela_festivales,
-        contacto.rela_tipo_contacto_cont, festivales.nombre_festival FROM contacto
-        INNER JOIN festivales ON festivales.id_festivales = contacto.rela_festivales
-        WHERE contacto.rela_tipo_contacto_cont = 2");
+        contacto.rela_tipo_contacto_cont FROM contacto 
+        where contacto.rela_tipo_contacto_cont = 2 ");
+
+        //recuperamos los datos y los retornamos
+
+        while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
+            $this->listaContacto[] = $filas;
+        }
+        return $this->listaContacto; //este return se va a llamar en el controlador_alojamiento.php clase inicio
+
+    }
+    public function consultarContactos2()
+    {
+        // se ingresa los datos para luego ver en el datetable
+        $conexionBD = BD::crearInstancia();
+
+        $sql = $conexionBD->query("SELECT contacto.descripcion_contacto, contacto.rela_festivales,
+        contacto.rela_tipo_contacto_cont FROM contacto 
+        where contacto.rela_tipo_contacto_cont = 9 ");
 
         //recuperamos los datos y los retornamos
 
@@ -372,6 +388,18 @@ class FestivalesModelo
 
         $sqlLocalidad = $conexionBD->query("SELECT `id_tipo_servicio`, `descripcion_servicio` 
         FROM `tipo_de_servicio`");
+
+        $sqlLocalidad->execute();
+
+        return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
+    }
+    public function contacto()
+    {
+
+        $conexionBD = BD::crearInstancia();
+
+
+        $sqlLocalidad = $conexionBD->query("SELECT `id_contacto`, `descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_alojamiento_contacto`, `rela_prestador_contacto`, `rela_guia_contacto`, `rela_contacto_agencia`, `rela_persona_contacto`, `rela_contacto_referente`, `rela_contacto_museo`, `rela_servicios_generales`, `rela_festivales` FROM `contacto`");
 
         $sqlLocalidad->execute();
 

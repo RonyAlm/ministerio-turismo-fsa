@@ -62,11 +62,24 @@ $rol_id = $_SESSION['rol_id'];
 
 
                             <td>
-                                <?php foreach ($tablaContacto as $contacto) { ?>
-                                    <?php
-                                    echo ($festival['id_festivales'] == $contacto['rela_festivales']) ? $contacto['descripcion_contacto'] . '   ' : '';
-                                    ?>
-                                <?php } ?>
+                                <?php
+
+                                var_dump($contacto["id_contacto"]);
+
+                                // if ($contacto->rela_tipo_contacto_cont) {
+                                //     foreach ($tablaContacto as $contacto) {
+                                //         echo "a";
+                                //         // echo ($festival['id_festivales'] == $contacto['rela_festivales']) ? $contacto['descripcion_contacto'] . '   ' : '';
+                                //     }
+                                // } elseif ($contacto->rela_tipo_contacto_cont == 9) {
+
+                                //     foreach ($tablaContacto2 as $contacto) {
+                                //         echo "b";
+                                //         // echo ($festival['id_festivales'] == $contacto['rela_festivales']) ? $contacto['descripcion_contacto'] . '   ' : '';
+                                //     }
+                                // }
+
+                                ?>
                             </td>
 
 
