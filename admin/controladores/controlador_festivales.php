@@ -81,7 +81,8 @@ class ControladorFestivales
             // print_r($insertar);
 
 
-            header("Location:index2.php?controlador=festivales&accion=inicio");
+            // header("Location:index2.php?controlador=festivales&accion=inicio");
+            echo "<script>location.href='index2.php?controlador=festivales&accion=inicio';</script>";
         }
 
 
@@ -218,16 +219,17 @@ class ControladorFestivales
     {
         //print_r($_GET);
 
-        $idServigeneralBorrar = $_GET["id"];
+        $id = $_GET["id"];
         $id_direccion = $_GET['idDireccion'];
 
         $borrarAgencias = new FestivalesModelo();
 
-        $buscarIDBorrado = $borrarAgencias->consultarID($idServigeneralBorrar);
+        $buscarIDBorrado = $borrarAgencias->consultarID($id);
 
-        $borrado = $borrarAgencias->borrar($idServigeneralBorrar, $id_direccion);
+        $borrado = $borrarAgencias->borrar($id, $id_direccion);
 
-        header("Location:index2.php?controlador=festivales&accion=inicio");
+        // header("Location:index2.php?controlador=festivales&accion=inicio");
+        echo "<script>location.href='index2.php?controlador=festivales&accion=inicio';</script>";
     }
 
     public function info()

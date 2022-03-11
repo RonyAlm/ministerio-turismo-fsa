@@ -18,7 +18,7 @@ $rol_id = $_SESSION['rol_id'];
         </div>
     <?php } ?>
 
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-md-3 col-sm-6 col-12">
             <div class="info-box">
                 <span class="info-box-icon bg-info"><i class="fas fa-hotel"></i></span>
@@ -29,12 +29,12 @@ $rol_id = $_SESSION['rol_id'];
                         <span class="info-box-text">Cantidad Total: <?php echo $estadistica->conteo; ?> </span>
                     <?php } ?>
                 </div>
-                <!-- /.info-box-content -->
+               
             </div>
-            <!-- /.info-box -->
+           
         </div>
 
-    </div>
+    </div> -->
 
 
     <div class="card-body">

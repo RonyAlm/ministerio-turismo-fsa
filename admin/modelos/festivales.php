@@ -172,12 +172,12 @@ class FestivalesModelo
         $sqlOtro->execute(array($otroAgencia, 8, $lastInsertIDAgencias));
     }
 
-    public static function borrar($idServigeneralBorrar, $id_direccion)
+    public static function borrar($id, $id_direccion)
     {
         // se ingresa los datos que nos envia el controlador Borrar para luego hacer un delete
         $conexionBD = BD::crearInstancia();
-        $sqlAgenciaBorrar = $conexionBD->prepare("DELETE FROM `servicios_generales` WHERE id_servicios_generales =?");
-        $sqlAgenciaBorrar->execute(array($idServigeneralBorrar));
+        $sqlAgenciaBorrar = $conexionBD->prepare("DELETE FROM `festivales` WHERE id_festivales =?");
+        $sqlAgenciaBorrar->execute(array($id));
 
         $sqlDireccionBorrar = $conexionBD->prepare("DELETE FROM direccion WHERE id_direccion =?");
         $sqlDireccionBorrar->execute(array($id_direccion));
