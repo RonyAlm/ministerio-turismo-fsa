@@ -48,8 +48,7 @@ class FestivalesModelo
         $sql = $conexionBD->query("SELECT contacto.descripcion_contacto, contacto.rela_festivales,
         contacto.rela_tipo_contacto_cont, festivales.nombre_festival FROM contacto
         INNER JOIN festivales ON festivales.id_festivales = contacto.rela_festivales
-        WHERE contacto.rela_tipo_contacto_cont = 2 or rela_tipo_contacto_cont = 9 
-        LIMIT 1");
+        WHERE contacto.rela_tipo_contacto_cont = 2");
 
         //recuperamos los datos y los retornamos
 

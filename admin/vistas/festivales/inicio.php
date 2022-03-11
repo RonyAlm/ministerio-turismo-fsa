@@ -60,14 +60,15 @@ $rol_id = $_SESSION['rol_id'];
                             <td><?php echo $festival["nombre_festival"]; ?></td>
 
 
-                            <?php foreach ($tablaContacto as $contacto) { ?>
-                                <td>
+
+                            <td>
+                                <?php foreach ($tablaContacto as $contacto) { ?>
                                     <?php
                                     echo ($festival['id_festivales'] == $contacto['rela_festivales']) ? $contacto['descripcion_contacto'] . '   ' : '';
                                     ?>
+                                <?php } ?>
+                            </td>
 
-                                </td>
-                            <?php } ?>
 
 
                             <td>
