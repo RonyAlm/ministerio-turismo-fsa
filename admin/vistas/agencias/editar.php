@@ -180,9 +180,12 @@
         <!-- /.card -->
       </div>
     </div>
-    <input name="" id="" class="btn btn-success" type="submit" value="Editar Agencia">
 
-    <a href="?controlador=agencias&accion=inicio" class="btn btn-primary">Cancelar</a>
+    <div class="botones-footer-edit card-footer">
+      <input name="" id="" class="btn btn-success" type="submit" value="Editar Agencia">
+      <a href="?controlador=agencias&accion=inicio" class="btn btn-primary">Cancelar</a>
+    </div>
+
   </form>
 
 

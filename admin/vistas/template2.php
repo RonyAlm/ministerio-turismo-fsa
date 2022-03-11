@@ -46,9 +46,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- style transporte -->
 
   <link rel="stylesheet" href="vistas/recursos/dist/transporte.css">
+  <link rel="stylesheet" href="vistas/recursos/dist/css/styles.css">
   <!-- Favicon -->
   <link rel="icon" href="vistas/recursos/dist/img/favicon.png">
+  <style>
 
+  </style>
 
 </head>
 
@@ -115,26 +118,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     </nav>
     <!-- /.navbar -->
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-
-      <!-- Main content -->
-      <div class="content">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-12">
-              <?php include_once("ruteador.php"); ?>
-            </div>
-
-          </div>
-          <!-- /.row -->
-        </div><!-- /.container-fluid -->
-      </div>
-      <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-
+     
+    <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-success elevation-4">
       <!-- Brand Logo -->
       <a href="?controlador=paginas&accion=inicio" class="brand-link">
@@ -180,8 +165,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </p>
               </a>
             </li>
-            <!-- REGISTRO -->
-            <?php if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
+            <!-- REGISTRO ADMIN -->
+            <?php if ($rol_id == 1 or $rol_id == 3) : ?>
 
               <li class="nav-item 
                 <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'Alojamientos' || $_GET['controlador'] == 'agencias' ||
@@ -195,8 +180,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
-                <?php }
-              if ($rol_id == 1 or $rol_id == 3 or $rol_id == 2) { ?>
                   <li class="nav-item">
                     <a href="?controlador=Alojamientos&accion=inicio" class="nav-link 
                     <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'Alojamientos') ? 'active' : '' ?>">
@@ -204,8 +187,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <p>Alojamientos</p>
                     </a>
                   </li>
-                <?php }
-              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
                   <li class="nav-item">
                     <a href="?controlador=agencias&accion=inicio" class="nav-link 
                     <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'agencias') ? 'active' : '' ?>">
@@ -213,8 +194,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <p>Agencias</p>
                     </a>
                   </li>
-                <?php }
-              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
                   <li class="nav-item">
                     <a href="?controlador=prestadores&accion=inicio" class="nav-link 
                     <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'prestadores') ? 'active' : '' ?>">
@@ -222,8 +201,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <p>Prestadores</p>
                     </a>
                   </li>
-                <?php }
-              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
                   <li class="nav-item">
                     <a href="?controlador=referentes&accion=inicio" class="nav-link 
                     <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'referentes') ? 'active' : '' ?>">
@@ -231,8 +208,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <p>Referentes municipales</p>
                     </a>
                   </li>
-                <?php }
-              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
                   <li class="nav-item">
                     <a href="?controlador=servigenerales&accion=inicio" class="nav-link 
                     <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'servigenerales') ? 'active' : '' ?>">
@@ -243,9 +218,52 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 </ul>
               </li>
+
+            <?php endif; ?>
+
+            <!-- REGISTRO VISUALIZACION -->
+            <?php if ($rol_id == 2) : ?>
+
+              <li class="nav-item">
+                <a href="?controlador=Alojamientos&accion=inicio" class="nav-link 
+                <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'Alojamientos') ? 'active' : '' ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Alojamientos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="?controlador=agencias&accion=inicio" class="nav-link 
+                <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'agencias') ? 'active' : '' ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Agencias</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="?controlador=prestadores&accion=inicio" class="nav-link 
+                <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'prestadores') ? 'active' : '' ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Prestadores</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="?controlador=referentes&accion=inicio" class="nav-link 
+                <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'referentes') ? 'active' : '' ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Referentes municipales</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="?controlador=servigenerales&accion=inicio" class="nav-link 
+                <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'servigenerales') ? 'active' : '' ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Servicios Generales</p>
+                </a>
+              </li>
+
+            <?php endif; ?>
+
               <!-- CALENDARIO -->
-            <?php }
-              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
+            <?php  if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
               <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'calendario')) ? 'menu-open' : '' ?>">
                 <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'calendario')) ? 'active' : '' ?>">
                   <i class="nav-icon far fa-calendar-alt"></i>
@@ -415,6 +433,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
       </div>
       <!-- /.sidebar -->
     </aside>
+    
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+
+      <!-- Main content -->
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12" style="margin-top: 1rem; ">
+              <?php include_once("ruteador.php"); ?>
+            </div>
+          </div>
+          <!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">

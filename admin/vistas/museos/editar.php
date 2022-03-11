@@ -65,7 +65,7 @@
               <input type="text" id="diaHorarioMuseo" value="<?php echo $editar->horario_dia_museo; ?>" name="diaHorarioMuseo" class="form-control">
             </div>
 
-            <div class="form-group">
+            <div class="form-group fg-description">
               <label for="DescripcionMuseo">Descripción</label>
               <input type="hidden" id="museosID" name="museosID" value="<?php echo $editar->id_museo; ?>">
               <textarea value="<?php echo $editar->descripcion_museo; ?>" name="DescripcionMuseo" id="DescripcionMuseo" cols="65" rows="10"><?php echo $editar->descripcion_museo; ?></textarea>
@@ -144,9 +144,12 @@
         <!-- /.card -->
       </div>
     </div>
-    <input name="" id="" class="btn btn-success" type="submit" value="Editar Museo">
 
-    <a href="?controlador=museos&accion=inicio" class="btn btn-primary">Cancelar</a>
+    <div class="botones-footer-edit card-footer">
+      <input name="" id="" class="btn btn-success" type="submit" value="Editar Museo">
+      <a href="?controlador=museos&accion=inicio" class="btn btn-primary">Cancelar</a>
+    </div>
+    
   </form>
 
 

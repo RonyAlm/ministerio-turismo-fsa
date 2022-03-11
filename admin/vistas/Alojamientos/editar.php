@@ -360,9 +360,10 @@ $rol_id = $_SESSION['rol_id'];
 
 
     </div>
-    <input name="" id="" class="btn btn-success" type="submit" value="Editar Alojamiento">
-
-    <a href="index2.php?controlador=Alojamientos&accion=inicio" class="btn btn-primary">Cancelar</a>
+    <div class="botones-footer-edit card-footer">
+      <input name="" id="" class="btn btn-success" type="submit" value="Guardar cambios">
+      <a href="index2.php?controlador=Alojamientos&accion=inicio" class="btn btn-primary">Cancelar</a>
+    </div>
   </form>
 
 
