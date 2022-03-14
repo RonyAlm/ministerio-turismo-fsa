@@ -11,10 +11,8 @@ class ControladorFestivales
     { //aca se muestra las tablas
 
         $consulta = new FestivalesModelo();
-
         $tabla = $consulta->consultar();
         $tablaContacto = $consulta->consultarContactos();
-        $tablaContacto2 = $consulta->consultarContactos2();
         $contacto = $consulta->contacto();
         // $datosEstadisticos = new estadistica();
 

@@ -4,7 +4,7 @@ class FestivalesModelo
 {
 
     public $lista;
-    public $listaContacto;
+    public $listaContactos;
     public $listaID;
     public $listaBuscar;
 
@@ -12,7 +12,7 @@ class FestivalesModelo
     public function __construct()
     {
         $this->lista = array();
-        $this->listaContacto = array();
+        $this->listaContactos = array();
         $this->listaID = array();
         $this->listaBuscar = array();
     }
@@ -45,33 +45,18 @@ class FestivalesModelo
         // se ingresa los datos para luego ver en el datetable
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->query("SELECT contacto.descripcion_contacto, contacto.rela_festivales,
-        contacto.rela_tipo_contacto_cont FROM contacto 
-        where contacto.rela_tipo_contacto_cont = 2 ");
+        // $sql = $conexionBD->query("SELECT contacto.descripcion_contacto, contacto.rela_festivales,
+        // contacto.rela_tipo_contacto_cont FROM contacto 
+        // where contacto.rela_tipo_contacto_cont = 2 ");
+
+        $sql = $conexionBD->query('CALL mostrarContactosFestivales();');
 
         //recuperamos los datos y los retornamos
 
         while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
-            $this->listaContacto[] = $filas;
+            $this->listaContactos[] = $filas;
         }
-        return $this->listaContacto; //este return se va a llamar en el controlador_alojamiento.php clase inicio
-
-    }
-    public function consultarContactos2()
-    {
-        // se ingresa los datos para luego ver en el datetable
-        $conexionBD = BD::crearInstancia();
-
-        $sql = $conexionBD->query("SELECT contacto.descripcion_contacto, contacto.rela_festivales,
-        contacto.rela_tipo_contacto_cont FROM contacto 
-        where contacto.rela_tipo_contacto_cont = 9 ");
-
-        //recuperamos los datos y los retornamos
-
-        while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
-            $this->listaContacto[] = $filas;
-        }
-        return $this->listaContacto; //este return se va a llamar en el controlador_alojamiento.php clase inicio
+        return $this->listaContactos; //este return se va a llamar en el controlador_alojamiento.php clase inicio
 
     }
 
