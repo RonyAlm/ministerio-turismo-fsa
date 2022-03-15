@@ -34,6 +34,7 @@ $(document).ready(function () {
   $provincia.addEventListener("change", function () {
     const idProvincia = $provincia.value;
     // console.log(idProvincia);
+    // hola hice un comentario
     const llamarDatos = {
       idProvincia: idProvincia,
     };
