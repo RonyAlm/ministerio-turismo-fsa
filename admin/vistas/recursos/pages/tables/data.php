@@ -7,26 +7,19 @@ include_once("../../../../conexion.php");
 
 $bd = BD::crearInstancia();
 
-$sql = $bd->query("SELECT a.id_alojamientos, l.nombre_localidad, a.descripcion_alojamientos,
-ta.descripcion_tipo_alojamiento, d.calle_direccion, sa.cantidad_total_hab,
-sa.cantidad_plazas, a.cuit_alojamiento, a.fecha_edit_alojamiento
-FROM alojamientos a
-INNER JOIN contacto c ON c.rela_alojamiento_contacto = a.id_alojamientos 
-INNER JOIN direccion d ON d.id_direccion = a.rela_alojamiento_direccion
-INNER JOIN localidad l ON l.id_localidad = d.rela_localidad_direccion
-INNER JOIN tipo_alojamiento ta ON ta.id_tipo_alojamiento = a.rela_tipo_alojamiento_aloja
-INNER JOIN servicios_alojamiento sa ON sa.id_servicio_alojamiento = a.rela_aloja_servicios
-WHERE c.rela_tipo_contacto_cont = 2 OR c.rela_tipo_contacto_cont = 9
-GROUP BY a.id_alojamientos;");
+$sql = $bd->query("SELECT `id_prestador`, `descripcion_prestador`, `cuit_prestador`, `dni_prestador`, `institucion_prestador`, `fecha_edit_prestador`, pre.descripcion_tipo_prestador,l.nombre_localidad, d.calle_direccion 
+FROM `prestadores` 
+INNER JOIN direccion d ON d.id_direccion = prestadores.rela_prestador_direccion
+INNER JOIN localidad l ON l.id_localidad = d.rela_localidad_direccion 
+INNER JOIN tipo_prestador pre on pre.id_tipo_prestador = prestadores.rela_tipo_prestador");
 
 $sql->execute();
 
 //$cantidadAlojamiento = $sqlestadistica->fetchAll(PDO::FETCH_OBJ);
 
-$sqlContactos = $bd->query("SELECT a.id_alojamientos, c.descripcion_contacto, c.rela_tipo_contacto_cont FROM alojamientos a
-INNER JOIN contacto c ON c.rela_alojamiento_contacto = a.id_alojamientos 
-INNER JOIN direccion d on d.id_direccion = a.rela_alojamiento_direccion
-INNER JOIN localidad l on l.id_localidad = d.rela_localidad_direccion 
+$sqlContactos = $bd->query("SELECT p.id_prestador, c.descripcion_contacto, c.rela_tipo_contacto_cont 
+FROM prestadores p
+INNER JOIN contacto c ON c.rela_prestador_contacto = p.id_prestador 
 WHERE (c.rela_tipo_contacto_cont = 2 OR c.rela_tipo_contacto_cont = 9)");
 
 $sqlContactos->execute();
@@ -60,7 +53,7 @@ while ($filas = $sqlContactos->fetch(PDO::FETCH_ASSOC)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ministerio de Turismo | Alojamientos</title>
+    <title>Ministerio de Turismo | Prestadores</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -232,39 +225,36 @@ while ($filas = $sqlContactos->fetch(PDO::FETCH_ASSOC)) {
                                         <thead>
                                             <tr>
                                                 <th>Localidad</th>
-                                                <th>Denominación</th>
-                                                <th>Tipología</th>
+                                                <th>Tipo</th>
+                                                <th>Nombre</th>
                                                 <th>Dirección</th>
                                                 <th>Celular</th>
                                                 <th>Telefono</th>
-                                                <th>Habitaciones</th>
-                                                <th>Plazas</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php foreach ($listaAlojamientos as $alojamiento) : ?>
                                                 <tr>
                                                     <td><?= $alojamiento['nombre_localidad'] ?></td>
-                                                    <td><?= $alojamiento['descripcion_alojamientos'] ?></td>
-                                                    <td><?= $alojamiento['descripcion_tipo_alojamiento'] ?></td>
+                                                    <td><?= $alojamiento['descripcion_tipo_prestador'] ?></td>
+                                                    <td><?= $alojamiento['descripcion_prestador'] ?></td>
                                                     <td><?= $alojamiento['calle_direccion'] ?></td>
 
                                                     <!-- <td><?php //($alojamiento['cuit_alojamiento'] == 0 ) ? '' : $alojamiento['cuit_alojamiento']; 
                                                                 ?></td> -->
                                                     <td><?php
                                                         foreach ($listaContacto as $contacto) :
-                                                            echo ($alojamiento['id_alojamientos'] == $contacto['id_alojamientos'] && $contacto['rela_tipo_contacto_cont'] == 2) ? $contacto['descripcion_contacto'] . '   ' : '';
+                                                            echo ($alojamiento['id_prestador'] == $contacto['id_prestador'] && $contacto['rela_tipo_contacto_cont'] == 2) ? $contacto['descripcion_contacto'] . '   ' : '';
                                                         endforeach;
                                                         ?>
                                                     </td>
                                                     <td><?php
                                                         foreach ($listaContacto as $contacto) :
-                                                            echo ($alojamiento['id_alojamientos'] == $contacto['id_alojamientos'] && $contacto['rela_tipo_contacto_cont'] == 9) ? $contacto['descripcion_contacto'] . '   ' : '';
+                                                            echo ($alojamiento['id_prestador'] == $contacto['id_prestador'] && $contacto['rela_tipo_contacto_cont'] == 9) ? $contacto['descripcion_contacto'] . '   ' : '';
                                                         endforeach;
                                                         ?>
                                                     </td>
-                                                    <td><?= $alojamiento['cantidad_total_hab'] ?></td>
-                                                    <td><?= $alojamiento['cantidad_plazas'] ?></td>
+
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>
