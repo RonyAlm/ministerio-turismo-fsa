@@ -16,7 +16,9 @@ $rol_id = $_SESSION['rol_id'];
 
       <a name="" id="" class="btn btn-success" href="?controlador=Alojamientos&accion=crear" role="button">Agregar Alojamiento</a>
 
+      <a name="" id="" class="btn btn-warning" href="?controlador=Alojamientos&accion=crear" role="button">IMPRIMIR</a>
     </div>
+
   <?php } ?>
 
   <div class="row">
