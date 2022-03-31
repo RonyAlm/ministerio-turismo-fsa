@@ -10,14 +10,10 @@
                 $opcionesPDO[PDO::ATTR_ERRMODE]= PDO::ERRMODE_EXCEPTION;
                 
 
-                self::$instancia = new PDO('mysql:host=localhost; dbname=pruebas', 'root', '', $opcionesPDO);
+                self::$instancia = new PDO('mysql:host=localhost; dbname=pruebas1', 'root', '', $opcionesPDO);
                 //echo "conexion realizada";
                 bd::$instancia->exec("SET CHARACTER SET utf8");
             }
             return self::$instancia;
         }
     }
-
-
-
-?>

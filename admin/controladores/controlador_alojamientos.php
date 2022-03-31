@@ -353,4 +353,10 @@ class ControladorAlojamientos
 
         include_once("vistas/Alojamientos/info.php");
     }
+
+    public function imprimir()
+    {
+
+        include_once("vistas/Alojamientos/imprimir.php");
+    }
 }

@@ -1,6 +1,6 @@
 <?php
-include_once("/xampp/htdocs/ministeriotur/admin/modelos/calendario.php");
-include_once("/xampp/htdocs/ministeriotur/admin/conexion.php");
+include_once("/xampp/htdocs/ministerio-turismo-fsa/admin/modelos/calendario.php");
+include_once("/xampp/htdocs/ministerio-turismo-fsa/admin/conexion.php");
 
 $drop = new CalendarioModelo();
 
