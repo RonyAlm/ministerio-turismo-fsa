@@ -61,8 +61,12 @@
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <label for="provincia">Destino:</label>
-                                                <select id="provincia" name="provincia" class="form-control custom-select" required>
-
+                                                <?php //var_dump($buscarSelectProvincia)?> 
+                                                <select id="provincia" name="provincia" class="form-control custom-select"  required>
+                                                    <option value="" selected="selected">Seleccionar Provincia</option>
+                                                     <?php foreach ($buscarSelectProvincia as $provincia) : ?>
+                                                            <option value="<?= $provincia['id_provincia']?>"><?= $provincia['nombre_provincia']?></option>
+                                                     <?php  endforeach; ?> 
                                                 </select>
                                             </div>
                                         </div>
@@ -70,7 +74,7 @@
                                             <div class="form-group">
                                                 <label for="localidad">Localidad:</label>
                                                 <select id="localidad" name="localidad" class="form-control custom-select" required>
-
+                                                   
                                                 </select>
                                             </div>
                                         </div>
