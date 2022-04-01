@@ -356,7 +356,12 @@ class ControladorAlojamientos
 
     public function imprimir()
     {
+        $datosEstadisticos = new estadistica();
+        $cantidad_Total_Alojamientos = $datosEstadisticos->cantidadTotalAlojamiento();
 
+        $consultarAlojamientosInicio = new Alojamientos();
+
+        $inicioAlojamiento = $consultarAlojamientosInicio->consultar();
         include_once("vistas/Alojamientos/imprimir.php");
     }
 }
