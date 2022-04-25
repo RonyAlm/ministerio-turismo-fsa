@@ -49,6 +49,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Favicon -->
   <link rel="icon" href="vistas/recursos/dist/img/favicon.png">
 
+  <style>
+    .resaltar {
+      background-color: yellow;
+      color: black;
+    }
+  </style>
+
 
 </head>
 
@@ -482,7 +489,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- <script src="vistas/recursos/script/selectDinamico.js"></script> -->
   <script src="vistas/recursos/script/traerLocalidades.js"></script>
   <script src="vistas/recursos/script/selectDinamico.js"></script>
-  <script src="vistas/recursos/script/imprimir.js"></script>
+  <!-- <script src="vistas/recursos/script/imprimir.js"></script> -->
+  <script src="vistas/recursos/script/imprimir_2.js"></script>
 
 
 

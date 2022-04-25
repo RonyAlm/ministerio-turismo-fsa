@@ -67,6 +67,13 @@ while ($filas = $sqlContactos->fetch(PDO::FETCH_ASSOC)) {
     <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+
+    <style>
+        .resaltar {
+            background-color: yellow;
+            color: black;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -335,6 +342,32 @@ while ($filas = $sqlContactos->fetch(PDO::FETCH_ASSOC)) {
                 "responsive": true,
             });
         });
+
+
+        // Este codigo se utiliza para eliminar columnas de la tabla
+
+
+        // $(document).ready(() => {
+        //     $("th").hover(
+        //         function() {
+        //             let indiceColumna = $(this).parent().children().index(this);
+        //             $(this).addClass("resaltar");
+
+        //             $(`table td:nth-child(${indiceColumna + 1})`).addClass("resaltar");
+        //         },
+        //         function() {
+        //             $("table tr").children().removeClass("resaltar");
+        //         }
+        //     );
+
+        //     $("th").click(function() {
+        //         $(this).hide();
+
+        //         let indiceColumna = $(this).parent().children().index(this);
+
+        //         $(`table td:nth-child(${indiceColumna + 1})`).hide();
+        //     });
+        // });
     </script>
 </body>
 

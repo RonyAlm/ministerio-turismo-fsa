@@ -1,38 +1,30 @@
 <form action="">
+    <!-- <//?php// foreach ($inicioAlojamiento as $alojamiento) { ?> -->
     <p>
         <label for="localidad">localidad</label>
         <input type="checkbox" value="localidad" name="temas" id="localidad" class="valores">
     </p>
 
     <p>
-        <label for="descripcion">descripcion</label>
-        <input type="checkbox" value="descripcion" name="temas" id="descripcion" class="valores">
-    </p>
-    <p>
-        <label for="descripcion">descripcion1</label>
-        <input type="checkbox" value="descripcion1" name="temas" id="descripcion1" class="valores">
+        <label for="provincia">provincia</label>
+        <input type="checkbox" value="provincia" name="temas" id="provincia" class="valores">
 
     </p>
     <p>
-        <label for="descripcion">descripcion2</label>
-        <input type="checkbox" value="descripcion2" name="temas" id="descripcion2" class="valores">
+        <label for="pais">pais</label>
+        <input type="checkbox" value="pais" name="temas" id="pais" class="valores">
+
     </p>
 
-    <div class="col-4">
-        <div class="form-group">
-            <label for="provincia1">Destino:</label>
-            <table id="provincia1" name="provincia1" class="table border" required>
-
-            </table>
-        </div>
-    </div>
     <p>
         <button type="button" id="boton">mostrar valores seleccionados</button>
     </p>
 
+    <!-- <//?php } ?> -->
+
 </form>
 
-<div class="container">
+<!-- <div class="container">
     <div class="row">
         <div class="col-lg-12">
             <table id="example1" class="table table-bordered table-striped" cellspacing="0" width="100%">
@@ -45,7 +37,7 @@
                         <th>Contacto</th>
                         <th>Dirección</th>
                         <th>Estado</th>
-                        <th>Acción</th>
+
 
                     </tr>
                 </thead>
@@ -90,27 +82,7 @@
                             <?php } ?>
 
 
-                            <td class="project-actions text-right">
-                                <div class="btn-group" role="group" aria-label="">
 
-                                    <a href="?controlador=Alojamientos&accion=info&id=<?php echo $alojamiento["id_alojamientos"]; ?>" class="btn btn-primary btn-sm">
-                                        <i class="fas fa-folder">
-                                        </i>Más Info
-                                    </a>
-                                    <?php if ($rol_id == 1 or $rol_id == 3) { ?>
-                                        <a href="?controlador=Alojamientos&accion=editar&id=<?php echo $alojamiento["id_alojamientos"]; ?>" <a class="btn btn-info btn-sm">
-                                            <i class="fas fa-pencil-alt">
-                                            </i>Editar
-                                        </a>
-                                        <a href="?controlador=Alojamientos&accion=borrar&id=<?php echo $alojamiento["id_alojamientos"]; ?>  &idDireccion=<?php echo $alojamiento["id_direccion"]; ?>  &idRazonSocial=<?php echo $alojamiento["id_razon_social"]; ?>  &idServicios=<?php echo $alojamiento["rela_aloja_servicios"]; ?>  &idServiciosComple=<?php echo $alojamiento["rela_aloja_serv_adicionales"]; ?>" class="btn btn-danger btn-sm">
-                                            <i class="fas fa-trash">
-                                            </i>Borrar
-                                        </a>
-
-                                </div>
-
-                            </td>
-                        <?php } ?>
                         </tr>
 
 
@@ -119,9 +91,22 @@
             </table>
         </div>
     </div>
-</div>
+</div> -->
 
 <h2>Valores seleccionados</h2>
 <table id="tabla" class="table border">
+
+    <thead>
+        <th>localidad</th>
+        <th>provincia</th>
+        <th>pais</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+        </tr>
+    </tbody>
 
 </table>
