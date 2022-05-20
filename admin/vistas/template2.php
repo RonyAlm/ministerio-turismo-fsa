@@ -131,6 +131,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="container-fluid">
           <div class="row">
             <div class="col-12">
+              <!-- Salto de linea -->
+              <br>
               <?php include_once("ruteador.php"); ?>
             </div>
 
