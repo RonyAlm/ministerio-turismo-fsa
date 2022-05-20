@@ -364,4 +364,25 @@ class ControladorAlojamientos
         $inicioAlojamiento = $consultarAlojamientosInicio->consultar();
         include_once("vistas/Alojamientos/imprimir.php");
     }
+    public function imprimirInfo()
+    {
+        $id_alojamientos = $_GET['id'];
+
+        $alojamientosInfo = new Alojamientos();
+
+        $infoAlojamiento = $alojamientosInfo->buscarInsertar($id_alojamientos);
+
+
+        $contactosDelAlojamiento = new ContactosInfo();
+
+        $alojamientosTelefono = $contactosDelAlojamiento->consultarTelefonos($id_alojamientos);
+        $alojamientoTelefonoFijo = $contactosDelAlojamiento->consultarTelefonosFijos($id_alojamientos);
+        $alojamientosCorreo = $contactosDelAlojamiento->consultarCorreo($id_alojamientos);
+        $alojamientosFacebook = $contactosDelAlojamiento->consultarFacebook($id_alojamientos);
+        $alojamientosInstagram = $contactosDelAlojamiento->consultarInstagram($id_alojamientos);
+        $alojamientosTwitter = $contactosDelAlojamiento->consultarTwitter($id_alojamientos);
+        $alojamientosWeb = $contactosDelAlojamiento->consultarWeb($id_alojamientos);
+        $alojamientosOtro = $contactosDelAlojamiento->consultarOtro($id_alojamientos);
+        include_once("vistas/Alojamientos/invoice-print.html");
+    }
 }
