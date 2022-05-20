@@ -10,8 +10,8 @@ $rol_id = $_SESSION['rol_id'];
 
 
 ?>
-
-
+<!-- Salto de linea -->
+<br>
 <!-- Main content -->
 <section class="content">
 
@@ -114,6 +114,62 @@ $rol_id = $_SESSION['rol_id'];
             <td>
               <a>
                 Central
+              </a>
+              <br />
+              <small>
+                Creado 01.01.2022
+              </small>
+            </td>
+            <td>
+              <ul class="list-inline">
+                <li class="list-inline-item">
+                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
+                </li>
+                <li class="list-inline-item">
+                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar2.png">
+                </li>
+                <li class="list-inline-item">
+                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar3.png">
+                </li>
+                <li class="list-inline-item">
+                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar4.png">
+                </li>
+              </ul>
+            </td>
+            <td class="project_progress">
+              <div class="progress progress-sm">
+                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
+                </div>
+              </div>
+              <small>
+                57% Complete
+              </small>
+            </td>
+            <td class="project-actions text-right">
+              <a class="btn btn-primary btn-sm" href="#">
+                <i class="fas fa-folder">
+                </i>
+                View
+              </a>
+              <a class="btn btn-info btn-sm" href="#">
+                <i class="fas fa-pencil-alt">
+                </i>
+                Edit
+              </a>
+              <a class="btn btn-danger btn-sm" href="#">
+                <i class="fas fa-trash">
+                </i>
+                Delete
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              #
+            </td>
+            <td>
+              <a>
+                Logística
               </a>
               <br />
               <small>
