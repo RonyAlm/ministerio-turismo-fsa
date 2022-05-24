@@ -1,157 +1,110 @@
-<div class="col-md-12">
-  <div class="mb-1">
-      
-      </div>
-  <div class="row">
-          <div class="col-md-6">
-            <div class="card card-info">
-              <div class="card-header">
-                <h3 class="card-title">
-                  <i class="fas fa-text-width"></i>
-                  Informacion General
-                </h3>
-                  <?php if ($agenciasInfomacion->rela_tipo_estado== 1) {?>
-                    <div class="card-tools">
-                    <long class="badge badge-success">Activo</long>
-                  </div>
-                  <?php } ?>
-                  
-                  <?php if ($agenciasInfomacion->rela_tipo_estado== 2) {?>
-                    <div class="card-tools">
-                      <long class="badge badge-danger">Baja</long>
-                    </div>
-                  <?php } ?>
-                  
-                  <?php if ($agenciasInfomacion->rela_tipo_estado== 4) {?>
-                    <div class="card-tools">
-                    <long class="badge badge-orange">Cambio de Domicilio</long>
-                  </div>
-                  <?php } ?>
-                  
-                  <?php if ($agenciasInfomacion->rela_tipo_estado== 5) {?>
-                    <div class="card-tools">
-                    <long class="badge badge-warning">Se desconoce su situación</long>
-                  </div>
-                  <?php } ?>
+<div class="card card-outline card-red">
+  <div class="card-header">
+    <h3 class="card-title">#Legal y Técnica</h3>
 
-                  <?php if ($agenciasInfomacion->rela_tipo_estado== 6) {?>
-                    <div class="card-tools">
-                    <long class="badge badge-info">Cierre Temporario</long>
-                  </div>
-                  <?php } ?>
-                  <?php if ($agenciasInfomacion->rela_tipo_estado== 7) {?>
-                    <div class="card-tools">
-                    <long class="badge badge-info">Cierre Temporario</long>
-                  </div>
-                  <?php } ?>
-                  
-                
+    <div class="card-tools">
+      <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+        <i class="fas fa-minus"></i>
+      </button>
+      <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-12 col-md-12">
+        <div class="row">
+          <div class="col-12 col-sm-4">
+            <div class="info-box bg-light">
+              <div class="info-box-content">
+                <span class="info-box-text text-center text-muted">Departamento</span>
+                <span class="info-box-number text-center text-muted mb-0">Administración</span>
               </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <dl>
-                  <dt>Designación Comercial:</dt>
-                  <dd><?php echo $agenciasInfomacion->descripcion_agencias ?></dd>
-                  <dt>Localidad:</dt>
-                  <dd><?php echo $agenciasInfomacion->nombre_localidad; ?></dd>
-                  <!--<dd>Donec id elit non mi porta gravida at eget metus.</dd>-->
-                  <dt>Dirección:</dt>
-                  <dd><?php echo $agenciasInfomacion->calle_direccion; ?></dd>
-                  <dt>Departamento:</dt>
-                  <dd><?php echo $agenciasInfomacion->descripcion_departamentos; ?></dd>
-                  <dt>Razón Social:</dt>
-                  <dd><?php echo $agenciasInfomacion->descripcion_razon_social; ?></dd>
-                  <dt>Idóneo:</dt>
-                  <dd><?php echo $agenciasInfomacion->idoneo_agencia; ?></dd>
-                  <dt>Matrícula:</dt>
-                  <dd><?php echo $agenciasInfomacion->matricula_agencia; ?></dd>
-                  <dt>Legajo:</dt>
-                  <dd><?php echo $agenciasInfomacion->legajo_agencia; ?></dd>
-                  <dt>Categoria:</dt>
-                  <dd><?php echo $agenciasInfomacion->categoria_agencia; ?></dd>
-                  <dt>Cuit:</dt>
-                  <dd><?php echo $agenciasInfomacion->cuit_agencia; ?></dd>
-                  <dt>Última actualización:</dt>
-                  <dd><?=$agenciasInfomacion->fecha_edit_agencia; ?></dd>
-                </dl>
-              </div>
-              <!-- /.card-body -->
             </div>
-            <!-- /.card -->
           </div>
-          <!-- ./col -->
-          <div class="col-md-6">
-            <div class="card card-teal">
-              <div class="card-header">
-                <h3 class="card-title">
-                  <i class="fas fa-text-width"></i>
-                  Contacto
-                </h3>
+          <div class="col-12 col-sm-4">
+            <div class="info-box bg-light">
+              <div class="info-box-content">
+                <span class="info-box-text text-center text-muted">Total de empleados</span>
+                <span class="info-box-number text-center text-muted mb-0">5</span>
               </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <dl class="row">
-                  
-                  <?php foreach ($agenciaTelefonoInfo as $telefonos) { ?>
-                    
-                    <dt class="col-sm-4"><i class="fas fa-phone -width"></i> Teléfono Celular</dt>
-                    <dd class="col-sm-8"><?php echo $telefonos["descripcion_contacto"]; ?></dd>
-
-                  <?php  } ?>
-
-                  <?php foreach ($agenciaTelefonoFijo as $telefonosFijo) { ?>
-                    
-                    <dt class="col-sm-4"><i class="fas fa-phone -width"></i> Teléfonos Fijo</dt>
-                    <dd class="col-sm-8"><?php echo $telefonosFijo["descripcion_contacto"]; ?></dd>
-
-                  <?php  } ?>
-
-                    
-                  <?php foreach ($agenciaCorreo as $correos) { ?>
-                    
-                    <dt class="col-sm-4"><i class="fas fa-at"></i> Correo</dt>
-                    <dd class="col-sm-8"><?php echo $correos["descripcion_contacto"]; ?></dd>
-                  
-                  <?php } ?>
-
-                  <?php foreach ($agenciaFacebook as $facebook) { ?>
-                    <dt class="col-sm-4"><i class="fab fa-facebook"></i> Facebook</dt>
-                    <dd class="col-sm-8"><?php echo $facebook["descripcion_contacto"]; ?></dd>
-                  
-                  <?php } ?>
-
-                  <?php foreach ($agenciaInstagram as $instagram) { ?>
-                    <dt class="col-sm-4"><i class="fas fa-at -width"></i> Instagram</dt>
-                    <dd class="col-sm-8"><?php echo $instagram["descripcion_contacto"]; ?></dd>
-                  
-                  <?php } ?>
-
-                  <?php foreach ($agenciaTwitter as $twitter) { ?>
-                    <dt class="col-sm-4"><i class="fab fa-twitter-square"></i> Twitter</dt>
-                    <dd class="col-sm-8"><?php echo $twitter["descripcion_contacto"]; ?></dd>
-                  
-                  <?php } ?>
-
-                  <?php foreach ($agenciaWeb  as $web) { ?>
-                    <dt class="col-sm-4"><i class="fas fa-globe"></i> Sitio Web</dt>
-                    <dd class="col-sm-8"><?php echo $web["descripcion_contacto"]; ?></dd>
-                  
-                  <?php } ?>
-
-                  <?php foreach ($agenciaOtro as $otro) { ?>
-                    <dt class="col-sm-4"><i class="fas fa-street-view"></i> Otro</dt>
-                    <dd class="col-sm-8"><?php echo $otro["descripcion_contacto"]; ?></dd>
-                  
-                  <?php } ?>
-                   
-                </dl>
-              </div>
-              <!-- /.card-body -->
             </div>
-            <!-- /.card -->
           </div>
-          <!-- ./col -->
+          <div class="col-12 col-sm-4">
+            <div class="info-box bg-light">
+              <div class="info-box-content">
+                <span class="info-box-text text-center text-muted">Estimated project duration</span>
+                <span class="info-box-number text-center text-muted mb-0">20</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <!-- /.row -->
-        
+        <div class="row">
+          <div class="col-12">
+            <h4>Recent Activity</h4>
+            <div class="post">
+              <div class="user-block">
+                <img class="img-circle img-bordered-sm" src="../../../dist/img/user1-128x128.jpg">
+                <span class="username">
+                  <a href="?controlador=personal&accion=editar">Marcela Saguier Dr.</a>
+                </span>
+                <span class="description">Shared publicly - 7:45 PM today</span>
+              </div>
+              <!-- /.user-block -->
+              <p>
+                Lorem ipsum represents a long-held tradition for designers,
+                typographers and the like. Some people hate it and argue for
+                its demise, but others ignore.
+              </p>
+
+              <p>
+                <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 1 v2</a>
+              </p>
+            </div>
+
+            <div class="post clearfix">
+              <div class="user-block">
+                <img class="img-circle img-bordered-sm" src="../../dist/img/user7-128x128.jpg" alt="User Image">
+                <span class="username">
+                  <a href="#">Sarah Ross</a>
+                </span>
+                <span class="description">Sent you a message - 3 days ago</span>
+              </div>
+              <!-- /.user-block -->
+              <p>
+                Lorem ipsum represents a long-held tradition for designers,
+                typographers and the like. Some people hate it and argue for
+                its demise, but others ignore.
+              </p>
+              <p>
+                <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 2</a>
+              </p>
+            </div>
+
+            <div class="post">
+              <div class="user-block">
+                <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
+                <span class="username">
+                  <a href="#">Jonathan Burke Jr.</a>
+                </span>
+                <span class="description">Shared publicly - 5 days ago</span>
+              </div>
+              <!-- /.user-block -->
+              <p>
+                Lorem ipsum represents a long-held tradition for designers,
+                typographers and the like. Some people hate it and argue for
+                its demise, but others ignore.
+              </p>
+
+              <p>
+                <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 1 v1</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.card-body -->
 </div>

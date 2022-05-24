@@ -37,13 +37,13 @@ $rol_id = $_SESSION['rol_id'];
               #
             </th>
             <th style="width: 20%">
-              Aréas
+              Departamentos
             </th>
             <th style="width: 30%">
               Personal de cada Aréa
             </th>
             <th>
-              Directores
+              Director/a - Encargado/a
             </th>
             <th style="width: 20%" class="text-center">
               Accion
@@ -90,12 +90,12 @@ $rol_id = $_SESSION['rol_id'];
               </small>
             </td>
             <td class="project-actions text-right">
-              <a class="btn btn-primary btn-sm" href="#">
+              <a class="btn btn-primary btn-sm" href="?controlador=personal&accion=info">
                 <i class="fas fa-folder">
                 </i>
                 View
               </a>
-              <a class="btn btn-info btn-sm" href="#">
+              <!-- <a class="btn btn-info btn-sm" href="#">
                 <i class="fas fa-pencil-alt">
                 </i>
                 Edit
@@ -104,7 +104,7 @@ $rol_id = $_SESSION['rol_id'];
                 <i class="fas fa-trash">
                 </i>
                 Delete
-              </a>
+              </a> -->
             </td>
           </tr>
           <tr>
@@ -151,7 +151,7 @@ $rol_id = $_SESSION['rol_id'];
                 </i>
                 View
               </a>
-              <a class="btn btn-info btn-sm" href="#">
+              <!-- <a class="btn btn-info btn-sm" href="#">
                 <i class="fas fa-pencil-alt">
                 </i>
                 Edit
@@ -160,7 +160,7 @@ $rol_id = $_SESSION['rol_id'];
                 <i class="fas fa-trash">
                 </i>
                 Delete
-              </a>
+              </a> -->
             </td>
           </tr>
           <tr>
@@ -207,7 +207,7 @@ $rol_id = $_SESSION['rol_id'];
                 </i>
                 View
               </a>
-              <a class="btn btn-info btn-sm" href="#">
+              <!-- <a class="btn btn-info btn-sm" href="#">
                 <i class="fas fa-pencil-alt">
                 </i>
                 Edit
@@ -216,7 +216,7 @@ $rol_id = $_SESSION['rol_id'];
                 <i class="fas fa-trash">
                 </i>
                 Delete
-              </a>
+              </a> -->
             </td>
           </tr>
 
