@@ -108,17 +108,25 @@
           <div class="card-header p-2">
             <ul class="nav nav-pills">
               <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Información</a></li>
-              <!-- <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li> -->
-              <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
+              <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Datos Personales</a></li>
+              <li class="nav-item"><a class="nav-link" href="#profesion" data-toggle="tab">Profesión</a></li>
+              <li class="nav-item"><a class="nav-link" href="#ministerio" data-toggle="tab">Ministerio</a></li>
+
+
             </ul>
           </div><!-- /.card-header -->
           <div class="card-body">
             <div class="tab-content">
+
+
+              <!-- ACTIVITY -->
+
+
               <div class="active tab-pane" id="activity">
                 <!-- Post -->
                 <div class="post">
                   <div class="user-block">
-                    <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
+                    <img class="img-circle img-bordered-sm" src="vistas/recursos/dist/img/user1-128x128.jpg" alt="user image">
                     <span class="username">
                       <a href="#">Jonathan Burke Jr.</a>
                       <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
@@ -151,7 +159,7 @@
                 <!-- Post -->
                 <div class="post clearfix">
                   <div class="user-block">
-                    <img class="img-circle img-bordered-sm" src="../../dist/img/user7-128x128.jpg" alt="User Image">
+                    <img class="img-circle img-bordered-sm" src="vistas/recursos/dist/img/user1-128x128.jpg" alt="User Image">
                     <span class="username">
                       <a href="#">Sarah Ross</a>
                       <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
@@ -181,36 +189,14 @@
                 <!-- Post -->
                 <div class="post">
                   <div class="user-block">
-                    <img class="img-circle img-bordered-sm" src="../../dist/img/user6-128x128.jpg" alt="User Image">
+                    <img class="img-circle img-bordered-sm" src="vistas/recursos/dist/img/user1-128x128.jpg" alt="User Image">
                     <span class="username">
                       <a href="#">Adam Jones</a>
                       <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
                     </span>
                     <span class="description">Posted 5 photos - 5 days ago</span>
                   </div>
-                  <!-- /.user-block -->
-                  <div class="row mb-3">
-                    <div class="col-sm-6">
-                      <img class="img-fluid" src="../../dist/img/photo1.png" alt="Photo">
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-6">
-                      <div class="row">
-                        <div class="col-sm-6">
-                          <img class="img-fluid mb-3" src="../../dist/img/photo2.png" alt="Photo">
-                          <img class="img-fluid" src="../../dist/img/photo3.jpg" alt="Photo">
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-sm-6">
-                          <img class="img-fluid mb-3" src="../../dist/img/photo4.jpg" alt="Photo">
-                          <img class="img-fluid" src="../../dist/img/photo1.png" alt="Photo">
-                        </div>
-                        <!-- /.col -->
-                      </div>
-                      <!-- /.row -->
-                    </div>
-                    <!-- /.col -->
-                  </div>
+
                   <!-- /.row -->
 
                   <p>
@@ -227,147 +213,178 @@
                 </div>
                 <!-- /.post -->
               </div>
-              <!-- /.tab-pane -->
-              <div class="tab-pane" id="timeline">
-                <!-- The timeline -->
-                <div class="timeline timeline-inverse">
-                  <!-- timeline time label -->
-                  <div class="time-label">
-                    <span class="bg-danger">
-                      10 Feb. 2014
-                    </span>
-                  </div>
-                  <!-- /.timeline-label -->
-                  <!-- timeline item -->
-                  <div>
-                    <i class="fas fa-envelope bg-primary"></i>
 
-                    <div class="timeline-item">
-                      <span class="time"><i class="far fa-clock"></i> 12:05</span>
 
-                      <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
+              <!-- SETTINGS -->
 
-                      <div class="timeline-body">
-                        Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                        weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                        jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                        quora plaxo ideeli hulu weebly balihoo...
-                      </div>
-                      <div class="timeline-footer">
-                        <a href="#" class="btn btn-primary btn-sm">Read more</a>
-                        <a href="#" class="btn btn-danger btn-sm">Delete</a>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- END timeline item -->
-                  <!-- timeline item -->
-                  <div>
-                    <i class="fas fa-user bg-info"></i>
-
-                    <div class="timeline-item">
-                      <span class="time"><i class="far fa-clock"></i> 5 mins ago</span>
-
-                      <h3 class="timeline-header border-0"><a href="#">Sarah Young</a> accepted your friend request
-                      </h3>
-                    </div>
-                  </div>
-                  <!-- END timeline item -->
-                  <!-- timeline item -->
-                  <div>
-                    <i class="fas fa-comments bg-warning"></i>
-
-                    <div class="timeline-item">
-                      <span class="time"><i class="far fa-clock"></i> 27 mins ago</span>
-
-                      <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-
-                      <div class="timeline-body">
-                        Take me to your leader!
-                        Switzerland is small and neutral!
-                        We are more like Germany, ambitious and misunderstood!
-                      </div>
-                      <div class="timeline-footer">
-                        <a href="#" class="btn btn-warning btn-flat btn-sm">View comment</a>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- END timeline item -->
-                  <!-- timeline time label -->
-                  <div class="time-label">
-                    <span class="bg-success">
-                      3 Jan. 2014
-                    </span>
-                  </div>
-                  <!-- /.timeline-label -->
-                  <!-- timeline item -->
-                  <div>
-                    <i class="fas fa-camera bg-purple"></i>
-
-                    <div class="timeline-item">
-                      <span class="time"><i class="far fa-clock"></i> 2 days ago</span>
-
-                      <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-
-                      <div class="timeline-body">
-                        <img src="https://placehold.it/150x100" alt="...">
-                        <img src="https://placehold.it/150x100" alt="...">
-                        <img src="https://placehold.it/150x100" alt="...">
-                        <img src="https://placehold.it/150x100" alt="...">
-                      </div>
-                    </div>
-                  </div>
-                  <!-- END timeline item -->
-                  <div>
-                    <i class="far fa-clock bg-gray"></i>
-                  </div>
-                </div>
-              </div>
-              <!-- /.tab-pane -->
 
               <div class="tab-pane" id="settings">
                 <form class="form-horizontal">
                   <div class="form-group row">
-                    <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                    <label for="inputName" class="col-sm-2 col-form-label">Nombre</label>
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputName" placeholder="Name">
+                      <input type="email" class="form-control" id="inputName" placeholder="Nombre">
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                    <label for="inputEmail" class="col-sm-2 col-form-label">Apellido</label>
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                      <input type="email" class="form-control" id="inputEmail" placeholder="Apellido">
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="inputName2" class="col-sm-2 col-form-label">Name</label>
+                    <label for="inputName2" class="col-sm-2 col-form-label">Dirección</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputName2" placeholder="Name">
+                      <input type="text" class="form-control" id="inputName2" placeholder="Dirección">
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
+                    <label for="inputName2" class="col-sm-2 col-form-label">Localidad</label>
                     <div class="col-sm-10">
-                      <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+                      <input type="text" class="form-control" id="inputName2" placeholder="Localidad">
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="inputSkills" class="col-sm-2 col-form-label">Skills</label>
+                    <label for="inputSkills" class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
+                      <input type="text" class="form-control" id="inputSkills" placeholder="Fecha de Nacimiento">
                     </div>
                   </div>
+                  <div class="form-group row">
+                    <label for="inputSkills" class="col-sm-2 col-form-label">Teléfono Celular</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputSkills" placeholder="Teléfono Celular">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputSkills" class="col-sm-2 col-form-label">Teléfono Fijo</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputSkills" placeholder="Teléfono Fijo">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputSkills" class="col-sm-2 col-form-label">Correo</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputSkills" placeholder="Correo">
+                    </div>
+                  </div>
+
+
                   <div class="form-group row">
                     <div class="offset-sm-2 col-sm-10">
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                        </label>
-                      </div>
+                      <button type="submit" class="btn btn-danger">Editar</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+
+              <!-- PROFESION -->
+
+
+              <div class="tab-pane" id="profesion">
+                <form class="form-horizontal">
+                  <div class="form-group row">
+                    <label for="inputName" class="col-sm-2 col-form-label">Educación</label>
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputName" placeholder="Educación">
                     </div>
                   </div>
                   <div class="form-group row">
+                    <label for="inputEmail" class="col-sm-2 col-form-label">Profesión</label>
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputEmail" placeholder="Profesión">
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="inputSkills" class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputSkills" placeholder="Fecha de Nacimiento">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputSkills" class="col-sm-2 col-form-label">Teléfono Celular</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputSkills" placeholder="Teléfono Celular">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputSkills" class="col-sm-2 col-form-label">Teléfono Fijo</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputSkills" placeholder="Teléfono Fijo">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputSkills" class="col-sm-2 col-form-label">Correo</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputSkills" placeholder="Correo">
+                    </div>
+                  </div>
+
+
+                  <div class="form-group row">
                     <div class="offset-sm-2 col-sm-10">
-                      <button type="submit" class="btn btn-danger">Submit</button>
+                      <button type="submit" class="btn btn-danger">Editar</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+
+              <!-- MINISTERIO -->
+
+
+              <div class="tab-pane" id="ministerio">
+                <form class="form-horizontal">
+                  <div class="form-group row">
+                    <label for="inputName" class="col-sm-2 col-form-label">Departamento</label>
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputName" placeholder="Departamento">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputEmail" class="col-sm-2 col-form-label">Área</label>
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputEmail" placeholder="Área">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputName2" class="col-sm-2 col-form-label">Nº de Legajo</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputName2" placeholder="Nº de Legajo">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputName2" class="col-sm-2 col-form-label">Nº de Expediente</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputName2" placeholder="Nº de Expediente">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputName2" class="col-sm-2 col-form-label">Tipo de Contrato</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputName2" placeholder="Tipo de Contrato">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputName2" class="col-sm-2 col-form-label">Cargo</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputName2" placeholder="Cargo">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputName2" class="col-sm-2 col-form-label">Rol</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputName2" placeholder="Rol">
+                    </div>
+                  </div>
+
+
+
+                  <div class="form-group row">
+                    <div class="offset-sm-2 col-sm-10">
+                      <button type="submit" class="btn btn-danger">Editar</button>
                     </div>
                   </div>
                 </form>

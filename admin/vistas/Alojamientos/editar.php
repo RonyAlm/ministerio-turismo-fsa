@@ -173,7 +173,6 @@ $rol_id = $_SESSION['rol_id'];
             <div class="form-group">
               <label for="telefonoFijoAlojamiento">Teléfono Fijo</label>
               <input type="hidden" id="alojamientoIDtelefonoFijo" name="alojamientoIDtelefonoFijo" value="<?php echo $alojamientosTelefonoFijo->id_contacto; ?>">
-
               <input type="number" value="<?php echo $alojamientosTelefonoFijo->descripcion_contacto; ?>" id="telefonoFijoAlojamiento" name="telefonoFijoAlojamiento" class="form-control">
             </div>
             <div class="form-group">

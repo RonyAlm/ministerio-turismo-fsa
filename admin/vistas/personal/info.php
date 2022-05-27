@@ -45,7 +45,7 @@
             <h4>Recent Activity</h4>
             <div class="post">
               <div class="user-block">
-                <img class="img-circle img-bordered-sm" src="../../../dist/img/user1-128x128.jpg">
+                <img class="img-circle img-bordered-sm" src="vistas/recursos/dist/img/user1-128x128.jpg">
                 <span class="username">
                   <a href="?controlador=personal&accion=editar">Marcela Saguier Dr.</a>
                 </span>
@@ -65,7 +65,7 @@
 
             <div class="post clearfix">
               <div class="user-block">
-                <img class="img-circle img-bordered-sm" src="../../dist/img/user7-128x128.jpg" alt="User Image">
+                <img class="img-circle img-bordered-sm" src="vistas/recursos/dist/img/user1-128x128.jpg" alt="User Image">
                 <span class="username">
                   <a href="#">Sarah Ross</a>
                 </span>
