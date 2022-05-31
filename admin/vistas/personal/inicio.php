@@ -11,7 +11,15 @@ $rol_id = $_SESSION['rol_id'];
 
 ?>
 <!-- Salto de linea -->
-<br>
+<!-- <br> -->
+<?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "monica") { ?>
+  <div class="card-header">
+
+    <a name="" id="" class="btn btn-success" href="?controlador=Alojamientos&accion=crear" role="button">Agregar Personal</a>
+    <!-- <a name="" id="" class="btn btn-warning" href="?controlador=Alojamientos&accion=imprimir" role="button">IMPRIMIR</a> -->
+  </div>
+
+<?php } ?>
 <!-- Main content -->
 <section class="content">
 

@@ -31,75 +31,134 @@
               </div>
             </div>
           </div>
-          <div class="col-12 col-sm-4">
+          <!-- <div class="col-12 col-sm-4">
             <div class="info-box bg-light">
               <div class="info-box-content">
                 <span class="info-box-text text-center text-muted">Estimated project duration</span>
                 <span class="info-box-number text-center text-muted mb-0">20</span>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="row">
-          <div class="col-12">
-            <h4>Recent Activity</h4>
-            <div class="post">
-              <div class="user-block">
-                <img class="img-circle img-bordered-sm" src="vistas/recursos/dist/img/user1-128x128.jpg">
-                <span class="username">
-                  <a href="?controlador=personal&accion=editar">Marcela Saguier Dr.</a>
-                </span>
-                <span class="description">Shared publicly - 7:45 PM today</span>
+          <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
+            <div class="card bg-light d-flex flex-fill">
+              <div class="card-header text-muted border-bottom-0">
+                Digital Strategist
               </div>
-              <!-- /.user-block -->
-              <p>
-                Lorem ipsum represents a long-held tradition for designers,
-                typographers and the like. Some people hate it and argue for
-                its demise, but others ignore.
-              </p>
+              <div class="card-body pt-0">
+                <div class="row">
+                  <div class="col-7">
+                    <h2 class="lead"><b>Nicole Pearson</b></h2>
+                    <p class="text-muted text-sm"><b>About: </b> Web Designer / UX / Graphic Artist / Coffee Lover </p>
+                    <ul class="ml-4 mb-0 fa-ul text-muted">
+                      <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: Demo Street 123, Demo City 04312, NJ</li>
+                      <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: + 800 - 12 12 23 52</li>
+                    </ul>
+                  </div>
+                  <div class="col-5 text-center">
+                    <img src="vistas/recursos/dist/img/user1-128x128.jpg" alt="user-avatar" class="img-circle img-fluid">
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="text-right">
 
-              <p>
-                <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 1 v2</a>
-              </p>
+                  <a href="?controlador=personal&accion=editar&id=1" class="btn btn-sm btn-primary">
+                    <i class="fas fa-user"></i> Ver Perfil
+                  </a>
+                </div>
+              </div>
             </div>
-
-            <div class="post clearfix">
-              <div class="user-block">
-                <img class="img-circle img-bordered-sm" src="vistas/recursos/dist/img/user1-128x128.jpg" alt="User Image">
-                <span class="username">
-                  <a href="#">Sarah Ross</a>
-                </span>
-                <span class="description">Sent you a message - 3 days ago</span>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
+            <div class="card bg-light d-flex flex-fill">
+              <div class="card-header text-muted border-bottom-0">
+                Digital Strategist
               </div>
-              <!-- /.user-block -->
-              <p>
-                Lorem ipsum represents a long-held tradition for designers,
-                typographers and the like. Some people hate it and argue for
-                its demise, but others ignore.
-              </p>
-              <p>
-                <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 2</a>
-              </p>
+              <div class="card-body pt-0">
+                <div class="row">
+                  <div class="col-7">
+                    <h2 class="lead"><b>Nicole Pearson</b></h2>
+                    <p class="text-muted text-sm"><b>About: </b> Web Designer / UX / Graphic Artist / Coffee Lover </p>
+                    <ul class="ml-4 mb-0 fa-ul text-muted">
+                      <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: Demo Street 123, Demo City 04312, NJ</li>
+                      <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: + 800 - 12 12 23 52</li>
+                    </ul>
+                  </div>
+                  <div class="col-5 text-center">
+                    <img src="vistas/recursos/dist/img/user2-160x160.jpg" alt="user-avatar" class="img-circle img-fluid">
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="text-right">
+
+                  <a href="#" class="btn btn-sm btn-primary">
+                    <i class="fas fa-user"></i> Ver Perfil
+                  </a>
+                </div>
+              </div>
             </div>
-
-            <div class="post">
-              <div class="user-block">
-                <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
-                <span class="username">
-                  <a href="#">Jonathan Burke Jr.</a>
-                </span>
-                <span class="description">Shared publicly - 5 days ago</span>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
+            <div class="card bg-light d-flex flex-fill">
+              <div class="card-header text-muted border-bottom-0">
+                Digital Strategist
               </div>
-              <!-- /.user-block -->
-              <p>
-                Lorem ipsum represents a long-held tradition for designers,
-                typographers and the like. Some people hate it and argue for
-                its demise, but others ignore.
-              </p>
+              <div class="card-body pt-0">
+                <div class="row">
+                  <div class="col-7">
+                    <h2 class="lead"><b>Nicole Pearson</b></h2>
+                    <p class="text-muted text-sm"><b>About: </b> Web Designer / UX / Graphic Artist / Coffee Lover </p>
+                    <ul class="ml-4 mb-0 fa-ul text-muted">
+                      <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: Demo Street 123, Demo City 04312, NJ</li>
+                      <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: + 800 - 12 12 23 52</li>
+                    </ul>
+                  </div>
+                  <div class="col-5 text-center">
+                    <img src="vistas/recursos/dist/img/user1-128x128.jpg" alt="user-avatar" class="img-circle img-fluid">
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="text-right">
 
-              <p>
-                <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 1 v1</a>
-              </p>
+                  <a href="#" class="btn btn-sm btn-primary">
+                    <i class="fas fa-user"></i> Ver Perfil
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
+            <div class="card bg-light d-flex flex-fill">
+              <div class="card-header text-muted border-bottom-0">
+                Digital Strategist
+              </div>
+              <div class="card-body pt-0">
+                <div class="row">
+                  <div class="col-7">
+                    <h2 class="lead"><b>Nicole Pearson</b></h2>
+                    <p class="text-muted text-sm"><b>About: </b> Web Designer / UX / Graphic Artist / Coffee Lover </p>
+                    <ul class="ml-4 mb-0 fa-ul text-muted">
+                      <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: Demo Street 123, Demo City 04312, NJ</li>
+                      <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: + 800 - 12 12 23 52</li>
+                    </ul>
+                  </div>
+                  <div class="col-5 text-center">
+                    <img src="vistas/recursos/dist/img/user2-160x160.jpg" alt="user-avatar" class="img-circle img-fluid">
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="text-right">
+
+                  <a href="#" class="btn btn-sm btn-primary">
+                    <i class="fas fa-user"></i> Ver Perfil
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
