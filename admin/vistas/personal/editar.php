@@ -57,7 +57,7 @@
           <div class="card-header p-2">
             <ul class="nav nav-pills">
               <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab">Datos Personales</a></li>
-              <li class="nav-item"><a class="nav-link" href="#profesion" data-toggle="tab">Profesión</a></li>
+              <!-- <li class="nav-item"><a class="nav-link" href="#profesion" data-toggle="tab">Profesión</a></li> -->
               <li class="nav-item"><a class="nav-link" href="#ministerio" data-toggle="tab">Ministerio</a></li>
 
 
@@ -119,22 +119,6 @@
                       <input type="text" class="form-control" id="inputSkills" placeholder="Correo">
                     </div>
                   </div>
-
-
-                  <div class="form-group row">
-                    <div class="offset-sm-2 col-sm-10">
-                      <button type="submit" class="btn btn-danger">Editar</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-
-
-              <!-- PROFESION -->
-
-
-              <div class="tab-pane" id="profesion">
-                <form class="form-horizontal">
                   <div class="form-group row">
                     <label for="inputName" class="col-sm-2 col-form-label">Educación</label>
                     <div class="col-sm-10">
@@ -145,31 +129,6 @@
                     <label for="inputEmail" class="col-sm-2 col-form-label">Profesión</label>
                     <div class="col-sm-10">
                       <input type="email" class="form-control" id="inputEmail" placeholder="Profesión">
-                    </div>
-                  </div>
-
-                  <div class="form-group row">
-                    <label for="inputSkills" class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputSkills" placeholder="Fecha de Nacimiento">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputSkills" class="col-sm-2 col-form-label">Teléfono Celular</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputSkills" placeholder="Teléfono Celular">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputSkills" class="col-sm-2 col-form-label">Teléfono Fijo</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputSkills" placeholder="Teléfono Fijo">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputSkills" class="col-sm-2 col-form-label">Correo</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputSkills" placeholder="Correo">
                     </div>
                   </div>
 

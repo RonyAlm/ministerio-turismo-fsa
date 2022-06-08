@@ -12,7 +12,7 @@ class ControladorPersonal
     public function inicio()
     { //aca se muestra las tablas
 
-        // $consultaAgencia = new AgenciaModelo();
+        // $consultaAgencia = new PersonalModelo();
 
         // $tablaAgencia = $consultaAgencia->consultar();
         // $datosEstadisticos = new estadistica();
@@ -26,7 +26,7 @@ class ControladorPersonal
     public function crear()
     {
 
-        $select_tipo_agencia = new AgenciaModelo();
+        $select_tipo_agencia = new PersonalModelo();
 
         $buscarSelectLocalidad = $select_tipo_agencia->buscarSelectLocalidad();
         $buscarSelectEstado = $select_tipo_agencia->buscarSelectEstado();
@@ -34,7 +34,7 @@ class ControladorPersonal
         if ($_POST) {
             //print_r($_POST);
 
-            $insertarAgencia = new AgenciaModelo();
+            $insertarAgencia = new PersonalModelo();
 
 
             $descripcion_agencias = $_POST['nombreAgencia'];
@@ -97,7 +97,7 @@ class ControladorPersonal
 
         // $idAgencia = $_GET["id"];
 
-        // $buscarAgencias = new AgenciaModelo();
+        // $buscarAgencias = new PersonalModelo();
 
         // $buscarSelectLocalidad = $buscarAgencias->buscarSelectLocalidad();
         // $buscarSelectEstado = $buscarAgencias->buscarSelectEstado();
@@ -106,7 +106,7 @@ class ControladorPersonal
         // /*----------BUSCA LOS POST QUE SE ENCUENTRA EN EDITAR.PHP PARA PODER EDITARLO----------*/
 
         // if ($_POST) {
-        //     $EditarAgencia = new AgenciaModelo();
+        //     $EditarAgencia = new PersonalModelo();
 
 
         //     $idAgencia = $_POST['agenciaID'];
@@ -213,7 +213,7 @@ class ControladorPersonal
         // $agenciaOtro = $contactosDeagencia->consultarOtro($idAgencia);
 
 
-        // $buscarID = new AgenciaModelo();
+        // $buscarID = new PersonalModelo();
 
         // $editar = $buscarID->buscar($idAgencia);
 
@@ -231,7 +231,7 @@ class ControladorPersonal
         $id_direccion = $_GET['idDireccion'];
         $idRazonSocial = $_GET['idRazonSocial'];
 
-        $borrarAgencias = new AgenciaModelo();
+        $borrarAgencias = new PersonalModelo();
 
         $buscarIDBorrado = $borrarAgencias->consultarID($idAgenciaBorrar);
 
@@ -244,7 +244,7 @@ class ControladorPersonal
     {
         // $id_agencia = $_GET['id'];
 
-        // $agenciaInfo = new AgenciaModelo();
+        // $agenciaInfo = new PersonalModelo();
 
         // $agenciasInfomacion = $agenciaInfo->buscar($id_agencia);
 
@@ -260,5 +260,29 @@ class ControladorPersonal
         // $agenciaOtro = $contactosDeagencia->consultarOtro($id_agencia);
 
         include_once("vistas/personal/info.php");
+    }
+
+    public function guardar()
+    {
+        $select_tipo_agencia = new PersonalModelo();
+
+        $buscarSelectLocalidad = $select_tipo_agencia->buscarSelectLocalidad();
+
+        // $agenciaInfo = new PersonalModelo();
+
+        // $agenciasInfomacion = $agenciaInfo->buscar($id_agencia);
+
+
+        // $contactosDeagencia = new ContactosInfo();
+        // $agenciaTelefonoInfo = $contactosDeagencia->consultarTelefonos($id_agencia);
+        // $agenciaTelefonoFijo = $contactosDeagencia->consultarTelefonosFijos($id_agencia);
+        // $agenciaCorreo = $contactosDeagencia->consultarCorreo($id_agencia);
+        // $agenciaFacebook = $contactosDeagencia->consultarFacebook($id_agencia);
+        // $agenciaInstagram = $contactosDeagencia->consultarInstagram($id_agencia);
+        // $agenciaTwitter = $contactosDeagencia->consultarTwitter($id_agencia);
+        // $agenciaWeb = $contactosDeagencia->consultarWeb($id_agencia);
+        // $agenciaOtro = $contactosDeagencia->consultarOtro($id_agencia);
+
+        include_once("vistas/personal/guardar.php");
     }
 }

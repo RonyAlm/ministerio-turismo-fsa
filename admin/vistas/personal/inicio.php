@@ -15,7 +15,7 @@ $rol_id = $_SESSION['rol_id'];
 <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "monica") { ?>
   <div class="card-header">
 
-    <a name="" id="" class="btn btn-success" href="?controlador=Alojamientos&accion=crear" role="button">Agregar Personal</a>
+    <a name="" id="" class="btn btn-success" href="?controlador=personal&accion=guardar" role="button">Agregar Personal</a>
     <!-- <a name="" id="" class="btn btn-warning" href="?controlador=Alojamientos&accion=imprimir" role="button">IMPRIMIR</a> -->
   </div>
 
