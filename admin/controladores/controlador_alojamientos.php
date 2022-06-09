@@ -289,7 +289,8 @@ class ControladorAlojamientos
 
 
 
-            header("Location:index2.php?controlador=Alojamientos&accion=inicio");
+            // header("Location:index2.php?controlador=Alojamientos&accion=inicio");
+            echo "<script>location.href='index2.php?controlador=Alojamientos&accion=inicio';</script>";
         }
 
         $contactosDelAlojamiento = new ContactosAlojamiento();
@@ -351,5 +352,37 @@ class ControladorAlojamientos
         //print_r($alojamientosCorreo);
 
         include_once("vistas/Alojamientos/info.php");
+    }
+
+    public function imprimir()
+    {
+        $datosEstadisticos = new estadistica();
+        $cantidad_Total_Alojamientos = $datosEstadisticos->cantidadTotalAlojamiento();
+
+        $consultarAlojamientosInicio = new Alojamientos();
+
+        $inicioAlojamiento = $consultarAlojamientosInicio->consultar();
+        include_once("vistas/Alojamientos/imprimir.php");
+    }
+    public function imprimirInfo()
+    {
+        $id_alojamientos = $_GET['id'];
+
+        $alojamientosInfo = new Alojamientos();
+
+        $infoAlojamiento = $alojamientosInfo->buscarInsertar($id_alojamientos);
+
+
+        $contactosDelAlojamiento = new ContactosInfo();
+
+        $alojamientosTelefono = $contactosDelAlojamiento->consultarTelefonos($id_alojamientos);
+        $alojamientoTelefonoFijo = $contactosDelAlojamiento->consultarTelefonosFijos($id_alojamientos);
+        $alojamientosCorreo = $contactosDelAlojamiento->consultarCorreo($id_alojamientos);
+        $alojamientosFacebook = $contactosDelAlojamiento->consultarFacebook($id_alojamientos);
+        $alojamientosInstagram = $contactosDelAlojamiento->consultarInstagram($id_alojamientos);
+        $alojamientosTwitter = $contactosDelAlojamiento->consultarTwitter($id_alojamientos);
+        $alojamientosWeb = $contactosDelAlojamiento->consultarWeb($id_alojamientos);
+        $alojamientosOtro = $contactosDelAlojamiento->consultarOtro($id_alojamientos);
+        include_once("vistas/Alojamientos/invoice-print.html");
     }
 }

@@ -10,9 +10,10 @@ class ControladorFestivales
     public function inicio()
     { //aca se muestra las tablas
 
-        // $consulta = new FestivalesModelo();
-
-        // $tabla = $consulta->consultar();
+        $consulta = new FestivalesModelo();
+        $tabla = $consulta->consultar();
+        $tablaContacto = $consulta->consultarContactos();
+        $contacto = $consulta->contacto();
         // $datosEstadisticos = new estadistica();
 
         // $cantidadFestivales = $datosEstadisticos->cantidadPiletas();
@@ -80,7 +81,8 @@ class ControladorFestivales
             // print_r($insertar);
 
 
-            header("Location:index2.php?controlador=festivales&accion=inicio");
+            // header("Location:index2.php?controlador=festivales&accion=inicio");
+            echo "<script>location.href='index2.php?controlador=festivales&accion=inicio';</script>";
         }
 
 
@@ -94,14 +96,15 @@ class ControladorFestivales
         $select_tipo_servigeneral = new FestivalesModelo();
 
         $buscarSelectLocalidad = $select_tipo_servigeneral->buscarSelectLocalidad();
-        $buscarSelectEstacion = $select_tipo_servigeneral->buscarSelectEstacion();
-        $buscarSelectLugar = $select_tipo_servigeneral->buscarSelectLugar();
+        // $buscarSelectEstacion = $select_tipo_servigeneral->buscarSelectEstacion();
+        // $buscarSelectLugar = $select_tipo_servigeneral->buscarSelectLugar();
         $buscarSelectTipoServicio = $select_tipo_servigeneral->buscarSelectTipoServicio();
 
         //print_r("$id");
         /*----------BUSCA LOS POST QUE SE ENCUENTRA EN EDITAR.PHP PARA PODER EDITARLO----------*/
 
         if ($_POST) {
+            // print_r($_POST);
             $EditarAgencia = new FestivalesModelo();
 
 
@@ -109,19 +112,16 @@ class ControladorFestivales
             $nombre = $_POST['nombre'];
             $descripcion = $_POST['descripcion'];
             $idoneo = $_POST['idoneo'];
+            $fecha = $_POST['fecha'];
 
-            $tipoServiGeneralID = $_POST['tipoServiGeneralID'];
-            $tipoServiGeneral = $_POST['tipoServiGeneral'];
 
-            $estacionID = $_POST['estacionID'];
-            $estacion = $_POST['estacion'];
+
 
             $tipoServicioID = $_POST['tipoServicioID'];
             $tipoServicio = $_POST['tipoServicio'];
 
-            $domicilioID = $_POST['domicilioID'];
+            $LocalidadID = $_POST['LocalidadID'];
             $localidad = $_POST['localidad'];
-            $domicilio = $_POST['domicilio'];
 
 
             $idtelefonoAgencia = $_POST['agenciatelefonoID'];
@@ -155,14 +155,11 @@ class ControladorFestivales
                 $descripcion,
                 $id,
                 $idoneo,
+                $fecha,
+                $LocalidadID,
                 $localidad,
-                $domicilio,
                 $tipoServicioID,
                 $tipoServicio,
-                $estacionID,
-                $estacion,
-                $tipoServiGeneralID,
-                $tipoServiGeneral,
 
                 $telefonoAgencia,
                 $telefonoFijoAgencia,
@@ -173,7 +170,6 @@ class ControladorFestivales
                 $webAgencia,
                 $otroAgencia,
 
-                $domicilioID,
                 $idtelefonoAgencia,
                 $idtelefonoFijoAgencia,
                 $idcorreoAgencia,
@@ -188,13 +184,14 @@ class ControladorFestivales
 
 
 
-            header("Location:index2.php?controlador=festivales&accion=inicio");
+            // header("Location:?controlador=festivales&accion=inicio");
+            echo "<script>location.href='index2.php?controlador=festivales&accion=inicio';</script>";
         }
 
 
         /*----------BUSCA LOS ID Y LOS PONE EN EL FORMULARIO----------*/
 
-        $contactosDeagencia = new ContactosAgencia();
+        $contactosDeagencia = new Contactos();
 
         $contactosDeagencia1 = new ContactosInfo();
 
@@ -222,16 +219,17 @@ class ControladorFestivales
     {
         //print_r($_GET);
 
-        $idServigeneralBorrar = $_GET["id"];
+        $id = $_GET["id"];
         $id_direccion = $_GET['idDireccion'];
 
         $borrarAgencias = new FestivalesModelo();
 
-        $buscarIDBorrado = $borrarAgencias->consultarID($idServigeneralBorrar);
+        $buscarIDBorrado = $borrarAgencias->consultarID($id);
 
-        $borrado = $borrarAgencias->borrar($idServigeneralBorrar, $id_direccion);
+        $borrado = $borrarAgencias->borrar($id, $id_direccion);
 
-        header("Location:index2.php?controlador=festivales&accion=inicio");
+        // header("Location:index2.php?controlador=festivales&accion=inicio");
+        echo "<script>location.href='index2.php?controlador=festivales&accion=inicio';</script>";
     }
 
     public function info()

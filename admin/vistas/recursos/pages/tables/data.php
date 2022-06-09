@@ -7,26 +7,21 @@ include_once("../../../../conexion.php");
 
 $bd = BD::crearInstancia();
 
-$sql = $bd->query("SELECT a.id_alojamientos, l.nombre_localidad, a.descripcion_alojamientos,
-ta.descripcion_tipo_alojamiento, d.calle_direccion, sa.cantidad_total_hab,
-sa.cantidad_plazas, a.cuit_alojamiento, a.fecha_edit_alojamiento
-FROM alojamientos a
-INNER JOIN contacto c ON c.rela_alojamiento_contacto = a.id_alojamientos 
-INNER JOIN direccion d ON d.id_direccion = a.rela_alojamiento_direccion
+$sql = $bd->query("SELECT `id_servicios_generales`, `nombre_servicio_general`, `idoneo_servicio_general`,ts.descripcion_servicio, tl.descripcion_lugar,l.nombre_localidad, d.calle_direccion
+FROM `servicios_generales` sg
+INNER JOIN direccion d ON d.id_direccion = sg.rela_direccion
 INNER JOIN localidad l ON l.id_localidad = d.rela_localidad_direccion
-INNER JOIN tipo_alojamiento ta ON ta.id_tipo_alojamiento = a.rela_tipo_alojamiento_aloja
-INNER JOIN servicios_alojamiento sa ON sa.id_servicio_alojamiento = a.rela_aloja_servicios
-WHERE c.rela_tipo_contacto_cont = 2 OR c.rela_tipo_contacto_cont = 9
-GROUP BY a.id_alojamientos;");
+INNER JOIN tipo_lugar tl on tl.id_tipo_lugar = sg.rela_tipo_lugar
+INNER JOIN tipo_de_servicio ts on ts.id_tipo_servicio = sg.rela_tipo_servicio
+WHERE sg.rela_tipo_lugar = 3");
 
 $sql->execute();
 
 //$cantidadAlojamiento = $sqlestadistica->fetchAll(PDO::FETCH_OBJ);
 
-$sqlContactos = $bd->query("SELECT a.id_alojamientos, c.descripcion_contacto, c.rela_tipo_contacto_cont FROM alojamientos a
-INNER JOIN contacto c ON c.rela_alojamiento_contacto = a.id_alojamientos 
-INNER JOIN direccion d on d.id_direccion = a.rela_alojamiento_direccion
-INNER JOIN localidad l on l.id_localidad = d.rela_localidad_direccion 
+$sqlContactos = $bd->query("SELECT sg.id_servicios_generales, c.descripcion_contacto, c.rela_tipo_contacto_cont 
+FROM servicios_generales sg
+INNER JOIN contacto c ON c.rela_servicios_generales = sg.id_servicios_generales
 WHERE (c.rela_tipo_contacto_cont = 2 OR c.rela_tipo_contacto_cont = 9)");
 
 $sqlContactos->execute();
@@ -60,7 +55,7 @@ while ($filas = $sqlContactos->fetch(PDO::FETCH_ASSOC)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ministerio de Turismo | Alojamientos</title>
+    <title>Ministerio de Turismo | Camping</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -72,6 +67,13 @@ while ($filas = $sqlContactos->fetch(PDO::FETCH_ASSOC)) {
     <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+
+    <style>
+        .resaltar {
+            background-color: yellow;
+            color: black;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -84,7 +86,7 @@ while ($filas = $sqlContactos->fetch(PDO::FETCH_ASSOC)) {
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="../../index3.html" class="nav-link">Inicio</a>
+                    <a href="#" class="nav-link">Inicio</a>
                 </li>
             </ul>
 
@@ -126,9 +128,9 @@ while ($filas = $sqlContactos->fetch(PDO::FETCH_ASSOC)) {
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="../../index3.html" class="brand-link">
+            <a href="#" class="brand-link">
                 <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">Min</span>
+                <span class="brand-text font-weight-light">Ministerio</span>
             </a>
 
             <!-- Sidebar -->
@@ -139,7 +141,7 @@ while ($filas = $sqlContactos->fetch(PDO::FETCH_ASSOC)) {
                         <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block"></a>
+                        <a href="#" class="d-block">david</a>
                     </div>
                 </div>
 
@@ -156,10 +158,9 @@ while ($filas = $sqlContactos->fetch(PDO::FETCH_ASSOC)) {
                 </div>
 
                 <!-- Sidebar Menu -->
-                <nav class="mt-2">
+                <!-- <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -191,7 +192,7 @@ while ($filas = $sqlContactos->fetch(PDO::FETCH_ASSOC)) {
                         </li>
 
                     </ul>
-                </nav>
+                </nav> -->
                 <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->
@@ -232,39 +233,38 @@ while ($filas = $sqlContactos->fetch(PDO::FETCH_ASSOC)) {
                                         <thead>
                                             <tr>
                                                 <th>Localidad</th>
-                                                <th>Denominación</th>
-                                                <th>Tipología</th>
+                                                <th>Nombre</th>
+                                                <th>Idoneo</th>
                                                 <th>Dirección</th>
+                                                <th>Tipo de servicio</th>
                                                 <th>Celular</th>
                                                 <th>Telefono</th>
-                                                <th>Habitaciones</th>
-                                                <th>Plazas</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php foreach ($listaAlojamientos as $alojamiento) : ?>
                                                 <tr>
                                                     <td><?= $alojamiento['nombre_localidad'] ?></td>
-                                                    <td><?= $alojamiento['descripcion_alojamientos'] ?></td>
-                                                    <td><?= $alojamiento['descripcion_tipo_alojamiento'] ?></td>
+                                                    <td><?= $alojamiento['nombre_servicio_general'] ?></td>
+                                                    <td><?= $alojamiento['idoneo_servicio_general'] ?></td>
                                                     <td><?= $alojamiento['calle_direccion'] ?></td>
+                                                    <td><?= $alojamiento['descripcion_servicio'] ?></td>
 
                                                     <!-- <td><?php //($alojamiento['cuit_alojamiento'] == 0 ) ? '' : $alojamiento['cuit_alojamiento']; 
                                                                 ?></td> -->
                                                     <td><?php
                                                         foreach ($listaContacto as $contacto) :
-                                                            echo ($alojamiento['id_alojamientos'] == $contacto['id_alojamientos'] && $contacto['rela_tipo_contacto_cont'] == 2) ? $contacto['descripcion_contacto'] . '   ' : '';
+                                                            echo ($alojamiento['id_servicios_generales'] == $contacto['id_servicios_generales'] && $contacto['rela_tipo_contacto_cont'] == 2) ? $contacto['descripcion_contacto'] . '   ' : '';
                                                         endforeach;
                                                         ?>
                                                     </td>
                                                     <td><?php
                                                         foreach ($listaContacto as $contacto) :
-                                                            echo ($alojamiento['id_alojamientos'] == $contacto['id_alojamientos'] && $contacto['rela_tipo_contacto_cont'] == 9) ? $contacto['descripcion_contacto'] . '   ' : '';
+                                                            echo ($alojamiento['id_servicios_generales'] == $contacto['id_servicios_generales'] && $contacto['rela_tipo_contacto_cont'] == 9) ? $contacto['descripcion_contacto'] . '   ' : '';
                                                         endforeach;
                                                         ?>
                                                     </td>
-                                                    <td><?= $alojamiento['cantidad_total_hab'] ?></td>
-                                                    <td><?= $alojamiento['cantidad_plazas'] ?></td>
+
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>
@@ -342,6 +342,32 @@ while ($filas = $sqlContactos->fetch(PDO::FETCH_ASSOC)) {
                 "responsive": true,
             });
         });
+
+
+        // Este codigo se utiliza para eliminar columnas de la tabla
+
+
+        // $(document).ready(() => {
+        //     $("th").hover(
+        //         function() {
+        //             let indiceColumna = $(this).parent().children().index(this);
+        //             $(this).addClass("resaltar");
+
+        //             $(`table td:nth-child(${indiceColumna + 1})`).addClass("resaltar");
+        //         },
+        //         function() {
+        //             $("table tr").children().removeClass("resaltar");
+        //         }
+        //     );
+
+        //     $("th").click(function() {
+        //         $(this).hide();
+
+        //         let indiceColumna = $(this).parent().children().index(this);
+
+        //         $(`table td:nth-child(${indiceColumna + 1})`).hide();
+        //     });
+        // });
     </script>
 </body>
 

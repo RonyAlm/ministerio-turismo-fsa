@@ -40,6 +40,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="vistas/recursos/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- SweetAlert2 -->
   <link rel="stylesheet" href="vistas/recursos/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <!-- BS Stepper -->
+  <link rel="stylesheet" href="vistas/recursos/plugins/bs-stepper/css/bs-stepper.min.css">
   <!-- fullCalendar -->
   <link rel="stylesheet" href="vistas/recursos/plugins/fullcalendar1/lib/main.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
@@ -48,6 +50,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="vistas/recursos/dist/transporte.css">
   <!-- Favicon -->
   <link rel="icon" href="vistas/recursos/dist/img/favicon.png">
+
+  <style>
+    .resaltar {
+      background-color: yellow;
+      color: black;
+    }
+  </style>
 
 
 </head>
@@ -124,6 +133,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="container-fluid">
           <div class="row">
             <div class="col-12">
+              <!-- Salto de linea -->
+              <br>
               <?php include_once("ruteador.php"); ?>
             </div>
 
@@ -406,6 +417,42 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 </ul>
               </li>
+
+              <!-- Personal -->
+            <?php }
+              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3 and $usuario == "monica") { ?>
+              <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'menu-open' : '' ?>">
+                <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'active' : '' ?>">
+                  <i class="nav-icon fas fa-table"></i>
+                  <p>
+                    Personal
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="?controlador=personal&accion=inicio" class="nav-link 
+                    <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'active' : '' ?>">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Registro</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="?controlador=personal&accion=inicio" class="nav-link 
+                    <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? '' : '' ?>">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Asistencia</p>
+                    </a>
+                  </li>
+                  <!-- <li class="nav-item">
+                    <a href="?controlador=agencias&accion=inicio" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Aviones</p>
+                    </a>
+                  </li> -->
+
+                </ul>
+              </li>
             <?php } ?>
           </ul>
         </nav>
@@ -463,6 +510,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="vistas/recursos/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
   <script src="vistas/recursos/plugins/datatables-buttons/js/buttons.print.min.js"></script>
   <script src="vistas/recursos/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+  <!-- BS-Stepper -->
+  <script src="vistas/recursos/plugins/bs-stepper/js/bs-stepper.min.js"></script>
   <!-- SweetAlert2 -->
   <script src="vistas/recursos/plugins/sweetalert2/sweetalert2.min.js"></script>
   <!-- fullCalendar 5.10.1 -->
@@ -478,7 +527,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="vistas/recursos/script/validacion_prestador.js"></script>
   <script src="vistas/recursos/script/filas_contacto.js"></script>
   <script src="vistas/recursos/script/agregarTransporte.js"></script>
+  <script src="vistas/recursos/script/traerLocalidades.js"></script>
   <script src="vistas/recursos/script/selectDinamico.js"></script>
+  <script src="vistas/recursos/script/formularios.js"></script>
+
 
 
 

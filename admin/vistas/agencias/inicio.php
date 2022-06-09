@@ -73,13 +73,39 @@ $rol_id = $_SESSION['rol_id'];
 
           <?php foreach ($tablaAgencia as $agencia) { ?>
 
-            <tr>
+            <tr align="center">
 
               <td><?php echo $agencia["nombre_localidad"]; ?></td>
               <td><?php echo $agencia["descripcion_agencias"]; ?></td>
               <td><?php echo $agencia["descripcion_contacto"]; ?></td>
               <td><?php echo $agencia["calle_direccion"]; ?></td>
-              <td><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
+              <?php if ($agencia["descripcion_tipo_estado"] == "Activo") { ?>
+                <td class="badge badge-success"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
+              <?php } ?>
+              <?php if ($agencia["descripcion_tipo_estado"] == "Falta Verificar") { ?>
+                <td class="badge badge-warning"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
+              <?php } ?>
+              <?php if ($agencia["descripcion_tipo_estado"] == "Baja") { ?>
+                <td class="badge badge-danger"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
+              <?php } ?>
+              <?php if ($agencia["descripcion_tipo_estado"] == "Centro de aislamiento") { ?>
+                <td class="badge badge-secondary"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
+              <?php } ?>
+              <?php if ($agencia["descripcion_tipo_estado"] == "Cambio de domicilio") { ?>
+                <td class="badge bg-lime"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
+              <?php } ?>
+              <?php if ($agencia["descripcion_tipo_estado"] == "Se desconoce situación") { ?>
+                <td class="badge bg-orange"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
+              <?php } ?>
+              <?php if ($agencia["descripcion_tipo_estado"] == "Cierre temporario") { ?>
+                <td class="badge bg-purple"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
+              <?php } ?>
+              <?php if ($agencia["descripcion_tipo_estado"] == "No Fiscalizadas") { ?>
+                <td class="badge bg-navy"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
+              <?php } ?>
+              <?php if ($agencia["descripcion_tipo_estado"] == "Domicilio Virtual") { ?>
+                <td class="badge bg-info"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
+              <?php } ?>
 
 
 

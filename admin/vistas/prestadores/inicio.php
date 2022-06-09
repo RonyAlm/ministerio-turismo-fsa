@@ -95,7 +95,7 @@ $rol_id = $_SESSION['rol_id'];
             <th>Institución / Emprendimiento</th>
             <th>Contacto</th>
             <th>Dirección</th>
-            <th>Institución</th>
+            <th>Estado</th>
             <th>Acción</th>
           </tr>
         </thead>
@@ -111,7 +111,33 @@ $rol_id = $_SESSION['rol_id'];
               <td><?php echo $prestadore["institucion_prestador"]; ?></td>
               <td><?php echo $prestadore["descripcion_contacto"]; ?></td>
               <td><?php echo $prestadore["calle_direccion"]; ?></td>
-              <td><?php echo $prestadore["descripcion_tipo_estado"]; ?></td>
+              <?php if ($prestadore["descripcion_tipo_estado"] == "Activo") { ?>
+                <td class="badge badge-success"><?php echo $prestadore["descripcion_tipo_estado"]; ?></td>
+              <?php } ?>
+              <?php if ($prestadore["descripcion_tipo_estado"] == "Falta Verificar") { ?>
+                <td class="badge badge-warning"><?php echo $prestadore["descripcion_tipo_estado"]; ?></td>
+              <?php } ?>
+              <?php if ($prestadore["descripcion_tipo_estado"] == "Baja") { ?>
+                <td class="badge badge-danger"><?php echo $prestadore["descripcion_tipo_estado"]; ?></td>
+              <?php } ?>
+              <?php if ($prestadore["descripcion_tipo_estado"] == "Centro de aislamiento") { ?>
+                <td class="badge badge-secondary"><?php echo $prestadore["descripcion_tipo_estado"]; ?></td>
+              <?php } ?>
+              <?php if ($prestadore["descripcion_tipo_estado"] == "Cambio de domicilio") { ?>
+                <td class="badge bg-lime"><?php echo $prestadore["descripcion_tipo_estado"]; ?></td>
+              <?php } ?>
+              <?php if ($prestadore["descripcion_tipo_estado"] == "Se desconoce situación") { ?>
+                <td class="badge bg-orange"><?php echo $prestadore["descripcion_tipo_estado"]; ?></td>
+              <?php } ?>
+              <?php if ($prestadore["descripcion_tipo_estado"] == "Cierre temporario") { ?>
+                <td class="badge bg-purple"><?php echo $prestadore["descripcion_tipo_estado"]; ?></td>
+              <?php } ?>
+              <?php if ($prestadore["descripcion_tipo_estado"] == "No Fiscalizadas") { ?>
+                <td class="badge bg-navy"><?php echo $prestadore["descripcion_tipo_estado"]; ?></td>
+              <?php } ?>
+              <?php if ($prestadore["descripcion_tipo_estado"] == "Domicilio Virtual") { ?>
+                <td class="badge bg-info"><?php echo $prestadore["descripcion_tipo_estado"]; ?></td>
+              <?php } ?>
 
 
 

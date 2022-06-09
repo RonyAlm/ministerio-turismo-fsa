@@ -18,7 +18,7 @@ $rol_id = $_SESSION['rol_id'];
         </div>
     <?php } ?>
 
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-md-3 col-sm-6 col-12">
             <div class="info-box">
                 <span class="info-box-icon bg-info"><i class="fas fa-hotel"></i></span>
@@ -29,12 +29,12 @@ $rol_id = $_SESSION['rol_id'];
                         <span class="info-box-text">Cantidad Total: <?php echo $estadistica->conteo; ?> </span>
                     <?php } ?>
                 </div>
-                <!-- /.info-box-content -->
+               
             </div>
-            <!-- /.info-box -->
+           
         </div>
 
-    </div>
+    </div> -->
 
 
     <div class="card-body">
@@ -53,22 +53,34 @@ $rol_id = $_SESSION['rol_id'];
                 <tbody>
 
 
-                    <?php foreach ($tablaServigeneral as $servigeneral) { ?>
+                    <?php foreach ($tabla as $festival) { ?>
 
                         <tr>
-                            <td><?php echo $servigeneral["nombre_localidad"]; ?></td>
-                            <td><?php echo $servigeneral["nombre_servicio_general"]; ?></td>
-                            <td><?php echo $servigeneral["descripcion_contacto"]; ?></td>
+                            <td><?php echo $festival["nombre_localidad"]; ?></td>
+                            <td><?php echo $festival["nombre_festival"]; ?></td>
+
+
+
+                            <td>
+                                <?php
+                                    foreach ($tablaContacto as $contacto):
+                                        if ($festival['id_festivales'] == $contacto['rela_festivales']) :
+                                            echo $contacto['descripcion_contacto'] . '   ';
+                                            break; // Para que solo muestre un número
+                                        endif;       
+                                    endforeach;
+                                ?>
+                            </td>
 
 
 
                             <td>
                                 <div class="btn-group" role="group" aria-label="">
 
-                                    <a id="btn1" href="?controlador=festivales&accion=info&id=<?php echo $servigeneral["id_servicios_generales"]; ?>" class="btn btn-warning">Más Info</a>
+                                    <a id="btn1" href="?controlador=festivales&accion=info&id=<?php echo $festival["id_festivales"]; ?>" class="btn btn-warning">Más Info</a>
                                     <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") { ?>
-                                        <a href="?controlador=festivales&accion=editar&id=<?php echo $servigeneral["id_servicios_generales"]; ?>" class="btn btn-info">Editar</a>
-                                        <a href="?controlador=festivales&accion=borrar&id=<?php echo $servigeneral["id_servicios_generales"]; ?> &idDireccion=<?php echo $servigeneral["id_direccion"]; ?>" class="btn btn-danger">Borrar</a>
+                                        <a href="?controlador=festivales&accion=editar&id=<?php echo $festival["id_festivales"]; ?>" class="btn btn-info">Editar</a>
+                                        <a href="?controlador=festivales&accion=borrar&id=<?php echo $festival["id_festivales"]; ?> &idDireccion=<?php echo $festival["id_direccion"]; ?>" class="btn btn-danger">Borrar</a>
 
                                     <?php } ?>
                                 </div>

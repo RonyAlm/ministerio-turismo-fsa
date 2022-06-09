@@ -6,6 +6,8 @@ class TransporteModelo
     public $listaTransporte;
     public $listaTransporteID;
     public $listaBuscar;
+    public $listaProvincias;
+    
 
 
     public function __construct()
@@ -13,6 +15,7 @@ class TransporteModelo
         $this->listaTransporte = array();
         $this->listaTransporteID = array();
         $this->listaBuscar = array();
+        $this->listaProvincias = array();
     }
 
     public function consultar()
@@ -350,7 +353,12 @@ class TransporteModelo
 
         $sqlLocalidad->execute();
 
-        return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
+        //return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
+
+        while ($filas = $sqlLocalidad->fetch(PDO::FETCH_ASSOC)) {
+            $this->listaProvincias[] = $filas;
+        }
+        return $this->listaProvincias;
     }
 
     public function buscarSelectEstacion()
