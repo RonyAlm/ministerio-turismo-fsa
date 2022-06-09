@@ -29,58 +29,136 @@
 <!-- Main content -->
 <!-- <form action="" method="post" enctype="multipart/form-data"> -->
 <section class="content">
-  <form action="">
-    <div class="container-fluid">
-      <div class="row">
 
-        <div class="col-md-3">
-          <!-- Profile Image -->
-          <div class="card card-primary card-outline">
-            <div class="card-body box-profile">
-              <div class="text-center">
-                <img class="profile-user-img img-fluid img-circle" src="vistas/recursos/dist/img/user1-128x128.jpg" alt="User profile picture">
-              </div>
+  <div class="container-fluid">
+    <div class="row">
 
-              <h3 class="profile-username text-center">Marcela Saguier Dr.</h3>
-
-              <p class="text-muted text-center">Abogada Penalista</p>
-
+      <div class="col-md-3">
+        <!-- Profile Image -->
+        <div class="card card-primary card-outline">
+          <div class="card-body box-profile">
+            <div class="text-center">
+              <img class="profile-user-img img-fluid img-circle" src="vistas/recursos/dist/img/user1-128x128.jpg" alt="User profile picture">
             </div>
-            <!-- /.card-body -->
+
+            <h3 class="profile-username text-center">Marcela Saguier Dr.</h3>
+
+            <p class="text-muted text-center">Abogada Penalista</p>
+
           </div>
+          <!-- /.card-body -->
         </div>
-        <!-- /.col -->
-        <div class="col-md-9">
-          <div class="card">
+      </div>
+      <!-- /.col -->
+      <div class="col-md-9">
+        <div class="card">
+          <form action="">
             <div class="row">
               <div class="col-md-12">
                 <div class="card card-default">
                   <div class="card-header">
-                    <h3 class="card-title">Registro del PERSONAL</h3>
+                    <h3 class="card-title">bs-stepper</h3>
                   </div>
                   <div class="card-body p-0">
-                    <div class="bs-stepper">
-                      <div class="bs-stepper-header" role="tablist">
-
-                        <div class="step" data-target="#logins-part">
-                          <button type="button" class="step-trigger" role="tab" aria-controls="logins-part" id="logins-part-trigger">
-                            <span class="bs-stepper-circle">1</span>
-                            <span class="bs-stepper-label">Personal</span>
-                          </button>
+                    <form action="">
+                      <div class="bs-stepper">
+                        <div class="bs-stepper-header" role="tablist">
+                          <!-- your steps here -->
+                          <div class="step" data-target="#logins-part">
+                            <button type="button" class="step-trigger" role="tab" aria-controls="logins-part" id="logins-part-trigger">
+                              <span class="bs-stepper-circle">1</span>
+                              <span class="bs-stepper-label">Personal</span>
+                            </button>
+                          </div>
+                          <div class="line"></div>
+                          <div class="step" data-target="#information-part">
+                            <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
+                              <span class="bs-stepper-circle">2</span>
+                              <span class="bs-stepper-label">Ministerio</span>
+                            </button>
+                          </div>
                         </div>
-                        <div class="line"></div>
-                        <div class="step" data-target="#information-part">
-                          <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
-                            <span class="bs-stepper-circle">2</span>
-                            <span class="bs-stepper-label">Laboral</span>
-                          </button>
+                        <div class="bs-stepper-content">
+                          <!-- your steps content here -->
+                          <div id="logins-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Email address</label>
+                              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" />
+                            </div>
+                            <div class="form-group row">
+                              <label for="inputName" class="col-sm-2 col-form-label">Nombre</label>
+                              <div class="col-sm-10">
+                                <input type="email" class="form-control" id="inputName" placeholder="Nombre">
+                              </div>
+                            </div>
+                            <button class="btn btn-primary" onclick="stepper.next()">
+                              Next
+                            </button>
+                          </div>
+
+
+                          <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
+                            <div class="form-group">
+                              <label for="exampleInputFile">File input</label>
+                              <div class="input-group">
+                                <div class="custom-file">
+                                  <input type="file" class="custom-file-input" id="exampleInputFile" />
+                                  <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                </div>
+                                <div class="input-group-append">
+                                  <span class="input-group-text">Upload</span>
+                                </div>
+                              </div>
+                            </div>
+                            <button class="btn btn-primary" onclick="stepper.previous()">
+                              Previous
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                              Submit
+                            </button>
+                          </div>
                         </div>
                       </div>
-                      <div class="bs-stepper-content">
+                    </form>
+                  </div>
 
+                </div>
+                <!-- /.card -->
+              </div>
+            </div>
+          </form>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card card-default">
+                <div class="card-header">
+                  <h3 class="card-title">bs-stepper</h3>
+                </div>
 
+                <div class="card-body p-0">
 
+                  <div class="bs-stepper">
+
+                    <div class="bs-stepper-header" role="tablist">
+                      <!-- your steps here -->
+                      <div class="step" data-target="#logins-part">
+                        <button type="button" class="step-trigger" role="tab" aria-controls="logins-part" id="logins-part-trigger">
+                          <span class="bs-stepper-circle">1</span>
+                          <span class="bs-stepper-label">Logins</span>
+                        </button>
+                      </div>
+                      <div class="line"></div>
+                      <div class="step" data-target="#information-part">
+                        <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
+                          <span class="bs-stepper-circle">2</span>
+                          <span class="bs-stepper-label">Various information</span>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="bs-stepper-content">
+                      <!-- your steps content here -->
+                      <form action="">
                         <div id="logins-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
+
                           <div class="form-group row">
                             <label for="inputName" class="col-sm-2 col-form-label">Nombre</label>
                             <div class="col-sm-10">
@@ -141,15 +219,11 @@
                               <input type="email" class="form-control" id="inputEmail" placeholder="Profesión">
                             </div>
                           </div>
-
-                          <button class="btn btn-primary" onclick="stepper.next()">Siguiente</button>
-
+                          <button class="btn btn-primary" onclick="stepper.next()">
+                            Next
+                          </button>
                         </div>
-
-                        <!-- PARTE 2 -->
-
                         <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
-
                           <div class="form-group row">
                             <label for="inputName" class="col-sm-2 col-form-label">Departamento</label>
                             <div class="col-sm-10">
@@ -192,31 +266,33 @@
                               <input type="text" class="form-control" id="inputName2" placeholder="Rol">
                             </div>
                           </div>
-
-                          <!-- <a href="?controlador=personal&accion=inicio" class="btn btn-danger">Cancelar</a> -->
-                          <button class="btn btn-primary" onclick="stepper.previous()">Atrás</button>
-                          <button type="submit" class="btn btn-primary">Cargar</button>
-
+                          <button class="btn btn-primary" onclick="stepper.previous()">
+                            Previous
+                          </button>
+                          <button type="submit" class="btn btn-primary">
+                            Submit
+                          </button>
                         </div>
-                        <!-- fin -->
-
-
-                      </div>
+                      </form>
                     </div>
-                  </div>
-                </div>
-                <!-- /.card -->
-              </div>
-              <!-- /.col -->
-            </div>
-            <!-- /.row -->
-          </div>
-          <!-- /.container-fluid -->
-        </div>
 
+                  </div>
+
+                </div>
+
+
+              </div>
+              <!-- /.card -->
+            </div>
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
       </div>
+
     </div>
-  </form>
+  </div>
+
 
 </section>
 
