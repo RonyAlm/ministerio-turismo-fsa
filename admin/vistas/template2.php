@@ -437,6 +437,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <p>Registro</p>
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a href="?controlador=personal&accion=inicio" class="nav-link 
+                    <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? '' : '' ?>">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Asistencia</p>
+                    </a>
+                  </li>
                   <!-- <li class="nav-item">
                     <a href="?controlador=agencias&accion=inicio" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>

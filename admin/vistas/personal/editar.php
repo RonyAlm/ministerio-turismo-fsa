@@ -68,147 +68,147 @@
 
               <!-- SETTINGS -->
 
-
-              <div class="active tab-pane" id="settings">
-                <form class="form-horizontal">
-                  <div class="form-group row">
-                    <label for="inputName" class="col-sm-2 col-form-label">Nombre</label>
-                    <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputName" placeholder="Nombre">
+              <form action="" method="POST">
+                <div class="active tab-pane" id="settings">
+                  <div class="form-horizontal">
+                    <div class="form-group row">
+                      <label for="" class="col-sm-2 col-form-label">Nombre</label>
+                      <div class="col-sm-10">
+                        <input type="" class="form-control" name="" id="" placeholder="Nombre">
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputEmail" class="col-sm-2 col-form-label">Apellido</label>
-                    <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputEmail" placeholder="Apellido">
+                    <div class="form-group row">
+                      <label for="" class="col-sm-2 col-form-label">Apellido</label>
+                      <div class="col-sm-10">
+                        <input type="" class="form-control" name="" id="" placeholder="Apellido">
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputName2" class="col-sm-2 col-form-label">Dirección</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputName2" placeholder="Dirección">
+                    <div class="form-group row">
+                      <label for="" class="col-sm-2 col-form-label">Dirección</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="" id="" placeholder="Dirección">
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputName2" class="col-sm-2 col-form-label">Localidad</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputName2" placeholder="Localidad">
+                    <div class="form-group row">
+                      <label for="" class="col-sm-2 col-form-label">Localidad</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="" id="" placeholder="Localidad">
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputSkills" class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputSkills" placeholder="Fecha de Nacimiento">
+                    <div class="form-group row">
+                      <label for="" class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="" id="" placeholder="Fecha de Nacimiento">
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputSkills" class="col-sm-2 col-form-label">Teléfono Celular</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputSkills" placeholder="Teléfono Celular">
+                    <div class="form-group row">
+                      <label for="" class="col-sm-2 col-form-label">Teléfono Celular</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="" id="" placeholder="Teléfono Celular">
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputSkills" class="col-sm-2 col-form-label">Teléfono Fijo</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputSkills" placeholder="Teléfono Fijo">
+                    <div class="form-group row">
+                      <label for="" class="col-sm-2 col-form-label">Teléfono Fijo</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="" id="" placeholder="Teléfono Fijo">
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputSkills" class="col-sm-2 col-form-label">Correo</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputSkills" placeholder="Correo">
+                    <div class="form-group row">
+                      <label for="" class="col-sm-2 col-form-label">Correo</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="" id="" placeholder="Correo">
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputName" class="col-sm-2 col-form-label">Educación</label>
-                    <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputName" placeholder="Educación">
+                    <div class="form-group row">
+                      <label for="" class="col-sm-2 col-form-label">Educación</label>
+                      <div class="col-sm-10">
+                        <input type="" class="form-control" name="" id="" placeholder="Educación">
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputEmail" class="col-sm-2 col-form-label">Profesión</label>
-                    <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputEmail" placeholder="Profesión">
+                    <div class="form-group row">
+                      <label for="" class="col-sm-2 col-form-label">Profesión</label>
+                      <div class="col-sm-10">
+                        <input type="" class="form-control" name="" id="" placeholder="Profesión">
+                      </div>
                     </div>
-                  </div>
-
-
-                  <div class="form-group row">
-                    <div class="offset-sm-2 col-sm-10">
-                      <button type="submit" class="btn btn-danger">Editar</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
 
 
-              <!-- MINISTERIO -->
+                    <div class="form-group row">
+                      <div class="offset-sm-2 col-sm-10">
+                        <button type="submit" class="btn btn-danger">Editar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
+                <!-- MINISTERIO -->
 
-              <div class="tab-pane" id="ministerio">
-                <form class="form-horizontal">
-                  <div class="form-group row">
-                    <label for="inputName" class="col-sm-2 col-form-label">Departamento</label>
-                    <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputName" placeholder="Departamento">
+                <div class="tab-pane" id="ministerio">
+                  <div class="form-horizontal">
+                    <div class="form-group row">
+                      <label for="" class="col-sm-2 col-form-label">Departamento</label>
+                      <div class="col-sm-10">
+                        <input type="" class="form-control" name="" id="" placeholder="Departamento">
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputEmail" class="col-sm-2 col-form-label">Área</label>
-                    <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputEmail" placeholder="Área">
+                    <div class="form-group row">
+                      <label for="" class="col-sm-2 col-form-label">Área</label>
+                      <div class="col-sm-10">
+                        <input type="" class="form-control" name="" id="" placeholder="Área">
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputName2" class="col-sm-2 col-form-label">Nº de Legajo</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputName2" placeholder="Nº de Legajo">
+                    <div class="form-group row">
+                      <label for="" class="col-sm-2 col-form-label">Nº de Legajo</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="" id="" placeholder="Nº de Legajo">
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputName2" class="col-sm-2 col-form-label">Nº de Expediente</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputName2" placeholder="Nº de Expediente">
+                    <div class="form-group row">
+                      <label for="" class="col-sm-2 col-form-label">Nº de Expediente</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="" id="" placeholder="Nº de Expediente">
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputName2" class="col-sm-2 col-form-label">Tipo de Contrato</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputName2" placeholder="Tipo de Contrato">
+                    <div class="form-group row">
+                      <label for="" class="col-sm-2 col-form-label">Tipo de Contrato</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="" id="" placeholder="Tipo de Contrato">
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputName2" class="col-sm-2 col-form-label">Cargo</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputName2" placeholder="Cargo">
+                    <div class="form-group row">
+                      <label for="" class="col-sm-2 col-form-label">Cargo</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="" id="" placeholder="Cargo">
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputName2" class="col-sm-2 col-form-label">Rol</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputName2" placeholder="Rol">
+                    <div class="form-group row">
+                      <label for="" class="col-sm-2 col-form-label">Rol</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="" id="" placeholder="Rol">
+                      </div>
                     </div>
-                  </div>
 
 
 
-                  <div class="form-group row">
-                    <div class="offset-sm-2 col-sm-10">
-                      <button type="submit" class="btn btn-danger">Editar</button>
+                    <div class="form-group row">
+                      <div class="offset-sm-2 col-sm-10">
+                        <button type="submit" class="btn btn-danger">Editar</button>
+                      </div>
                     </div>
                   </div>
-                </form>
-              </div>
-              <!-- /.tab-pane -->
+                </div>
+              </form>
             </div>
-            <!-- /.tab-content -->
-          </div><!-- /.card-body -->
-        </div>
-        <!-- /.card -->
+            <!-- /.tab-pane -->
+          </div>
+          <!-- /.tab-content -->
+        </div><!-- /.card-body -->
       </div>
-      <!-- /.col -->
+      <!-- /.card -->
     </div>
-    <!-- /.row -->
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
   </div><!-- /.container-fluid -->
 </section>
 <!-- /.content -->
