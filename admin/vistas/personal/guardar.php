@@ -101,16 +101,19 @@
                         <input type="date" class="form-control" name="fecha" id="fecha" placeholder="Fecha de Nacimiento">
                       </div>
                     </div>
-                    <div class="form-group row">
-                      <label for="" class="col-sm-2 col-form-label">Teléfono Celular</label>
+                    <div class="form-group row" id="celu">
+                      <label for="telefonoAgencia" class="col-sm-2 col-form-label">Teléfono Celular</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" name="" id="" placeholder="Teléfono Celular">
+                        <input type="number" id="telefonoAgencia" name="telefonoAgencia[]" class="form-control">
+                        <div class="btn-der">
+                          <button id="adicional" name="adicional" type="button" class="btn btn-warning"> Más + </button>
+                        </div>
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label for="" class="col-sm-2 col-form-label">Teléfono Fijo</label>
+                      <label for="telefonoFijo" class="col-sm-2 col-form-label">Teléfono Fijo</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" name="" id="" placeholder="Teléfono Fijo">
+                        <input type="text" class="form-control" name="telefonoFijo" id="telefonoFijo" placeholder="Teléfono Fijo">
                       </div>
                     </div>
                     <div class="form-group row">

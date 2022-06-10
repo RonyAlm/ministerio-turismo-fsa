@@ -268,20 +268,63 @@ class ControladorPersonal
 
         $buscarSelectLocalidad = $select_tipo_agencia->buscarSelectLocalidad();
 
-        // $agenciaInfo = new PersonalModelo();
+        if ($_POST) {
+            //print_r($_POST);
 
-        // $agenciasInfomacion = $agenciaInfo->buscar($id_agencia);
+            $insertar = new PersonalModelo();
 
 
-        // $contactosDeagencia = new ContactosInfo();
-        // $agenciaTelefonoInfo = $contactosDeagencia->consultarTelefonos($id_agencia);
-        // $agenciaTelefonoFijo = $contactosDeagencia->consultarTelefonosFijos($id_agencia);
-        // $agenciaCorreo = $contactosDeagencia->consultarCorreo($id_agencia);
-        // $agenciaFacebook = $contactosDeagencia->consultarFacebook($id_agencia);
-        // $agenciaInstagram = $contactosDeagencia->consultarInstagram($id_agencia);
-        // $agenciaTwitter = $contactosDeagencia->consultarTwitter($id_agencia);
-        // $agenciaWeb = $contactosDeagencia->consultarWeb($id_agencia);
-        // $agenciaOtro = $contactosDeagencia->consultarOtro($id_agencia);
+            $descripcion_agencias = $_POST['nombreAgencia'];
+            $matricula_agencia = $_POST['matriculaAgencia'];
+            $legajo_agencia = $_POST['legajoAgencia'];
+            $cuit_agencia = $_POST['cuitAgencia'];
+            $categoria_agencia = $_POST['categoriaAgencia'];
+            $idoneoAgencia = $_POST['idoneoAgencia'];
+
+            $razonsocial = $_POST['razonsocialAgencia'];
+
+            $rela_localidad_direccion = $_POST['localidadAgencia'];
+            $calle_direccion = $_POST['domicilioAgencia'];
+
+            $telefonoAgencia = $_POST['telefonoAgencia'];
+            $telefonoFijoAgencia = $_POST['telefonoFijoAgencia'];
+            $correoAgencia = $_POST['correoAgencia'];
+            $facebookAgencia = $_POST['facebookAgencia'];
+            $instagramAgencia = $_POST['instagramAgencia'];
+            $twitterAgencia = $_POST['twitterAgencia'];
+            $webAgencia = $_POST['webAgencia'];
+            $otroAgencia = $_POST['otroAgencia'];
+
+            $estadoAgencia = $_POST['estadoAgencia'];
+
+
+
+
+
+            $insertarAgencia->guardar(
+                $descripcion_agencias,
+                $matricula_agencia,
+                $legajo_agencia,
+                $cuit_agencia,
+                $categoria_agencia,
+                $rela_localidad_direccion,
+                $calle_direccion,
+                $razonsocial,
+                $telefonoAgencia,
+                $telefonoFijoAgencia,
+                $correoAgencia,
+                $facebookAgencia,
+                $instagramAgencia,
+                $twitterAgencia,
+                $webAgencia,
+                $otroAgencia,
+                $estadoAgencia,
+                $idoneoAgencia
+            );
+
+
+            header("Location:index2.php?controlador=agencias&accion=inicio");
+        }
 
         include_once("vistas/personal/guardar.php");
     }
