@@ -52,143 +52,154 @@
       <!-- /.col -->
 
       <div class="col-md-9">
-        <form action="" method="$_POST">
+        <form action="" method="POST">
           <div class="card">
             <div class="card-header p-2">
               <ul class="nav nav-pills">
                 <li class="nav-item"><a class="nav-link active" href="#personal" data-toggle="tab">Personal</a></li>
                 <li class="nav-item"><a class="nav-link" href="#ministerio" data-toggle="tab">Ministerio</a></li>
-
               </ul>
             </div><!-- /.card-header -->
             <div class="card-body">
               <div class="tab-content">
 
                 <div class="active tab-pane" id="personal">
-                  <form class="form-horizontal">
-                    <div class="form-group row">
-                      <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
-                      <div class="col-sm-10">
-                        <input type="" class="form-control" name="nombre" id="nombre" placeholder="Nombre">
+                  <!-- <form class="form-horizontal"> -->
+                  <div class="form-group row">
+                    <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+                    <div class="col-sm-10">
+                      <input type="" class="form-control" name="nombre" id="nombre" placeholder="Nombre">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="apellido" class="col-sm-2 col-form-label">Apellido</label>
+                    <div class="col-sm-10">
+                      <input type="" class="form-control" name="apellido" id="apellido" placeholder="Apellido">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="cuil" class="col-sm-2 col-form-label">Cuil</label>
+                    <div class="col-sm-10">
+                      <input type="number" class="form-control" name="cuil" id="cuil" placeholder="99-99.999.99-99">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="direccion" class="col-sm-2 col-form-label">Dirección</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="direccion" id="direccion" placeholder="Dirección">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="localidad" class="col-sm-2 col-form-label">Localidad</label>
+                    <div class="col-sm-10">
+                      <select id="localidad" name="localidad" class="form-control custom-select" required>
+                        <option value="0" selected disabled>Seleccionar la localidad</option>
+                        <?php foreach ($buscarSelectLocalidad as $k) : ?>
+                          <option value="<?php echo $k->id_localidad; ?>"> <?php echo $k->nombre_localidad; ?></option>
+                        <?php endforeach; ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="fecha" class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
+                    <div class="col-sm-10">
+                      <input type="date" class="form-control" name="fecha" id="fecha" placeholder="Fecha de Nacimiento">
+                    </div>
+                  </div>
+                  <div class="form-group row" id="celu">
+                    <label for="telefonoCel" class="col-sm-2 col-form-label">Teléfono Celular</label>
+                    <div class="col-sm-10">
+                      <input type="number" id="telefonoCel" name="telefonoCel[]" class="form-control">
+                      <div class="btn-der">
+                        <button id="adicional" name="adicional" type="button" class="btn btn-warning"> Más + </button>
                       </div>
                     </div>
-                    <div class="form-group row">
-                      <label for="apellido" class="col-sm-2 col-form-label">Apellido</label>
-                      <div class="col-sm-10">
-                        <input type="" class="form-control" name="apellido" id="apellido" placeholder="Apellido">
-                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="telefonoFijo" class="col-sm-2 col-form-label">Teléfono Fijo</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="telefonoFijo" id="telefonoFijo" placeholder="Teléfono Fijo">
                     </div>
-                    <div class="form-group row">
-                      <label for="direccion" class="col-sm-2 col-form-label">Dirección</label>
-                      <div class="col-sm-10">
-                        <input type="text" class="form-control" name="direccion" id="direccion" placeholder="Dirección">
-                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="correo" class="col-sm-2 col-form-label">Correo</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="correo" id="correo" placeholder="Correo">
                     </div>
-                    <div class="form-group row">
-                      <label for="localidad" class="col-sm-2 col-form-label">Localidad</label>
-                      <div class="col-sm-10">
-                        <select id="localidad" name="localidad" class="form-control custom-select" required>
-                          <option value="0" selected disabled>Seleccionar la localidad</option>
-                          <?php foreach ($buscarSelectLocalidad as $k) : ?>
-                            <option value="<?php echo $k->id_localidad; ?>"> <?php echo $k->nombre_localidad; ?></option>
-                          <?php endforeach; ?>
-                        </select>
-                      </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="educacion" class="col-sm-2 col-form-label">Educacion</label>
+                    <div class="col-sm-10">
+                      <select id="educacion" name="educacion" class="form-control custom-select" required>
+                        <option value="0" selected disabled>Seleccionar educacion</option>
+                        <?php foreach ($buscarSelectEstudios as $k) : ?>
+                          <option value="<?php echo $k->id_educacion; ?>"> <?php echo $k->descripcion; ?></option>
+                        <?php endforeach; ?>
+                      </select>
                     </div>
-                    <div class="form-group row">
-                      <label for="fecha" class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
-                      <div class="col-sm-10">
-                        <input type="date" class="form-control" name="fecha" id="fecha" placeholder="Fecha de Nacimiento">
-                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="profesion" class="col-sm-2 col-form-label">Profesión</label>
+                    <div class="col-sm-10">
+                      <input type="" class="form-control" name="profesion" id="profesion" placeholder="Profesión">
                     </div>
-                    <div class="form-group row" id="celu">
-                      <label for="telefonoAgencia" class="col-sm-2 col-form-label">Teléfono Celular</label>
-                      <div class="col-sm-10">
-                        <input type="number" id="telefonoAgencia" name="telefonoAgencia[]" class="form-control">
-                        <div class="btn-der">
-                          <button id="adicional" name="adicional" type="button" class="btn btn-warning"> Más + </button>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label for="telefonoFijo" class="col-sm-2 col-form-label">Teléfono Fijo</label>
-                      <div class="col-sm-10">
-                        <input type="text" class="form-control" name="telefonoFijo" id="telefonoFijo" placeholder="Teléfono Fijo">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label for="correo" class="col-sm-2 col-form-label">Correo</label>
-                      <div class="col-sm-10">
-                        <input type="text" class="form-control" name="correo" id="correo" placeholder="Correo">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label for="educacion" class="col-sm-2 col-form-label">Educación</label>
-                      <div class="col-sm-10">
-                        <input type="" class="form-control" name="educacion" id="educacion" placeholder="Ultimó grado de Educación">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label for="profesion" class="col-sm-2 col-form-label">Profesión</label>
-                      <div class="col-sm-10">
-                        <input type="" class="form-control" name="profesion" id="profesion" placeholder="Profesión">
-                      </div>
-                    </div>
-                  </form>
+                  </div>
+                  <!-- </form> -->
                 </div>
                 <!-- /.tab-pane -->
                 <div class="tab-pane" id="ministerio">
-                  <form class="form-horizontal">
-                    <div class="form-group row">
-                      <label for="" class="col-sm-2 col-form-label">Departamento</label>
-                      <div class="col-sm-10">
-                        <input type="" class="form-control" name="" id="" placeholder="Departamento">
-                      </div>
+                  <!-- <form class="form-horizontal"> -->
+                  <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Departamento</label>
+                    <div class="col-sm-10">
+                      <input type="" class="form-control" name="" id="" placeholder="Departamento">
                     </div>
-                    <div class="form-group row">
-                      <label for="" class="col-sm-2 col-form-label">Área</label>
-                      <div class="col-sm-10">
-                        <input type="" class="form-control" name="" id="" placeholder="Área">
-                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Área</label>
+                    <div class="col-sm-10">
+                      <input type="" class="form-control" name="" id="" placeholder="Área">
                     </div>
-                    <div class="form-group row">
-                      <label for="" class="col-sm-2 col-form-label">Nº de Legajo</label>
-                      <div class="col-sm-10">
-                        <input type="text" class="form-control" name="" id="" placeholder="Nº de Legajo">
-                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Nº de Legajo</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="" id="" placeholder="Nº de Legajo">
                     </div>
-                    <div class="form-group row">
-                      <label for="" class="col-sm-2 col-form-label">Nº de Expediente</label>
-                      <div class="col-sm-10">
-                        <input type="text" class="form-control" name="" id="" placeholder="Nº de Expediente">
-                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Nº de Expediente</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="" id="" placeholder="Nº de Expediente">
                     </div>
-                    <div class="form-group row">
-                      <label for="" class="col-sm-2 col-form-label">Tipo de Contrato</label>
-                      <div class="col-sm-10">
-                        <input type="text" class="form-control" name="" id="" placeholder="Tipo de Contrato">
-                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Tipo de Contrato</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="" id="" placeholder="Tipo de Contrato">
                     </div>
-                    <div class="form-group row">
-                      <label for="" class="col-sm-2 col-form-label">Cargo</label>
-                      <div class="col-sm-10">
-                        <input type="text" class="form-control" name="" id="" placeholder="Cargo">
-                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Cargo</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="" id="" placeholder="Cargo">
                     </div>
-                    <div class="form-group row">
-                      <label for="" class="col-sm-2 col-form-label">Rol</label>
-                      <div class="col-sm-10">
-                        <input type="text" class="form-control" name="" id="" placeholder="Rol">
-                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Rol</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="" id="" placeholder="Rol">
                     </div>
-                    <div class="form-group row">
-                      <div class="offset-sm-2 col-sm-10">
-                        <input name="" id="" class="btn btn-success" type="submit" value="Agregar">
+                  </div>
+                  <div class="form-group row">
+                    <div class="offset-sm-2 col-sm-10">
+                      <input name="" id="" class="btn btn-success" type="submit" value="Agregar">
 
-                        <a href="?controlador=personal&accion=inicio" class="btn btn-primary">Cancelar</a>
-                      </div>
+                      <a href="?controlador=personal&accion=inicio" class="btn btn-primary">Cancelar</a>
                     </div>
-                  </form>
+                  </div>
+                  <!-- </form> -->
                 </div>
 
               </div>

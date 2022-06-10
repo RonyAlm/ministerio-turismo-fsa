@@ -402,6 +402,19 @@ class PersonalModelo
         return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function buscarSelectEstudios()
+    {
+
+        $conexionBD = BD::crearInstancia();
+
+
+        $sqlLocalidad = $conexionBD->query("SELECT id_educacion, descripcion FROM educacion");
+
+        $sqlLocalidad->execute();
+
+        return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
+    }
+
     public function buscarSelectEstado()
     {
 
