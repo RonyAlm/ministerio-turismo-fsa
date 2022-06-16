@@ -406,15 +406,49 @@ class PersonalModelo
 
         return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
     }
-
-    public function buscarSelectEstado()
+    public function buscarSelectDepartamento()
     {
 
         $conexionBD = BD::crearInstancia();
 
 
-        $sqlLocalidad = $conexionBD->query("SELECT `id_tipo_estado`, `descripcion_tipo_estado` 
-                                                       FROM `tipo_estado`");
+        $sqlLocalidad = $conexionBD->query("SELECT `id_deptos_mintur`, `descripcion` FROM `deptos_mintur`");
+
+        $sqlLocalidad->execute();
+
+        return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
+    }
+    public function buscarSelectCargo()
+    {
+
+        $conexionBD = BD::crearInstancia();
+
+
+        $sqlLocalidad = $conexionBD->query("SELECT `id_tipo_personal`, `descripcion` FROM `tipo_personal`");
+
+        $sqlLocalidad->execute();
+
+        return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
+    }
+    public function buscarSelectRol()
+    {
+
+        $conexionBD = BD::crearInstancia();
+
+
+        $sqlLocalidad = $conexionBD->query("SELECT `id_roles`, `roles` FROM `roles`");
+
+        $sqlLocalidad->execute();
+
+        return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
+    }
+    public function buscarSelectArea()
+    {
+
+        $conexionBD = BD::crearInstancia();
+
+
+        $sqlLocalidad = $conexionBD->query("SELECT `id_areas`, `descripcion` FROM `areas`");
 
         $sqlLocalidad->execute();
 

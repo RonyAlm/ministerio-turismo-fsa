@@ -150,15 +150,25 @@
                 <div class="tab-pane" id="ministerio">
                   <!-- <form class="form-horizontal"> -->
                   <div class="form-group row">
-                    <label for="" class="col-sm-2 col-form-label">Departamento</label>
+                    <label for="departamento" class="col-sm-2 col-form-label">Departamento</label>
                     <div class="col-sm-10">
-                      <input type="" class="form-control" name="" id="" placeholder="Departamento">
+                      <select id="departamento" name="departamento" class="form-control custom-select" required>
+                        <option value="0" selected disabled>Seleccionar el departamento</option>
+                        <?php foreach ($buscarSelectDepartamento as $k) : ?>
+                          <option value="<?php echo $k->id_deptos_mintur; ?>"> <?php echo $k->descripcion; ?></option>
+                        <?php endforeach; ?>
+                      </select>
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="" class="col-sm-2 col-form-label">Área</label>
+                    <label for="area" class="col-sm-2 col-form-label">Área</label>
                     <div class="col-sm-10">
-                      <input type="" class="form-control" name="" id="" placeholder="Área">
+                      <select id="area" name="area" class="form-control custom-select" required>
+                        <option value="0" selected disabled>Seleccionar el Área</option>
+                        <?php foreach ($buscarSelectArea as $k) : ?>
+                          <option value="<?php echo $k->id_areas; ?>"> <?php echo $k->descripcion; ?></option>
+                        <?php endforeach; ?>
+                      </select>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -180,15 +190,31 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="" class="col-sm-2 col-form-label">Cargo</label>
+                    <label for="cargo" class="col-sm-2 col-form-label">Cargo</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="" id="" placeholder="Cargo">
+                      <select id="cargo" name="cargo" class="form-control custom-select" required>
+                        <option value="0" selected disabled>Seleccionar el cargo</option>
+                        <?php foreach ($buscarSelectCargo as $k) : ?>
+                          <option value="<?php echo $k->id_tipo_personal; ?>"> <?php echo $k->descripcion; ?></option>
+                        <?php endforeach; ?>
+                      </select>
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="" class="col-sm-2 col-form-label">Rol</label>
+                    <label for="rol" class="col-sm-2 col-form-label">Rol</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="" id="" placeholder="Rol">
+                      <select id="rol" name="rol" class="form-control custom-select" required>
+                        <option value="0" selected disabled>Seleccionar el rol</option>
+                        <?php foreach ($buscarSelectRol as $k) : ?>
+                          <?php if ($k->id_roles == 1) : ?>
+                            <option value="<?php echo $k->id_roles; ?>" disabled> <?php echo $k->roles; ?></option>
+                            } <?php endif; ?>
+                          <?php if ($k->id_roles > 1) : ?>
+                            <option value="<?php echo $k->id_roles; ?>"> <?php echo $k->roles; ?></option>
+                            } <?php endif; ?>
+
+                        <?php endforeach; ?>
+                      </select>
                     </div>
                   </div>
                   <div class="form-group row">

@@ -29,7 +29,7 @@ class ControladorPersonal
         $select_tipo_agencia = new PersonalModelo();
 
         $buscarSelectLocalidad = $select_tipo_agencia->buscarSelectLocalidad();
-        $buscarSelectEstado = $select_tipo_agencia->buscarSelectEstado();
+        // $buscarSelectEstado = $select_tipo_agencia->buscarSelectEstado();
 
         if ($_POST) {
             //print_r($_POST);
@@ -268,6 +268,10 @@ class ControladorPersonal
 
         $buscarSelectLocalidad = $select_tipo->buscarSelectLocalidad();
         $buscarSelectEstudios = $select_tipo->buscarSelectEstudios();
+        $buscarSelectDepartamento = $select_tipo->buscarSelectDepartamento();
+        $buscarSelectCargo = $select_tipo->buscarSelectCargo();
+        $buscarSelectRol = $select_tipo->buscarSelectRol();
+        $buscarSelectArea = $select_tipo->buscarSelectArea();
 
         if ($_POST) {
             print_r($_POST);
