@@ -280,9 +280,7 @@ class ControladorPersonal
             $profesion = $_POST['profesion'];
             $cuil = $_POST['cuil'];
             $fecha = $_POST['fecha'];
-            // $idoneoAgencia = $_POST['idoneoAgencia'];
-
-            // $razonsocial = $_POST['razonsocialAgencia'];
+            $educacion = $_POST['educacion'];
 
             $rela_localidad_direccion = $_POST['localidad'];
             $calle_direccion = $_POST['direccion'];
@@ -290,38 +288,24 @@ class ControladorPersonal
             $telefonoCel = $_POST['telefonoCel'];
             $telefonoFijo = $_POST['telefonoFijo'];
             $correo = $_POST['correo'];
-            // $facebookAgencia = $_POST['facebookAgencia'];
-            // $instagramAgencia = $_POST['instagramAgencia'];
-            // $twitterAgencia = $_POST['twitterAgencia'];
-            // $webAgencia = $_POST['webAgencia'];
-            // $otroAgencia = $_POST['otroAgencia'];
-
-            // $estadoAgencia = $_POST['estadoAgencia'];
 
 
 
 
 
-            // $insertarAgencia->guardar(
-            //     $descripcion_agencias,
-            //     $matricula_agencia,
-            //     $legajo_agencia,
-            //     $cuit_agencia,
-            //     $categoria_agencia,
-            //     $rela_localidad_direccion,
-            //     $calle_direccion,
-            //     $razonsocial,
-            //     $telefonoAgencia,
-            //     $telefonoFijoAgencia,
-            //     $correoAgencia,
-            //     $facebookAgencia,
-            //     $instagramAgencia,
-            //     $twitterAgencia,
-            //     $webAgencia,
-            //     $otroAgencia,
-            //     $estadoAgencia,
-            //     $idoneoAgencia
-            // );
+            $insertar->guardar(
+                $nombre,
+                $apellido,
+                $cuil,
+                $profesion,
+                $fecha,
+                $educacion,
+                $rela_localidad_direccion,
+                $calle_direccion,
+                $telefonoCel,
+                $telefonoFijo,
+                $correo
+            );
 
 
             // header("Location:index2.php?controlador=agencias&accion=inicio");

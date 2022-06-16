@@ -127,7 +127,6 @@
                       <input type="text" class="form-control" name="correo" id="correo" placeholder="Correo">
                     </div>
                   </div>
-
                   <div class="form-group row">
                     <label for="educacion" class="col-sm-2 col-form-label">Educacion</label>
                     <div class="col-sm-10">

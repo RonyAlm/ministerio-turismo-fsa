@@ -66,24 +66,17 @@ class PersonalModelo
     }
 
     public function guardar(
-        $descripcion_agencias,
-        $matricula_agencia,
-        $legajo_agencia,
-        $cuit_agencia,
-        $categoria_agencia,
+        $nombre,
+        $apellido,
+        $cuil,
+        $profesion,
+        $fecha,
+        $educacion,
         $rela_localidad_direccion,
         $calle_direccion,
-        $razonsocial,
-        $telefonoAgencia,
-        $telefonoFijoAgencia,
-        $correoAgencia,
-        $facebookAgencia,
-        $instagramAgencia,
-        $twitterAgencia,
-        $webAgencia,
-        $otroAgencia,
-        $estadoAgencia,
-        $idoneoAgencia
+        $telefonoCel,
+        $telefonoFijo,
+        $correo
     ) {
 
         $conexionBD = BD::crearInstancia();
@@ -97,27 +90,26 @@ class PersonalModelo
         $lastInsertIDdireccion = $conexionBD->lastInsertId();
 
 
-        /*-------- INSERTAMOS LA AGENCIA--------*/
+        /*-------- INSERTAMOS LA PERSONA--------*/
 
-        $sql = $conexionBD->prepare("INSERT INTO agencias (descripcion_agencias,matricula_agencia,
-                                                                legajo_agencia,cuit_agencia,categoria_agencia, fecha_edit_agencia,
-                                                                rela_agencia_direccion,rela_razon_social_agencia
-                                                                ,idoneo_agencia) 
-                                            VALUES (?,?,?,?,?,CURRENT_TIMESTAMP(),?,?,?)");
+        $sql = $conexionBD->prepare("INSERT INTO `persona`(`nombre_persona`, `apellido_persona`,
+                                                 `cuil_persona`, `fecha_nac`, `rela_persona_direccion`,
+                                                  `rela_educacion`, `profesion`) 
+                                            VALUES (?,?,?,?,?,?,?)");
         $sql->execute(array(
-            $descripcion_agencias, $matricula_agencia,
-            $legajo_agencia, $cuit_agencia, $categoria_agencia, $lastInsertIDdireccion,
-            $lastInsertIDRazonSocial, $idoneoAgencia
+            $nombre, $apellido,
+            $cuil, $fecha, $lastInsertIDdireccion,
+            $educacion, $profesion
         ));
 
         $lastInsertIDAgencias = $conexionBD->lastInsertId();
 
         /*-------- INSERTAMOS EL TELEFONO CELULAR--------*/
 
-        foreach ($telefonoAgencia as $telefonoAgencia1) {
+        foreach ($telefonoCel as $telefonoAgencia1) {
 
             $sqlTelefono = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-                                                                            `rela_contacto_agencia`) 
+                                                                            `rela_persona_contacto`) 
                                                     VALUES (?,?,?)");
             $sqlTelefono->execute(array($telefonoAgencia1, 2, $lastInsertIDAgencias));
         }
@@ -125,16 +117,16 @@ class PersonalModelo
         /*-------- INSERTAMOS EL TELEFONO FIJO--------*/
 
         $sqlFijo = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-                                                                            `rela_contacto_agencia`) 
+                                                                            `rela_persona_contacto`) 
                                                     VALUES (?,?,?)");
-        $sqlFijo->execute(array($telefonoFijoAgencia, 9, $lastInsertIDAgencias));
+        $sqlFijo->execute(array($telefonoFijo, 9, $lastInsertIDAgencias));
 
         /*-------- INSERTAMOS EL CORREO-------*/
 
         $sqlCorreo = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-                                                                            `rela_contacto_agencia`) 
+                                                                            `rela_persona_contacto`) 
                                                     VALUES (?,?,?)");
-        $sqlCorreo->execute(array($correoAgencia, 1, $lastInsertIDAgencias));
+        $sqlCorreo->execute(array($correo, 1, $lastInsertIDAgencias));
     }
 
     public function crear(
