@@ -48,8 +48,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- style transporte -->
 
   <link rel="stylesheet" href="vistas/recursos/dist/transporte.css">
+
   <!-- Favicon -->
   <link rel="icon" href="vistas/recursos/dist/img/favicon.png">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
 
   <style>
     .resaltar {
@@ -58,6 +60,64 @@ scratch. This page gets rid of all links and provides the needed markup only.
     }
   </style>
 
+
+  <link rel="stylesheet" href="vistas/recursos/dist/table.css">
+
+  <style type="text/css">
+    #tblList_info {
+      margin-bottom: 0.7rem;
+    }
+
+    #example1_wrapper {
+      margin-top: 0.5rem !important;
+    }
+
+    #example1_filter {
+      margin-top: -2.1rem !important;
+    }
+
+    #example1_paginate {
+      margin-bottom: 1rem !important;
+      margin-top: -2rem !important;
+    }
+
+
+
+    /* #tblList_filter label input{
+      width: 90%;
+    }
+    #tblList_filter label i{
+      margin-right: 10px;
+    } */
+
+    div.dataTables_wrapper div.dataTables_filter input {
+      margin-left: 0;
+      display: inline-block;
+      width: auto;
+      border-left: 0px solid #ccc;
+      border-radius: 1px 4px 4px 1px;
+    }
+
+    .badge {
+      text-align: center;
+      margin-left: 3rem;
+      margin-right: 3rem;
+      margin-top: 0.3rem;
+    }
+
+    .sorting_1 {
+      box-shadow: inset 0 0 0 9999px rgba(0, 0, 0, 0.054) !important;
+      min-width: 11rem;
+    }
+
+    .tblInfo {
+      margin-bottom: 0 !important;
+    }
+
+    .tblInfo tr td {
+      text-align: center;
+    }
+  </style>
 
 </head>
 
@@ -129,19 +189,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="content-wrapper">
 
       <!-- Main content -->
-      <div class="content">
+      <section class="content">
         <div class="container-fluid">
           <div class="row">
             <div class="col-12">
               <!-- Salto de linea -->
-              <br>
+              <!-- <br> -->
               <?php include_once("ruteador.php"); ?>
             </div>
 
           </div>
           <!-- /.row -->
         </div><!-- /.container-fluid -->
-      </div>
+      </section>
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
@@ -478,10 +538,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- ./wrapper -->
   <footer class="main-footer">
     <strong> &copy;
-      <script>
+      <!-- <script>
         document.write(new Date().getFullYear());
-      </script>.
-    </strong> Todos los derechos reservados.
+      </script>. -->
+    </strong><?php
+      $Object = new DateTime();
+      $DateAndTime = $Object->format("d-m-Y h:i:s a");
+      echo "$DateAndTime.";
+      ?>
     <div class="float-right d-none d-sm-inline-block">
       Ministerio de Turismo Formosa
     </div>
@@ -498,7 +562,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Select2 -->
   <script src="vistas/recursos/plugins/select2/js/select2.full.min.js"></script>
   <!-- DataTables  & Plugins -->
-  <script src="vistas/recursos/plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="vistas/recursos/plugins/datatables/jquery.dataTables.js"></script>
   <script src="vistas/recursos/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
   <script src="vistas/recursos/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
   <script src="vistas/recursos/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
@@ -538,6 +602,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <script>
     $(function() {
+
+
+
       // Clona la fila oculta que tiene los campos base, y la agrega al final de la tabla
       $("#adicional").on('click', function() {
         $("#tabla tbody tr:eq(0)").clone().removeClass('fila-fija').appendTo("#tabla");
@@ -560,15 +627,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
     });
 
     $(function() {
+
+      $("#tblList").DataTable({
+        "language": {
+          "url": "vistas/recursos/plugins/datatables/Spanish.json"
+        }
+      });
+
+      $("#tblAlojamiento").DataTable({
+        "responsive": true,
+        "lengthChange": true,
+        "autoWidth": true,
+        "language": {
+          "url": "vistas/recursos/plugins/datatables/Spanish.json"
+        },
+        dom: 'Bfrtip',
+        buttons: ['excel', 'pdf', 'print', 'colvis', ]
+
+      }).buttons().container().appendTo('#tblAlojamiento_wrapper .col-md-6:eq(0)');
+
+    });
+
+    $(function() {
       $("#example1").DataTable({
         "responsive": true,
         "lengthChange": true,
         "autoWidth": true,
         "language": {
-          "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+          "url": "vistas/recursos/plugins/datatables/Spanish.json"
         },
         dom: 'Bfrtip',
-        buttons: ['copy', 'csv', 'excel', 'pdf', 'print', 'colvis', ]
+        buttons: ['excel', 'pdf', 'print', 'colvis', ]
 
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
       $('#example2').DataTable({
@@ -581,8 +670,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
         "responsive": true,
 
       });
+
+
+
     });
   </script>
+
   <!-- MODAL DEL EVENTO -->
   <div class="modal fade" id="myModal">
     <div class="modal-dialog">
@@ -641,6 +734,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.modal -->
 
   <script src="vistas/recursos/script/modal.js"></script>
+
 </body>
 
 </html>
