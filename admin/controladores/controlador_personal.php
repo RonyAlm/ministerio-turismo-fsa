@@ -29,7 +29,7 @@ class ControladorPersonal
         $select_tipo_agencia = new PersonalModelo();
 
         $buscarSelectLocalidad = $select_tipo_agencia->buscarSelectLocalidad();
-        $buscarSelectEstado = $select_tipo_agencia->buscarSelectEstado();
+        // $buscarSelectEstado = $select_tipo_agencia->buscarSelectEstado();
 
         if ($_POST) {
             //print_r($_POST);
@@ -264,66 +264,55 @@ class ControladorPersonal
 
     public function guardar()
     {
-        $select_tipo_agencia = new PersonalModelo();
+        $select_tipo = new PersonalModelo();
 
-        $buscarSelectLocalidad = $select_tipo_agencia->buscarSelectLocalidad();
+        $buscarSelectLocalidad = $select_tipo->buscarSelectLocalidad();
+        $buscarSelectEstudios = $select_tipo->buscarSelectEstudios();
+        $buscarSelectDepartamento = $select_tipo->buscarSelectDepartamento();
+        $buscarSelectCargo = $select_tipo->buscarSelectCargo();
+        $buscarSelectRol = $select_tipo->buscarSelectRol();
+        $buscarSelectArea = $select_tipo->buscarSelectArea();
 
         if ($_POST) {
-            //print_r($_POST);
+            print_r($_POST);
 
             $insertar = new PersonalModelo();
 
 
-            $descripcion_agencias = $_POST['nombreAgencia'];
-            $matricula_agencia = $_POST['matriculaAgencia'];
-            $legajo_agencia = $_POST['legajoAgencia'];
-            $cuit_agencia = $_POST['cuitAgencia'];
-            $categoria_agencia = $_POST['categoriaAgencia'];
-            $idoneoAgencia = $_POST['idoneoAgencia'];
+            $nombre = $_POST['nombre'];
+            $apellido = $_POST['apellido'];
+            $profesion = $_POST['profesion'];
+            $cuil = $_POST['cuil'];
+            $fecha = $_POST['fecha'];
+            $educacion = $_POST['educacion'];
 
-            $razonsocial = $_POST['razonsocialAgencia'];
+            $rela_localidad_direccion = $_POST['localidad'];
+            $calle_direccion = $_POST['direccion'];
 
-            $rela_localidad_direccion = $_POST['localidadAgencia'];
-            $calle_direccion = $_POST['domicilioAgencia'];
-
-            $telefonoAgencia = $_POST['telefonoAgencia'];
-            $telefonoFijoAgencia = $_POST['telefonoFijoAgencia'];
-            $correoAgencia = $_POST['correoAgencia'];
-            $facebookAgencia = $_POST['facebookAgencia'];
-            $instagramAgencia = $_POST['instagramAgencia'];
-            $twitterAgencia = $_POST['twitterAgencia'];
-            $webAgencia = $_POST['webAgencia'];
-            $otroAgencia = $_POST['otroAgencia'];
-
-            $estadoAgencia = $_POST['estadoAgencia'];
+            $telefonoCel = $_POST['telefonoCel'];
+            $telefonoFijo = $_POST['telefonoFijo'];
+            $correo = $_POST['correo'];
 
 
 
 
 
-            $insertarAgencia->guardar(
-                $descripcion_agencias,
-                $matricula_agencia,
-                $legajo_agencia,
-                $cuit_agencia,
-                $categoria_agencia,
+            $insertar->guardar(
+                $nombre,
+                $apellido,
+                $cuil,
+                $profesion,
+                $fecha,
+                $educacion,
                 $rela_localidad_direccion,
                 $calle_direccion,
-                $razonsocial,
-                $telefonoAgencia,
-                $telefonoFijoAgencia,
-                $correoAgencia,
-                $facebookAgencia,
-                $instagramAgencia,
-                $twitterAgencia,
-                $webAgencia,
-                $otroAgencia,
-                $estadoAgencia,
-                $idoneoAgencia
+                $telefonoCel,
+                $telefonoFijo,
+                $correo
             );
 
 
-            header("Location:index2.php?controlador=agencias&accion=inicio");
+            // header("Location:index2.php?controlador=agencias&accion=inicio");
         }
 
         include_once("vistas/personal/guardar.php");
