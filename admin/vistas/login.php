@@ -32,7 +32,7 @@
     <!-- /.login-logo -->
     <div class="card">
       <div class="card-body login-card-body">
-        <p class="login-box-msg">Ingresar Usuario y Contraseña</p>
+        <p class="login-box-msg">Ingresar Usuario y Contraseña hollaaaa</p>
 
         <form action="?controlador_login.php" method="POST">
           <div class="input-group mb-3">

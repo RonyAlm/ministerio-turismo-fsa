@@ -26,18 +26,32 @@ if ($_POST) {
   $resultado->execute(array());
 
   $num = $resultado->rowCount();
+  // DESDE ESTE PUNTO LO QUE SE VA A HACER ES SACAR SI LA PERSONA ESTA ACTIVA O INACTIVA
+  $sqlACTIVO = "SELECT id_persona, nombre_persona, apellido_persona FROM `persona` WHERE  nombre_persona='$usuario'";
 
+  $resultadoActivo = $conexion->prepare($sqlACTIVO);
+  $resultadoActivo->execute(array());
+
+  $numActivo = $resultadoActivo->rowCount();
+  // FIN 
   $error = "";
   if ($num > 0) {
+
     $row = $resultado->fetch(PDO::FETCH_ASSOC);
+    $rowActivo = $resultadoActivo->fetch(PDO::FETCH_ASSOC); //lo que hago es sacar el usuario
+
     $contraseña_bd = $row['contraseña'];
     if ($contraseña_bd == $contraseña) {
       $_SESSION['id'] = $row['id_usuario'];
       $_SESSION['usuarios'] = $row['usuario'];
       $_SESSION['contraseña'] = $row['contraseña'];
       $_SESSION['rol_id'] = $row['rela_rol_id'];
+      $_SESSION['nombre_persona'] = $rowActivo['nombre_persona'];
+      $_SESSION['apellido_persona'] = $rowActivo['apellido_persona'];
+      $_SESSION['id_persona'] = $rowActivo['id_persona'];
 
       header("Location: index2.php");
+      // echo "entraste wey";
     } else {
       $error = "La contraseña no coincide";
       // echo "La contraseña no coincide";
@@ -130,7 +144,7 @@ if ($_POST) {
     <div class="card">
       <div class="card-body login-card-body">
 
-        <p class="login-box-msg">Ingresar Usuario y Contraseña</p>
+        <p class="login-box-msg">Ingresar Usuario y Contraseña holaaa</p>
 
         <form action="?controlador_login.php" method="POST">
           <div class="input-group mb-3">

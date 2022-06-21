@@ -9,6 +9,19 @@ if (!isset($_SESSION['id'])) {
 $usuario = $_SESSION['usuarios'];
 $rol_id = $_SESSION['rol_id'];
 
+$id_persona = $_SESSION['id_persona'];
+$nombre = $_SESSION['nombre_persona'];
+$apellido = $_SESSION['apellido_persona'];
+
+
+
+if ($nombre) {
+  // $nombre = 1;
+  echo "mi nombre es " . $id_persona;
+} else {
+  // $nombre = 0;
+  echo "mi nombre es otro " . $nombre;
+}
 
 
 ?>
@@ -107,7 +120,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
             <div class="dropdown-divider"></div>
             <a href="#" class="dropdown-item">
-              <i class="fas fa-user mr-2"></i> Perfil
+              <i class="fas fa-user mr-2"></i><?php
+                                              if ($nombre) {
+                                                // $nombre = 1;
+                                                echo "mi nombre es " . $apellido;
+                                              } else {
+                                                // $nombre = 0;
+                                                echo "mi nombre es otro " . $apellido;
+                                              } ?>
             </a>
             <div class="dropdown-divider"></div>
             <a href="vistas/logout.php" class="dropdown-item">
