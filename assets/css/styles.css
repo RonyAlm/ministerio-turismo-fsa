@@ -343,3 +343,10 @@
   border-color: #83c331 !important;
   color: #fff !important;
 }
+
+.page-item.active .page-link {
+	z-index: 3;
+	color: #fff;
+	background-color: #1db31f;
+	border-color: #28a745;
+}
