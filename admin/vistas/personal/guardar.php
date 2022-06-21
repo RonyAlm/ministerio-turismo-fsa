@@ -172,21 +172,26 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="" class="col-sm-2 col-form-label">Nº de Legajo</label>
+                    <label for="n_legajo" class="col-sm-2 col-form-label">Nº de Legajo</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="" id="" placeholder="Nº de Legajo">
+                      <input type="text" class="form-control" name="n_legajo" id="n_legajo" placeholder="Nº de Legajo">
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="" class="col-sm-2 col-form-label">Nº de Expediente</label>
+                    <label for="n_expediente" class="col-sm-2 col-form-label">Nº de Expediente</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="" id="" placeholder="Nº de Expediente">
+                      <input type="text" class="form-control" name="n_expediente" id="n_expediente" placeholder="Nº de Expediente">
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="" class="col-sm-2 col-form-label">Tipo de Contrato</label>
+                    <label for="tipo_contrato" class="col-sm-2 col-form-label">Tipo de Contrato</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="" id="" placeholder="Tipo de Contrato">
+                      <select id="tipo_contrato" name="tipo_contrato" class="form-control custom-select" required>
+                        <option value="0" selected disabled>Seleccionar el tipo de contrato</option>
+                        <?php foreach ($buscarSelectContrato as $k) : ?>
+                          <option value="<?php echo $k->id_tipo_contrato; ?>"> <?php echo $k->descripcion_contrato; ?></option>
+                        <?php endforeach; ?>
+                      </select>
                     </div>
                   </div>
                   <div class="form-group row">

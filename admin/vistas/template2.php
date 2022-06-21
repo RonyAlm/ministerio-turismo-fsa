@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+include_once("conexion.php");
+
+$conexion = BD::crearInstancia();
+
 
 if (!isset($_SESSION['id'])) {
   header("Location: index.php");
@@ -16,10 +20,14 @@ $apellido = $_SESSION['apellido_persona'];
 
 
 if ($nombre) {
-  // $nombre = 1;
-  // echo "mi nombre es " . $id_persona;
+  $nombre = 1;
+  /*---------------SE ACTUALIZA LA DIRECCION CON LA LOCALIDAD-------------------*/
+
+  // $sqlDireccion = $conexionBD->prepare("UPDATE `personales` SET `rela_tipo_estado`='$nombre'
+  //                                               WHERE rela_persona = $id_persona ");
+  // $sqlDireccion->execute();
 } else {
-  // $nombre = 0;
+  $nombre = 0;
   echo "mi nombre es otro " . $nombre;
 }
 
