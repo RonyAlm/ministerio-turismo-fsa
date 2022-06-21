@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+// include_once "controladores/controlador_login.php";
+
 include_once("conexion.php");
 
 $conexion = BD::crearInstancia();
@@ -9,7 +11,7 @@ $conexion = BD::crearInstancia();
 if (!isset($_SESSION['id'])) {
   header("Location: index.php");
 }
-
+$id = $_SESSION['id'];
 $usuario = $_SESSION['usuarios'];
 $rol_id = $_SESSION['rol_id'];
 
@@ -23,9 +25,10 @@ if ($nombre) {
   $nombre = 1;
   /*---------------SE ACTUALIZA LA DIRECCION CON LA LOCALIDAD-------------------*/
 
-  // $sqlDireccion = $conexionBD->prepare("UPDATE `personales` SET `rela_tipo_estado`='$nombre'
-  //                                               WHERE rela_persona = $id_persona ");
-  // $sqlDireccion->execute();
+  $sqlDireccion = $conexion->prepare("UPDATE `personales` SET `rela_tipo_estado`=$nombre
+                                                WHERE rela_persona = $id_persona");
+  $sqlDireccion->execute();
+  // print_r($sqlDireccion);
 } else {
   $nombre = 0;
   echo "mi nombre es otro " . $nombre;
