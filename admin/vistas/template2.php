@@ -17,10 +17,10 @@ $apellido = $_SESSION['apellido_persona'];
 
 if ($nombre) {
   // $nombre = 1;
-  echo "mi nombre es " . $id_persona;
+  // echo "mi nombre es " . $id_persona;
 } else {
   // $nombre = 0;
-  echo "mi nombre es otro " . $nombre;
+  // echo "mi nombre es otro " . $nombre;
 }
 
 
@@ -562,10 +562,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         document.write(new Date().getFullYear());
       </script>. -->
     </strong><?php
-      $Object = new DateTime();
-      $DateAndTime = $Object->format("d-m-Y h:i:s a");
-      echo "$DateAndTime.";
-      ?>
+              $Object = new DateTime();
+              $DateAndTime = $Object->format("d-m-Y h:i:s a");
+              echo "$DateAndTime.";
+              ?>
     <div class="float-right d-none d-sm-inline-block">
       Ministerio de Turismo Formosa
     </div>
