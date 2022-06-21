@@ -20,7 +20,7 @@ if ($nombre) {
   // echo "mi nombre es " . $id_persona;
 } else {
   // $nombre = 0;
-  // echo "mi nombre es otro " . $nombre;
+  echo "mi nombre es otro " . $nombre;
 }
 
 
