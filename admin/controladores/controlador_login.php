@@ -1,10 +1,10 @@
 <?php
 
-session_start();
+// session_start();
 
-if (!isset($_SESSION['id'])) {
-    header("Location: ../index.php");
-}
+// if (!isset($_SESSION['id'])) {
+//     header("Location: ../index.php");
+// }
 include_once("modelos/login.php");
 include_once("conexion.php");
 //print_r($_POST);

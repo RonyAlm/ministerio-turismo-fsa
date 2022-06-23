@@ -70,9 +70,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="vistas/recursos/plugins/fullcalendar1/lib/main.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
   <!-- style transporte -->
-
   <link rel="stylesheet" href="vistas/recursos/dist/transporte.css">
-
   <!-- Favicon -->
   <link rel="icon" href="vistas/recursos/dist/img/favicon.png">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
@@ -378,51 +376,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </li> -->
                 </ul>
               </li>
-
-              <!-- CIRCUITOS TURISTICOS -->
-            <?php }
-              if ($rol_id == 1 or $rol_id == 3 and $usuario == "liz") { ?>
-              <li class="nav-item">
-                <a href="pages/calendar.html" class="nav-link">
-                  <i class="nav-icon fas fa-tree"></i>
-                  <p>
-                    Circuitos Turisticos
-                    <i class="fas fa-angle-left right"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="pages/tables/simple.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Circuito Oeste</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="pages/tables/data.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Circuito Norte</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="pages/tables/jsgrid.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Circuito Sur</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="pages/tables/simple.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Circuito Formosa/Herradura</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="pages/tables/simple.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Bañado la Estrella</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
             <?php }
               if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3 and $usuario == "matias") { ?>
               <!-- TURISMO RELIGIOSO -->
@@ -672,8 +625,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         "language": {
           "url": "vistas/recursos/plugins/datatables/Spanish.json"
         },
+
         dom: 'Bfrtip',
-        buttons: ['excel', 'pdf', 'print', 'colvis', ]
+        buttons: ['excel', 'pdf', 'print', 'colvis']
 
       }).buttons().container().appendTo('#tblAlojamiento_wrapper .col-md-6:eq(0)');
 
@@ -688,7 +642,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
           "url": "vistas/recursos/plugins/datatables/Spanish.json"
         },
         dom: 'Bfrtip',
-        buttons: ['excel', 'pdf', 'print', 'colvis', ]
+        buttons: ['excel', 'pdf', 'print', 'colvis'],
+
+
 
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
       $('#example2').DataTable({

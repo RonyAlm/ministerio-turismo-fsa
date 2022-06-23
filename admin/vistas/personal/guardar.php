@@ -58,6 +58,7 @@
               <ul class="nav nav-pills">
                 <li class="nav-item"><a class="nav-link active" href="#personal" data-toggle="tab">Personal</a></li>
                 <li class="nav-item"><a class="nav-link" href="#ministerio" data-toggle="tab">Ministerio</a></li>
+                <li class="nav-item"><a class="nav-link" href="#licencias" data-toggle="tab">Ministerio</a></li>
               </ul>
             </div><!-- /.card-header -->
             <div class="card-body">
@@ -232,6 +233,75 @@
                       </select>
                     </div>
                   </div> -->
+                  <div class="form-group row">
+                    <div class="offset-sm-2 col-sm-10">
+                      <input name="" id="" class="btn btn-success" type="submit" value="Agregar">
+
+                      <a href="?controlador=personal&accion=inicio" class="btn btn-primary">Cancelar</a>
+                    </div>
+                  </div>
+                  <!-- </form> -->
+                </div>
+
+                <div class="tab-pane" id="licencias">
+                  <!-- <form class="form-horizontal"> -->
+                  <div class="form-group row">
+                    <label for="departamento" class="col-sm-2 col-form-label">Licencias</label>
+                    <div class="col-sm-10">
+                      <select id="departamento" name="departamento" class="form-control custom-select" required>
+                        <option value="0" selected disabled>Seleccionar el departamento</option>
+                        <?php foreach ($buscarSelectDepartamento as $k) : ?>
+                          <option value="<?php echo $k->id_deptos_mintur; ?>"> <?php echo $k->descripcion; ?></option>
+                        <?php endforeach; ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="area" class="col-sm-2 col-form-label">Área</label>
+                    <div class="col-sm-10">
+                      <select id="area" name="area" class="form-control custom-select" required>
+                        <option value="0" selected disabled>Seleccionar el Área</option>
+                        <?php foreach ($buscarSelectArea as $k) : ?>
+                          <option value="<?php echo $k->id_areas; ?>"> <?php echo $k->descripcion; ?></option>
+                        <?php endforeach; ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="n_legajo" class="col-sm-2 col-form-label">Nº de Legajo</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="n_legajo" id="n_legajo" placeholder="Nº de Legajo">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="n_expediente" class="col-sm-2 col-form-label">Nº de Expediente</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="n_expediente" id="n_expediente" placeholder="Nº de Expediente">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="tipo_contrato" class="col-sm-2 col-form-label">Tipo de Contrato</label>
+                    <div class="col-sm-10">
+                      <select id="tipo_contrato" name="tipo_contrato" class="form-control custom-select" required>
+                        <option value="0" selected disabled>Seleccionar el tipo de contrato</option>
+                        <?php foreach ($buscarSelectContrato as $k) : ?>
+                          <option value="<?php echo $k->id_tipo_contrato; ?>"> <?php echo $k->descripcion_contrato; ?></option>
+                        <?php endforeach; ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="cargo" class="col-sm-2 col-form-label">Cargo</label>
+                    <div class="col-sm-10">
+                      <select id="cargo" name="cargo" class="form-control custom-select" required>
+                        <option value="0" selected disabled>Seleccionar el cargo</option>
+                        <?php foreach ($buscarSelectCargo as $k) : ?>
+                          <option value="<?php echo $k->id_tipo_personal; ?>"> <?php echo $k->descripcion; ?></option>
+                        <?php endforeach; ?>
+                      </select>
+                    </div>
+                  </div>
+
                   <div class="form-group row">
                     <div class="offset-sm-2 col-sm-10">
                       <input name="" id="" class="btn btn-success" type="submit" value="Agregar">
