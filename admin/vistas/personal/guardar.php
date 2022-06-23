@@ -244,33 +244,11 @@
                 </div>
 
                 <div class="tab-pane" id="licencias">
-                  <!-- <form class="form-horizontal"> -->
+
                   <div class="form-group row">
-                    <label for="departamento" class="col-sm-2 col-form-label">Licencias</label>
+                    <label for="antiguedad" class="col-sm-2 col-form-label">Años de antigüedad</label>
                     <div class="col-sm-10">
-                      <select id="departamento" name="departamento" class="form-control custom-select" required>
-                        <option value="0" selected disabled>Seleccionar el departamento</option>
-                        <?php foreach ($buscarSelectDepartamento as $k) : ?>
-                          <option value="<?php echo $k->id_deptos_mintur; ?>"> <?php echo $k->descripcion; ?></option>
-                        <?php endforeach; ?>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="area" class="col-sm-2 col-form-label">Área</label>
-                    <div class="col-sm-10">
-                      <select id="area" name="area" class="form-control custom-select" required>
-                        <option value="0" selected disabled>Seleccionar el Área</option>
-                        <?php foreach ($buscarSelectArea as $k) : ?>
-                          <option value="<?php echo $k->id_areas; ?>"> <?php echo $k->descripcion; ?></option>
-                        <?php endforeach; ?>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="n_legajo" class="col-sm-2 col-form-label">Nº de Legajo</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" name="n_legajo" id="n_legajo" placeholder="Nº de Legajo">
+                      <input type="number" class="form-control" name="antiguedad" id="antiguedad" placeholder="Años de antigüedad">
                     </div>
                   </div>
                   <div class="form-group row">
