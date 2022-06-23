@@ -58,7 +58,7 @@
               <ul class="nav nav-pills">
                 <li class="nav-item"><a class="nav-link active" href="#personal" data-toggle="tab">Personal</a></li>
                 <li class="nav-item"><a class="nav-link" href="#ministerio" data-toggle="tab">Ministerio</a></li>
-                <li class="nav-item"><a class="nav-link" href="#licencias" data-toggle="tab">Ministerio</a></li>
+                <li class="nav-item"><a class="nav-link" href="#licencias" data-toggle="tab">Licencias</a></li>
               </ul>
             </div><!-- /.card-header -->
             <div class="card-body">
