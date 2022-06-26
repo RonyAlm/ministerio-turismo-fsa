@@ -200,23 +200,33 @@
                       </select>
                     </div>
                   </div>
-                  <div class="form-group row">
+                  <!-- <div class="form-group row">
                     <label for="rol" class="col-sm-2 col-form-label">Rol</label>
                     <div class="col-sm-10">
                       <select id="rol" name="rol" class="form-control custom-select" required>
                         <option value="0" selected disabled>Seleccionar el rol</option>
-                        <?php foreach ($buscarSelectRol as $k) : ?>
-                          <?php if ($k->id_roles == 1) : ?>
-                            <option value="<?php echo $k->id_roles; ?>" disabled> <?php echo $k->roles; ?></option>
-                            } <?php endif; ?>
-                          <?php if ($k->id_roles > 1) : ?>
-                            <option value="<?php echo $k->id_roles; ?>"> <?php echo $k->roles; ?></option>
-                            } <?php endif; ?>
+                        <? //php // foreach ($buscarSelectRol as $k) : 
+                        ?>
+                          <?php //if ($k->id_roles == 1) : 
+                          ?>
+                            <option value="<?php //echo $k->id_roles; 
+                                            ?>" disabled> <?php //echo $k->roles; 
+                                                          ?></option>
+                            } <? // php // endif; 
+                              ?>
+                          <? //php // if ($k->id_roles > 1) : 
+                          ?>
+                            <option value="<? // php // echo $k->id_roles; 
+                                            ?>"> <? //php echo $k->roles; 
+                                                  ?></option>
+                            } <?php //endif; 
+                              ?>
 
-                        <?php endforeach; ?>
+                        <?php //endforeach; 
+                        ?>
                       </select>
                     </div>
-                  </div>
+                  </div> -->
                   <div class="form-group row">
                     <div class="offset-sm-2 col-sm-10">
                       <input name="" id="" class="btn btn-success" type="submit" value="Agregar">

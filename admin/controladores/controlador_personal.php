@@ -293,23 +293,35 @@ class ControladorPersonal
             $telefonoFijo = $_POST['telefonoFijo'];
             $correo = $_POST['correo'];
 
+            $usuario = $nombre . strtoupper(substr($apellido, 0, 1)) . substr($apellido, 1, 1);
+
+            // lo que estoy haciendo es agarrar el nombre despues poner en may la primera palabra del apellido,
+            // y despues la segunda palabra en min.
+
+
+            echo $usuario;
+            echo "</br>";
+            $random = random_int(1000, 9999);
+            $contraseña = $usuario . $random;
+            echo $contraseña;
 
 
 
 
-            $insertar->guardar(
-                $nombre,
-                $apellido,
-                $cuil,
-                $profesion,
-                $fecha,
-                $educacion,
-                $rela_localidad_direccion,
-                $calle_direccion,
-                $telefonoCel,
-                $telefonoFijo,
-                $correo
-            );
+
+            // $insertar->guardar(
+            //     $nombre,
+            //     $apellido,
+            //     $cuil,
+            //     $profesion,
+            //     $fecha,
+            //     $educacion,
+            //     $rela_localidad_direccion,
+            //     $calle_direccion,
+            //     $telefonoCel,
+            //     $telefonoFijo,
+            //     $correo
+            // );
 
 
             // header("Location:index2.php?controlador=agencias&accion=inicio");
