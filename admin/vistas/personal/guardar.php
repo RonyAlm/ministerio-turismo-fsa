@@ -252,31 +252,15 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="n_expediente" class="col-sm-2 col-form-label">Nº de Expediente</label>
+                    <label for="n_expediente" class="col-sm-2 col-form-label">Fechas de licencias pendientes</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="n_expediente" id="n_expediente" placeholder="Nº de Expediente">
+                      <input type="text" class="form-control" name="n_expediente" id="n_expediente" placeholder="Año pendiente de licencia">
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="tipo_contrato" class="col-sm-2 col-form-label">Tipo de Contrato</label>
+                    <label for="n_expediente" class="col-sm-2 col-form-label">Días pendientes</label>
                     <div class="col-sm-10">
-                      <select id="tipo_contrato" name="tipo_contrato" class="form-control custom-select" required>
-                        <option value="0" selected disabled>Seleccionar el tipo de contrato</option>
-                        <?php foreach ($buscarSelectContrato as $k) : ?>
-                          <option value="<?php echo $k->id_tipo_contrato; ?>"> <?php echo $k->descripcion_contrato; ?></option>
-                        <?php endforeach; ?>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="cargo" class="col-sm-2 col-form-label">Cargo</label>
-                    <div class="col-sm-10">
-                      <select id="cargo" name="cargo" class="form-control custom-select" required>
-                        <option value="0" selected disabled>Seleccionar el cargo</option>
-                        <?php foreach ($buscarSelectCargo as $k) : ?>
-                          <option value="<?php echo $k->id_tipo_personal; ?>"> <?php echo $k->descripcion; ?></option>
-                        <?php endforeach; ?>
-                      </select>
+                      <input type="text" class="form-control" name="n_expediente" id="n_expediente" placeholder="Días pendientes a la fecha">
                     </div>
                   </div>
 
