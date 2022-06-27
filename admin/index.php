@@ -26,18 +26,22 @@ if ($_POST) {
   $resultado->execute(array());
 
   $num = $resultado->rowCount();
-  // DESDE ESTE PUNTO LO QUE SE VA A HACER ES SACAR SI LA PERSONA ESTA ACTIVA O INACTIVA
-  $sqlACTIVO = "SELECT id_persona, nombre_persona, apellido_persona FROM `persona` WHERE  nombre_persona='$usuario'";
 
-  $resultadoActivo = $conexion->prepare($sqlACTIVO);
-  $resultadoActivo->execute(array());
-
-  $numActivo = $resultadoActivo->rowCount();
-  // FIN 
   $error = "";
   if ($num > 0) {
 
     $row = $resultado->fetch(PDO::FETCH_ASSOC);
+
+    $id_usuario_contraseña = $row['id_usuario'];
+
+    // DESDE ESTE PUNTO LO QUE SE VA A HACER ES SACAR SI LA PERSONA ESTA ACTIVA O INACTIVA
+    $sqlACTIVO = "SELECT id_persona, nombre_persona, apellido_persona FROM `persona` where rela_usuario_contra =$id_usuario_contraseña";
+
+    $resultadoActivo = $conexion->prepare($sqlACTIVO);
+    $resultadoActivo->execute(array());
+
+    $numActivo = $resultadoActivo->rowCount();
+    // FIN 
     $rowActivo = $resultadoActivo->fetch(PDO::FETCH_ASSOC); //lo que hago es sacar el usuario
 
     $contraseña_bd = $row['contraseña'];
@@ -144,7 +148,7 @@ if ($_POST) {
     <div class="card">
       <div class="card-body login-card-body">
 
-        <p class="login-box-msg">Ingresar Usuario y Contraseña holaaa</p>
+        <p class="login-box-msg">Ingresar Usuario y Contraseña</p>
 
         <form action="?controlador_login.php" method="POST">
           <div class="input-group mb-3">

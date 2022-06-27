@@ -29,12 +29,12 @@ $rol_id = $_SESSION['rol_id'];
       <h3 class="card-title">PERSONAL</h3>
 
       <div class="card-tools">
-        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+        <!-- <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
           <i class="fas fa-minus"></i>
-        </button>
-        <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+        </button> -->
+        <!-- <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
           <i class="fas fa-times"></i>
-        </button>
+        </button> -->
       </div>
     </div>
     <div class="card-body p-0">
@@ -75,26 +75,26 @@ $rol_id = $_SESSION['rol_id'];
             <td>
               <ul class="list-inline">
                 <li class="list-inline-item">
-                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
+                  <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar2.png">
                 </li>
                 <li class="list-inline-item">
-                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar2.png">
+                  <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar3.png">
                 </li>
                 <li class="list-inline-item">
-                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar3.png">
+                  <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar4.png">
                 </li>
                 <li class="list-inline-item">
-                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar4.png">
+                  <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar5.png">
                 </li>
               </ul>
             </td>
-            <td class="project_progress">
-              <div class="progress progress-sm">
-                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
-                </div>
-              </div>
+            <td>
+              <a>
+                Director
+              </a>
+              <br />
               <small>
-                57% Complete
+                Jorge Cantero
               </small>
             </td>
             <td class="project-actions text-right">
@@ -103,7 +103,7 @@ $rol_id = $_SESSION['rol_id'];
                 </i>
                 View
               </a>
-              <!-- <a class="btn btn-info btn-sm" href="#">
+              <a class="btn btn-info btn-sm" href="#">
                 <i class="fas fa-pencil-alt">
                 </i>
                 Edit
@@ -112,7 +112,7 @@ $rol_id = $_SESSION['rol_id'];
                 <i class="fas fa-trash">
                 </i>
                 Delete
-              </a> -->
+              </a>
             </td>
           </tr>
           <tr>
@@ -131,26 +131,26 @@ $rol_id = $_SESSION['rol_id'];
             <td>
               <ul class="list-inline">
                 <li class="list-inline-item">
-                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
+                  <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar2.png">
                 </li>
                 <li class="list-inline-item">
-                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar2.png">
+                  <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar2.png">
                 </li>
                 <li class="list-inline-item">
-                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar3.png">
+                  <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar3.png">
                 </li>
                 <li class="list-inline-item">
-                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar4.png">
+                  <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar4.png">
                 </li>
               </ul>
             </td>
-            <td class="project_progress">
-              <div class="progress progress-sm">
-                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
-                </div>
-              </div>
+            <td>
+              <a>
+                Director
+              </a>
+              <br />
               <small>
-                57% Complete
+                Gonzalo Bordoy
               </small>
             </td>
             <td class="project-actions text-right">
@@ -187,26 +187,26 @@ $rol_id = $_SESSION['rol_id'];
             <td>
               <ul class="list-inline">
                 <li class="list-inline-item">
-                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
+                  <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar.png">
                 </li>
                 <li class="list-inline-item">
-                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar2.png">
+                  <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar2.png">
                 </li>
                 <li class="list-inline-item">
-                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar3.png">
+                  <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar3.png">
                 </li>
                 <li class="list-inline-item">
-                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar4.png">
+                  <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar4.png">
                 </li>
               </ul>
             </td>
-            <td class="project_progress">
-              <div class="progress progress-sm">
-                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
-                </div>
-              </div>
+            <td>
+              <a>
+                Encargado
+              </a>
+              <br />
               <small>
-                57% Complete
+                Fabian Benitez
               </small>
             </td>
             <td class="project-actions text-right">
