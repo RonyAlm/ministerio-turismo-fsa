@@ -350,7 +350,7 @@
   <div class="card-footer mb-4 card">
     <div class="row no-print">
       <div class="col-12">
-        <a href="?controlador=Alojamientos&accion=imprimirInfo&id=<?php echo $infoAlojamiento->id_alojamientos; ?>" rel="noopener" target="_blank" class="btn btn-default float-right"><i class="fas fa-print mr-2"></i> Imprimir</a>
+        <a href="?controlador=Alojamientos&accion=imprimirInfo&id=<?php echo $infoAlojamiento->id_alojamientos; ?>" rel="noopener" class="btn btn-default float-right"><i class="fas fa-print mr-2"></i> Imprimir</a>
       </div>
     </div>
   </div>
