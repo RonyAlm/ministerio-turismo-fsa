@@ -21,6 +21,7 @@ class ControladorAgencias
 
         include_once("vistas/agencias/inicio.php");
     }
+
     public function crear()
     {
 
@@ -90,6 +91,7 @@ class ControladorAgencias
 
         include_once("vistas/agencias/crear.php");
     }
+
     public function editar()
     {
 
@@ -265,4 +267,41 @@ class ControladorAgencias
 
         $id_agencia = $_GET['id'];
     }
+
+    public function imprimir()
+    {
+        $consultaAgencia = new AgenciaModelo();
+
+        $tablaAgencia = $consultaAgencia->consultar();
+        $datosEstadisticos = new estadistica();
+
+        $cantidad_agencias = $datosEstadisticos->cantidadAgencias();
+        $cantidadAgenciasHabilitadas = $datosEstadisticos->cantidadAgenciasHabilitadas();
+
+
+        include_once("vistas/agencias/imprimir.php");
+    }
+
+    public function imprimirInfo()
+    {
+        $id_agencia = $_GET['id'];
+
+        $agenciaInfo = new AgenciaModelo();
+
+        $agenciasInfomacion = $agenciaInfo->buscar($id_agencia);
+
+
+        $contactosDeagencia = new ContactosInfo();
+        $agenciaTelefonoInfo = $contactosDeagencia->consultarTelefonos($id_agencia);
+        $agenciaTelefonoFijo = $contactosDeagencia->consultarTelefonosFijos($id_agencia);
+        $agenciaCorreo = $contactosDeagencia->consultarCorreo($id_agencia);
+        $agenciaFacebook = $contactosDeagencia->consultarFacebook($id_agencia);
+        $agenciaInstagram = $contactosDeagencia->consultarInstagram($id_agencia);
+        $agenciaTwitter = $contactosDeagencia->consultarTwitter($id_agencia);
+        $agenciaWeb = $contactosDeagencia->consultarWeb($id_agencia);
+        $agenciaOtro = $contactosDeagencia->consultarOtro($id_agencia);
+
+        include_once("vistas/agencias/invoice-print.php");
+    }
+
 }
