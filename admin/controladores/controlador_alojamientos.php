@@ -364,6 +364,7 @@ class ControladorAlojamientos
         $inicioAlojamiento = $consultarAlojamientosInicio->consultar();
         include_once("vistas/Alojamientos/imprimir.php");
     }
+    
     public function imprimirInfo()
     {
         $id_alojamientos = $_GET['id'];
@@ -383,6 +384,6 @@ class ControladorAlojamientos
         $alojamientosTwitter = $contactosDelAlojamiento->consultarTwitter($id_alojamientos);
         $alojamientosWeb = $contactosDelAlojamiento->consultarWeb($id_alojamientos);
         $alojamientosOtro = $contactosDelAlojamiento->consultarOtro($id_alojamientos);
-        include_once("vistas/Alojamientos/invoice-print.html");
+        include_once("vistas/Alojamientos/invoice-print.php");
     }
 }

@@ -1,6 +1,6 @@
 <?php
-session_start();
 
+session_start();
 
 if (!isset($_SESSION['id'])) {
   header("Location: index.php");
@@ -561,11 +561,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- <script>
         document.write(new Date().getFullYear());
       </script>. -->
-    </strong><?php
-              $Object = new DateTime();
-              $DateAndTime = $Object->format("d-m-Y h:i:s a");
-              echo "$DateAndTime.";
-              ?>
+    </strong>
+    <script>
+      var hoy = new Date();
+      var fecha = hoy.getDate() + '-' + (hoy.getMonth() + 1) + '-' + hoy.getFullYear();
+      var hora = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds();
+      document.write(fecha + ' ');
+    </script>
+
     <div class="float-right d-none d-sm-inline-block">
       Ministerio de Turismo Formosa
     </div>

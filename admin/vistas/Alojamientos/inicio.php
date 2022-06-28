@@ -34,7 +34,7 @@ $rol_id = $_SESSION['rol_id'];
 
       <a name="" id="" class="btn btn-success" href="?controlador=Alojamientos&accion=crear" role="button">Agregar</a>
 
-      <a name="" id="" class="btn btn-secondary" href="?controlador=Alojamientos&accion=imprimir" role="button">Informes</a>
+      <a name="" id="" class="btn btn-secondary" href="?controlador=Alojamientos&accion=imprimir" role="button">Imprimir</a>
 
     </div>
 
@@ -120,7 +120,6 @@ $rol_id = $_SESSION['rol_id'];
 
     <div class="row">
       <div class="col-lg-12">
-        <!-- <i class="iconBuscar fas fa-search"></i> -->
         <table id="tblList" class="table table-bordered table-striped" cellspacing="0" width="100%">
           <thead>
             <tr style="background: linear-gradient(to right, #61ba6d, #83c331)">
@@ -184,12 +183,10 @@ $rol_id = $_SESSION['rol_id'];
                     <?php if ($rol_id == 1 or $rol_id == 3) : ?>
 
                       <a title="Editar" href="?controlador=Alojamientos&accion=editar&id=<?php echo $alojamiento["id_alojamientos"]; ?>" class="btn btn-success btn-sm">
-                        <i class="fas fa-pencil-alt">
-                        </i>
+                        <i class="fas fa-pencil-alt"></i>
                       </a>
                       <a title="Borrar" href="?controlador=Alojamientos&accion=borrar&id=<?php echo $alojamiento["id_alojamientos"]; ?>  &idDireccion=<?php echo $alojamiento["id_direccion"]; ?>  &idRazonSocial=<?php echo $alojamiento["id_razon_social"]; ?>  &idServicios=<?php echo $alojamiento["rela_aloja_servicios"]; ?>  &idServiciosComple=<?php echo $alojamiento["rela_aloja_serv_adicionales"]; ?>" class="btn btn-danger btn-sm">
-                        <i class="fas fa-trash">
-                        </i>
+                        <i class="fas fa-trash"></i>
                       </a>
 
                     <?php endif; ?>
