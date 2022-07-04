@@ -206,68 +206,37 @@
                       </select>
                     </div>
                   </div>
-                  <!-- <div class="form-group row">
-                    <label for="rol" class="col-sm-2 col-form-label">Rol</label>
-                    <div class="col-sm-10">
-                      <select id="rol" name="rol" class="form-control custom-select" required>
-                        <option value="0" selected disabled>Seleccionar el rol</option>
-                        <? //php // foreach ($buscarSelectRol as $k) : 
-                        ?>
-                          <?php //if ($k->id_roles == 1) : 
-                          ?>
-                            <option value="<?php //echo $k->id_roles; 
-                                            ?>" disabled> <?php //echo $k->roles; 
-                                                          ?></option>
-                            } <? // php // endif; 
-                              ?>
-                          <? //php // if ($k->id_roles > 1) : 
-                          ?>
-                            <option value="<? // php // echo $k->id_roles; 
-                                            ?>"> <? //php echo $k->roles; 
-                                                  ?></option>
-                            } <?php //endif; 
-                              ?>
-
-                        <?php //endforeach; 
-                        ?>
-                      </select>
-                    </div>
-                  </div> -->
-                  <div class="form-group row">
-                    <div class="offset-sm-2 col-sm-10">
-                      <input name="" id="" class="btn btn-success" type="submit" value="Agregar">
-
-                      <a href="?controlador=personal&accion=inicio" class="btn btn-primary">Cancelar</a>
-                    </div>
-                  </div>
-                  <!-- </form> -->
-                </div>
-
-                <div class="tab-pane" id="licencias">
-
                   <div class="form-group row">
                     <label for="antiguedad" class="col-sm-2 col-form-label">Años de antigüedad</label>
                     <div class="col-sm-10">
                       <input type="number" class="form-control" name="antiguedad" id="antiguedad" placeholder="Años de antigüedad">
                     </div>
                   </div>
+                </div>
+
+                <div class="tab-pane" id="licencias">
                   <div class="form-group row">
-                    <label for="n_expediente" class="col-sm-2 col-form-label">Fechas de licencias pendientes</label>
+                    <label for="fechaini" class="col-sm-2 col-form-label">Fechas inicio</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="n_expediente" id="n_expediente" placeholder="Año pendiente de licencia">
+                      <input type="date" class="form-control" name="fechaini" id="fechaini" placeholder="Año pendiente de licencia">
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="n_expediente" class="col-sm-2 col-form-label">Días pendientes</label>
+                    <label for="fechafin" class="col-sm-2 col-form-label">Fechas fin</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="n_expediente" id="n_expediente" placeholder="Días pendientes a la fecha">
+                      <input type="date" class="form-control" name="fechafin" id="fechafin" placeholder="Año pendiente de licencia">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="diasrestante" class="col-sm-2 col-form-label">Días Restantes</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="diasrestante" id="diasrestante" placeholder="Días pendientes de lincencias">
                     </div>
                   </div>
 
                   <div class="form-group row">
                     <div class="offset-sm-2 col-sm-10">
                       <input name="" id="" class="btn btn-success" type="submit" value="Agregar">
-
                       <a href="?controlador=personal&accion=inicio" class="btn btn-primary">Cancelar</a>
                     </div>
                   </div>

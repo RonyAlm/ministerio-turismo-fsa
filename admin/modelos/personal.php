@@ -84,7 +84,11 @@ class PersonalModelo
         $tipo_contrato,
         $cargo,
         $usuario,
-        $contraseña
+        $contraseña,
+        $antiguedad,
+        $fechaini,
+        $fechafin,
+        $diasrestante
     ) {
 
         $conexionBD = BD::crearInstancia();
@@ -118,12 +122,14 @@ class PersonalModelo
                                                          `rela_tipo_personal`, `rela_area`,
                                                          `n_legajo`,
                                                             `rela_tipo_estado`, `rela_depto_mintur`,
-                                                            `expediente`, `rela_tipo_contrato`) 
-                                            VALUES (?,?,?,?,?,?,?,?)");
+                                                            `expediente`, `rela_tipo_contrato`,
+                                                            anio_antiguedad) 
+                                            VALUES (?,?,?,?,?,?,?,?,?)");
         $sqlPersonal->execute(array(
             $lastInsertIDAgencias, $cargo,
             $area, $n_legajo, 2,
-            $departamento, $n_expediente, $tipo_contrato
+            $departamento, $n_expediente, $tipo_contrato,
+            $antiguedad
         ));
 
         $lastInsertIDPersonal = $conexionBD->lastInsertId();
@@ -139,6 +145,18 @@ class PersonalModelo
         ));
 
         $lastInsertusuariocontraseña = $conexionBD->lastInsertId();
+
+        /*-------- INSERTAMOS LAS LICENCIAS--------*/
+
+        $sqllicencias = $conexionBD->prepare("INSERT INTO `licencias`(`fecha_ini`,`fecha_fin`,
+                                             `dias_restante`, `estado`, `rela_personal`)
+                                            VALUES (?,?,?,?,?)");
+        $sqllicencias->execute(array(
+            $fechaini, $fechafin,
+            $diasrestante, 0, $lastInsertIDPersonal
+        ));
+
+        $lastInsertlicencias = $conexionBD->lastInsertId();
 
         /*-------- INSERTAMOS EL TELEFONO CELULAR--------*/
 
