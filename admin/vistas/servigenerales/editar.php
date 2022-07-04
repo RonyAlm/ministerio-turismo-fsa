@@ -89,10 +89,10 @@
                             </select>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group fg-description">
                             <label for="descripcion">Descripcion</label>
                             <input type="hidden" id="descripcionID" name="descripcionID" value="<?php echo $editar->id_servicios_generales; ?>">
-                            <textarea name="descripcion" id="descripcion" cols="65" rows="10"><?php echo $editar->descripcion_servicio_general; ?></textarea>
+                            <textarea name="descripcion" id="descripcion" ><?php echo $editar->descripcion_servicio_general; ?></textarea>
                             <!-- <input type="text" id="descripcion" name="descripcion" class="form-control"> -->
                         </div>
 
@@ -163,9 +163,12 @@
                 <!-- /.card -->
             </div>
         </div>
-        <input name="" id="" class="btn btn-success" type="submit" value="Editar Servicio">
 
-        <a href="?controlador=servigenerales&accion=inicio" class="btn btn-primary">Cancelar</a>
+        <div class="botones-footer-edit card-footer">
+            <input name="" id="" class="btn btn-success" type="submit" value="Editar Servicio">
+            <a href="?controlador=servigenerales&accion=inicio" class="btn btn-primary">Cancelar</a>
+        </div>
+
     </form>
 
 
