@@ -58,6 +58,7 @@
               <ul class="nav nav-pills">
                 <li class="nav-item"><a class="nav-link active" href="#personal" data-toggle="tab">Personal</a></li>
                 <li class="nav-item"><a class="nav-link" href="#ministerio" data-toggle="tab">Ministerio</a></li>
+                <li class="nav-item"><a class="nav-link" href="#licencias" data-toggle="tab">Licencias</a></li>
               </ul>
             </div><!-- /.card-header -->
             <div class="card-body">
@@ -172,21 +173,26 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="" class="col-sm-2 col-form-label">Nº de Legajo</label>
+                    <label for="n_legajo" class="col-sm-2 col-form-label">Nº de Legajo</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="" id="" placeholder="Nº de Legajo">
+                      <input type="text" class="form-control" name="n_legajo" id="n_legajo" placeholder="Nº de Legajo">
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="" class="col-sm-2 col-form-label">Nº de Expediente</label>
+                    <label for="n_expediente" class="col-sm-2 col-form-label">Nº de Expediente</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="" id="" placeholder="Nº de Expediente">
+                      <input type="text" class="form-control" name="n_expediente" id="n_expediente" placeholder="Nº de Expediente">
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="" class="col-sm-2 col-form-label">Tipo de Contrato</label>
+                    <label for="tipo_contrato" class="col-sm-2 col-form-label">Tipo de Contrato</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="" id="" placeholder="Tipo de Contrato">
+                      <select id="tipo_contrato" name="tipo_contrato" class="form-control custom-select" required>
+                        <option value="0" selected disabled>Seleccionar el tipo de contrato</option>
+                        <?php foreach ($buscarSelectContrato as $k) : ?>
+                          <option value="<?php echo $k->id_tipo_contrato; ?>"> <?php echo $k->descripcion_contrato; ?></option>
+                        <?php endforeach; ?>
+                      </select>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -200,37 +206,37 @@
                       </select>
                     </div>
                   </div>
-                  <!-- <div class="form-group row">
-                    <label for="rol" class="col-sm-2 col-form-label">Rol</label>
+                  <div class="form-group row">
+                    <label for="antiguedad" class="col-sm-2 col-form-label">Años de antigüedad</label>
                     <div class="col-sm-10">
-                      <select id="rol" name="rol" class="form-control custom-select" required>
-                        <option value="0" selected disabled>Seleccionar el rol</option>
-                        <? //php // foreach ($buscarSelectRol as $k) : 
-                        ?>
-                          <?php //if ($k->id_roles == 1) : 
-                          ?>
-                            <option value="<?php //echo $k->id_roles; 
-                                            ?>" disabled> <?php //echo $k->roles; 
-                                                          ?></option>
-                            } <? // php // endif; 
-                              ?>
-                          <? //php // if ($k->id_roles > 1) : 
-                          ?>
-                            <option value="<? // php // echo $k->id_roles; 
-                                            ?>"> <? //php echo $k->roles; 
-                                                  ?></option>
-                            } <?php //endif; 
-                              ?>
-
-                        <?php //endforeach; 
-                        ?>
-                      </select>
+                      <input type="number" class="form-control" name="antiguedad" id="antiguedad" placeholder="Años de antigüedad">
                     </div>
-                  </div> -->
+                  </div>
+                </div>
+
+                <div class="tab-pane" id="licencias">
+                  <div class="form-group row">
+                    <label for="fechaini" class="col-sm-2 col-form-label">Fechas inicio</label>
+                    <div class="col-sm-10">
+                      <input type="date" class="form-control" name="fechaini" id="fechaini" placeholder="Año pendiente de licencia">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="fechafin" class="col-sm-2 col-form-label">Fechas fin</label>
+                    <div class="col-sm-10">
+                      <input type="date" class="form-control" name="fechafin" id="fechafin" placeholder="Año pendiente de licencia">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="diasrestante" class="col-sm-2 col-form-label">Días Restantes</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="diasrestante" id="diasrestante" placeholder="Días pendientes de lincencias">
+                    </div>
+                  </div>
+
                   <div class="form-group row">
                     <div class="offset-sm-2 col-sm-10">
                       <input name="" id="" class="btn btn-success" type="submit" value="Agregar">
-
                       <a href="?controlador=personal&accion=inicio" class="btn btn-primary">Cancelar</a>
                     </div>
                   </div>

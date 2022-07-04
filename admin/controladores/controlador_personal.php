@@ -64,26 +64,26 @@ class ControladorPersonal
 
 
 
-            $insertarAgencia->crear(
-                $descripcion_agencias,
-                $matricula_agencia,
-                $legajo_agencia,
-                $cuit_agencia,
-                $categoria_agencia,
-                $rela_localidad_direccion,
-                $calle_direccion,
-                $razonsocial,
-                $telefonoAgencia,
-                $telefonoFijoAgencia,
-                $correoAgencia,
-                $facebookAgencia,
-                $instagramAgencia,
-                $twitterAgencia,
-                $webAgencia,
-                $otroAgencia,
-                $estadoAgencia,
-                $idoneoAgencia
-            );
+            // $insertarAgencia->crear(
+            //     $descripcion_agencias,
+            //     $matricula_agencia,
+            //     $legajo_agencia,
+            //     $cuit_agencia,
+            //     $categoria_agencia,
+            //     $rela_localidad_direccion,
+            //     $calle_direccion,
+            //     $razonsocial,
+            //     $telefonoAgencia,
+            //     $telefonoFijoAgencia,
+            //     $correoAgencia,
+            //     $facebookAgencia,
+            //     $instagramAgencia,
+            //     $twitterAgencia,
+            //     $webAgencia,
+            //     $otroAgencia,
+            //     $estadoAgencia,
+            //     $idoneoAgencia
+            // );
 
 
             header("Location:index2.php?controlador=agencias&accion=inicio");
@@ -272,6 +272,7 @@ class ControladorPersonal
         $buscarSelectCargo = $select_tipo->buscarSelectCargo();
         $buscarSelectRol = $select_tipo->buscarSelectRol();
         $buscarSelectArea = $select_tipo->buscarSelectArea();
+        $buscarSelectContrato = $select_tipo->buscarSelectContrato();
 
         if ($_POST) {
             print_r($_POST);
@@ -293,17 +294,31 @@ class ControladorPersonal
             $telefonoFijo = $_POST['telefonoFijo'];
             $correo = $_POST['correo'];
 
+            $departamento = $_POST['departamento'];
+            $area = $_POST['area'];
+            $n_legajo = $_POST['n_legajo'];
+            $n_expediente = $_POST['n_expediente'];
+            $tipo_contrato = $_POST['tipo_contrato'];
+            $cargo = $_POST['cargo'];
+            $antiguedad = $_POST['antiguedad'];
+
+            $fechaini = $_POST['fechaini'];
+            $fechafin = $_POST['fechafin'];
+            $diasrestante = $_POST['diasrestante'];
+
+
+
             $usuario = $nombre . strtoupper(substr($apellido, 0, 1)) . substr($apellido, 1, 1);
 
             // lo que estoy haciendo es agarrar el nombre despues poner en may la primera palabra del apellido,
             // y despues la segunda palabra en min.
 
 
-            echo $usuario;
+            echo str_replace(" ", "", $usuario);
             echo "</br>";
             $random = random_int(1000, 9999);
             $contraseña = $usuario . $random;
-            echo $contraseña;
+            echo str_replace(" ", "", $contraseña);
 
 
 
@@ -320,11 +335,23 @@ class ControladorPersonal
             //     $calle_direccion,
             //     $telefonoCel,
             //     $telefonoFijo,
-            //     $correo
+            //     $correo,
+            //     $departamento,
+            //     $area,
+            //     $n_legajo,
+            //     $n_expediente,
+            //     $tipo_contrato,
+            //     $cargo,
+            //     $usuario,
+            //     $contraseña,
+            //     $antiguedad,
+            //     $fechaini,
+            //     $fechafin,
+            //     $diasrestante
             // );
 
 
-            // header("Location:index2.php?controlador=agencias&accion=inicio");
+            // header("Location:index2.php?controlador=personal&accion=inicio");
         }
 
         include_once("vistas/personal/guardar.php");

@@ -76,7 +76,19 @@ class PersonalModelo
         $calle_direccion,
         $telefonoCel,
         $telefonoFijo,
-        $correo
+        $correo,
+        $departamento,
+        $area,
+        $n_legajo,
+        $n_expediente,
+        $tipo_contrato,
+        $cargo,
+        $usuario,
+        $contraseña,
+        $antiguedad,
+        $fechaini,
+        $fechafin,
+        $diasrestante
     ) {
 
         $conexionBD = BD::crearInstancia();
@@ -104,6 +116,48 @@ class PersonalModelo
 
         $lastInsertIDAgencias = $conexionBD->lastInsertId();
 
+        /*-------- INSERTAMOS EL PERSONAL--------*/
+
+        $sqlPersonal = $conexionBD->prepare("INSERT INTO `personales`(`rela_persona`,
+                                                         `rela_tipo_personal`, `rela_area`,
+                                                         `n_legajo`,
+                                                            `rela_tipo_estado`, `rela_depto_mintur`,
+                                                            `expediente`, `rela_tipo_contrato`,
+                                                            anio_antiguedad) 
+                                            VALUES (?,?,?,?,?,?,?,?,?)");
+        $sqlPersonal->execute(array(
+            $lastInsertIDAgencias, $cargo,
+            $area, $n_legajo, 2,
+            $departamento, $n_expediente, $tipo_contrato,
+            $antiguedad
+        ));
+
+        $lastInsertIDPersonal = $conexionBD->lastInsertId();
+
+        /*-------- INSERTAMOS EL USUARIO Y LA CONTRASEÑA--------*/
+
+        $sqlusuario = $conexionBD->prepare("INSERT INTO `usuario_contra`(`usuario`,
+                                                 `contraseña`, `rela_rol_id`)
+                                            VALUES (?,?,?)");
+        $sqlusuario->execute(array(
+            $usuario, $contraseña,
+            2
+        ));
+
+        $lastInsertusuariocontraseña = $conexionBD->lastInsertId();
+
+        /*-------- INSERTAMOS LAS LICENCIAS--------*/
+
+        $sqllicencias = $conexionBD->prepare("INSERT INTO `licencias`(`fecha_ini`,`fecha_fin`,
+                                             `dias_restante`, `estado`, `rela_personal`)
+                                            VALUES (?,?,?,?,?)");
+        $sqllicencias->execute(array(
+            $fechaini, $fechafin,
+            $diasrestante, 0, $lastInsertIDPersonal
+        ));
+
+        $lastInsertlicencias = $conexionBD->lastInsertId();
+
         /*-------- INSERTAMOS EL TELEFONO CELULAR--------*/
 
         foreach ($telefonoCel as $telefonoAgencia1) {
@@ -129,77 +183,6 @@ class PersonalModelo
         $sqlCorreo->execute(array($correo, 1, $lastInsertIDAgencias));
     }
 
-    public function crear(
-        $descripcion_agencias,
-        $matricula_agencia,
-        $legajo_agencia,
-        $cuit_agencia,
-        $categoria_agencia,
-        $rela_localidad_direccion,
-        $calle_direccion,
-        $razonsocial,
-        $telefonoAgencia,
-        $telefonoFijoAgencia,
-        $correoAgencia,
-        $facebookAgencia,
-        $instagramAgencia,
-        $twitterAgencia,
-        $webAgencia,
-        $otroAgencia,
-        $estadoAgencia,
-        $idoneoAgencia
-    ) {
-
-        $conexionBD = BD::crearInstancia();
-
-        /*-------- INSERTAMOS LA DIRECCION--------*/
-
-        $sqlDireccion = $conexionBD->prepare("INSERT INTO direccion (calle_direccion,rela_localidad_direccion)
-                                                    VALUES(?,?)");
-        $sqlDireccion->execute(array($calle_direccion, $rela_localidad_direccion));
-
-        $lastInsertIDdireccion = $conexionBD->lastInsertId();
-
-
-        /*-------- INSERTAMOS LA AGENCIA--------*/
-
-        $sql = $conexionBD->prepare("INSERT INTO agencias (descripcion_agencias,matricula_agencia,
-                                                                legajo_agencia,cuit_agencia,categoria_agencia, fecha_edit_agencia,
-                                                                rela_agencia_direccion,rela_razon_social_agencia
-                                                                ,idoneo_agencia) 
-                                            VALUES (?,?,?,?,?,CURRENT_TIMESTAMP(),?,?,?)");
-        $sql->execute(array(
-            $descripcion_agencias, $matricula_agencia,
-            $legajo_agencia, $cuit_agencia, $categoria_agencia, $lastInsertIDdireccion,
-            $lastInsertIDRazonSocial, $idoneoAgencia
-        ));
-
-        $lastInsertIDAgencias = $conexionBD->lastInsertId();
-
-        /*-------- INSERTAMOS EL TELEFONO CELULAR--------*/
-
-        foreach ($telefonoAgencia as $telefonoAgencia1) {
-
-            $sqlTelefono = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-                                                                            `rela_contacto_agencia`) 
-                                                    VALUES (?,?,?)");
-            $sqlTelefono->execute(array($telefonoAgencia1, 2, $lastInsertIDAgencias));
-        }
-
-        /*-------- INSERTAMOS EL TELEFONO FIJO--------*/
-
-        $sqlFijo = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-                                                                            `rela_contacto_agencia`) 
-                                                    VALUES (?,?,?)");
-        $sqlFijo->execute(array($telefonoFijoAgencia, 9, $lastInsertIDAgencias));
-
-        /*-------- INSERTAMOS EL CORREO-------*/
-
-        $sqlCorreo = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-                                                                            `rela_contacto_agencia`) 
-                                                    VALUES (?,?,?)");
-        $sqlCorreo->execute(array($correoAgencia, 1, $lastInsertIDAgencias));
-    }
 
     public static function borrar($idAgenciaBorrar, $id_direccion, $idRazonSocial)
     {
@@ -449,6 +432,19 @@ class PersonalModelo
 
 
         $sqlLocalidad = $conexionBD->query("SELECT `id_areas`, `descripcion` FROM `areas`");
+
+        $sqlLocalidad->execute();
+
+        return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
+    }
+    public function buscarSelectContrato()
+    {
+
+        $conexionBD = BD::crearInstancia();
+
+
+        $sqlLocalidad = $conexionBD->query("SELECT `id_tipo_contrato`, `descripcion_contrato` 
+                                            FROM `tipo_contrato`");
 
         $sqlLocalidad->execute();
 
