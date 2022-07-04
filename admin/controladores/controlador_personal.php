@@ -275,7 +275,7 @@ class ControladorPersonal
         $buscarSelectContrato = $select_tipo->buscarSelectContrato();
 
         if ($_POST) {
-            // print_r($_POST);
+            print_r($_POST);
 
             $insertar = new PersonalModelo();
 
@@ -300,6 +300,13 @@ class ControladorPersonal
             $n_expediente = $_POST['n_expediente'];
             $tipo_contrato = $_POST['tipo_contrato'];
             $cargo = $_POST['cargo'];
+            $antiguedad = $_POST['antiguedad'];
+
+            $fechaini = $_POST['fechaini'];
+            $fechafin = $_POST['fechafin'];
+            $diasrestante = $_POST['diasrestante'];
+
+
 
             $usuario = $nombre . strtoupper(substr($apellido, 0, 1)) . substr($apellido, 1, 1);
 
@@ -317,30 +324,34 @@ class ControladorPersonal
 
 
 
-            $insertar->guardar(
-                $nombre,
-                $apellido,
-                $cuil,
-                $profesion,
-                $fecha,
-                $educacion,
-                $rela_localidad_direccion,
-                $calle_direccion,
-                $telefonoCel,
-                $telefonoFijo,
-                $correo,
-                $departamento,
-                $area,
-                $n_legajo,
-                $n_expediente,
-                $tipo_contrato,
-                $cargo,
-                $usuario,
-                $contraseña
-            );
+            // $insertar->guardar(
+            //     $nombre,
+            //     $apellido,
+            //     $cuil,
+            //     $profesion,
+            //     $fecha,
+            //     $educacion,
+            //     $rela_localidad_direccion,
+            //     $calle_direccion,
+            //     $telefonoCel,
+            //     $telefonoFijo,
+            //     $correo,
+            //     $departamento,
+            //     $area,
+            //     $n_legajo,
+            //     $n_expediente,
+            //     $tipo_contrato,
+            //     $cargo,
+            //     $usuario,
+            //     $contraseña,
+            //     $antiguedad,
+            //     $fechaini,
+            //     $fechafin,
+            //     $diasrestante
+            // );
 
 
-            header("Location:index2.php?controlador=personal&accion=inicio");
+            // header("Location:index2.php?controlador=personal&accion=inicio");
         }
 
         include_once("vistas/personal/guardar.php");
