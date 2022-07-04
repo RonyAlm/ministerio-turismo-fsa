@@ -12,13 +12,13 @@ class ControladorPersonal
     public function inicio()
     { //aca se muestra las tablas
 
-        // $consultaAgencia = new PersonalModelo();
+        $consulta = new PersonalModelo();
 
-        // $tablaAgencia = $consultaAgencia->consultar();
+        $tabla = $consulta->consultar();
         // $datosEstadisticos = new estadistica();
 
-        // $cantidad_agencias = $datosEstadisticos->cantidadAgencias();
-        // $cantidadAgenciasHabilitadas = $datosEstadisticos->cantidadAgenciasHabilitadas();
+        // $cantidad = $datosEstadisticos->cantidadAgencias();
+        // $cantidad = $datosEstadisticos->cantidadAgenciasHabilitadas();
 
 
         include_once("vistas/personal/inicio.php");
@@ -242,7 +242,7 @@ class ControladorPersonal
 
     public function info()
     {
-        // $id_agencia = $_GET['id'];
+        // $id = $_GET['id'];
 
         // $agenciaInfo = new PersonalModelo();
 
@@ -275,7 +275,7 @@ class ControladorPersonal
         $buscarSelectContrato = $select_tipo->buscarSelectContrato();
 
         if ($_POST) {
-            print_r($_POST);
+            // print_r($_POST);
 
             $insertar = new PersonalModelo();
 
@@ -314,44 +314,40 @@ class ControladorPersonal
             // y despues la segunda palabra en min.
 
 
-            echo str_replace(" ", "", $usuario);
-            echo "</br>";
+            str_replace(" ", "", $usuario);
+            // echo "</br>";
             $random = random_int(1000, 9999);
             $contraseña = $usuario . $random;
-            echo str_replace(" ", "", $contraseña);
+            str_replace(" ", "", $contraseña);
+
+            $insertar->guardar(
+                $nombre,
+                $apellido,
+                $cuil,
+                $profesion,
+                $fecha,
+                $educacion,
+                $rela_localidad_direccion,
+                $calle_direccion,
+                $telefonoCel,
+                $telefonoFijo,
+                $correo,
+                $departamento,
+                $area,
+                $n_legajo,
+                $n_expediente,
+                $tipo_contrato,
+                $cargo,
+                $usuario,
+                $contraseña,
+                $antiguedad,
+                $fechaini,
+                $fechafin,
+                $diasrestante
+            );
 
 
-
-
-
-            // $insertar->guardar(
-            //     $nombre,
-            //     $apellido,
-            //     $cuil,
-            //     $profesion,
-            //     $fecha,
-            //     $educacion,
-            //     $rela_localidad_direccion,
-            //     $calle_direccion,
-            //     $telefonoCel,
-            //     $telefonoFijo,
-            //     $correo,
-            //     $departamento,
-            //     $area,
-            //     $n_legajo,
-            //     $n_expediente,
-            //     $tipo_contrato,
-            //     $cargo,
-            //     $usuario,
-            //     $contraseña,
-            //     $antiguedad,
-            //     $fechaini,
-            //     $fechafin,
-            //     $diasrestante
-            // );
-
-
-            // header("Location:index2.php?controlador=personal&accion=inicio");
+            header("Location:index2.php?controlador=personal&accion=inicio");
         }
 
         include_once("vistas/personal/guardar.php");

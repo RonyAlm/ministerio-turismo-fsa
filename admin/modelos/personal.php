@@ -19,19 +19,16 @@ class PersonalModelo
 
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->query("SELECT `id_agencias`, `descripcion_agencias`, direccion.calle_direccion, fecha_edit_agencia,
-                                        (SELECT contacto.descripcion_contacto 
-                                        FROM contacto 
-                                        WHERE agencias.id_agencias = contacto.rela_contacto_agencia
-                                        and contacto.rela_tipo_contacto_cont = 2
-                                        LIMIT 1) descripcion_contacto  ,tipo_estado.descripcion_tipo_estado,
-                                        localidad.nombre_localidad ,direccion.id_direccion,razon_social.id_razon_social
-                                        FROM `agencias`
-                                        INNER JOIN direccion ON agencias.rela_agencia_direccion = direccion.id_direccion
-                                        INNER JOIN estado_actividad on estado_actividad.rela_estado_agencia = agencias.id_agencias
-                                        INNER JOIN tipo_estado on tipo_estado.id_tipo_estado = estado_actividad.rela_tipo_estado
-                                        INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad
-                                        INNER JOIN razon_social on agencias.rela_razon_social_agencia = razon_social.id_razon_social");
+        $sql = $conexionBD->query("SELECT `id_deptos_mintur`, dpm.descripcion as descrDepto,
+        per.id_persona,
+        CONCAT(per.nombre_persona, ' ', per.apellido_persona) full_name,
+        tp.id_tipo_personal, tp.descripcion as descrTP
+        FROM `deptos_mintur` dpm
+        INNER JOIN personales p on p.rela_depto_mintur = dpm.id_deptos_mintur
+        INNER JOIN persona per on per.id_persona = p.rela_persona
+        INNER JOIN tipo_personal tp on tp.id_tipo_personal = p.rela_tipo_personal
+        WHERE p.rela_tipo_personal = 2 OR p.rela_tipo_personal = 4
+        and p.rela_area = 7");
 
         //recuperamos los datos y los retornamos
 

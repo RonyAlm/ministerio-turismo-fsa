@@ -230,7 +230,7 @@
                   <div class="form-group row">
                     <label for="diasrestante" class="col-sm-2 col-form-label">Días Restantes</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="diasrestante" id="diasrestante" placeholder="Días pendientes de lincencias">
+                      <input type="number" class="form-control" name="diasrestante" id="diasrestante" placeholder="Días pendientes de lincencias">
                     </div>
                   </div>
 
