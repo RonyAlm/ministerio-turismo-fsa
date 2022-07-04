@@ -31,7 +31,7 @@ if ($nombre) {
   // print_r($sqlDireccion);
 } else {
   $nombre = 0;
-  echo "mi nombre es otro " . $nombre;
+  // echo "mi nombre es otro " . $nombre;
 }
 
 
@@ -541,24 +541,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- /.sidebar -->
     </aside>
     
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-
-      <!-- Main content -->
-      <section class="content">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-12" style="margin-top: 1rem; ">
-              <?php include_once("ruteador.php"); ?>
-            </div>
-          </div>
-          <!-- /.row -->
-        </div><!-- /.container-fluid -->
-      </section>
-      <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
       <!-- Control sidebar content goes here -->
