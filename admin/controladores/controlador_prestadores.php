@@ -23,6 +23,7 @@ class ControladorPrestadores
 
         include_once("vistas/prestadores/inicio.php");
     }
+
     public function crear()
     {
 
@@ -90,6 +91,7 @@ class ControladorPrestadores
 
         include_once("vistas/prestadores/crear.php");
     }
+
     public function editar()
     {
 
@@ -205,6 +207,7 @@ class ControladorPrestadores
         }
         include_once("vistas/prestadores/editar.php");
     }
+
     public function borrar()
     {
         print_r($_GET);
@@ -221,6 +224,7 @@ class ControladorPrestadores
 
         header("Location:index2.php?controlador=Prestadores&accion=inicio");
     }
+
     public function info()
     {
         $id_prestador = $_GET['id'];
@@ -248,4 +252,51 @@ class ControladorPrestadores
 
         include_once("vistas/prestadores/info.php");
     }
+
+    public function imprimir()
+    {
+
+        $consultaPrestadores = new PrestadoresModelo();
+
+        $tablaPrestadores = $consultaPrestadores->consultar();
+        $contactotelefonos = $consultaPrestadores->consultarContacto();
+
+        $datosEstadisticos = new estadistica();
+
+        $cantidad_prestadores = $datosEstadisticos->cantidadPrestadores();
+        $cantidad_guias = $datosEstadisticos->cantidadGuias();
+        $cantidad_operadores = $datosEstadisticos->cantidadOperadores();
+        $cantidad_total = $datosEstadisticos->cantidadTotal();
+
+        include_once("vistas/prestadores/imprimir.php");
+    }
+
+    public function imprimirInfo()
+    {
+        $id_prestador = $_GET['id'];
+
+        $prestadorInfo = new PrestadoresModelo();
+
+        $infoPrestador = $prestadorInfo->buscarInsertar($id_prestador);
+
+        $serviciosPrestador = $prestadorInfo->serviciosprestadores($id_prestador);
+
+
+
+
+        $contactosDelPrestador = new ContactosInfo();
+
+        $prestadorTelefono = $contactosDelPrestador->consultarTelefonos($id_prestador);
+        $prestadorTelefonoFijo = $contactosDelPrestador->consultarTelefonosFijos($id_prestador);
+        $prestadorCorreo = $contactosDelPrestador->consultarCorreo($id_prestador);
+        $prestadorFacebook = $contactosDelPrestador->consultarFacebook($id_prestador);
+        $prestadorInstagram = $contactosDelPrestador->consultarInstagram($id_prestador);
+        $prestadorTwitter = $contactosDelPrestador->consultarTwitter($id_prestador);
+        $prestadorWeb = $contactosDelPrestador->consultarWeb($id_prestador);
+        $prestadorOtro = $contactosDelPrestador->consultarOtro($id_prestador);
+        //print_r($alojamientosCorreo);
+
+        include_once("vistas/prestadores/invoice-print.php");
+    }
+
 }
