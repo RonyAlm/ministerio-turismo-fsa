@@ -23,6 +23,7 @@ class ControladorServigenerales
 
         include_once("vistas/servigenerales/inicio.php");
     }
+
     public function crear()
     {
 
@@ -92,6 +93,7 @@ class ControladorServigenerales
 
         include_once("vistas/servigenerales/crear.php");
     }
+
     public function editar()
     {
 
@@ -261,4 +263,44 @@ class ControladorServigenerales
 
         include_once("vistas/servigenerales/info.php");
     }
+
+    public function imprimir()
+    { //aca se muestra las tablas
+
+        $consultaServigeneral = new ServigeneralModelo();
+
+        $tablaServigeneral = $consultaServigeneral->consultar();
+        $datosEstadisticos = new estadistica();
+
+        $cantidadPiletas = $datosEstadisticos->cantidadPiletas();
+        $cantidadPlayas = $datosEstadisticos->cantidadPlayas();
+        $cantidadCamping = $datosEstadisticos->cantidadCamping();
+        $cantidadParqueAcuaticos = $datosEstadisticos->cantidadParqueAcuaticos();
+
+
+        include_once("vistas/servigenerales/imprimir.php");
+    }
+
+    public function imprimirInfo()
+    {
+        $id = $_GET['id'];
+
+        $info = new ServigeneralModelo();
+
+        $informacion = $info->buscar($id);
+
+
+        $contactosDeagencia = new ContactosInfo();
+        $agenciaTelefonoInfo = $contactosDeagencia->consultarTelefonos($id);
+        $agenciaTelefonoFijo = $contactosDeagencia->consultarTelefonosFijos($id);
+        $agenciaCorreo = $contactosDeagencia->consultarCorreo($id);
+        $agenciaFacebook = $contactosDeagencia->consultarFacebook($id);
+        $agenciaInstagram = $contactosDeagencia->consultarInstagram($id);
+        $agenciaTwitter = $contactosDeagencia->consultarTwitter($id);
+        $agenciaWeb = $contactosDeagencia->consultarWeb($id);
+        $agenciaOtro = $contactosDeagencia->consultarOtro($id);
+
+        include_once("vistas/servigenerales/invoice-print.php");
+    }
+    
 }
