@@ -3,6 +3,7 @@ class PersonalModelo
 {
 
     public $listaPersonal;
+    public $listaPersonal3;
     public $listaPersonalID;
     public $listaBuscar;
 
@@ -10,6 +11,7 @@ class PersonalModelo
     public function __construct()
     {
         $this->listaPersonal = array();
+        $this->listaPersonal3 = array();
         $this->listaPersonalID = array();
         $this->listaBuscar = array();
     }
@@ -29,6 +31,48 @@ class PersonalModelo
         INNER JOIN tipo_personal tp on tp.id_tipo_personal = p.rela_tipo_personal
         WHERE p.rela_tipo_personal = 2 OR p.rela_tipo_personal = 4
         and p.rela_area = 7");
+
+        //recuperamos los datos y los retornamos
+
+        while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
+            $this->listaPersonal[] = $filas;
+        }
+        return $this->listaPersonal; //este return se va a llamar en el controlador_alojamiento.php clase inicio
+
+    }
+
+    public function info3($id)
+    {
+
+        $conexionBD = BD::crearInstancia();
+
+        $sql = $conexionBD->query("SELECT `id_personal`, `rela_area`,a.descripcion,a.id_areas,
+        tep.id_tipo_estado_personal, tep.descripcion as tipoestado,
+        pe.id_persona,CONCAT(pe.nombre_persona, ' ', pe.apellido_persona) full_name
+        FROM `personales` p
+        INNER JOIN areas a on a.id_areas = p.rela_area
+        INNER JOIN tipo_estado_personal tep on tep.id_tipo_estado_personal = p.rela_tipo_estado
+        INNER JOIN persona pe on pe.id_persona = p.rela_persona
+        WHERE p.rela_depto_mintur = $id
+        ORDER by rela_area");
+
+        //recuperamos los datos y los retornamos
+
+        while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
+            $this->listaPersonal3[] = $filas;
+        }
+        return $this->listaPersonal3; //este return se va a llamar en el controlador_alojamiento.php clase inicio
+
+    }
+    public function info2($id)
+    {
+
+        $conexionBD = BD::crearInstancia();
+
+        $sql = $conexionBD->query("SELECT * FROM areas a
+        INNER JOIN personales p on p.rela_area = a.id_areas
+        WHERE p.rela_depto_mintur = $id
+        GROUP BY a.descripcion");
 
         //recuperamos los datos y los retornamos
 

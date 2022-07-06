@@ -242,9 +242,12 @@ class ControladorPersonal
 
     public function info()
     {
-        // $id = $_GET['id'];
+        $id = $_GET['id'];
 
-        // $agenciaInfo = new PersonalModelo();
+        $Info = new PersonalModelo();
+
+        $tablaInformes = $Info->info3($id);
+        $tablaInfo2 = $Info->info2($id);
 
         // $agenciasInfomacion = $agenciaInfo->buscar($id_agencia);
 
