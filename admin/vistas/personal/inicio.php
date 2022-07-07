@@ -37,6 +37,7 @@ $rol_id = $_SESSION['rol_id'];
         </button> -->
       </div>
     </div>
+
     <div class="card-body p-0">
       <table class="table table-striped projects">
         <thead>
@@ -58,179 +59,60 @@ $rol_id = $_SESSION['rol_id'];
             </th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>
-              #
-            </td>
-            <td>
-              <a>
-                Administración
-              </a>
-              <br />
-              <small>
-                Creado 01.01.2022
-              </small>
-            </td>
-            <td>
-              <ul class="list-inline">
-                <li class="list-inline-item">
-                  <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar2.png">
-                </li>
-                <li class="list-inline-item">
-                  <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar3.png">
-                </li>
-                <li class="list-inline-item">
-                  <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar4.png">
-                </li>
-                <li class="list-inline-item">
-                  <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar5.png">
-                </li>
-              </ul>
-            </td>
-            <td>
-              <a>
-                Director
-              </a>
-              <br />
-              <small>
-                Jorge Cantero
-              </small>
-            </td>
-            <td class="project-actions text-right">
-              <a class="btn btn-primary btn-sm" href="?controlador=personal&accion=info">
-                <i class="fas fa-folder">
-                </i>
-                View
-              </a>
-              <a class="btn btn-info btn-sm" href="#">
-                <i class="fas fa-pencil-alt">
-                </i>
-                Edit
-              </a>
-              <a class="btn btn-danger btn-sm" href="#">
-                <i class="fas fa-trash">
-                </i>
-                Delete
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              #
-            </td>
-            <td>
-              <a>
-                Central
-              </a>
-              <br />
-              <small>
-                Creado 01.01.2022
-              </small>
-            </td>
-            <td>
-              <ul class="list-inline">
-                <li class="list-inline-item">
-                  <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar2.png">
-                </li>
-                <li class="list-inline-item">
-                  <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar2.png">
-                </li>
-                <li class="list-inline-item">
-                  <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar3.png">
-                </li>
-                <li class="list-inline-item">
-                  <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar4.png">
-                </li>
-              </ul>
-            </td>
-            <td>
-              <a>
-                Director
-              </a>
-              <br />
-              <small>
-                Gonzalo Bordoy
-              </small>
-            </td>
-            <td class="project-actions text-right">
-              <a class="btn btn-primary btn-sm" href="#">
-                <i class="fas fa-folder">
-                </i>
-                View
-              </a>
-              <!-- <a class="btn btn-info btn-sm" href="#">
-                <i class="fas fa-pencil-alt">
-                </i>
-                Edit
-              </a>
-              <a class="btn btn-danger btn-sm" href="#">
-                <i class="fas fa-trash">
-                </i>
-                Delete
-              </a> -->
-            </td>
-          </tr>
-          <tr>
-            <td>
-              #
-            </td>
-            <td>
-              <a>
-                Logística
-              </a>
-              <br />
-              <small>
-                Creado 01.01.2022
-              </small>
-            </td>
-            <td>
-              <ul class="list-inline">
-                <li class="list-inline-item">
-                  <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar.png">
-                </li>
-                <li class="list-inline-item">
-                  <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar2.png">
-                </li>
-                <li class="list-inline-item">
-                  <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar3.png">
-                </li>
-                <li class="list-inline-item">
-                  <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar4.png">
-                </li>
-              </ul>
-            </td>
-            <td>
-              <a>
-                Encargado
-              </a>
-              <br />
-              <small>
-                Fabian Benitez
-              </small>
-            </td>
-            <td class="project-actions text-right">
-              <a class="btn btn-primary btn-sm" href="#">
-                <i class="fas fa-folder">
-                </i>
-                View
-              </a>
-              <!-- <a class="btn btn-info btn-sm" href="#">
-                <i class="fas fa-pencil-alt">
-                </i>
-                Edit
-              </a>
-              <a class="btn btn-danger btn-sm" href="#">
-                <i class="fas fa-trash">
-                </i>
-                Delete
-              </a> -->
-            </td>
-          </tr>
+        <?php foreach ($tabla as $k) : ?>
+          <tbody>
+            <tr>
+              <td>
+                #
+              </td>
+              <td>
+                <a>
+                  <?php echo $k["descrDepto"]; ?>
+                </a>
+                <br />
+                <small>
+                  Creado 01.01.2022
+                </small>
+              </td>
+              <td>
+                <ul class="list-inline">
+                  <li class="list-inline-item">
+                    <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar2.png">
+                  </li>
+                  <li class="list-inline-item">
+                    <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar3.png">
+                  </li>
+                  <li class="list-inline-item">
+                    <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar4.png">
+                  </li>
+                  <li class="list-inline-item">
+                    <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar5.png">
+                  </li>
+                </ul>
+              </td>
+              <td>
+                <a>
+                  <?php echo $k["descrTP"]; ?>
+                </a>
+                <br />
+                <small>
+                  <?php echo $k["full_name"]; ?>
+                </small>
+              </td>
+              <td class="project-actions text-right">
+                <a class="btn btn-primary btn-sm" href="?controlador=personal&accion=info&id=<?php echo $k["id_deptos_mintur"]; ?>">
+                  <i class="fas fa-folder">
+                  </i>
+                  Vista
+                </a>
+              </td>
+            </tr>
 
-        </tbody>
+          </tbody>
+        <?php endforeach; ?>
       </table>
     </div>
+
     <!-- /.card-body -->
   </div>
   <!-- /.card -->

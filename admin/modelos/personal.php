@@ -3,6 +3,7 @@ class PersonalModelo
 {
 
     public $listaPersonal;
+    public $listaPersonal3;
     public $listaPersonalID;
     public $listaBuscar;
 
@@ -10,6 +11,7 @@ class PersonalModelo
     public function __construct()
     {
         $this->listaPersonal = array();
+        $this->listaPersonal3 = array();
         $this->listaPersonalID = array();
         $this->listaBuscar = array();
     }
@@ -19,19 +21,58 @@ class PersonalModelo
 
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->query("SELECT `id_agencias`, `descripcion_agencias`, direccion.calle_direccion, fecha_edit_agencia,
-                                        (SELECT contacto.descripcion_contacto 
-                                        FROM contacto 
-                                        WHERE agencias.id_agencias = contacto.rela_contacto_agencia
-                                        and contacto.rela_tipo_contacto_cont = 2
-                                        LIMIT 1) descripcion_contacto  ,tipo_estado.descripcion_tipo_estado,
-                                        localidad.nombre_localidad ,direccion.id_direccion,razon_social.id_razon_social
-                                        FROM `agencias`
-                                        INNER JOIN direccion ON agencias.rela_agencia_direccion = direccion.id_direccion
-                                        INNER JOIN estado_actividad on estado_actividad.rela_estado_agencia = agencias.id_agencias
-                                        INNER JOIN tipo_estado on tipo_estado.id_tipo_estado = estado_actividad.rela_tipo_estado
-                                        INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad
-                                        INNER JOIN razon_social on agencias.rela_razon_social_agencia = razon_social.id_razon_social");
+        $sql = $conexionBD->query("SELECT `id_deptos_mintur`, dpm.descripcion as descrDepto,
+        per.id_persona,
+        CONCAT(per.nombre_persona, ' ', per.apellido_persona) full_name,
+        tp.id_tipo_personal, tp.descripcion as descrTP
+        FROM `deptos_mintur` dpm
+        INNER JOIN personales p on p.rela_depto_mintur = dpm.id_deptos_mintur
+        INNER JOIN persona per on per.id_persona = p.rela_persona
+        INNER JOIN tipo_personal tp on tp.id_tipo_personal = p.rela_tipo_personal
+        WHERE p.rela_tipo_personal = 2 OR p.rela_tipo_personal = 4
+        and p.rela_area = 7");
+
+        //recuperamos los datos y los retornamos
+
+        while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
+            $this->listaPersonal[] = $filas;
+        }
+        return $this->listaPersonal; //este return se va a llamar en el controlador_alojamiento.php clase inicio
+
+    }
+
+    public function info3($id)
+    {
+
+        $conexionBD = BD::crearInstancia();
+
+        $sql = $conexionBD->query("SELECT `id_personal`, `rela_area`,a.descripcion,a.id_areas,
+        tep.id_tipo_estado_personal, tep.descripcion as tipoestado,
+        pe.id_persona,CONCAT(pe.nombre_persona, ' ', pe.apellido_persona) full_name
+        FROM `personales` p
+        INNER JOIN areas a on a.id_areas = p.rela_area
+        INNER JOIN tipo_estado_personal tep on tep.id_tipo_estado_personal = p.rela_tipo_estado
+        INNER JOIN persona pe on pe.id_persona = p.rela_persona
+        WHERE p.rela_depto_mintur = $id
+        ORDER by rela_area");
+
+        //recuperamos los datos y los retornamos
+
+        while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
+            $this->listaPersonal3[] = $filas;
+        }
+        return $this->listaPersonal3; //este return se va a llamar en el controlador_alojamiento.php clase inicio
+
+    }
+    public function info2($id)
+    {
+
+        $conexionBD = BD::crearInstancia();
+
+        $sql = $conexionBD->query("SELECT * FROM areas a
+        INNER JOIN personales p on p.rela_area = a.id_areas
+        WHERE p.rela_depto_mintur = $id
+        GROUP BY a.descripcion");
 
         //recuperamos los datos y los retornamos
 

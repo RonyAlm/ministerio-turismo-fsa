@@ -4,7 +4,7 @@ session_start();
 
 // include_once "controladores/controlador_login.php";
 
-include_once("/xampp/htdocs/ministerio-turismo-fsa/admin/conexion.php");
+include_once("../conexion.php");
 
 $conexion = BD::crearInstancia();
 
