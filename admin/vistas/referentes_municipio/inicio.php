@@ -29,11 +29,14 @@ $rol_id = $_SESSION['rol_id'];
 
 <div class="card">
   <div class="card-header">
-    <?php if ($rol_id == 1 or $rol_id == 3) { ?>
+
+    <?php if ($rol_id == 1 or $rol_id == 3) : ?>
 
       <a name="" id="" class="btn btn-success" href="?controlador=referentes&accion=crear" role="button">Agregar</a>
 
-    <?php } ?>
+    <?php else : ?>
+      <a class="btn btn-success disabled" href="#" role="button">Agregar</a>
+    <?php endif; ?>
 
     <a name="" id="" class="btn btn-secondary" href="?controlador=referentes&accion=imprimir" role="button">Imprimir</a>
 
@@ -149,14 +152,25 @@ $rol_id = $_SESSION['rol_id'];
                       <i class="fas fa-folder"></i>
                     </a>
 
-                    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") { ?>
+                    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") : ?>
+
                       <a title="Editar" href="?controlador=referentes&accion=editar&id=<?php echo $referente["id_referentes"]; ?>" class="btn btn-success btn-sm">
                         <i class="fas fa-pencil-alt"></i>
                       </a>
                       <a title="Borrar" href="?controlador=referentes&accion=borrar&id=<?php echo $referente["id_referentes"]; ?>&idDireccion=<?php echo $referente["id_direccion"]; ?>" class="btn btn-danger btn-sm">
                         <i class="fas fa-trash"></i>
                       </a>
-                    <?php } ?>
+
+                    <?php else : ?>
+
+                      <a title="Editar" href="#" class="btn btn-success btn-sm disabled">
+                        <i class="fas fa-pencil-alt"></i>
+                      </a>
+                      <a title="Borrar" href="#" class="btn btn-danger btn-sm disabled">
+                        <i class="fas fa-trash"></i>
+                      </a>
+
+                    <?php endif; ?>
 
                   </div>
 

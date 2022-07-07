@@ -28,18 +28,18 @@ $rol_id = $_SESSION['rol_id'];
 <div class="card">
 
   <div class="card-header">
-    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") { ?>
+    
+    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") : ?>
 
       <a name="" id="" class="btn btn-success" href="?controlador=servigenerales&accion=crear" role="button">Agregar</a>
 
-    <?php } ?>
+    <?php else : ?>
+      <a class="btn btn-success disabled" href="#" role="button">Agregar</a>
+    <?php endif; ?>
 
     <a name="" id="" class="btn btn-secondary" href="?controlador=servigenerales&accion=imprimir" role="button">Imprimir</a>
 
   </div>
-
-
-
 
   <div class="card-body">
 
@@ -135,7 +135,7 @@ $rol_id = $_SESSION['rol_id'];
                     <a title="Más información" id="btn1" href="?controlador=servigenerales&accion=info&id=<?php echo $servigeneral["id_servicios_generales"]; ?>" class="btn btn-primary btn-sm"> <i class="fas fa-folder"></i>
                     </a>
 
-                    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") { ?>
+                    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") : ?>
 
                       <a title="Editar" href="?controlador=servigenerales&accion=editar&id=<?php echo $servigeneral["id_servicios_generales"]; ?>" class="btn btn-success btn-sm">
                         <i class="fas fa-pencil-alt"></i>
@@ -144,7 +144,16 @@ $rol_id = $_SESSION['rol_id'];
                         <i class="fas fa-trash"></i>
                       </a>
 
-                    <?php } ?>
+                    <?php else : ?>
+
+                      <a title="Editar" href="#" class="btn btn-success btn-sm disabled">
+                        <i class="fas fa-pencil-alt"></i>
+                      </a>
+                      <a title="Borrar" href="#" class="btn btn-danger btn-sm disabled">
+                        <i class="fas fa-trash"></i>
+                      </a>
+
+                    <?php endif; ?>
 
                   </div>
 
