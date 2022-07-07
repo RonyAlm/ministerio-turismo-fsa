@@ -257,14 +257,14 @@ class ReferenteModelo
         /*------------ SE ACTUALIZA EL REFERENTE---------- */
 
         if ($referenteEncargado == 0) {
-            echo "se actualiza sin el encargado";
+            // echo "se actualiza sin el encargado";
             $sql = $conexionBD->prepare("UPDATE `referentes_municipal` SET `idoneo_referente`='$nombreReferente',
                                                                             fecha_edit_referente= CURRENT_TIMESTAMP()
                                         
                                         WHERE id_referentes = $referenteID");
             $sql->execute();
         } else {
-            echo "se actualiza con el encargado";
+            // echo "se actualiza con el encargado";
             $sql = $conexionBD->prepare("UPDATE `referentes_municipal` 
                 SET`rela_tipo_encargado`=$referenteEncargado ,`idoneo_referente`='$nombreReferente',
                 fecha_edit_referente= CURRENT_TIMESTAMP()
