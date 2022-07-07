@@ -47,7 +47,7 @@ $rol_id = $_SESSION['rol_id'];
 
                   <?php if ($tabla["rela_area"] == $tabla1["rela_area"]) { ?>
 
-                    <div id="#collapse<?php echo $conteo ?>" class="collapse show" data-parent="#accordion">
+                    <div id="collapse<?php echo $conteo ?>" class="collapse show" data-parent="#accordion">
                       <div class="card-body">
                         <div id="acordeon" class="row">
                           <div class="col-lg-12">
@@ -73,7 +73,7 @@ $rol_id = $_SESSION['rol_id'];
                                   <td class="project-actions text-right">
                                     <div class="btn-group" role="group" aria-label="">
 
-                                      <a title="Más Infomación" id="btn1" href="?controlador=personal&accion=info&id=<?= $tabla1["id_personal"]; ?>" class="btn btn-primary btn-sm">
+                                      <a title="Más Infomación" id="btn1" href="?controlador=personal&accion=infopersonal&id=<?= $tabla1["id_personal"]; ?>" class="btn btn-primary btn-sm">
                                         <i class="fas fa-folder"></i>
                                       </a>
 
