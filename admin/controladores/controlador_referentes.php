@@ -1,8 +1,7 @@
 <?php
+
 include_once("modelos/referentes.php");
 include_once("conexion.php");
-
-
 
 class ControladorReferentes
 {
@@ -65,12 +64,14 @@ class ControladorReferentes
                 $referenteEncargado
             );
 
-            header("Location:./index2.php?controlador=referentes&accion=inicio");
+            // header("Location:./index2.php?controlador=referentes&accion=inicio");
+            echo "<script>location.href='index2.php?controlador=referentes&accion=inicio';</script>";
         }
 
 
         include_once("vistas/referentes_municipio/crear.php");
     }
+
     public function editar()
     { //aca se muestra las tablas
 
@@ -80,7 +81,7 @@ class ControladorReferentes
         $buscarSelectEncargado = $buscarReferente->buscarSelectEncargado();
 
         if ($_POST) {
-            print_r($_POST);
+            // print_r($_POST);
 
             $insertarReferente = new ReferenteModelo();
 
@@ -145,7 +146,8 @@ class ControladorReferentes
                 $referenteEncargado
             );
 
-            header("Location: index2.php?controlador=referentes&accion=inicio");
+            // header("Location: index2.php?controlador=referentes&accion=inicio");
+            echo "<script>location.href='index2.php?controlador=referentes&accion=inicio';</script>";
         }
 
         $contactosReferentes = new ContactosReferentes();
@@ -167,10 +169,11 @@ class ControladorReferentes
 
         include_once("vistas/referentes_municipio/editar.php");
     }
+
     public function borrar()
     { //aca se muestra las tablas
 
-        print_r($_GET);
+        // print_r($_GET);
 
         $borradoReferente = new ReferenteModelo();
 
@@ -182,7 +185,8 @@ class ControladorReferentes
 
 
 
-        header("Location:index2.php?controlador=Referentes&accion=inicio");
+        // header("Location:index2.php?controlador=Referentes&accion=inicio");
+        echo "<script>location.href='index2.php?controlador=referentes&accion=inicio';</script>";
     }
 
     public function info()
@@ -209,8 +213,42 @@ class ControladorReferentes
         include_once("vistas/referentes_municipio/info.php");
     }
 
+    public function imprimir()
+    { //aca se muestra las tablas
+        $consultaReferente = new ReferenteModelo();
+
+        $tablaReferente = $consultaReferente->consultar();
+
+        $estadistica = $consultaReferente->estadistica();
+        $estadistica2 = $consultaReferente->estadisticaSedesTurismo();
+
+        //print_r($estadistica);
+
+        include_once("vistas/referentes_municipio/imprimir.php");
+    }
+
+    public function imprimirInfo()
+    { //aca se muestra las tablas
+
+        $id_referente = $_GET['id'];
+
+        $referenteInfo = new ReferenteModelo();
+
+        $referenteInfo = $referenteInfo->buscar($id_referente);
+
+        $contactosReferentes = new ContactosInfo();
+        $referenteTelefono = $contactosReferentes->consultarTelefonos($id_referente);
+        $referenteTelefonoFijo = $contactosReferentes->consultarTelefonosFijos($id_referente);
+        $referenteCorreo = $contactosReferentes->consultarCorreo($id_referente);
+        $referenteFacebook = $contactosReferentes->consultarFacebook($id_referente);
+        $referenteInstagram = $contactosReferentes->consultarInstagram($id_referente);
+        $referenteTwitter = $contactosReferentes->consultarTwitter($id_referente);
+        $referenteWeb = $contactosReferentes->consultarWeb($id_referente);
+        $referenteOtro = $contactosReferentes->consultarOtro($id_referente);
 
 
 
-    /*---- FIN DE LA CLASE CONTROLADOR*/
+        include_once("vistas/referentes_municipio/invoice-print.php");
+    }
+
 }
