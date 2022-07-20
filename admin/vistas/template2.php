@@ -340,9 +340,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <p>Servicios Generales</p>
                     </a>
                   </li>
+                <?php }
+              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
+                  <li class="nav-item">
+                    <a href="?controlador=gastronomia&accion=inicio" class="nav-link 
+                    <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'gastronomia') ? 'active' : '' ?>">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Gastronomía</p>
+                    </a>
+                  </li>
 
                 </ul>
               </li>
+
               <!-- CALENDARIO -->
             <?php }
               if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
