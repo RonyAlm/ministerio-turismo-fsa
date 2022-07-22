@@ -3,7 +3,7 @@
   <div class="card-header ">
     <h3 class="card-title text-success">
       <i class="fas fa-solid fa-plus-minus  mr-2"></i>
-      Agregar Agencia
+      Agregar Gastronomía
     </h3>
   </div>
 
@@ -17,7 +17,7 @@
     <form action="" method="post">
 
       <div class="row">
-        
+
         <!-- CREAR GENERAL -->
         <div class="col-md-6">
           <div class="card card-success card-outline">
@@ -32,8 +32,8 @@
             </div>
             <div class="card-body">
               <div class="form-group">
-                <label for="nombreAgencia">Designación Comercial:</label>
-                <input type="text" id="nombreAgencia" name="nombreAgencia" class="form-control" required>
+                <label for="designacion">Designación Comercial:</label>
+                <input type="text" id="designacion" name="designacion" class="form-control" required>
               </div>
 
               <div class="form-group">
@@ -45,35 +45,12 @@
                   <?php endforeach; ?>
                 </select>
               </div>
-              <div class="form-group">
-                <label for="razonsocialAgencia">Razón Social:</label>
-                <input type="text" id="razonsocialAgencia" name="razonsocialAgencia" class="form-control"></input>
-              </div>
 
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label for="idoneoAgencia">Idóneo:</label>
                 <input type="text" id="idoneoAgencia" name="idoneoAgencia" class="form-control"></input>
-              </div>
+              </div> -->
 
-              <div class="form-group">
-                <label for="matriculaAgencia">Matrícula</label>
-                <input type="text" id="matriculaAgencia" name="matriculaAgencia" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label for="legajoAgencia">Legajo</label>
-                <input type="text" id="legajoAgencia" name="legajoAgencia" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label for="categoriaAgencia">Categoria</label>
-                <input type="text" id="categoriaAgencia" name="categoriaAgencia" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label for="cuitAgencia">Cuit</label>
-                <input type="text" id="cuitAgencia" name="cuitAgencia" class="form-control" required>
-              </div>
 
               <div class="form-group">
                 <label for="domicilioAgencia">Domicilio</label>
@@ -81,14 +58,15 @@
               </div>
 
               <div class="form-group">
-                <label for="estadoAgencia">Estado</label>
-                <select id="estadoAgencia" name="estadoAgencia" class="form-control custom-select" required>
-                  <option value="0" selected disabled>Seleccionar el Estado de la Agencia</option>
-                  <?php foreach ($buscarSelectEstado as $k) : ?>
-                    <option value="<?php echo $k->id_tipo_estado; ?>"> <?php echo $k->descripcion_tipo_estado; ?></option>
-                  <?php endforeach; ?>
-                </select>
+                <label for="diayhora">Días y horarios de atención</label>
+                <input type="text" id="diayhora" name="diayhora" class="form-control">
               </div>
+
+              <div class="form-group">
+                <label for="observacion">Observación</label>
+                <input type="text" id="observacion" name="observacion" class="form-control">
+              </div>
+
 
             </div>
             <!-- /.card-body -->
@@ -120,7 +98,7 @@
                 </div>
               </div>
               <div class="telefonos">
-                  <!-- en este contenedor de agregar los demas teléfonos -->
+                <!-- en este contenedor de agregar los demas teléfonos -->
               </div>
               <div class="form-group">
                 <label for="telefonoFijoAgencia">Teléfono Fijo</label>
@@ -161,7 +139,7 @@
   </div>
   <div class="card-footer">
     <div class="float-right">
-      <a href="?controlador=agencias&accion=inicio" class="btn btn-secondary">Cancelar</a>
+      <a href="?controlador=gastronomia&accion=inicio" class="btn btn-secondary">Cancelar</a>
       <input name="" id="" class="btn btn-success" type="submit" value="Agregar">
     </div>
     </form>

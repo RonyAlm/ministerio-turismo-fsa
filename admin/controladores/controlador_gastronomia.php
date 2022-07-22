@@ -10,9 +10,9 @@ class ControladorGastronomia
     public function inicio()
     { //aca se muestra las tablas
 
-        // $consultaAgencia = new AgenciaModelo();
+        $consulta = new GastronomiaModelo();
 
-        // $tablaAgencia = $consultaAgencia->consultar();
+        $tabla = $consulta->consultar();
         // $datosEstadisticos = new estadistica();
 
         // $cantidad_agencias = $datosEstadisticos->cantidadAgencias();
@@ -25,25 +25,21 @@ class ControladorGastronomia
     public function crear()
     {
 
-        $select_tipo_agencia = new AgenciaModelo();
+        $select_tipo_agencia = new GastronomiaModelo();
 
         $buscarSelectLocalidad = $select_tipo_agencia->buscarSelectLocalidad();
-        $buscarSelectEstado = $select_tipo_agencia->buscarSelectEstado();
+
 
         if ($_POST) {
             //print_r($_POST);
 
-            $insertarAgencia = new AgenciaModelo();
+            $insertar = new GastronomiaModelo();
 
 
-            $descripcion_agencias = $_POST['nombreAgencia'];
-            $matricula_agencia = $_POST['matriculaAgencia'];
-            $legajo_agencia = $_POST['legajoAgencia'];
-            $cuit_agencia = $_POST['cuitAgencia'];
-            $categoria_agencia = $_POST['categoriaAgencia'];
-            $idoneoAgencia = $_POST['idoneoAgencia'];
-
-            $razonsocial = $_POST['razonsocialAgencia'];
+            $designacion = $_POST['designacion'];
+            $diayhora = $_POST['diayhora'];
+            $observacion = $_POST['observacion'];
+            // $idoneoAgencia = $_POST['idoneoAgencia'];
 
             $rela_localidad_direccion = $_POST['localidadAgencia'];
             $calle_direccion = $_POST['domicilioAgencia'];
@@ -57,21 +53,17 @@ class ControladorGastronomia
             $webAgencia = $_POST['webAgencia'];
             $otroAgencia = $_POST['otroAgencia'];
 
-            $estadoAgencia = $_POST['estadoAgencia'];
 
 
 
 
 
-            $insertarAgencia->crear(
-                $descripcion_agencias,
-                $matricula_agencia,
-                $legajo_agencia,
-                $cuit_agencia,
-                $categoria_agencia,
+            $insertar->crear(
+                $designacion,
+                $diayhora,
+                $observacion,
                 $rela_localidad_direccion,
                 $calle_direccion,
-                $razonsocial,
                 $telefonoAgencia,
                 $telefonoFijoAgencia,
                 $correoAgencia,
@@ -79,17 +71,15 @@ class ControladorGastronomia
                 $instagramAgencia,
                 $twitterAgencia,
                 $webAgencia,
-                $otroAgencia,
-                $estadoAgencia,
-                $idoneoAgencia
+                $otroAgencia
             );
 
 
-            header("Location:index2.php?controlador=agencias&accion=inicio");
+            echo "<script>location.href='index2.php?controlador=gastronomia&accion=inicio';</script>";
         }
 
 
-        include_once("vistas/agencias/crear.php");
+        include_once("vistas/gastronomia/crear.php");
     }
 
     public function editar()
@@ -97,7 +87,7 @@ class ControladorGastronomia
 
         $idAgencia = $_GET["id"];
 
-        $buscarAgencias = new AgenciaModelo();
+        $buscarAgencias = new GastronomiaModelo();
 
         $buscarSelectLocalidad = $buscarAgencias->buscarSelectLocalidad();
         $buscarSelectEstado = $buscarAgencias->buscarSelectEstado();
@@ -106,7 +96,7 @@ class ControladorGastronomia
         /*----------BUSCA LOS POST QUE SE ENCUENTRA EN EDITAR.PHP PARA PODER EDITARLO----------*/
 
         if ($_POST) {
-            $EditarAgencia = new AgenciaModelo();
+            $EditarAgencia = new GastronomiaModelo();
 
 
             $idAgencia =  $_POST['agenciaID'];
@@ -213,7 +203,7 @@ class ControladorGastronomia
         $agenciaOtro = $contactosDeagencia->consultarOtro($idAgencia);
 
 
-        $buscarID = new AgenciaModelo();
+        $buscarID = new GastronomiaModelo();
 
         $editar = $buscarID->buscar($idAgencia);
 
@@ -231,7 +221,7 @@ class ControladorGastronomia
         $id_direccion = $_GET['idDireccion'];
         $idRazonSocial = $_GET['idRazonSocial'];
 
-        $borrarAgencias = new AgenciaModelo();
+        $borrarAgencias = new GastronomiaModelo();
 
         $buscarIDBorrado = $borrarAgencias->consultarID($idAgenciaBorrar);
 
@@ -244,7 +234,7 @@ class ControladorGastronomia
     {
         $id_agencia = $_GET['id'];
 
-        $agenciaInfo = new AgenciaModelo();
+        $agenciaInfo = new GastronomiaModelo();
 
         $agenciasInfomacion = $agenciaInfo->buscar($id_agencia);
 
@@ -270,7 +260,7 @@ class ControladorGastronomia
 
     public function imprimir()
     {
-        $consultaAgencia = new AgenciaModelo();
+        $consultaAgencia = new GastronomiaModelo();
 
         $tablaAgencia = $consultaAgencia->consultar();
         $datosEstadisticos = new estadistica();
@@ -286,7 +276,7 @@ class ControladorGastronomia
     {
         $id_agencia = $_GET['id'];
 
-        $agenciaInfo = new AgenciaModelo();
+        $agenciaInfo = new GastronomiaModelo();
 
         $agenciasInfomacion = $agenciaInfo->buscar($id_agencia);
 
