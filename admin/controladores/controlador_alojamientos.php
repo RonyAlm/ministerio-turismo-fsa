@@ -34,6 +34,7 @@ class ControladorAlojamientos
 
         include_once("vistas/Alojamientos/inicio.php");
     }
+
     public function crear()
     {
 
@@ -135,11 +136,13 @@ class ControladorAlojamientos
                 $cantTotalPlazasAlojamiento
             );
 
-            header("Location:index2.php?controlador=Alojamientos&accion=inicio");
+            // header("Location:index2.php?controlador=Alojamientos&accion=inicio");
+            echo "<script>location.href='index2.php?controlador=Alojamientos&accion=inicio';</script>";
         }
 
         include_once("vistas/Alojamientos/crear.php");
     }
+    
     public function editar()
     {
 
@@ -327,7 +330,8 @@ class ControladorAlojamientos
 
         $borrar = $borrado->borrar($id_alojamientos, $id_direccion, $idRazonSocial, $idServicios, $idServiciosComple);
 
-        header("Location:index2.php?controlador=Alojamientos&accion=inicio");
+        // header("Location:index2.php?controlador=Alojamientos&accion=inicio");
+        echo "<script>location.href='index2.php?controlador=Alojamientos&accion=inicio';</script>";
     }
 
     public function info()

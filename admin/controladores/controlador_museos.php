@@ -21,6 +21,7 @@ class ControladorMuseos
 
         include_once("vistas/museos/inicio.php");
     }
+
     public function crear()
     {
 
@@ -68,12 +69,14 @@ class ControladorMuseos
                 $idoneoMuseo
             );
 
-            header("Location:index2.php?controlador=museos&accion=inicio");
+            // header("Location:index2.php?controlador=museos&accion=inicio");
+            echo "<script>location.href='index2.php?controlador=museos&accion=inicio';</script>";
         }
 
 
         include_once("vistas/museos/crear.php");
     }
+
     public function editar()
     {
 
@@ -156,7 +159,9 @@ class ControladorMuseos
 
 
 
-            header("Location:index2.php?controlador=museos&accion=inicio");
+            // header("Location:index2.php?controlador=museos&accion=inicio");
+            echo "<script>location.href='index2.php?controlador=museos&accion=inicio';</script>";
+            
         }
 
 
@@ -197,7 +202,8 @@ class ControladorMuseos
 
         $IDBorrado = $borrarMuseos->borrar($idBorrar, $id_direccion);
 
-        header("Location:index2.php?controlador=museos&accion=inicio");
+        // header("Location:index2.php?controlador=museos&accion=inicio");
+        echo "<script>location.href='index2.php?controlador=museos&accion=inicio';</script>";
     }
 
     public function info()
@@ -228,4 +234,43 @@ class ControladorMuseos
 
         $id_agencia = $_GET['id'];
     }
+
+    public function imprimir()
+    { //aca se muestra las tablas
+
+        $consultaMuseo = new MuseoModelo();
+
+        $tablaMuseo = $consultaMuseo->consultar();
+
+        $datosEstadisticos = new estadistica();
+
+        $cantidad_museos = $datosEstadisticos->cantidadMuseos();
+
+
+        include_once("vistas/museos/imprimir.php");
+    }
+
+    public function imprimirInfo()
+    {
+
+        $id_agencia = $_GET['id'];
+
+        $agenciaInfo = new MuseoModelo();
+
+        $agenciasInfomacion = $agenciaInfo->buscar($id_agencia);
+
+
+        $contactosDeagencia = new ContactosInfoMuseos();
+        $agenciaTelefonoInfo = $contactosDeagencia->consultarTelefonos($id_agencia);
+        $agenciaTelefonoFijo = $contactosDeagencia->consultarTelefonosFijos($id_agencia);
+        $agenciaCorreo = $contactosDeagencia->consultarCorreo($id_agencia);
+        $agenciaFacebook = $contactosDeagencia->consultarFacebook($id_agencia);
+        $agenciaInstagram = $contactosDeagencia->consultarInstagram($id_agencia);
+        $agenciaTwitter = $contactosDeagencia->consultarTwitter($id_agencia);
+        $agenciaWeb = $contactosDeagencia->consultarWeb($id_agencia);
+        $agenciaOtro = $contactosDeagencia->consultarOtro($id_agencia);
+
+        include_once("vistas/museos/invoice-print.php");
+    }
+
 }

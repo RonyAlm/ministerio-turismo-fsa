@@ -1,182 +1,228 @@
-<div class="col-md-12">
-  <div class="mb-1">
-
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Información Prestador</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=prestadores&accion=inicio">Prestador</a></li>
+          <li class="breadcrumb-item active">Información</li>
+        </ol>
+      </div>
+    </div>
   </div>
+</section>
+
+<div class="col-md-12">
+
   <div class="row">
+
+    <!-- Información general -->
     <div class="col-md-6">
-      <div class="card card-info">
+      <div class="card card-success card-outline ">
         <div class="card-header">
-          <h3 class="card-title">
-            <i class="fas fa-text-width"></i>
-            Informacion General
+          <h3 class="card-title text-success">
+            <i class="fas fa-folder mr-2"></i>
+            Información General
           </h3>
-          <?php if ($infoPrestador->rela_tipo_estado == 1) { ?>
-            <div class="card-tools">
-              <long class="badge badge-success">Activo</long>
-            </div>
-          <?php } ?>
-
-          <?php if ($infoPrestador->rela_tipo_estado == 2) { ?>
-            <div class="card-tools">
-              <long class="badge badge-danger">Baja</long>
-            </div>
-          <?php } ?>
-
-          <?php if ($infoPrestador->rela_tipo_estado == 3) { ?>
-            <div class="card-tools">
-              <long class="badge badge-orange">Cambio de Domicilio</long>
-            </div>
-          <?php } ?>
-
-          <?php if ($infoPrestador->rela_tipo_estado == 4) { ?>
-            <div class="card-tools">
-              <long class="badge badge-orange">Cambio de Domicilio</long>
-            </div>
-          <?php } ?>
-
-          <?php if ($infoPrestador->rela_tipo_estado == 5) { ?>
-            <div class="card-tools">
-              <long class="badge badge-warning">Se desconoce su situación</long>
-            </div>
-          <?php } ?>
-
-          <?php if ($infoPrestador->rela_tipo_estado == 6) { ?>
-            <div class="card-tools">
-              <long class="badge badge-info">Cierre Temporario</long>
-            </div>
-          <?php } ?>
-          <?php if ($infoPrestador->rela_tipo_estado == 7) { ?>
-            <div class="card-tools">
-              <long class="badge badge-info">No Fiscalizada</long>
-            </div>
-          <?php } ?>
-          <?php if ($infoPrestador->rela_tipo_estado == 8) { ?>
-            <div class="card-tools">
-              <long class="badge badge-info">Domicilio Virtual</long>
-            </div>
-          <?php } ?>
+          <div class="card-tools text-success">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+          </div>
 
         </div>
         <!-- /.card-header -->
-        <div class="card-body">
-          <dl>
-            <dt>Categoría:</dt>
-            <dd><?php echo $infoPrestador->descripcion_tipo_prestador; ?></dd>
-            <dt>Apellido y Nombre:</dt>
-            <dd><?php echo $infoPrestador->descripcion_prestador; ?></dd>
-            <dt>Localidad:</dt>
-            <dd><?php echo $infoPrestador->nombre_localidad; ?></dd>
-            <dt>Dirección:</dt>
-            <dd><?php echo $infoPrestador->calle_direccion; ?></dd>
-            <dt>Departamento:</dt>
-            <dd><?php echo $infoPrestador->descripcion_departamentos; ?></dd>
-            <dt>DNI:</dt>
-            <dd><?php echo $infoPrestador->dni_prestador; ?></dd>
-            <dt>Institución / Emprendimiento:</dt>
-            <dd><?php echo $infoPrestador->institucion_prestador; ?></dd>
-            <dt>CUIT / CUIL:</dt>
-            <dd><?php echo $infoPrestador->cuit_prestador; ?></dd>
-            <dt>Última actualización:</dt>
-            <dd><?=$infoPrestador->fecha_edit_prestador; ?></dd>
 
-          </dl>
+        <div class="card-body">
+
+          <table id="tblInfoGe" class="tblInfo table table-bordered table-striped" cellspacing="0" width="100%">
+
+            <tr>
+              <th class="sorting_1">Categoría</th>
+              <td><?php echo $infoPrestador->descripcion_tipo_prestador; ?></td>
+            </tr>
+            <tr>
+              <th class="sorting_1">Apellido y Nombre</th>
+              <td><?php echo $infoPrestador->descripcion_prestador; ?></td>
+            </tr>
+            <tr>
+              <th class="sorting_1">Localidad</th>
+              <td><?php echo $infoPrestador->nombre_localidad; ?></td>
+            </tr>
+            <tr>
+              <th class="sorting_1">Dirección</th>
+              <td><?php echo $infoPrestador->calle_direccion; ?></td>
+            </tr>
+            <tr>
+              <th class="sorting_1">Departamento</th>
+              <td><?php echo $infoPrestador->descripcion_departamentos; ?></td>
+            </tr>
+            <tr>
+              <th class="sorting_1">DNI</th>
+              <td><?php echo $infoPrestador->dni_prestador; ?></td>
+            </tr>
+            <tr>
+              <th class="sorting_1">Institución / Emprendimiento</th>
+              <td><?php echo $infoPrestador->institucion_prestador; ?></td>
+            </tr>
+            <tr>
+              <th class="sorting_1">CUIT / CUIL</th>
+              <td><?php echo $infoPrestador->cuit_prestador; ?></td>
+            </tr>
+            <tr>
+              <th class="sorting_1">Estado</th>
+              <td><?= $infoPrestador->descripcion_tipo_estado; ?></td>
+            </tr>
+
+          </table>
+
         </div>
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
     </div>
-    <!-- Contacto -->
+    <!-- Contactos -->
     <div class="col-md-6">
-      <div class="card card-teal">
+      <div class="card card-success card-outline ">
         <div class="card-header">
-          <h3 class="card-title">
-            <i class="fas fa-text-width"></i>
-            Contacto
+          <h3 class="card-title text-success">
+            <i class="fas fa-folder mr-2"></i>
+            Contactos
           </h3>
+          <div class="card-tools text-success">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+          </div>
+
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-          <dl class="row">
+
+          <table id="tblContacto" class="tblInfo table table-bordered table-striped" cellspacing="0" width="100%">
 
             <?php foreach ($prestadorTelefono as $telefonos) { ?>
 
-              <dt class="col-sm-4"><i class="fas fa-phone -width"></i> Teléfono Celular</dt>
-              <dd class="col-sm-8"><?php echo $telefonos["descripcion_contacto"]; ?></dd>
+              <tr>
+                <th class="sorting_1"><i class="fas fa-phone mr-1"></i> Teléfono Celular</th>
+                <td><?php echo $telefonos["descripcion_contacto"]; ?></td>
+              </tr>
 
             <?php  } ?>
 
             <?php foreach ($prestadorTelefonoFijo as $telefonosFijo) { ?>
 
-              <dt class="col-sm-4"><i class="fas fa-phone -width"></i> Teléfonos Fijo</dt>
-              <dd class="col-sm-8"><?php echo $telefonosFijo["descripcion_contacto"]; ?></dd>
+              <tr>
+                <th class="sorting_1"><i class="fas fa-phone mr-1"></i> Teléfonos Fijo</th>
+                <td><?php echo $telefonosFijo["descripcion_contacto"]; ?></td>
+              </tr>
 
             <?php  } ?>
 
 
             <?php foreach ($prestadorCorreo as $correos) { ?>
 
-              <dt class="col-sm-4"><i class="fas fa-at"></i> Correo</dt>
-              <dd class="col-sm-8"><?php echo $correos["descripcion_contacto"]; ?></dd>
+              <tr>
+                <th class="sorting_1"><i class="fas fa-solid fa-envelope mr-1"></i> Correo</th>
+                <td><?php echo $correos["descripcion_contacto"]; ?></td>
+              </tr>
 
             <?php } ?>
 
             <?php foreach ($prestadorFacebook as $facebook) { ?>
-              <dt class="col-sm-4"><i class="fab fa-facebook"></i> Facebook</dt>
-              <dd class="col-sm-8"><?php echo $facebook["descripcion_contacto"]; ?></dd>
+
+              <tr>
+                <th class="sorting_1"><i class="fab fa-facebook mr-1"></i> Facebook</th>
+                <td><?php echo $facebook["descripcion_contacto"]; ?></td>
+              </tr>
 
             <?php } ?>
 
             <?php foreach ($prestadorInstagram as $instagram) { ?>
-              <dt class="col-sm-4"><i class="fas fa-at -width"></i> Instagram</dt>
-              <dd class="col-sm-8"><?php echo $instagram["descripcion_contacto"]; ?></dd>
+
+              <tr>
+                <th class="sorting_1"><i class="fa-brands fa-instagram mr-1"></i> Instagram</th>
+                <td><?php echo $instagram["descripcion_contacto"]; ?></td>
+              </tr>
 
             <?php } ?>
 
             <?php foreach ($prestadorTwitter as $twitter) { ?>
-              <dt class="col-sm-4"><i class="fab fa-twitter-square"></i> Twitter</dt>
-              <dd class="col-sm-8"><?php echo $twitter["descripcion_contacto"]; ?></dd>
+
+              <tr>
+                <th class="sorting_1"><i class="fab fa-twitter-square mr-1"></i> Twitter</th>
+                <td><?php echo $twitter["descripcion_contacto"]; ?></td>
+              </tr>
 
             <?php } ?>
 
             <?php foreach ($prestadorWeb  as $web) { ?>
-              <dt class="col-sm-4"><i class="fas fa-globe"></i> Sitio Web</dt>
-              <dd class="col-sm-8"><?php echo $web["descripcion_contacto"]; ?></dd>
+
+              <tr>
+                <th class="sorting_1"><i class="fas fa-globe mr-1"></i> Sitio Web</th>
+                <td><?php echo $web["descripcion_contacto"]; ?></td>
+              </tr>
 
             <?php } ?>
 
             <?php foreach ($prestadorOtro as $otro) { ?>
-              <dt class="col-sm-4"><i class="fas fa-street-view"></i> Otro</dt>
-              <dd class="col-sm-8"><?php echo $otro["descripcion_contacto"]; ?></dd>
+
+              <tr>
+                <th class="sorting_1"><i class="fas fa-street-view mr-1"></i> Otros</th>
+                <td><?php echo $otro["descripcion_contacto"]; ?></td>
+              </tr>
 
             <?php } ?>
 
-          </dl>
+            <tr>
+              <th class="sorting_1">Última actualización</th>
+              <td><?= $infoPrestador->fecha_edit_prestador; ?></td>
+            </tr>
+
+          </table>
+
         </div>
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
     </div>
     <!-- Servicios -->
-    <div class="col-md-6">
-      <div class="card card-info">
+    <div class="col-md-12">
+      <div class="card card-success card-outline ">
         <div class="card-header">
-          <h3 class="card-title">
-            <i class="fas fa-text-width"></i>
-            Informacion de los Servicios
+          <h3 class="card-title text-success">
+            <i class="fas fa-folder mr-2"></i>
+            Servicios
           </h3>
+          <div class="card-tools text-success">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+          </div>
+
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-          <dl>
-            <dt>Servicios:</dt>
-            <?php foreach ($serviciosPrestador as $prestadore) { ?>
-              <dd><?php echo $prestadore["descrip_tipo_serv_prestadores"] ?></dd>
-            <?php } ?>
-            <dt>Otros Servicios:</dt>
-            <dd><?php echo $infoPrestador->otros_servicios_prestadores; ?></dd>
 
+          <table id="tblContacto" class="tblInfo table table-bordered table-striped" cellspacing="0" width="100%">
 
-          </dl>
+            <tr>
+              <th class="sorting_1">Servicios</th>
+              <td><?php foreach ($serviciosPrestador as $prestadore) {
+                    echo $prestadore["descrip_tipo_serv_prestadores"] . " - ";
+                  } ?>
+              </td>
+            </tr>
+
+            <tr>
+              <th class="sorting_1">Otros Servicios</th>
+              <td><?php echo $infoPrestador->otros_servicios_prestadores; ?></td>
+            </tr>
+
+          </table>
+
         </div>
         <!-- /.card-body -->
       </div>
@@ -185,5 +231,15 @@
 
   </div>
   <!-- /.row -->
+
+  <div class="card-footer mb-4 card">
+    <div class="row no-print">
+      <div class="col-12">
+        <a href="?controlador=prestadores&accion=imprimirInfo&id=<?= $id_prestador; ?>" rel="noopener" class="btn btn-default float-right">
+          <i class="fas fa-print mr-2"></i> Imprimir
+        </a>
+      </div>
+    </div>
+  </div>
 
 </div>
