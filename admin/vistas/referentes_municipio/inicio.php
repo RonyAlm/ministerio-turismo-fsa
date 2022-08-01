@@ -10,139 +10,191 @@ $rol_id = $_SESSION['rol_id'];
 
 
 ?>
+
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Referentes Municipales</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=paginas&accion=inicio">Inicio</a></li>
+          <li class="breadcrumb-item active">Referentes</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="card">
-  <?php if ($rol_id == 1 or $rol_id == 3) { ?>
-    <div class="card-header">
+  <div class="card-header">
 
-      <a name="" id="" class="btn btn-success" href="?controlador=referentes&accion=crear" role="button">Agregar Referente</a>
+    <?php if ($rol_id == 1 or $rol_id == 3) : ?>
 
-    </div>
-  <?php } ?>
+      <a name="" id="" class="btn btn-success" href="?controlador=referentes&accion=crear" role="button">Agregar</a>
 
-  <div class="row">
-    <div class="col-lg-3 col-6">
-      <!-- small box -->
-      <div class="small-box bg-info">
-        <div class="inner">
-          <?php foreach ($estadistica as $esta) { ?>
-            <h3>
+    <?php else : ?>
+      <a class="btn btn-success disabled" href="#" role="button">Agregar</a>
+    <?php endif; ?>
 
-              <?php echo $esta->conteo; ?>
-            </h3>
-          <?php } ?>
+    <a name="" id="" class="btn btn-secondary" href="?controlador=referentes&accion=imprimir" role="button">Imprimir</a>
 
-          <p>Referentes</p>
-        </div>
-        <div class="icon">
-          <i class="ion ion-bag"></i>
-        </div>
-        <a href="#" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
-      </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-lg-3 col-6">
-      <!-- small box -->
-      <div class="small-box bg-success">
-        <div class="inner">
-          <?php foreach ($estadistica2 as $esta) { ?>
-            <h3>
-
-              <?php echo $esta->conteo; ?>
-            </h3>
-          <?php } ?>
-
-          <p>Municipios con sedes de turismo</p>
-        </div>
-        <div class="icon">
-          <i class="ion ion-stats-bars"></i>
-        </div>
-        <a href="#" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
-      </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-lg-3 col-6">
-      <!-- small box -->
-      <div class="small-box bg-warning">
-        <div class="inner">
-          <h3>20</h3>
-
-          <p>Registradas</p>
-        </div>
-        <div class="icon">
-          <i class="ion ion-person-add"></i>
-        </div>
-        <a href="#" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
-      </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-lg-3 col-6">
-      <!-- small box -->
-      <div class="small-box bg-danger">
-        <div class="inner">
-          <h3>3</h3>
-
-          <p>Dados de Baja</p>
-        </div>
-        <div class="icon">
-          <i class="ion ion-pie-graph"></i>
-        </div>
-        <a href="#" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
-      </div>
-    </div>
-    <!-- ./col -->
   </div>
 
   <div class="card-body">
 
-    <div id="acordeon">
-      <table id="example1" class="table table-bordered table-striped" cellspacing="0" width="100%">
-        <thead>
-          <tr style="background: linear-gradient(to right, #61ba6d, #83c331)" align="center">
-            <th class="visually-hidden">ID</th>
-            <th>Localidad</th>
-            <th>Nombre y Apellido</th>
-            <th>Contacto</th>
-            <th>Encargado</th>
-            <th>Acción</th>
-          </tr>
-        </thead>
-        <tbody>
+    <div class="row">
 
+      <!-- Referentes -->
+      <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
 
-          <?php foreach ($tablaReferente as $referente) { ?>
+          <span class="info-box-icon bg-success"><i class="fa-solid fa-people-line"></i></span>
 
-            <tr>
-              <td class="visually-hidden"> <?php echo $referente["id_referentes"]; ?></td>
-              <td><?php echo $referente["nombre_localidad"]; ?></td>
-              <td><?php echo $referente["idoneo_referente"]; ?></td>
-              <td><?php echo $referente["descripcion_contacto"]; ?></td>
-              <td><?php echo $referente["descripcion_tipo_encargado"]; ?></td>
+          <div class="info-box-content">
+            <span class="info-box-text text-center">Referentes</span>
+            <?php foreach ($estadistica as $esta) { ?>
+              <span class="info-box-text">Cantidad Total: <?php echo $esta->conteo; ?> </span>
+            <?php } ?>
+          </div>
 
+        </div>
+      </div>
 
+      <!-- Monicipios -->
+      <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
 
+          <span class="info-box-icon bg-success"><i class="fa-solid fa-building"></i></span>
 
+          <div class="info-box-content">
+            <span class="info-box-text text-center">Monicipios
+              <!-- con sedes de turismo -->
+            </span>
+            <?php foreach ($estadistica2 as $esta) { ?>
+              <span class="info-box-text">Cantidad Total: <?php echo $esta->conteo; ?> </span>
+            <?php } ?>
+          </div>
 
-              <td>
-                <div class="btn-group" role="group" aria-label="">
+        </div>
+      </div>
 
-                  <a href="?controlador=referentes&accion=info&id=<?php echo $referente["id_referentes"]; ?>" class="btn btn-warning">Más Info</a>
-                  <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") { ?>
-                    <a href="?controlador=referentes&accion=editar&id=<?php echo $referente["id_referentes"]; ?>" class="btn btn-info">Editar</a>
-                    <a href="?controlador=referentes&accion=borrar&id=<?php echo $referente["id_referentes"]; ?>&idDireccion=<?php echo $referente["id_direccion"]; ?>" class="btn btn-danger">Borrar</a>
-                  <?php } ?>
+      <!-- Registrada -->
+      <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
 
-                </div>
+          <span class="info-box-icon bg-success"><i class="fa-solid fa-building-circle-check"></i></span>
 
-              </td>
-            </tr>
+          <div class="info-box-content">
+            <span class="info-box-text text-center">Registradas</span>
+            <?php //foreach ($estadistica as $esta) { 
+            ?>
+            <span class="info-box-text">Cantidad Total: 20 <?php //echo $esta->conteo; 
+                                                            ?> </span>
+            <?php //} 
+            ?>
+          </div>
 
+        </div>
+      </div>
 
-          <?php } ?>
-        </tbody>
-      </table>
+      <!-- Registrada -->
+      <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+
+          <span class="info-box-icon bg-success"><i class="fa-solid fa-building-circle-exclamation"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text text-center">Dado de baja</span>
+            <?php //foreach ($estadistica as $esta) { 
+            ?>
+            <span class="info-box-text">Cantidad Total: 3 <?php //echo $esta->conteo; 
+                                                          ?> </span>
+            <?php //} 
+            ?>
+          </div>
+
+        </div>
+      </div>
+
     </div>
 
+    <div class="row" id="acordeon">
 
+      <div class="col-lg-12">
+
+        <table id="tblList" class="table table-bordered table-striped" cellspacing="0" width="100%">
+          <thead>
+            <tr style="background: linear-gradient(to right, #61ba6d, #83c331)">
+              <th class="d-none">ID</th>
+              <th>Localidad</th>
+              <th>Nombre y Apellido</th>
+              <th>Contacto</th>
+              <th>Encargado</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <?php foreach ($tablaReferente as $referente) { ?>
+
+              <tr>
+                <td class="d-none"> <?php echo $referente["id_referentes"]; ?></td>
+                <td><?php echo $referente["nombre_localidad"]; ?></td>
+                <td><?php echo $referente["idoneo_referente"]; ?></td>
+                <td><?php echo $referente["descripcion_contacto"]; ?></td>
+                <td><?php echo $referente["descripcion_tipo_encargado"]; ?></td>
+                <td class="project-actions text-right">
+                  <div class="btn-group" role="group">
+
+                    <a title="Más información" href="?controlador=referentes&accion=info&id=<?php echo $referente["id_referentes"]; ?>" class="btn btn-primary btn-sm">
+                      <i class="fas fa-folder"></i>
+                    </a>
+
+                    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") : ?>
+
+                      <a title="Editar" href="?controlador=referentes&accion=editar&id=<?php echo $referente["id_referentes"]; ?>" class="btn btn-success btn-sm">
+                        <i class="fas fa-pencil-alt"></i>
+                      </a>
+                      <a title="Borrar" href="?controlador=referentes&accion=borrar&id=<?php echo $referente["id_referentes"]; ?>&idDireccion=<?php echo $referente["id_direccion"]; ?>" class="btn btn-danger btn-sm">
+                        <i class="fas fa-trash"></i>
+                      </a>
+
+                    <?php else : ?>
+
+                      <a title="Editar" href="#" class="btn btn-success btn-sm disabled">
+                        <i class="fas fa-pencil-alt"></i>
+                      </a>
+                      <a title="Borrar" href="#" class="btn btn-danger btn-sm disabled">
+                        <i class="fas fa-trash"></i>
+                      </a>
+
+                    <?php endif; ?>
+
+                  </div>
+
+                </td>
+              </tr>
+
+            <?php } ?>
+
+          </tbody>
+          <tfoot>
+            <tr style="background: linear-gradient(to right, #61ba6d, #83c331)">
+              <th class="d-none">ID</th>
+              <th>Localidad</th>
+              <th>Nombre y Apellido</th>
+              <th>Contacto</th>
+              <th>Encargado</th>
+              <th>Acción</th>
+            </tr>
+          </tfoot>
+        </table>
+
+      </div>
+
+    </div>
 
   </div>
 

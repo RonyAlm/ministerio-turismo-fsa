@@ -29,16 +29,20 @@ $rol_id = $_SESSION['rol_id'];
 
 <div class="card">
 
-  <?php if ($rol_id == 1 or $rol_id == 3) { ?>
-    <div class="card-header">
+
+  <div class="card-header">
+
+    <?php if ($rol_id == 1 or $rol_id == 3) : ?>
 
       <a name="" id="" class="btn btn-success" href="?controlador=Alojamientos&accion=crear" role="button">Agregar</a>
 
-      <a name="" id="" class="btn btn-secondary" href="?controlador=Alojamientos&accion=imprimir" role="button">Imprimir</a>
+    <?php else : ?>
+      <a class="btn btn-success disabled" href="#" role="button">Agregar</a>
+    <?php endif; ?>
 
-    </div>
+    <a name="" id="" class="btn btn-secondary" href="?controlador=Alojamientos&accion=imprimir" role="button">Imprimir</a>
 
-  <?php } ?>
+  </div>
 
   <div class="card-body">
 
@@ -176,7 +180,7 @@ $rol_id = $_SESSION['rol_id'];
                 <td class="project-actions text-right">
                   <div class="btn-group" role="group" aria-label="">
 
-                    <a title="Más Infomación" href="?controlador=Alojamientos&accion=info&id=<?php echo $alojamiento["id_alojamientos"]; ?>" class="btn btn-primary btn-sm">
+                    <a title="Más Infomación" href="?controlador=Alojamientos&accion=info&id=<?php echo $alojamiento["id_alojamientos"]; ?>" class="btn btn-primary btn-sm ">
                       <i class="fas fa-folder"></i>
                     </a>
 
@@ -186,6 +190,15 @@ $rol_id = $_SESSION['rol_id'];
                         <i class="fas fa-pencil-alt"></i>
                       </a>
                       <a title="Borrar" href="?controlador=Alojamientos&accion=borrar&id=<?php echo $alojamiento["id_alojamientos"]; ?>  &idDireccion=<?php echo $alojamiento["id_direccion"]; ?>  &idRazonSocial=<?php echo $alojamiento["id_razon_social"]; ?>  &idServicios=<?php echo $alojamiento["rela_aloja_servicios"]; ?>  &idServiciosComple=<?php echo $alojamiento["rela_aloja_serv_adicionales"]; ?>" class="btn btn-danger btn-sm">
+                        <i class="fas fa-trash"></i>
+                      </a>
+
+                    <?php else : ?>
+
+                      <a title="Editar" href="#" class="btn btn-success btn-sm disabled">
+                        <i class="fas fa-pencil-alt"></i>
+                      </a>
+                      <a title="Borrar" href="#" class="btn btn-danger btn-sm disabled">
                         <i class="fas fa-trash"></i>
                       </a>
 

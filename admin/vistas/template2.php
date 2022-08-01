@@ -1,6 +1,6 @@
 <?php
-session_start();
 
+session_start();
 // include_once "controladores/controlador_login.php";
 
 include_once("conexion.php");
@@ -31,7 +31,7 @@ if ($nombre) {
   // print_r($sqlDireccion);
 } else {
   $nombre = 0;
-  echo "mi nombre es otro " . $nombre;
+  // echo "mi nombre es otro " . $nombre;
 }
 
 
@@ -71,6 +71,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
   <!-- style transporte -->
   <link rel="stylesheet" href="vistas/recursos/dist/transporte.css">
+  <link rel="stylesheet" href="vistas/recursos/dist/css/styles.css">
   <!-- Favicon -->
   <link rel="icon" href="vistas/recursos/dist/img/favicon.png">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
@@ -189,13 +190,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
             <div class="dropdown-divider"></div>
             <a href="#" class="dropdown-item">
-              <i class="fas fa-user mr-2"></i><?php
+              <i class="fas fa-user mr-2"></i>Mi Perfil<?php
                                               if ($nombre) {
                                                 // $nombre = 1;
-                                                echo "mi nombre es " . $apellido;
+                                                //echo "mi nombre es " . $apellido;
                                               } else {
                                                 // $nombre = 0;
-                                                echo "mi nombre es otro " . $apellido;
+                                                //echo "mi nombre es otro " . $apellido;
                                               } ?>
             </a>
             <div class="dropdown-divider"></div>
@@ -265,12 +266,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </button>
             </div>
           </div>
-
         </div>
 
         <!-- Sidebar Menu -->
-        <nav class="mt-2">
+        <nav class="mt-2 mb-3">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
             <li class="nav-item">
               <a href="?controlador=paginas&accion=inicio" class="nav-link 
                   <?= (!isset($_GET['controlador']) || $_GET['controlador'] == 'paginas' && $_GET['accion'] == 'inicio') ? 'active' : '' ?>">
@@ -280,8 +281,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </p>
               </a>
             </li>
-            <!-- REGISTRO -->
-            <?php if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
+
+            <!-- REGISTRO ADMIN -->
+            <?php if ($rol_id == 1 or $rol_id == 3) : ?>
 
               <li class="nav-item 
                 <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'Alojamientos' || $_GET['controlador'] == 'agencias' ||
@@ -295,8 +297,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
-                <?php }
-              if ($rol_id == 1 or $rol_id == 3 or $rol_id == 2) { ?>
                   <li class="nav-item">
                     <a href="?controlador=Alojamientos&accion=inicio" class="nav-link 
                     <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'Alojamientos') ? 'active' : '' ?>">
@@ -304,8 +304,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <p>Alojamientos</p>
                     </a>
                   </li>
-                <?php }
-              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
                   <li class="nav-item">
                     <a href="?controlador=agencias&accion=inicio" class="nav-link 
                     <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'agencias') ? 'active' : '' ?>">
@@ -313,8 +311,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <p>Agencias</p>
                     </a>
                   </li>
-                <?php }
-              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
                   <li class="nav-item">
                     <a href="?controlador=prestadores&accion=inicio" class="nav-link 
                     <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'prestadores') ? 'active' : '' ?>">
@@ -322,8 +318,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <p>Prestadores</p>
                     </a>
                   </li>
-                <?php }
-              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
                   <li class="nav-item">
                     <a href="?controlador=referentes&accion=inicio" class="nav-link 
                     <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'referentes') ? 'active' : '' ?>">
@@ -331,8 +325,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <p>Referentes municipales</p>
                     </a>
                   </li>
-                <?php }
-              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
                   <li class="nav-item">
                     <a href="?controlador=servigenerales&accion=inicio" class="nav-link 
                     <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'servigenerales') ? 'active' : '' ?>">
@@ -340,22 +332,59 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <p>Servicios Generales</p>
                     </a>
                   </li>
-                <?php }
-              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
-                  <li class="nav-item">
-                    <a href="?controlador=gastronomia&accion=inicio" class="nav-link 
+                  <?php
+                  if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
+                    <li class="nav-item">
+                      <a href="?controlador=gastronomia&accion=inicio" class="nav-link 
                     <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'gastronomia') ? 'active' : '' ?>">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Gastronomía</p>
-                    </a>
-                  </li>
-
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Gastronomía</p>
+                      </a>
+                    </li>
+                  <?php } ?>
                 </ul>
               </li>
 
-              <!-- CALENDARIO -->
-            <?php }
-              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
+            <?php endif; ?>
+
+            <!-- REGISTRO VISUALIZACION -->
+            <?php if ($rol_id == 2) : ?>
+
+              <li class="nav-item">
+                <a href="?controlador=Alojamientos&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'Alojamientos') ? 'active' : '' ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Alojamientos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="?controlador=agencias&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'agencias') ? 'active' : '' ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Agencias</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="?controlador=prestadores&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'prestadores') ? 'active' : '' ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Prestadores</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="?controlador=referentes&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'referentes') ? 'active' : '' ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Referentes municipales</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="?controlador=servigenerales&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'servigenerales') ? 'active' : '' ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Servicios Generales</p>
+                </a>
+              </li>
+
+            <?php endif; ?>
+
+            <!-- CALENDARIO -->
+            <?php if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
               <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'calendario')) ? 'menu-open' : '' ?>">
                 <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'calendario')) ? 'active' : '' ?>">
                   <i class="nav-icon far fa-calendar-alt"></i>
@@ -386,11 +415,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </li> -->
                 </ul>
               </li>
-            <?php }
-              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3 and $usuario == "matias") { ?>
-              <!-- TURISMO RELIGIOSO -->
-            <?php }
-              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3 and $usuario == "matias") { ?>
+            <?php } ?>
+
+            <!-- RELIGION -->
+            <?php if ($rol_id == 8  and $usuario == "matias") : ?>
               <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'museos')) ? 'menu-open' : '' ?>">
                 <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'museos')) ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-columns"></i>
@@ -422,9 +450,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 </ul>
               </li>
-              <!-- FESTIVALES -->
-            <?php }
-              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3 and $usuario == "matias") { ?>
+            <?php endif; ?>
+
+            <!-- MUSEOS -->
+            <?php if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3 and $usuario == "matias") { ?>
+              <li class="nav-item">
+                <a href="?controlador=museos&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'museos')) ? 'active' : '' ?>">
+                  <!-- <i class="nav-icon fas fa-home"></i> -->
+                  <i class="nav-icon fa-solid fa-building-columns"></i>
+                  <p>
+                    Museos
+                  </p>
+                </a>
+              </li>
+            <?php } ?>
+
+            <!-- FESTIVALES -->
+            <?php if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3 and $usuario == "matias") { ?>
               <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'festivales')) ? 'menu-open' : '' ?>">
                 <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'festivales')) ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-columns"></i>
@@ -443,9 +485,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </li>
                 </ul>
               </li>
-              <!-- TRANSPORTE -->
-            <?php }
-              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3 and $usuario == "monica") { ?>
+            <?php } ?>
+
+            <!-- TRANSPORTE -->
+            <?php if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3 and $usuario == "monica") { ?>
               <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'transporte')) ? 'menu-open' : '' ?>">
                 <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'transporte')) ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-table"></i>
@@ -471,10 +514,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 </ul>
               </li>
+            <?php } ?>
 
-              <!-- Personal -->
-            <?php }
-              if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3 and $usuario == "monica") { ?>
+            <!-- PERSONAL -->
+            <?php if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3 and $usuario == "monica") { ?>
               <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'menu-open' : '' ?>">
                 <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-table"></i>
@@ -508,11 +551,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </ul>
               </li>
             <?php } ?>
+
           </ul>
         </nav>
 
-
-        <!--  -->
       </div>
       <!-- /.sidebar -->
     </aside>
@@ -530,16 +572,36 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   </div>
   <!-- ./wrapper -->
+
   <footer class="main-footer">
-    <strong> &copy;
-      <!-- <script>
-        document.write(new Date().getFullYear());
-      </script>. -->
-    </strong><?php
-              $Object = new DateTime();
-              $DateAndTime = $Object->format("d-m-Y h:i:s a");
-              echo "$DateAndTime.";
-              ?>
+    <strong> &copy; </strong><i id="fechaFooter">
+      <!-- 20:00:14 -->
+    </i>
+    <script>
+      const currentTime = () => {
+
+        const fechaF = document.getElementById("fechaFooter");
+        let date = new Date();
+        let hh = date.getHours();
+        let mm = date.getMinutes();
+        let ss = date.getSeconds();
+        let dd = date.getDate();
+        let mes = date.getMonth() + 1;
+
+        hh = hh < 10 ? `0${hh}` : hh;
+        mm = mm < 10 ? `0${mm}` : mm;
+        ss = ss < 10 ? `0${ss}` : ss;
+        dd = dd < 10 ? `0${dd}` : dd;
+        mes = mes < 10 ? `0${mes}` : mes;
+
+        let fecha = dd + '-' + mes + '-' + date.getFullYear();
+        let time = `${fecha}  ${hh}:${mm}:${ss}`;
+        fechaF.innerText = time;
+
+      };
+      currentTime();
+      setInterval(currentTime, 1000);
+    </script>
     <div class="float-right d-none d-sm-inline-block">
       Ministerio de Turismo Formosa
     </div>

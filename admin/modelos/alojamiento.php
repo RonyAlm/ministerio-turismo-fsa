@@ -335,7 +335,7 @@ class Alojamientos
         /*---------------SE ACTUALIZA EL ALOJAMIENTO-------------------*/
 
         if ($rubroAlojamiento == 0) {
-            echo "rubro igual a 0        /// ";
+            // echo "rubro igual a 0        /// ";
             $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
                                                                     `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
                                                                     `estrella_alojamiento`=$estrellaAlojamiento,
@@ -344,7 +344,7 @@ class Alojamientos
 
             $sql->execute();
         } else {
-            echo "rubro igual conectado   ///        ";
+            // echo "rubro igual conectado   ///        ";
             $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
                                                                     `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
                                                                     `estrella_alojamiento`=$estrellaAlojamiento,`rela_alojamiento_rubro`=$rubroAlojamiento,
@@ -354,7 +354,7 @@ class Alojamientos
             $sql->execute();
         }
         if ($categoriaAlojamiento == 0) {
-            echo "categoria igual a 0    ///  ";
+            // echo "categoria igual a 0    ///  ";
             $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
                                                                     `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
                                                                     `estrella_alojamiento`=$estrellaAlojamiento,
@@ -363,7 +363,7 @@ class Alojamientos
 
             $sql->execute();
         } else {
-            echo "categoria igual a  conectado    ///  ";
+            // echo "categoria igual a  conectado    ///  ";
             $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
                                                                     `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
                                                                     `estrella_alojamiento`=$estrellaAlojamiento
@@ -375,7 +375,7 @@ class Alojamientos
         }
 
         if ($habilitacionAlojamiento == 0) {
-            echo "habilitacion igual a 0    ///  ";
+            // echo "habilitacion igual a 0    ///  ";
             $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
                                                                     `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
                                                                     `estrella_alojamiento`=$estrellaAlojamiento,
@@ -384,7 +384,7 @@ class Alojamientos
 
             $sql->execute();
         } else {
-            echo "categoria igual a  conectado    ///  ";
+            // echo "categoria igual a  conectado    ///  ";
             $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
                                                                     `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
                                                                     `estrella_alojamiento`=$estrellaAlojamiento
@@ -402,24 +402,24 @@ class Alojamientos
         if ($localidadAlojamiento == 0) {
             $sqlDireccion = $conexionBD->prepare("UPDATE `direccion` SET `calle_direccion`='$domicilioAlojamiento'
                                                     WHERE id_direccion = $IDdireccionAlojamiento ");
-            echo "no se actualiza la localidad cuando es null  ///  ";
+            // echo "no se actualiza la localidad cuando es null  ///  ";
             $sqlDireccion->execute();
         } else {
             $sqlDireccion = $conexionBD->prepare("UPDATE `direccion` SET `calle_direccion`='$domicilioAlojamiento',
                                                     `rela_localidad_direccion`=$localidadAlojamiento 
                                                     WHERE id_direccion = $IDdireccionAlojamiento ");
-            echo "se actualiza la localidad /// ";
+            // echo "se actualiza la localidad /// ";
             $sqlDireccion->execute();
         }
 
         /*----------------SE ACTUALIZA EL ESTADO------------------*/
 
         if ($estadoAlojamiento == 0) {
-            echo "no se actualiza el estado cuando es null /// ";
+            // echo "no se actualiza el estado cuando es null /// ";
         } else {
             $sqlEstado = $conexionBD->prepare("UPDATE `estado_actividad` SET `rela_tipo_estado`=$estadoAlojamiento
                                                     WHERE id_estado = $IDestadoAlojamiento");
-            echo "se actualiza el estado   ///";
+            // echo "se actualiza el estado   ///";
             $sqlEstado->execute();
         }
 

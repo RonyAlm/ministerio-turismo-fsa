@@ -1,0 +1,13 @@
+/* .botones-footer-edit {
+   
+} */
+
+.botones-footer-edit .btn {
+    margin-right: 0.5rem;
+}
+
+.fg-description {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
