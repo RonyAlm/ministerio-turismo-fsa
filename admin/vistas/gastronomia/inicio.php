@@ -98,15 +98,15 @@ $rol_id = $_SESSION['rol_id'];
                 <td class="project-actions text-right">
                   <div class="btn-group" role="group" aria-label="">
 
-                    <a title="Más Infomación" id="btn1" href="?controlador=agencias&accion=info&id=<?= $gastronomia["id_gastronomia"]; ?>" class="btn btn-primary btn-sm">
+                    <a title="Más Infomación" id="btn1" href="?controlador=gastronomia&accion=info&id=<?= $gastronomia["id_gastronomia"]; ?>" class="btn btn-primary btn-sm">
                       <i class="fas fa-folder"></i>
                     </a>
 
                     <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") { ?>
-                      <a title="Editar" href="?controlador=agencias&accion=editar&id=<?php echo $gastronomia["id_gastronomia"]; ?>" class="btn btn-success btn-sm">
+                      <a title="Editar" href="?controlador=gastronomia&accion=editar&id=<?php echo $gastronomia["id_gastronomia"]; ?>" class="btn btn-success btn-sm">
                         <i class="fas fa-pencil-alt"></i>
                       </a>
-                      <a title="Borrar" href="?controlador=agencias&accion=borrar&id=<?php echo $gastronomia["id_gastronomia"]; ?>
+                      <a title="Borrar" href="?controlador=gastronomia&accion=borrar&id=<?php echo $gastronomia["id_gastronomia"]; ?>
                                                                             &idDireccion=<?php echo $gastronomia["id_direccion"]; ?>" class="btn btn-danger btn-sm">
                         <i class="fas fa-trash"></i>
                       </a>
