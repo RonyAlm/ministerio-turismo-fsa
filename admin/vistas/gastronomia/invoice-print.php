@@ -79,7 +79,7 @@
 
                     <tr>
                       <th class="sorting_1">Designación Comercial</th>
-                      <td><?php echo $agenciasInfomacion->descripcion_agencias ?></td>
+                      <td><?php echo $agenciasInfomacion->denominacion_gastro ?></td>
                     </tr>
 
                     <tr>
@@ -97,41 +97,16 @@
                       <td><?php echo $agenciasInfomacion->descripcion_departamentos; ?></td>
                     </tr>
 
+
                     <tr>
-                      <th class="sorting_1">Razón Social</th>
-                      <td><?php echo $agenciasInfomacion->descripcion_razon_social; ?></td>
+                      <th class="sorting_1">observacion</th>
+                      <td><?php echo $agenciasInfomacion->observacion_gastro; ?></td>
                     </tr>
 
                     <tr>
-                      <th class="sorting_1">Idóneo</th>
-                      <td><?php echo $agenciasInfomacion->idoneo_agencia; ?></td>
+                      <th class="sorting_1">Días y horarios</th>
+                      <td><?php echo $agenciasInfomacion->dias_horarios; ?></td>
                     </tr>
-
-                    <tr>
-                      <th class="sorting_1">Matrícula</th>
-                      <td><?php echo $agenciasInfomacion->matricula_agencia; ?></td>
-                    </tr>
-
-                    <tr>
-                      <th class="sorting_1">Legajo</th>
-                      <td><?php echo $agenciasInfomacion->legajo_agencia; ?></td>
-                    </tr>
-
-                    <tr>
-                      <th class="sorting_1">Categoria</th>
-                      <td><?php echo $agenciasInfomacion->categoria_agencia; ?></td>
-                    </tr>
-
-                    <tr>
-                      <th class="sorting_1">Cuit</th>
-                      <td><?php echo $agenciasInfomacion->cuit_agencia; ?></td>
-                    </tr>
-
-                    <tr>
-                      <th class="sorting_1">Estado</th>
-                      <td><?php echo $agenciasInfomacion->descripcion_tipo_estado; ?></td>
-                    </tr>
-
                   </table>
 
                 </div>
@@ -230,10 +205,7 @@
 
                     <?php } ?>
 
-                    <tr>
-                      <th class="sorting_1">Última actualización</th>
-                      <td><?= $agenciasInfomacion->fecha_edit_agencia; ?></td>
-                    </tr>
+
 
                   </table>
 

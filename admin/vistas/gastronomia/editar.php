@@ -154,7 +154,7 @@
 
   <div class="card-footer">
     <div class="float-right">
-      <a href="?controlador=agencias&accion=inicio" class="btn btn-secondary">Cancelar</a>
+      <a href="?controlador=gastronomia&accion=inicio" class="btn btn-secondary">Cancelar</a>
       <input name="" id="" class="btn btn-success" type="submit" value="Editar">
     </div>
     </form>

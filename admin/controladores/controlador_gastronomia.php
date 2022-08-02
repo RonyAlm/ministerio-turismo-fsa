@@ -96,19 +96,16 @@ class ControladorGastronomia
         /*----------BUSCA LOS POST QUE SE ENCUENTRA EN EDITAR.PHP PARA PODER EDITARLO----------*/
 
         if ($_POST) {
+            // print_r($_POST);
             $EditarAgencia = new GastronomiaModelo();
 
 
-            $idAgencia =  $_POST['agenciaID'];
-            $descripcion_agencias = $_POST['nombreAgencia'];
-            $matricula_agencia = $_POST['matriculaAgencia'];
-            $legajo_agencia = $_POST['legajoAgencia'];
-            $cuit_agencia = $_POST['cuitAgencia'];
-            $categoria_agencia = $_POST['categoriaAgencia'];
-            $idoneoAgencia = $_POST['idoneoAgencia'];
 
-            $idRazonSocial = $_POST['agenciaRazonID'];
-            $razonsocial = $_POST['razonsocialAgencia'];
+
+            $designacionID =  $_POST['designacionID'];
+            $designacion = $_POST['designacion'];
+            $observacion = $_POST['observacion'];
+            $diayhora = $_POST['diayhora'];
 
             $idDireccion = $_POST['agenciaDomicilioID'];
             $rela_localidad_direccion = $_POST['localidadAgencia'];
@@ -141,20 +138,13 @@ class ControladorGastronomia
             $otroAgencia = $_POST['otroAgencia'];
 
 
-            $idestadoAgencia = $_POST['agenciaEstadoID'];
-            $estadoAgencia = $_POST['estadoAgencia'];
-
             $EditarAgencia->editar(
-                $descripcion_agencias,
-                $matricula_agencia,
-                $legajo_agencia,
-                $cuit_agencia,
-                $categoria_agencia,
-                $idAgencia,
-                $idoneoAgencia,
+                $designacion,
+                $observacion,
+                $diayhora,
+                $designacionID,
                 $rela_localidad_direccion,
                 $calle_direccion,
-                $razonsocial,
                 $telefonoAgencia,
                 $telefonoFijoAgencia,
                 $correoAgencia,
@@ -163,9 +153,8 @@ class ControladorGastronomia
                 $twitterAgencia,
                 $webAgencia,
                 $otroAgencia,
-                $estadoAgencia,
 
-                $idRazonSocial,
+
                 $idDireccion,
                 $idtelefonoAgencia,
                 $idtelefonoFijoAgencia,
@@ -174,8 +163,7 @@ class ControladorGastronomia
                 $idinstagramAgencia,
                 $idtwitterAgencia,
                 $idwebAgencia,
-                $idotroAgencia,
-                $idestadoAgencia
+                $idotroAgencia
             );
 
             // print_r($EditarAgencia);
@@ -183,7 +171,7 @@ class ControladorGastronomia
 
 
             // header("Location:admin/index2.php?controlador=agencias&accion=inicio");
-            echo "<script>location.href='index2.php?controlador=agencias&accion=inicio';</script>";
+            echo "<script>location.href='index2.php?controlador=gastronomia&accion=inicio';</script>";
         }
 
 
@@ -249,7 +237,7 @@ class ControladorGastronomia
         $agenciaWeb = $contactosDeagencia->consultarWeb($id_agencia);
         $agenciaOtro = $contactosDeagencia->consultarOtro($id_agencia);
 
-        include_once("vistas/agencias/info.php");
+        include_once("vistas/gastronomia/info.php");
     }
 
     public function sucursal()
@@ -291,6 +279,6 @@ class ControladorGastronomia
         $agenciaWeb = $contactosDeagencia->consultarWeb($id_agencia);
         $agenciaOtro = $contactosDeagencia->consultarOtro($id_agencia);
 
-        include_once("vistas/agencias/invoice-print.php");
+        include_once("vistas/gastronomia/invoice-print.php");
     }
 }
