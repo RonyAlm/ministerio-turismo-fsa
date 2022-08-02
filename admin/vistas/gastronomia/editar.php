@@ -44,9 +44,9 @@
             </div>
             <div class="card-body">
               <div class="form-group">
-                <label for="nombreAgencia">Designación Comercial:</label>
-                <input type="hidden" id="agenciaID" name="agenciaID" value="<?php echo $InsertarID->id_agencias; ?>">
-                <input type="text" id="nombreAgencia" name="nombreAgencia" value="<?php echo $editar->descripcion_agencias; ?>" class="form-control" required>
+                <label for="designacion">Designación Comercial:</label>
+                <input type="hidden" id="designacionID" name="designacionID" value="<?php echo $InsertarID->id_gastronomia; ?>">
+                <input type="text" id="designacion" name="designacion" value="<?php echo $editar->denominacion_gastro; ?>" class="form-control" required>
               </div>
 
               <div class="form-group">
@@ -59,41 +59,7 @@
                   <?php endforeach; ?>
                 </select>
               </div>
-              <div class="form-group">
-                <label for="razonsocialAgencia">Razón Social:</label>
-                <input type="hidden" id="agenciaRazonID" name="agenciaRazonID" value="<?php echo $InsertarID->id_razon_social; ?>">
-                <input type="text" id="razonsocialAgencia" value="<?php echo $editar->descripcion_razon_social; ?>" name="razonsocialAgencia" class="form-control"></input>
-              </div>
 
-              <div class="form-group">
-                <label for="idoneoAgencia">Idóneo:</label>
-                <input type="hidden" id="" name="" value="<?php echo $InsertarID->id_agencias; ?>">
-                <input type="text" id="idoneoAgencia" value="<?php echo $editar->idoneo_agencia; ?>" name="idoneoAgencia" class="form-control"></input>
-              </div>
-
-              <div class="form-group">
-                <label for="matriculaAgencia">Matrícula</label>
-                <input type="hidden" id="" name="" value="<?php echo $InsertarID->id_agencias; ?>">
-                <input type="text" id="matriculaAgencia" value="<?php echo $editar->matricula_agencia; ?>" name="matriculaAgencia" class="form-control" required>
-              </div>
-
-              <div class="form-group">
-                <label for="legajoAgencia">Legajo</label>
-                <input type="hidden" id="" name="" value="<?php echo $InsertarID->id_agencias; ?>">
-                <input type="text" id="legajoAgencia" value="<?php echo $editar->legajo_agencia; ?>" name="legajoAgencia" class="form-control" required>
-              </div>
-
-              <div class="form-group">
-                <label for="categoriaAgencia">Categoria</label>
-                <input type="hidden" id="" name="" value="<?php echo $InsertarID->id_agencias; ?>">
-                <input type="text" id="categoriaAgencia" value="<?php echo $editar->categoria_agencia; ?>" name="categoriaAgencia" class="form-control" required>
-              </div>
-
-              <div class="form-group">
-                <label for="cuitAgencia">Cuit</label>
-                <input type="hidden" id="" name="" value="<?php echo $InsertarID->id_agencias; ?>">
-                <input type="text" id="cuitAgencia" value="<?php echo $editar->cuit_agencia; ?>" name="cuitAgencia" class="form-control" required>
-              </div>
 
               <div class="form-group">
                 <label for="domicilioAgencia">Domicilio</label>
@@ -101,17 +67,18 @@
                 <input type="text" id="domicilioAgencia" value="<?php echo $editar->calle_direccion; ?>" name="domicilioAgencia" class="form-control" required>
               </div>
 
+              <div class="form-group">
+                <label for="observacion">Observación:</label>
+                <input type="hidden" id="" name="" value="<?php echo $InsertarID->id_gastronomia; ?>">
+                <input type="text" id="observacion" value="<?php echo $editar->observacion_gastro; ?>" name="observacion" class="form-control"></input>
+              </div>
 
               <div class="form-group">
-                <label for="estadoAgencia">Estado</label>
-                <input type="hidden" id="agenciaEstadoID" name="agenciaEstadoID" value="<?php echo $InsertarID->id_estado; ?>">
-                <?php $des_tipo_estado_actual = $editar->descripcion_tipo_estado; ?>
-                <select id="estadoAgencia" name="estadoAgencia" class="form-control custom-select ordenarSelect" required>
-                  <?php foreach ($buscarSelectEstado as $k) : ?>
-                    <option value="<?= $k->id_tipo_estado; ?>" <?= ($k->descripcion_tipo_estado == $des_tipo_estado_actual) ? 'selected="selected"' : ''; ?>> <?= $k->descripcion_tipo_estado; ?></option>
-                  <?php endforeach; ?>
-                </select>
+                <label for="diayhora">Días y horarios de atención</label>
+                <input type="hidden" id="" name="" value="<?php echo $InsertarID->id_gastronomia; ?>">
+                <input type="text" id="diayhora" value="<?php echo $editar->dias_horarios; ?>" name="diayhora" class="form-control" required>
               </div>
+
 
             </div>
             <!-- /.card-body -->

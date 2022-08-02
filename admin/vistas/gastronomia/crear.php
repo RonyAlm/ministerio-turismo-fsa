@@ -46,11 +46,6 @@
                 </select>
               </div>
 
-              <!-- <div class="form-group">
-                <label for="idoneoAgencia">Idóneo:</label>
-                <input type="text" id="idoneoAgencia" name="idoneoAgencia" class="form-control"></input>
-              </div> -->
-
 
               <div class="form-group">
                 <label for="domicilioAgencia">Domicilio</label>

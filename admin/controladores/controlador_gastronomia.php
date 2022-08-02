@@ -189,7 +189,7 @@ class ControladorGastronomia
 
         /*----------BUSCA LOS ID Y LOS PONE EN EL FORMULARIO----------*/
 
-        $contactosDeagencia = new ContactosAgencia();
+        $contactosDeagencia = new ContactosGastronomia();
 
         $contactosDeagencia1 = new ContactosInfo();
 
@@ -210,7 +210,7 @@ class ControladorGastronomia
         $InsertarID = $buscarID->consultarID($idAgencia);
 
 
-        include_once("vistas/agencias/editar.php");
+        include_once("vistas/gastronomia/editar.php");
     }
 
     public function borrar()
