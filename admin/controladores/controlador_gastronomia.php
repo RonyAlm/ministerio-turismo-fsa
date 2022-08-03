@@ -207,15 +207,15 @@ class ControladorGastronomia
 
         $idAgenciaBorrar = $_GET["id"];
         $id_direccion = $_GET['idDireccion'];
-        $idRazonSocial = $_GET['idRazonSocial'];
 
         $borrarAgencias = new GastronomiaModelo();
 
         $buscarIDBorrado = $borrarAgencias->consultarID($idAgenciaBorrar);
 
-        $borrado = $borrarAgencias->borrar($idAgenciaBorrar, $id_direccion, $idRazonSocial);
+        $borrado = $borrarAgencias->borrar($idAgenciaBorrar, $id_direccion);
 
-        header("Location:index2.php?controlador=agencias&accion=inicio");
+        // header("Location:index2.php?controlador=gastronomia&accion=inicio");
+        echo "<script>location.href='index2.php?controlador=gastronomia&accion=inicio';</script>";
     }
 
     public function info()
@@ -257,7 +257,7 @@ class ControladorGastronomia
         $cantidadAgenciasHabilitadas = $datosEstadisticos->cantidadAgenciasHabilitadas();
 
 
-        include_once("vistas/agencias/imprimir.php");
+        include_once("vistas/gastronomia/imprimir.php");
     }
 
     public function imprimirInfo()

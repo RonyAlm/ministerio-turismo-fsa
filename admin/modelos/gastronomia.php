@@ -159,17 +159,14 @@ class GastronomiaModelo
         $sqlOtro->execute(array($otroAgencia, 8, $lastInsertIDAgencias));
     }
 
-    public static function borrar($idAgenciaBorrar, $id_direccion, $idRazonSocial)
+    public static function borrar($idAgenciaBorrar, $id_direccion)
     {
         $conexionBD = BD::crearInstancia();
-        $sqlAgenciaBorrar = $conexionBD->prepare("DELETE FROM agencias WHERE id_agencias =?");
+        $sqlAgenciaBorrar = $conexionBD->prepare("DELETE FROM gastronomia WHERE id_gastronomia =?");
         $sqlAgenciaBorrar->execute(array($idAgenciaBorrar));
 
         $sqlDireccionBorrar = $conexionBD->prepare("DELETE FROM direccion WHERE id_direccion =?");
         $sqlDireccionBorrar->execute(array($id_direccion));
-
-        $sqlRazonBorrar = $conexionBD->prepare("DELETE FROM `razon_social` WHERE id_razon_social =?");
-        $sqlRazonBorrar->execute(array($idRazonSocial));
     }
     /*----------BUSCAR para ir imprimir en la seccion EDITAR----------*/
     public function buscar($id)
