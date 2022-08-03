@@ -24,6 +24,7 @@ class ControladorFestivales
 
         include_once("vistas/festivales/inicio.php");
     }
+
     public function crear()
     {
 
@@ -88,6 +89,7 @@ class ControladorFestivales
 
         include_once("vistas/festivales/crear.php");
     }
+
     public function editar()
     {
 
@@ -253,4 +255,45 @@ class ControladorFestivales
 
         include_once("vistas/festivales/info.php");
     }
+
+    public function imprimir()
+    { //aca se muestra las tablas
+
+        $consulta = new FestivalesModelo();
+        $tabla = $consulta->consultar();
+        $tablaContacto = $consulta->consultarContactos();
+        $contacto = $consulta->contacto();
+        // $datosEstadisticos = new estadistica();
+
+        // $cantidadFestivales = $datosEstadisticos->cantidadPiletas();
+        // $cantidadPlayas = $datosEstadisticos->cantidadPlayas();
+        // $cantidadCamping = $datosEstadisticos->cantidadCamping();
+        // $cantidadParqueAcuaticos = $datosEstadisticos->cantidadParqueAcuaticos();
+
+
+        include_once("vistas/festivales/imprimir.php");
+    }
+
+    public function imprimirInfo()
+    {
+        $id = $_GET['id'];
+
+        $info = new FestivalesModelo();
+
+        $informacion = $info->buscar($id);
+
+
+        $contactosDeagencia = new ContactosInfo();
+        $agenciaTelefonoInfo = $contactosDeagencia->consultarTelefonos($id);
+        $agenciaTelefonoFijo = $contactosDeagencia->consultarTelefonosFijos($id);
+        $agenciaCorreo = $contactosDeagencia->consultarCorreo($id);
+        $agenciaFacebook = $contactosDeagencia->consultarFacebook($id);
+        $agenciaInstagram = $contactosDeagencia->consultarInstagram($id);
+        $agenciaTwitter = $contactosDeagencia->consultarTwitter($id);
+        $agenciaWeb = $contactosDeagencia->consultarWeb($id);
+        $agenciaOtro = $contactosDeagencia->consultarOtro($id);
+
+        include_once("vistas/festivales/invoice-print.php");
+    }
+
 }
