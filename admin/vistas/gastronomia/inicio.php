@@ -40,38 +40,6 @@ $rol_id = $_SESSION['rol_id'];
 
   <div class="card-body">
 
-    <div class="row">
-      <div class="col-md-3 col-sm-6 col-12">
-        <div class="info-box">
-          <span class="info-box-icon bg-success"><i class="fa-solid fa-building"></i></span>
-
-          <div class="info-box-content">
-            <span class="info-box-text text-center">Gastronomicos</span>
-            <?php foreach ($cantidad_agencias as $estadistica) { ?>
-              <span class="info-box-text">Cantidad Total: <?php echo $estadistica->conteo; ?> </span>
-            <?php } ?>
-          </div>
-          <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
-      </div>
-      <!-- /.col -->
-      <div class="col-md-3 col-sm-6 col-12">
-        <div class="info-box">
-          <span class="info-box-icon bg-success"><i class="fa-solid fa-building-circle-check"></i></span>
-
-          <div class="info-box-content">
-            <span class="info-box-text text-center">Activas</span>
-            <?php foreach ($cantidadAgenciasHabilitadas as $estadistica) { ?>
-              <span class="info-box-text">Cantidad Total: <?php echo $estadistica->conteo; ?> </span>
-            <?php } ?>
-          </div>
-          <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
-      </div>
-      <!-- /.col -->
-    </div>
 
     <div id="acordeon" class="row">
       <div class="col-lg-12">
