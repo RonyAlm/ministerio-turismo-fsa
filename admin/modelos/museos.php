@@ -20,7 +20,7 @@ class MuseoModelo
 
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->query("SELECT `id_museo`, `nombre_museo`, `horario_dia_museo`, `descripcion_museo`, `idoneo_museo`,
+        $sql = $conexionBD->query("SELECT `id_museo`, `nombre_museo`, `horario_dia_museo`, `descripcion_museo`, `idoneo_museo`, date_updated_museo,
                                         (SELECT contacto.descripcion_contacto 
                                         FROM contacto 
                                         WHERE museo.id_museo = contacto.rela_contacto_museo
@@ -176,7 +176,7 @@ class MuseoModelo
     public function buscar($id_museo)
     {
         $conexionBD = BD::crearInstancia();
-        $sql = $conexionBD->prepare("SELECT `id_museo`, `nombre_museo`, `horario_dia_museo`, `descripcion_museo`, `idoneo_museo`,
+        $sql = $conexionBD->prepare("SELECT `id_museo`, `nombre_museo`, `horario_dia_museo`, `descripcion_museo`, `idoneo_museo`, date_updated_museo,
                                             direccion.calle_direccion, direccion.id_direccion,
                                             localidad.nombre_localidad,
                                             departamentos_fsa.descripcion_departamentos,
