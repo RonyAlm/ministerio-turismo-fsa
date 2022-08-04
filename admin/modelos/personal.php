@@ -142,17 +142,29 @@ class PersonalModelo
 
         $lastInsertIDdireccion = $conexionBD->lastInsertId();
 
+        /*-------- INSERTAMOS EL USUARIO Y LA CONTRASEÑA--------*/
+
+        $sqlusuario = $conexionBD->prepare("INSERT INTO `usuario_contra`(`usuario`,
+                                                 `contraseña`, `rela_rol_id`)
+                                            VALUES (?,?,?)");
+        $sqlusuario->execute(array(
+            $usuario, $contraseña,
+            2
+        ));
+
+        $lastInsertusuariocontraseña = $conexionBD->lastInsertId();
+
 
         /*-------- INSERTAMOS LA PERSONA--------*/
 
         $sql = $conexionBD->prepare("INSERT INTO `persona`(`nombre_persona`, `apellido_persona`,
                                                  `cuil_persona`, `fecha_nac`, `rela_persona_direccion`,
-                                                  `rela_educacion`, `profesion`) 
-                                            VALUES (?,?,?,?,?,?,?)");
+                                                  `rela_educacion`, `profesion`,`rela_usuario_contra`)
+                                            VALUES (?,?,?,?,?,?,?,?)");
         $sql->execute(array(
             $nombre, $apellido,
             $cuil, $fecha, $lastInsertIDdireccion,
-            $educacion, $profesion
+            $educacion, $profesion, $lastInsertusuariocontraseña
         ));
 
         $lastInsertIDAgencias = $conexionBD->lastInsertId();
@@ -175,17 +187,7 @@ class PersonalModelo
 
         $lastInsertIDPersonal = $conexionBD->lastInsertId();
 
-        /*-------- INSERTAMOS EL USUARIO Y LA CONTRASEÑA--------*/
 
-        $sqlusuario = $conexionBD->prepare("INSERT INTO `usuario_contra`(`usuario`,
-                                                 `contraseña`, `rela_rol_id`)
-                                            VALUES (?,?,?)");
-        $sqlusuario->execute(array(
-            $usuario, $contraseña,
-            2
-        ));
-
-        $lastInsertusuariocontraseña = $conexionBD->lastInsertId();
 
         /*-------- INSERTAMOS LAS LICENCIAS--------*/
 

@@ -20,6 +20,9 @@ if ($_POST) {
   $usuario = $_POST['usuario'];
   $contraseña = $_POST['contraseña'];
 
+  // print_r($usuario);
+  // print_r($contraseña);
+
   $sql = "SELECT id_usuario, usuario, contraseña, rela_rol_id from usuario_contra where usuario='$usuario'";
 
   $resultado = $conexion->prepare($sql);
@@ -33,6 +36,8 @@ if ($_POST) {
     $row = $resultado->fetch(PDO::FETCH_ASSOC);
 
     $id_usuario_contraseña = $row['id_usuario'];
+    // echo "hola";
+    // print_r($id_usuario_contraseña);
 
     // DESDE ESTE PUNTO LO QUE SE VA A HACER ES SACAR SI LA PERSONA ESTA ACTIVA O INACTIVA
     $sqlACTIVO = "SELECT id_persona, nombre_persona, apellido_persona FROM `persona` where rela_usuario_contra =$id_usuario_contraseña";
@@ -55,7 +60,8 @@ if ($_POST) {
       $_SESSION['id_persona'] = $rowActivo['id_persona'];
 
       header("Location: index2.php");
-      // echo "entraste wey";
+      // print_r($_SESSION['nombre_persona']);
+      echo "entraste wey";
     } else {
       $error = "La contraseña no coincide";
       // echo "La contraseña no coincide";
