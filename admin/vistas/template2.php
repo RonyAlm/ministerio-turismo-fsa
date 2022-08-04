@@ -289,9 +289,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
               <li class="nav-item 
                 <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'Alojamientos' || $_GET['controlador'] == 'agencias' ||
-                  $_GET['controlador'] == 'prestadores' || $_GET['controlador'] == 'referentes' || $_GET['controlador'] == 'servigenerales')) ? 'menu-open' : '' ?>">
+                  $_GET['controlador'] == 'prestadores' || $_GET['controlador'] == 'referentes' || $_GET['controlador'] == 'servigenerales' || $_GET['controlador'] == 'gastronomia')) ? 'menu-open' : '' ?>">
                 <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'Alojamientos' || $_GET['controlador'] == 'agencias' ||
-                                              $_GET['controlador'] == 'prestadores' || $_GET['controlador'] == 'referentes' || $_GET['controlador'] == 'servigenerales')) ? 'active' : '' ?>">
+                                              $_GET['controlador'] == 'prestadores' || $_GET['controlador'] == 'referentes' || $_GET['controlador'] == 'servigenerales' || $_GET['controlador'] == 'gastronomia')) ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-edit"></i>
                   <p>
                     Registro
@@ -340,7 +340,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <a href="?controlador=gastronomia&accion=inicio" class="nav-link 
                     <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'gastronomia') ? 'active' : '' ?>">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Gastronomía</p>
+                        <p>Gastronomías</p>
                       </a>
                     </li>
                   <?php } ?>

@@ -19,7 +19,7 @@ class GastronomiaModelo
 
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->query("SELECT `id_gastronomia`, `denominacion_gastro`, `observacion_gastro`, `dias_horarios`,
+        $sql = $conexionBD->query("SELECT `id_gastronomia`, `denominacion_gastro`, `observacion_gastro`, `dias_horarios`, date_updated_gastronomia,
         (SELECT contacto.descripcion_contacto 
         FROM contacto 
         WHERE gastronomia.id_gastronomia= contacto.rela_gastronomia_contacto
@@ -172,7 +172,7 @@ class GastronomiaModelo
     public function buscar($id)
     {
         $conexionBD = BD::crearInstancia();
-        $sql = $conexionBD->prepare("SELECT `id_gastronomia`, `denominacion_gastro`, `observacion_gastro`, `dias_horarios`,
+        $sql = $conexionBD->prepare("SELECT `id_gastronomia`, `denominacion_gastro`, `observacion_gastro`, `dias_horarios`, date_updated_gastronomia,
         direccion.id_direccion,direccion.calle_direccion,
         localidad.id_localidad,localidad.nombre_localidad,
         contacto.id_contacto,contacto.descripcion_contacto,

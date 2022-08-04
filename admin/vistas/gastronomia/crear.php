@@ -72,7 +72,7 @@
         <div class="col-md-6">
           <div class="card card-success card-outline">
             <div class="card-header">
-              <h3 class="card-title">Contacto</h3>
+              <h3 class="card-title">Contactos</h3>
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -120,7 +120,7 @@
                 <input type="text" id="webAgencia" name="webAgencia" class="form-control">
               </div>
               <div class="form-group">
-                <label for="otroAgencia">Otro</label>
+                <label for="otroAgencia">Otros</label>
                 <input type="text" id="otroAgencia" name="otroAgencia" class="form-control">
               </div>
             </div>
