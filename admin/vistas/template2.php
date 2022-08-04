@@ -19,11 +19,13 @@ $id_persona = $_SESSION['id_persona'];
 $nombre = $_SESSION['nombre_persona'];
 $apellido = $_SESSION['apellido_persona'];
 
+print_r($apellido);
+
 
 
 if ($nombre) {
   $nombre = 1;
-  /*---------------SE ACTUALIZA LA DIRECCION CON LA LOCALIDAD-------------------*/
+  /*---------------SE ACTUALIZA -------------------*/
 
   $sqlDireccion = $conexion->prepare("UPDATE `personales` SET `rela_tipo_estado`=$nombre
                                                 WHERE rela_persona = $id_persona");
@@ -191,13 +193,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="dropdown-divider"></div>
             <a href="#" class="dropdown-item">
               <i class="fas fa-user mr-2"></i>Mi Perfil<?php
-                                              if ($nombre) {
-                                                // $nombre = 1;
-                                                //echo "mi nombre es " . $apellido;
-                                              } else {
-                                                // $nombre = 0;
-                                                //echo "mi nombre es otro " . $apellido;
-                                              } ?>
+                                                        if ($nombre) {
+                                                          // $nombre = 1;
+                                                          // echo "mi nombre es " . $apellido;
+                                                        } else {
+                                                          // $nombre = 0;
+                                                          // echo "mi nombre es otro " . $apellido;
+                                                        } ?>
             </a>
             <div class="dropdown-divider"></div>
             <a href="vistas/logout.php" class="dropdown-item">
