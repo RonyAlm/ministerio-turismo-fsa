@@ -19,7 +19,7 @@ $id_persona = $_SESSION['id_persona'];
 $nombre = $_SESSION['nombre_persona'];
 $apellido = $_SESSION['apellido_persona'];
 
-print_r($apellido);
+// print_r($apellido);
 
 
 
@@ -519,7 +519,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <?php } ?>
 
             <!-- PERSONAL -->
-            <?php if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3 and $usuario == "monica") { ?>
+            <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "monica") { ?>
               <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'menu-open' : '' ?>">
                 <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-table"></i>

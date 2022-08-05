@@ -51,25 +51,26 @@
                   <div class="form-group row">
                     <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
                     <div class="col-sm-10">
-                      <input type="" class="form-control" name="nombre" id="nombre" placeholder="Nombre">
+                      <input type="" class="form-control" name="nombre" id="nombre">
+                      <?php echo $Infomacion->nombre_persona ?>
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="apellido" class="col-sm-2 col-form-label">Apellido</label>
                     <div class="col-sm-10">
-                      <input type="" class="form-control" name="apellido" id="apellido" placeholder="Apellido">
+                      <input type="" class="form-control" name="apellido" id="apellido" placeholder="<?php echo $Infomacion->nombre_persona ?>">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="cuil" class="col-sm-2 col-form-label">Cuil</label>
                     <div class="col-sm-10">
-                      <input type="number" class="form-control" name="cuil" id="cuil" placeholder="99-99.999.99-99">
+                      <input type="number" class="form-control" name="cuil" id="cuil" placeholder="<?php echo $Infomacion->nombre_persona ?>">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="direccion" class="col-sm-2 col-form-label">Dirección</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="direccion" id="direccion" placeholder="Dirección">
+                      <input type="text" class="form-control" name="direccion" id="direccion" placeholder="<?php echo $Infomacion->nombre_persona ?>">
                     </div>
                   </div>
                   <div class="form-group row">

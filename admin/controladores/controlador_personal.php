@@ -273,7 +273,7 @@ class ControladorPersonal
         $Info = new PersonalModelo();
 
 
-        // $agenciasInfomacion = $agenciaInfo->buscar($id_agencia);
+        $Infomacion = $Info->buscar($id);
 
 
         // $contactosDeagencia = new ContactosInfo();
@@ -374,7 +374,8 @@ class ControladorPersonal
             );
 
 
-            header("Location:index2.php?controlador=personal&accion=inicio");
+            // header("Location:index2.php?controlador=personal&accion=inicio");
+            echo "<script>location.href = 'index2.php?controlador=agencias&accion=inicio';</script>";
         }
 
         include_once("vistas/personal/guardar.php");

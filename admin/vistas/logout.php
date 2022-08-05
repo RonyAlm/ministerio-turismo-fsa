@@ -17,7 +17,6 @@ $nombre = $_SESSION['nombre_persona'];
 $apellido = $_SESSION['apellido_persona'];
 
 
-
 if ($nombre) {
     $nombre = 2;
     /*---------------SE ACTUALIZA LA DIRECCION CON LA LOCALIDAD-------------------*/
@@ -26,6 +25,8 @@ if ($nombre) {
                                                 WHERE rela_persona = $id_persona");
     $sqlDireccion->execute();
     // print_r($sqlDireccion);
+
+
 } else {
     $nombre = 0;
     echo "mi nombre es otro " . $nombre;

@@ -240,23 +240,22 @@ class PersonalModelo
         $sqlRazonBorrar->execute(array($idRazonSocial));
     }
     /*----------BUSCAR para ir imprimir en la seccion EDITAR----------*/
-    public function buscar($id_agencia)
+    public function buscar($id)
     {
         $conexionBD = BD::crearInstancia();
-        $sql = $conexionBD->prepare("SELECT id_agencias, descripcion_agencias , `idoneo_agencia`, `matricula_agencia`,
-                                                    `legajo_agencia`, `cuit_agencia`, `categoria_agencia`, fecha_edit_agencia, razon_social.descripcion_razon_social,
-                                                     direccion.calle_direccion,
-                                                    contacto.descripcion_contacto, tipo_estado.descripcion_tipo_estado,localidad.nombre_localidad
-                                                    ,estado_actividad.rela_tipo_estado,departamentos_fsa.descripcion_departamentos 
-                                            FROM `agencias`
-                                            INNER JOIN contacto ON contacto.rela_contacto_agencia = agencias.id_agencias
-                                            INNER JOIN razon_social on razon_social.id_razon_social = agencias.rela_razon_social_agencia
-                                            INNER JOIN direccion ON agencias.rela_agencia_direccion = direccion.id_direccion
-                                            INNER JOIN estado_actividad on estado_actividad.rela_estado_agencia = agencias.id_agencias
-                                            INNER JOIN tipo_estado on tipo_estado.id_tipo_estado = estado_actividad.rela_tipo_estado
-                                            INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad
-                                            INNER JOIN departamentos_fsa on localidad.rela_departamento = departamentos_fsa.id_departamentos_fsa
-                                            WHERE agencias.id_agencias = $id_agencia");
+        $sql = $conexionBD->prepare("SELECT *
+        FROM `personales` per
+        INNER JOIN persona p on p.id_persona = per.rela_persona
+        INNER JOIN educacion e on e.id_educacion = p.rela_educacion
+        INNER JOIN contacto c on c.rela_persona_contacto = p.id_persona
+        INNER JOIN areas a on a.id_areas = per.rela_area
+        INNER JOIN tipo_contrato ticon on ticon.id_tipo_contrato = per.rela_tipo_contrato
+        INNER JOIN deptos_mintur depmin on depmin.id_deptos_mintur = per.rela_depto_mintur
+        INNER JOIN direccion dir on dir.id_direccion = p.rela_persona_direccion
+        INNER join localidad l on l.id_localidad = dir.rela_localidad_direccion
+        INNER JOIN tipo_personal tiper on tiper.id_tipo_personal = per.rela_tipo_personal
+        INNER JOIN licencias li on li.rela_personal = per.id_personal
+        WHERE per.id_personal = $id");
 
         $sql->execute();
 

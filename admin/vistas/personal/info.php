@@ -31,7 +31,7 @@ $rol_id = $_SESSION['rol_id'];
             <?php foreach ($tablaInfo2 as $tabla) { ?>
 
               <?php
-              echo $conteo;
+              // echo $conteo;
               ?>
 
               <div class="card card-primary">
