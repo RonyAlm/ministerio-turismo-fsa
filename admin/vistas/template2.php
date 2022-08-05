@@ -752,7 +752,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <div class="modal fade" id="myModal">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header bg-info">
+        <div class="modal-header bg-success">
           <h4 class="modal-title" id="titulo"></h4>
           <button type="button" class="btn btn-close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -777,7 +777,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
 
             <div class="form-floating mb-3">
-              <label for="descripcion" class="form-label">Descripcion</label>
+              <label for="descripcion" class="form-label">Descripción</label>
               <!-- <textarea name="descripcion" id="descripcion" cols="62" rows="5"></textarea> -->
               <input type="text" class="form-control" name="descripcion" id="descripcion">
             </div>
