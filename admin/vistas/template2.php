@@ -578,6 +578,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <footer class="main-footer">
     <strong> &copy; </strong><i id="fechaFooter">
       <!-- 20:00:14 -->
+      <!-- <?php
+            // if ("fechaFooter" == "09:10:00") {
+
+            //   echo "entre";
+            // }
+            ?> -->
     </i>
     <script>
       const currentTime = () => {
@@ -600,8 +606,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         let time = `${fecha}  ${hh}:${mm}:${ss}`;
         fechaF.innerText = time;
 
+        // if (time == "09:05:30") {
+        //   document.write(time);
+        // }
+
       };
       currentTime();
+
       setInterval(currentTime, 1000);
     </script>
     <div class="float-right d-none d-sm-inline-block">
