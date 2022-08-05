@@ -167,7 +167,7 @@
 
                         <tr>
                             <th class="sorting_1">Última actualización</th>
-                            <td><?php  //echo $agenciasInfomacion->fecha_edit_agencia; ?></td>
+                            <td><?php echo $agenciasInfomacion->date_updated_museo; ?></td>
                         </tr>
 
                     </table>

@@ -23,8 +23,8 @@
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=agencias&accion=inicio">Agencias</a></li>
-            <li class="breadcrumb-item active">Imprimir Información Agencia</li>
+            <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=gastronomia&accion=inicio">Gastronomías</a></li>
+            <li class="breadcrumb-item active">Imprimir Información Gastronomía</li>
           </ol>
         </div>
       </div>
@@ -39,7 +39,7 @@
           <div class="row">
             <div class="col-12">
               <h2 class="page-header">
-                Agencia
+                Gastronomía
                 <small class="float-right">Fecha:
                   <?php
                   $Object = new DateTime();
@@ -99,7 +99,7 @@
 
 
                     <tr>
-                      <th class="sorting_1">observacion</th>
+                      <th class="sorting_1">Observación</th>
                       <td><?php echo $agenciasInfomacion->observacion_gastro; ?></td>
                     </tr>
 
@@ -107,6 +107,12 @@
                       <th class="sorting_1">Días y horarios</th>
                       <td><?php echo $agenciasInfomacion->dias_horarios; ?></td>
                     </tr>
+
+                    <tr>
+                      <th class="sorting_1">Última actualización</th>
+                      <td><?php echo $agenciasInfomacion->date_updated_gastronomia; ?></td>
+                    </tr>
+                    
                   </table>
 
                 </div>

@@ -2,11 +2,11 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Información Agencia</h1>
+        <h1>Información Gastronomía</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=agencias&accion=inicio">Agencias</a></li>
+          <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=gastronomia&accion=inicio">Gastronomías</a></li>
           <li class="breadcrumb-item active">Información</li>
         </ol>
       </div>
@@ -60,13 +60,18 @@
 
 
             <tr>
-              <th class="sorting_1">observacion</th>
+              <th class="sorting_1">Observación</th>
               <td><?php echo $agenciasInfomacion->observacion_gastro; ?></td>
             </tr>
 
             <tr>
               <th class="sorting_1">Días y horarios</th>
               <td><?php echo $agenciasInfomacion->dias_horarios; ?></td>
+            </tr>
+            
+            <tr>
+              <th class="sorting_1">Última actualización</th>
+              <td><?php echo $agenciasInfomacion->date_updated_gastronomia; ?></td>
             </tr>
 
           </table>

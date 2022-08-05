@@ -23,8 +23,8 @@
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=museos&accion=inicio">Museos</a></li>
-            <li class="breadcrumb-item active">Imprimir Información Museo</li>
+            <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=festivales&accion=inicio">Festividades</a></li>
+            <li class="breadcrumb-item active">Imprimir Información Festividad</li>
           </ol>
         </div>
       </div>
@@ -39,7 +39,7 @@
           <div class="row">
             <div class="col-12">
               <h2 class="page-header">
-                Museo
+                Festividad
                 <small class="float-right">Fecha:
                   <?php
                   $Object = new DateTime();
@@ -78,33 +78,32 @@
                   <table id="tblInfoGe" class="tblInfo table table-bordered table-striped" cellspacing="0" width="100%">
 
                     <tr>
-                      <th class="sorting_1">Designación Comercial</th>
-                      <td><?php echo $agenciasInfomacion->nombre_museo ?></td>
+                      <th class="sorting_1">Tipo de Servicio</th>
+                      <td><?php echo $informacion->descripcion_servicio ?></td>
                     </tr>
-
+                    <tr>
+                      <th class="sorting_1">Nombre</th>
+                      <td><?php echo $informacion->nombre_festival ?></td>
+                    </tr>
                     <tr>
                       <th class="sorting_1">Localidad</th>
-                      <td><?php echo $agenciasInfomacion->nombre_localidad; ?></td>
+                      <td><?php echo $informacion->nombre_localidad; ?></td>
                     </tr>
-
                     <tr>
-                      <th class="sorting_1">Dirección</th>
-                      <td><?php echo $agenciasInfomacion->calle_direccion; ?></td>
+                      <th class="sorting_1">Departamento</th>
+                      <td><?php echo $informacion->descripcion_departamentos; ?></td>
                     </tr>
-
                     <tr>
                       <th class="sorting_1">Idóneo</th>
-                      <td><?php echo $agenciasInfomacion->idoneo_museo; ?></td>
+                      <td><?php echo $informacion->idoneo; ?></td>
                     </tr>
-
-                    <tr>
-                      <th class="sorting_1">Días y horarios</th>
-                      <td><?php echo $agenciasInfomacion->horario_dia_museo; ?></td>
-                    </tr>
-
                     <tr>
                       <th class="sorting_1">Descripción</th>
-                      <td><?php echo $agenciasInfomacion->descripcion_museo; ?></td>
+                      <td><?php echo $informacion->descripcion; ?></td>
+                    </tr>
+                    <tr>
+                      <th class="sorting_1">Última actualización</th>
+                      <td><?= $informacion->fecha_edit_general; ?></td>
                     </tr>
 
                   </table>
@@ -144,7 +143,7 @@
                     <?php foreach ($agenciaTelefonoFijo as $telefonosFijo) { ?>
 
                       <tr>
-                        <th class="sorting_1"><i class="fas fa-phone mr-1"></i> Teléfono Fijo</th>
+                        <th class="sorting_1"><i class="fas fa-phone mr-1"></i> Teléfonos Fijo</th>
                         <td><?php echo $telefonosFijo["descripcion_contacto"]; ?></td>
                       </tr>
 
@@ -154,7 +153,7 @@
                     <?php foreach ($agenciaCorreo as $correos) { ?>
 
                       <tr>
-                        <th class="sorting_1"><i class=" fas fa-solid fa-envelope mr-1"></i> Correo</th>
+                        <th class="sorting_1"><i class="fas fa-solid fa-envelope mr-1"></i> Correo</th>
                         <td><?php echo $correos["descripcion_contacto"]; ?></td>
                       </tr>
 
@@ -190,7 +189,7 @@
                     <?php foreach ($agenciaWeb  as $web) { ?>
 
                       <tr>
-                        <th class="sorting_1"><i class="fas fa-globe  mr-1"></i> Sitio Web</th>
+                        <th class="sorting_1"><i class="fas fa-globe mr-1"></i> Sitio Web</th>
                         <td><?php echo $web["descripcion_contacto"]; ?></td>
                       </tr>
 
@@ -199,17 +198,11 @@
                     <?php foreach ($agenciaOtro as $otro) { ?>
 
                       <tr>
-                        <th class="sorting_1"><i class="fas fa-street-view mr-1"></i>Otros</th>
+                        <th class="sorting_1"><i class="fas fa-street-view mr-1"></i> Otros</th>
                         <td><?php echo $otro["descripcion_contacto"]; ?></td>
                       </tr>
 
                     <?php } ?>
-
-                    <tr>
-                      <th class="sorting_1">Última actualización</th>
-                      <td><?php  echo $agenciasInfomacion->date_updated_museo; 
-                          ?></td>
-                    </tr>
 
                   </table>
 

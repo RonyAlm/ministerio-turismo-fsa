@@ -17,7 +17,7 @@ $rol_id = $_SESSION['rol_id'];
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=gastronomia&accion=inicio">Inicio</a></li>
+          <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=paginas&accion=inicio">Inicio</a></li>
           <li class="breadcrumb-item active">Gastronomia</li>
         </ol>
       </div>
