@@ -425,7 +425,7 @@ class PersonalModelo
         $conexionBD = BD::crearInstancia();
 
 
-        $sqlLocalidad = $conexionBD->query("SELECT id_educacion, descripcion FROM educacion");
+        $sqlLocalidad = $conexionBD->query("SELECT id_educacion, descriEducacion FROM educacion");
 
         $sqlLocalidad->execute();
 

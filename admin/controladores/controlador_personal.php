@@ -95,12 +95,17 @@ class ControladorPersonal
     public function editar()
     {
 
-        // $idAgencia = $_GET["id"];
+        $id = $_GET["id"];
 
-        // $buscarAgencias = new PersonalModelo();
+        $select_tipo = new PersonalModelo();
 
-        // $buscarSelectLocalidad = $buscarAgencias->buscarSelectLocalidad();
-        // $buscarSelectEstado = $buscarAgencias->buscarSelectEstado();
+        $buscarSelectLocalidad = $select_tipo->buscarSelectLocalidad();
+        $buscarSelectEstudios = $select_tipo->buscarSelectEstudios();
+        $buscarSelectDepartamento = $select_tipo->buscarSelectDepartamento();
+        $buscarSelectCargo = $select_tipo->buscarSelectCargo();
+        $buscarSelectRol = $select_tipo->buscarSelectRol();
+        $buscarSelectArea = $select_tipo->buscarSelectArea();
+        $buscarSelectContrato = $select_tipo->buscarSelectContrato();
 
         // //print_r("$idAgencia");
         // /*----------BUSCA LOS POST QUE SE ENCUENTRA EN EDITAR.PHP PARA PODER EDITARLO----------*/
@@ -213,9 +218,9 @@ class ControladorPersonal
         // $agenciaOtro = $contactosDeagencia->consultarOtro($idAgencia);
 
 
-        // $buscarID = new PersonalModelo();
+        $buscarID = new PersonalModelo();
 
-        // $editar = $buscarID->buscar($idAgencia);
+        $editar = $buscarID->buscar($id);
 
         // $InsertarID = $buscarID->consultarID($idAgencia);
 

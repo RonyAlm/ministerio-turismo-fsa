@@ -116,7 +116,7 @@
                       <select id="educacion" name="educacion" class="form-control custom-select" required>
                         <option value="0" selected disabled>Seleccionar educacion</option>
                         <?php foreach ($buscarSelectEstudios as $k) : ?>
-                          <option value="<?php echo $k->id_educacion; ?>"> <?php echo $k->descripcion; ?></option>
+                          <option value="<?php echo $k->id_educacion; ?>"> <?php echo $k->descriEducacion; ?></option>
                         <?php endforeach; ?>
                       </select>
                     </div>
