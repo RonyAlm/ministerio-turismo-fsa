@@ -792,7 +792,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="modal-footer">
 
             <button type="submit" class="btn btn-success" id="btnAccion">Agregar</button>
+
             <button type="button" id="btnEliminar" class="btn btn-danger">Borrar</button>
+
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 
           </div>
