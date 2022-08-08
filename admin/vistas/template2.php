@@ -659,9 +659,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="vistas/recursos/script/validacion_museo.js"></script>
   <script src="vistas/recursos/script/validacion_prestador.js"></script>
   <script src="vistas/recursos/script/filas_contacto.js"></script>
-  <script src="vistas/recursos/script/agregarTransporte.js"></script>
+
   <script src="vistas/recursos/script/traerLocalidades.js"></script>
-  <script src="vistas/recursos/script/selectDinamico.js"></script>
+
   <script src="vistas/recursos/script/formularios.js"></script>
 
 
