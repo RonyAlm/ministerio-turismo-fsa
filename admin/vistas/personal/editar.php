@@ -97,6 +97,7 @@
                       <input type="date" class="form-control" name="fecha" id="fecha" value="<?php echo $editar->fecha_nac; ?>">
                     </div>
                   </div>
+
                   <?php foreach ($agenciaTelefono as $telefonos) { ?>
                     <div class="form-group row">
                       <label for="telefonoCel" class="col-sm-2 col-form-label">Teléfono Celular</label>
@@ -119,15 +120,17 @@
                   <div class="form-group row">
                     <label for="correo" class="col-sm-2 col-form-label">Correo</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="correo" id="correo" placeholder="Correo">
+                      <input type="text" id="CorreoID" name="CorreoID" value="<?php echo $agenciaCorreo->id_contacto; ?>">
+                      <input type="email" id="correo" value="<?php echo $agenciaCorreo->descripcion_contacto; ?>" name="correo" class="form-control">
+
                     </div>
                   </div>
                   <div class="form-group row">
                     <input type="hidden" id="LocalidadID" name="LocalidadID" value="<?= $editar->id_educacion  ?>">
-                    <label for="localidad" class="col-sm-2 col-form-label">Educacion</label>
+                    <label for="educacion" class="col-sm-2 col-form-label">Educacion</label>
                     <div class="col-sm-10">
                       <?php $nombre_educacion_actual = $editar->descriEducacion; ?>
-                      <select id="localidad" name="localidad" class="form-control custom-select" required>
+                      <select id="educacion" name="educacion" class="form-control custom-select" required>
                         <option value="0" selected disabled>Seleccionar la Educación</option>
                         <?php foreach ($buscarSelectEstudios as $k) : ?>
                           <option value="<?php echo $k->id_educacion; ?>" <?= ($k->descriEducacion == $nombre_educacion_actual) ? 'selected="selected"' : ''; ?>> <?php echo $k->descriEducacion; ?></option>
@@ -138,7 +141,7 @@
                   <div class="form-group row">
                     <label for="profesion" class="col-sm-2 col-form-label">Profesión</label>
                     <div class="col-sm-10">
-                      <input type="text" id="" name="" value="<?php echo $editar->id_persona; ?>">
+                      <input type="hidden" id="" name="" value="<?php echo $editar->id_persona; ?>">
                       <input type="" class="form-control" name="profesion" id="profesion" value="<?php echo $editar->profesion; ?>">
                     </div>
                   </div>
@@ -148,23 +151,27 @@
                 <div class="tab-pane" id="ministerio">
                   <!-- <form class="form-horizontal"> -->
                   <div class="form-group row">
+                    <input type="hidden" id="LocalidadID" name="LocalidadID" value="<?= $editar->id_deptos_mintur ?>">
                     <label for="departamento" class="col-sm-2 col-form-label">Departamento</label>
                     <div class="col-sm-10">
-                      <select id="departamento" name="departamento" class="form-control custom-select" required>
-                        <option value="0" selected disabled>Seleccionar el departamento</option>
+                      <?php $nombre_departamento_actual = $editar->descriDepartamento; ?>
+                      <select id="educacion" name="educacion" class="form-control custom-select" required>
+                        <option value="0" selected disabled>Seleccionar el Departamento</option>
                         <?php foreach ($buscarSelectDepartamento as $k) : ?>
-                          <option value="<?php echo $k->id_deptos_mintur; ?>"> <?php echo $k->descripcion; ?></option>
+                          <option value="<?php echo $k->id_deptos_mintur; ?>" <?= ($k->descriDepartamento == $nombre_departamento_actual) ? 'selected="selected"' : ''; ?>> <?php echo $k->descriDepartamento; ?></option>
                         <?php endforeach; ?>
                       </select>
                     </div>
                   </div>
                   <div class="form-group row">
+                    <input type="hidden" id="LocalidadID" name="LocalidadID" value="<?= $editar->id_areas  ?>">
                     <label for="area" class="col-sm-2 col-form-label">Área</label>
                     <div class="col-sm-10">
-                      <select id="area" name="area" class="form-control custom-select" required>
+                      <?php $nombre_area_actual = $editar->descriArea; ?>
+                      <select id="educacion" name="educacion" class="form-control custom-select" required>
                         <option value="0" selected disabled>Seleccionar el Área</option>
                         <?php foreach ($buscarSelectArea as $k) : ?>
-                          <option value="<?php echo $k->id_areas; ?>"> <?php echo $k->descripcion; ?></option>
+                          <option value="<?php echo $k->id_areas; ?>" <?= ($k->descriArea == $nombre_area_actual) ? 'selected="selected"' : ''; ?>> <?php echo $k->descriArea; ?></option>
                         <?php endforeach; ?>
                       </select>
                     </div>
@@ -172,33 +179,39 @@
                   <div class="form-group row">
                     <label for="n_legajo" class="col-sm-2 col-form-label">Nº de Legajo</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="n_legajo" id="n_legajo" placeholder="Nº de Legajo">
+                      <input type="hidden" id="" name="" value="<?php echo $editar->id_personal; ?>">
+                      <input type="text" class="form-control" name="n_legajo" id="n_legajo" value="<?php echo $editar->n_legajo; ?>">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="n_expediente" class="col-sm-2 col-form-label">Nº de Expediente</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="n_expediente" id="n_expediente" placeholder="Nº de Expediente">
+                      <input type="hidden" id="" name="" value="<?php echo $editar->id_personal; ?>">
+                      <input type="text" class="form-control" name="n_expediente" id="n_expediente" value="<?php echo $editar->expediente; ?>">
                     </div>
                   </div>
                   <div class="form-group row">
+                    <input type="hidden" id="LocalidadID" name="LocalidadID" value="<?= $editar->id_tipo_contrato   ?>">
                     <label for="tipo_contrato" class="col-sm-2 col-form-label">Tipo de Contrato</label>
                     <div class="col-sm-10">
-                      <select id="tipo_contrato" name="tipo_contrato" class="form-control custom-select" required>
+                      <?php $nombre_contrato_actual = $editar->descripcion_contrato; ?>
+                      <select id="educacion" name="educacion" class="form-control custom-select" required>
                         <option value="0" selected disabled>Seleccionar el tipo de contrato</option>
                         <?php foreach ($buscarSelectContrato as $k) : ?>
-                          <option value="<?php echo $k->id_tipo_contrato; ?>"> <?php echo $k->descripcion_contrato; ?></option>
+                          <option value="<?php echo $k->id_areas; ?>" <?= ($k->descripcion_contrato == $nombre_contrato_actual) ? 'selected="selected"' : ''; ?>> <?php echo $k->descripcion_contrato; ?></option>
                         <?php endforeach; ?>
                       </select>
                     </div>
                   </div>
                   <div class="form-group row">
+                    <input type="hidden" id="LocalidadID" name="LocalidadID" value="<?= $editar->id_tipo_contrato   ?>">
                     <label for="cargo" class="col-sm-2 col-form-label">Cargo</label>
                     <div class="col-sm-10">
-                      <select id="cargo" name="cargo" class="form-control custom-select" required>
-                        <option value="0" selected disabled>Seleccionar el cargo</option>
+                      <?php $nombre_cargo_actual = $editar->descri_tipo_personal; ?>
+                      <select id="educacion" name="educacion" class="form-control custom-select" required>
+                        <option value="0" selected disabled>Seleccionar el tipo de Cargo</option>
                         <?php foreach ($buscarSelectCargo as $k) : ?>
-                          <option value="<?php echo $k->id_tipo_personal; ?>"> <?php echo $k->descripcion; ?></option>
+                          <option value="<?php echo $k->id_tipo_contrato; ?>" <?= ($k->descri_tipo_personal == $nombre_cargo_actual) ? 'selected="selected"' : ''; ?>> <?php echo $k->descri_tipo_personal; ?></option>
                         <?php endforeach; ?>
                       </select>
                     </div>
@@ -206,7 +219,8 @@
                   <div class="form-group row">
                     <label for="antiguedad" class="col-sm-2 col-form-label">Años de antigüedad</label>
                     <div class="col-sm-10">
-                      <input type="number" class="form-control" name="antiguedad" id="antiguedad" placeholder="Años de antigüedad">
+                      <input type="hidden" id="" name="" value="<?php echo $editar->id_personal; ?>">
+                      <input type="number" class="form-control" name="antiguedad" id="antiguedad" value="<?php echo $editar->anio_antiguedad; ?>">
                     </div>
                   </div>
                 </div>
@@ -215,19 +229,22 @@
                   <div class="form-group row">
                     <label for="fechaini" class="col-sm-2 col-form-label">Fechas inicio</label>
                     <div class="col-sm-10">
-                      <input type="date" class="form-control" name="fechaini" id="fechaini" placeholder="Año pendiente de licencia">
+                      <input type="hidden" id="" name="" value="<?php echo $editar->id_licencias; ?>">
+                      <input type="date" class="form-control" name="fechaini" id="fechaini" value="<?= $editar->fecha_ini ?>">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="fechafin" class="col-sm-2 col-form-label">Fechas fin</label>
                     <div class="col-sm-10">
-                      <input type="date" class="form-control" name="fechafin" id="fechafin" placeholder="Año pendiente de licencia">
+                      <input type="hidden" id="" name="" value="<?php echo $editar->id_licencias; ?>">
+                      <input type="date" class="form-control" name="fechafin" id="fechafin" value="<?= $editar->fecha_fin ?>">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="diasrestante" class="col-sm-2 col-form-label">Días Restantes</label>
                     <div class="col-sm-10">
-                      <input type="number" class="form-control" name="diasrestante" id="diasrestante" placeholder="Días pendientes de lincencias">
+                      <input type="hidden" id="" name="" value="<?php echo $editar->id_licencias; ?>">
+                      <input type="number" class="form-control" name="diasrestante" id="diasrestante" value="<?= $editar->dias_restante ?>">
                     </div>
                   </div>
 

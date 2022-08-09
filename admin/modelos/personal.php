@@ -21,10 +21,10 @@ class PersonalModelo
 
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->query("SELECT `id_deptos_mintur`, dpm.descripcion as descrDepto,
+        $sql = $conexionBD->query("SELECT `id_deptos_mintur`, dpm.descriDepartamento as descrDepto,
         per.id_persona,
         CONCAT(per.nombre_persona, ' ', per.apellido_persona) full_name,
-        tp.id_tipo_personal, tp.descripcion as descrTP
+        tp.id_tipo_personal, tp.descri_tipo_personal as descrTP
         FROM `deptos_mintur` dpm
         INNER JOIN personales p on p.rela_depto_mintur = dpm.id_deptos_mintur
         INNER JOIN persona per on per.id_persona = p.rela_persona
@@ -46,7 +46,7 @@ class PersonalModelo
 
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->query("SELECT `id_personal`, `rela_area`,a.descripcion,a.id_areas,
+        $sql = $conexionBD->query("SELECT `id_personal`, `rela_area`,a.descriArea,a.id_areas,
         tep.id_tipo_estado_personal, tep.descripcion as tipoestado,
         pe.id_persona,CONCAT(pe.nombre_persona, ' ', pe.apellido_persona) full_name
         FROM `personales` p
@@ -72,7 +72,7 @@ class PersonalModelo
         $sql = $conexionBD->query("SELECT * FROM areas a
         INNER JOIN personales p on p.rela_area = a.id_areas
         WHERE p.rela_depto_mintur = $id
-        GROUP BY a.descripcion");
+        GROUP BY a.descriArea");
 
         //recuperamos los datos y los retornamos
 
@@ -437,7 +437,7 @@ class PersonalModelo
         $conexionBD = BD::crearInstancia();
 
 
-        $sqlLocalidad = $conexionBD->query("SELECT `id_deptos_mintur`, `descripcion` FROM `deptos_mintur`");
+        $sqlLocalidad = $conexionBD->query("SELECT `id_deptos_mintur`, `descriDepartamento` FROM `deptos_mintur`");
 
         $sqlLocalidad->execute();
 
@@ -449,7 +449,7 @@ class PersonalModelo
         $conexionBD = BD::crearInstancia();
 
 
-        $sqlLocalidad = $conexionBD->query("SELECT `id_tipo_personal`, `descripcion` FROM `tipo_personal`");
+        $sqlLocalidad = $conexionBD->query("SELECT `id_tipo_personal`, `descri_tipo_personal` FROM `tipo_personal`");
 
         $sqlLocalidad->execute();
 
@@ -473,7 +473,7 @@ class PersonalModelo
         $conexionBD = BD::crearInstancia();
 
 
-        $sqlLocalidad = $conexionBD->query("SELECT `id_areas`, `descripcion` FROM `areas`");
+        $sqlLocalidad = $conexionBD->query("SELECT `id_areas`, `descriArea` FROM `areas`");
 
         $sqlLocalidad->execute();
 
@@ -519,7 +519,7 @@ class Contactos
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 2
-                                            and contacto.rela_contacto_agencia = $id_agencia");
+                                            and contacto.rela_persona_contacto  = $id_agencia");
 
         $consulta->execute();
 
@@ -532,7 +532,7 @@ class Contactos
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 9
-                                            and contacto.rela_contacto_agencia = $id_agencia");
+                                            and contacto.rela_persona_contacto  = $id_agencia");
 
         $consulta->execute();
 
@@ -545,7 +545,7 @@ class Contactos
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 1
-                                            and contacto.rela_contacto_agencia = $id_agencia");
+                                            and contacto.rela_persona_contacto  = $id_agencia");
 
         $consulta->execute();
 
@@ -558,7 +558,7 @@ class Contactos
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 4
-                                            and contacto.rela_contacto_agencia = $id_agencia");
+                                            and contacto.rela_persona_contacto  = $id_agencia");
 
         $consulta->execute();
 
@@ -571,7 +571,7 @@ class Contactos
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 5
-                                            and contacto.rela_contacto_agencia = $id_agencia");
+                                            and contacto.rela_persona_contacto  = $id_agencia");
 
         $consulta->execute();
 
@@ -584,7 +584,7 @@ class Contactos
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 6
-                                            and contacto.rela_contacto_agencia = $id_agencia");
+                                            and contacto.rela_persona_contacto  = $id_agencia");
 
         $consulta->execute();
 
@@ -597,7 +597,7 @@ class Contactos
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 7
-                                            and contacto.rela_contacto_agencia = $id_agencia");
+                                            and contacto.rela_persona_contacto  = $id_agencia");
 
         $consulta->execute();
 
@@ -610,7 +610,7 @@ class Contactos
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 8
-                                            and contacto.rela_contacto_agencia = $id_agencia");
+                                            and contacto.rela_persona_contacto  = $id_agencia");
 
         $consulta->execute();
 
@@ -653,7 +653,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 2
-                                            and contacto.rela_contacto_agencia = $id_agencia");
+                                            and contacto.rela_persona_contacto  = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->telefonoAgenciaInfo[] = $filas;
@@ -667,7 +667,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 9
-                                            and contacto.rela_contacto_agencia = $id_agencia");
+                                            and contacto.rela_persona_contacto  = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->telefonoFijoAgencia[] = $filas;
@@ -681,7 +681,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 1
-                                            and contacto.rela_contacto_agencia = $id_agencia");
+                                            and contacto.rela_persona_contacto  = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->correoAgencia[] = $filas;
@@ -695,7 +695,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 4
-                                            and contacto.rela_contacto_agencia = $id_agencia");
+                                            and contacto.rela_persona_contacto  = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->facebookAgencia[] = $filas;
@@ -709,7 +709,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 5
-                                            and contacto.rela_contacto_agencia = $id_agencia");
+                                            and contacto.rela_persona_contacto  = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->instagramAgencia[] = $filas;
@@ -723,7 +723,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 6
-                                            and contacto.rela_contacto_agencia = $id_agencia");
+                                            and contacto.rela_persona_contacto  = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->twitterAgencia[] = $filas;
@@ -737,7 +737,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 7
-                                            and contacto.rela_contacto_agencia = $id_agencia");
+                                            and contacto.rela_persona_contacto  = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->webAgencia[] = $filas;
@@ -751,7 +751,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 8
-                                            and contacto.rela_contacto_agencia = $id_agencia");
+                                            and contacto.rela_persona_contacto  = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->otroAgencia[] = $filas;

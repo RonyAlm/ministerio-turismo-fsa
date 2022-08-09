@@ -96,6 +96,7 @@ class ControladorPersonal
     {
 
         $id = $_GET["id"];
+        $idPersona = $_GET["idPersona"];
 
         $select_tipo = new PersonalModelo();
 
@@ -204,18 +205,18 @@ class ControladorPersonal
 
         // /*----------BUSCA LOS ID Y LOS PONE EN EL FORMULARIO----------*/
 
-        // $contactosDeagencia = new ContactosAgencia();
+        $contactosDeagencia = new Contactos();
 
-        // $contactosDeagencia1 = new ContactosInfo();
+        $contactosDeagencia1 = new ContactosInfo();
 
-        // $agenciaTelefono = $contactosDeagencia1->consultarTelefonos($idAgencia);
-        // $agenciaTelefonoFijo = $contactosDeagencia->consultarTelefonosFijos($idAgencia);
-        // $agenciaCorreo = $contactosDeagencia->consultarCorreo($idAgencia);
-        // $agenciaFacebook = $contactosDeagencia->consultarFacebook($idAgencia);
-        // $agenciaInstagram = $contactosDeagencia->consultarInstagram($idAgencia);
-        // $agenciaTwitter = $contactosDeagencia->consultarTwitter($idAgencia);
-        // $agenciaWeb = $contactosDeagencia->consultarWeb($idAgencia);
-        // $agenciaOtro = $contactosDeagencia->consultarOtro($idAgencia);
+        $agenciaTelefono = $contactosDeagencia1->consultarTelefonos($idPersona);
+        $agenciaTelefonoFijo = $contactosDeagencia->consultarTelefonosFijos($idPersona);
+        $agenciaCorreo = $contactosDeagencia->consultarCorreo($idPersona);
+        $agenciaFacebook = $contactosDeagencia->consultarFacebook($idPersona);
+        $agenciaInstagram = $contactosDeagencia->consultarInstagram($idPersona);
+        $agenciaTwitter = $contactosDeagencia->consultarTwitter($idPersona);
+        $agenciaWeb = $contactosDeagencia->consultarWeb($idPersona);
+        $agenciaOtro = $contactosDeagencia->consultarOtro($idPersona);
 
 
         $buscarID = new PersonalModelo();
