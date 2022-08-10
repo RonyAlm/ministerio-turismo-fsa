@@ -111,96 +111,97 @@ class ControladorPersonal
         // //print_r("$idAgencia");
         // /*----------BUSCA LOS POST QUE SE ENCUENTRA EN EDITAR.PHP PARA PODER EDITARLO----------*/
 
-        // if ($_POST) {
-        //     $EditarAgencia = new PersonalModelo();
+        if ($_POST) {
+            $EditarAgencia = new PersonalModelo();
+
+            // PERSONA
+            //     $id_persona = $_POST['id_persona'];
+            //     $nombre = $_POST['nombre'];
+            //     $apellido = $_POST['apellido'];
+            //     $cuil = $_POST['cuil'];
+            //     $fecha = $_POST['fecha'];
+            //     $profesion = $_POST['profesion'];
+
+            // PERSONAL 
+            //     $id_Personal = $_POST['id_Personal'];
+            //     $n_legajo = $_POST['n_legajo'];
+            //     $n_expediente = $_POST['n_expediente'];
+            //     $antiguedad = $_POST['antiguedad'];
+
+            // DIRECCION
+            //     $idDireccion = $_POST['DomicilioID'];
+            //     $rela_localidad_direccion = $_POST['localidad'];
+            //     $calle_direccion = $_POST['direccion'];
+
+            //     $idtelefonoAgencia = $_POST['agenciatelefonoID'];
+            //     $telefonoAgencia = $_POST['telefonoAgencia'];
+
+            //     $idtelefonoFijoAgencia = $_POST['telFijoID'];
+            //     $telefonoFijoAgencia = $_POST['telefonoFijoAgencia'];
+
+            //     $idcorreoAgencia = $_POST['agenciaCorreoID'];
+            //     $correoAgencia = $_POST['correoAgencia'];
+
+            //     $idfacebookAgencia = $_POST['agenciaFacebookID'];
+            //     $facebookAgencia = $_POST['facebookAgencia'];
+
+            //     $idinstagramAgencia = $_POST['agenciaInstagramID'];
+            //     $instagramAgencia = $_POST['instagramAgencia'];
+
+            //     $idtwitterAgencia = $_POST['agenciaTwitterID'];
+            //     $twitterAgencia = $_POST['twitterAgencia'];
+
+            //     $idwebAgencia = $_POST['agenciaWebID'];
+            //     $webAgencia = $_POST['webAgencia'];
+
+            //     $idotroAgencia = $_POST['agenciaOtroID'];
+            //     $otroAgencia = $_POST['otroAgencia'];
 
 
-        //     $idAgencia = $_POST['agenciaID'];
-        //     $descripcion_agencias = $_POST['nombreAgencia'];
-        //     $matricula_agencia = $_POST['matriculaAgencia'];
-        //     $legajo_agencia = $_POST['legajoAgencia'];
-        //     $cuit_agencia = $_POST['cuitAgencia'];
-        //     $categoria_agencia = $_POST['categoriaAgencia'];
-        //     $idoneoAgencia = $_POST['idoneoAgencia'];
+            //     $idestadoAgencia = $_POST['agenciaEstadoID'];
+            //     $estadoAgencia = $_POST['estadoAgencia'];
 
-        //     $idRazonSocial = $_POST['agenciaRazonID'];
-        //     $razonsocial = $_POST['razonsocialAgencia'];
+            //     $EditarAgencia->editar(
+            //         $descripcion_agencias,
+            //         $matricula_agencia,
+            //         $legajo_agencia,
+            //         $cuit_agencia,
+            //         $categoria_agencia,
+            //         $idAgencia,
+            //         $idoneoAgencia,
+            //         $rela_localidad_direccion,
+            //         $calle_direccion,
+            //         $razonsocial,
+            //         $telefonoAgencia,
+            //         $telefonoFijoAgencia,
+            //         $correoAgencia,
+            //         $facebookAgencia,
+            //         $instagramAgencia,
+            //         $twitterAgencia,
+            //         $webAgencia,
+            //         $otroAgencia,
+            //         $estadoAgencia,
 
-        //     $idDireccion = $_POST['agenciaDomicilioID'];
-        //     $rela_localidad_direccion = $_POST['localidadAgencia'];
+            //         $idRazonSocial,
+            //         $idDireccion,
+            //         $idtelefonoAgencia,
+            //         $idtelefonoFijoAgencia,
+            //         $idcorreoAgencia,
+            //         $idfacebookAgencia,
+            //         $idinstagramAgencia,
+            //         $idtwitterAgencia,
+            //         $idwebAgencia,
+            //         $idotroAgencia,
+            //         $idestadoAgencia
+            //     );
 
-
-        //     $calle_direccion = $_POST['domicilioAgencia'];
-
-        //     $idtelefonoAgencia = $_POST['agenciatelefonoID'];
-        //     $telefonoAgencia = $_POST['telefonoAgencia'];
-
-        //     $idtelefonoFijoAgencia = $_POST['telFijoID'];
-        //     $telefonoFijoAgencia = $_POST['telefonoFijoAgencia'];
-
-        //     $idcorreoAgencia = $_POST['agenciaCorreoID'];
-        //     $correoAgencia = $_POST['correoAgencia'];
-
-        //     $idfacebookAgencia = $_POST['agenciaFacebookID'];
-        //     $facebookAgencia = $_POST['facebookAgencia'];
-
-        //     $idinstagramAgencia = $_POST['agenciaInstagramID'];
-        //     $instagramAgencia = $_POST['instagramAgencia'];
-
-        //     $idtwitterAgencia = $_POST['agenciaTwitterID'];
-        //     $twitterAgencia = $_POST['twitterAgencia'];
-
-        //     $idwebAgencia = $_POST['agenciaWebID'];
-        //     $webAgencia = $_POST['webAgencia'];
-
-        //     $idotroAgencia = $_POST['agenciaOtroID'];
-        //     $otroAgencia = $_POST['otroAgencia'];
-
-
-        //     $idestadoAgencia = $_POST['agenciaEstadoID'];
-        //     $estadoAgencia = $_POST['estadoAgencia'];
-
-        //     $EditarAgencia->editar(
-        //         $descripcion_agencias,
-        //         $matricula_agencia,
-        //         $legajo_agencia,
-        //         $cuit_agencia,
-        //         $categoria_agencia,
-        //         $idAgencia,
-        //         $idoneoAgencia,
-        //         $rela_localidad_direccion,
-        //         $calle_direccion,
-        //         $razonsocial,
-        //         $telefonoAgencia,
-        //         $telefonoFijoAgencia,
-        //         $correoAgencia,
-        //         $facebookAgencia,
-        //         $instagramAgencia,
-        //         $twitterAgencia,
-        //         $webAgencia,
-        //         $otroAgencia,
-        //         $estadoAgencia,
-
-        //         $idRazonSocial,
-        //         $idDireccion,
-        //         $idtelefonoAgencia,
-        //         $idtelefonoFijoAgencia,
-        //         $idcorreoAgencia,
-        //         $idfacebookAgencia,
-        //         $idinstagramAgencia,
-        //         $idtwitterAgencia,
-        //         $idwebAgencia,
-        //         $idotroAgencia,
-        //         $idestadoAgencia
-        //     );
-
-        //     // print_r($EditarAgencia);
+            //     // print_r($EditarAgencia);
 
 
 
-        //     // header("Location:admin/index2.php?controlador=agencias&accion=inicio");
-        //     echo "<script>location.href = 'index2.php?controlador=agencias&accion=inicio';</script>";
-        // }
+            //     // header("Location:admin/index2.php?controlador=agencias&accion=inicio");
+            //     echo "<script>location.href = 'index2.php?controlador=agencias&accion=inicio';</script>";
+        }
 
 
         // /*----------BUSCA LOS ID Y LOS PONE EN EL FORMULARIO----------*/

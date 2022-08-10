@@ -51,7 +51,7 @@
                   <div class="form-group row">
                     <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
                     <div class="col-sm-10">
-                      <input type="text" id="" name="" value="<?php echo $editar->id_persona; ?>">
+                      <input type="text" id="id_persona" name="id_persona" value="<?php echo $editar->id_persona; ?>">
                       <input type="" class="form-control" name="nombre" id="nombre" value="<?php echo $editar->nombre_persona; ?>">
                     </div>
                   </div>
@@ -72,7 +72,7 @@
                   <div class="form-group row">
                     <label for="direccion" class="col-sm-2 col-form-label">Dirección</label>
                     <div class="col-sm-10">
-                      <input type="text" id="agenciaDomicilioID" name="agenciaDomicilioID" value="<?php echo $editar->id_direccion; ?>">
+                      <input type="text" id="DomicilioID" name="DomicilioID" value="<?php echo $editar->id_direccion; ?>">
                       <input type="text" class="form-control" name="direccion" id="direccion" value="<?php echo $editar->calle_direccion; ?>">
                     </div>
                   </div>
@@ -179,7 +179,7 @@
                   <div class="form-group row">
                     <label for="n_legajo" class="col-sm-2 col-form-label">Nº de Legajo</label>
                     <div class="col-sm-10">
-                      <input type="hidden" id="" name="" value="<?php echo $editar->id_personal; ?>">
+                      <input type="hidden" id="id_Personal" name="id_Personal" value="<?php echo $editar->id_personal; ?>">
                       <input type="text" class="form-control" name="n_legajo" id="n_legajo" value="<?php echo $editar->n_legajo; ?>">
                     </div>
                   </div>
