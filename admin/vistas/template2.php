@@ -473,7 +473,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'festivales')) ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-columns"></i>
                   <p>
-                    Festividades
+                    Festivales y eventos
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
@@ -537,8 +537,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="?controlador=personal&accion=inicio" class="nav-link 
-                    <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? '' : '' ?>">
+                    <a href="?controlador=asistencias&accion=inicio" class="nav-link 
+                    <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'asistencias')) ? '' : '' ?>">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Asistencia</p>
                     </a>

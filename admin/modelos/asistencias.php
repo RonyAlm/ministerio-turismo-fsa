@@ -1,5 +1,5 @@
 <?php
-class AgenciaModelo
+class AsistenciaModelo
 {
 
     public $listaAgencia;
@@ -19,19 +19,14 @@ class AgenciaModelo
 
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->query("SELECT `id_agencias`, `descripcion_agencias`, direccion.calle_direccion, fecha_edit_agencia,
-                                        (SELECT contacto.descripcion_contacto 
-                                        FROM contacto 
-                                        WHERE agencias.id_agencias = contacto.rela_contacto_agencia
-                                        and contacto.rela_tipo_contacto_cont = 2
-                                        LIMIT 1) descripcion_contacto  ,tipo_estado.descripcion_tipo_estado,
-                                        localidad.nombre_localidad ,direccion.id_direccion,razon_social.id_razon_social
-                                        FROM `agencias`
-                                        INNER JOIN direccion ON agencias.rela_agencia_direccion = direccion.id_direccion
-                                        INNER JOIN estado_actividad on estado_actividad.rela_estado_agencia = agencias.id_agencias
-                                        INNER JOIN tipo_estado on tipo_estado.id_tipo_estado = estado_actividad.rela_tipo_estado
-                                        INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad
-                                        INNER JOIN razon_social on agencias.rela_razon_social_agencia = razon_social.id_razon_social");
+        $sql = $conexionBD->query("SELECT `id_asistencia`, `fecha_asistencia`, `semana_asistencia`, `date_updated_asistencia`,
+        per.id_persona,
+        CONCAT(a.in_p1,' | ', a.on_p1) manana,
+        CONCAT(a.in_p2,' | ', a.on_p2) tarde,
+        CONCAT(per.nombre_persona, ' ', per.apellido_persona) full_name
+        FROM `asistencia` a
+        INNER JOIN personales p on p.id_personal = a.rela_personal
+        INNER JOIN persona per on per.id_persona = p.rela_persona");
 
         //recuperamos los datos y los retornamos
 

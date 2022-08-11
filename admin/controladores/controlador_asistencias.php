@@ -1,95 +1,125 @@
 <?php
 
-include_once("modelos/agencias.php");
+include_once("modelos/asistencias.php");
 include_once("conexion.php");
 
 
-class ControladorAgencias
+class ControladorAsistencias
 {
 
     public function inicio()
     { //aca se muestra las tablas
 
-        $consultaAgencia = new AgenciaModelo();
+        $consulta = new AsistenciaModelo();
 
-        $tablaAgencia = $consultaAgencia->consultar();
-        $datosEstadisticos = new estadistica();
+        $tabla = $consulta->consultar();
+        // $datosEstadisticos = new estadistica();
 
-        $cantidad_agencias = $datosEstadisticos->cantidadAgencias();
-        $cantidadAgenciasHabilitadas = $datosEstadisticos->cantidadAgenciasHabilitadas();
+        // $cantidad_agencias = $datosEstadisticos->cantidadAgencias();
+        // $cantidadAgenciasHabilitadas = $datosEstadisticos->cantidadAgenciasHabilitadas();
 
 
-        include_once("vistas/agencias/inicio.php");
+        include_once("vistas/asistencia/inicio.php");
     }
 
     public function crear()
     {
 
-        $select_tipo_agencia = new AgenciaModelo();
 
-        $buscarSelectLocalidad = $select_tipo_agencia->buscarSelectLocalidad();
-        $buscarSelectEstado = $select_tipo_agencia->buscarSelectEstado();
+
+        // $select_tipo_agencia = new AsistenciaModelo();
+
+        // $buscarSelectLocalidad = $select_tipo_agencia->buscarSelectLocalidad();
+        // $buscarSelectEstado = $select_tipo_agencia->buscarSelectEstado();
 
         if ($_POST) {
-            //print_r($_POST);
+            //     //print_r($_POST);
 
-            $insertarAgencia = new AgenciaModelo();
+            $tipo       = $_FILES['dataCliente']['type'];
+            $tamanio    = $_FILES['dataCliente']['size'];
+            $archivotmp = $_FILES['dataCliente']['tmp_name'];
+            $lineas     = file($archivotmp);
 
+            // print_r($lineas);
 
-            $descripcion_agencias = $_POST['nombreAgencia'];
-            $matricula_agencia = $_POST['matriculaAgencia'];
-            $legajo_agencia = $_POST['legajoAgencia'];
-            $cuit_agencia = $_POST['cuitAgencia'];
-            $categoria_agencia = $_POST['categoriaAgencia'];
-            $idoneoAgencia = $_POST['idoneoAgencia'];
+            $i = 0;
 
-            $razonsocial = $_POST['razonsocialAgencia'];
+            foreach ($lineas as $linea) {
+                $cantidad_registros = count($lineas);
+                $cantidad_regist_agregados =  ($cantidad_registros - 1);
 
-            $rela_localidad_direccion = $_POST['localidadAgencia'];
-            $calle_direccion = $_POST['domicilioAgencia'];
+                if ($i != 0) {
 
-            $telefonoAgencia = $_POST['telefonoAgencia'];
-            $telefonoFijoAgencia = $_POST['telefonoFijoAgencia'];
-            $correoAgencia = $_POST['correoAgencia'];
-            $facebookAgencia = $_POST['facebookAgencia'];
-            $instagramAgencia = $_POST['instagramAgencia'];
-            $twitterAgencia = $_POST['twitterAgencia'];
-            $webAgencia = $_POST['webAgencia'];
-            $otroAgencia = $_POST['otroAgencia'];
+                    $datos = explode(";", $linea);
+                    $semanas = [];
 
-            $estadoAgencia = $_POST['estadoAgencia'];
+                    $semana                = !empty($datos[8])  ? ($datos[0]) : '';
+                    $semana1                = !empty($datos[8])  ? ($datos[9]) : '';
+                    $celular               = !empty($datos[2])  ? ($datos[2]) : '';
+                }
 
 
+                echo '<div>' . $i . "). " . $semana . '</div>';
+                $i++;
+            }
+
+            //     $insertarAgencia = new AsistenciaModelo();
+
+
+            //     $descripcion_agencias = $_POST['nombreAgencia'];
+            //     $matricula_agencia = $_POST['matriculaAgencia'];
+            //     $legajo_agencia = $_POST['legajoAgencia'];
+            //     $cuit_agencia = $_POST['cuitAgencia'];
+            //     $categoria_agencia = $_POST['categoriaAgencia'];
+            //     $idoneoAgencia = $_POST['idoneoAgencia'];
+
+            //     $razonsocial = $_POST['razonsocialAgencia'];
+
+            //     $rela_localidad_direccion = $_POST['localidadAgencia'];
+            //     $calle_direccion = $_POST['domicilioAgencia'];
+
+            //     $telefonoAgencia = $_POST['telefonoAgencia'];
+            //     $telefonoFijoAgencia = $_POST['telefonoFijoAgencia'];
+            //     $correoAgencia = $_POST['correoAgencia'];
+            //     $facebookAgencia = $_POST['facebookAgencia'];
+            //     $instagramAgencia = $_POST['instagramAgencia'];
+            //     $twitterAgencia = $_POST['twitterAgencia'];
+            //     $webAgencia = $_POST['webAgencia'];
+            //     $otroAgencia = $_POST['otroAgencia'];
+
+            //     $estadoAgencia = $_POST['estadoAgencia'];
 
 
 
-            $insertarAgencia->crear(
-                $descripcion_agencias,
-                $matricula_agencia,
-                $legajo_agencia,
-                $cuit_agencia,
-                $categoria_agencia,
-                $rela_localidad_direccion,
-                $calle_direccion,
-                $razonsocial,
-                $telefonoAgencia,
-                $telefonoFijoAgencia,
-                $correoAgencia,
-                $facebookAgencia,
-                $instagramAgencia,
-                $twitterAgencia,
-                $webAgencia,
-                $otroAgencia,
-                $estadoAgencia,
-                $idoneoAgencia
-            );
 
 
-            header("Location:index2.php?controlador=agencias&accion=inicio");
+            //     $insertarAgencia->crear(
+            //         $descripcion_agencias,
+            //         $matricula_agencia,
+            //         $legajo_agencia,
+            //         $cuit_agencia,
+            //         $categoria_agencia,
+            //         $rela_localidad_direccion,
+            //         $calle_direccion,
+            //         $razonsocial,
+            //         $telefonoAgencia,
+            //         $telefonoFijoAgencia,
+            //         $correoAgencia,
+            //         $facebookAgencia,
+            //         $instagramAgencia,
+            //         $twitterAgencia,
+            //         $webAgencia,
+            //         $otroAgencia,
+            //         $estadoAgencia,
+            //         $idoneoAgencia
+            //     );
+
+
+            //     header("Location:index2.php?controlador=agencias&accion=inicio");
         }
 
 
-        include_once("vistas/agencias/crear.php");
+        include_once("vistas/asistencia/crear.php");
     }
 
     public function editar()
@@ -97,7 +127,7 @@ class ControladorAgencias
 
         $idAgencia = $_GET["id"];
 
-        $buscarAgencias = new AgenciaModelo();
+        $buscarAgencias = new AsistenciaModelo();
 
         $buscarSelectLocalidad = $buscarAgencias->buscarSelectLocalidad();
         $buscarSelectEstado = $buscarAgencias->buscarSelectEstado();
@@ -106,7 +136,7 @@ class ControladorAgencias
         /*----------BUSCA LOS POST QUE SE ENCUENTRA EN EDITAR.PHP PARA PODER EDITARLO----------*/
 
         if ($_POST) {
-            $EditarAgencia = new AgenciaModelo();
+            $EditarAgencia = new AsistenciaModelo();
 
 
             $idAgencia =  $_POST['agenciaID'];
@@ -213,7 +243,7 @@ class ControladorAgencias
         $agenciaOtro = $contactosDeagencia->consultarOtro($idAgencia);
 
 
-        $buscarID = new AgenciaModelo();
+        $buscarID = new AsistenciaModelo();
 
         $editar = $buscarID->buscar($idAgencia);
 
@@ -231,7 +261,7 @@ class ControladorAgencias
         $id_direccion = $_GET['idDireccion'];
         $idRazonSocial = $_GET['idRazonSocial'];
 
-        $borrarAgencias = new AgenciaModelo();
+        $borrarAgencias = new AsistenciaModelo();
 
         $buscarIDBorrado = $borrarAgencias->consultarID($idAgenciaBorrar);
 
@@ -244,7 +274,7 @@ class ControladorAgencias
     {
         $id_agencia = $_GET['id'];
 
-        $agenciaInfo = new AgenciaModelo();
+        $agenciaInfo = new AsistenciaModelo();
 
         $agenciasInfomacion = $agenciaInfo->buscar($id_agencia);
 
@@ -270,7 +300,7 @@ class ControladorAgencias
 
     public function imprimir()
     {
-        $consultaAgencia = new AgenciaModelo();
+        $consultaAgencia = new AsistenciaModelo();
 
         $tablaAgencia = $consultaAgencia->consultar();
         $datosEstadisticos = new estadistica();
@@ -286,7 +316,7 @@ class ControladorAgencias
     {
         $id_agencia = $_GET['id'];
 
-        $agenciaInfo = new AgenciaModelo();
+        $agenciaInfo = new AsistenciaModelo();
 
         $agenciasInfomacion = $agenciaInfo->buscar($id_agencia);
 
@@ -303,5 +333,4 @@ class ControladorAgencias
 
         include_once("vistas/agencias/invoice-print.php");
     }
-
 }
