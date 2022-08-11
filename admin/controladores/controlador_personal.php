@@ -133,8 +133,10 @@ class ControladorPersonal
             //     $rela_localidad_direccion = $_POST['localidad'];
             //     $calle_direccion = $_POST['direccion'];
 
+            // CONTANTOS 
+
             //     $idtelefonoAgencia = $_POST['agenciatelefonoID'];
-            //     $telefonoAgencia = $_POST['telefonoAgencia'];
+            //     $telefonoCel = $_POST['telefonoCel'];
 
             //     $idtelefonoFijoAgencia = $_POST['telFijoID'];
             //     $telefonoFijoAgencia = $_POST['telefonoFijoAgencia'];
@@ -157,9 +159,6 @@ class ControladorPersonal
             //     $idotroAgencia = $_POST['agenciaOtroID'];
             //     $otroAgencia = $_POST['otroAgencia'];
 
-
-            //     $idestadoAgencia = $_POST['agenciaEstadoID'];
-            //     $estadoAgencia = $_POST['estadoAgencia'];
 
             //     $EditarAgencia->editar(
             //         $descripcion_agencias,

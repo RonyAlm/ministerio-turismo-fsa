@@ -114,7 +114,8 @@
                   <div class="form-group row">
                     <label for="telefonoFijo" class="col-sm-2 col-form-label">Teléfono Fijo</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="telefonoFijo" id="telefonoFijo" placeholder="Teléfono Fijo">
+                      <input type="hidden" id="telFijoID" name="telFijoID" value="<?php echo $agenciaTelefonoFijo->id_contacto; ?>">
+                      <input type="number" id="telefonoFijoAgencia" value="<?php echo $agenciaTelefonoFijo->descripcion_contacto; ?>" name="telefonoFijoAgencia" class="form-control">
                     </div>
                   </div>
                   <div class="form-group row">
