@@ -121,12 +121,20 @@ class ControladorPersonal
             //     $cuil = $_POST['cuil'];
             //     $fecha = $_POST['fecha'];
             //     $profesion = $_POST['profesion'];
+            //     $educacionID = $_POST['educacionID'];
+            //     $educacion = $_POST['educacion'];
+            //     $areaID = $_POST['areaID'];
+            //     $area = $_POST['area'];
+
 
             // PERSONAL 
             //     $id_Personal = $_POST['id_Personal'];
             //     $n_legajo = $_POST['n_legajo'];
             //     $n_expediente = $_POST['n_expediente'];
             //     $antiguedad = $_POST['antiguedad'];
+            //     $departamentoID = $_POST['departamentoID'];
+            //     $departamento = $_POST['departamento'];
+
 
             // DIRECCION
             //     $idDireccion = $_POST['DomicilioID'];
@@ -138,26 +146,12 @@ class ControladorPersonal
             //     $idtelefonoAgencia = $_POST['agenciatelefonoID'];
             //     $telefonoCel = $_POST['telefonoCel'];
 
-            //     $idtelefonoFijoAgencia = $_POST['telFijoID'];
+            //     $idtelefonoFijo = $_POST['telFijoID'];
             //     $telefonoFijoAgencia = $_POST['telefonoFijoAgencia'];
 
-            //     $idcorreoAgencia = $_POST['agenciaCorreoID'];
-            //     $correoAgencia = $_POST['correoAgencia'];
+            //     $idcorreo = $_POST['CorreoID'];
+            //     $correo = $_POST['correo'];
 
-            //     $idfacebookAgencia = $_POST['agenciaFacebookID'];
-            //     $facebookAgencia = $_POST['facebookAgencia'];
-
-            //     $idinstagramAgencia = $_POST['agenciaInstagramID'];
-            //     $instagramAgencia = $_POST['instagramAgencia'];
-
-            //     $idtwitterAgencia = $_POST['agenciaTwitterID'];
-            //     $twitterAgencia = $_POST['twitterAgencia'];
-
-            //     $idwebAgencia = $_POST['agenciaWebID'];
-            //     $webAgencia = $_POST['webAgencia'];
-
-            //     $idotroAgencia = $_POST['agenciaOtroID'];
-            //     $otroAgencia = $_POST['otroAgencia'];
 
 
             //     $EditarAgencia->editar(

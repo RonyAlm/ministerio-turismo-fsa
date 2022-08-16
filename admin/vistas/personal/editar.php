@@ -127,7 +127,7 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <input type="hidden" id="LocalidadID" name="LocalidadID" value="<?= $editar->id_educacion  ?>">
+                    <input type="hidden" id="educacionID" name="educacionID" value="<?= $editar->id_educacion  ?>">
                     <label for="educacion" class="col-sm-2 col-form-label">Educacion</label>
                     <div class="col-sm-10">
                       <?php $nombre_educacion_actual = $editar->descriEducacion; ?>
@@ -152,11 +152,11 @@
                 <div class="tab-pane" id="ministerio">
                   <!-- <form class="form-horizontal"> -->
                   <div class="form-group row">
-                    <input type="hidden" id="LocalidadID" name="LocalidadID" value="<?= $editar->id_deptos_mintur ?>">
+                    <input type="hidden" id="departamentoID" name="departamentoID" value="<?= $editar->id_deptos_mintur ?>">
                     <label for="departamento" class="col-sm-2 col-form-label">Departamento</label>
                     <div class="col-sm-10">
                       <?php $nombre_departamento_actual = $editar->descriDepartamento; ?>
-                      <select id="educacion" name="educacion" class="form-control custom-select" required>
+                      <select id="departamento" name="departamento" class="form-control custom-select" required>
                         <option value="0" selected disabled>Seleccionar el Departamento</option>
                         <?php foreach ($buscarSelectDepartamento as $k) : ?>
                           <option value="<?php echo $k->id_deptos_mintur; ?>" <?= ($k->descriDepartamento == $nombre_departamento_actual) ? 'selected="selected"' : ''; ?>> <?php echo $k->descriDepartamento; ?></option>
@@ -165,11 +165,11 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <input type="hidden" id="LocalidadID" name="LocalidadID" value="<?= $editar->id_areas  ?>">
+                    <input type="hidden" id="areaID" name="areaID" value="<?= $editar->id_areas  ?>">
                     <label for="area" class="col-sm-2 col-form-label">Área</label>
                     <div class="col-sm-10">
                       <?php $nombre_area_actual = $editar->descriArea; ?>
-                      <select id="educacion" name="educacion" class="form-control custom-select" required>
+                      <select id="area" name="area" class="form-control custom-select" required>
                         <option value="0" selected disabled>Seleccionar el Área</option>
                         <?php foreach ($buscarSelectArea as $k) : ?>
                           <option value="<?php echo $k->id_areas; ?>" <?= ($k->descriArea == $nombre_area_actual) ? 'selected="selected"' : ''; ?>> <?php echo $k->descriArea; ?></option>

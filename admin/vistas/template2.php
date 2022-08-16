@@ -490,7 +490,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <?php } ?>
 
             <!-- TRANSPORTE -->
-            <?php if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3 and $usuario == "monica") { ?>
+            <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "monica") { ?>
               <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'transporte')) ? 'menu-open' : '' ?>">
                 <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'transporte')) ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-table"></i>
