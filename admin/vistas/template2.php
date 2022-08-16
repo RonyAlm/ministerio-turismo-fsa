@@ -77,7 +77,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Favicon -->
   <link rel="icon" href="vistas/recursos/dist/img/favicon.png">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
-
+  <!-- <link rel="manifest" href="vistas/recursos/plugins/fontawesome-free-6.1.2-desktop/metadata/icons.json"> -->
   <style>
     .resaltar {
       background-color: yellow;
@@ -459,7 +459,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <li class="nav-item">
                 <a href="?controlador=museos&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'museos')) ? 'active' : '' ?>">
                   <!-- <i class="nav-icon fas fa-home"></i> -->
-                  <i class="nav-icon fa-solid fa-building-columns"></i>
+                  <i class="nav-icon fa-solid fas fa-hotel"></i>
+                  <!-- <i class="fas fa-hotel"></i> -->
                   <p>
                     Museos
                   </p>
@@ -698,6 +699,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     $(function() {
 
       $("#tblList").DataTable({
+        "responsive": true,
+        "lengthChange": true,
+        "autoWidth": true,
         "language": {
           "url": "vistas/recursos/plugins/datatables/Spanish.json"
         }
