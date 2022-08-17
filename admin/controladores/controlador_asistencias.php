@@ -54,11 +54,11 @@ class ControladorAsistencias
 
                 // $arrays = array_merge($semana, $semana1);
 
-                $resultado = array_merge_recursive((array)$semana, (array)$semana1);
-                print_r($resultado);
+                // $resultado = array_merge_recursive((array)$semana, (array)$semana1);
+                // print_r($resultado);
 
 
-                // echo '<div>' . $i . "). " . $resultado . '</div>';
+                echo '<div>' . $i . "). " . $semana . '</div>';
                 $i++;
             }
 
