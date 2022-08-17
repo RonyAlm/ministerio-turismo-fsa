@@ -192,27 +192,27 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <input type="hidden" id="LocalidadID" name="LocalidadID" value="<?= $editar->id_tipo_contrato   ?>">
+                    <input type="hidden" id="tipoContratoID" name="tipoContratoID" value="<?= $editar->id_tipo_contrato; ?>">
                     <label for="tipo_contrato" class="col-sm-2 col-form-label">Tipo de Contrato</label>
                     <div class="col-sm-10">
-                      <?php $nombre_contrato_actual = $editar->descripcion_contrato; ?>
-                      <select id="educacion" name="educacion" class="form-control custom-select" required>
+                      <?php $nombre_tipocontrato_actual = $editar->descripcion_contrato; ?>
+                      <select id="tipo_contrato" name="tipo_contrato" class="form-control custom-select" required>
                         <option value="0" selected disabled>Seleccionar el tipo de contrato</option>
                         <?php foreach ($buscarSelectContrato as $k) : ?>
-                          <option value="<?php echo $k->id_areas; ?>" <?= ($k->descripcion_contrato == $nombre_contrato_actual) ? 'selected="selected"' : ''; ?>> <?php echo $k->descripcion_contrato; ?></option>
+                          <option value="<?php echo $k->id_tipo_contrato; ?>" <?= ($k->descripcion_contrato == $nombre_tipocontrato_actual) ? 'selected="selected"' : ''; ?>> <?php echo $k->descripcion_contrato; ?></option>
                         <?php endforeach; ?>
                       </select>
                     </div>
                   </div>
                   <div class="form-group row">
-                    <input type="hidden" id="LocalidadID" name="LocalidadID" value="<?= $editar->id_tipo_contrato   ?>">
+                    <input type="hidden" id="cargoID" name="cargoID" value="<?= $editar->id_tipo_personal; ?>">
                     <label for="cargo" class="col-sm-2 col-form-label">Cargo</label>
                     <div class="col-sm-10">
                       <?php $nombre_cargo_actual = $editar->descri_tipo_personal; ?>
-                      <select id="educacion" name="educacion" class="form-control custom-select" required>
+                      <select id="tipoCargo" name="tipoCargo" class="form-control custom-select" required>
                         <option value="0" selected disabled>Seleccionar el tipo de Cargo</option>
                         <?php foreach ($buscarSelectCargo as $k) : ?>
-                          <option value="<?php echo $k->id_tipo_contrato; ?>" <?= ($k->descri_tipo_personal == $nombre_cargo_actual) ? 'selected="selected"' : ''; ?>> <?php echo $k->descri_tipo_personal; ?></option>
+                          <option value="<?php echo $k->id_tipo_personal; ?>" <?= ($k->descri_tipo_personal == $nombre_cargo_actual) ? 'selected="selected"' : ''; ?>> <?php echo $k->descri_tipo_personal; ?></option>
                         <?php endforeach; ?>
                       </select>
                     </div>

@@ -114,6 +114,8 @@ class ControladorPersonal
         if ($_POST) {
             $EditarAgencia = new PersonalModelo();
 
+            print_r($_POST);
+
             // PERSONA
             //     $id_persona = $_POST['id_persona'];
             //     $nombre = $_POST['nombre'];
@@ -123,8 +125,6 @@ class ControladorPersonal
             //     $profesion = $_POST['profesion'];
             //     $educacionID = $_POST['educacionID'];
             //     $educacion = $_POST['educacion'];
-            //     $areaID = $_POST['areaID'];
-            //     $area = $_POST['area'];
 
 
             // PERSONAL 
@@ -134,6 +134,12 @@ class ControladorPersonal
             //     $antiguedad = $_POST['antiguedad'];
             //     $departamentoID = $_POST['departamentoID'];
             //     $departamento = $_POST['departamento'];
+            //     $areaID = $_POST['areaID'];
+            //     $area = $_POST['area'];
+            //     $cargoID = $_POST['cargoID'];
+            //     $tipoCargo = $_POST['tipoCargo'];
+            //     $tipoContratoID = $_POST['tipoContratoID'];
+            //     $tipo_contrato = $_POST['tipo_contrato'];
 
 
             // DIRECCION
