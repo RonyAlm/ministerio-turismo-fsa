@@ -38,7 +38,7 @@ $rol_id = $_SESSION['rol_id'];
                 <div class="card-header">
                   <h4 class="card-title w-100">
                     <a class="d-block w-100" data-toggle="collapse" href="#collapse<?php echo $conteo ?>">
-                      <?php echo $tabla["descripcion"]; ?>
+                      <?php echo $tabla["descriArea"]; ?>
                     </a>
                   </h4>
                 </div>
@@ -73,12 +73,12 @@ $rol_id = $_SESSION['rol_id'];
                                   <td class="project-actions text-right">
                                     <div class="btn-group" role="group" aria-label="">
 
-                                      <a title="Más Infomación" id="btn1" href="?controlador=personal&accion=infopersonal&id=<?= $tabla1["id_personal"]; ?>" class="btn btn-primary btn-sm">
+                                      <a title="Más Infomación" id="btn1" href="?controlador=personal&accion=infopersonal&id=<?= $tabla1["id_personal"]; ?>&idPersona=<?php echo $tabla1["id_persona"]; ?>" class="btn btn-primary btn-sm">
                                         <i class="fas fa-folder"></i>
                                       </a>
 
                                       <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") { ?>
-                                        <a title="Editar" href="?controlador=personal&accion=editar&id=<?php echo $tabla1["id_personal"]; ?>" class="btn btn-success btn-sm">
+                                        <a title="Editar" href="?controlador=personal&accion=editar&id=<?php echo $tabla1["id_personal"]; ?>&idPersona=<?php echo $tabla1["id_persona"]; ?>" class="btn btn-success btn-sm">
                                           <i class="fas fa-pencil-alt"></i>
                                         </a>
                                         <a title="Borrar" href="?controlador=personal&accion=borrar&id=<?php echo $tabla1["id_personal"]; ?>" class="btn btn-danger btn-sm">

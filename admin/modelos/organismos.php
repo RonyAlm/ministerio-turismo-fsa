@@ -1,18 +1,16 @@
 <?php
-class PersonalModelo
+class AgenciaModelo
 {
 
-    public $listaPersonal;
-    public $listaPersonal3;
-    public $listaPersonalID;
+    public $listaAgencia;
+    public $listaAgenciaID;
     public $listaBuscar;
 
 
     public function __construct()
     {
-        $this->listaPersonal = array();
-        $this->listaPersonal3 = array();
-        $this->listaPersonalID = array();
+        $this->listaAgencia = array();
+        $this->listaAgenciaID = array();
         $this->listaBuscar = array();
     }
 
@@ -21,65 +19,26 @@ class PersonalModelo
 
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->query("SELECT `id_deptos_mintur`, dpm.descriDepartamento as descrDepto,
-        per.id_persona,
-        CONCAT(per.nombre_persona, ' ', per.apellido_persona) full_name,
-        tp.id_tipo_personal, tp.descri_tipo_personal as descrTP
-        FROM `deptos_mintur` dpm
-        INNER JOIN personales p on p.rela_depto_mintur = dpm.id_deptos_mintur
-        INNER JOIN persona per on per.id_persona = p.rela_persona
-        INNER JOIN tipo_personal tp on tp.id_tipo_personal = p.rela_tipo_personal
-        WHERE p.rela_tipo_personal = 2 OR p.rela_tipo_personal = 4
-        and p.rela_area = 7");
+        $sql = $conexionBD->query("SELECT `id_agencias`, `descripcion_agencias`, direccion.calle_direccion, fecha_edit_agencia,
+                                        (SELECT contacto.descripcion_contacto 
+                                        FROM contacto 
+                                        WHERE agencias.id_agencias = contacto.rela_contacto_agencia
+                                        and contacto.rela_tipo_contacto_cont = 2
+                                        LIMIT 1) descripcion_contacto  ,tipo_estado.descripcion_tipo_estado,
+                                        localidad.nombre_localidad ,direccion.id_direccion,razon_social.id_razon_social
+                                        FROM `agencias`
+                                        INNER JOIN direccion ON agencias.rela_agencia_direccion = direccion.id_direccion
+                                        INNER JOIN estado_actividad on estado_actividad.rela_estado_agencia = agencias.id_agencias
+                                        INNER JOIN tipo_estado on tipo_estado.id_tipo_estado = estado_actividad.rela_tipo_estado
+                                        INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad
+                                        INNER JOIN razon_social on agencias.rela_razon_social_agencia = razon_social.id_razon_social");
 
         //recuperamos los datos y los retornamos
 
         while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
-            $this->listaPersonal[] = $filas;
+            $this->listaAgencia[] = $filas;
         }
-        return $this->listaPersonal; //este return se va a llamar en el controlador_alojamiento.php clase inicio
-
-    }
-
-    public function info3($id)
-    {
-
-        $conexionBD = BD::crearInstancia();
-
-        $sql = $conexionBD->query("SELECT `id_personal`, `rela_area`,a.descriArea,a.id_areas,
-        tep.id_tipo_estado_personal, tep.descripcion as tipoestado,
-        pe.id_persona,CONCAT(pe.nombre_persona, ' ', pe.apellido_persona) full_name
-        FROM `personales` p
-        INNER JOIN areas a on a.id_areas = p.rela_area
-        INNER JOIN tipo_estado_personal tep on tep.id_tipo_estado_personal = p.rela_tipo_estado
-        INNER JOIN persona pe on pe.id_persona = p.rela_persona
-        WHERE p.rela_depto_mintur = $id
-        ORDER by rela_area");
-
-        //recuperamos los datos y los retornamos
-
-        while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
-            $this->listaPersonal3[] = $filas;
-        }
-        return $this->listaPersonal3; //este return se va a llamar en el controlador_alojamiento.php clase inicio
-
-    }
-    public function info2($id)
-    {
-
-        $conexionBD = BD::crearInstancia();
-
-        $sql = $conexionBD->query("SELECT * FROM areas a
-        INNER JOIN personales p on p.rela_area = a.id_areas
-        WHERE p.rela_depto_mintur = $id
-        GROUP BY a.descriArea");
-
-        //recuperamos los datos y los retornamos
-
-        while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
-            $this->listaPersonal[] = $filas;
-        }
-        return $this->listaPersonal; //este return se va a llamar en el controlador_alojamiento.php clase inicio
+        return $this->listaAgencia; //este return se va a llamar en el controlador_alojamiento.php clase inicio
 
     }
 
@@ -106,30 +65,25 @@ class PersonalModelo
 
     }
 
-    public function guardar(
-        $nombre,
-        $apellido,
-        $cuil,
-        $profesion,
-        $fecha,
-        $educacion,
+    public function crear(
+        $descripcion_agencias,
+        $matricula_agencia,
+        $legajo_agencia,
+        $cuit_agencia,
+        $categoria_agencia,
         $rela_localidad_direccion,
         $calle_direccion,
-        $telefonoCel,
-        $telefonoFijo,
-        $correo,
-        $departamento,
-        $area,
-        $n_legajo,
-        $n_expediente,
-        $tipo_contrato,
-        $cargo,
-        $usuario,
-        $contraseña,
-        $antiguedad,
-        $fechaini,
-        $fechafin,
-        $diasrestante
+        $razonsocial,
+        $telefonoAgencia,
+        $telefonoFijoAgencia,
+        $correoAgencia,
+        $facebookAgencia,
+        $instagramAgencia,
+        $twitterAgencia,
+        $webAgencia,
+        $otroAgencia,
+        $estadoAgencia,
+        $idoneoAgencia
     ) {
 
         $conexionBD = BD::crearInstancia();
@@ -142,71 +96,35 @@ class PersonalModelo
 
         $lastInsertIDdireccion = $conexionBD->lastInsertId();
 
-        /*-------- INSERTAMOS EL USUARIO Y LA CONTRASEÑA--------*/
+        /*-------- INSERTAMOS LA RAZON SOCIAL--------*/
 
-        $sqlusuario = $conexionBD->prepare("INSERT INTO `usuario_contra`(`usuario`,
-                                                 `contraseña`, `rela_rol_id`)
-                                            VALUES (?,?,?)");
-        $sqlusuario->execute(array(
-            $usuario, $contraseña,
-            2
-        ));
+        $sqlRazonSocial = $conexionBD->prepare("INSERT INTO `razon_social`(`descripcion_razon_social`) 
+                                                    VALUES (?)");
+        $sqlRazonSocial->execute(array($razonsocial));
 
-        $lastInsertusuariocontraseña = $conexionBD->lastInsertId();
+        $lastInsertIDRazonSocial = $conexionBD->lastInsertId();
 
+        /*-------- INSERTAMOS LA AGENCIA--------*/
 
-        /*-------- INSERTAMOS LA PERSONA--------*/
-
-        $sql = $conexionBD->prepare("INSERT INTO `persona`(`nombre_persona`, `apellido_persona`,
-                                                 `cuil_persona`, `fecha_nac`, `rela_persona_direccion`,
-                                                  `rela_educacion`, `profesion`,`rela_usuario_contra`)
-                                            VALUES (?,?,?,?,?,?,?,?)");
+        $sql = $conexionBD->prepare("INSERT INTO agencias (descripcion_agencias,matricula_agencia,
+                                                                legajo_agencia,cuit_agencia,categoria_agencia, fecha_edit_agencia,
+                                                                rela_agencia_direccion,rela_razon_social_agencia
+                                                                ,idoneo_agencia) 
+                                            VALUES (?,?,?,?,?,CURRENT_TIMESTAMP(),?,?,?)");
         $sql->execute(array(
-            $nombre, $apellido,
-            $cuil, $fecha, $lastInsertIDdireccion,
-            $educacion, $profesion, $lastInsertusuariocontraseña
+            $descripcion_agencias, $matricula_agencia,
+            $legajo_agencia, $cuit_agencia, $categoria_agencia, $lastInsertIDdireccion,
+            $lastInsertIDRazonSocial, $idoneoAgencia
         ));
 
         $lastInsertIDAgencias = $conexionBD->lastInsertId();
 
-        /*-------- INSERTAMOS EL PERSONAL--------*/
-
-        $sqlPersonal = $conexionBD->prepare("INSERT INTO `personales`(`rela_persona`,
-                                                         `rela_tipo_personal`, `rela_area`,
-                                                         `n_legajo`,
-                                                            `rela_tipo_estado`, `rela_depto_mintur`,
-                                                            `expediente`, `rela_tipo_contrato`,
-                                                            anio_antiguedad) 
-                                            VALUES (?,?,?,?,?,?,?,?,?)");
-        $sqlPersonal->execute(array(
-            $lastInsertIDAgencias, $cargo,
-            $area, $n_legajo, 2,
-            $departamento, $n_expediente, $tipo_contrato,
-            $antiguedad
-        ));
-
-        $lastInsertIDPersonal = $conexionBD->lastInsertId();
-
-
-
-        /*-------- INSERTAMOS LAS LICENCIAS--------*/
-
-        $sqllicencias = $conexionBD->prepare("INSERT INTO `licencias`(`fecha_ini`,`fecha_fin`,
-                                             `dias_restante`, `estado`, `rela_personal`)
-                                            VALUES (?,?,?,?,?)");
-        $sqllicencias->execute(array(
-            $fechaini, $fechafin,
-            $diasrestante, 0, $lastInsertIDPersonal
-        ));
-
-        $lastInsertlicencias = $conexionBD->lastInsertId();
-
         /*-------- INSERTAMOS EL TELEFONO CELULAR--------*/
 
-        foreach ($telefonoCel as $telefonoAgencia1) {
+        foreach ($telefonoAgencia as $telefonoAgencia1) {
 
             $sqlTelefono = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-                                                                            `rela_persona_contacto`) 
+                                                                            `rela_contacto_agencia`) 
                                                     VALUES (?,?,?)");
             $sqlTelefono->execute(array($telefonoAgencia1, 2, $lastInsertIDAgencias));
         }
@@ -214,18 +132,58 @@ class PersonalModelo
         /*-------- INSERTAMOS EL TELEFONO FIJO--------*/
 
         $sqlFijo = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-                                                                            `rela_persona_contacto`) 
+                                                                            `rela_contacto_agencia`) 
                                                     VALUES (?,?,?)");
-        $sqlFijo->execute(array($telefonoFijo, 9, $lastInsertIDAgencias));
+        $sqlFijo->execute(array($telefonoFijoAgencia, 9, $lastInsertIDAgencias));
 
         /*-------- INSERTAMOS EL CORREO-------*/
 
         $sqlCorreo = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-                                                                            `rela_persona_contacto`) 
+                                                                            `rela_contacto_agencia`) 
                                                     VALUES (?,?,?)");
-        $sqlCorreo->execute(array($correo, 1, $lastInsertIDAgencias));
-    }
+        $sqlCorreo->execute(array($correoAgencia, 1, $lastInsertIDAgencias));
 
+        /*-------- INSERTAMOS EL FACEBOOK--------*/
+
+        $sqlFacebook = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
+                                                                            `rela_contacto_agencia`) 
+                                                    VALUES (?,?,?)");
+        $sqlFacebook->execute(array($facebookAgencia, 4, $lastInsertIDAgencias));
+
+        /*-------- INSERTAMOS EL INSTAGRAM--------*/
+
+        $sqlInstagram = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
+                                                                            `rela_contacto_agencia`) 
+                                                    VALUES (?,?,?)");
+        $sqlInstagram->execute(array($instagramAgencia, 5, $lastInsertIDAgencias));
+
+        /*-------- INSERTAMOS EL TWITTER--------*/
+
+        $sqlTwitter = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
+                                                                            `rela_contacto_agencia`) 
+                                                    VALUES (?,?,?)");
+        $sqlTwitter->execute(array($twitterAgencia, 6, $lastInsertIDAgencias));
+
+        /*-------- INSERTAMOS EL SITIO WEB--------*/
+
+        $sqlWeb = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
+                                                                            `rela_contacto_agencia`) 
+                                                    VALUES (?,?,?)");
+        $sqlWeb->execute(array($webAgencia, 7, $lastInsertIDAgencias));
+
+        /*-------- INSERTAMOS OTRO--------*/
+
+        $sqlOtro = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
+                                                                            `rela_contacto_agencia`) 
+                                                    VALUES (?,?,?)");
+        $sqlOtro->execute(array($otroAgencia, 8, $lastInsertIDAgencias));
+
+        /*-------- INSERTAMOS EL ESTADO--------*/
+
+        $sqlEstado = $conexionBD->prepare("INSERT INTO `estado_actividad`(`rela_tipo_estado`, `rela_estado_agencia`) 
+                                            VALUES (?,?)");
+        $sqlEstado->execute(array($estadoAgencia, $lastInsertIDAgencias));
+    }
 
     public static function borrar($idAgenciaBorrar, $id_direccion, $idRazonSocial)
     {
@@ -240,22 +198,23 @@ class PersonalModelo
         $sqlRazonBorrar->execute(array($idRazonSocial));
     }
     /*----------BUSCAR para ir imprimir en la seccion EDITAR----------*/
-    public function buscar($id)
+    public function buscar($id_agencia)
     {
         $conexionBD = BD::crearInstancia();
-        $sql = $conexionBD->prepare("SELECT *
-        FROM `personales` per
-        INNER JOIN persona p on p.id_persona = per.rela_persona
-        INNER JOIN educacion e on e.id_educacion = p.rela_educacion
-        INNER JOIN contacto c on c.rela_persona_contacto = p.id_persona
-        INNER JOIN areas a on a.id_areas = per.rela_area
-        INNER JOIN tipo_contrato ticon on ticon.id_tipo_contrato = per.rela_tipo_contrato
-        INNER JOIN deptos_mintur depmin on depmin.id_deptos_mintur = per.rela_depto_mintur
-        INNER JOIN direccion dir on dir.id_direccion = p.rela_persona_direccion
-        INNER join localidad l on l.id_localidad = dir.rela_localidad_direccion
-        INNER JOIN tipo_personal tiper on tiper.id_tipo_personal = per.rela_tipo_personal
-        INNER JOIN licencias li on li.rela_personal = per.id_personal
-        WHERE per.id_personal = $id");
+        $sql = $conexionBD->prepare("SELECT id_agencias, descripcion_agencias , `idoneo_agencia`, `matricula_agencia`,
+                                                    `legajo_agencia`, `cuit_agencia`, `categoria_agencia`, fecha_edit_agencia, razon_social.descripcion_razon_social,
+                                                     direccion.calle_direccion,
+                                                    contacto.descripcion_contacto, tipo_estado.descripcion_tipo_estado,localidad.nombre_localidad
+                                                    ,estado_actividad.rela_tipo_estado,departamentos_fsa.descripcion_departamentos 
+                                            FROM `agencias`
+                                            INNER JOIN contacto ON contacto.rela_contacto_agencia = agencias.id_agencias
+                                            INNER JOIN razon_social on razon_social.id_razon_social = agencias.rela_razon_social_agencia
+                                            INNER JOIN direccion ON agencias.rela_agencia_direccion = direccion.id_direccion
+                                            INNER JOIN estado_actividad on estado_actividad.rela_estado_agencia = agencias.id_agencias
+                                            INNER JOIN tipo_estado on tipo_estado.id_tipo_estado = estado_actividad.rela_tipo_estado
+                                            INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad
+                                            INNER JOIN departamentos_fsa on localidad.rela_departamento = departamentos_fsa.id_departamentos_fsa
+                                            WHERE agencias.id_agencias = $id_agencia");
 
         $sql->execute();
 
@@ -263,65 +222,49 @@ class PersonalModelo
     }
 
     public static function editar(
-        $nombre,
-        $apellido,
-        $cuil,
-        $fecha,
-        $profesion,
-        $educacion,
-        $n_legajo,
-        $n_expediente,
-        $antiguedad,
-        $departamento,
-        $area,
-        $tipoCargo,
-        $tipo_contrato,
+        $descripcion_agencias,
+        $matricula_agencia,
+        $legajo_agencia,
+        $cuit_agencia,
+        $categoria_agencia,
+        $idAgencia,
+        $idoneoAgencia,
         $rela_localidad_direccion,
         $calle_direccion,
-        $telefonoCel,
+        $razonsocial,
+        $telefonoAgencia,
         $telefonoFijoAgencia,
-        $correo,
-        $fechaini,
-        $fechafin,
-        $diasrestante,
+        $correoAgencia,
+        $facebookAgencia,
+        $instagramAgencia,
+        $twitterAgencia,
+        $webAgencia,
+        $otroAgencia,
+        $estadoAgencia,
 
-        $id_persona,
-        $educacionID,
-        $id_Personal,
-        $departamentoID,
-        $areaID,
-        $cargoID,
-        $tipoContratoID,
+        $idRazonSocial,
         $idDireccion,
         $idtelefonoAgencia,
-        $idtelefonoFijo,
-        $idcorreo,
-        $licenciasID
+        $idtelefonoFijoAgencia,
+        $idcorreoAgencia,
+        $idfacebookAgencia,
+        $idinstagramAgencia,
+        $idtwitterAgencia,
+        $idwebAgencia,
+        $idotroAgencia,
+        $idestadoAgencia
     ) {
 
         $conexionBD = BD::crearInstancia();
 
-        /*---------------SE ACTUALIZA LA PERSONA-------------------*/
-        $sql = $conexionBD->prepare("UPDATE `persona` SET `nombre_persona`='$nombre',`apellido_persona`='$apellido',
-        `cuil_persona`='$cuil',`fecha_nac`='$fecha',
-        `rela_educacion`=$educacion,`profesion`='$profesion' 
-        WHERE id_persona = $id_persona;");
+        /*---------------SE ACTUALIZA LA AGENCIA-------------------*/
+        $sql = $conexionBD->prepare("UPDATE `agencias` SET `descripcion_agencias` = '$descripcion_agencias',
+                                                    idoneo_agencia = '$idoneoAgencia', matricula_agencia ='$matricula_agencia',
+                                                    legajo_agencia = '$legajo_agencia', cuit_agencia= '$cuit_agencia',
+                                                    categoria_agencia= '$categoria_agencia',
+                                                    fecha_edit_agencia= CURRENT_TIMESTAMP()
+                                            WHERE `agencias`.`id_agencias` = $idAgencia;");
         $sql->execute();
-
-        /*---------------SE ACTUALIZA EL PERSONAL-------------------*/
-        $sqlPersonal = $conexionBD->prepare("UPDATE `personales` SET 
-        `rela_tipo_personal`=$tipoCargo,`rela_area`=$area,
-        `n_legajo`='$n_legajo',`rela_depto_mintur`=$departamento,
-        `expediente`='$n_expediente',`rela_tipo_contrato`=$tipo_contrato,
-        `anio_antiguedad`=$antiguedad 
-        WHERE id_personal =$id_Personal;");
-        $sqlPersonal->execute();
-
-        /*---------------SE ACTUALIZA LAS LICENCIAS-------------------*/
-        $sqlLicencias = $conexionBD->prepare("UPDATE `licencias` SET `fecha_ini`='$fechaini',
-        `fecha_fin`='$fechafin',`dias_restante`='$diasrestante' 
-        WHERE id_licencias = $licenciasID;");
-        $sqlLicencias->execute();
 
         /*---------------SE ACTUALIZA LA DIRECCION CON LA LOCALIDAD-------------------*/
 
@@ -336,12 +279,25 @@ class PersonalModelo
             $sqlDireccion->execute();
         }
 
+        /*----------------SE ACTUALIZA EL ESTADO------------------*/
 
+        if ($estadoAgencia == 0) {
+            echo "actualizado";
+        } else {
+            $sqlEstado = $conexionBD->prepare("UPDATE `estado_actividad` SET `rela_tipo_estado`=$estadoAgencia
+                                                        WHERE id_estado = $idestadoAgencia");
+            $sqlEstado->execute();
+        }
 
+        /*----------------SE ACTUALIZA LA RAZON SOCIAL------------------*/
+
+        $sqlRazonSocial = $conexionBD->prepare("UPDATE `razon_social` SET `descripcion_razon_social`='$razonsocial' 
+                                                    WHERE id_razon_social = $idRazonSocial");
+        $sqlRazonSocial->execute();
 
         /*----------------SE ACTUALIZA EL CONTACTO telefono------------------*/
 
-        $asociativo = array_combine($idtelefonoAgencia, $telefonoCel);
+        $asociativo = array_combine($idtelefonoAgencia, $telefonoAgencia);
 
 
 
@@ -362,11 +318,11 @@ class PersonalModelo
             $telefonoFijoAgencia = "No se registró";
 
             $sqlFijo = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`= '$telefonoFijoAgencia'
-                                                    WHERE id_contacto = $idtelefonoFijo");
+                                                    WHERE id_contacto = $idtelefonoFijoAgencia");
             $sqlFijo->execute();
         } else {
             $sqlFijo = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`= $telefonoFijoAgencia
-                                                    WHERE id_contacto = $idtelefonoFijo");
+                                                    WHERE id_contacto = $idtelefonoFijoAgencia");
             $sqlFijo->execute();
         }
 
@@ -374,9 +330,39 @@ class PersonalModelo
 
         /*----------------SE ACTUALIZA EL CONTACTO correo------------------*/
 
-        $sqlCorreo = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`='$correo'
-                                                    WHERE id_contacto = $idcorreo");
+        $sqlCorreo = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`='$correoAgencia'
+                                                    WHERE id_contacto = $idcorreoAgencia");
         $sqlCorreo->execute();
+
+        /*----------------SE ACTUALIZA EL CONTACTO facebook ------------------*/
+
+        $sqlFacebook = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`='$facebookAgencia'
+                                                    WHERE id_contacto = $idfacebookAgencia");
+        $sqlFacebook->execute();
+
+        /*----------------SE ACTUALIZA EL CONTACTO Instagram ------------------*/
+
+        $sqlInstagram = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`='$instagramAgencia'
+                                                    WHERE id_contacto = $idinstagramAgencia");
+        $sqlInstagram->execute();
+
+        /*----------------SE ACTUALIZA EL CONTACTO  twitter------------------*/
+
+        $sqlTwitter = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`='$twitterAgencia'
+                                                    WHERE id_contacto = $idtwitterAgencia");
+        $sqlTwitter->execute();
+
+        /*----------------SE ACTUALIZA EL CONTACTO  sitio web------------------*/
+
+        $sqlWeb = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`='$webAgencia'
+                                                    WHERE id_contacto = $idwebAgencia");
+        $sqlWeb->execute();
+
+        /*----------------SE ACTUALIZA EL CONTACTO otro------------------*/
+
+        $sqlOtro = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`='$otroAgencia'
+                                                    WHERE id_contacto = $idotroAgencia ");
+        $sqlOtro->execute();
     }
 
     public function buscarSelectLocalidad()
@@ -392,74 +378,14 @@ class PersonalModelo
         return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function buscarSelectEstudios()
+    public function buscarSelectEstado()
     {
 
         $conexionBD = BD::crearInstancia();
 
 
-        $sqlLocalidad = $conexionBD->query("SELECT id_educacion, descriEducacion FROM educacion");
-
-        $sqlLocalidad->execute();
-
-        return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
-    }
-    public function buscarSelectDepartamento()
-    {
-
-        $conexionBD = BD::crearInstancia();
-
-
-        $sqlLocalidad = $conexionBD->query("SELECT `id_deptos_mintur`, `descriDepartamento` FROM `deptos_mintur`");
-
-        $sqlLocalidad->execute();
-
-        return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
-    }
-    public function buscarSelectCargo()
-    {
-
-        $conexionBD = BD::crearInstancia();
-
-
-        $sqlLocalidad = $conexionBD->query("SELECT `id_tipo_personal`, `descri_tipo_personal` FROM `tipo_personal`");
-
-        $sqlLocalidad->execute();
-
-        return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
-    }
-    public function buscarSelectRol()
-    {
-
-        $conexionBD = BD::crearInstancia();
-
-
-        $sqlLocalidad = $conexionBD->query("SELECT `id_roles`, `roles` FROM `roles`");
-
-        $sqlLocalidad->execute();
-
-        return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
-    }
-    public function buscarSelectArea()
-    {
-
-        $conexionBD = BD::crearInstancia();
-
-
-        $sqlLocalidad = $conexionBD->query("SELECT `id_areas`, `descriArea` FROM `areas`");
-
-        $sqlLocalidad->execute();
-
-        return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
-    }
-    public function buscarSelectContrato()
-    {
-
-        $conexionBD = BD::crearInstancia();
-
-
-        $sqlLocalidad = $conexionBD->query("SELECT `id_tipo_contrato`, `descripcion_contrato` 
-                                            FROM `tipo_contrato`");
+        $sqlLocalidad = $conexionBD->query("SELECT `id_tipo_estado`, `descripcion_tipo_estado` 
+                                                       FROM `tipo_estado`");
 
         $sqlLocalidad->execute();
 
@@ -467,7 +393,7 @@ class PersonalModelo
     }
 }
 
-class Contactos
+class ContactosAgencia
 {
     public $telefonoAgencia;
     public $correoAgencia;
@@ -492,7 +418,7 @@ class Contactos
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 2
-                                            and contacto.rela_persona_contacto  = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         $consulta->execute();
 
@@ -505,7 +431,7 @@ class Contactos
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 9
-                                            and contacto.rela_persona_contacto  = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         $consulta->execute();
 
@@ -518,7 +444,7 @@ class Contactos
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 1
-                                            and contacto.rela_persona_contacto  = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         $consulta->execute();
 
@@ -531,7 +457,7 @@ class Contactos
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 4
-                                            and contacto.rela_persona_contacto  = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         $consulta->execute();
 
@@ -544,7 +470,7 @@ class Contactos
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 5
-                                            and contacto.rela_persona_contacto  = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         $consulta->execute();
 
@@ -557,7 +483,7 @@ class Contactos
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 6
-                                            and contacto.rela_persona_contacto  = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         $consulta->execute();
 
@@ -570,7 +496,7 @@ class Contactos
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 7
-                                            and contacto.rela_persona_contacto  = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         $consulta->execute();
 
@@ -583,7 +509,7 @@ class Contactos
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 8
-                                            and contacto.rela_persona_contacto  = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         $consulta->execute();
 
@@ -591,7 +517,7 @@ class Contactos
     }
 }
 
-class ContactosInfoPersonal
+class ContactosInfo
 {
     public $telefonoAgenciaInfo;
     public $telefonoFijoAgencia;
@@ -626,7 +552,7 @@ class ContactosInfoPersonal
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 2
-                                            and contacto.rela_persona_contacto  = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->telefonoAgenciaInfo[] = $filas;
@@ -640,7 +566,7 @@ class ContactosInfoPersonal
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 9
-                                            and contacto.rela_persona_contacto  = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->telefonoFijoAgencia[] = $filas;
@@ -654,7 +580,7 @@ class ContactosInfoPersonal
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 1
-                                            and contacto.rela_persona_contacto  = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->correoAgencia[] = $filas;
@@ -668,7 +594,7 @@ class ContactosInfoPersonal
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 4
-                                            and contacto.rela_persona_contacto  = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->facebookAgencia[] = $filas;
@@ -682,7 +608,7 @@ class ContactosInfoPersonal
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 5
-                                            and contacto.rela_persona_contacto  = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->instagramAgencia[] = $filas;
@@ -696,7 +622,7 @@ class ContactosInfoPersonal
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 6
-                                            and contacto.rela_persona_contacto  = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->twitterAgencia[] = $filas;
@@ -710,7 +636,7 @@ class ContactosInfoPersonal
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 7
-                                            and contacto.rela_persona_contacto  = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->webAgencia[] = $filas;
@@ -724,7 +650,7 @@ class ContactosInfoPersonal
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 8
-                                            and contacto.rela_persona_contacto  = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->otroAgencia[] = $filas;

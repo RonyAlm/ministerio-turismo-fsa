@@ -116,7 +116,7 @@
                       <select id="educacion" name="educacion" class="form-control custom-select" required>
                         <option value="0" selected disabled>Seleccionar educacion</option>
                         <?php foreach ($buscarSelectEstudios as $k) : ?>
-                          <option value="<?php echo $k->id_educacion; ?>"> <?php echo $k->descripcion; ?></option>
+                          <option value="<?php echo $k->id_educacion; ?>"> <?php echo $k->descriEducacion; ?></option>
                         <?php endforeach; ?>
                       </select>
                     </div>
@@ -138,7 +138,7 @@
                       <select id="departamento" name="departamento" class="form-control custom-select" required>
                         <option value="0" selected disabled>Seleccionar el departamento</option>
                         <?php foreach ($buscarSelectDepartamento as $k) : ?>
-                          <option value="<?php echo $k->id_deptos_mintur; ?>"> <?php echo $k->descripcion; ?></option>
+                          <option value="<?php echo $k->id_deptos_mintur; ?>"> <?php echo $k->descriDepartamento; ?></option>
                         <?php endforeach; ?>
                       </select>
                     </div>
@@ -149,7 +149,7 @@
                       <select id="area" name="area" class="form-control custom-select" required>
                         <option value="0" selected disabled>Seleccionar el Área</option>
                         <?php foreach ($buscarSelectArea as $k) : ?>
-                          <option value="<?php echo $k->id_areas; ?>"> <?php echo $k->descripcion; ?></option>
+                          <option value="<?php echo $k->id_areas; ?>"> <?php echo $k->descriArea; ?></option>
                         <?php endforeach; ?>
                       </select>
                     </div>
@@ -183,7 +183,7 @@
                       <select id="cargo" name="cargo" class="form-control custom-select" required>
                         <option value="0" selected disabled>Seleccionar el cargo</option>
                         <?php foreach ($buscarSelectCargo as $k) : ?>
-                          <option value="<?php echo $k->id_tipo_personal; ?>"> <?php echo $k->descripcion; ?></option>
+                          <option value="<?php echo $k->id_tipo_personal; ?>"> <?php echo $k->descri_tipo_personal; ?></option>
                         <?php endforeach; ?>
                       </select>
                     </div>

@@ -86,7 +86,8 @@ class ControladorPrestadores
             );
 
 
-            header("Location:index2.php?controlador=Prestadores&accion=inicio");
+            // header("Location:index2.php?controlador=Prestadores&accion=inicio");
+            echo "<script>location.href = 'index2.php?controlador=Prestadores&accion=inicio';</script>";
         }
 
         include_once("vistas/prestadores/crear.php");
@@ -203,7 +204,8 @@ class ControladorPrestadores
 
             // print_r($insertarPrestador);
 
-            header("Location:index2.php?controlador=Prestadores&accion=inicio");
+            // header("Location:index2.php?controlador=Prestadores&accion=inicio");
+            echo "<script>location.href = 'index2.php?controlador=Prestadores&accion=inicio';</script>";
         }
         include_once("vistas/prestadores/editar.php");
     }
@@ -298,5 +300,4 @@ class ControladorPrestadores
 
         include_once("vistas/prestadores/invoice-print.php");
     }
-
 }

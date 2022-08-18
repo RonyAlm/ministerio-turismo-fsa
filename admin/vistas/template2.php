@@ -474,7 +474,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'festivales')) ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-columns"></i>
                   <p>
-                    Festividades
+                    Festivales y eventos
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
@@ -491,7 +491,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <?php } ?>
 
             <!-- TRANSPORTE -->
-            <?php if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3 and $usuario == "monica") { ?>
+            <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "monica") { ?>
               <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'transporte')) ? 'menu-open' : '' ?>">
                 <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'transporte')) ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-table"></i>
@@ -538,8 +538,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="?controlador=personal&accion=inicio" class="nav-link 
-                    <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? '' : '' ?>">
+                    <a href="?controlador=asistencias&accion=inicio" class="nav-link 
+                    <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'asistencias')) ? '' : '' ?>">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Asistencia</p>
                     </a>
@@ -577,15 +577,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- ./wrapper -->
 
   <footer class="main-footer">
-    <strong> &copy; </strong><i id="fechaFooter">
-      <!-- 20:00:14 -->
-      <!-- <?php
-            // if ("fechaFooter" == "09:10:00") {
-
-            //   echo "entre";
-            // }
-            ?> -->
-    </i>
+    <strong> &copy; </strong>
+    <i id="fechaFooter"></i>
     <script>
       const currentTime = () => {
 
@@ -607,9 +600,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         let time = `${fecha}  ${hh}:${mm}:${ss}`;
         fechaF.innerText = time;
 
-        // if (time == "09:05:30") {
-        //   document.write(time);
-        // }
+
 
       };
       currentTime();
@@ -660,13 +651,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="vistas/recursos/script/validacion_museo.js"></script>
   <script src="vistas/recursos/script/validacion_prestador.js"></script>
   <script src="vistas/recursos/script/filas_contacto.js"></script>
-  <script src="vistas/recursos/script/agregarTransporte.js"></script>
+
   <script src="vistas/recursos/script/traerLocalidades.js"></script>
-  <script src="vistas/recursos/script/selectDinamico.js"></script>
+
   <script src="vistas/recursos/script/formularios.js"></script>
-
-
-
 
 
 
@@ -796,7 +784,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="modal-footer">
 
             <button type="submit" class="btn btn-success" id="btnAccion">Agregar</button>
+
             <button type="button" id="btnEliminar" class="btn btn-danger">Borrar</button>
+
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 
           </div>
