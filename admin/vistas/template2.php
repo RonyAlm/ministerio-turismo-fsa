@@ -576,15 +576,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- ./wrapper -->
 
   <footer class="main-footer">
-    <strong> &copy; </strong><i id="fechaFooter">
-      <!-- 20:00:14 -->
-      <!-- <?php
-            // if ("fechaFooter" == "09:10:00") {
-
-            //   echo "entre";
-            // }
-            ?> -->
-    </i>
+    <strong> &copy; </strong>
+    <i id="fechaFooter"></i>
     <script>
       const currentTime = () => {
 
@@ -606,9 +599,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         let time = `${fecha}  ${hh}:${mm}:${ss}`;
         fechaF.innerText = time;
 
-        // if (time == "09:05:30") {
-        //   document.write(time);
-        // }
+
 
       };
       currentTime();
@@ -663,9 +654,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="vistas/recursos/script/traerLocalidades.js"></script>
 
   <script src="vistas/recursos/script/formularios.js"></script>
-
-
-
 
 
 

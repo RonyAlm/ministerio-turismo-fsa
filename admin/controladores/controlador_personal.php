@@ -114,7 +114,7 @@ class ControladorPersonal
         if ($_POST) {
             $EditarAgencia = new PersonalModelo();
 
-            print_r($_POST);
+            // print_r($_POST);
 
             // PERSONA
             $id_persona = $_POST['id_persona'];
@@ -216,7 +216,7 @@ class ControladorPersonal
 
         $contactosDeagencia = new Contactos();
 
-        $contactosDeagencia1 = new ContactosInfo();
+        $contactosDeagencia1 = new ContactosInfoPersonal();
 
         $agenciaTelefono = $contactosDeagencia1->consultarTelefonos($idPersona);
         $agenciaTelefonoFijo = $contactosDeagencia->consultarTelefonosFijos($idPersona);
@@ -258,6 +258,8 @@ class ControladorPersonal
     {
         $id = $_GET['id'];
 
+
+
         $Info = new PersonalModelo();
 
         $tablaInformes = $Info->info3($id);
@@ -266,7 +268,7 @@ class ControladorPersonal
         // $agenciasInfomacion = $agenciaInfo->buscar($id_agencia);
 
 
-        // $contactosDeagencia = new ContactosInfo();
+        // $contactosDeagencia = new ContactosInfoPersonal();
         // $agenciaTelefonoInfo = $contactosDeagencia->consultarTelefonos($id_agencia);
         // $agenciaTelefonoFijo = $contactosDeagencia->consultarTelefonosFijos($id_agencia);
         // $agenciaCorreo = $contactosDeagencia->consultarCorreo($id_agencia);
@@ -281,8 +283,9 @@ class ControladorPersonal
     public function infopersonal()
     {
         $id = $_GET['id'];
+        $idpersona = $_GET['idPersona'];
 
-        echo $id;
+        // echo $id;
 
         $Info = new PersonalModelo();
 
@@ -290,10 +293,10 @@ class ControladorPersonal
         $Infomacion = $Info->buscar($id);
 
 
-        // $contactosDeagencia = new ContactosInfo();
-        // $agenciaTelefonoInfo = $contactosDeagencia->consultarTelefonos($id_agencia);
-        // $agenciaTelefonoFijo = $contactosDeagencia->consultarTelefonosFijos($id_agencia);
-        // $agenciaCorreo = $contactosDeagencia->consultarCorreo($id_agencia);
+        $contactosDeagencia = new ContactosInfoPersonal();
+        $agenciaTelefonoInfo = $contactosDeagencia->consultarTelefonos($idpersona);
+        $agenciaTelefonoFijo = $contactosDeagencia->consultarTelefonosFijos($idpersona);
+        $agenciaCorreo = $contactosDeagencia->consultarCorreo($idpersona);
         // $agenciaFacebook = $contactosDeagencia->consultarFacebook($id_agencia);
         // $agenciaInstagram = $contactosDeagencia->consultarInstagram($id_agencia);
         // $agenciaTwitter = $contactosDeagencia->consultarTwitter($id_agencia);

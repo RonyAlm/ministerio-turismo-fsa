@@ -73,7 +73,7 @@ $rol_id = $_SESSION['rol_id'];
                                   <td class="project-actions text-right">
                                     <div class="btn-group" role="group" aria-label="">
 
-                                      <a title="Más Infomación" id="btn1" href="?controlador=personal&accion=infopersonal&id=<?= $tabla1["id_personal"]; ?>" class="btn btn-primary btn-sm">
+                                      <a title="Más Infomación" id="btn1" href="?controlador=personal&accion=infopersonal&id=<?= $tabla1["id_personal"]; ?>&idPersona=<?php echo $tabla1["id_persona"]; ?>" class="btn btn-primary btn-sm">
                                         <i class="fas fa-folder"></i>
                                       </a>
 

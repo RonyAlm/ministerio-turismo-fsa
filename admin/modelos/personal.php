@@ -591,7 +591,7 @@ class Contactos
     }
 }
 
-class ContactosInfo
+class ContactosInfoPersonal
 {
     public $telefonoAgenciaInfo;
     public $telefonoFijoAgencia;

@@ -18,7 +18,6 @@ class ControladorAgencias
         $cantidad_agencias = $datosEstadisticos->cantidadAgencias();
         $cantidadAgenciasHabilitadas = $datosEstadisticos->cantidadAgenciasHabilitadas();
 
-
         include_once("vistas/agencias/inicio.php");
     }
 
@@ -262,11 +261,7 @@ class ControladorAgencias
         include_once("vistas/agencias/info.php");
     }
 
-    public function sucursal()
-    {
 
-        $id_agencia = $_GET['id'];
-    }
 
     public function imprimir()
     {
@@ -303,5 +298,4 @@ class ControladorAgencias
 
         include_once("vistas/agencias/invoice-print.php");
     }
-
 }
