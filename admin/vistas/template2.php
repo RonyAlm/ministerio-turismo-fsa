@@ -380,6 +380,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <p>Servicios Generales</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="?controlador=gastronomia&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'gastronomia') ? 'active' : '' ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Gastronomía</p>
+                </a>
+              </li>
 
             <?php endif; ?>
 
@@ -466,7 +472,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <?php } ?>
 
             <!-- FESTIVALES -->
-            <?php if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3 and $usuario == "matias") { ?>
+            <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") { ?>
               <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'festivales')) ? 'menu-open' : '' ?>">
                 <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'festivales')) ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-columns"></i>
