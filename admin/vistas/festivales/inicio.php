@@ -105,7 +105,7 @@ $rol_id = $_SESSION['rol_id'];
                                             <a title="Editar" href="?controlador=festivales&accion=editar&id=<?php echo $festival["id_festivales"]; ?>" class="btn btn-success btn-sm">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            <a title="Borrar" href="?controlador=festivales&accion=borrar&id=<?php echo $festival["id_festivales"]; ?> &idDireccion=<?php echo $festival["id_direccion"]; ?>" class="btn btn-danger btn-sm">
+                                            <a title="Borrar" href="?controlador=festivales&accion=borrar&id=<?php echo $festival["id_festivales"]; ?> &idDireccion=<?php echo $festival["id_direccion"]; ?>" class="btn btn-danger btn-sm" id="fntEliminar">
                                                 <i class="fas fa-trash"></i>
                                             </a>
 

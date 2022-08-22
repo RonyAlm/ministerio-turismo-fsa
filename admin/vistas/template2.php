@@ -642,6 +642,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="vistas/recursos/plugins/bs-stepper/js/bs-stepper.min.js"></script>
   <!-- SweetAlert2 -->
   <script src="vistas/recursos/plugins/sweetalert2/sweetalert2.min.js"></script>
+
   <!-- fullCalendar 5.10.1 -->
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
   <script src="vistas/recursos/script/calendario.js"></script>
@@ -658,6 +659,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="vistas/recursos/script/traerLocalidades.js"></script>
 
   <script src="vistas/recursos/script/formularios.js"></script>
+
+  <script src="vistas/recursos/script/sweetalertEliminar.js"></script>
 
 
 

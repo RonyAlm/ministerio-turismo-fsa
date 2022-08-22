@@ -295,5 +295,4 @@ class ControladorFestivales
 
         include_once("vistas/festivales/invoice-print.php");
     }
-
 }
