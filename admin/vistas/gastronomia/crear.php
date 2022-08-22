@@ -58,6 +58,12 @@
               </div>
 
               <div class="form-group">
+                <label for="caracteristicas_gastro">Caracteristicas (Servicio que ofrecen)</label>
+                <input type="text" id="caracteristicas_gastro" name="caracteristicas_gastro" class="form-control">
+              </div>
+
+
+              <div class="form-group">
                 <label for="observacion">Observación</label>
                 <input type="text" id="observacion" name="observacion" class="form-control">
               </div>

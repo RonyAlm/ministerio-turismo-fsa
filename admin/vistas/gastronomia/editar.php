@@ -67,16 +67,23 @@
                 <input type="text" id="domicilioAgencia" value="<?php echo $editar->calle_direccion; ?>" name="domicilioAgencia" class="form-control" required>
               </div>
 
-              <div class="form-group">
-                <label for="observacion">Observación:</label>
-                <input type="hidden" id="" name="" value="<?php echo $InsertarID->id_gastronomia; ?>">
-                <input type="text" id="observacion" value="<?php echo $editar->observacion_gastro; ?>" name="observacion" class="form-control"></input>
-              </div>
 
               <div class="form-group">
                 <label for="diayhora">Días y horarios de atención</label>
                 <input type="hidden" id="" name="" value="<?php echo $InsertarID->id_gastronomia; ?>">
                 <input type="text" id="diayhora" value="<?php echo $editar->dias_horarios; ?>" name="diayhora" class="form-control" required>
+              </div>
+
+              <div class="form-group">
+                <label for="caracteristicas_gastro">Caracteristicas (Servicio que ofrecen):</label>
+                <input type="hidden" id="" name="" value="<?php echo $InsertarID->id_gastronomia; ?>">
+                <input type="text" id="caracteristicas_gastro" value="<?php echo $editar->caracteristicas_gastronomia; ?>" name="caracteristicas_gastro" class="form-control"></input>
+              </div>
+
+              <div class="form-group">
+                <label for="observacion">Observación:</label>
+                <input type="hidden" id="" name="" value="<?php echo $InsertarID->id_gastronomia; ?>">
+                <input type="text" id="observacion" value="<?php echo $editar->observacion_gastro; ?>" name="observacion" class="form-control"></input>
               </div>
 
 

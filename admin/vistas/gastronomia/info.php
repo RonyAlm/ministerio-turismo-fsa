@@ -60,15 +60,20 @@
 
 
             <tr>
+              <th class="sorting_1">Días y horarios</th>
+              <td><?php echo $agenciasInfomacion->dias_horarios; ?></td>
+            </tr>
+
+            <tr>
+              <th class="sorting_1">Caracteristicas (Servicio que ofrecen)</th>
+              <td><?php echo $agenciasInfomacion->caracteristicas_gastronomia; ?></td>
+            </tr>
+
+            <tr>
               <th class="sorting_1">Observación</th>
               <td><?php echo $agenciasInfomacion->observacion_gastro; ?></td>
             </tr>
 
-            <tr>
-              <th class="sorting_1">Días y horarios</th>
-              <td><?php echo $agenciasInfomacion->dias_horarios; ?></td>
-            </tr>
-            
             <tr>
               <th class="sorting_1">Última actualización</th>
               <td><?php echo $agenciasInfomacion->date_updated_gastronomia; ?></td>
