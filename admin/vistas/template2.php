@@ -643,6 +643,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- SweetAlert2 -->
   <script src="vistas/recursos/plugins/sweetalert2/sweetalert2.min.js"></script>
 
+  <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+
   <!-- fullCalendar 5.10.1 -->
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
   <script src="vistas/recursos/script/calendario.js"></script>

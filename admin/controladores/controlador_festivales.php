@@ -220,15 +220,20 @@ class ControladorFestivales
     public function borrar()
     {
         //print_r($_GET);
-
         $id = $_GET["id"];
         $id_direccion = $_GET['idDireccion'];
-
         $borrarAgencias = new FestivalesModelo();
+        if ($_GET) {
+            $borrado = $borrarAgencias->borrar($id, $id_direccion);
+        }
+
+
+
+
 
         $buscarIDBorrado = $borrarAgencias->consultarID($id);
 
-        $borrado = $borrarAgencias->borrar($id, $id_direccion);
+
 
         // header("Location:index2.php?controlador=festivales&accion=inicio");
         echo "<script>location.href='index2.php?controlador=festivales&accion=inicio';</script>";
