@@ -7,7 +7,7 @@ class TransporteModelo
     public $listaTransporteID;
     public $listaBuscar;
     public $listaProvincias;
-    
+
 
 
     public function __construct()
@@ -335,8 +335,10 @@ class TransporteModelo
         $conexionBD = BD::crearInstancia();
 
 
-        $sqlLocalidad = $conexionBD->query("SELECT id_localidad, `nombre_localidad`, rela_provincia, rela_departamento
-                                                       FROM localidad");
+        $sqlLocalidad = $conexionBD->query(
+            "SELECT id_localidad, `nombre_localidad`, rela_provincia, rela_departamento
+            FROM localidad "
+        );
 
         $sqlLocalidad->execute();
 
@@ -353,12 +355,12 @@ class TransporteModelo
 
         $sqlLocalidad->execute();
 
-        //return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
+        return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
 
-        while ($filas = $sqlLocalidad->fetch(PDO::FETCH_ASSOC)) {
-            $this->listaProvincias[] = $filas;
-        }
-        return $this->listaProvincias;
+        // while ($filas = $sqlLocalidad->fetch(PDO::FETCH_ASSOC)) {
+        //     $this->listaProvincias[] = $filas;
+        // }
+        // return $this->listaProvincias;
     }
 
     public function buscarSelectEstacion()

@@ -75,7 +75,7 @@
                   <div class="form-group row">
                     <label for="localidad" class="col-sm-2 col-form-label">Localidad</label>
                     <div class="col-sm-10">
-                      <select id="localidad" name="localidad" class="form-control custom-select" required>
+                      <select id="localidad" name="localidad" class="form-control select2" style="width: 100%;" required>
                         <option value="0" selected disabled>Seleccionar la localidad</option>
                         <?php foreach ($buscarSelectLocalidad as $k) : ?>
                           <option value="<?php echo $k->id_localidad; ?>"> <?php echo $k->nombre_localidad; ?></option>

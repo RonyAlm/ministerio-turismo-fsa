@@ -51,28 +51,28 @@
                   <div class="form-group row">
                     <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
                     <div class="col-sm-10">
-                      <input type="text" id="id_persona" name="id_persona" value="<?php echo $editar->id_persona; ?>">
+                      <input type="hidden" id="id_persona" name="id_persona" value="<?php echo $editar->id_persona; ?>">
                       <input type="" class="form-control" name="nombre" id="nombre" value="<?php echo $editar->nombre_persona; ?>">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="apellido" class="col-sm-2 col-form-label">Apellido</label>
                     <div class="col-sm-10">
-                      <input type="text" id="" name="" value="<?php echo $editar->id_persona; ?>">
+                      <input type="hidden" id="" name="" value="<?php echo $editar->id_persona; ?>">
                       <input type="" class="form-control" name="apellido" id="apellido" value="<?php echo $editar->apellido_persona; ?>">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="cuil" class="col-sm-2 col-form-label">Cuil</label>
                     <div class="col-sm-10">
-                      <input type="text" id="" name="" value="<?php echo $editar->id_persona; ?>">
+                      <input type="hidden" id="" name="" value="<?php echo $editar->id_persona; ?>">
                       <input type="number" class="form-control" name="cuil" id="cuil" value="<?php echo $editar->cuil_persona; ?>">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="direccion" class="col-sm-2 col-form-label">Dirección</label>
                     <div class="col-sm-10">
-                      <input type="text" id="DomicilioID" name="DomicilioID" value="<?php echo $editar->id_direccion; ?>">
+                      <input type="hidden" id="DomicilioID" name="DomicilioID" value="<?php echo $editar->id_direccion; ?>">
                       <input type="text" class="form-control" name="direccion" id="direccion" value="<?php echo $editar->calle_direccion; ?>">
                     </div>
                   </div>
@@ -93,7 +93,7 @@
                   <div class="form-group row">
                     <label for="fecha" class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
                     <div class="col-sm-10">
-                      <input type="text" id="" name="" value="<?php echo $editar->id_persona; ?>">
+                      <input type="hidden" id="" name="" value="<?php echo $editar->id_persona; ?>">
                       <input type="date" class="form-control" name="fecha" id="fecha" value="<?php echo $editar->fecha_nac; ?>">
                     </div>
                   </div>
@@ -121,7 +121,7 @@
                   <div class="form-group row">
                     <label for="correo" class="col-sm-2 col-form-label">Correo</label>
                     <div class="col-sm-10">
-                      <input type="text" id="CorreoID" name="CorreoID" value="<?php echo $agenciaCorreo->id_contacto; ?>">
+                      <input type="hidden" id="CorreoID" name="CorreoID" value="<?php echo $agenciaCorreo->id_contacto; ?>">
                       <input type="email" id="correo" value="<?php echo $agenciaCorreo->descripcion_contacto; ?>" name="correo" class="form-control">
 
                     </div>
