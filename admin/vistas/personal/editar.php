@@ -251,7 +251,7 @@
 
                   <div class="form-group row">
                     <div class="offset-sm-2 col-sm-10">
-                      <input name="" id="" class="btn btn-success" type="submit" value="Agregar">
+                      <input name="" id="" class="btn btn-success" type="submit" value="Editar">
                       <a href="?controlador=personal&accion=inicio" class="btn btn-primary">Cancelar</a>
                     </div>
                   </div>
