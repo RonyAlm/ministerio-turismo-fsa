@@ -37,8 +37,8 @@ class ControladorTransporte
 
         $buscarSelectLocalidad = $select->buscarSelectLocalidad();
         $buscarSelectProvincia = $select->buscarSelectProvincia();
-        // $buscarSelectLugar = $select->buscarSelectLugar();
-        // $buscarSelectTipoServicio = $select->buscarSelectTipoServicio();
+        $buscarSelectEmpresa = $select->buscarSelectEmpresa();
+
 
         if ($_POST) {
             //print_r($_POST);

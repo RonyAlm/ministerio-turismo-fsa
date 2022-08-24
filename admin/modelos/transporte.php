@@ -337,7 +337,8 @@ class TransporteModelo
 
         $sqlLocalidad = $conexionBD->query(
             "SELECT id_localidad, `nombre_localidad`, rela_provincia, rela_departamento
-            FROM localidad "
+            FROM localidad 
+            WHERE rela_provincia = 1 "
         );
 
         $sqlLocalidad->execute();
@@ -352,6 +353,25 @@ class TransporteModelo
 
         $sqlLocalidad = $conexionBD->query("SELECT `id_provincia`, `nombre_provincia`, `rela_pais` 
                                             FROM `provincia`");
+
+        $sqlLocalidad->execute();
+
+        return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
+
+        // while ($filas = $sqlLocalidad->fetch(PDO::FETCH_ASSOC)) {
+        //     $this->listaProvincias[] = $filas;
+        // }
+        // return $this->listaProvincias;
+    }
+
+    public function buscarSelectEmpresa()
+    {
+
+        $conexionBD = BD::crearInstancia();
+
+
+        $sqlLocalidad = $conexionBD->query("SELECT `id_empresa_colectivo`, `nombre_empresa`, `boleteria_empresa` 
+        FROM `empresa_colectivo`");
 
         $sqlLocalidad->execute();
 

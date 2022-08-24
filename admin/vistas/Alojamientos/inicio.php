@@ -32,7 +32,7 @@ $rol_id = $_SESSION['rol_id'];
 
   <div class="card-header">
 
-    <?php if ($rol_id == 1 or $rol_id == 3) : ?>
+    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") : ?>
 
       <a name="" id="" class="btn btn-success" href="?controlador=Alojamientos&accion=crear" role="button">Agregar</a>
 
@@ -184,7 +184,7 @@ $rol_id = $_SESSION['rol_id'];
                       <i class="fas fa-folder"></i>
                     </a>
 
-                    <?php if ($rol_id == 1 or $rol_id == 3) : ?>
+                    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") : ?>
 
                       <a title="Editar" href="?controlador=Alojamientos&accion=editar&id=<?php echo $alojamiento["id_alojamientos"]; ?>" class="btn btn-success btn-sm">
                         <i class="fas fa-pencil-alt"></i>

@@ -12,7 +12,7 @@ $rol_id = $_SESSION['rol_id'];
 ?>
 <!-- Salto de linea -->
 <!-- <br> -->
-<?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "monica") { ?>
+<?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "rrhh") { ?>
   <div class="card-header">
 
     <a name="" id="" class="btn btn-success" href="?controlador=personal&accion=guardar" role="button">Agregar Personal</a>

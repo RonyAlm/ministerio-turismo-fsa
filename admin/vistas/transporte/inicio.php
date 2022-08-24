@@ -9,7 +9,7 @@
 
     ?>
   <div class="card">
-      <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") { ?>
+      <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") { ?>
           <div class="card-header">
 
               <a name="" id="" class="btn btn-success" href="?controlador=transporte&accion=crear" role="button">Agregar Transporte</a>
@@ -34,7 +34,7 @@
                               <div class="col-6">
                                   <div class="form-group">
                                       <label>Empresa:</label>
-                                      <select class="select2"  data-placeholder="Any" style="width: 100%;">
+                                      <select class="select2" data-placeholder="Any" style="width: 100%;">
                                           <option>EL pulqui</option>
                                           <option>Flecha Bus</option>
                                           <option>Aguila Dorada</option>
@@ -90,8 +90,15 @@
                                           <p>Tel: 3704747832</p>
                                       </div>
                                       <div class="card-info-colectivo-item">
-                                          <h5>Horarios:</h5>
+                                          <h5>Origen:</h5>
+                                          <p>Terminal de Formosa </p>
+                                          <h5>Destino:</h5>
+                                          <p>Terminal de Laguna Blanca </p>
+                                      </div>
+                                      <div class="card-info-colectivo-item">
+                                          <h5>Horario Salida:</h5>
                                           <p>Dom 20 Feb 12:05hs. </p>
+                                          <h5>Horario Llegada:</h5>
                                           <p>Dom 20 Feb 12:05hs. </p>
                                       </div>
                                       <div class="card-info-colectivo-item">
@@ -99,12 +106,7 @@
                                           <p>Semi Cama: <span>$3200</span> </p>
                                           <p>Ejecutivo: <span>$1300</span> </p>
                                       </div>
-                                      <div class="card-info-colectivo-item">
-                                          <p>Duracion: 18:10hs.</p>
-                                          <p>Pasajes: 2</p>
-                                          <span>¡Ultimos asientos!</span>
-                                          <p>Recorrido</p>
-                                      </div>
+
 
                                   </div>
 

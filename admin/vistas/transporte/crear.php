@@ -19,12 +19,6 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-md-12 text-center">
-                    <button class="btn btn-warning" id="agregar">+ Agregar campos</button>
-
-                </div>
-            </div>
-            <div class="row">
                 <div class="col-md-12">
                     <div class="card card-success">
                         <div class="card-header">
@@ -36,71 +30,67 @@
                                     <!-- Empresa- Telefono- Correo -->
                                     <div class="row">
                                         <div class="col-4">
-                                            <label>Empresa:</label>
-                                            <select class="form-control">
-                                                <option>El Pulqui</option>
-                                                <option>Godoy</option>
-                                                <option>Flecha BUS</option>
-
-                                            </select>
-                                        </div>
-                                        <div class="col-4">
-                                            <label>N° de Teléfono:</label>
-                                            <input type="text" class="form-control">
-
-                                        </div>
-                                        <div class="col-4">
-                                            <label>Correo:</label>
-                                            <input type="text" class="form-control">
-
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <!-- Origen- Destino- Horarios -->
-                                    <div class="row">
-                                        <div class="col-4">
                                             <div class="form-group">
-                                                <label>Provincia</label>
-                                                <select class="form-control select2" style="width: 100%;" id="provincia">
-                                                    <option value="0" selected disabled>Seleccionar la Provincia</option>
-                                                    <?php foreach ($buscarSelectProvincia as $k) : ?>
-                                                        <option value="<?php echo $k->id_provincia; ?>"> <?php echo $k->nombre_provincia; ?></option>
+                                                <label for="">Empresas</label>
+                                                <select name="" class="form-control select2" style="width: 100%;" id="empresas">
+                                                    <option value="0" selected disabled>Seleccionar la Empresa</option>
+                                                    <?php foreach ($buscarSelectEmpresa as $k) : ?>
+                                                        <option value="<?php echo $k->id_empresa_colectivo; ?>"> <?php echo $k->nombre_empresa; ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-4">
                                             <div class="form-group">
-                                                <label>Localidad</label>
-                                                <select class="form-control select2" style="width: 100%;" id="localidad">
-                                                    <option selected="selected">Alabama</option>
-                                                    <option>Alaska</option>
-                                                    <option>California</option>
-                                                    <option>Delaware</option>
-                                                    <option>Tennessee</option>
-                                                    <option>Texas</option>
-                                                    <option>Washington</option>
+                                                <label for="">Provincia</label>
+                                                <select name="" class="form-control select2" style="width: 100%;" id="provincias">
+                                                    <option value="0" selected disabled>Seleccionar la Provincia</option>
+                                                    <?php foreach ($buscarSelectProvincia as $k) : ?>
+                                                        <option value="<?php echo $k->id_provincia; ?>"> <?php echo $k->nombre_provincia; ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="">Localidad</label>
+                                                <select name="" class="form-control select2" style="width: 100%;" id="localidad">
+                                                    <option value="0" selected disabled>Seleccionar la Localidad</option>
+                                                    <?php foreach ($buscarSelectLocalidad as $k) : ?>
+                                                        <option value="<?php echo $k->id_localidad; ?>"> <?php echo $k->nombre_localidad; ?></option>
+                                                    <?php endforeach; ?>
                                                 </select>
                                             </div>
                                         </div>
+                                    </div>
+                                    <br>
+                                    <!-- Origen- Destino- Horarios -->
+                                    <div class="row">
                                         <div class="col-4">
-                                            <label>Horarios</label>
+                                            <label for="">Horario de Salida</label>
                                             <input type="text" class="form-control">
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="">Horario de llegada</label>
+                                                <input type="text" class="form-control">
+                                            </div>
                                         </div>
                                     </div>
                                     <br>
                                     <!-- Camas -->
                                     <div class="row">
                                         <div class="col-4">
-                                            <label>$ Cama</label>
+                                            <label for="">$ Cama</label>
                                             <input type="text" class="form-control">
                                         </div>
                                         <div class="col-4">
-                                            <label>$ Semi-Cama</label>
+                                            <label for="">$ Semi-Cama</label>
                                             <input type="text" class="form-control">
                                         </div>
                                         <div class="col-4">
-                                            <label>$ Ejecutivo</label>
+                                            <label for="">$ Ejecutivo</label>
                                             <input type="text" class="form-control">
                                         </div>
                                     </div>
