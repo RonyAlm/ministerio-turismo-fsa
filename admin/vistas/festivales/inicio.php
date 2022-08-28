@@ -41,24 +41,6 @@ $rol_id = $_SESSION['rol_id'];
 
     </div>
 
-    <!-- <div class="row">
-        <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box">
-                <span class="info-box-icon bg-info"><i class="fas fa-hotel"></i></span>
-
-                <div class="info-box-content">
-                    <span class="info-box-text text-center">Festival</span>
-                    <?php foreach ($cantidadPiletas as $estadistica) { ?>
-                        <span class="info-box-text">Cantidad Total: <?php echo $estadistica->conteo; ?> </span>
-                    <?php } ?>
-                </div>
-               
-            </div>
-           
-        </div>
-
-    </div> -->
-
 
     <div class="card-body">
 

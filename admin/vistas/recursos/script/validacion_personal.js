@@ -1,15 +1,27 @@
 $(function () {
   $.validator.setDefaults({
     submitHandler: function () {
-      header("Location:index2.php?controlador=Prestadores&accion=inicio");
+      header("Location:index2.php?controlador=personal&accion=inicio");
     },
   });
-  $("#agregarPrestador").validate({
+  $("#agregarPersonal").validate({
     rules: {
-      nombreAlojamiento: {
+      nombre: {
         required: true,
       },
-      categoriaAlojamiento: {
+      apellido: {
+        required: true,
+      },
+      antiguedad: {
+        required: true,
+      },
+      fechaini: {
+        required: true,
+      },
+      fechafin: {
+        required: true,
+      },
+      diasrestante: {
         required: true,
       },
       terms: {
@@ -17,13 +29,22 @@ $(function () {
       },
     },
     messages: {
-      nombreAlojamiento: {
+      fechaini: {
+        required: "Por favor ingrese algún dato",
+      },
+      fechafin: {
+        required: "Por favor ingrese algún dato",
+      },
+      diasrestante: {
+        required: "Por favor ingrese algún dato",
+      },
+      nombre: {
         required: "Por favor ingresar un nombre para el alojamiento",
       },
-      categoriaAlojamiento: {
+      apellido: {
         required: "Por favor ingresar una categoría",
       },
-      terms: "Please accept our terms",
+      terms: "Por favor ingrese algún dato",
     },
     errorElement: "span",
     errorPlacement: function (error, element) {

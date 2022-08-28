@@ -34,7 +34,7 @@
     <div class="row">
 
       <div class="col-md-12">
-        <form action="" method="POST">
+        <form action="" id="agregarPersonal" method="POST">
           <div class="card">
             <div class="card-header p-2">
               <ul class="nav nav-pills">
@@ -43,6 +43,7 @@
                 <li class="nav-item"><a class="nav-link" href="#licencias" data-toggle="tab">Licencias</a></li>
               </ul>
             </div><!-- /.card-header -->
+
             <div class="card-body">
               <div class="tab-content">
 
@@ -51,13 +52,13 @@
                   <div class="form-group row">
                     <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
                     <div class="col-sm-10">
-                      <input type="" class="form-control" name="nombre" id="nombre" placeholder="Nombre">
+                      <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" require>
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="apellido" class="col-sm-2 col-form-label">Apellido</label>
                     <div class="col-sm-10">
-                      <input type="" class="form-control" name="apellido" id="apellido" placeholder="Apellido">
+                      <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Apellido" require>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -227,7 +228,8 @@
 
               </div>
               <!-- /.tab-content -->
-            </div><!-- /.card-body -->
+            </div>
+
           </div>
           <!-- /.card -->
         </form>
