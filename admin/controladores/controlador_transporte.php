@@ -41,59 +41,59 @@ class ControladorTransporte
 
 
         if ($_POST) {
-            //print_r($_POST);
+            print_r($_POST);
 
-            $insertar = new TransporteModelo();
-
-
-            $nombre = $_POST['nombre'];
-            $descripcion = $_POST['descripcion'];
-            $idoneo = $_POST['idoneo'];
-
-            $tipoServiGeneral = $_POST['tipoServiGeneral'];
-
-            $estacion = $_POST['estacion'];
-
-            $tipoServicio = $_POST['tipoServicio'];
-
-            $localidad = $_POST['localidad'];
-            $domicilio = $_POST['domicilio'];
-
-            $telefonoAgencia = $_POST['telefonoAgencia'];
-            $telefonoFijoAgencia = $_POST['telefonoFijoAgencia'];
-            $correoAgencia = $_POST['correoAgencia'];
-            $facebookAgencia = $_POST['facebookAgencia'];
-            $instagramAgencia = $_POST['instagramAgencia'];
-            $twitterAgencia = $_POST['twitterAgencia'];
-            $webAgencia = $_POST['webAgencia'];
-            $otroAgencia = $_POST['otroAgencia'];
+            // $insertar = new TransporteModelo();
 
 
+            // $nombre = $_POST['nombre'];
+            // $descripcion = $_POST['descripcion'];
+            // $idoneo = $_POST['idoneo'];
+
+            // $tipoServiGeneral = $_POST['tipoServiGeneral'];
+
+            // $estacion = $_POST['estacion'];
+
+            // $tipoServicio = $_POST['tipoServicio'];
+
+            // $localidad = $_POST['localidad'];
+            // $domicilio = $_POST['domicilio'];
+
+            // $telefonoAgencia = $_POST['telefonoAgencia'];
+            // $telefonoFijoAgencia = $_POST['telefonoFijoAgencia'];
+            // $correoAgencia = $_POST['correoAgencia'];
+            // $facebookAgencia = $_POST['facebookAgencia'];
+            // $instagramAgencia = $_POST['instagramAgencia'];
+            // $twitterAgencia = $_POST['twitterAgencia'];
+            // $webAgencia = $_POST['webAgencia'];
+            // $otroAgencia = $_POST['otroAgencia'];
 
 
 
-            $insertar->crear(
-                $nombre,
-                $descripcion,
-                $idoneo,
-                $localidad,
-                $tipoServiGeneral,
-                $tipoServicio,
-                $domicilio,
-                $estacion,
-                $telefonoAgencia,
-                $telefonoFijoAgencia,
-                $correoAgencia,
-                $facebookAgencia,
-                $instagramAgencia,
-                $twitterAgencia,
-                $webAgencia,
-                $otroAgencia
-            );
-            // print_r($insertar);
 
 
-            header("Location:index2.php?controlador=transporte&accion=inicio");
+            // $insertar->crear(
+            //     $nombre,
+            //     $descripcion,
+            //     $idoneo,
+            //     $localidad,
+            //     $tipoServiGeneral,
+            //     $tipoServicio,
+            //     $domicilio,
+            //     $estacion,
+            //     $telefonoAgencia,
+            //     $telefonoFijoAgencia,
+            //     $correoAgencia,
+            //     $facebookAgencia,
+            //     $instagramAgencia,
+            //     $twitterAgencia,
+            //     $webAgencia,
+            //     $otroAgencia
+            // );
+            // // print_r($insertar);
+
+
+            // header("Location:index2.php?controlador=transporte&accion=inicio");
         }
 
 

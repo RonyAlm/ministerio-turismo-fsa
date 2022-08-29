@@ -66,17 +66,24 @@
                                     </div>
                                     <br>
                                     <!-- Origen- Destino- Horarios -->
-                                    <div class="row">
+                                    <div class="row" id="hora">
                                         <div class="col-4">
-                                            <label for="">Horario de Salida</label>
-                                            <input type="text" class="form-control">
+                                            <label for="horarioSalida">Horario de Salida</label>
+                                            <input type="text" id="horarioSalida" name="horarioSalida[]" class="form-control">
                                         </div>
                                         <div class="col-4">
                                             <div class="form-group">
-                                                <label for="">Horario de llegada</label>
-                                                <input type="text" class="form-control">
+                                                <label for="horarioLlegada">Horario de llegada</label>
+                                                <input type="text" id="horarioLlegada" name="horarioLlegada[]" class="form-control">
                                             </div>
                                         </div>
+                                    </div>
+                                    <span id="adicional1" name="adicional1" class="btn btn-success col fileinput-button dz-clickable">
+                                        <i class="fas fa-plus"></i>
+                                        <span>Añadir más Horarios</span>
+                                    </span>
+                                    <div class="horarios">
+
                                     </div>
                                     <br>
                                     <!-- Camas -->

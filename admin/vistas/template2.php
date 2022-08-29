@@ -522,6 +522,41 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
             <?php } ?>
 
+            <!-- Organismos -->
+            <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") { ?>
+              <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'organismos')) ? 'menu-open' : '' ?>">
+                <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'organismos')) ? 'active' : '' ?>">
+                  <i class="nav-icon fas fa-table"></i>
+                  <p>
+                    Organismos
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="?controlador=organismos&accion=inicio" class="nav-link 
+                    <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'organismos')) ? 'active' : '' ?>">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Colegios - Asociaciones</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="?controlador=asistencias&accion=inicio" class="nav-link 
+                    <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'asistencias')) ? '' : '' ?>">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Asistencia</p>
+                    </a>
+                  </li>
+                  <!-- <li class="nav-item">
+                    <a href="?controlador=agencias&accion=inicio" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Aviones</p>
+                    </a>
+                  </li> -->
+                </ul>
+              </li>
+            <?php } ?>
+
             <!-- PERSONAL -->
             <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "rrhh") { ?>
               <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'menu-open' : '' ?>">
@@ -657,6 +692,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="vistas/recursos/script/validacion_prestador.js"></script>
   <script src="vistas/recursos/script/validacion_personal.js"></script>
   <script src="vistas/recursos/script/filas_contacto.js"></script>
+  <script src="vistas/recursos/script/filas_transporte.js"></script>
 
   <script src="vistas/recursos/script/traerLocalidades.js"></script>
 
