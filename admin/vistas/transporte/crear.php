@@ -31,8 +31,8 @@
                                     <div class="row">
                                         <div class="col-4">
                                             <div class="form-group">
-                                                <label for="">Empresas</label>
-                                                <select name="" class="form-control select2" style="width: 100%;" id="empresas">
+                                                <label for="empresas">Empresas</label>
+                                                <select name="empresas" class="form-control select2" style="width: 100%;" id="empresas">
                                                     <option value="0" selected disabled>Seleccionar la Empresa</option>
                                                     <?php foreach ($buscarSelectEmpresa as $k) : ?>
                                                         <option value="<?php echo $k->id_empresa_colectivo; ?>"> <?php echo $k->nombre_empresa; ?></option>
@@ -42,8 +42,8 @@
                                         </div>
                                         <div class="col-4">
                                             <div class="form-group">
-                                                <label for="">Provincia</label>
-                                                <select name="" class="form-control select2" style="width: 100%;" id="provincias">
+                                                <label for="provincias">Provincia</label>
+                                                <select name="provincias" class="form-control select2" style="width: 100%;" id="provincias">
                                                     <option value="0" selected disabled>Seleccionar la Provincia</option>
                                                     <?php foreach ($buscarSelectProvincia as $k) : ?>
                                                         <option value="<?php echo $k->id_provincia; ?>"> <?php echo $k->nombre_provincia; ?></option>
@@ -54,8 +54,8 @@
                                         </div>
                                         <div class="col-4">
                                             <div class="form-group">
-                                                <label for="">Localidad</label>
-                                                <select name="" class="form-control select2" style="width: 100%;" id="localidad">
+                                                <label for="localidad">Localidad</label>
+                                                <select name="localidad" class="form-control select2" style="width: 100%;" id="localidad">
                                                     <option value="0" selected disabled>Seleccionar la Localidad</option>
                                                     <?php foreach ($buscarSelectLocalidad as $k) : ?>
                                                         <option value="<?php echo $k->id_localidad; ?>"> <?php echo $k->nombre_localidad; ?></option>
@@ -89,16 +89,19 @@
                                     <!-- Camas -->
                                     <div class="row">
                                         <div class="col-4">
-                                            <label for="">$ Cama</label>
-                                            <input type="text" class="form-control">
+                                            <input type="hidden" name="IDcama" value="1" id="IDcama">
+                                            <label for="cama">$ Cama</label>
+                                            <input type="text" name="cama" class="form-control">
                                         </div>
                                         <div class="col-4">
-                                            <label for="">$ Semi-Cama</label>
-                                            <input type="text" class="form-control">
+                                            <input type="hidden" name="IDsemicama" value="2" id="IDsemicama">
+                                            <label for="semicama">$ Semi-Cama</label>
+                                            <input type="text" name="semicama" class="form-control">
                                         </div>
                                         <div class="col-4">
-                                            <label for="">$ Ejecutivo</label>
-                                            <input type="text" class="form-control">
+                                            <input type="hidden" name="IDejecutivo" value="3" id="IDejecutivo">
+                                            <label for="ejecutivo">$ Ejecutivo</label>
+                                            <input type="text" name="ejecutivo" class="form-control">
                                         </div>
                                     </div>
                                     <br>
@@ -107,8 +110,8 @@
                                         <div class="col-sm-12">
 
                                             <div class="form-group">
-                                                <label>Observación</label>
-                                                <textarea class="form-control" rows="2" placeholder=""></textarea>
+                                                <label for="observacionTransporte">Observación</label>
+                                                <textarea name="observacionTransporte" class="form-control" rows="2" placeholder=""></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -121,7 +124,7 @@
                 </div>
             </div>
         </div>
-        <input name="" id="" class="btn btn-success" type="submit" value="AgregarTransportes">
+        <input name="" id="" class="btn btn-success" type="submit" value="Agregar Transportes">
 
         <a href="?controlador=transporte&accion=inicio" class="btn btn-primary">Cancelar</a>
     </form>

@@ -43,57 +43,48 @@ class ControladorTransporte
         if ($_POST) {
             print_r($_POST);
 
-            // $insertar = new TransporteModelo();
+            $insertar = new TransporteModelo();
 
 
-            // $nombre = $_POST['nombre'];
-            // $descripcion = $_POST['descripcion'];
-            // $idoneo = $_POST['idoneo'];
+            $empresas = $_POST['empresas'];
+            $provincias = $_POST['provincias'];
+            $localidad = $_POST['localidad'];
 
-            // $tipoServiGeneral = $_POST['tipoServiGeneral'];
+            $horarioSalida = $_POST['horarioSalida'];
+            $horarioLlegada = $_POST['horarioLlegada'];
 
-            // $estacion = $_POST['estacion'];
+            $cama = $_POST['cama'];
+            $semicama = $_POST['semicama'];
+            $ejecutivo = $_POST['ejecutivo'];
 
-            // $tipoServicio = $_POST['tipoServicio'];
+            $IDcama = $_POST['IDcama'];
+            $IDsemicama = $_POST['IDsemicama'];
+            $IDejecutivo = $_POST['IDejecutivo'];
 
-            // $localidad = $_POST['localidad'];
-            // $domicilio = $_POST['domicilio'];
-
-            // $telefonoAgencia = $_POST['telefonoAgencia'];
-            // $telefonoFijoAgencia = $_POST['telefonoFijoAgencia'];
-            // $correoAgencia = $_POST['correoAgencia'];
-            // $facebookAgencia = $_POST['facebookAgencia'];
-            // $instagramAgencia = $_POST['instagramAgencia'];
-            // $twitterAgencia = $_POST['twitterAgencia'];
-            // $webAgencia = $_POST['webAgencia'];
-            // $otroAgencia = $_POST['otroAgencia'];
+            $observacionTransporte = $_POST['observacionTransporte'];
 
 
 
 
 
-            // $insertar->crear(
-            //     $nombre,
-            //     $descripcion,
-            //     $idoneo,
-            //     $localidad,
-            //     $tipoServiGeneral,
-            //     $tipoServicio,
-            //     $domicilio,
-            //     $estacion,
-            //     $telefonoAgencia,
-            //     $telefonoFijoAgencia,
-            //     $correoAgencia,
-            //     $facebookAgencia,
-            //     $instagramAgencia,
-            //     $twitterAgencia,
-            //     $webAgencia,
-            //     $otroAgencia
-            // );
-            // // print_r($insertar);
+            $insertar->crear(
+                $empresas,
+                $provincias,
+                $localidad,
+                $horarioSalida,
+                $horarioLlegada,
+                $cama,
+                $semicama,
+                $ejecutivo,
+                $IDcama,
+                $IDsemicama,
+                $IDejecutivo,
+                $observacionTransporte
+            );
+            // print_r($insertar);
 
 
-            // header("Location:index2.php?controlador=transporte&accion=inicio");
+            header("Location:index2.php?controlador=transporte&accion=inicio");
         }
 
 

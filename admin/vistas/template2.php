@@ -78,6 +78,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="icon" href="vistas/recursos/dist/img/favicon.png">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
 
+  <!-- Ekko Lightbox -->
+  <link rel="stylesheet" href="vistas/recursos/plugins/ekko-lightbox/ekko-lightbox.css">
+
+
   <style>
     .resaltar {
       background-color: yellow;
@@ -682,7 +686,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- fullCalendar 5.10.1 -->
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
   <script src="vistas/recursos/script/calendario.js"></script>
-  <!-- <script src="/vistas/recursos/plugins/fullcalendar1/lib/locales-all.js"></script> -->
+  <!-- Ekko Lightbox -->
+  <script src="vistas/recursos/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
+  <!-- Filterizr-->
+  <script src="vistas/recursos/plugins/filterizr/jquery.filterizr.min.js"></script>
 
   <!-- jquery-validation -->
   <script src="vistas/recursos/plugins/jquery-validation/jquery.validate.min.js"></script>
@@ -693,6 +700,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="vistas/recursos/script/validacion_personal.js"></script>
   <script src="vistas/recursos/script/filas_contacto.js"></script>
   <script src="vistas/recursos/script/filas_transporte.js"></script>
+  <script src="vistas/recursos/script/gallery.js"></script>
 
   <script src="vistas/recursos/script/traerLocalidades.js"></script>
 
@@ -704,8 +712,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <script>
     $(function() {
-
-
 
       // Clona la fila oculta que tiene los campos base, y la agrega al final de la tabla
       $("#adicional").on('click', function() {

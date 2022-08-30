@@ -76,22 +76,18 @@ class TransporteModelo
     }
 
     public function crear(
-        $nombre,
-        $descripcion,
-        $idoneo,
+        $empresas,
+        $provincias,
         $localidad,
-        $tipoServiGeneral,
-        $tipoServicio,
-        $domicilio,
-        $estacion,
-        $telefonoAgencia,
-        $telefonoFijoAgencia,
-        $correoAgencia,
-        $facebookAgencia,
-        $instagramAgencia,
-        $twitterAgencia,
-        $webAgencia,
-        $otroAgencia
+        $horarioSalida,
+        $horarioLlegada,
+        $cama,
+        $semicama,
+        $ejecutivo,
+        $IDcama,
+        $IDsemicama,
+        $IDejecutivo,
+        $observacionTransporte
     ) {
 
         $conexionBD = BD::crearInstancia();
