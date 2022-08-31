@@ -83,12 +83,13 @@ class ControladorAgencias
                 $idoneoAgencia
             );
 
+            echo "<script>location.href='index2.php?controlador=organismos&accion=inicio';</script>";
 
-            header("Location:index2.php?controlador=agencias&accion=inicio");
+            // header("Location:index2.php?controlador=organismos&accion=inicio");
         }
 
 
-        include_once("vistas/agencias/crear.php");
+        include_once("vistas/organismos/crear.php");
     }
 
     public function editar()

@@ -195,8 +195,9 @@ class ControladorServigenerales
             // print_r($EditarAgencia);
 
 
+            echo "<script>location.href='index2.php?controlador=servigenerales&accion=inicio';</script>";
 
-            header("Location:index2.php?controlador=servigenerales&accion=inicio");
+            // header("Location:index2.php?controlador=servigenerales&accion=inicio");
         }
 
 
@@ -302,5 +303,4 @@ class ControladorServigenerales
 
         include_once("vistas/servigenerales/invoice-print.php");
     }
-    
 }
