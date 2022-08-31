@@ -86,6 +86,7 @@ class ControladorServigenerales
             );
             // print_r($insertar);
 
+            echo "<script>location.href='index2.php?controlador=servigenerales&accion=inicio';</script>";
 
             header("Location:index2.php?controlador=servigenerales&accion=inicio");
         }
