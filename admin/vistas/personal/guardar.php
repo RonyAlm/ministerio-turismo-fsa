@@ -34,7 +34,7 @@
     <div class="row">
 
       <div class="col-md-12">
-        <form action="" method="POST">
+        <form action="" id="agregarPersonal" method="POST">
           <div class="card">
             <div class="card-header p-2">
               <ul class="nav nav-pills">
@@ -43,6 +43,7 @@
                 <li class="nav-item"><a class="nav-link" href="#licencias" data-toggle="tab">Licencias</a></li>
               </ul>
             </div><!-- /.card-header -->
+
             <div class="card-body">
               <div class="tab-content">
 
@@ -51,13 +52,13 @@
                   <div class="form-group row">
                     <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
                     <div class="col-sm-10">
-                      <input type="" class="form-control" name="nombre" id="nombre" placeholder="Nombre">
+                      <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" require>
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="apellido" class="col-sm-2 col-form-label">Apellido</label>
                     <div class="col-sm-10">
-                      <input type="" class="form-control" name="apellido" id="apellido" placeholder="Apellido">
+                      <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Apellido" require>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -75,7 +76,7 @@
                   <div class="form-group row">
                     <label for="localidad" class="col-sm-2 col-form-label">Localidad</label>
                     <div class="col-sm-10">
-                      <select id="localidad" name="localidad" class="form-control custom-select" required>
+                      <select id="localidad" name="localidad" class="form-control select2" style="width: 100%;" required>
                         <option value="0" selected disabled>Seleccionar la localidad</option>
                         <?php foreach ($buscarSelectLocalidad as $k) : ?>
                           <option value="<?php echo $k->id_localidad; ?>"> <?php echo $k->nombre_localidad; ?></option>
@@ -89,7 +90,7 @@
                       <input type="date" class="form-control" name="fecha" id="fecha" placeholder="Fecha de Nacimiento">
                     </div>
                   </div>
-                  <div class="form-group row" id="celu">
+                  <!-- <div class="form-group row" id="celu">
                     <label for="telefonoCel" class="col-sm-2 col-form-label">Teléfono Celular</label>
                     <div class="col-sm-10">
                       <input type="number" id="telefonoCel" name="telefonoCel[]" class="form-control">
@@ -97,6 +98,20 @@
                         <button id="adicional" name="adicional" type="button" class="btn btn-warning"> Más + </button>
                       </div>
                     </div>
+                  </div> -->
+                  <div class="form-group row" id="celu">
+                    <label for="telefonoAgencia" class="col-sm-2 col-form-label">Teléfono Celular</label>
+                    <input type="number" id="telefonoAgencia" name="telefonoAgencia[]" class="form-control">
+                    <div class="btn-der mt-3 mb-3">
+                      <!-- <button id="adicional" name="adicional" type="button" class="btn btn-warning"> Más + </button> -->
+                      <span id="adicional" name="adicional" class="btn btn-success col fileinput-button dz-clickable">
+                        <i class="fas fa-plus"></i>
+                        <span>Más teléfono</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="telefonos">
+                    <!-- en este contenedor de agregar los demas teléfonos -->
                   </div>
                   <div class="form-group row">
                     <label for="telefonoFijo" class="col-sm-2 col-form-label">Teléfono Fijo</label>
@@ -227,7 +242,8 @@
 
               </div>
               <!-- /.tab-content -->
-            </div><!-- /.card-body -->
+            </div>
+
           </div>
           <!-- /.card -->
         </form>

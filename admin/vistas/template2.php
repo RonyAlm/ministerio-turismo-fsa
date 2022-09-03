@@ -77,7 +77,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Favicon -->
   <link rel="icon" href="vistas/recursos/dist/img/favicon.png">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
-  <!-- <link rel="manifest" href="vistas/recursos/plugins/fontawesome-free-6.1.2-desktop/metadata/icons.json"> -->
+
   <style>
     .resaltar {
       background-color: yellow;
@@ -334,16 +334,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <p>Servicios Generales</p>
                     </a>
                   </li>
-                  <?php
-                  if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
-                    <li class="nav-item">
-                      <a href="?controlador=gastronomia&accion=inicio" class="nav-link 
+                  <li class="nav-item">
+                    <a href="?controlador=gastronomia&accion=inicio" class="nav-link 
                     <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'gastronomia') ? 'active' : '' ?>">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Gastronomías</p>
-                      </a>
-                    </li>
-                  <?php } ?>
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Gastronomías</p>
+                    </a>
+                  </li>
+
                 </ul>
               </li>
 
@@ -380,6 +378,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <a href="?controlador=servigenerales&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'servigenerales') ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Servicios Generales</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="?controlador=gastronomia&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'gastronomia') ? 'active' : '' ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Gastronomía</p>
                 </a>
               </li>
 
@@ -455,7 +459,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <?php endif; ?>
 
             <!-- MUSEOS -->
-            <?php if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3 and $usuario == "matias") { ?>
+            <?php if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
               <li class="nav-item">
                 <a href="?controlador=museos&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'museos')) ? 'active' : '' ?>">
                   <!-- <i class="nav-icon fas fa-home"></i> -->
@@ -469,7 +473,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <?php } ?>
 
             <!-- FESTIVALES -->
-            <?php if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3 and $usuario == "matias") { ?>
+            <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") { ?>
               <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'festivales')) ? 'menu-open' : '' ?>">
                 <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'festivales')) ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-columns"></i>
@@ -491,7 +495,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <?php } ?>
 
             <!-- TRANSPORTE -->
-            <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "monica") { ?>
+            <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") { ?>
               <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'transporte')) ? 'menu-open' : '' ?>">
                 <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'transporte')) ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-table"></i>
@@ -509,7 +513,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="?controlador=agencias&accion=inicio" class="nav-link">
+                    <a href="?controlador=transporte&accion=inicio" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Aviones</p>
                     </a>
@@ -519,8 +523,43 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
             <?php } ?>
 
+            <!-- Organismos -->
+            <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") { ?>
+              <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'organismos')) ? 'menu-open' : '' ?>">
+                <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'organismos')) ? 'active' : '' ?>">
+                  <i class="nav-icon fas fa-table"></i>
+                  <p>
+                    Organismos
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="?controlador=organismos&accion=inicio" class="nav-link 
+                    <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'organismos')) ? 'active' : '' ?>">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Colegios - Asociaciones</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="?controlador=asistencias&accion=inicio" class="nav-link 
+                    <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'asistencias')) ? '' : '' ?>">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Asistencia</p>
+                    </a>
+                  </li>
+                  <!-- <li class="nav-item">
+                    <a href="?controlador=agencias&accion=inicio" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Aviones</p>
+                    </a>
+                  </li> -->
+                </ul>
+              </li>
+            <?php } ?>
+
             <!-- PERSONAL -->
-            <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "monica") { ?>
+            <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "rrhh") { ?>
               <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'menu-open' : '' ?>">
                 <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-table"></i>
@@ -550,7 +589,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <p>Aviones</p>
                     </a>
                   </li> -->
-
                 </ul>
               </li>
             <?php } ?>
@@ -577,15 +615,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- ./wrapper -->
 
   <footer class="main-footer">
-    <strong> &copy; </strong><i id="fechaFooter">
-      <!-- 20:00:14 -->
-      <!-- <?php
-            // if ("fechaFooter" == "09:10:00") {
-
-            //   echo "entre";
-            // }
-            ?> -->
-    </i>
+    <strong> &copy; </strong>
+    <i id="fechaFooter"></i>
     <script>
       const currentTime = () => {
 
@@ -607,9 +638,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         let time = `${fecha}  ${hh}:${mm}:${ss}`;
         fechaF.innerText = time;
 
-        // if (time == "09:05:30") {
-        //   document.write(time);
-        // }
+
 
       };
       currentTime();
@@ -648,10 +677,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="vistas/recursos/plugins/bs-stepper/js/bs-stepper.min.js"></script>
   <!-- SweetAlert2 -->
   <script src="vistas/recursos/plugins/sweetalert2/sweetalert2.min.js"></script>
+
+  <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+
   <!-- fullCalendar 5.10.1 -->
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
   <script src="vistas/recursos/script/calendario.js"></script>
-  <!-- <script src="/vistas/recursos/plugins/fullcalendar1/lib/locales-all.js"></script> -->
+  <!-- Ekko Lightbox -->
+  <script src="vistas/recursos/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
+  <!-- Filterizr-->
+  <script src="vistas/recursos/plugins/filterizr/jquery.filterizr.min.js"></script>
 
   <!-- jquery-validation -->
   <script src="vistas/recursos/plugins/jquery-validation/jquery.validate.min.js"></script>
@@ -659,21 +694,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="vistas/recursos/script/validaciones_hoteles.js"></script>
   <script src="vistas/recursos/script/validacion_museo.js"></script>
   <script src="vistas/recursos/script/validacion_prestador.js"></script>
+  <script src="vistas/recursos/script/validacion_personal.js"></script>
   <script src="vistas/recursos/script/filas_contacto.js"></script>
+  <script src="vistas/recursos/script/filas_transporte.js"></script>
+  <script src="vistas/recursos/script/gallery.js"></script>
 
   <script src="vistas/recursos/script/traerLocalidades.js"></script>
 
   <script src="vistas/recursos/script/formularios.js"></script>
 
-
-
+  <script src="vistas/recursos/script/sweetalertEliminar.js"></script>
 
 
 
   <script>
     $(function() {
-
-
 
       // Clona la fila oculta que tiene los campos base, y la agrega al final de la tabla
       $("#adicional").on('click', function() {

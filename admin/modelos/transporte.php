@@ -7,7 +7,7 @@ class TransporteModelo
     public $listaTransporteID;
     public $listaBuscar;
     public $listaProvincias;
-    
+
 
 
     public function __construct()
@@ -76,22 +76,18 @@ class TransporteModelo
     }
 
     public function crear(
-        $nombre,
-        $descripcion,
-        $idoneo,
+        $empresas,
+        $provincias,
         $localidad,
-        $tipoServiGeneral,
-        $tipoServicio,
-        $domicilio,
-        $estacion,
-        $telefonoAgencia,
-        $telefonoFijoAgencia,
-        $correoAgencia,
-        $facebookAgencia,
-        $instagramAgencia,
-        $twitterAgencia,
-        $webAgencia,
-        $otroAgencia
+        $horarioSalida,
+        $horarioLlegada,
+        $cama,
+        $semicama,
+        $ejecutivo,
+        $IDcama,
+        $IDsemicama,
+        $IDejecutivo,
+        $observacionTransporte
     ) {
 
         $conexionBD = BD::crearInstancia();
@@ -335,8 +331,11 @@ class TransporteModelo
         $conexionBD = BD::crearInstancia();
 
 
-        $sqlLocalidad = $conexionBD->query("SELECT id_localidad, `nombre_localidad`, rela_provincia, rela_departamento
-                                                       FROM localidad");
+        $sqlLocalidad = $conexionBD->query(
+            "SELECT id_localidad, `nombre_localidad`, rela_provincia, rela_departamento
+            FROM localidad 
+            WHERE rela_provincia = 1 "
+        );
 
         $sqlLocalidad->execute();
 
@@ -353,12 +352,31 @@ class TransporteModelo
 
         $sqlLocalidad->execute();
 
-        //return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
+        return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
 
-        while ($filas = $sqlLocalidad->fetch(PDO::FETCH_ASSOC)) {
-            $this->listaProvincias[] = $filas;
-        }
-        return $this->listaProvincias;
+        // while ($filas = $sqlLocalidad->fetch(PDO::FETCH_ASSOC)) {
+        //     $this->listaProvincias[] = $filas;
+        // }
+        // return $this->listaProvincias;
+    }
+
+    public function buscarSelectEmpresa()
+    {
+
+        $conexionBD = BD::crearInstancia();
+
+
+        $sqlLocalidad = $conexionBD->query("SELECT `id_empresa_colectivo`, `nombre_empresa`, `boleteria_empresa` 
+        FROM `empresa_colectivo`");
+
+        $sqlLocalidad->execute();
+
+        return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
+
+        // while ($filas = $sqlLocalidad->fetch(PDO::FETCH_ASSOC)) {
+        //     $this->listaProvincias[] = $filas;
+        // }
+        // return $this->listaProvincias;
     }
 
     public function buscarSelectEstacion()

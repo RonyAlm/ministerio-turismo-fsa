@@ -263,49 +263,65 @@ class PersonalModelo
     }
 
     public static function editar(
-        $descripcion_agencias,
-        $matricula_agencia,
-        $legajo_agencia,
-        $cuit_agencia,
-        $categoria_agencia,
-        $idAgencia,
-        $idoneoAgencia,
+        $nombre,
+        $apellido,
+        $cuil,
+        $fecha,
+        $profesion,
+        $educacion,
+        $n_legajo,
+        $n_expediente,
+        $antiguedad,
+        $departamento,
+        $area,
+        $tipoCargo,
+        $tipo_contrato,
         $rela_localidad_direccion,
         $calle_direccion,
-        $razonsocial,
-        $telefonoAgencia,
+        $telefonoCel,
         $telefonoFijoAgencia,
-        $correoAgencia,
-        $facebookAgencia,
-        $instagramAgencia,
-        $twitterAgencia,
-        $webAgencia,
-        $otroAgencia,
-        $estadoAgencia,
+        $correo,
+        $fechaini,
+        $fechafin,
+        $diasrestante,
 
-        $idRazonSocial,
+        $id_persona,
+        $educacionID,
+        $id_Personal,
+        $departamentoID,
+        $areaID,
+        $cargoID,
+        $tipoContratoID,
         $idDireccion,
         $idtelefonoAgencia,
-        $idtelefonoFijoAgencia,
-        $idcorreoAgencia,
-        $idfacebookAgencia,
-        $idinstagramAgencia,
-        $idtwitterAgencia,
-        $idwebAgencia,
-        $idotroAgencia,
-        $idestadoAgencia
+        $idtelefonoFijo,
+        $idcorreo,
+        $licenciasID
     ) {
 
         $conexionBD = BD::crearInstancia();
 
-        /*---------------SE ACTUALIZA LA AGENCIA-------------------*/
-        $sql = $conexionBD->prepare("UPDATE `agencias` SET `descripcion_agencias` = '$descripcion_agencias',
-                                                    idoneo_agencia = '$idoneoAgencia', matricula_agencia ='$matricula_agencia',
-                                                    legajo_agencia = '$legajo_agencia', cuit_agencia= '$cuit_agencia',
-                                                    categoria_agencia= '$categoria_agencia',
-                                                    fecha_edit_agencia= CURRENT_TIMESTAMP()
-                                            WHERE `agencias`.`id_agencias` = $idAgencia;");
+        /*---------------SE ACTUALIZA LA PERSONA-------------------*/
+        $sql = $conexionBD->prepare("UPDATE `persona` SET `nombre_persona`='$nombre',`apellido_persona`='$apellido',
+        `cuil_persona`='$cuil',`fecha_nac`='$fecha',
+        `rela_educacion`=$educacion,`profesion`='$profesion' 
+        WHERE id_persona = $id_persona;");
         $sql->execute();
+
+        /*---------------SE ACTUALIZA EL PERSONAL-------------------*/
+        $sqlPersonal = $conexionBD->prepare("UPDATE `personales` SET 
+        `rela_tipo_personal`=$tipoCargo,`rela_area`=$area,
+        `n_legajo`='$n_legajo',`rela_depto_mintur`=$departamento,
+        `expediente`='$n_expediente',`rela_tipo_contrato`=$tipo_contrato,
+        `anio_antiguedad`=$antiguedad 
+        WHERE id_personal =$id_Personal;");
+        $sqlPersonal->execute();
+
+        /*---------------SE ACTUALIZA LAS LICENCIAS-------------------*/
+        $sqlLicencias = $conexionBD->prepare("UPDATE `licencias` SET `fecha_ini`='$fechaini',
+        `fecha_fin`='$fechafin',`dias_restante`='$diasrestante' 
+        WHERE id_licencias = $licenciasID;");
+        $sqlLicencias->execute();
 
         /*---------------SE ACTUALIZA LA DIRECCION CON LA LOCALIDAD-------------------*/
 
@@ -320,25 +336,12 @@ class PersonalModelo
             $sqlDireccion->execute();
         }
 
-        /*----------------SE ACTUALIZA EL ESTADO------------------*/
 
-        if ($estadoAgencia == 0) {
-            echo "actualizado";
-        } else {
-            $sqlEstado = $conexionBD->prepare("UPDATE `estado_actividad` SET `rela_tipo_estado`=$estadoAgencia
-                                                        WHERE id_estado = $idestadoAgencia");
-            $sqlEstado->execute();
-        }
 
-        /*----------------SE ACTUALIZA LA RAZON SOCIAL------------------*/
-
-        $sqlRazonSocial = $conexionBD->prepare("UPDATE `razon_social` SET `descripcion_razon_social`='$razonsocial' 
-                                                    WHERE id_razon_social = $idRazonSocial");
-        $sqlRazonSocial->execute();
 
         /*----------------SE ACTUALIZA EL CONTACTO telefono------------------*/
 
-        $asociativo = array_combine($idtelefonoAgencia, $telefonoAgencia);
+        $asociativo = array_combine($idtelefonoAgencia, $telefonoCel);
 
 
 
@@ -359,11 +362,11 @@ class PersonalModelo
             $telefonoFijoAgencia = "No se registró";
 
             $sqlFijo = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`= '$telefonoFijoAgencia'
-                                                    WHERE id_contacto = $idtelefonoFijoAgencia");
+                                                    WHERE id_contacto = $idtelefonoFijo");
             $sqlFijo->execute();
         } else {
             $sqlFijo = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`= $telefonoFijoAgencia
-                                                    WHERE id_contacto = $idtelefonoFijoAgencia");
+                                                    WHERE id_contacto = $idtelefonoFijo");
             $sqlFijo->execute();
         }
 
@@ -371,39 +374,9 @@ class PersonalModelo
 
         /*----------------SE ACTUALIZA EL CONTACTO correo------------------*/
 
-        $sqlCorreo = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`='$correoAgencia'
-                                                    WHERE id_contacto = $idcorreoAgencia");
+        $sqlCorreo = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`='$correo'
+                                                    WHERE id_contacto = $idcorreo");
         $sqlCorreo->execute();
-
-        /*----------------SE ACTUALIZA EL CONTACTO facebook ------------------*/
-
-        $sqlFacebook = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`='$facebookAgencia'
-                                                    WHERE id_contacto = $idfacebookAgencia");
-        $sqlFacebook->execute();
-
-        /*----------------SE ACTUALIZA EL CONTACTO Instagram ------------------*/
-
-        $sqlInstagram = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`='$instagramAgencia'
-                                                    WHERE id_contacto = $idinstagramAgencia");
-        $sqlInstagram->execute();
-
-        /*----------------SE ACTUALIZA EL CONTACTO  twitter------------------*/
-
-        $sqlTwitter = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`='$twitterAgencia'
-                                                    WHERE id_contacto = $idtwitterAgencia");
-        $sqlTwitter->execute();
-
-        /*----------------SE ACTUALIZA EL CONTACTO  sitio web------------------*/
-
-        $sqlWeb = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`='$webAgencia'
-                                                    WHERE id_contacto = $idwebAgencia");
-        $sqlWeb->execute();
-
-        /*----------------SE ACTUALIZA EL CONTACTO otro------------------*/
-
-        $sqlOtro = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`='$otroAgencia'
-                                                    WHERE id_contacto = $idotroAgencia ");
-        $sqlOtro->execute();
     }
 
     public function buscarSelectLocalidad()
@@ -618,7 +591,7 @@ class Contactos
     }
 }
 
-class ContactosInfo
+class ContactosInfoPersonal
 {
     public $telefonoAgenciaInfo;
     public $telefonoFijoAgencia;

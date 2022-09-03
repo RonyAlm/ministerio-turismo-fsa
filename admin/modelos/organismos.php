@@ -1,5 +1,5 @@
 <?php
-class GastronomiaModelo
+class AgenciaModelo
 {
 
     public $listaAgencia;
@@ -19,16 +19,19 @@ class GastronomiaModelo
 
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->query("SELECT `id_gastronomia`, `denominacion_gastro`, `observacion_gastro`, `dias_horarios`, date_updated_gastronomia,
-        (SELECT contacto.descripcion_contacto 
-        FROM contacto 
-        WHERE gastronomia.id_gastronomia= contacto.rela_gastronomia_contacto
-        and contacto.rela_tipo_contacto_cont = 2
-        LIMIT 1) descripcion_contacto,
-        localidad.nombre_localidad,direccion.id_direccion,direccion.calle_direccion
-        FROM `gastronomia`
-        INNER JOIN direccion ON gastronomia.rela_direccion_gastro = direccion.id_direccion
-        INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad");
+        $sql = $conexionBD->query("SELECT `id_agencias`, `descripcion_agencias`, direccion.calle_direccion, fecha_edit_agencia,
+                                        (SELECT contacto.descripcion_contacto 
+                                        FROM contacto 
+                                        WHERE agencias.id_agencias = contacto.rela_contacto_agencia
+                                        and contacto.rela_tipo_contacto_cont = 2
+                                        LIMIT 1) descripcion_contacto  ,tipo_estado.descripcion_tipo_estado,
+                                        localidad.nombre_localidad ,direccion.id_direccion,razon_social.id_razon_social
+                                        FROM `agencias`
+                                        INNER JOIN direccion ON agencias.rela_agencia_direccion = direccion.id_direccion
+                                        INNER JOIN estado_actividad on estado_actividad.rela_estado_agencia = agencias.id_agencias
+                                        INNER JOIN tipo_estado on tipo_estado.id_tipo_estado = estado_actividad.rela_tipo_estado
+                                        INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad
+                                        INNER JOIN razon_social on agencias.rela_razon_social_agencia = razon_social.id_razon_social");
 
         //recuperamos los datos y los retornamos
 
@@ -39,15 +42,18 @@ class GastronomiaModelo
 
     }
 
-    public function consultarID($id)
+    public function consultarID($id_agencia)
     {
 
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->query("SELECT `id_gastronomia`, direccion.id_direccion
-        FROM `gastronomia`
-        INNER JOIN direccion ON gastronomia.rela_direccion_gastro = direccion.id_direccion
-        WHERE gastronomia.id_gastronomia = $id");
+        $sql = $conexionBD->query("SELECT id_agencias, razon_social.id_razon_social, direccion.id_direccion,
+                                                estado_actividad.id_estado
+                                        FROM `agencias`                                    
+                                        INNER JOIN razon_social on razon_social.id_razon_social = agencias.rela_razon_social_agencia
+                                        INNER JOIN direccion ON agencias.rela_agencia_direccion = direccion.id_direccion
+                                        INNER JOIN estado_actividad on estado_actividad.rela_estado_agencia = agencias.id_agencias
+                                        WHERE agencias.id_agencias = $id_agencia");
 
         //recuperamos los datos y los retornamos
 
@@ -60,12 +66,14 @@ class GastronomiaModelo
     }
 
     public function crear(
-        $designacion,
-        $diayhora,
-        $observacion,
-        $caracteristicas_gastro,
+        $descripcion_agencias,
+        $matricula_agencia,
+        $legajo_agencia,
+        $cuit_agencia,
+        $categoria_agencia,
         $rela_localidad_direccion,
         $calle_direccion,
+        $razonsocial,
         $telefonoAgencia,
         $telefonoFijoAgencia,
         $correoAgencia,
@@ -73,7 +81,9 @@ class GastronomiaModelo
         $instagramAgencia,
         $twitterAgencia,
         $webAgencia,
-        $otroAgencia
+        $otroAgencia,
+        $estadoAgencia,
+        $idoneoAgencia
     ) {
 
         $conexionBD = BD::crearInstancia();
@@ -86,18 +96,25 @@ class GastronomiaModelo
 
         $lastInsertIDdireccion = $conexionBD->lastInsertId();
 
+        /*-------- INSERTAMOS LA RAZON SOCIAL--------*/
 
+        $sqlRazonSocial = $conexionBD->prepare("INSERT INTO `razon_social`(`descripcion_razon_social`) 
+                                                    VALUES (?)");
+        $sqlRazonSocial->execute(array($razonsocial));
 
-        /*-------- INSERTAMOS LA GASTRONOMIA--------*/
+        $lastInsertIDRazonSocial = $conexionBD->lastInsertId();
 
-        $sql = $conexionBD->prepare("INSERT INTO `gastronomia`(`denominacion_gastro`, `observacion_gastro`,
-                                                 rela_direccion_gastro, `dias_horarios`,
-                                                 `caracteristicas_gastronomia`,`date_updated_gastronomia`)
-                                    VALUES (?,?,?,?,?,CURRENT_TIMESTAMP())");
+        /*-------- INSERTAMOS LA AGENCIA--------*/
+
+        $sql = $conexionBD->prepare("INSERT INTO agencias (descripcion_agencias,matricula_agencia,
+                                                                legajo_agencia,cuit_agencia,categoria_agencia, fecha_edit_agencia,
+                                                                rela_agencia_direccion,rela_razon_social_agencia
+                                                                ,idoneo_agencia) 
+                                            VALUES (?,?,?,?,?,CURRENT_TIMESTAMP(),?,?,?)");
         $sql->execute(array(
-            $designacion, $observacion,
-            $lastInsertIDdireccion, $diayhora,
-            $caracteristicas_gastro
+            $descripcion_agencias, $matricula_agencia,
+            $legajo_agencia, $cuit_agencia, $categoria_agencia, $lastInsertIDdireccion,
+            $lastInsertIDRazonSocial, $idoneoAgencia
         ));
 
         $lastInsertIDAgencias = $conexionBD->lastInsertId();
@@ -107,7 +124,7 @@ class GastronomiaModelo
         foreach ($telefonoAgencia as $telefonoAgencia1) {
 
             $sqlTelefono = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-                                                                            `rela_gastronomia_contacto`) 
+                                                                            `rela_contacto_agencia`) 
                                                     VALUES (?,?,?)");
             $sqlTelefono->execute(array($telefonoAgencia1, 2, $lastInsertIDAgencias));
         }
@@ -115,77 +132,89 @@ class GastronomiaModelo
         /*-------- INSERTAMOS EL TELEFONO FIJO--------*/
 
         $sqlFijo = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-                                                                            `rela_gastronomia_contacto`) 
+                                                                            `rela_contacto_agencia`) 
                                                     VALUES (?,?,?)");
         $sqlFijo->execute(array($telefonoFijoAgencia, 9, $lastInsertIDAgencias));
 
         /*-------- INSERTAMOS EL CORREO-------*/
 
         $sqlCorreo = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-                                                                            `rela_gastronomia_contacto`) 
+                                                                            `rela_contacto_agencia`) 
                                                     VALUES (?,?,?)");
         $sqlCorreo->execute(array($correoAgencia, 1, $lastInsertIDAgencias));
 
         /*-------- INSERTAMOS EL FACEBOOK--------*/
 
         $sqlFacebook = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-                                                                            `rela_gastronomia_contacto`) 
+                                                                            `rela_contacto_agencia`) 
                                                     VALUES (?,?,?)");
         $sqlFacebook->execute(array($facebookAgencia, 4, $lastInsertIDAgencias));
 
         /*-------- INSERTAMOS EL INSTAGRAM--------*/
 
         $sqlInstagram = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-                                                                            `rela_gastronomia_contacto`) 
+                                                                            `rela_contacto_agencia`) 
                                                     VALUES (?,?,?)");
         $sqlInstagram->execute(array($instagramAgencia, 5, $lastInsertIDAgencias));
 
         /*-------- INSERTAMOS EL TWITTER--------*/
 
         $sqlTwitter = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-                                                                            `rela_gastronomia_contacto`) 
+                                                                            `rela_contacto_agencia`) 
                                                     VALUES (?,?,?)");
         $sqlTwitter->execute(array($twitterAgencia, 6, $lastInsertIDAgencias));
 
         /*-------- INSERTAMOS EL SITIO WEB--------*/
 
         $sqlWeb = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-                                                                            `rela_gastronomia_contacto`) 
+                                                                            `rela_contacto_agencia`) 
                                                     VALUES (?,?,?)");
         $sqlWeb->execute(array($webAgencia, 7, $lastInsertIDAgencias));
 
         /*-------- INSERTAMOS OTRO--------*/
 
         $sqlOtro = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-                                                                            `rela_gastronomia_contacto`) 
+                                                                            `rela_contacto_agencia`) 
                                                     VALUES (?,?,?)");
         $sqlOtro->execute(array($otroAgencia, 8, $lastInsertIDAgencias));
+
+        /*-------- INSERTAMOS EL ESTADO--------*/
+
+        $sqlEstado = $conexionBD->prepare("INSERT INTO `estado_actividad`(`rela_tipo_estado`, `rela_estado_agencia`) 
+                                            VALUES (?,?)");
+        $sqlEstado->execute(array($estadoAgencia, $lastInsertIDAgencias));
     }
 
-    public static function borrar($idAgenciaBorrar, $id_direccion)
+    public static function borrar($idAgenciaBorrar, $id_direccion, $idRazonSocial)
     {
         $conexionBD = BD::crearInstancia();
-        $sqlAgenciaBorrar = $conexionBD->prepare("DELETE FROM gastronomia WHERE id_gastronomia =?");
+        $sqlAgenciaBorrar = $conexionBD->prepare("DELETE FROM agencias WHERE id_agencias =?");
         $sqlAgenciaBorrar->execute(array($idAgenciaBorrar));
 
         $sqlDireccionBorrar = $conexionBD->prepare("DELETE FROM direccion WHERE id_direccion =?");
         $sqlDireccionBorrar->execute(array($id_direccion));
+
+        $sqlRazonBorrar = $conexionBD->prepare("DELETE FROM `razon_social` WHERE id_razon_social =?");
+        $sqlRazonBorrar->execute(array($idRazonSocial));
     }
     /*----------BUSCAR para ir imprimir en la seccion EDITAR----------*/
-    public function buscar($id)
+    public function buscar($id_agencia)
     {
         $conexionBD = BD::crearInstancia();
-        $sql = $conexionBD->prepare("SELECT `id_gastronomia`, `denominacion_gastro`, `observacion_gastro`, `dias_horarios`, date_updated_gastronomia,
-        direccion.id_direccion,direccion.calle_direccion,`caracteristicas_gastronomia`,
-        localidad.id_localidad,localidad.nombre_localidad,
-        contacto.id_contacto,contacto.descripcion_contacto,
-        departamentos_fsa.id_departamentos_fsa,departamentos_fsa.descripcion_departamentos
-        FROM `gastronomia`
-        INNER JOIN direccion ON gastronomia.rela_direccion_gastro = direccion.id_direccion
-        INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad
-        INNER JOIN contacto ON contacto.rela_gastronomia_contacto =  gastronomia.id_gastronomia
-        INNER JOIN departamentos_fsa on departamentos_fsa.id_departamentos_fsa = localidad.rela_departamento
-        WHERE gastronomia.id_gastronomia=$id");
+        $sql = $conexionBD->prepare("SELECT id_agencias, descripcion_agencias , `idoneo_agencia`, `matricula_agencia`,
+                                                    `legajo_agencia`, `cuit_agencia`, `categoria_agencia`, fecha_edit_agencia, razon_social.descripcion_razon_social,
+                                                     direccion.calle_direccion,
+                                                    contacto.descripcion_contacto, tipo_estado.descripcion_tipo_estado,localidad.nombre_localidad
+                                                    ,estado_actividad.rela_tipo_estado,departamentos_fsa.descripcion_departamentos 
+                                            FROM `agencias`
+                                            INNER JOIN contacto ON contacto.rela_contacto_agencia = agencias.id_agencias
+                                            INNER JOIN razon_social on razon_social.id_razon_social = agencias.rela_razon_social_agencia
+                                            INNER JOIN direccion ON agencias.rela_agencia_direccion = direccion.id_direccion
+                                            INNER JOIN estado_actividad on estado_actividad.rela_estado_agencia = agencias.id_agencias
+                                            INNER JOIN tipo_estado on tipo_estado.id_tipo_estado = estado_actividad.rela_tipo_estado
+                                            INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad
+                                            INNER JOIN departamentos_fsa on localidad.rela_departamento = departamentos_fsa.id_departamentos_fsa
+                                            WHERE agencias.id_agencias = $id_agencia");
 
         $sql->execute();
 
@@ -193,13 +222,16 @@ class GastronomiaModelo
     }
 
     public static function editar(
-        $designacion,
-        $observacion,
-        $diayhora,
-        $caracteristicas_gastro,
-        $designacionID,
+        $descripcion_agencias,
+        $matricula_agencia,
+        $legajo_agencia,
+        $cuit_agencia,
+        $categoria_agencia,
+        $idAgencia,
+        $idoneoAgencia,
         $rela_localidad_direccion,
         $calle_direccion,
+        $razonsocial,
         $telefonoAgencia,
         $telefonoFijoAgencia,
         $correoAgencia,
@@ -208,8 +240,9 @@ class GastronomiaModelo
         $twitterAgencia,
         $webAgencia,
         $otroAgencia,
+        $estadoAgencia,
 
-
+        $idRazonSocial,
         $idDireccion,
         $idtelefonoAgencia,
         $idtelefonoFijoAgencia,
@@ -218,17 +251,19 @@ class GastronomiaModelo
         $idinstagramAgencia,
         $idtwitterAgencia,
         $idwebAgencia,
-        $idotroAgencia
+        $idotroAgencia,
+        $idestadoAgencia
     ) {
 
         $conexionBD = BD::crearInstancia();
 
-        /*---------------SE ACTUALIZA LA GASTRONOMIA-------------------*/
-        $sql = $conexionBD->prepare("UPDATE `gastronomia` 
-        SET`denominacion_gastro`='$designacion',`observacion_gastro`='$observacion',
-        `dias_horarios`='$diayhora',`caracteristicas_gastronomia`='$caracteristicas_gastro',
-        `date_updated_gastronomia`= CURRENT_TIMESTAMP()
-        WHERE gastronomia.id_gastronomia = $designacionID;");
+        /*---------------SE ACTUALIZA LA AGENCIA-------------------*/
+        $sql = $conexionBD->prepare("UPDATE `agencias` SET `descripcion_agencias` = '$descripcion_agencias',
+                                                    idoneo_agencia = '$idoneoAgencia', matricula_agencia ='$matricula_agencia',
+                                                    legajo_agencia = '$legajo_agencia', cuit_agencia= '$cuit_agencia',
+                                                    categoria_agencia= '$categoria_agencia',
+                                                    fecha_edit_agencia= CURRENT_TIMESTAMP()
+                                            WHERE `agencias`.`id_agencias` = $idAgencia;");
         $sql->execute();
 
         /*---------------SE ACTUALIZA LA DIRECCION CON LA LOCALIDAD-------------------*/
@@ -244,8 +279,21 @@ class GastronomiaModelo
             $sqlDireccion->execute();
         }
 
+        /*----------------SE ACTUALIZA EL ESTADO------------------*/
 
+        if ($estadoAgencia == 0) {
+            echo "actualizado";
+        } else {
+            $sqlEstado = $conexionBD->prepare("UPDATE `estado_actividad` SET `rela_tipo_estado`=$estadoAgencia
+                                                        WHERE id_estado = $idestadoAgencia");
+            $sqlEstado->execute();
+        }
 
+        /*----------------SE ACTUALIZA LA RAZON SOCIAL------------------*/
+
+        $sqlRazonSocial = $conexionBD->prepare("UPDATE `razon_social` SET `descripcion_razon_social`='$razonsocial' 
+                                                    WHERE id_razon_social = $idRazonSocial");
+        $sqlRazonSocial->execute();
 
         /*----------------SE ACTUALIZA EL CONTACTO telefono------------------*/
 
@@ -345,7 +393,7 @@ class GastronomiaModelo
     }
 }
 
-class ContactosGastronomia
+class ContactosAgencia
 {
     public $telefonoAgencia;
     public $correoAgencia;
@@ -370,7 +418,7 @@ class ContactosGastronomia
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 2
-                                            and contacto.rela_gastronomia_contacto = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         $consulta->execute();
 
@@ -383,7 +431,7 @@ class ContactosGastronomia
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 9
-                                            and contacto.rela_gastronomia_contacto = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         $consulta->execute();
 
@@ -396,7 +444,7 @@ class ContactosGastronomia
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 1
-                                            and contacto.rela_gastronomia_contacto = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         $consulta->execute();
 
@@ -409,7 +457,7 @@ class ContactosGastronomia
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 4
-                                            and contacto.rela_gastronomia_contacto = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         $consulta->execute();
 
@@ -422,7 +470,7 @@ class ContactosGastronomia
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 5
-                                            and contacto.rela_gastronomia_contacto = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         $consulta->execute();
 
@@ -435,7 +483,7 @@ class ContactosGastronomia
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 6
-                                            and contacto.rela_gastronomia_contacto = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         $consulta->execute();
 
@@ -448,7 +496,7 @@ class ContactosGastronomia
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 7
-                                            and contacto.rela_gastronomia_contacto = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         $consulta->execute();
 
@@ -461,7 +509,7 @@ class ContactosGastronomia
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 8
-                                            and contacto.rela_gastronomia_contacto = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         $consulta->execute();
 
@@ -504,7 +552,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 2
-                                            and contacto.rela_gastronomia_contacto = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->telefonoAgenciaInfo[] = $filas;
@@ -518,7 +566,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 9
-                                            and contacto.rela_gastronomia_contacto = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->telefonoFijoAgencia[] = $filas;
@@ -532,7 +580,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 1
-                                            and contacto.rela_gastronomia_contacto = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->correoAgencia[] = $filas;
@@ -546,7 +594,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 4
-                                            and contacto.rela_gastronomia_contacto = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->facebookAgencia[] = $filas;
@@ -560,7 +608,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 5
-                                            and contacto.rela_gastronomia_contacto = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->instagramAgencia[] = $filas;
@@ -574,7 +622,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 6
-                                            and contacto.rela_gastronomia_contacto = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->twitterAgencia[] = $filas;
@@ -588,7 +636,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 7
-                                            and contacto.rela_gastronomia_contacto = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->webAgencia[] = $filas;
@@ -602,7 +650,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 8
-                                            and contacto.rela_gastronomia_contacto = $id_agencia");
+                                            and contacto.rela_contacto_agencia = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->otroAgencia[] = $filas;

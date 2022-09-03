@@ -37,58 +37,49 @@ class ControladorTransporte
 
         $buscarSelectLocalidad = $select->buscarSelectLocalidad();
         $buscarSelectProvincia = $select->buscarSelectProvincia();
-        // $buscarSelectLugar = $select->buscarSelectLugar();
-        // $buscarSelectTipoServicio = $select->buscarSelectTipoServicio();
+        $buscarSelectEmpresa = $select->buscarSelectEmpresa();
+
 
         if ($_POST) {
-            //print_r($_POST);
+            print_r($_POST);
 
             $insertar = new TransporteModelo();
 
 
-            $nombre = $_POST['nombre'];
-            $descripcion = $_POST['descripcion'];
-            $idoneo = $_POST['idoneo'];
-
-            $tipoServiGeneral = $_POST['tipoServiGeneral'];
-
-            $estacion = $_POST['estacion'];
-
-            $tipoServicio = $_POST['tipoServicio'];
-
+            $empresas = $_POST['empresas'];
+            $provincias = $_POST['provincias'];
             $localidad = $_POST['localidad'];
-            $domicilio = $_POST['domicilio'];
 
-            $telefonoAgencia = $_POST['telefonoAgencia'];
-            $telefonoFijoAgencia = $_POST['telefonoFijoAgencia'];
-            $correoAgencia = $_POST['correoAgencia'];
-            $facebookAgencia = $_POST['facebookAgencia'];
-            $instagramAgencia = $_POST['instagramAgencia'];
-            $twitterAgencia = $_POST['twitterAgencia'];
-            $webAgencia = $_POST['webAgencia'];
-            $otroAgencia = $_POST['otroAgencia'];
+            $horarioSalida = $_POST['horarioSalida'];
+            $horarioLlegada = $_POST['horarioLlegada'];
+
+            $cama = $_POST['cama'];
+            $semicama = $_POST['semicama'];
+            $ejecutivo = $_POST['ejecutivo'];
+
+            $IDcama = $_POST['IDcama'];
+            $IDsemicama = $_POST['IDsemicama'];
+            $IDejecutivo = $_POST['IDejecutivo'];
+
+            $observacionTransporte = $_POST['observacionTransporte'];
 
 
 
 
 
             $insertar->crear(
-                $nombre,
-                $descripcion,
-                $idoneo,
+                $empresas,
+                $provincias,
                 $localidad,
-                $tipoServiGeneral,
-                $tipoServicio,
-                $domicilio,
-                $estacion,
-                $telefonoAgencia,
-                $telefonoFijoAgencia,
-                $correoAgencia,
-                $facebookAgencia,
-                $instagramAgencia,
-                $twitterAgencia,
-                $webAgencia,
-                $otroAgencia
+                $horarioSalida,
+                $horarioLlegada,
+                $cama,
+                $semicama,
+                $ejecutivo,
+                $IDcama,
+                $IDsemicama,
+                $IDejecutivo,
+                $observacionTransporte
             );
             // print_r($insertar);
 

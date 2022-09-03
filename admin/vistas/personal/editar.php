@@ -51,28 +51,28 @@
                   <div class="form-group row">
                     <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
                     <div class="col-sm-10">
-                      <input type="text" id="id_persona" name="id_persona" value="<?php echo $editar->id_persona; ?>">
+                      <input type="hidden" id="id_persona" name="id_persona" value="<?php echo $editar->id_persona; ?>">
                       <input type="" class="form-control" name="nombre" id="nombre" value="<?php echo $editar->nombre_persona; ?>">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="apellido" class="col-sm-2 col-form-label">Apellido</label>
                     <div class="col-sm-10">
-                      <input type="text" id="" name="" value="<?php echo $editar->id_persona; ?>">
+                      <input type="hidden" id="" name="" value="<?php echo $editar->id_persona; ?>">
                       <input type="" class="form-control" name="apellido" id="apellido" value="<?php echo $editar->apellido_persona; ?>">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="cuil" class="col-sm-2 col-form-label">Cuil</label>
                     <div class="col-sm-10">
-                      <input type="text" id="" name="" value="<?php echo $editar->id_persona; ?>">
+                      <input type="hidden" id="" name="" value="<?php echo $editar->id_persona; ?>">
                       <input type="number" class="form-control" name="cuil" id="cuil" value="<?php echo $editar->cuil_persona; ?>">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="direccion" class="col-sm-2 col-form-label">Dirección</label>
                     <div class="col-sm-10">
-                      <input type="text" id="DomicilioID" name="DomicilioID" value="<?php echo $editar->id_direccion; ?>">
+                      <input type="hidden" id="DomicilioID" name="DomicilioID" value="<?php echo $editar->id_direccion; ?>">
                       <input type="text" class="form-control" name="direccion" id="direccion" value="<?php echo $editar->calle_direccion; ?>">
                     </div>
                   </div>
@@ -93,7 +93,7 @@
                   <div class="form-group row">
                     <label for="fecha" class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
                     <div class="col-sm-10">
-                      <input type="text" id="" name="" value="<?php echo $editar->id_persona; ?>">
+                      <input type="hidden" id="" name="" value="<?php echo $editar->id_persona; ?>">
                       <input type="date" class="form-control" name="fecha" id="fecha" value="<?php echo $editar->fecha_nac; ?>">
                     </div>
                   </div>
@@ -121,7 +121,7 @@
                   <div class="form-group row">
                     <label for="correo" class="col-sm-2 col-form-label">Correo</label>
                     <div class="col-sm-10">
-                      <input type="text" id="CorreoID" name="CorreoID" value="<?php echo $agenciaCorreo->id_contacto; ?>">
+                      <input type="hidden" id="CorreoID" name="CorreoID" value="<?php echo $agenciaCorreo->id_contacto; ?>">
                       <input type="email" id="correo" value="<?php echo $agenciaCorreo->descripcion_contacto; ?>" name="correo" class="form-control">
 
                     </div>
@@ -192,27 +192,27 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <input type="hidden" id="LocalidadID" name="LocalidadID" value="<?= $editar->id_tipo_contrato   ?>">
+                    <input type="hidden" id="tipoContratoID" name="tipoContratoID" value="<?= $editar->id_tipo_contrato; ?>">
                     <label for="tipo_contrato" class="col-sm-2 col-form-label">Tipo de Contrato</label>
                     <div class="col-sm-10">
-                      <?php $nombre_contrato_actual = $editar->descripcion_contrato; ?>
-                      <select id="educacion" name="educacion" class="form-control custom-select" required>
+                      <?php $nombre_tipocontrato_actual = $editar->descripcion_contrato; ?>
+                      <select id="tipo_contrato" name="tipo_contrato" class="form-control custom-select" required>
                         <option value="0" selected disabled>Seleccionar el tipo de contrato</option>
                         <?php foreach ($buscarSelectContrato as $k) : ?>
-                          <option value="<?php echo $k->id_areas; ?>" <?= ($k->descripcion_contrato == $nombre_contrato_actual) ? 'selected="selected"' : ''; ?>> <?php echo $k->descripcion_contrato; ?></option>
+                          <option value="<?php echo $k->id_tipo_contrato; ?>" <?= ($k->descripcion_contrato == $nombre_tipocontrato_actual) ? 'selected="selected"' : ''; ?>> <?php echo $k->descripcion_contrato; ?></option>
                         <?php endforeach; ?>
                       </select>
                     </div>
                   </div>
                   <div class="form-group row">
-                    <input type="hidden" id="LocalidadID" name="LocalidadID" value="<?= $editar->id_tipo_contrato   ?>">
+                    <input type="hidden" id="cargoID" name="cargoID" value="<?= $editar->id_tipo_personal; ?>">
                     <label for="cargo" class="col-sm-2 col-form-label">Cargo</label>
                     <div class="col-sm-10">
                       <?php $nombre_cargo_actual = $editar->descri_tipo_personal; ?>
-                      <select id="educacion" name="educacion" class="form-control custom-select" required>
+                      <select id="tipoCargo" name="tipoCargo" class="form-control custom-select" required>
                         <option value="0" selected disabled>Seleccionar el tipo de Cargo</option>
                         <?php foreach ($buscarSelectCargo as $k) : ?>
-                          <option value="<?php echo $k->id_tipo_contrato; ?>" <?= ($k->descri_tipo_personal == $nombre_cargo_actual) ? 'selected="selected"' : ''; ?>> <?php echo $k->descri_tipo_personal; ?></option>
+                          <option value="<?php echo $k->id_tipo_personal; ?>" <?= ($k->descri_tipo_personal == $nombre_cargo_actual) ? 'selected="selected"' : ''; ?>> <?php echo $k->descri_tipo_personal; ?></option>
                         <?php endforeach; ?>
                       </select>
                     </div>
@@ -230,7 +230,7 @@
                   <div class="form-group row">
                     <label for="fechaini" class="col-sm-2 col-form-label">Fechas inicio</label>
                     <div class="col-sm-10">
-                      <input type="hidden" id="" name="" value="<?php echo $editar->id_licencias; ?>">
+                      <input type="hidden" id="licenciasID" name="licenciasID" value="<?php echo $editar->id_licencias; ?>">
                       <input type="date" class="form-control" name="fechaini" id="fechaini" value="<?= $editar->fecha_ini ?>">
                     </div>
                   </div>
@@ -251,7 +251,7 @@
 
                   <div class="form-group row">
                     <div class="offset-sm-2 col-sm-10">
-                      <input name="" id="" class="btn btn-success" type="submit" value="Agregar">
+                      <input name="" id="" class="btn btn-success" type="submit" value="Editar">
                       <a href="?controlador=personal&accion=inicio" class="btn btn-primary">Cancelar</a>
                     </div>
                   </div>

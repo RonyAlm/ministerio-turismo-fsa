@@ -114,86 +114,101 @@ class ControladorPersonal
         if ($_POST) {
             $EditarAgencia = new PersonalModelo();
 
+            // print_r($_POST);
+
             // PERSONA
-            //     $id_persona = $_POST['id_persona'];
-            //     $nombre = $_POST['nombre'];
-            //     $apellido = $_POST['apellido'];
-            //     $cuil = $_POST['cuil'];
-            //     $fecha = $_POST['fecha'];
-            //     $profesion = $_POST['profesion'];
-            //     $educacionID = $_POST['educacionID'];
-            //     $educacion = $_POST['educacion'];
-            //     $areaID = $_POST['areaID'];
-            //     $area = $_POST['area'];
+            $id_persona = $_POST['id_persona'];
+            $nombre = $_POST['nombre'];
+            $apellido = $_POST['apellido'];
+            $cuil = $_POST['cuil'];
+            $fecha = $_POST['fecha'];
+            $profesion = $_POST['profesion'];
+            $educacionID = $_POST['educacionID'];
+            $educacion = $_POST['educacion'];
 
 
             // PERSONAL 
-            //     $id_Personal = $_POST['id_Personal'];
-            //     $n_legajo = $_POST['n_legajo'];
-            //     $n_expediente = $_POST['n_expediente'];
-            //     $antiguedad = $_POST['antiguedad'];
-            //     $departamentoID = $_POST['departamentoID'];
-            //     $departamento = $_POST['departamento'];
+            $id_Personal = $_POST['id_Personal'];
+            $n_legajo = $_POST['n_legajo'];
+            $n_expediente = $_POST['n_expediente'];
+            $antiguedad = $_POST['antiguedad'];
+            $departamentoID = $_POST['departamentoID'];
+            $departamento = $_POST['departamento'];
+            $areaID = $_POST['areaID'];
+            $area = $_POST['area'];
+            $cargoID = $_POST['cargoID'];
+            $tipoCargo = $_POST['tipoCargo'];
+            $tipoContratoID = $_POST['tipoContratoID'];
+            $tipo_contrato = $_POST['tipo_contrato'];
 
 
             // DIRECCION
-            //     $idDireccion = $_POST['DomicilioID'];
-            //     $rela_localidad_direccion = $_POST['localidad'];
-            //     $calle_direccion = $_POST['direccion'];
+            $idDireccion = $_POST['DomicilioID'];
+            $rela_localidad_direccion = $_POST['localidad'];
+            $calle_direccion = $_POST['direccion'];
 
             // CONTANTOS 
 
-            //     $idtelefonoAgencia = $_POST['agenciatelefonoID'];
-            //     $telefonoCel = $_POST['telefonoCel'];
+            $idtelefonoAgencia = $_POST['agenciatelefonoID'];
+            $telefonoCel = $_POST['telefonoCel'];
 
-            //     $idtelefonoFijo = $_POST['telFijoID'];
-            //     $telefonoFijoAgencia = $_POST['telefonoFijoAgencia'];
+            $idtelefonoFijo = $_POST['telFijoID'];
+            $telefonoFijoAgencia = $_POST['telefonoFijoAgencia'];
 
-            //     $idcorreo = $_POST['CorreoID'];
-            //     $correo = $_POST['correo'];
+            $idcorreo = $_POST['CorreoID'];
+            $correo = $_POST['correo'];
 
-
-
-            //     $EditarAgencia->editar(
-            //         $descripcion_agencias,
-            //         $matricula_agencia,
-            //         $legajo_agencia,
-            //         $cuit_agencia,
-            //         $categoria_agencia,
-            //         $idAgencia,
-            //         $idoneoAgencia,
-            //         $rela_localidad_direccion,
-            //         $calle_direccion,
-            //         $razonsocial,
-            //         $telefonoAgencia,
-            //         $telefonoFijoAgencia,
-            //         $correoAgencia,
-            //         $facebookAgencia,
-            //         $instagramAgencia,
-            //         $twitterAgencia,
-            //         $webAgencia,
-            //         $otroAgencia,
-            //         $estadoAgencia,
-
-            //         $idRazonSocial,
-            //         $idDireccion,
-            //         $idtelefonoAgencia,
-            //         $idtelefonoFijoAgencia,
-            //         $idcorreoAgencia,
-            //         $idfacebookAgencia,
-            //         $idinstagramAgencia,
-            //         $idtwitterAgencia,
-            //         $idwebAgencia,
-            //         $idotroAgencia,
-            //         $idestadoAgencia
-            //     );
-
-            //     // print_r($EditarAgencia);
+            // LICENCIAS
+            $licenciasID = $_POST['licenciasID'];
+            $fechaini = $_POST['fechaini'];
+            $fechafin = $_POST['fechafin'];
+            $diasrestante = $_POST['diasrestante'];
 
 
 
-            //     // header("Location:admin/index2.php?controlador=agencias&accion=inicio");
-            //     echo "<script>location.href = 'index2.php?controlador=agencias&accion=inicio';</script>";
+            $EditarAgencia->editar(
+                $nombre,
+                $apellido,
+                $cuil,
+                $fecha,
+                $profesion,
+                $educacion,
+                $n_legajo,
+                $n_expediente,
+                $antiguedad,
+                $departamento,
+                $area,
+                $tipoCargo,
+                $tipo_contrato,
+                $rela_localidad_direccion,
+                $calle_direccion,
+                $telefonoCel,
+                $telefonoFijoAgencia,
+                $correo,
+                $fechaini,
+                $fechafin,
+                $diasrestante,
+
+                $id_persona,
+                $educacionID,
+                $id_Personal,
+                $departamentoID,
+                $areaID,
+                $cargoID,
+                $tipoContratoID,
+                $idDireccion,
+                $idtelefonoAgencia,
+                $idtelefonoFijo,
+                $idcorreo,
+                $licenciasID
+            );
+
+            print_r($EditarAgencia);
+
+
+
+            // header("Location:admin/index2.php?controlador=agencias&accion=inicio");
+            echo "<script>location.href = 'index2.php?controlador=personal&accion=inicio';</script>";
         }
 
 
@@ -201,7 +216,7 @@ class ControladorPersonal
 
         $contactosDeagencia = new Contactos();
 
-        $contactosDeagencia1 = new ContactosInfo();
+        $contactosDeagencia1 = new ContactosInfoPersonal();
 
         $agenciaTelefono = $contactosDeagencia1->consultarTelefonos($idPersona);
         $agenciaTelefonoFijo = $contactosDeagencia->consultarTelefonosFijos($idPersona);
@@ -217,7 +232,6 @@ class ControladorPersonal
 
         $editar = $buscarID->buscar($id);
 
-        // $InsertarID = $buscarID->consultarID($idAgencia);
 
 
         include_once("vistas/personal/editar.php");
@@ -244,6 +258,8 @@ class ControladorPersonal
     {
         $id = $_GET['id'];
 
+
+
         $Info = new PersonalModelo();
 
         $tablaInformes = $Info->info3($id);
@@ -252,7 +268,7 @@ class ControladorPersonal
         // $agenciasInfomacion = $agenciaInfo->buscar($id_agencia);
 
 
-        // $contactosDeagencia = new ContactosInfo();
+        // $contactosDeagencia = new ContactosInfoPersonal();
         // $agenciaTelefonoInfo = $contactosDeagencia->consultarTelefonos($id_agencia);
         // $agenciaTelefonoFijo = $contactosDeagencia->consultarTelefonosFijos($id_agencia);
         // $agenciaCorreo = $contactosDeagencia->consultarCorreo($id_agencia);
@@ -267,8 +283,9 @@ class ControladorPersonal
     public function infopersonal()
     {
         $id = $_GET['id'];
+        $idpersona = $_GET['idPersona'];
 
-        echo $id;
+        // echo $id;
 
         $Info = new PersonalModelo();
 
@@ -276,10 +293,10 @@ class ControladorPersonal
         $Infomacion = $Info->buscar($id);
 
 
-        // $contactosDeagencia = new ContactosInfo();
-        // $agenciaTelefonoInfo = $contactosDeagencia->consultarTelefonos($id_agencia);
-        // $agenciaTelefonoFijo = $contactosDeagencia->consultarTelefonosFijos($id_agencia);
-        // $agenciaCorreo = $contactosDeagencia->consultarCorreo($id_agencia);
+        $contactosDeagencia = new ContactosInfoPersonal();
+        $agenciaTelefonoInfo = $contactosDeagencia->consultarTelefonos($idpersona);
+        $agenciaTelefonoFijo = $contactosDeagencia->consultarTelefonosFijos($idpersona);
+        $agenciaCorreo = $contactosDeagencia->consultarCorreo($idpersona);
         // $agenciaFacebook = $contactosDeagencia->consultarFacebook($id_agencia);
         // $agenciaInstagram = $contactosDeagencia->consultarInstagram($id_agencia);
         // $agenciaTwitter = $contactosDeagencia->consultarTwitter($id_agencia);
@@ -347,35 +364,35 @@ class ControladorPersonal
             $contraseña = $usuario . $random;
             str_replace(" ", "", $contraseña);
 
-            $insertar->guardar(
-                $nombre,
-                $apellido,
-                $cuil,
-                $profesion,
-                $fecha,
-                $educacion,
-                $rela_localidad_direccion,
-                $calle_direccion,
-                $telefonoCel,
-                $telefonoFijo,
-                $correo,
-                $departamento,
-                $area,
-                $n_legajo,
-                $n_expediente,
-                $tipo_contrato,
-                $cargo,
-                $usuario,
-                $contraseña,
-                $antiguedad,
-                $fechaini,
-                $fechafin,
-                $diasrestante
-            );
+            // $insertar->guardar(
+            //     $nombre,
+            //     $apellido,
+            //     $cuil,
+            //     $profesion,
+            //     $fecha,
+            //     $educacion,
+            //     $rela_localidad_direccion,
+            //     $calle_direccion,
+            //     $telefonoCel,
+            //     $telefonoFijo,
+            //     $correo,
+            //     $departamento,
+            //     $area,
+            //     $n_legajo,
+            //     $n_expediente,
+            //     $tipo_contrato,
+            //     $cargo,
+            //     $usuario,
+            //     $contraseña,
+            //     $antiguedad,
+            //     $fechaini,
+            //     $fechafin,
+            //     $diasrestante
+            // );
 
 
             // header("Location:index2.php?controlador=personal&accion=inicio");
-            echo "<script>location.href = 'index2.php?controlador=agencias&accion=inicio';</script>";
+            // echo "<script>location.href = 'index2.php?controlador=personal&accion=inicio';</script>";
         }
 
         include_once("vistas/personal/guardar.php");

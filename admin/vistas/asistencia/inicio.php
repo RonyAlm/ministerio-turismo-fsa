@@ -28,7 +28,7 @@ $rol_id = $_SESSION['rol_id'];
 <div class="card">
   <div class="card-header">
 
-    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") : ?>
+    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") : ?>
 
       <a name="" id="" class="btn btn-success" href="?controlador=asistencias&accion=crear" role="button">Agregar</a>
 
