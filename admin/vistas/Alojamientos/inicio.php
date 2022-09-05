@@ -47,79 +47,113 @@ $rol_id = $_SESSION['rol_id'];
   <div class="card-body">
 
     <div class="row">
-      <div class="col-md-3 col-sm-6 col-12">
-        <div class="info-box">
-          <span class="info-box-icon bg-success"><i class="fas fa-hotel"></i></span>
 
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box">
+          <span class="info-box-icon bg-success elevation-1"><i class="fas fa-hotel"></i></span>
           <div class="info-box-content">
-            <span class="info-box-text text-center">Hoteles</span>
+            <span class="info-box-text">Hoteles</span>
+
             <?php foreach ($cantidad_hotel as $estadistica) { ?>
-              <span class="info-box-text">Cantidad Total: <?php echo $estadistica->conteo; ?> </span>
+              <span class="info-box-text">
+                Total:
+                <strong><?php echo $estadistica->conteo; ?></strong>
+              </span>
             <?php } ?>
+
             <?php foreach ($cantidad_hotel_plazas as $estadistica) { ?>
-              <span class="info-box-text">Cantidad Plazas: <?php echo $estadistica->conteo; ?> </span>
+              <span class="info-box-text">
+                Plazas:
+                <strong><?php echo $estadistica->conteo; ?></strong>
+              </span>
             <?php } ?>
-          </div>
-          <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
-      </div>
-      <!-- /.col -->
-      <div class="col-md-3 col-sm-6 col-12">
-        <div class="info-box">
-          <span class="info-box-icon bg-success"><i class=" fa-solid fa-tents"></i></span>
 
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box">
+          <span class="info-box-icon bg-success elevation-1"><i class=" fa-solid fa-tents"></i></span>
           <div class="info-box-content">
-            <span class="info-box-text text-center">Cabañas</span>
+            <span class="info-box-text">Cabañas</span>
+
             <?php foreach ($cantidad_Cabaña as $estadistica) { ?>
-              <span class="info-box-text">Cantidad Total: <?php echo $estadistica->conteo; ?> </span>
+              <span class="info-box-text">
+                Total:
+                <strong><?php echo $estadistica->conteo; ?></strong>
+              </span>
             <?php } ?>
+
             <?php foreach ($cantidad_Cabaña_plazas as $estadistica) { ?>
-              <span class="info-box-text">Cantidad Plazas: <?php echo $estadistica->conteo; ?> </span>
+              <span class="info-box-text">
+                Plazas:
+                <strong><?php echo $estadistica->conteo; ?></strong>
+              </span>
             <?php } ?>
+
           </div>
 
-          <!-- /.info-box-content -->
         </div>
-        <!-- /.info-box -->
-      </div>
-      <!-- /.col -->
-      <div class="col-md-3 col-sm-6 col-12">
-        <div class="info-box">
-          <span class="info-box-icon bg-success"><i class="fas fa-bed"></i></span>
 
+      </div>
+
+
+      <div class="clearfix hidden-md-up"></div>
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box">
+          <span class="info-box-icon bg-success elevation-1"><i class="fas fa-bed"></i></span>
           <div class="info-box-content">
-            <span class="info-box-text text-center">Hospedaje</span>
+            <span class="info-box-text">Hospedaje</span>
+
             <?php foreach ($cantidad_Hospedaje as $estadistica) { ?>
-              <span class="info-box-text">Cantidad Total: <?php echo $estadistica->conteo; ?> </span>
+              <span class="info-box-text">
+                Total:
+                <strong><?php echo $estadistica->conteo; ?></strong>
+              </span>
             <?php } ?>
-            <?php foreach ($cantidad_Hospedaje_plazas as $estadistica) { ?>
-              <span class="info-box-text">Cantidad Plazas: <?php echo $estadistica->conteo; ?> </span>
-            <?php } ?>
-          </div>
-          <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
-      </div>
-      <!-- /.col -->
-      <div class="col-md-3 col-sm-6 col-12">
-        <div class="info-box">
-          <span class="info-box-icon bg-success"><i class=" fas fa-building"></i></span>
 
-          <div class="info-box-content">
-            <span class="info-box-text text-center">Alojamientos</span>
-            <?php foreach ($cantidad_Total_Alojamientos as $estadistica) { ?>
-              <span class="info-box-text">Cantidad Total: <?php echo $estadistica->conteo; ?> </span>
+            <?php foreach ($cantidad_Hospedaje_plazas as $estadistica) { ?>
+              <span class="info-box-text">
+                Plazas:
+                <strong><?php echo $estadistica->conteo; ?></strong>
+              </span>
             <?php } ?>
-            <?php foreach ($cantidad_Total_Alojamientos_Plazas as $estadistica) { ?>
-              <span class="info-box-text">Cantidad Plazas: <?php echo $estadistica->conteo; ?> </span>
-            <?php } ?>
+
           </div>
-          <!-- /.info-box-content -->
+
         </div>
-        <!-- /.info-box -->
+
       </div>
-      <!-- /.col -->
+
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box">
+          <span class="info-box-icon bg-success elevation-1"><i class="fas fa-building"></i></span>
+          <div class="info-box-content">
+            <span class="info-box-text">Alojamientos</span>
+
+            <?php foreach ($cantidad_Total_Alojamientos as $estadistica) { ?>
+              <span class="info-box-text">
+                Total:
+                <strong><?php echo $estadistica->conteo; ?></strong>
+              </span>
+            <?php } ?>
+
+            <?php foreach ($cantidad_Total_Alojamientos_Plazas as $estadistica) { ?>
+              <span class="info-box-text">
+                Plazas:
+                <strong><?php echo $estadistica->conteo; ?></strong>
+              </span>
+            <?php } ?>
+
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
 
     <div class="row">
