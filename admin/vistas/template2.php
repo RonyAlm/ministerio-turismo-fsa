@@ -292,7 +292,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <?php if ($rol_id == 1 or $rol_id == 3) : ?>
 
               <li class="nav-item 
-                <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'Alojamientos' || $_GET['controlador'] == 'agencias' ||
+                <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'alojamientos' || $_GET['controlador'] == 'agencias' ||
                   $_GET['controlador'] == 'prestadores' || $_GET['controlador'] == 'referentes' || $_GET['controlador'] == 'servigenerales' || $_GET['controlador'] == 'gastronomia')) ? 'menu-open' : '' ?>">
                 <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'Alojamientos' || $_GET['controlador'] == 'agencias' ||
                                               $_GET['controlador'] == 'prestadores' || $_GET['controlador'] == 'referentes' || $_GET['controlador'] == 'servigenerales' || $_GET['controlador'] == 'gastronomia')) ? 'active' : '' ?>">
@@ -304,7 +304,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="?controlador=Alojamientos&accion=inicio" class="nav-link 
+                    <a href="?controlador=alojamientos&accion=inicio" class="nav-link 
                     <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'Alojamientos') ? 'active' : '' ?>">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Alojamientos</p>
