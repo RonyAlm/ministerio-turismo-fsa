@@ -290,7 +290,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <li class="nav-item 
                 <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'alojamientos' || $_GET['controlador'] == 'agencias' ||
                   $_GET['controlador'] == 'prestadores' || $_GET['controlador'] == 'referentes' || $_GET['controlador'] == 'servigenerales' || $_GET['controlador'] == 'gastronomia')) ? 'menu-open' : '' ?>">
-                <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'Alojamientos' || $_GET['controlador'] == 'agencias' ||
+                <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'alojamientos' || $_GET['controlador'] == 'agencias' ||
                                               $_GET['controlador'] == 'prestadores' || $_GET['controlador'] == 'referentes' || $_GET['controlador'] == 'servigenerales' || $_GET['controlador'] == 'gastronomia')) ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-edit"></i>
                   <p>
@@ -301,7 +301,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="?controlador=alojamientos&accion=inicio" class="nav-link 
-                    <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'Alojamientos') ? 'active' : '' ?>">
+                    <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'alojamientos') ? 'active' : '' ?>">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Alojamientos</p>
                     </a>
@@ -351,7 +351,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <?php if ($rol_id == 2) : ?>
 
               <li class="nav-item">
-                <a href="?controlador=Alojamientos&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'Alojamientos') ? 'active' : '' ?>">
+                <a href="?controlador=alojamientos&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'alojamientos') ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Alojamientos</p>
                 </a>
@@ -542,18 +542,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="?controlador=asistencias&accion=inicio" class="nav-link 
-                    <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'asistencias')) ? '' : '' ?>">
+                    <a href="?controlador=institucion&accion=inicio" class="nav-link 
+                    <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'institucion')) ? '' : '' ?>">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Asistencia</p>
+                      <p>Organismos - Instituciones</p>
                     </a>
                   </li>
-                  <!-- <li class="nav-item">
-                    <a href="?controlador=agencias&accion=inicio" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Aviones</p>
-                    </a>
-                  </li> -->
+
                 </ul>
               </li>
             <?php } ?>
@@ -583,12 +578,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <p>Asistencia</p>
                     </a>
                   </li>
-                  <!-- <li class="nav-item">
-                    <a href="?controlador=agencias&accion=inicio" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Aviones</p>
-                    </a>
-                  </li> -->
+
                 </ul>
               </li>
             <?php } ?>

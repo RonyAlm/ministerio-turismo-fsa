@@ -1,5 +1,5 @@
 <?php
-class AgenciaModelo
+class OrganismoModelo
 {
 
     public $listaAgencia;
