@@ -60,7 +60,7 @@
                             <div class="form-group">
                                 <label for="tipoServicio">Tipo servicio:</label>
                                 <input type="hidden" id="tipoServicioID" name="tipoServicioID" value="<?php echo $editar->id_tipo_servicio; ?>">
-                                <select id="tipoServicio" name="tipoServicio" class="form-control custom-select" required>
+                                <select id="tipoServicio" name="tipoServicio" class="form-control select2" required>
                                     <?php $id_tipo_servicio_actual = $editar->id_tipo_servicio; ?>
                                     <?php foreach ($buscarSelectTipoServicio as $k) : ?>
                                         <option value="<?= $k->id_tipo_servicio; ?>" <?= ($k->id_tipo_servicio == $id_tipo_servicio_actual) ? 'selected="selected"' : ''; ?>> <?= $k->descripcion_servicio; ?></option>

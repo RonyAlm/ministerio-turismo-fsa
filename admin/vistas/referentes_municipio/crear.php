@@ -35,7 +35,7 @@
 
               <div class="form-group">
                 <label for="localidadReferente">Localidad</label>
-                <select id="localidadReferente" name="localidadReferente" class="form-control custom-select" required>
+                <select id="localidadReferente" name="localidadReferente" class="form-control select2" required>
                   <option value="0" selected disabled>Seleccionar la localidad</option>
                   <?php foreach ($buscarSelectLocalidad as $k) : ?>
                     <option value="<?php echo $k->id_localidad; ?>"> <?php echo $k->nombre_localidad; ?></option>
@@ -50,7 +50,7 @@
 
               <div class="form-group">
                 <label for="referenteEncargado">Tipo de Encargado</label>
-                <select id="referenteEncargado" name="referenteEncargado" class="form-control custom-select" required>
+                <select id="referenteEncargado" name="referenteEncargado" class="form-control select2" required>
                   <option value="0" selected disabled>Seleccionar el Encargado</option>
                   <?php foreach ($buscarSelectEncargado as $k) : ?>
                     <option value="<?php echo $k->id_tipo_encargado; ?>"> <?php echo $k->descripcion_tipo_encargado; ?></option>

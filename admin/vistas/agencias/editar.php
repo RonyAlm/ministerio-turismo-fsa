@@ -106,7 +106,7 @@
                 <label for="estadoAgencia">Estado</label>
                 <input type="hidden" id="agenciaEstadoID" name="agenciaEstadoID" value="<?php echo $InsertarID->id_estado; ?>">
                 <?php $des_tipo_estado_actual = $editar->descripcion_tipo_estado; ?>
-                <select id="estadoAgencia" name="estadoAgencia" class="form-control custom-select ordenarSelect" required>
+                <select id="estadoAgencia" name="estadoAgencia" class="form-control select2 ordenarSelect" required>
                   <?php foreach ($buscarSelectEstado as $k) : ?>
                     <option value="<?= $k->id_tipo_estado; ?>" <?= ($k->descripcion_tipo_estado == $des_tipo_estado_actual) ? 'selected="selected"' : ''; ?>> <?= $k->descripcion_tipo_estado; ?></option>
                   <?php endforeach; ?>

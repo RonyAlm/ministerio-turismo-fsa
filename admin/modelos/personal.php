@@ -465,6 +465,22 @@ class PersonalModelo
 
         return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
     }
+
+    public function buscarSelectPersonal()
+    {
+
+        $conexionBD = BD::crearInstancia();
+
+
+        $sqlLocalidad = $conexionBD->query("SELECT CONCAT(p.nombre_persona, ' ', p.apellido_persona) full_name,
+         per.id_personal 
+        FROM `personales` per 
+        INNER JOIN persona p on p.id_persona = per.rela_persona");
+
+        $sqlLocalidad->execute();
+
+        return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
+    }
 }
 
 class Contactos

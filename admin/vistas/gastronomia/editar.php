@@ -53,7 +53,7 @@
                 <input type="hidden" id="agenciaLocalidadID" name="agenciaLocalidadID" value="<?= $InsertarID->id_direccion ?>">
                 <label for="localidadAgencia">Localidad</label>
                 <?php $nombre_localidad_actual = $editar->nombre_localidad; ?>
-                <select id="localidadAgencia" name="localidadAgencia" class="form-control custom-select" required>
+                <select id="localidadAgencia" name="localidadAgencia" class="form-control select2" required>
                   <?php foreach ($buscarSelectLocalidad as $k) : ?>
                     <option value="<?php echo $k->id_localidad; ?>" <?= ($k->nombre_localidad == $nombre_localidad_actual) ? 'selected="selected"' : ''; ?>> <?php echo $k->nombre_localidad; ?></option>
                   <?php endforeach; ?>

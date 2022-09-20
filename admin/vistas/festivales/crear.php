@@ -62,7 +62,7 @@
 
                             <div class="form-group">
                                 <label for="tipoServicio">Tipo servicio</label>
-                                <select id="tipoServicio" name="tipoServicio" class="form-control custom-select" required>
+                                <select id="tipoServicio" name="tipoServicio" class="form-control select2" required>
                                     <option value="0" selected disabled>Seleccionar el tipo de servicio</option>
                                     <?php foreach ($buscarSelectTipoServicio as $k) : ?>
                                         <option value="<?php echo $k->id_tipo_servicio; ?>"> <?php echo $k->descripcion_servicio; ?></option>

@@ -128,7 +128,7 @@
                   <div class="form-group row">
                     <label for="educacion" class="col-sm-2 col-form-label">Educacion</label>
                     <div class="col-sm-10">
-                      <select id="educacion" name="educacion" class="form-control custom-select" required>
+                      <select id="educacion" name="educacion" class="form-control select2" required>
                         <option value="0" selected disabled>Seleccionar educacion</option>
                         <?php foreach ($buscarSelectEstudios as $k) : ?>
                           <option value="<?php echo $k->id_educacion; ?>"> <?php echo $k->descriEducacion; ?></option>
@@ -150,7 +150,7 @@
                   <div class="form-group row">
                     <label for="departamento" class="col-sm-2 col-form-label">Departamento</label>
                     <div class="col-sm-10">
-                      <select id="departamento" name="departamento" class="form-control custom-select" required>
+                      <select id="departamento" name="departamento" class="form-control select2" required>
                         <option value="0" selected disabled>Seleccionar el departamento</option>
                         <?php foreach ($buscarSelectDepartamento as $k) : ?>
                           <option value="<?php echo $k->id_deptos_mintur; ?>"> <?php echo $k->descriDepartamento; ?></option>
@@ -161,7 +161,7 @@
                   <div class="form-group row">
                     <label for="area" class="col-sm-2 col-form-label">Área</label>
                     <div class="col-sm-10">
-                      <select id="area" name="area" class="form-control custom-select" required>
+                      <select id="area" name="area" class="form-control select2" required>
                         <option value="0" selected disabled>Seleccionar el Área</option>
                         <?php foreach ($buscarSelectArea as $k) : ?>
                           <option value="<?php echo $k->id_areas; ?>"> <?php echo $k->descriArea; ?></option>
@@ -184,7 +184,7 @@
                   <div class="form-group row">
                     <label for="tipo_contrato" class="col-sm-2 col-form-label">Tipo de Contrato</label>
                     <div class="col-sm-10">
-                      <select id="tipo_contrato" name="tipo_contrato" class="form-control custom-select" required>
+                      <select id="tipo_contrato" name="tipo_contrato" class="form-control select2" required>
                         <option value="0" selected disabled>Seleccionar el tipo de contrato</option>
                         <?php foreach ($buscarSelectContrato as $k) : ?>
                           <option value="<?php echo $k->id_tipo_contrato; ?>"> <?php echo $k->descripcion_contrato; ?></option>
@@ -195,7 +195,7 @@
                   <div class="form-group row">
                     <label for="cargo" class="col-sm-2 col-form-label">Cargo</label>
                     <div class="col-sm-10">
-                      <select id="cargo" name="cargo" class="form-control custom-select" required>
+                      <select id="cargo" name="cargo" class="form-control select2" required>
                         <option value="0" selected disabled>Seleccionar el cargo</option>
                         <?php foreach ($buscarSelectCargo as $k) : ?>
                           <option value="<?php echo $k->id_tipo_personal; ?>"> <?php echo $k->descri_tipo_personal; ?></option>

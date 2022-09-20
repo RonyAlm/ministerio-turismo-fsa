@@ -17,7 +17,7 @@
     <form action="" method="post">
 
       <div class="row">
-        
+
         <!-- CREAR GENERAL -->
         <div class="col-md-6">
           <div class="card card-success card-outline">
@@ -38,8 +38,8 @@
 
               <div class="form-group">
                 <label for="localidadAgencia">Localidad</label>
-                <select id="localidadAgencia" name="localidadAgencia" class="form-control custom-select" required>
-                  <option value="0" selected disabled>Seleccionar la localidad</option>
+                <select id="localidadAgencia" name="localidadAgencia" class="form-control select2" required>
+                  <option value="" selected disabled>Seleccionar la localidad</option>
                   <?php foreach ($buscarSelectLocalidad as $k) : ?>
                     <option value="<?php echo $k->id_localidad; ?>"> <?php echo $k->nombre_localidad; ?></option>
                   <?php endforeach; ?>
@@ -82,7 +82,7 @@
 
               <div class="form-group">
                 <label for="estadoAgencia">Estado</label>
-                <select id="estadoAgencia" name="estadoAgencia" class="form-control custom-select" required>
+                <select id="estadoAgencia" name="estadoAgencia" class="form-control select2" required>
                   <option value="0" selected disabled>Seleccionar el Estado de la Agencia</option>
                   <?php foreach ($buscarSelectEstado as $k) : ?>
                     <option value="<?php echo $k->id_tipo_estado; ?>"> <?php echo $k->descripcion_tipo_estado; ?></option>
@@ -120,7 +120,7 @@
                 </div>
               </div>
               <div class="telefonos">
-                  <!-- en este contenedor de agregar los demas teléfonos -->
+                <!-- en este contenedor de agregar los demas teléfonos -->
               </div>
               <div class="form-group">
                 <label for="telefonoFijoAgencia">Teléfono Fijo</label>

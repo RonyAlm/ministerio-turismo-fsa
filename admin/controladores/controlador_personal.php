@@ -15,10 +15,22 @@ class ControladorPersonal
         $consulta = new PersonalModelo();
 
         $tabla = $consulta->consultar();
-        // $datosEstadisticos = new estadistica();
 
-        // $cantidad = $datosEstadisticos->cantidadAgencias();
-        // $cantidad = $datosEstadisticos->cantidadAgenciasHabilitadas();
+        $select_tipo_agencia = new PersonalModelo();
+
+        $buscarSelectPersonal = $select_tipo_agencia->buscarSelectPersonal();
+
+        print_r($_POST);
+
+        if ($_POST) {
+            $insertarModelLic = new PersonalModelo();
+
+            $selectPersonal = $_POST['selectPersonal'];
+            $fechaIniLicencia = $_POST['fechaIniLicencia'];
+            $fechafinLicencia = $_POST['fechafinLicencia'];
+            $CantLicencia = $_POST['CantLicencia'];
+            $fechaIniArticulo = $_POST['fechaIniArticulo'];
+        }
 
 
         include_once("vistas/personal/inicio.php");
@@ -90,7 +102,7 @@ class ControladorPersonal
         }
 
 
-        include_once("vistas/agencias/crear.php");
+        include_once("vistas/modales/modal_ag_li_pe.php");
     }
     public function editar()
     {

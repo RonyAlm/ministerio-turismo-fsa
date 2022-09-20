@@ -16,7 +16,12 @@ $rol_id = $_SESSION['rol_id'];
   <div class="card-header">
 
     <a name="" id="" class="btn btn-success" href="?controlador=personal&accion=guardar" role="button">Agregar Personal</a>
-    <!-- <a name="" id="" class="btn btn-warning" href="?controlador=Alojamientos&accion=imprimir" role="button">IMPRIMIR</a> -->
+
+    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+      Agregar licencia o Artículo
+    </button>
+
+
   </div>
 
 <?php } ?>
@@ -118,3 +123,93 @@ $rol_id = $_SESSION['rol_id'];
   <!-- /.card -->
 
 </section>
+
+<div class="modal fade" id="modal-default">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Licencia o Art</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="formularioModalPersonal" method="POST">
+        <div class="modal-body">
+
+          <div class="custom-control custom-checkbox ">
+            <input name="licencia" class="custom-control-input custom-control-input-danger custom-control-input-outline" type="checkbox" id="customCheckbox5" checked>
+            <label for="customCheckbox5" class="custom-control-label">Licencias</label>
+          </div>
+          <div class="custom-control custom-checkbox">
+            <input name="articulo" class="custom-control-input custom-control-input-danger custom-control-input-outline" type="checkbox" id="customCheckbox6">
+            <label for="customCheckbox6" class="custom-control-label">Árticulo 5.9-dec.ley 1362/85 </label>
+          </div>
+
+          <br>
+
+          <div class="form-group">
+            <label for="selectPersonal">Personal</label>
+            <select id="selectPersonal" name="selectPersonal" class="form-control select2" style="width: 100%;" required>
+              <option value="" selected disabled>Seleccionar el personal</option>
+              <?php foreach ($buscarSelectPersonal as $k) : ?>
+                <option value="<?php echo $k->id_personal; ?>"> <?php echo $k->full_name; ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+
+          <div class="row" id="elemento">
+            <div class="col-sm-6">
+              <div class="form-floating mb-3">
+                <label for="fechaIniLicencia" class="form-label">Fecha Inicio</label>
+                <input type="date" class="form-control" name="fechaIniLicencia" id="fechaIniLicencia">
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-floating mb-3">
+                <label for="fechafinLicencia" class="form-label">Fecha fin</label>
+                <input type="date" class="form-control" name="fechafinLicencia" id="fechafinLicencia">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-floating mb-3">
+                <label for="CantLicencia" class="form-label">Cantidad de días faltantes</label>
+                <input type="number" class="form-control" name="CantLicencia" id="CantLicencia">
+              </div>
+            </div>
+          </div>
+
+          <div class="row" id="articulo">
+            <div class="col-sm-6">
+              <div class="form-floating mb-3">
+                <label for="fechaIniArticulo" class="form-label">Fecha Inicio</label>
+                <input type="date" class="form-control" name="fechaIniArticulo" id="fechaIniArticulo">
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-floating mb-3">
+                <label for="descripcion" class="form-label">Cantidad de Art. faltantes</label>
+                <h4>
+                  <span style="justify-content:center" title="3 Razones particulares" class="badge badge-warning">
+                    3
+                  </span>
+                </h4>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-default" value="Agregar">Agregar</button>
+        </div>
+
+      </form>
+
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>

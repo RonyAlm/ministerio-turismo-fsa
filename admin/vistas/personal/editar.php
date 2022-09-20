@@ -81,7 +81,7 @@
                     <label for="localidad" class="col-sm-2 col-form-label">Localidad</label>
                     <div class="col-sm-10">
                       <?php $nombre_localidad_actual = $editar->nombre_localidad; ?>
-                      <select id="localidad" name="localidad" class="form-control custom-select" required>
+                      <select id="localidad" name="localidad" class="form-control select2" required>
                         <option value="0" selected disabled>Seleccionar la localidad</option>
                         <?php foreach ($buscarSelectLocalidad as $k) : ?>
                           <option value="<?php echo $k->id_localidad; ?>" <?= ($k->nombre_localidad == $nombre_localidad_actual) ? 'selected="selected"' : ''; ?>> <?php echo $k->nombre_localidad; ?></option>
@@ -131,7 +131,7 @@
                     <label for="educacion" class="col-sm-2 col-form-label">Educacion</label>
                     <div class="col-sm-10">
                       <?php $nombre_educacion_actual = $editar->descriEducacion; ?>
-                      <select id="educacion" name="educacion" class="form-control custom-select" required>
+                      <select id="educacion" name="educacion" class="form-control select2" required>
                         <option value="0" selected disabled>Seleccionar la Educación</option>
                         <?php foreach ($buscarSelectEstudios as $k) : ?>
                           <option value="<?php echo $k->id_educacion; ?>" <?= ($k->descriEducacion == $nombre_educacion_actual) ? 'selected="selected"' : ''; ?>> <?php echo $k->descriEducacion; ?></option>
@@ -156,7 +156,7 @@
                     <label for="departamento" class="col-sm-2 col-form-label">Departamento</label>
                     <div class="col-sm-10">
                       <?php $nombre_departamento_actual = $editar->descriDepartamento; ?>
-                      <select id="departamento" name="departamento" class="form-control custom-select" required>
+                      <select id="departamento" name="departamento" class="form-control select2" required>
                         <option value="0" selected disabled>Seleccionar el Departamento</option>
                         <?php foreach ($buscarSelectDepartamento as $k) : ?>
                           <option value="<?php echo $k->id_deptos_mintur; ?>" <?= ($k->descriDepartamento == $nombre_departamento_actual) ? 'selected="selected"' : ''; ?>> <?php echo $k->descriDepartamento; ?></option>
@@ -169,7 +169,7 @@
                     <label for="area" class="col-sm-2 col-form-label">Área</label>
                     <div class="col-sm-10">
                       <?php $nombre_area_actual = $editar->descriArea; ?>
-                      <select id="area" name="area" class="form-control custom-select" required>
+                      <select id="area" name="area" class="form-control select2" required>
                         <option value="0" selected disabled>Seleccionar el Área</option>
                         <?php foreach ($buscarSelectArea as $k) : ?>
                           <option value="<?php echo $k->id_areas; ?>" <?= ($k->descriArea == $nombre_area_actual) ? 'selected="selected"' : ''; ?>> <?php echo $k->descriArea; ?></option>
@@ -196,7 +196,7 @@
                     <label for="tipo_contrato" class="col-sm-2 col-form-label">Tipo de Contrato</label>
                     <div class="col-sm-10">
                       <?php $nombre_tipocontrato_actual = $editar->descripcion_contrato; ?>
-                      <select id="tipo_contrato" name="tipo_contrato" class="form-control custom-select" required>
+                      <select id="tipo_contrato" name="tipo_contrato" class="form-control select2" required>
                         <option value="0" selected disabled>Seleccionar el tipo de contrato</option>
                         <?php foreach ($buscarSelectContrato as $k) : ?>
                           <option value="<?php echo $k->id_tipo_contrato; ?>" <?= ($k->descripcion_contrato == $nombre_tipocontrato_actual) ? 'selected="selected"' : ''; ?>> <?php echo $k->descripcion_contrato; ?></option>
@@ -209,7 +209,7 @@
                     <label for="cargo" class="col-sm-2 col-form-label">Cargo</label>
                     <div class="col-sm-10">
                       <?php $nombre_cargo_actual = $editar->descri_tipo_personal; ?>
-                      <select id="tipoCargo" name="tipoCargo" class="form-control custom-select" required>
+                      <select id="tipoCargo" name="tipoCargo" class="form-control select2" required>
                         <option value="0" selected disabled>Seleccionar el tipo de Cargo</option>
                         <?php foreach ($buscarSelectCargo as $k) : ?>
                           <option value="<?php echo $k->id_tipo_personal; ?>" <?= ($k->descri_tipo_personal == $nombre_cargo_actual) ? 'selected="selected"' : ''; ?>> <?php echo $k->descri_tipo_personal; ?></option>

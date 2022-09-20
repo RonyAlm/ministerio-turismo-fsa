@@ -699,6 +699,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <script>
     $(function() {
+      $("#customCheckbox5").change(function() {
+        if (!$(this).prop("checked")) {
+          $("#elemento").hide();
+        } else {
+          $("#elemento").show();
+        }
+      });
+      $("#customCheckbox6").change(function() {
+        if (!$(this).prop("checked")) {
+          $("#articulo").hide();
+        } else {
+          $("#articulo").show();
+        }
+      });
+    });
+
+
+    $(function() {
 
       // Clona la fila oculta que tiene los campos base, y la agrega al final de la tabla
       $("#adicional").on('click', function() {
@@ -777,66 +795,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
     });
   </script>
 
-  <!-- MODAL DEL EVENTO -->
-  <div class="modal fade" id="myModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-success">
-          <h4 class="modal-title" id="titulo"></h4>
-          <button type="button" class="btn btn-close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <form id="formularioModal">
-          <div class="modal-body">
-            <div class="form-floating mb-3">
-              <input type="hidden" id="id" name="id">
-              <label for="title" class="form-label">Evento</label>
-              <input type="text" class="form-control" name="title" id="title">
-            </div>
+  <!-- MODAL DEL EVENTO CALENDARIO -->
 
-            <div class="form-floating mb-3">
-              <label for="start" class="form-label">Fecha Inicio</label>
-              <input type="date" class="form-control" name="start" id="start">
-            </div>
-
-            <div class="form-floating mb-3">
-              <label for="fecha_fin" class="form-label">Fecha fin</label>
-              <input type="date" class="form-control" name="fecha_fin" id="fecha_fin">
-            </div>
-
-            <div class="form-floating mb-3">
-              <label for="descripcion" class="form-label">Descripción</label>
-              <!-- <textarea name="descripcion" id="descripcion" cols="62" rows="5"></textarea> -->
-              <input type="text" class="form-control" name="descripcion" id="descripcion">
-            </div>
-
-            <div class="form-floating mb-3">
-              <label for="color" class="form-label">Color</label>
-              <input type="color" class="form-control" name="color" id="color">
-            </div>
-
-          </div>
-
-          <div class="modal-footer">
-
-            <button type="submit" class="btn btn-success" id="btnAccion">Agregar</button>
-
-            <button type="button" id="btnEliminar" class="btn btn-danger">Borrar</button>
-
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-
-          </div>
-        </form>
-
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
+  <?php include_once("modales/modal_calendario.php"); ?>
   <!-- /.modal -->
 
+
+  <!-- MODALES -->
+  <!-- <?php include_once("modales/modal_ag_li_pe.php"); ?> -->
+  <!-- <?php include_once("festivales/inicio.php"); ?> -->
+
   <script src="vistas/recursos/script/modal.js"></script>
+
+
 
 </body>
 
