@@ -15,7 +15,7 @@
 
     </div>
 
-    <form action="" method="post">
+    <form action="" id="agregarTransporte" method="post">
 
         <div class="container">
             <div class="row">
@@ -32,8 +32,8 @@
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <label for="empresas">Empresas</label>
-                                                <select name="empresas" class="form-control select2" style="width: 100%;" id="empresas">
-                                                    <option value="0" selected disabled>Seleccionar la Empresa</option>
+                                                <select name="empresas" class="form-control select2" style="width: 100%;" id="empresas" required>
+                                                    <option value="" selected disabled>Seleccionar la Empresa</option>
                                                     <?php foreach ($buscarSelectEmpresa as $k) : ?>
                                                         <option value="<?php echo $k->id_empresa_colectivo; ?>"> <?php echo $k->nombre_empresa; ?></option>
                                                     <?php endforeach; ?>
@@ -42,11 +42,11 @@
                                         </div>
                                         <div class="col-4">
                                             <div class="form-group">
-                                                <label for="provincias">Provincia</label>
-                                                <select name="provincias" class="form-control select2" style="width: 100%;" id="provincias">
-                                                    <option value="0" selected disabled>Seleccionar la Provincia</option>
-                                                    <?php foreach ($buscarSelectProvincia as $k) : ?>
-                                                        <option value="<?php echo $k->id_provincia; ?>"> <?php echo $k->nombre_provincia; ?></option>
+                                                <label for="origen">Origen</label>
+                                                <select name="origen" class="form-control select2" style="width: 100%;" id="origen" required>
+                                                    <option value="" selected disabled>Seleccionar el Origen</option>
+                                                    <?php foreach ($buscarSelectLocalidad as $k) : ?>
+                                                        <option value="<?php echo $k->id_localidad; ?>"> <?php echo $k->nombre_localidad; ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
@@ -54,9 +54,9 @@
                                         </div>
                                         <div class="col-4">
                                             <div class="form-group">
-                                                <label for="localidad">Localidad</label>
-                                                <select name="localidad" class="form-control select2" style="width: 100%;" id="localidad">
-                                                    <option value="0" selected disabled>Seleccionar la Localidad</option>
+                                                <label for="destino">Destino</label>
+                                                <select name="destino" class="form-control select2" style="width: 100%;" id="destino" required>
+                                                    <option value="" selected disabled>Seleccionar el Destino</option>
                                                     <?php foreach ($buscarSelectLocalidad as $k) : ?>
                                                         <option value="<?php echo $k->id_localidad; ?>"> <?php echo $k->nombre_localidad; ?></option>
                                                     <?php endforeach; ?>
@@ -69,12 +69,12 @@
                                     <div class="row" id="hora">
                                         <div class="col-4">
                                             <label for="horarioSalida">Horario de Salida</label>
-                                            <input type="text" id="horarioSalida" name="horarioSalida[]" class="form-control">
+                                            <input type="time" id="horarioSalida" name="horarioSalida[]" class="form-control" required>
                                         </div>
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <label for="horarioLlegada">Horario de llegada</label>
-                                                <input type="text" id="horarioLlegada" name="horarioLlegada[]" class="form-control">
+                                                <input type="time" id="horarioLlegada" name="horarioLlegada[]" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -85,26 +85,7 @@
                                     <div class="horarios">
 
                                     </div>
-                                    <br>
-                                    <!-- Camas -->
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <input type="hidden" name="IDcama" value="1" id="IDcama">
-                                            <label for="cama">$ Cama</label>
-                                            <input type="text" name="cama" class="form-control">
-                                        </div>
-                                        <div class="col-4">
-                                            <input type="hidden" name="IDsemicama" value="2" id="IDsemicama">
-                                            <label for="semicama">$ Semi-Cama</label>
-                                            <input type="text" name="semicama" class="form-control">
-                                        </div>
-                                        <div class="col-4">
-                                            <input type="hidden" name="IDejecutivo" value="3" id="IDejecutivo">
-                                            <label for="ejecutivo">$ Ejecutivo</label>
-                                            <input type="text" name="ejecutivo" class="form-control">
-                                        </div>
-                                    </div>
-                                    <br>
+
                                     <!-- observacion -->
                                     <div class="row">
                                         <div class="col-sm-12">

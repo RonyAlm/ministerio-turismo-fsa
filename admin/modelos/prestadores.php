@@ -18,18 +18,20 @@ class PrestadoresModelo
         $conexionBD = BD::crearInstancia();
 
         $sql = $conexionBD->query(" SELECT `id_prestador`, `descripcion_prestador`, `institucion_prestador`, fecha_edit_prestador, direccion.calle_direccion,
-                                        localidad.nombre_localidad,tipo_estado.descripcion_tipo_estado,direccion.id_direccion,
-                                        (SELECT contacto.descripcion_contacto 
-                                        FROM contacto 
-                                        WHERE prestadores.id_prestador = contacto.rela_prestador_contacto
-                                        and contacto.rela_tipo_contacto_cont = 2
-                                        LIMIT 1) descripcion_contacto
-            
-                                        FROM `prestadores` 
-                                        INNER JOIN direccion ON prestadores.rela_prestador_direccion = direccion.id_direccion
-                                        INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad
-                                        INNER JOIN estado_actividad on estado_actividad.rela_estado_prestador = prestadores.id_prestador
-                                        INNER JOIN tipo_estado on tipo_estado.id_tipo_estado = estado_actividad.rela_tipo_estado");
+        localidad.nombre_localidad,tipo_estado.descripcion_tipo_estado,direccion.id_direccion,
+         (SELECT contacto.descripcion_contacto 
+         FROM contacto 
+         WHERE prestadores.id_prestador = contacto.rela_prestador_contacto
+         and contacto.rela_tipo_contacto_cont = 2
+         LIMIT 1) descripcion_contacto,tsp.descrip_tipo_serv_prestadores
+         FROM `prestadores` 
+         INNER JOIN direccion ON prestadores.rela_prestador_direccion = direccion.id_direccion
+         INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad
+         INNER JOIN estado_actividad on estado_actividad.rela_estado_prestador = prestadores.id_prestador
+         INNER JOIN tipo_estado on tipo_estado.id_tipo_estado = estado_actividad.rela_tipo_estado 
+         INNER JOIN servicios_prestadores sp on sp.rela_servicios_prestadores = prestadores.id_prestador
+         INNER JOIN tipo_servicios_prestadores tsp on tsp.id_tipo_servicios_prestadores = sp.rela_tipo_servicios_presta
+         GROUP by sp.rela_servicios_prestadores;");
 
         while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
             $this->listaPrestadores[] = $filas;

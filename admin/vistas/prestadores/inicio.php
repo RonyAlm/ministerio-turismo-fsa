@@ -121,7 +121,7 @@ $rol_id = $_SESSION['rol_id'];
               <th>Institución / Emprendimiento</th>
               <th>Contacto</th>
               <th>Dirección</th>
-              <th>Estado</th>
+              <th>Servicio</th>
               <th>Acción</th>
             </tr>
           </thead>
@@ -137,7 +137,7 @@ $rol_id = $_SESSION['rol_id'];
                 <td><?php echo $prestadore["institucion_prestador"]; ?></td>
                 <td><?php echo $prestadore["descripcion_contacto"]; ?></td>
                 <td><?php echo $prestadore["calle_direccion"]; ?></td>
-                <td><?php echo $prestadore["descripcion_tipo_estado"]; ?></td>
+                <td><?php echo $prestadore["descrip_tipo_serv_prestadores"]; ?></td>
                 <td class="project-actions text-right">
                   <div class="btn-group" role="group" aria-label="">
 

@@ -7,11 +7,11 @@ $(function () {
   $("#adicional1").on("click", function () {
     var clonCelu = $("#hora").clone();
     clonCelu.children("div").hidden = true;
-    clonCelu.children("input").value = "";
-    clonCelu.children("label").innerText = "" + c;
+    clonCelu.children("input").value = " ";
+    clonCelu.children("label").innerText = " " + c;
     c++;
     clonCelu.appendTo(".horarios");
-    console.log(clonCelu.children("input"));
+    console.log(clonCelu.children("input")[0]);
   });
 
   // Evento que selecciona la fila y la elimina

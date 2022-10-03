@@ -41,50 +41,44 @@ class ControladorTransporte
 
 
         if ($_POST) {
-            print_r($_POST);
+            // print_r($_POST);
 
             $insertar = new TransporteModelo();
 
 
             $empresas = $_POST['empresas'];
-            $provincias = $_POST['provincias'];
-            $localidad = $_POST['localidad'];
+            $origen = $_POST['origen'];
+            $destino = $_POST['destino'];
 
             $horarioSalida = $_POST['horarioSalida'];
             $horarioLlegada = $_POST['horarioLlegada'];
 
-            $cama = $_POST['cama'];
-            $semicama = $_POST['semicama'];
-            $ejecutivo = $_POST['ejecutivo'];
-
-            $IDcama = $_POST['IDcama'];
-            $IDsemicama = $_POST['IDsemicama'];
-            $IDejecutivo = $_POST['IDejecutivo'];
-
             $observacionTransporte = $_POST['observacionTransporte'];
 
 
+            // $datos = array_combine($horarioSalida, $horarioLlegada);
+            // print_r($datos);
+            // echo "<br>";
 
 
+
+            // foreach ($datos as $indice => $valor) {
+            //     echo "Salida: $indice; LLegada: $valor\n ";
+            //     echo "<br>";
+            // }
 
             $insertar->crear(
                 $empresas,
-                $provincias,
-                $localidad,
+                $origen,
+                $destino,
                 $horarioSalida,
                 $horarioLlegada,
-                $cama,
-                $semicama,
-                $ejecutivo,
-                $IDcama,
-                $IDsemicama,
-                $IDejecutivo,
                 $observacionTransporte
             );
-            // print_r($insertar);
 
-
-            header("Location:index2.php?controlador=transporte&accion=inicio");
+            // print_r($datos);
+            echo "<script>location.href='index2.php?controlador=transporte&accion=inicio';</script>";
+            // header("Location:index2.php?controlador=transporte&accion=inicio");
         }
 
 
@@ -190,9 +184,9 @@ class ControladorTransporte
 
             // print_r($EditarAgencia);
 
+            echo "<script>location.href='index2.php?controlador=transporte&accion=inicio';</script>";
 
-
-            header("Location:index2.php?controlador=servigenerales&accion=inicio");
+            // header("Location:index2.php?controlador=servigenerales&accion=inicio");
         }
 
 
@@ -235,7 +229,9 @@ class ControladorTransporte
 
         $borrado = $borrarAgencias->borrar($idServigeneralBorrar, $id_direccion);
 
-        header("Location:index2.php?controlador=servigenerales&accion=inicio");
+        echo "<script>location.href='index2.php?controlador=transporte&accion=inicio';</script>";
+
+        // header("Location:index2.php?controlador=servigenerales&accion=inicio");
     }
 
     public function info()

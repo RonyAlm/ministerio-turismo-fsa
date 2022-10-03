@@ -20,7 +20,7 @@ class ControladorPersonal
 
         $buscarSelectPersonal = $select_tipo_agencia->buscarSelectPersonal();
 
-        print_r($_POST);
+        // print_r($_POST);
 
         if ($_POST) {
             $insertarModelLic = new PersonalModelo();

@@ -158,18 +158,23 @@ $rol_id = $_SESSION['rol_id'];
           </div>
 
           <div class="row" id="elemento">
-            <div class="col-sm-6">
+            <div class="col-sm-4">
               <div class="form-floating mb-3">
                 <label for="fechaIniLicencia" class="form-label">Fecha Inicio</label>
                 <input type="date" class="form-control" name="fechaIniLicencia" id="fechaIniLicencia">
               </div>
             </div>
 
-            <div class="col-sm-6">
+            <div class="col-sm-4">
               <div class="form-floating mb-3">
                 <label for="fechafinLicencia" class="form-label">Fecha fin</label>
+                <br>
                 <input type="date" class="form-control" name="fechafinLicencia" id="fechafinLicencia">
               </div>
+            </div>
+            <div class="col-sm-4">
+              <label for="fechafinLicencia" class="form-label">Agregar otra fecha</label>
+              <button type="submit" class="btn btn-default" value="Agregar">Agregar</button>
             </div>
             <div class="col-sm-6">
               <div class="form-floating mb-3">
@@ -177,6 +182,7 @@ $rol_id = $_SESSION['rol_id'];
                 <input type="number" class="form-control" name="CantLicencia" id="CantLicencia">
               </div>
             </div>
+
           </div>
 
           <div class="row" id="articulo">

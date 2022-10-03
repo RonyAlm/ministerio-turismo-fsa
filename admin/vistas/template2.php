@@ -685,8 +685,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="vistas/recursos/script/validacion_museo.js"></script>
   <script src="vistas/recursos/script/validacion_prestador.js"></script>
   <script src="vistas/recursos/script/validacion_personal.js"></script>
+  <script src="vistas/recursos/script/validacionesRequire.js"></script>
   <script src="vistas/recursos/script/filas_contacto.js"></script>
   <script src="vistas/recursos/script/filas_transporte.js"></script>
+  <script src="vistas/recursos/script/filas_licencias.js"></script>
   <script src="vistas/recursos/script/gallery.js"></script>
 
   <script src="vistas/recursos/script/traerLocalidades.js"></script>
