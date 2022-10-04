@@ -23,6 +23,7 @@ class ControladorPersonal
         // print_r($_POST);
 
         if ($_POST) {
+            print_r($_POST);
             $insertarModelLic = new PersonalModelo();
 
             $selectPersonal = $_POST['selectPersonal'];
