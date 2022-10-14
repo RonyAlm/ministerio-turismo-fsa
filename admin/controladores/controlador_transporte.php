@@ -9,9 +9,9 @@ class ControladorTransporte
     public function inicio()
     { //aca se muestra las tablas
 
-        // $consultaServigeneral = new TransporteModelo();
+        $consulta = new TransporteModelo();
 
-        // $tablaServigeneral = $consultaServigeneral->consultar();
+        $tabla = $consulta->consultar();
         // $datosEstadisticos = new estadistica();
 
         // $cantidadPiletas = $datosEstadisticos->cantidadPiletas();
@@ -55,17 +55,6 @@ class ControladorTransporte
 
             $observacionTransporte = $_POST['observacionTransporte'];
 
-
-            // $datos = array_combine($horarioSalida, $horarioLlegada);
-            // print_r($datos);
-            // echo "<br>";
-
-
-
-            // foreach ($datos as $indice => $valor) {
-            //     echo "Salida: $indice; LLegada: $valor\n ";
-            //     echo "<br>";
-            // }
 
             $insertar->crear(
                 $empresas,

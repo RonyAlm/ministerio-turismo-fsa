@@ -41,6 +41,7 @@
                 <li class="nav-item"><a class="nav-link active" href="#personal" data-toggle="tab">Personal</a></li>
                 <li class="nav-item"><a class="nav-link" href="#ministerio" data-toggle="tab">Ministerio</a></li>
                 <li class="nav-item"><a class="nav-link" href="#licencias" data-toggle="tab">Licencias</a></li>
+                <li class="nav-item"><a class="nav-link" href="#articulos" data-toggle="tab">Artículos</a></li>
               </ul>
             </div><!-- /.card-header -->
             <div class="card-body">
@@ -196,6 +197,172 @@
                     </div>
                   </div> -->
                   <!-- </form> -->
+                </div>
+                <div class="tab-pane" id="articulos">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="card">
+                        <div class="card-header">
+                          <h3 class="card-title">Expandable Table Tree</h3>
+                        </div>
+                        <!-- ./card-header -->
+                        <div class="card-body p-0">
+                          <table class="table table-hover">
+                            <tbody>
+
+                              <tr data-widget="expandable-table" aria-expanded="true">
+                                <td>
+                                  <i class="expandable-table-caret fas fa-caret-right fa-fw"></i>
+                                  2021
+
+                                  <span class="badge bg-warning">4</span>
+                                </td>
+                              </tr>
+                              <tr class="expandable-body">
+                                <td>
+                                  <div class="p-0">
+                                    <table class="table table-hover">
+                                      <tbody>
+                                        <tr data-widget="expandable-table" aria-expanded="false">
+                                          <td>
+                                            <i class="expandable-table-caret fas fa-caret-right fa-fw"></i>
+                                            Enero
+                                            <span class="badge bg-danger">2</span>
+                                          </td>
+                                        </tr>
+                                        <tr class="expandable-body">
+                                          <td>
+                                            <div class="p-0">
+                                              <table class="table table-hover">
+                                                <tbody>
+                                                  <tr>
+                                                    <td>01/01/2021</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>02/01/2021</td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                          </td>
+                                        </tr>
+                                        <tr data-widget="expandable-table" aria-expanded="false">
+                                          <td>
+                                            <button type="button" class="btn btn-primary p-0">
+                                              <i class="expandable-table-caret fas fa-caret-right fa-fw"></i>
+                                            </button>
+                                            Febrero
+                                            <span class="badge bg-danger">2</span>
+                                          </td>
+                                        </tr>
+                                        <tr class="expandable-body">
+                                          <td>
+                                            <div class="p-0">
+                                              <table class="table table-hover">
+                                                <tbody>
+                                                  <tr>
+                                                    <td>01/02/2021</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>02/02/2021</td>
+                                                  </tr>
+
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td>Marzo
+                                            <span class="badge bg-success">0</span>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr data-widget="expandable-table" aria-expanded="true">
+                                <td>
+                                  <i class="expandable-table-caret fas fa-caret-right fa-fw"></i>
+                                  2022
+
+                                  <span class="badge bg-primary">3</span>
+                                </td>
+                              </tr>
+                              <tr class="expandable-body">
+                                <td>
+                                  <div class="p-0">
+                                    <table class="table table-hover">
+                                      <tbody>
+                                        <tr data-widget="expandable-table" aria-expanded="false">
+                                          <td>
+                                            <i class="expandable-table-caret fas fa-caret-right fa-fw"></i>
+                                            Enero
+                                            <span class="badge bg-success">1</span>
+                                          </td>
+                                        </tr>
+                                        <tr class="expandable-body">
+                                          <td>
+                                            <div class="p-0">
+                                              <table class="table table-hover">
+                                                <tbody>
+                                                  <tr>
+                                                    <td>01/01/2022</td>
+                                                  </tr>
+
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                          </td>
+                                        </tr>
+                                        <tr data-widget="expandable-table" aria-expanded="false">
+                                          <td>
+                                            <button type="button" class="btn btn-primary p-0">
+                                              <i class="expandable-table-caret fas fa-caret-right fa-fw"></i>
+                                            </button>
+                                            Febrero
+                                            <span class="badge bg-danger">2</span>
+                                          </td>
+                                        </tr>
+                                        <tr class="expandable-body">
+                                          <td>
+                                            <div class="p-0">
+                                              <table class="table table-hover">
+                                                <tbody>
+                                                  <tr>
+                                                    <td>01/02/2022</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>02/02/2022</td>
+                                                  </tr>
+
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td>Marzo
+                                            <span class="badge bg-success">0</span>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </td>
+                              </tr>
+
+                            </tbody>
+                          </table>
+                        </div>
+                        <!-- /.card-body -->
+                      </div>
+                      <!-- /.card -->
+                    </div>
+                  </div>
+
+
                 </div>
 
               </div>

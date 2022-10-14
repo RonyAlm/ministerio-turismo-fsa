@@ -23,25 +23,18 @@ class TransporteModelo
 
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->query("SELECT `id_servicios_generales`, `nombre_servicio_general`, `idoneo_servicio_general`,
-        direccion.calle_direccion,direccion.id_direccion,
-        localidad.nombre_localidad,localidad.id_localidad,
-        tipo_estacion.descripcion_estacion,
-        tipo_de_servicio.descripcion_servicio,
-        tipo_lugar.descripcion_lugar,
-        `descripcion_servicio_general`,
-        fecha_edit_general,
-        (SELECT contacto.descripcion_contacto 
-        FROM contacto 
-        WHERE servicios_generales.id_servicios_generales = contacto.rela_servicios_generales
-        and contacto.rela_tipo_contacto_cont = 2
-        LIMIT 1) descripcion_contacto
-        FROM `servicios_generales` 
-        INNER JOIN direccion ON servicios_generales.rela_direccion = direccion.id_direccion
-        INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad
-        INNER JOIN tipo_estacion on tipo_estacion.id_tipo_estacion= servicios_generales.rela_estacion
-        INNER JOIN tipo_de_servicio on tipo_de_servicio.id_tipo_servicio = servicios_generales.rela_tipo_servicio
-        INNER JOIN tipo_lugar on tipo_lugar.id_tipo_lugar = servicios_generales.rela_tipo_lugar");
+        $sql = $conexionBD->query("SELECT `id_viajes`, `horario_salida`, `horario_llegada`,
+        `fecha_salida`, `fecha_llegada`, `fecha_edit_viajes`,
+        od.id_origen_destino,
+        od.origen_localidad, od.destino_localidad, od.observacion_transporte,
+        ec.id_empresa_colectivo, ec.nombre_empresa,
+        l.nombre_localidad origen, ld.nombre_localidad destino
+        FROM `viajes` v
+        INNER JOIN origen_destino od on od.id_origen_destino = v.rela_origen_destino
+        INNER JOIN empresa_colectivo ec on ec.id_empresa_colectivo = od.rela_empresa_O_D
+        INNER JOIN localidad l on l.id_localidad = od.origen_localidad
+        INNER JOIN localidad ld on ld.id_localidad = od.destino_localidad
+        GROUP BY od.id_origen_destino");
 
         //recuperamos los datos y los retornamos
 
@@ -108,7 +101,7 @@ class TransporteModelo
 
         // print_r($lastInsertIDAgencias);
 
-        /*-------- INSERTAMOS EL TELEFONO CELULAR--------*/
+        /*-------- INSERTAMOS LA SALIDA Y LLEGADA--------*/
 
         $datos = array_combine($horarioSalida, $horarioLlegada);
 
