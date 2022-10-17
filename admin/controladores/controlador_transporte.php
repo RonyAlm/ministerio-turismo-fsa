@@ -214,7 +214,7 @@ class ControladorTransporte
 
         $borrarAgencias = new TransporteModelo();
 
-        $buscarIDBorrado = $borrarAgencias->consultarID($idServigeneralBorrar);
+        $buscarIDBorrado = $borrarAgencias->consultar($idServigeneralBorrar);
 
         $borrado = $borrarAgencias->borrar($idServigeneralBorrar, $id_direccion);
 
