@@ -79,7 +79,7 @@
             </tr>
 
             <tr>
-              <th class="sorting_1">Categoria</th>
+              <th class="sorting_1">Categoría</th>
               <td><?php echo $agenciasInfomacion->categoria_agencia; ?></td>
             </tr>
 
@@ -134,7 +134,7 @@
             <?php foreach ($agenciaTelefonoFijo as $telefonosFijo) { ?>
 
               <tr>
-                <th class="sorting_1"><i class="fas fa-phone mr-1"></i> Teléfonos Fijo</th>
+                <th class="sorting_1"><i class="fas fa-phone mr-1"></i> Teléfonos Fijos</th>
                 <td><?php echo $telefonosFijo["descripcion_contacto"]; ?></td>
               </tr>
 
