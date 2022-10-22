@@ -31,6 +31,8 @@ class ControladorPersonal
             $fechafinLicencia = $_POST['fechafinLicencia'];
             $CantLicencia = $_POST['CantLicencia'];
             $fechaIniArticulo = $_POST['fechaIniArticulo'];
+
+            $agregarLiAr = $insertarModelLic->agregarLiAr();
         }
 
 

@@ -74,7 +74,14 @@ class ControladorTransporte
         include_once("vistas/transporte/crear.php");
     }
     public function editar()
+
     {
+
+        $select = new TransporteModelo();
+
+        $buscarSelectLocalidad = $select->buscarSelectLocalidad();
+        $buscarSelectProvincia = $select->buscarSelectProvincia();
+        $buscarSelectEmpresa = $select->buscarSelectEmpresa();
 
         $id = $_GET["id"];
 
@@ -202,7 +209,7 @@ class ControladorTransporte
         $InsertarID = $buscarID->consultarID($id);
 
 
-        include_once("vistas/servigenerales/editar.php");
+        include_once("vistas/transporte/editar.php");
     }
 
     public function borrar()

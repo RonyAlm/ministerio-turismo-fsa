@@ -379,6 +379,10 @@ class PersonalModelo
         $sqlCorreo->execute();
     }
 
+    public static function agregarLiAr()
+    {
+    }
+
     public function buscarSelectLocalidad()
     {
 
