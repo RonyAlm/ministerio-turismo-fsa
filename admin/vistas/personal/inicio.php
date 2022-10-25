@@ -238,14 +238,7 @@ $rol_id = $_SESSION['rol_id'];
             </div>
 
 
-            <!-- <div class="col-sm-4">
-              <div class="form-floating mb-3">
-                <label for="fechafinLicencia" class="form-label">Añadir fechas</label>
-                <span id="masArticu" name="masArticu" class="btn btn-success">
-                  <i class="fas fa-plus"></i>
-                  <span></span>
-              </div>
-            </div> -->
+           
 
             <div class="masArticulos col-sm-12">
               <!-- <div class="col-sm-6">
