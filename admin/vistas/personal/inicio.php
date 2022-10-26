@@ -238,7 +238,7 @@ $rol_id = $_SESSION['rol_id'];
             </div>
 
 
-           
+
 
             <div class="masArticulos col-sm-12">
               <!-- <div class="col-sm-6">

@@ -379,8 +379,25 @@ class PersonalModelo
         $sqlCorreo->execute();
     }
 
-    public static function agregarLiAr()
-    {
+    public static function agregarLiAr(
+        $selectPersonal,
+        $fechaIniLicencia,
+        $fechafinLicencia,
+        $CantLicencia,
+        $fechaIniArticulo,
+        $licencia,
+        $articulo
+    ) {
+
+        if ($licencia == "") {
+            echo "no hay nada en licencia";
+        } else {
+            echo "entre a licencia";
+        }
+
+        if ($articulo) {
+            echo "entre a articulo";
+        }
     }
 
     public function buscarSelectLocalidad()

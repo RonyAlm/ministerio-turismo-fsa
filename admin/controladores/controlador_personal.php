@@ -26,13 +26,27 @@ class ControladorPersonal
             print_r($_POST);
             $insertarModelLic = new PersonalModelo();
 
+
+
             $selectPersonal = $_POST['selectPersonal'];
             $fechaIniLicencia = $_POST['fechaIniLicencia'];
             $fechafinLicencia = $_POST['fechafinLicencia'];
             $CantLicencia = $_POST['CantLicencia'];
             $fechaIniArticulo = $_POST['fechaIniArticulo'];
 
-            $agregarLiAr = $insertarModelLic->agregarLiAr();
+            $licencia = $_POST['licencia'];
+            $articulo = $_POST['articulo'];
+
+
+            $agregarLiAr = $insertarModelLic->agregarLiAr(
+                $selectPersonal,
+                $fechaIniLicencia,
+                $fechafinLicencia,
+                $CantLicencia,
+                $fechaIniArticulo,
+                $licencia,
+                $articulo
+            );
         }
 
 
