@@ -389,10 +389,17 @@ class PersonalModelo
         $articulo
     ) {
 
-        if ($licencia == "") {
-            echo "no hay nada en licencia";
-        } else {
-            echo "entre a licencia";
+        if ($licencia) {
+
+            $conexionBD = BD::crearInstancia();
+
+            /*-------- INSERTAMOS LAS LICENCIAS--------*/
+
+            $sqlLicencia = $conexionBD->prepare("INSERT INTO direccion (calle_direccion,rela_localidad_direccion)
+                                                    VALUES(?,?)");
+            $sqlLicencia->execute(array($calle_direccion, $rela_localidad_direccion));
+
+            $lastInsertIDdireccion = $conexionBD->lastInsertId();
         }
 
         if ($articulo) {

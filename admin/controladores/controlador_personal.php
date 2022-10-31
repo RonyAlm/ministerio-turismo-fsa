@@ -26,9 +26,7 @@ class ControladorPersonal
             print_r($_POST);
             $insertarModelLic = new PersonalModelo();
 
-
-
-            $selectPersonal = $_POST['selectPersonal'];
+            $selectPersonal = $_POST['selectPersonal23'];
             $fechaIniLicencia = $_POST['fechaIniLicencia'];
             $fechafinLicencia = $_POST['fechafinLicencia'];
             $CantLicencia = $_POST['CantLicencia'];
@@ -425,5 +423,42 @@ class ControladorPersonal
         }
 
         include_once("vistas/personal/guardar.php");
+    }
+
+    public function licArt()
+    {
+        $conexionBD = BD::crearInstancia();
+
+        print_r($_POST['personal']);
+
+        $personal = $_POST['personal'];
+
+        // $sql = $conexionBD->query("SELECT `id_licencias`, `fecha_ini`, `fecha_fin`, `dias_restante`, `estado`, `rela_personal` FROM `licencias` WHERE rela_personal='$personal'");
+
+
+        // $cadena = "<label>SELECT 2 (paises)</label> 
+        // 	<select id='lista2' name='lista2'>";
+
+        // while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
+        //     // $this->listaPersonal[] = $filas;
+        //     $cadena = $cadena . '<option value=' . $filas->dias_restante . '>' . $filas->fecha_fin . '</option>';
+
+        //     print_r($filas);
+        // }
+        // // return $this->listaPersonal; //este return se va a llamar en el controlador_alojamiento.php clase inicio
+
+
+        // // $cadena = "<label>SELECT 2 (paises)</label> 
+        // // 	<select id='lista2' name='lista2'>";
+
+        // // while ($ver = mysqli_fetch_row($result)) {
+        // //     $cadena = $cadena . '<option value=' . $ver[0] . '>' . utf8_encode($ver[2]) . '</option>';
+        // // }
+
+        // echo  $cadena . "</select>";
+
+
+
+        include_once("vistas/personal/rellenar.php");
     }
 }

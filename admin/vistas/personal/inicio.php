@@ -148,8 +148,8 @@ $rol_id = $_SESSION['rol_id'];
           <br>
 
           <div class="form-group">
-            <label for="selectPersonal">Personal</label>
-            <select id="selectPersonal" name="selectPersonal" class="form-control select2" style="width: 100%;" required>
+            <label for="selectPersonal23">Personal</label>
+            <select id="selectPersonal23" name="selectPersonal23" class="form-control select2" style="width: 100%;" required>
               <option value="" selected disabled>Seleccionar el personal</option>
               <?php foreach ($buscarSelectPersonal as $k) : ?>
                 <option value="<?php echo $k->id_personal; ?>"> <?php echo $k->full_name; ?></option>
@@ -204,6 +204,8 @@ $rol_id = $_SESSION['rol_id'];
                 <input type="number" class="form-control" name="CantLicencia" id="CantLicencia">
               </div>
             </div>
+
+            <div id="select2lista3"></div>
 
           </div>
 

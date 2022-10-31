@@ -691,6 +691,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="vistas/recursos/script/filas_licencias.js"></script>
   <script src="vistas/recursos/script/gallery.js"></script>
 
+  <script src="vistas/recursos/script/selectDinamicoLiAr.js"></script>
+
   <script src="vistas/recursos/script/traerLocalidades.js"></script>
 
   <script src="vistas/recursos/script/formularios.js"></script>
@@ -797,6 +799,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     });
   </script>
+
+
+
 
   <!-- MODAL DEL EVENTO CALENDARIO -->
 
