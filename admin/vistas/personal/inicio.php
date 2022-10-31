@@ -200,7 +200,7 @@ $rol_id = $_SESSION['rol_id'];
 
             <div class="col-sm-5">
               <div class="form-floating mb-3">
-                <label for="CantLicencia" class="form-label">Cantidad de días faltantes</label>
+                <label for="CantLicencia" class="form-label">Cantidad de días restantes</label>
                 <input type="number" class="form-control" name="CantLicencia" id="CantLicencia">
               </div>
             </div>

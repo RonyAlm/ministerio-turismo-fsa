@@ -397,7 +397,7 @@ class PersonalModelo
 
             $sqlLicencia = $conexionBD->prepare("INSERT INTO direccion (calle_direccion,rela_localidad_direccion)
                                                     VALUES(?,?)");
-            $sqlLicencia->execute(array($calle_direccion, $rela_localidad_direccion));
+            // $sqlLicencia->execute(array(,));
 
             $lastInsertIDdireccion = $conexionBD->lastInsertId();
         }

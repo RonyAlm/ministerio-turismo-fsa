@@ -12,14 +12,14 @@ $sql = $conexionBD->query("SELECT `id_licencias`, `fecha_ini`, `fecha_fin`, `dia
 
 // se crea el select que se va a rellenar en el inicio de personal para que el model muestre cant
 // de licencias o art que tiene el personal
-$cadena = "<label>SELECT 2 (paises)</label> 
+$cadena = "<label>Cantidad de días faltantes</label> 
 			<select id='lista2' name='lista2'>";
 
 while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
     // $this->listaPersonal[] = $filas;
     $cadena = $cadena . '<option value=' . $filas['dias_restante'] . '>' . $filas['dias_restante'] . '</option>';
 
-    print_r($filas);
+    // print_r($filas);
 }
 
 
