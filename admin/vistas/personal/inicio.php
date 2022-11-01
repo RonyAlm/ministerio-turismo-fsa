@@ -205,7 +205,7 @@ $rol_id = $_SESSION['rol_id'];
               </div>
             </div>
 
-            <div id="select2lista3"></div>
+            <div class="col-sm-5" id="select2lista3"></div>
 
           </div>
 
@@ -239,25 +239,11 @@ $rol_id = $_SESSION['rol_id'];
 
             </div>
 
-
-
-
             <div class="masArticulos col-sm-12">
-              <!-- <div class="col-sm-6">
 
-              </div> -->
             </div>
 
-            <div class="col-sm-6">
-              <div class="form-floating mb-3">
-                <label for="descripcion" class="form-label">Cantidad de Art. faltantes</label>
-                <h4>
-                  <span style="justify-content:center" title="3 Razones particulares" class="badge badge-warning">
-                    3
-                  </span>
-                </h4>
-              </div>
-            </div>
+            <div class="col-sm-5" id="selectArtFaltante2"></div>
           </div>
 
         </div>
