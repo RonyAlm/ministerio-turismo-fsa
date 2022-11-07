@@ -204,7 +204,7 @@ $rol_id = $_SESSION['rol_id'];
                 <input type="number" class="form-control" name="CantLicencia" id="CantLicencia">
               </div>
             </div>
-
+            <!-- Aquí va la cantidad de licencia que le queda al personal, que obtenemos del script selectdinamicoliar -->
             <div class="col-sm-5" id="select2lista3"></div>
 
           </div>
@@ -242,7 +242,7 @@ $rol_id = $_SESSION['rol_id'];
             <div class="masArticulos col-sm-12">
 
             </div>
-
+            <!-- Aquí va la cantidad de Art que le queda al personal, que obtenemos del script selectdinamicoliar -->
             <div class="col-sm-5" id="selectArtFaltante2"></div>
           </div>
 

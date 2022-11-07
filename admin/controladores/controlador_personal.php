@@ -36,7 +36,7 @@ class ControladorPersonal
 
             $cantidadlicenciaF = $_POST['lista2'];
             $CantLicenciaRestante = $_POST['CantLicencia'];
-            $articulo = $_POST['articulo'];
+            // $articulo = $_POST['articulo'];
 
 
 

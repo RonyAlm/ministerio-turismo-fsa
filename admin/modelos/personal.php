@@ -196,7 +196,7 @@ class PersonalModelo
                                             VALUES (?,?,?,?,?)");
         $sqllicencias->execute(array(
             $fechaini, $fechafin,
-            $diasrestante, 0, $lastInsertIDPersonal
+            $diasrestante, 1, $lastInsertIDPersonal
         ));
 
         $lastInsertlicencias = $conexionBD->lastInsertId();
@@ -383,23 +383,35 @@ class PersonalModelo
         $selectPersonal,
         $fechaIniLicencia,
         $fechafinLicencia,
-        $CantLicencia,
+        $CantLicenciaRestante,
         $fechaIniArticulo,
         $licencia,
-        $articulo
+        $articulo,
+        $cantidadlicenciaF
     ) {
 
         if ($licencia) {
 
             $conexionBD = BD::crearInstancia();
 
-            /*-------- INSERTAMOS LAS LICENCIAS--------*/
+            /*-------- ACTUALIZAMOS EL ESTADO DE LA ULTIMA LICENCIA--------*/
 
-            $sqlLicencia = $conexionBD->prepare("INSERT INTO direccion (calle_direccion,rela_localidad_direccion)
-                                                    VALUES(?,?)");
-            // $sqlLicencia->execute(array(,));
+            $sqlUdLicencia = $conexionBD->prepare("UPDATE `licencias` SET `estado`=0 WHERE `rela_personal`=$selectPersonal");
+            $sqlUdLicencia->execute();
 
-            $lastInsertIDdireccion = $conexionBD->lastInsertId();
+            print_r($sqlUdLicencia);
+
+            /*-------- INSERTAMOS LAS LICENCIAS en la tabla licencia--------*/
+
+            $asociativo = array_combine($fechaIniLicencia, $fechafinLicencia);
+
+            foreach ($asociativo as $indice => $valor) {
+
+                $sqlLicencia = $conexionBD->prepare("INSERT INTO `licencias`( `fecha_ini`, `fecha_fin`, `dias_restante`, `estado`, `rela_personal`) VALUES (?,?,?,?,?)");
+                $sqlLicencia->execute(array($indice, $valor, $CantLicenciaRestante, 1, $selectPersonal));
+                print_r($sqlLicencia);
+                $lastInsertLicencia = $conexionBD->lastInsertId();
+            }
         }
 
         if ($articulo) {
