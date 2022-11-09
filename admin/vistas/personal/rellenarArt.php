@@ -18,11 +18,13 @@ $cadena = "<label>Cantidad de Razones Particulares</label>
 			<select id='listaArt' name='listaArt'>";
 
 while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
-    // $this->listaPersonal[] = $filas;
+
     $cadena = $cadena . '<option value=' . $filas['id_razon_particular'] . '>' . $filas['cantidad'] . '</option>';
 
     // print_r($filas);
 }
+
+print_r($filas['id_razon_particular']);
 
 
 echo  $cadena . "</select>";

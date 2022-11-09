@@ -394,7 +394,7 @@ class PersonalModelo
 
             $conexionBD = BD::crearInstancia();
 
-            /*-------- ACTUALIZAMOS EL ESTADO DE LA ULTIMA LICENCIA--------*/
+            /*-------- ACTUALIZAMOS EL ESTADO DE LA ULTIMA LICENCIA a 0(cero) para mostrar por pantalla cuando insertamos eh ingresamos 1 a la base de datos --------*/
 
             $sqlUdLicencia = $conexionBD->prepare("UPDATE `licencias` SET `estado`=0 WHERE `rela_personal`=$selectPersonal");
             $sqlUdLicencia->execute();
@@ -415,7 +415,16 @@ class PersonalModelo
         }
 
         if ($articulo) {
-            echo "entre a articulo";
+            $conexionBD = BD::crearInstancia();
+            /*-------- INSERTAMOS LOS ARTICULOS en la tabla razon_particular--------*/
+            foreach ($fechaIniArticulo as $articuloFechas) {
+
+                $sqlArticulo = $conexionBD->prepare("INSERT INTO `razon_particular`(`fecha_ini_razonparticular`, `rela_personal`) 
+                VALUES (?,?)");
+                $sqlArticulo->execute(array($articuloFechas, $selectPersonal));
+                print_r($sqlArticulo);
+                $lastInsertArticulo = $conexionBD->lastInsertId();
+            }
         }
     }
 
