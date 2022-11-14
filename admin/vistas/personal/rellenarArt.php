@@ -8,7 +8,7 @@ $conexionBD = BD::crearInstancia();
 $idpersonal = $_POST["personal"];
 
 // generamos el sql
-$sql = $conexionBD->query("SELECT id_razon_particular, COUNT(id_razon_particular) cantidad
+$sql = $conexionBD->query("SELECT id_razon_particular,fecha_ini_razonparticular, COUNT(id_razon_particular) cantidad
 FROM `razon_particular` 
 WHERE rela_personal= '$idpersonal'");
 
@@ -20,11 +20,7 @@ $cadena = "<label>Cantidad de Razones Particulares</label>
 while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
 
     $cadena = $cadena . '<option value=' . $filas['id_razon_particular'] . '>' . $filas['cantidad'] . '</option>';
-
-    // print_r($filas);
 }
-
-print_r($filas['id_razon_particular']);
 
 
 echo  $cadena . "</select>";
