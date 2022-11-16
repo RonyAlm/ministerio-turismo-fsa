@@ -296,7 +296,8 @@ class PersonalModelo
         $idtelefonoAgencia,
         $idtelefonoFijo,
         $idcorreo,
-        $licenciasID
+        $licenciasID,
+        $diasRestID
     ) {
 
         $conexionBD = BD::crearInstancia();
@@ -318,10 +319,30 @@ class PersonalModelo
         $sqlPersonal->execute();
 
         /*---------------SE ACTUALIZA LAS LICENCIAS-------------------*/
-        $sqlLicencias = $conexionBD->prepare("UPDATE `licencias` SET `fecha_ini`='$fechaini',
-        `fecha_fin`='$fechafin',`dias_restante`='$diasrestante' 
-        WHERE id_licencias = $licenciasID;");
-        $sqlLicencias->execute();
+        $probando = array_combine($licenciasID, $fechaini);
+
+        foreach ($probando as $key1 => $inicio) {
+            $sqlLicenciasIni = $conexionBD->prepare("UPDATE `licencias` SET `fecha_ini`='$inicio'
+                                                    WHERE id_licencias = $key1");
+            $sqlLicenciasIni->execute();
+        }
+
+        $probando2 = array_combine($licenciasID, $fechafin);
+
+        foreach ($probando2 as $key2 => $fin) {
+            $sqlLicenciasFin = $conexionBD->prepare("UPDATE `licencias` SET `fecha_fin`='$fin' 
+                                                WHERE id_licencias = $key2");
+            $sqlLicenciasFin->execute();
+        }
+        // $sqlLicencias = $conexionBD->prepare("UPDATE `licencias` SET `fecha_ini`='$fechaini',
+        // `fecha_fin`='$fechafin' 
+        // WHERE id_licencias = $licenciasID;");
+        // $sqlLicencias->execute();
+
+        /*---------------SE ACTUALIZA LAS LICENCIAS DIAS RESTANTES-------------------*/
+        $sqlLicenciasDiasRestantes = $conexionBD->prepare("UPDATE `licencias` SET `dias_restante`='$diasrestante' 
+        WHERE id_licencias = $diasRestID");
+        $sqlLicenciasDiasRestantes->execute();
 
         /*---------------SE ACTUALIZA LA DIRECCION CON LA LOCALIDAD-------------------*/
 
@@ -530,9 +551,23 @@ class PersonalModelo
 
         return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
     }
+    public function buscarCantidadLicencia($idpersonal)
+    {
+
+        $conexionBD = BD::crearInstancia();
+
+
+        $sqlcantLic = $conexionBD->query("SELECT `id_licencias`, `fecha_ini`, `fecha_fin`, `dias_restante`, `estado`, `rela_personal` 
+        FROM `licencias` 
+        WHERE rela_personal=$idpersonal AND estado = 1 LIMIT 1");
+
+        $sqlcantLic->execute();
+
+        return $sqlcantLic->fetch(PDO::FETCH_OBJ);
+    }
 }
 
-class Contactos
+class ContactosPersonal
 {
     public $telefonoAgencia;
     public $correoAgencia;
@@ -541,6 +576,7 @@ class Contactos
     public $twitterAgencia;
     public $webAgencia;
     public $otroAgencia;
+    public $licencia;
 
     private $BD;
 
@@ -653,6 +689,17 @@ class Contactos
         $consulta->execute();
 
         return $consulta->fetch(PDO::FETCH_OBJ);
+    }
+    public function consultarLicencias($id)
+    {
+        // echo 'este es el id:' . $id;
+        $conexionBD = BD::crearInstancia();
+        $consultalicencia = $conexionBD->query("SELECT `id_licencias`, `fecha_ini`, `fecha_fin`, `dias_restante`, `estado`, `rela_personal` FROM `licencias`
+        WHERE `rela_personal`=$id");
+
+        $consultalicencia->execute();
+
+        return $consultalicencia->fetchAll(PDO::FETCH_OBJ);
     }
 }
 

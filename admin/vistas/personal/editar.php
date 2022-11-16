@@ -19,7 +19,7 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Perfil</h1>
+        <h1> Editar Perfil</h1>
       </div>
 
     </div>
@@ -104,9 +104,7 @@
                       <div class="col-sm-10">
                         <input type="hidden" id="agenciatelefonoID" name="agenciatelefonoID[]" value="<?php echo $telefonos['id_contacto']; ?>">
                         <input type="number" id="telefonoCel" name="telefonoCel[]" class="form-control" value="<?php echo $telefonos['descripcion_contacto']; ?>">
-                        <!-- <div class="btn-der">
-                        <button id="adicional" name="adicional" type="button" class="btn btn-warning"> Más + </button>
-                      </div> -->
+
                       </div>
                     </div>
                   <?php  } ?>
@@ -227,25 +225,32 @@
                 </div>
 
                 <div class="tab-pane" id="licencias">
-                  <div class="form-group row">
-                    <label for="fechaini" class="col-sm-2 col-form-label">Fechas inicio</label>
-                    <div class="col-sm-10">
-                      <input type="hidden" id="licenciasID" name="licenciasID" value="<?php echo $editar->id_licencias; ?>">
-                      <input type="date" class="form-control" name="fechaini" id="fechaini" value="<?= $editar->fecha_ini ?>">
+
+                  <?php foreach ($consultarLicencias as $licencia) { ?>
+
+                    <div class="form-group row">
+                      <label for="fechaini" class="col-sm-2 col-form-label">Fechas inicio</label>
+                      <div class="col-sm-10">
+                        <input type="hidden" id="licenciasID" name="licenciasID[]" value="<?= $licencia->id_licencias ?>">
+                        <input type="date" class="form-control" name="fechaini[]" id="fechaini" value="<?= $licencia->fecha_ini ?>">
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="fechafin" class="col-sm-2 col-form-label">Fechas fin</label>
-                    <div class="col-sm-10">
-                      <input type="hidden" id="" name="" value="<?php echo $editar->id_licencias; ?>">
-                      <input type="date" class="form-control" name="fechafin" id="fechafin" value="<?= $editar->fecha_fin ?>">
+
+                    <div class="form-group row">
+                      <label for="fechafin" class="col-sm-2 col-form-label">Fechas fin</label>
+                      <div class="col-sm-10">
+                        <input type="hidden" id="" name="" value="<?php echo $licencia->id_licencias ?>">
+                        <input type="date" class="form-control" name="fechafin[]" id="fechafin" value="<?= $licencia->fecha_fin ?>">
+                      </div>
                     </div>
-                  </div>
+
+                  <?php  } ?>
+
                   <div class="form-group row">
                     <label for="diasrestante" class="col-sm-2 col-form-label">Días Restantes</label>
                     <div class="col-sm-10">
-                      <input type="hidden" id="" name="" value="<?php echo $editar->id_licencias; ?>">
-                      <input type="number" class="form-control" name="diasrestante" id="diasrestante" value="<?= $editar->dias_restante ?>">
+                      <input type="hidden" id="diasRestID" name="diasRestID" value="<?= $consultarCantidLicenciaEditar->id_licencias ?>">
+                      <input type="number" class="form-control" name="diasrestante" id="diasrestante" value="<?= $consultarCantidLicenciaEditar->dias_restante ?>">
                     </div>
                   </div>
 

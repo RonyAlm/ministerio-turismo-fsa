@@ -23,7 +23,7 @@ class ControladorPersonal
         // print_r($_POST);
 
         if ($_POST) {
-            print_r($_POST);
+            // print_r($_POST);
             $insertarModelLic = new PersonalModelo();
 
             $selectPersonal = $_POST['selectPersonal23'];
@@ -140,6 +140,9 @@ class ControladorPersonal
         $buscarSelectRol = $select_tipo->buscarSelectRol();
         $buscarSelectArea = $select_tipo->buscarSelectArea();
         $buscarSelectContrato = $select_tipo->buscarSelectContrato();
+        $consultarCantidLicenciaEditar = $select_tipo->buscarCantidadLicencia($id);
+
+        // print_r($consultarLicencias);
 
         // //print_r("$idAgencia");
         // /*----------BUSCA LOS POST QUE SE ENCUENTRA EN EDITAR.PHP PARA PODER EDITARLO----------*/
@@ -180,7 +183,7 @@ class ControladorPersonal
             $rela_localidad_direccion = $_POST['localidad'];
             $calle_direccion = $_POST['direccion'];
 
-            // CONTANTOS 
+            // CONTACTOS 
 
             $idtelefonoAgencia = $_POST['agenciatelefonoID'];
             $telefonoCel = $_POST['telefonoCel'];
@@ -195,7 +198,12 @@ class ControladorPersonal
             $licenciasID = $_POST['licenciasID'];
             $fechaini = $_POST['fechaini'];
             $fechafin = $_POST['fechafin'];
+            $diasRestID = $_POST['diasRestID'];
             $diasrestante = $_POST['diasrestante'];
+
+
+
+            // var_dump($probando);
 
 
 
@@ -233,10 +241,11 @@ class ControladorPersonal
                 $idtelefonoAgencia,
                 $idtelefonoFijo,
                 $idcorreo,
-                $licenciasID
+                $licenciasID,
+                $diasRestID
             );
 
-            print_r($EditarAgencia);
+            // print_r($EditarAgencia);
 
 
 
@@ -247,7 +256,7 @@ class ControladorPersonal
 
         // /*----------BUSCA LOS ID Y LOS PONE EN EL FORMULARIO----------*/
 
-        $contactosDeagencia = new Contactos();
+        $contactosDeagencia = new ContactosPersonal();
 
         $contactosDeagencia1 = new ContactosInfoPersonal();
 
@@ -259,11 +268,18 @@ class ControladorPersonal
         $agenciaTwitter = $contactosDeagencia->consultarTwitter($idPersona);
         $agenciaWeb = $contactosDeagencia->consultarWeb($idPersona);
         $agenciaOtro = $contactosDeagencia->consultarOtro($idPersona);
+        $consultarLicencias = $contactosDeagencia->consultarLicencias($id);
 
+
+        // if (is_array($consultarLicenciasa) || is_object($consultarLicenciasa)) {
+        //     echo "holaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholahola";
+        // } ESTO VERIFICA SI ES UN ARRAY O UN OBJETO
 
         $buscarID = new PersonalModelo();
 
         $editar = $buscarID->buscar($id);
+
+
 
 
 
@@ -392,7 +408,7 @@ class ControladorPersonal
 
 
             str_replace(" ", "", $usuario);
-            // echo "</br>";
+            // echo "</>";
             $random = random_int(1000, 9999);
             $contraseña = $usuario . $random;
             str_replace(" ", "", $contraseña);
@@ -435,33 +451,11 @@ class ControladorPersonal
     {
         $conexionBD = BD::crearInstancia();
 
-        print_r($_POST['personal']);
+        // print_r($_POST['personal']);
 
         $personal = $_POST['personal'];
 
-        // $sql = $conexionBD->query("SELECT `id_licencias`, `fecha_ini`, `fecha_fin`, `dias_restante`, `estado`, `rela_personal` FROM `licencias` WHERE rela_personal='$personal'");
 
-
-        // $cadena = "<label>SELECT 2 (paises)</label> 
-        // 	<select id='lista2' name='lista2'>";
-
-        // while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
-        //     // $this->listaPersonal[] = $filas;
-        //     $cadena = $cadena . '<option value=' . $filas->dias_restante . '>' . $filas->fecha_fin . '</option>';
-
-        //     print_r($filas);
-        // }
-        // // return $this->listaPersonal; //este return se va a llamar en el controlador_alojamiento.php clase inicio
-
-
-        // // $cadena = "<label>SELECT 2 (paises)</label> 
-        // // 	<select id='lista2' name='lista2'>";
-
-        // // while ($ver = mysqli_fetch_row($result)) {
-        // //     $cadena = $cadena . '<option value=' . $ver[0] . '>' . utf8_encode($ver[2]) . '</option>';
-        // // }
-
-        // echo  $cadena . "</select>";
 
 
 
