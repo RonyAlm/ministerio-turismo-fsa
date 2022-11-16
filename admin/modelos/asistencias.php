@@ -19,14 +19,8 @@ class AsistenciaModelo
 
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->query("SELECT `id_asistencia`, `fecha_asistencia`, `semana_asistencia`, `date_updated_asistencia`,
-        per.id_persona,
-        CONCAT(a.in_p1,' | ', a.on_p1) manana,
-        CONCAT(a.in_p2,' | ', a.on_p2) tarde,
-        CONCAT(per.nombre_persona, ' ', per.apellido_persona) full_name
-        FROM `asistencia` a
-        INNER JOIN personales p on p.id_personal = a.rela_personal
-        INNER JOIN persona per on per.id_persona = p.rela_persona");
+        $sql = $conexionBD->query("SELECT `id_asistencia2`, `nombre_personal`, `fecha_asistencia`, `hora_asistencia` 
+                                    FROM `asistencia2`");
 
         //recuperamos los datos y los retornamos
 
@@ -61,123 +55,139 @@ class AsistenciaModelo
     }
 
     public function crear(
-        $descripcion_agencias,
-        $matricula_agencia,
-        $legajo_agencia,
-        $cuit_agencia,
-        $categoria_agencia,
-        $rela_localidad_direccion,
-        $calle_direccion,
-        $razonsocial,
-        $telefonoAgencia,
-        $telefonoFijoAgencia,
-        $correoAgencia,
-        $facebookAgencia,
-        $instagramAgencia,
-        $twitterAgencia,
-        $webAgencia,
-        $otroAgencia,
-        $estadoAgencia,
-        $idoneoAgencia
+        $lineas
     ) {
 
         $conexionBD = BD::crearInstancia();
 
-        /*-------- INSERTAMOS LA DIRECCION--------*/
+        $i = 0;
 
-        $sqlDireccion = $conexionBD->prepare("INSERT INTO direccion (calle_direccion,rela_localidad_direccion)
-                                                    VALUES(?,?)");
-        $sqlDireccion->execute(array($calle_direccion, $rela_localidad_direccion));
+        foreach ($lineas as $linea) {
+            $cantidad_registros = count($lineas);
+            $cantidad_regist_agregados =  ($cantidad_registros - 1);
 
-        $lastInsertIDdireccion = $conexionBD->lastInsertId();
+            if ($i != 0) {
 
-        /*-------- INSERTAMOS LA RAZON SOCIAL--------*/
+                $datos = explode(",", $linea);
+                $semanas = [];
 
-        $sqlRazonSocial = $conexionBD->prepare("INSERT INTO `razon_social`(`descripcion_razon_social`) 
-                                                    VALUES (?)");
-        $sqlRazonSocial->execute(array($razonsocial));
+                $nombre                = !empty($datos[0])  ? ($datos[0]) : '';
+                $id                = !empty($datos[1])  ? ($datos[1]) : '';
+                $fecha               = !empty($datos[3])  ? ($datos[3]) : '';
+                $hora               = !empty($datos[4])  ? ($datos[4]) : '';
+                $in               = !empty($datos[5])  ? ($datos[5]) : '';
+                $checkInOn               = !empty($datos[9])  ? ($datos[9]) : '';
 
-        $lastInsertIDRazonSocial = $conexionBD->lastInsertId();
+                /*-------- INSERTAMOS LA DIRECCION--------*/
 
-        /*-------- INSERTAMOS LA AGENCIA--------*/
+                $sqlDireccion = $conexionBD->prepare("INSERT INTO `asistencia2`(`nombre_personal`, `fecha_asistencia`, `hora_asistencia`) 
+                                                     VALUES (?,?,?)");
+                $sqlDireccion->execute(array($nombre, $fecha, $hora));
+            }
 
-        $sql = $conexionBD->prepare("INSERT INTO agencias (descripcion_agencias,matricula_agencia,
-                                                                legajo_agencia,cuit_agencia,categoria_agencia, fecha_edit_agencia,
-                                                                rela_agencia_direccion,rela_razon_social_agencia
-                                                                ,idoneo_agencia) 
-                                            VALUES (?,?,?,?,?,CURRENT_TIMESTAMP(),?,?,?)");
-        $sql->execute(array(
-            $descripcion_agencias, $matricula_agencia,
-            $legajo_agencia, $cuit_agencia, $categoria_agencia, $lastInsertIDdireccion,
-            $lastInsertIDRazonSocial, $idoneoAgencia
-        ));
+            // $arrays = array_merge($semana, $semana1);
 
-        $lastInsertIDAgencias = $conexionBD->lastInsertId();
+            // $resultado = array_merge_recursive((array)$semana, (array)$semana1);
+            // print_r($resultado);
 
-        /*-------- INSERTAMOS EL TELEFONO CELULAR--------*/
 
-        foreach ($telefonoAgencia as $telefonoAgencia1) {
-
-            $sqlTelefono = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-                                                                            `rela_contacto_agencia`) 
-                                                    VALUES (?,?,?)");
-            $sqlTelefono->execute(array($telefonoAgencia1, 2, $lastInsertIDAgencias));
+            echo '<div>' . $i . "). " . $checkInOn . '</div>';
+            $i++;
         }
 
-        /*-------- INSERTAMOS EL TELEFONO FIJO--------*/
 
-        $sqlFijo = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-                                                                            `rela_contacto_agencia`) 
-                                                    VALUES (?,?,?)");
-        $sqlFijo->execute(array($telefonoFijoAgencia, 9, $lastInsertIDAgencias));
 
-        /*-------- INSERTAMOS EL CORREO-------*/
 
-        $sqlCorreo = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-                                                                            `rela_contacto_agencia`) 
-                                                    VALUES (?,?,?)");
-        $sqlCorreo->execute(array($correoAgencia, 1, $lastInsertIDAgencias));
 
-        /*-------- INSERTAMOS EL FACEBOOK--------*/
+        // $lastInsertIDdireccion = $conexionBD->lastInsertId();
 
-        $sqlFacebook = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-                                                                            `rela_contacto_agencia`) 
-                                                    VALUES (?,?,?)");
-        $sqlFacebook->execute(array($facebookAgencia, 4, $lastInsertIDAgencias));
+        //     /*-------- INSERTAMOS LA RAZON SOCIAL--------*/
 
-        /*-------- INSERTAMOS EL INSTAGRAM--------*/
+        //     $sqlRazonSocial = $conexionBD->prepare("INSERT INTO `razon_social`(`descripcion_razon_social`) 
+        //                                                 VALUES (?)");
+        //     $sqlRazonSocial->execute(array($razonsocial));
 
-        $sqlInstagram = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-                                                                            `rela_contacto_agencia`) 
-                                                    VALUES (?,?,?)");
-        $sqlInstagram->execute(array($instagramAgencia, 5, $lastInsertIDAgencias));
+        //     $lastInsertIDRazonSocial = $conexionBD->lastInsertId();
 
-        /*-------- INSERTAMOS EL TWITTER--------*/
+        //     /*-------- INSERTAMOS LA AGENCIA--------*/
 
-        $sqlTwitter = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-                                                                            `rela_contacto_agencia`) 
-                                                    VALUES (?,?,?)");
-        $sqlTwitter->execute(array($twitterAgencia, 6, $lastInsertIDAgencias));
+        //     $sql = $conexionBD->prepare("INSERT INTO agencias (descripcion_agencias,matricula_agencia,
+        //                                                             legajo_agencia,cuit_agencia,categoria_agencia, fecha_edit_agencia,
+        //                                                             rela_agencia_direccion,rela_razon_social_agencia
+        //                                                             ,idoneo_agencia) 
+        //                                         VALUES (?,?,?,?,?,CURRENT_TIMESTAMP(),?,?,?)");
+        //     $sql->execute(array(
+        //         $descripcion_agencias, $matricula_agencia,
+        //         $legajo_agencia, $cuit_agencia, $categoria_agencia, $lastInsertIDdireccion,
+        //         $lastInsertIDRazonSocial, $idoneoAgencia
+        //     ));
 
-        /*-------- INSERTAMOS EL SITIO WEB--------*/
+        //     $lastInsertIDAgencias = $conexionBD->lastInsertId();
 
-        $sqlWeb = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-                                                                            `rela_contacto_agencia`) 
-                                                    VALUES (?,?,?)");
-        $sqlWeb->execute(array($webAgencia, 7, $lastInsertIDAgencias));
+        //     /*-------- INSERTAMOS EL TELEFONO CELULAR--------*/
 
-        /*-------- INSERTAMOS OTRO--------*/
+        //     foreach ($telefonoAgencia as $telefonoAgencia1) {
 
-        $sqlOtro = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-                                                                            `rela_contacto_agencia`) 
-                                                    VALUES (?,?,?)");
-        $sqlOtro->execute(array($otroAgencia, 8, $lastInsertIDAgencias));
+        //         $sqlTelefono = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
+        //                                                                         `rela_contacto_agencia`) 
+        //                                                 VALUES (?,?,?)");
+        //         $sqlTelefono->execute(array($telefonoAgencia1, 2, $lastInsertIDAgencias));
+        //     }
 
-        /*-------- INSERTAMOS EL ESTADO--------*/
+        //     /*-------- INSERTAMOS EL TELEFONO FIJO--------*/
 
-        $sqlEstado = $conexionBD->prepare("INSERT INTO `estado_actividad`(`rela_tipo_estado`, `rela_estado_agencia`) 
-                                            VALUES (?,?)");
-        $sqlEstado->execute(array($estadoAgencia, $lastInsertIDAgencias));
+        //     $sqlFijo = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
+        //                                                                         `rela_contacto_agencia`) 
+        //                                                 VALUES (?,?,?)");
+        //     $sqlFijo->execute(array($telefonoFijoAgencia, 9, $lastInsertIDAgencias));
+
+        //     /*-------- INSERTAMOS EL CORREO-------*/
+
+        //     $sqlCorreo = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
+        //                                                                         `rela_contacto_agencia`) 
+        //                                                 VALUES (?,?,?)");
+        //     $sqlCorreo->execute(array($correoAgencia, 1, $lastInsertIDAgencias));
+
+        //     /*-------- INSERTAMOS EL FACEBOOK--------*/
+
+        //     $sqlFacebook = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
+        //                                                                         `rela_contacto_agencia`) 
+        //                                                 VALUES (?,?,?)");
+        //     $sqlFacebook->execute(array($facebookAgencia, 4, $lastInsertIDAgencias));
+
+        //     /*-------- INSERTAMOS EL INSTAGRAM--------*/
+
+        //     $sqlInstagram = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
+        //                                                                         `rela_contacto_agencia`) 
+        //                                                 VALUES (?,?,?)");
+        //     $sqlInstagram->execute(array($instagramAgencia, 5, $lastInsertIDAgencias));
+
+        //     /*-------- INSERTAMOS EL TWITTER--------*/
+
+        //     $sqlTwitter = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
+        //                                                                         `rela_contacto_agencia`) 
+        //                                                 VALUES (?,?,?)");
+        //     $sqlTwitter->execute(array($twitterAgencia, 6, $lastInsertIDAgencias));
+
+        //     /*-------- INSERTAMOS EL SITIO WEB--------*/
+
+        //     $sqlWeb = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
+        //                                                                         `rela_contacto_agencia`) 
+        //                                                 VALUES (?,?,?)");
+        //     $sqlWeb->execute(array($webAgencia, 7, $lastInsertIDAgencias));
+
+        //     /*-------- INSERTAMOS OTRO--------*/
+
+        //     $sqlOtro = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
+        //                                                                         `rela_contacto_agencia`) 
+        //                                                 VALUES (?,?,?)");
+        //     $sqlOtro->execute(array($otroAgencia, 8, $lastInsertIDAgencias));
+
+        //     /*-------- INSERTAMOS EL ESTADO--------*/
+
+        //     $sqlEstado = $conexionBD->prepare("INSERT INTO `estado_actividad`(`rela_tipo_estado`, `rela_estado_agencia`) 
+        //                                         VALUES (?,?)");
+        //     $sqlEstado->execute(array($estadoAgencia, $lastInsertIDAgencias));
     }
 
     public static function borrar($idAgenciaBorrar, $id_direccion, $idRazonSocial)

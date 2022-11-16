@@ -7,7 +7,7 @@ class TransporteModelo
     public $listaTransporteID;
     public $listaBuscar;
     public $listaProvincias;
-    
+
 
 
     public function __construct()
@@ -23,25 +23,18 @@ class TransporteModelo
 
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->query("SELECT `id_servicios_generales`, `nombre_servicio_general`, `idoneo_servicio_general`,
-        direccion.calle_direccion,direccion.id_direccion,
-        localidad.nombre_localidad,localidad.id_localidad,
-        tipo_estacion.descripcion_estacion,
-        tipo_de_servicio.descripcion_servicio,
-        tipo_lugar.descripcion_lugar,
-        `descripcion_servicio_general`,
-        fecha_edit_general,
-        (SELECT contacto.descripcion_contacto 
-        FROM contacto 
-        WHERE servicios_generales.id_servicios_generales = contacto.rela_servicios_generales
-        and contacto.rela_tipo_contacto_cont = 2
-        LIMIT 1) descripcion_contacto
-        FROM `servicios_generales` 
-        INNER JOIN direccion ON servicios_generales.rela_direccion = direccion.id_direccion
-        INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad
-        INNER JOIN tipo_estacion on tipo_estacion.id_tipo_estacion= servicios_generales.rela_estacion
-        INNER JOIN tipo_de_servicio on tipo_de_servicio.id_tipo_servicio = servicios_generales.rela_tipo_servicio
-        INNER JOIN tipo_lugar on tipo_lugar.id_tipo_lugar = servicios_generales.rela_tipo_lugar");
+        $sql = $conexionBD->query("SELECT `id_viajes`, `horario_salida`, `horario_llegada`,
+        `fecha_salida`, `fecha_llegada`, `fecha_edit_viajes`,
+        od.id_origen_destino,
+        od.origen_localidad, od.destino_localidad, od.observacion_transporte,
+        ec.id_empresa_colectivo, ec.nombre_empresa,
+        l.nombre_localidad origen, ld.nombre_localidad destino
+        FROM `viajes` v
+        INNER JOIN origen_destino od on od.id_origen_destino = v.rela_origen_destino
+        INNER JOIN empresa_colectivo ec on ec.id_empresa_colectivo = od.rela_empresa_O_D
+        INNER JOIN localidad l on l.id_localidad = od.origen_localidad
+        INNER JOIN localidad ld on ld.id_localidad = od.destino_localidad
+        GROUP BY od.id_origen_destino");
 
         //recuperamos los datos y los retornamos
 
@@ -76,93 +69,85 @@ class TransporteModelo
     }
 
     public function crear(
-        $nombre,
-        $descripcion,
-        $idoneo,
-        $localidad,
-        $tipoServiGeneral,
-        $tipoServicio,
-        $domicilio,
-        $estacion,
-        $telefonoAgencia,
-        $telefonoFijoAgencia,
-        $correoAgencia,
-        $facebookAgencia,
-        $instagramAgencia,
-        $twitterAgencia,
-        $webAgencia,
-        $otroAgencia
+        $empresas,
+        $origen,
+        $destino,
+        $horarioSalida,
+        $horarioLlegada,
+        $observacionTransporte
+        // ,
+        // $datos
     ) {
 
         $conexionBD = BD::crearInstancia();
 
-        /*-------- INSERTAMOS LA DIRECCION--------*/
+        /*-------- INSERTAMOS LA ORIGEN-DESTINO --------*/
 
-        $sqlDireccion = $conexionBD->prepare("INSERT INTO direccion (calle_direccion,rela_localidad_direccion)
-                                                    VALUES(?,?)");
-        $sqlDireccion->execute(array($domicilio, $localidad));
+        $sqlDireccion = $conexionBD->prepare("INSERT INTO `origen_destino`(`observacion_transporte`,`origen_localidad`, `destino_localidad`, `rela_empresa_O_D`) VALUES (?,?,?,?)");
+        $sqlDireccion->execute(array($observacionTransporte, $origen, $destino, $empresas));
 
-        $lastInsertIDdireccion = $conexionBD->lastInsertId();
+        $lastInsertIDOrigen = $conexionBD->lastInsertId();
 
 
-        /*-------- INSERTAMOS EL SERVICIO GENERAL--------*/
+        /*-------- INSERTAMOS EL VIAJE--------*/
 
-        $sql = $conexionBD->prepare("INSERT INTO `servicios_generales`( `nombre_servicio_general`,`idoneo_servicio_general`, `rela_direccion`, `rela_estacion`, `rela_tipo_servicio`, `rela_tipo_lugar`, `descripcion_servicio_general`, fecha_edit_general) VALUES (?,?,?,?,?,?,?,CURRENT_TIMESTAMP())");
+        $sql = $conexionBD->prepare("INSERT INTO `viajes`(`rela_origen_destino`, `fecha_edit_viajes`) 
+        VALUES (?,CURRENT_TIMESTAMP())");
         $sql->execute(array(
-            $nombre, $idoneo, $lastInsertIDdireccion,
-            $estacion, $tipoServicio, $tipoServiGeneral,
-            $descripcion
+            $lastInsertIDOrigen
         ));
 
         $lastInsertIDAgencias = $conexionBD->lastInsertId();
 
         // print_r($lastInsertIDAgencias);
 
-        /*-------- INSERTAMOS EL TELEFONO CELULAR--------*/
+        /*-------- INSERTAMOS LA SALIDA Y LLEGADA--------*/
 
-        foreach ($telefonoAgencia as $telefonoAgencia1) {
+        $datos = array_combine($horarioSalida, $horarioLlegada);
 
-            $sqlTelefono = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_servicios_generales`) VALUES (?,?,?)");
-            // print_r($sqlTelefono);
-            $sqlTelefono->execute(array($telefonoAgencia1, 2, $lastInsertIDAgencias));
-            // $sqlTelefono->execute();
+        foreach ($datos as $indice => $valor) {
+
+            $sqlTelefono = $conexionBD->prepare("INSERT INTO `viajes`(`horario_salida`,`horario_llegada`,`rela_origen_destino`)
+        VALUES (?,?,?)");
+            $sqlTelefono->execute(array($indice, $valor, $lastInsertIDOrigen));
         }
+
 
         /*-------- INSERTAMOS EL TELEFONO FIJO--------*/
 
-        $sqlFijo = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_servicios_generales`) VALUES (?,?,?)");
-        $sqlFijo->execute(array($telefonoFijoAgencia, 9,  $lastInsertIDAgencias));
-        print_r($sqlFijo);
+        // $sqlFijo = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_servicios_generales`) VALUES (?,?,?)");
+        // $sqlFijo->execute(array($telefonoFijoAgencia, 9,  $lastInsertIDAgencias));
+        // print_r($sqlFijo);
 
-        /*-------- INSERTAMOS EL CORREO-------*/
+        // /*-------- INSERTAMOS EL CORREO-------*/
 
-        $sqlCorreo = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_servicios_generales`) VALUES (?,?,?)");
-        $sqlCorreo->execute(array($correoAgencia, 1, $lastInsertIDAgencias));
+        // $sqlCorreo = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_servicios_generales`) VALUES (?,?,?)");
+        // $sqlCorreo->execute(array($correoAgencia, 1, $lastInsertIDAgencias));
 
-        /*-------- INSERTAMOS EL FACEBOOK--------*/
+        // /*-------- INSERTAMOS EL FACEBOOK--------*/
 
-        $sqlFacebook = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_servicios_generales`) VALUES (?,?,?)");
-        $sqlFacebook->execute(array($facebookAgencia, 4, $lastInsertIDAgencias));
+        // $sqlFacebook = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_servicios_generales`) VALUES (?,?,?)");
+        // $sqlFacebook->execute(array($facebookAgencia, 4, $lastInsertIDAgencias));
 
-        /*-------- INSERTAMOS EL INSTAGRAM--------*/
+        // /*-------- INSERTAMOS EL INSTAGRAM--------*/
 
-        $sqlInstagram = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_servicios_generales`) VALUES (?,?,?)");
-        $sqlInstagram->execute(array($instagramAgencia, 5, $lastInsertIDAgencias));
+        // $sqlInstagram = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_servicios_generales`) VALUES (?,?,?)");
+        // $sqlInstagram->execute(array($instagramAgencia, 5, $lastInsertIDAgencias));
 
-        /*-------- INSERTAMOS EL TWITTER--------*/
+        // /*-------- INSERTAMOS EL TWITTER--------*/
 
-        $sqlTwitter = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_servicios_generales`) VALUES (?,?,?)");
-        $sqlTwitter->execute(array($twitterAgencia, 6, $lastInsertIDAgencias));
+        // $sqlTwitter = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_servicios_generales`) VALUES (?,?,?)");
+        // $sqlTwitter->execute(array($twitterAgencia, 6, $lastInsertIDAgencias));
 
-        /*-------- INSERTAMOS EL SITIO WEB--------*/
+        // /*-------- INSERTAMOS EL SITIO WEB--------*/
 
-        $sqlWeb = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_servicios_generales`) VALUES (?,?,?)");
-        $sqlWeb->execute(array($webAgencia, 7, $lastInsertIDAgencias));
+        // $sqlWeb = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_servicios_generales`) VALUES (?,?,?)");
+        // $sqlWeb->execute(array($webAgencia, 7, $lastInsertIDAgencias));
 
-        /*-------- INSERTAMOS OTRO--------*/
+        // /*-------- INSERTAMOS OTRO--------*/
 
-        $sqlOtro = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_servicios_generales`) VALUES (?,?,?)");
-        $sqlOtro->execute(array($otroAgencia, 8, $lastInsertIDAgencias));
+        // $sqlOtro = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`, `rela_tipo_contacto_cont`, `rela_servicios_generales`) VALUES (?,?,?)");
+        // $sqlOtro->execute(array($otroAgencia, 8, $lastInsertIDAgencias));
     }
 
     public static function borrar($idServigeneralBorrar, $id_direccion)
@@ -335,8 +320,11 @@ class TransporteModelo
         $conexionBD = BD::crearInstancia();
 
 
-        $sqlLocalidad = $conexionBD->query("SELECT id_localidad, `nombre_localidad`, rela_provincia, rela_departamento
-                                                       FROM localidad");
+        $sqlLocalidad = $conexionBD->query(
+            "SELECT id_localidad, `nombre_localidad`, rela_provincia, rela_departamento
+            FROM localidad 
+            WHERE rela_provincia = 1 "
+        );
 
         $sqlLocalidad->execute();
 
@@ -353,12 +341,31 @@ class TransporteModelo
 
         $sqlLocalidad->execute();
 
-        //return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
+        return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
 
-        while ($filas = $sqlLocalidad->fetch(PDO::FETCH_ASSOC)) {
-            $this->listaProvincias[] = $filas;
-        }
-        return $this->listaProvincias;
+        // while ($filas = $sqlLocalidad->fetch(PDO::FETCH_ASSOC)) {
+        //     $this->listaProvincias[] = $filas;
+        // }
+        // return $this->listaProvincias;
+    }
+
+    public function buscarSelectEmpresa()
+    {
+
+        $conexionBD = BD::crearInstancia();
+
+
+        $sqlLocalidad = $conexionBD->query("SELECT `id_empresa_colectivo`, `nombre_empresa`, `boleteria_empresa` 
+        FROM `empresa_colectivo`");
+
+        $sqlLocalidad->execute();
+
+        return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
+
+        // while ($filas = $sqlLocalidad->fetch(PDO::FETCH_ASSOC)) {
+        //     $this->listaProvincias[] = $filas;
+        // }
+        // return $this->listaProvincias;
     }
 
     public function buscarSelectEstacion()

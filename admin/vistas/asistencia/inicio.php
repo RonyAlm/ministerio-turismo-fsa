@@ -28,7 +28,7 @@ $rol_id = $_SESSION['rol_id'];
 <div class="card">
   <div class="card-header">
 
-    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") : ?>
+    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") : ?>
 
       <a name="" id="" class="btn btn-success" href="?controlador=asistencias&accion=crear" role="button">Agregar</a>
 
@@ -50,10 +50,8 @@ $rol_id = $_SESSION['rol_id'];
             <tr style="background: linear-gradient(to right, #61ba6d, #83c331)">
               <th>id</th>
               <th>Nombre y Apellido</th>
-              <th>(M)Entrada y Salida</th>
-              <th>(T)Entrada y Salida</th>
               <th>Fecha</th>
-              <th>Semana</th>
+              <th>Hora</th>
               <th>Acción</th>
             </tr>
           </thead>
@@ -62,25 +60,24 @@ $rol_id = $_SESSION['rol_id'];
             <?php foreach ($tabla as $asistencia) { ?>
 
               <tr>
-                <td><?php echo $asistencia["id_asistencia"]; ?></td>
-                <td><?php echo $asistencia["full_name"]; ?></td>
-                <td><?php echo $asistencia["manana"]; ?></td>
-                <td><?php echo $asistencia["tarde"]; ?></td>
+                <td><?php echo $asistencia["id_asistencia2"]; ?></td>
+                <td><?php echo $asistencia["nombre_personal"]; ?></td>
                 <td><?php echo $asistencia["fecha_asistencia"]; ?></td>
-                <td><?php echo $asistencia["semana_asistencia"]; ?></td>
+                <td><?php echo $asistencia["hora_asistencia"]; ?></td>
+
                 <td class="project-actions text-right">
                   <div class="btn-group" role="group" aria-label="">
 
-                    <a title="Más Infomación" id="btn1" href="?controlador=asistencias&accion=info&id=<?= $asistencia["id_asistencia"]; ?>" class="btn btn-primary btn-sm">
+                    <a title="Más Infomación" id="btn1" href="?controlador=asistencias&accion=info&id=<?= $asistencia["id_asistencia2"]; ?>" class="btn btn-primary btn-sm">
                       <i class="fas fa-folder"></i>
                     </a>
 
                     <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") : ?>
 
-                      <a title="Editar" href="?controlador=asistencias&accion=editar&id=<?php echo $asistencia["id_asistencia"]; ?>" class="btn btn-success btn-sm">
+                      <a title="Editar" href="?controlador=asistencias&accion=editar&id=<?php echo $asistencia["id_asistencia2"]; ?>" class="btn btn-success btn-sm">
                         <i class="fas fa-pencil-alt"></i>
                       </a>
-                      <a title="Borrar" href="?controlador=asistencias&accion=borrar&id=<?php echo $asistencia["id_asistencia"]; ?>" class="btn btn-danger btn-sm">
+                      <a title="Borrar" href="?controlador=asistencias&accion=borrar&id=<?php echo $asistencia["id_asistencia2"]; ?>" class="btn btn-danger btn-sm">
                         <i class="fas fa-trash"></i>
                       </a>
 
@@ -107,10 +104,8 @@ $rol_id = $_SESSION['rol_id'];
             <tr style="background: linear-gradient(to right, #61ba6d, #83c331)">
               <th>id</th>
               <th>Nombre y Apellido</th>
-              <th>(M)Entrada y Salida</th>
-              <th>(T)Entrada y Salida</th>
               <th>Fecha</th>
-              <th>Semana</th>
+              <th>Hora</th>
               <th>Acción</th>
             </tr>
           </tfoot>

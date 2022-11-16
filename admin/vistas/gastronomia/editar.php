@@ -53,7 +53,7 @@
                 <input type="hidden" id="agenciaLocalidadID" name="agenciaLocalidadID" value="<?= $InsertarID->id_direccion ?>">
                 <label for="localidadAgencia">Localidad</label>
                 <?php $nombre_localidad_actual = $editar->nombre_localidad; ?>
-                <select id="localidadAgencia" name="localidadAgencia" class="form-control custom-select" required>
+                <select id="localidadAgencia" name="localidadAgencia" class="form-control select2" required>
                   <?php foreach ($buscarSelectLocalidad as $k) : ?>
                     <option value="<?php echo $k->id_localidad; ?>" <?= ($k->nombre_localidad == $nombre_localidad_actual) ? 'selected="selected"' : ''; ?>> <?php echo $k->nombre_localidad; ?></option>
                   <?php endforeach; ?>
@@ -67,16 +67,23 @@
                 <input type="text" id="domicilioAgencia" value="<?php echo $editar->calle_direccion; ?>" name="domicilioAgencia" class="form-control" required>
               </div>
 
-              <div class="form-group">
-                <label for="observacion">Observación:</label>
-                <input type="hidden" id="" name="" value="<?php echo $InsertarID->id_gastronomia; ?>">
-                <input type="text" id="observacion" value="<?php echo $editar->observacion_gastro; ?>" name="observacion" class="form-control"></input>
-              </div>
 
               <div class="form-group">
                 <label for="diayhora">Días y horarios de atención</label>
                 <input type="hidden" id="" name="" value="<?php echo $InsertarID->id_gastronomia; ?>">
                 <input type="text" id="diayhora" value="<?php echo $editar->dias_horarios; ?>" name="diayhora" class="form-control" required>
+              </div>
+
+              <div class="form-group">
+                <label for="caracteristicas_gastro">Caracteristicas (Servicio que ofrecen):</label>
+                <input type="hidden" id="" name="" value="<?php echo $InsertarID->id_gastronomia; ?>">
+                <input type="text" id="caracteristicas_gastro" value="<?php echo $editar->caracteristicas_gastronomia; ?>" name="caracteristicas_gastro" class="form-control"></input>
+              </div>
+
+              <div class="form-group">
+                <label for="observacion">Observación:</label>
+                <input type="hidden" id="" name="" value="<?php echo $InsertarID->id_gastronomia; ?>">
+                <input type="text" id="observacion" value="<?php echo $editar->observacion_gastro; ?>" name="observacion" class="form-control"></input>
               </div>
 
 

@@ -34,7 +34,7 @@
               </div>
               <div class="form-group">
                 <label for="localidadMuseo">Localidad</label>
-                <select id="localidadMuseo" name="localidadMuseo" class="form-control custom-select" required>
+                <select id="localidadMuseo" name="localidadMuseo" class="form-control select2" required>
                   <option value="0" selected disabled>Seleccionar la localidad</option>
                   <?php foreach ($buscarSelectLocalidad as $k) : ?>
                     <option value="<?php echo $k->id_localidad; ?>"> <?php echo $k->nombre_localidad; ?></option>
@@ -94,7 +94,7 @@
               </div>
 
               <div class="telefonos">
-                  <!-- en este contenedor de agregar los demas teléfonos -->
+                <!-- en este contenedor de agregar los demas teléfonos -->
               </div>
 
               <div class="form-group">

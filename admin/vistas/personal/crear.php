@@ -34,7 +34,7 @@
 
             <div class="form-group">
               <label for="localidadAgencia">Localidad</label>
-              <select id="localidadAgencia" name="localidadAgencia" class="form-control custom-select" required>
+              <select id="localidadAgencia" name="localidadAgencia" class="form-control select2" style="width: 100%;" required>
                 <option value="0" selected disabled>Seleccionar la localidad</option>
                 <?php foreach ($buscarSelectLocalidad as $k) : ?>
                   <option value="<?php echo $k->id_localidad; ?>"> <?php echo $k->nombre_localidad; ?></option>
@@ -78,7 +78,7 @@
 
             <div class="form-group">
               <label for="estadoAgencia">Estado</label>
-              <select id="estadoAgencia" name="estadoAgencia" class="form-control custom-select" required>
+              <select id="estadoAgencia" name="estadoAgencia" class="form-control select2" required>
                 <option value="0" selected disabled>Seleccionar el Estado de la Agencia</option>
                 <?php foreach ($buscarSelectEstado as $k) : ?>
                   <option value="<?php echo $k->id_tipo_estado; ?>"> <?php echo $k->descripcion_tipo_estado; ?></option>

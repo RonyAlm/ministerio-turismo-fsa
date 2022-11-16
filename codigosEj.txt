@@ -1,0 +1,40 @@
+https://www.php.net/manual/es/control-structures.foreach.php
+Utilizando arrays anidados con list()
+
+PHP 5.5 añade la posibilidad de recorrer un array de arrays y utilizar el array interior en las variables del bucle proporcionando list() como el valor.
+
+Por ejemplo:
+
+<?php
+$array = [
+    [1, 2],
+    [3, 4],
+];
+
+foreach ($array as list($a, $b)) {
+    // $a contiene el primer elemento del array interior,
+    // y $b contiene el segundo elemento.
+    echo "A: $a; B: $b\n";
+}
+?>
+El resultado del ejemplo sería:
+
+A: 1; B: 2
+A: 3; B: 4
+Puedes proporcionar menos elementos a list() de los que hay en el array interior, en cuyo caso los elementos sobrantes del array serán descartados:
+
+<?php
+$array = [
+    [1, 2],
+    [3, 4],
+];
+
+foreach ($array as list($a)) {
+    // Observa que no hay $b en este caso.
+    echo "$a\n";
+}
+?>
+El resultado del ejemplo sería:
+
+1
+3

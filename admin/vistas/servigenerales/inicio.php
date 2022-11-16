@@ -28,8 +28,8 @@ $rol_id = $_SESSION['rol_id'];
 <div class="card">
 
   <div class="card-header">
-    
-    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") : ?>
+
+    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") : ?>
 
       <a name="" id="" class="btn btn-success" href="?controlador=servigenerales&accion=crear" role="button">Agregar</a>
 
@@ -135,7 +135,7 @@ $rol_id = $_SESSION['rol_id'];
                     <a title="Más información" id="btn1" href="?controlador=servigenerales&accion=info&id=<?php echo $servigeneral["id_servicios_generales"]; ?>" class="btn btn-primary btn-sm"> <i class="fas fa-folder"></i>
                     </a>
 
-                    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") : ?>
+                    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") : ?>
 
                       <a title="Editar" href="?controlador=servigenerales&accion=editar&id=<?php echo $servigeneral["id_servicios_generales"]; ?>" class="btn btn-success btn-sm">
                         <i class="fas fa-pencil-alt"></i>

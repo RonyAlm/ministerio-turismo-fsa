@@ -31,7 +31,7 @@
 
               <div class="form-group">
                 <label for="categoriaPrestador">Categoría:</label>
-                <select id="categoriaPrestador" name="categoriaPrestador" class="form-control custom-select" required>
+                <select id="categoriaPrestador" name="categoriaPrestador" class="form-control select2" required>
                   <option value="0" selected disabled>Seleccionar la Categoría</option>
                   <?php foreach ($buscarCategoriaPrestador as $k) : ?>
                     <option value="<?php echo $k->id_tipo_prestador; ?>"> <?php echo $k->descripcion_tipo_prestador; ?></option>
@@ -44,7 +44,7 @@
               </div>
               <div class="form-group">
                 <label for="localidadPrestador">Localidad:</label>
-                <select id="localidadPrestador" name="localidadPrestador" class="form-control custom-select" required>
+                <select id="localidadPrestador" name="localidadPrestador" class="form-control select2" required>
                   <option value="0" selected disabled>Seleccionar la localidad</option>
                   <?php foreach ($buscarSelectLocalidad as $k) : ?>
                     <option value="<?php echo $k->id_localidad; ?>"> <?php echo $k->nombre_localidad; ?></option>
@@ -74,7 +74,7 @@
 
               <div class="form-group">
                 <label for="estadoPrestador">Estado</label>
-                <select id="estadoPrestador" name="estadoPrestador" class="form-control custom-select" required>
+                <select id="estadoPrestador" name="estadoPrestador" class="form-control select2" required>
                   <option value="0" selected disabled>Seleccionar el Estado del Prestador</option>
                   <?php foreach ($buscarSelectEstado as $k) : ?>
                     <option value="<?php echo $k->id_tipo_estado; ?>"> <?php echo $k->descripcion_tipo_estado; ?></option>

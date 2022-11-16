@@ -32,7 +32,7 @@
 
               <div class="form-group">
                 <label for="categoriaAlojamiento">Categoría</label>
-                <select id="categoriaAlojamiento" name="categoriaAlojamiento" class="form-control custom-select" required>
+                <select id="categoriaAlojamiento" name="categoriaAlojamiento" class="form-control select2" required>
                   <option value="0" selected disabled>Seleccionar la Categoría</option>
                   <?php foreach ($buscarSelectTipoAlojamiento as $k) : ?>
                     <option value="<?php echo $k->id_tipo_alojamiento; ?>"> <?php echo $k->descripcion_tipo_alojamiento; ?></option>
@@ -45,7 +45,7 @@
               </div>
               <div class="form-group">
                 <label for="localidadAlojamiento">Localidad</label>
-                <select id="localidadAlojamiento" name="localidadAlojamiento" class="form-control custom-select" required>
+                <select id="localidadAlojamiento" name="localidadAlojamiento" class="form-control select2" required>
                   <option value="0" selected disabled>Seleccionar la localidad</option>
                   <?php foreach ($buscarSelectLocalidad as $k) : ?>
                     <option value="<?php echo $k->id_localidad; ?>"> <?php echo $k->nombre_localidad; ?></option>
@@ -64,7 +64,7 @@
 
               <div class="form-group">
                 <label for="rubroAlojamiento">Rubro</label>
-                <select id="rubroAlojamiento" name="rubroAlojamiento" class="form-control custom-select" required>
+                <select id="rubroAlojamiento" name="rubroAlojamiento" class="form-control select2" required>
                   <option value="0" selected disabled>Seleccionar el Rubro</option>
                   <?php foreach ($buscarSelectRubro as $k) : ?>
                     <option value="<?php echo $k->id_rubro_alojamiento; ?>"> <?php echo $k->descripcion_rubro; ?></option>
@@ -88,7 +88,7 @@
 
               <div class="form-group">
                 <label for="habilitacionAlojamiento">Habilitación Municipal</label>
-                <select id="habilitacionAlojamiento" name="habilitacionAlojamiento" class="form-control custom-select" required>
+                <select id="habilitacionAlojamiento" name="habilitacionAlojamiento" class="form-control select2" required>
                   <option value="0" selected disabled>Seleccionar el Estado de la Habilitación</option>
                   <?php foreach ($buscarSelecthabilitacion as $k) : ?>
                     <option value="<?php echo $k->id_habi_municipal; ?>"> <?php echo $k->descripcion; ?></option>
@@ -98,7 +98,7 @@
 
               <div class="form-group">
                 <label for="estadoAlojamiento">Estado</label>
-                <select id="estadoAlojamiento" name="estadoAlojamiento" class="form-control custom-select" required>
+                <select id="estadoAlojamiento" name="estadoAlojamiento" class="form-control select2" required>
                   <option value="0" selected disabled>Seleccionar el Estado del Alojamiento</option>
                   <?php foreach ($buscarSelectEstado as $k) : ?>
                     <option value="<?php echo $k->id_tipo_estado; ?>"> <?php echo $k->descripcion_tipo_estado; ?></option>
@@ -139,7 +139,7 @@
               </div>
 
               <div class="telefonos">
-                  <!-- en este contenedor de agregar los demas teléfonos -->
+                <!-- en este contenedor de agregar los demas teléfonos -->
               </div>
 
               <div class="form-group">

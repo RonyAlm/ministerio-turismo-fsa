@@ -54,7 +54,7 @@
                 <label for="localidadReferente">Localidad</label>
                 <input type="hidden" id="referenteLocalidadID" name="referenteLocalidadID" value="<?php echo $editar->id_direccion; ?>">
                 <?php $nombre_localidad_actual = $editar->nombre_localidad; ?>
-                <select id="localidadReferente" name="localidadReferente" class="form-control custom-select" required>
+                <select id="localidadReferente" name="localidadReferente" class="form-control select2" required>
                   <?php foreach ($buscarSelectLocalidad as $k) : ?>
                     <option value="<?= $k->id_localidad; ?>" <?= ($k->nombre_localidad == $nombre_localidad_actual) ? 'selected="selected"' : ''; ?>> <?= $k->nombre_localidad; ?></option>
                   <?php endforeach; ?>
@@ -71,7 +71,7 @@
                 <label for="referenteEncargado">Tipo de Encargado</label>
                 <input type="hidden" id="referenteEncargadoID" name="referenteEncargadoID" value="<?php echo $editar->id_tipo_encargado; ?>">
                 <?php $id_tipo_encargado_actual = $editar->id_tipo_encargado; ?>
-                <select id="referenteEncargado" name="referenteEncargado" class="form-control custom-select" required>
+                <select id="referenteEncargado" name="referenteEncargado" class="form-control select2" required>
                   <?php foreach ($buscarSelectEncargado as $k) : ?>
                     <option value="<?= $k->id_tipo_encargado; ?>" <?= ($k->id_tipo_encargado == $id_tipo_encargado_actual) ? 'selected="selected"' : ''; ?>> <?= $k->descripcion_tipo_encargado; ?></option>
                   <?php endforeach; ?>
@@ -147,7 +147,7 @@
 
       </div>
 
-    
+
 
   </div>
 

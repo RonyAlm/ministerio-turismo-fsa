@@ -38,7 +38,7 @@
                                 <input type="hidden" id="LocalidadID" name="LocalidadID" value="<?= $InsertarID->id_direccion ?>">
                                 <label for="localidad">Localidad</label>
                                 <?php $nombre_localidad_actual = $editar->nombre_localidad; ?>
-                                <select id="localidad" name="localidad" class="form-control custom-select" required>
+                                <select id="localidad" name="localidad" class="form-control select2" style="width: 100%;" required>
                                     <?php foreach ($buscarSelectLocalidad as $k) : ?>
                                         <option value="<?php echo $k->id_localidad; ?>" <?= ($k->nombre_localidad == $nombre_localidad_actual) ? 'selected="selected"' : ''; ?>> <?php echo $k->nombre_localidad; ?></option>
                                     <?php endforeach; ?>
@@ -60,7 +60,7 @@
                             <div class="form-group">
                                 <label for="tipoServicio">Tipo servicio:</label>
                                 <input type="hidden" id="tipoServicioID" name="tipoServicioID" value="<?php echo $editar->id_tipo_servicio; ?>">
-                                <select id="tipoServicio" name="tipoServicio" class="form-control custom-select" required>
+                                <select id="tipoServicio" name="tipoServicio" class="form-control select2" required>
                                     <?php $id_tipo_servicio_actual = $editar->id_tipo_servicio; ?>
                                     <?php foreach ($buscarSelectTipoServicio as $k) : ?>
                                         <option value="<?= $k->id_tipo_servicio; ?>" <?= ($k->id_tipo_servicio == $id_tipo_servicio_actual) ? 'selected="selected"' : ''; ?>> <?= $k->descripcion_servicio; ?></option>

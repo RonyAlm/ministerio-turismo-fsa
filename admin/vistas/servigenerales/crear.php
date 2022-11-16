@@ -30,7 +30,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="tipoServiGeneral">Tipo</label>
-                                <select id="tipoServiGeneral" name="tipoServiGeneral" class="form-control custom-select" required>
+                                <select id="tipoServiGeneral" name="tipoServiGeneral" class="form-control select2" required>
                                     <option value="0" selected disabled>Seleccionar el tipo</option>
                                     <?php foreach ($buscarSelectLugar as $k) : ?>
                                         <option value="<?php echo $k->id_tipo_lugar; ?>"> <?php echo $k->descripcion_lugar; ?></option>
@@ -39,7 +39,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="estacion">Estación</label>
-                                <select id="estacion" name="estacion" class="form-control custom-select" required>
+                                <select id="estacion" name="estacion" class="form-control select2" required>
                                     <option value="0" selected disabled>Seleccionar el tipo</option>
                                     <?php foreach ($buscarSelectEstacion as $k) : ?>
                                         <option value="<?php echo $k->id_tipo_estacion; ?>"> <?php echo $k->descripcion_estacion; ?></option>
@@ -52,7 +52,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="localidad">Localidad</label>
-                                <select id="localidad" name="localidad" class="form-control custom-select" required>
+                                <select id="localidad" name="localidad" class="form-control select2" required>
                                     <option value="0" selected disabled>Seleccionar la localidad</option>
                                     <?php foreach ($buscarSelectLocalidad as $k) : ?>
                                         <option value="<?php echo $k->id_localidad; ?>"> <?php echo $k->nombre_localidad; ?></option>
@@ -72,7 +72,7 @@
 
                             <div class="form-group">
                                 <label for="tipoServicio">Tipo servicio</label>
-                                <select id="tipoServicio" name="tipoServicio" class="form-control custom-select" required>
+                                <select id="tipoServicio" name="tipoServicio" class="form-control select2" required>
                                     <option value="0" selected disabled>Seleccionar el tipo de servicio</option>
                                     <?php foreach ($buscarSelectTipoServicio as $k) : ?>
                                         <option value="<?php echo $k->id_tipo_servicio; ?>"> <?php echo $k->descripcion_servicio; ?></option>

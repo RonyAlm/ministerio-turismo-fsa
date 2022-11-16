@@ -77,7 +77,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Favicon -->
   <link rel="icon" href="vistas/recursos/dist/img/favicon.png">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
-  <!-- <link rel="manifest" href="vistas/recursos/plugins/fontawesome-free-6.1.2-desktop/metadata/icons.json"> -->
+
   <style>
     .resaltar {
       background-color: yellow;
@@ -288,9 +288,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <?php if ($rol_id == 1 or $rol_id == 3) : ?>
 
               <li class="nav-item 
-                <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'Alojamientos' || $_GET['controlador'] == 'agencias' ||
+                <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'alojamientos' || $_GET['controlador'] == 'agencias' ||
                   $_GET['controlador'] == 'prestadores' || $_GET['controlador'] == 'referentes' || $_GET['controlador'] == 'servigenerales' || $_GET['controlador'] == 'gastronomia')) ? 'menu-open' : '' ?>">
-                <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'Alojamientos' || $_GET['controlador'] == 'agencias' ||
+                <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'alojamientos' || $_GET['controlador'] == 'agencias' ||
                                               $_GET['controlador'] == 'prestadores' || $_GET['controlador'] == 'referentes' || $_GET['controlador'] == 'servigenerales' || $_GET['controlador'] == 'gastronomia')) ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-edit"></i>
                   <p>
@@ -300,8 +300,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="?controlador=Alojamientos&accion=inicio" class="nav-link 
-                    <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'Alojamientos') ? 'active' : '' ?>">
+                    <a href="?controlador=alojamientos&accion=inicio" class="nav-link 
+                    <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'alojamientos') ? 'active' : '' ?>">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Alojamientos</p>
                     </a>
@@ -334,16 +334,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <p>Servicios Generales</p>
                     </a>
                   </li>
-                  <?php
-                  if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
-                    <li class="nav-item">
-                      <a href="?controlador=gastronomia&accion=inicio" class="nav-link 
+                  <li class="nav-item">
+                    <a href="?controlador=gastronomia&accion=inicio" class="nav-link 
                     <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'gastronomia') ? 'active' : '' ?>">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Gastronomías</p>
-                      </a>
-                    </li>
-                  <?php } ?>
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Gastronomías</p>
+                    </a>
+                  </li>
+
                 </ul>
               </li>
 
@@ -353,7 +351,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <?php if ($rol_id == 2) : ?>
 
               <li class="nav-item">
-                <a href="?controlador=Alojamientos&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'Alojamientos') ? 'active' : '' ?>">
+                <a href="?controlador=alojamientos&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'alojamientos') ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Alojamientos</p>
                 </a>
@@ -380,6 +378,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <a href="?controlador=servigenerales&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'servigenerales') ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Servicios Generales</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="?controlador=gastronomia&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'gastronomia') ? 'active' : '' ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Gastronomía</p>
                 </a>
               </li>
 
@@ -455,7 +459,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <?php endif; ?>
 
             <!-- MUSEOS -->
-            <?php if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3 and $usuario == "matias") { ?>
+            <?php if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
               <li class="nav-item">
                 <a href="?controlador=museos&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'museos')) ? 'active' : '' ?>">
                   <!-- <i class="nav-icon fas fa-home"></i> -->
@@ -469,7 +473,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <?php } ?>
 
             <!-- FESTIVALES -->
-            <?php if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3 and $usuario == "matias") { ?>
+            <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") { ?>
               <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'festivales')) ? 'menu-open' : '' ?>">
                 <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'festivales')) ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-columns"></i>
@@ -491,7 +495,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <?php } ?>
 
             <!-- TRANSPORTE -->
-            <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "monica") { ?>
+            <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") { ?>
               <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'transporte')) ? 'menu-open' : '' ?>">
                 <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'transporte')) ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-table"></i>
@@ -509,7 +513,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="?controlador=agencias&accion=inicio" class="nav-link">
+                    <a href="?controlador=transporte&accion=inicio" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Aviones</p>
                     </a>
@@ -519,8 +523,38 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
             <?php } ?>
 
+            <!-- Organismos -->
+            <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") { ?>
+              <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'organismos')) ? 'menu-open' : '' ?>">
+                <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'organismos')) ? 'active' : '' ?>">
+                  <i class="nav-icon fas fa-table"></i>
+                  <p>
+                    Organismos
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="?controlador=organismos&accion=inicio" class="nav-link 
+                    <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'organismos')) ? 'active' : '' ?>">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Colegios - Asociaciones</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="?controlador=institucion&accion=inicio" class="nav-link 
+                    <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'institucion')) ? '' : '' ?>">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Organismos - Instituciones</p>
+                    </a>
+                  </li>
+
+                </ul>
+              </li>
+            <?php } ?>
+
             <!-- PERSONAL -->
-            <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "monica") { ?>
+            <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "rrhh") { ?>
               <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'menu-open' : '' ?>">
                 <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-table"></i>
@@ -544,12 +578,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <p>Asistencia</p>
                     </a>
                   </li>
-                  <!-- <li class="nav-item">
-                    <a href="?controlador=agencias&accion=inicio" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Aviones</p>
-                    </a>
-                  </li> -->
 
                 </ul>
               </li>
@@ -639,10 +667,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="vistas/recursos/plugins/bs-stepper/js/bs-stepper.min.js"></script>
   <!-- SweetAlert2 -->
   <script src="vistas/recursos/plugins/sweetalert2/sweetalert2.min.js"></script>
+
+  <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+
   <!-- fullCalendar 5.10.1 -->
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
   <script src="vistas/recursos/script/calendario.js"></script>
-  <!-- <script src="/vistas/recursos/plugins/fullcalendar1/lib/locales-all.js"></script> -->
+  <!-- Ekko Lightbox -->
+  <script src="vistas/recursos/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
+  <!-- Filterizr-->
+  <script src="vistas/recursos/plugins/filterizr/jquery.filterizr.min.js"></script>
 
   <!-- jquery-validation -->
   <script src="vistas/recursos/plugins/jquery-validation/jquery.validate.min.js"></script>
@@ -650,18 +684,44 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="vistas/recursos/script/validaciones_hoteles.js"></script>
   <script src="vistas/recursos/script/validacion_museo.js"></script>
   <script src="vistas/recursos/script/validacion_prestador.js"></script>
+  <script src="vistas/recursos/script/validacion_personal.js"></script>
+  <script src="vistas/recursos/script/validacionesRequire.js"></script>
   <script src="vistas/recursos/script/filas_contacto.js"></script>
+  <script src="vistas/recursos/script/filas_transporte.js"></script>
+  <script src="vistas/recursos/script/filas_licencias.js"></script>
+  <script src="vistas/recursos/script/gallery.js"></script>
+
+  <script src="vistas/recursos/script/selectDinamicoLiAr.js"></script>
 
   <script src="vistas/recursos/script/traerLocalidades.js"></script>
 
   <script src="vistas/recursos/script/formularios.js"></script>
 
+  <script src="vistas/recursos/script/sweetalertEliminar.js"></script>
+
 
 
   <script>
     $(function() {
+      $("#articulo").hide();
+      $("#customCheckbox5").change(function() {
+        if (!$(this).prop("checked")) {
+          $("#elemento").hide();
+        } else {
+          $("#elemento").show();
+        }
+      });
+      $("#customCheckbox6").change(function() {
+        if (!$(this).prop("checked")) {
+          $("#articulo").hide();
+        } else {
+          $("#articulo").show();
+        }
+      });
+    });
 
 
+    $(function() {
 
       // Clona la fila oculta que tiene los campos base, y la agrega al final de la tabla
       $("#adicional").on('click', function() {
@@ -740,66 +800,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
     });
   </script>
 
-  <!-- MODAL DEL EVENTO -->
-  <div class="modal fade" id="myModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-success">
-          <h4 class="modal-title" id="titulo"></h4>
-          <button type="button" class="btn btn-close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <form id="formularioModal">
-          <div class="modal-body">
-            <div class="form-floating mb-3">
-              <input type="hidden" id="id" name="id">
-              <label for="title" class="form-label">Evento</label>
-              <input type="text" class="form-control" name="title" id="title">
-            </div>
 
-            <div class="form-floating mb-3">
-              <label for="start" class="form-label">Fecha Inicio</label>
-              <input type="date" class="form-control" name="start" id="start">
-            </div>
 
-            <div class="form-floating mb-3">
-              <label for="fecha_fin" class="form-label">Fecha fin</label>
-              <input type="date" class="form-control" name="fecha_fin" id="fecha_fin">
-            </div>
 
-            <div class="form-floating mb-3">
-              <label for="descripcion" class="form-label">Descripción</label>
-              <!-- <textarea name="descripcion" id="descripcion" cols="62" rows="5"></textarea> -->
-              <input type="text" class="form-control" name="descripcion" id="descripcion">
-            </div>
+  <!-- MODAL DEL EVENTO CALENDARIO -->
 
-            <div class="form-floating mb-3">
-              <label for="color" class="form-label">Color</label>
-              <input type="color" class="form-control" name="color" id="color">
-            </div>
-
-          </div>
-
-          <div class="modal-footer">
-
-            <button type="submit" class="btn btn-success" id="btnAccion">Agregar</button>
-
-            <button type="button" id="btnEliminar" class="btn btn-danger">Borrar</button>
-
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-
-          </div>
-        </form>
-
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
+  <?php include_once("modales/modal_calendario.php"); ?>
   <!-- /.modal -->
 
+
+  <!-- MODALES -->
+  <!-- <?php include_once("modales/modal_ag_li_pe.php"); ?> -->
+  <!-- <?php include_once("festivales/inicio.php"); ?> -->
+
   <script src="vistas/recursos/script/modal.js"></script>
+
+
 
 </body>
 

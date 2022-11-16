@@ -1,16 +1,16 @@
 <?php
 
-include_once("modelos/agencias.php");
+include_once("modelos/organismos.php");
 include_once("conexion.php");
 
 
-class ControladorAgencias
+class ControladorOrganismos
 {
 
     public function inicio()
     { //aca se muestra las tablas
 
-        $consultaAgencia = new AgenciaModelo();
+        $consultaAgencia = new OrganismoModelo();
 
         $tablaAgencia = $consultaAgencia->consultar();
         $datosEstadisticos = new estadistica();
@@ -18,13 +18,13 @@ class ControladorAgencias
         $cantidad_agencias = $datosEstadisticos->cantidadAgencias();
         $cantidadAgenciasHabilitadas = $datosEstadisticos->cantidadAgenciasHabilitadas();
 
-        include_once("vistas/agencias/inicio.php");
+        include_once("vistas/organismos/inicio.php");
     }
 
     public function crear()
     {
 
-        $select_tipo_agencia = new AgenciaModelo();
+        $select_tipo_agencia = new OrganismoModelo();
 
         $buscarSelectLocalidad = $select_tipo_agencia->buscarSelectLocalidad();
         $buscarSelectEstado = $select_tipo_agencia->buscarSelectEstado();
@@ -32,7 +32,7 @@ class ControladorAgencias
         if ($_POST) {
             //print_r($_POST);
 
-            $insertarAgencia = new AgenciaModelo();
+            $insertarAgencia = new OrganismoModelo();
 
 
             $descripcion_agencias = $_POST['nombreAgencia'];
@@ -83,12 +83,13 @@ class ControladorAgencias
                 $idoneoAgencia
             );
 
+            echo "<script>location.href='index2.php?controlador=organismos&accion=inicio';</script>";
 
-            header("Location:index2.php?controlador=agencias&accion=inicio");
+            // header("Location:index2.php?controlador=organismos&accion=inicio");
         }
 
 
-        include_once("vistas/agencias/crear.php");
+        include_once("vistas/organismos/crear.php");
     }
 
     public function editar()
@@ -96,7 +97,7 @@ class ControladorAgencias
 
         $idAgencia = $_GET["id"];
 
-        $buscarAgencias = new AgenciaModelo();
+        $buscarAgencias = new OrganismoModelo();
 
         $buscarSelectLocalidad = $buscarAgencias->buscarSelectLocalidad();
         $buscarSelectEstado = $buscarAgencias->buscarSelectEstado();
@@ -105,7 +106,7 @@ class ControladorAgencias
         /*----------BUSCA LOS POST QUE SE ENCUENTRA EN EDITAR.PHP PARA PODER EDITARLO----------*/
 
         if ($_POST) {
-            $EditarAgencia = new AgenciaModelo();
+            $EditarAgencia = new OrganismoModelo();
 
 
             $idAgencia =  $_POST['agenciaID'];
@@ -191,8 +192,8 @@ class ControladorAgencias
 
 
 
-            // header("Location:admin/index2.php?controlador=agencias&accion=inicio");
-            echo "<script>location.href='index2.php?controlador=agencias&accion=inicio';</script>";
+            // header("Location:admin/index2.php?controlador=organismos&accion=inicio");
+            echo "<script>location.href='index2.php?controlador=organismos&accion=inicio';</script>";
         }
 
 
@@ -212,14 +213,14 @@ class ControladorAgencias
         $agenciaOtro = $contactosDeagencia->consultarOtro($idAgencia);
 
 
-        $buscarID = new AgenciaModelo();
+        $buscarID = new OrganismoModelo();
 
         $editar = $buscarID->buscar($idAgencia);
 
         $InsertarID = $buscarID->consultarID($idAgencia);
 
 
-        include_once("vistas/agencias/editar.php");
+        include_once("vistas/organismos/editar.php");
     }
 
     public function borrar()
@@ -230,20 +231,20 @@ class ControladorAgencias
         $id_direccion = $_GET['idDireccion'];
         $idRazonSocial = $_GET['idRazonSocial'];
 
-        $borrarAgencias = new AgenciaModelo();
+        $borrarAgencias = new OrganismoModelo();
 
         $buscarIDBorrado = $borrarAgencias->consultarID($idAgenciaBorrar);
 
         $borrado = $borrarAgencias->borrar($idAgenciaBorrar, $id_direccion, $idRazonSocial);
 
-        header("Location:index2.php?controlador=agencias&accion=inicio");
+        header("Location:index2.php?controlador=organismos&accion=inicio");
     }
 
     public function info()
     {
         $id_agencia = $_GET['id'];
 
-        $agenciaInfo = new AgenciaModelo();
+        $agenciaInfo = new OrganismoModelo();
 
         $agenciasInfomacion = $agenciaInfo->buscar($id_agencia);
 
@@ -258,14 +259,14 @@ class ControladorAgencias
         $agenciaWeb = $contactosDeagencia->consultarWeb($id_agencia);
         $agenciaOtro = $contactosDeagencia->consultarOtro($id_agencia);
 
-        include_once("vistas/agencias/info.php");
+        include_once("vistas/organismos/info.php");
     }
 
 
 
     public function imprimir()
     {
-        $consultaAgencia = new AgenciaModelo();
+        $consultaAgencia = new OrganismoModelo();
 
         $tablaAgencia = $consultaAgencia->consultar();
         $datosEstadisticos = new estadistica();
@@ -274,14 +275,14 @@ class ControladorAgencias
         $cantidadAgenciasHabilitadas = $datosEstadisticos->cantidadAgenciasHabilitadas();
 
 
-        include_once("vistas/agencias/imprimir.php");
+        include_once("vistas/organismos/imprimir.php");
     }
 
     public function imprimirInfo()
     {
         $id_agencia = $_GET['id'];
 
-        $agenciaInfo = new AgenciaModelo();
+        $agenciaInfo = new OrganismoModelo();
 
         $agenciasInfomacion = $agenciaInfo->buscar($id_agencia);
 
@@ -296,6 +297,6 @@ class ControladorAgencias
         $agenciaWeb = $contactosDeagencia->consultarWeb($id_agencia);
         $agenciaOtro = $contactosDeagencia->consultarOtro($id_agencia);
 
-        include_once("vistas/agencias/invoice-print.php");
+        include_once("vistas/organismos/invoice-print.php");
     }
 }

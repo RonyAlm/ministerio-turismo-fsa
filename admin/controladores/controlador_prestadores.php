@@ -212,7 +212,7 @@ class ControladorPrestadores
 
     public function borrar()
     {
-        print_r($_GET);
+        // print_r($_GET);
 
         $borradoPrestadores = new PrestadoresModelo();
 
@@ -222,9 +222,10 @@ class ControladorPrestadores
         $borrado = $borradoPrestadores->borrar($id_Prestador, $id_direccion);
 
 
+        echo "<script>location.href = 'index2.php?controlador=Prestadores&accion=inicio';</script>";
 
 
-        header("Location:index2.php?controlador=Prestadores&accion=inicio");
+        // header("Location:index2.php?controlador=Prestadores&accion=inicio");
     }
 
     public function info()

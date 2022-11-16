@@ -196,7 +196,7 @@ class PersonalModelo
                                             VALUES (?,?,?,?,?)");
         $sqllicencias->execute(array(
             $fechaini, $fechafin,
-            $diasrestante, 0, $lastInsertIDPersonal
+            $diasrestante, 1, $lastInsertIDPersonal
         ));
 
         $lastInsertlicencias = $conexionBD->lastInsertId();
@@ -296,7 +296,8 @@ class PersonalModelo
         $idtelefonoAgencia,
         $idtelefonoFijo,
         $idcorreo,
-        $licenciasID
+        $licenciasID,
+        $diasRestID
     ) {
 
         $conexionBD = BD::crearInstancia();
@@ -318,10 +319,30 @@ class PersonalModelo
         $sqlPersonal->execute();
 
         /*---------------SE ACTUALIZA LAS LICENCIAS-------------------*/
-        $sqlLicencias = $conexionBD->prepare("UPDATE `licencias` SET `fecha_ini`='$fechaini',
-        `fecha_fin`='$fechafin',`dias_restante`='$diasrestante' 
-        WHERE id_licencias = $licenciasID;");
-        $sqlLicencias->execute();
+        $probando = array_combine($licenciasID, $fechaini);
+
+        foreach ($probando as $key1 => $inicio) {
+            $sqlLicenciasIni = $conexionBD->prepare("UPDATE `licencias` SET `fecha_ini`='$inicio'
+                                                    WHERE id_licencias = $key1");
+            $sqlLicenciasIni->execute();
+        }
+
+        $probando2 = array_combine($licenciasID, $fechafin);
+
+        foreach ($probando2 as $key2 => $fin) {
+            $sqlLicenciasFin = $conexionBD->prepare("UPDATE `licencias` SET `fecha_fin`='$fin' 
+                                                WHERE id_licencias = $key2");
+            $sqlLicenciasFin->execute();
+        }
+        // $sqlLicencias = $conexionBD->prepare("UPDATE `licencias` SET `fecha_ini`='$fechaini',
+        // `fecha_fin`='$fechafin' 
+        // WHERE id_licencias = $licenciasID;");
+        // $sqlLicencias->execute();
+
+        /*---------------SE ACTUALIZA LAS LICENCIAS DIAS RESTANTES-------------------*/
+        $sqlLicenciasDiasRestantes = $conexionBD->prepare("UPDATE `licencias` SET `dias_restante`='$diasrestante' 
+        WHERE id_licencias = $diasRestID");
+        $sqlLicenciasDiasRestantes->execute();
 
         /*---------------SE ACTUALIZA LA DIRECCION CON LA LOCALIDAD-------------------*/
 
@@ -377,6 +398,55 @@ class PersonalModelo
         $sqlCorreo = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`='$correo'
                                                     WHERE id_contacto = $idcorreo");
         $sqlCorreo->execute();
+    }
+
+    public static function agregarLiAr(
+        $selectPersonal,
+        $fechaIniLicencia,
+        $fechafinLicencia,
+        $CantLicenciaRestante,
+        $fechaIniArticulo,
+        $licencia,
+        $articulo,
+        $cantidadlicenciaF
+    ) {
+
+        if ($licencia) {
+
+            $conexionBD = BD::crearInstancia();
+
+            /*-------- ACTUALIZAMOS EL ESTADO DE LA ULTIMA LICENCIA a 0(cero) para mostrar por pantalla cuando insertamos eh ingresamos 1 a la base de datos --------*/
+
+            $sqlUdLicencia = $conexionBD->prepare("UPDATE `licencias` SET `estado`=0 WHERE `rela_personal`=$selectPersonal");
+            $sqlUdLicencia->execute();
+
+            print_r($sqlUdLicencia);
+
+            /*-------- INSERTAMOS LAS LICENCIAS en la tabla licencia--------*/
+
+            $asociativo = array_combine($fechaIniLicencia, $fechafinLicencia);
+
+            foreach ($asociativo as $indice => $valor) {
+
+                $sqlLicencia = $conexionBD->prepare("INSERT INTO `licencias`( `fecha_ini`, `fecha_fin`, `dias_restante`, `estado`, `rela_personal`) VALUES (?,?,?,?,?)");
+                $sqlLicencia->execute(array($indice, $valor, $CantLicenciaRestante, 1, $selectPersonal));
+                print_r($sqlLicencia);
+                $lastInsertLicencia = $conexionBD->lastInsertId();
+            }
+        }
+
+        if ($articulo) {
+            $conexionBD = BD::crearInstancia();
+            /*-------- INSERTAMOS LOS ARTICULOS en la tabla razon_particular--------*/
+            foreach ($fechaIniArticulo as $articuloFechas) {
+
+                $sqlArticulo = $conexionBD->prepare("INSERT INTO `razon_particular`(`fecha_ini_razonparticular`, `rela_personal`) 
+                VALUES (?,?)");
+                $sqlArticulo->execute(array($articuloFechas, $selectPersonal));
+                print_r($sqlArticulo);
+                $lastInsertArticulo = $conexionBD->lastInsertId();
+            }
+        }
     }
 
     public function buscarSelectLocalidad()
@@ -465,9 +535,39 @@ class PersonalModelo
 
         return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
     }
+
+    public function buscarSelectPersonal()
+    {
+
+        $conexionBD = BD::crearInstancia();
+
+
+        $sqlLocalidad = $conexionBD->query("SELECT CONCAT(p.nombre_persona, ' ', p.apellido_persona) full_name,
+         per.id_personal 
+        FROM `personales` per 
+        INNER JOIN persona p on p.id_persona = per.rela_persona");
+
+        $sqlLocalidad->execute();
+
+        return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
+    }
+    public function buscarCantidadLicencia($idpersonal)
+    {
+
+        $conexionBD = BD::crearInstancia();
+
+
+        $sqlcantLic = $conexionBD->query("SELECT `id_licencias`, `fecha_ini`, `fecha_fin`, `dias_restante`, `estado`, `rela_personal` 
+        FROM `licencias` 
+        WHERE rela_personal=$idpersonal AND estado = 1 LIMIT 1");
+
+        $sqlcantLic->execute();
+
+        return $sqlcantLic->fetch(PDO::FETCH_OBJ);
+    }
 }
 
-class Contactos
+class ContactosPersonal
 {
     public $telefonoAgencia;
     public $correoAgencia;
@@ -476,6 +576,7 @@ class Contactos
     public $twitterAgencia;
     public $webAgencia;
     public $otroAgencia;
+    public $licencia;
 
     private $BD;
 
@@ -588,6 +689,17 @@ class Contactos
         $consulta->execute();
 
         return $consulta->fetch(PDO::FETCH_OBJ);
+    }
+    public function consultarLicencias($id)
+    {
+        // echo 'este es el id:' . $id;
+        $conexionBD = BD::crearInstancia();
+        $consultalicencia = $conexionBD->query("SELECT `id_licencias`, `fecha_ini`, `fecha_fin`, `dias_restante`, `estado`, `rela_personal` FROM `licencias`
+        WHERE `rela_personal`=$id");
+
+        $consultalicencia->execute();
+
+        return $consultalicencia->fetchAll(PDO::FETCH_OBJ);
     }
 }
 

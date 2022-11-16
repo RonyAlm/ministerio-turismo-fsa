@@ -77,7 +77,7 @@ $rol_id = $_SESSION['rol_id'];
                                         <i class="fas fa-folder"></i>
                                       </a>
 
-                                      <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") { ?>
+                                      <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "rrhh") { ?>
                                         <a title="Editar" href="?controlador=personal&accion=editar&id=<?php echo $tabla1["id_personal"]; ?>&idPersona=<?php echo $tabla1["id_persona"]; ?>" class="btn btn-success btn-sm">
                                           <i class="fas fa-pencil-alt"></i>
                                         </a>

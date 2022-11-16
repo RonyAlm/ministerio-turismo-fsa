@@ -9,9 +9,9 @@ class ControladorTransporte
     public function inicio()
     { //aca se muestra las tablas
 
-        // $consultaServigeneral = new TransporteModelo();
+        $consulta = new TransporteModelo();
 
-        // $tablaServigeneral = $consultaServigeneral->consultar();
+        $tabla = $consulta->consultar();
         // $datosEstadisticos = new estadistica();
 
         // $cantidadPiletas = $datosEstadisticos->cantidadPiletas();
@@ -37,70 +37,51 @@ class ControladorTransporte
 
         $buscarSelectLocalidad = $select->buscarSelectLocalidad();
         $buscarSelectProvincia = $select->buscarSelectProvincia();
-        // $buscarSelectLugar = $select->buscarSelectLugar();
-        // $buscarSelectTipoServicio = $select->buscarSelectTipoServicio();
+        $buscarSelectEmpresa = $select->buscarSelectEmpresa();
+
 
         if ($_POST) {
-            //print_r($_POST);
+            // print_r($_POST);
 
             $insertar = new TransporteModelo();
 
 
-            $nombre = $_POST['nombre'];
-            $descripcion = $_POST['descripcion'];
-            $idoneo = $_POST['idoneo'];
+            $empresas = $_POST['empresas'];
+            $origen = $_POST['origen'];
+            $destino = $_POST['destino'];
 
-            $tipoServiGeneral = $_POST['tipoServiGeneral'];
+            $horarioSalida = $_POST['horarioSalida'];
+            $horarioLlegada = $_POST['horarioLlegada'];
 
-            $estacion = $_POST['estacion'];
-
-            $tipoServicio = $_POST['tipoServicio'];
-
-            $localidad = $_POST['localidad'];
-            $domicilio = $_POST['domicilio'];
-
-            $telefonoAgencia = $_POST['telefonoAgencia'];
-            $telefonoFijoAgencia = $_POST['telefonoFijoAgencia'];
-            $correoAgencia = $_POST['correoAgencia'];
-            $facebookAgencia = $_POST['facebookAgencia'];
-            $instagramAgencia = $_POST['instagramAgencia'];
-            $twitterAgencia = $_POST['twitterAgencia'];
-            $webAgencia = $_POST['webAgencia'];
-            $otroAgencia = $_POST['otroAgencia'];
-
-
-
+            $observacionTransporte = $_POST['observacionTransporte'];
 
 
             $insertar->crear(
-                $nombre,
-                $descripcion,
-                $idoneo,
-                $localidad,
-                $tipoServiGeneral,
-                $tipoServicio,
-                $domicilio,
-                $estacion,
-                $telefonoAgencia,
-                $telefonoFijoAgencia,
-                $correoAgencia,
-                $facebookAgencia,
-                $instagramAgencia,
-                $twitterAgencia,
-                $webAgencia,
-                $otroAgencia
+                $empresas,
+                $origen,
+                $destino,
+                $horarioSalida,
+                $horarioLlegada,
+                $observacionTransporte
             );
-            // print_r($insertar);
 
-
-            header("Location:index2.php?controlador=transporte&accion=inicio");
+            // print_r($datos);
+            echo "<script>location.href='index2.php?controlador=transporte&accion=inicio';</script>";
+            // header("Location:index2.php?controlador=transporte&accion=inicio");
         }
 
 
         include_once("vistas/transporte/crear.php");
     }
     public function editar()
+
     {
+
+        $select = new TransporteModelo();
+
+        $buscarSelectLocalidad = $select->buscarSelectLocalidad();
+        $buscarSelectProvincia = $select->buscarSelectProvincia();
+        $buscarSelectEmpresa = $select->buscarSelectEmpresa();
 
         $id = $_GET["id"];
 
@@ -199,9 +180,9 @@ class ControladorTransporte
 
             // print_r($EditarAgencia);
 
+            echo "<script>location.href='index2.php?controlador=transporte&accion=inicio';</script>";
 
-
-            header("Location:index2.php?controlador=servigenerales&accion=inicio");
+            // header("Location:index2.php?controlador=servigenerales&accion=inicio");
         }
 
 
@@ -228,7 +209,7 @@ class ControladorTransporte
         $InsertarID = $buscarID->consultarID($id);
 
 
-        include_once("vistas/servigenerales/editar.php");
+        include_once("vistas/transporte/editar.php");
     }
 
     public function borrar()
@@ -240,11 +221,13 @@ class ControladorTransporte
 
         $borrarAgencias = new TransporteModelo();
 
-        $buscarIDBorrado = $borrarAgencias->consultarID($idServigeneralBorrar);
+        $buscarIDBorrado = $borrarAgencias->consultar($idServigeneralBorrar);
 
         $borrado = $borrarAgencias->borrar($idServigeneralBorrar, $id_direccion);
 
-        header("Location:index2.php?controlador=servigenerales&accion=inicio");
+        echo "<script>location.href='index2.php?controlador=transporte&accion=inicio';</script>";
+
+        // header("Location:index2.php?controlador=servigenerales&accion=inicio");
     }
 
     public function info()

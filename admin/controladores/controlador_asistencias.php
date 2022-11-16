@@ -27,6 +27,7 @@ class ControladorAsistencias
 
 
         if ($_POST) {
+            $insertar = new AsistenciaModelo();
             //     //print_r($_POST);
 
             $tipo       = $_FILES['dataCliente']['type'];
@@ -36,31 +37,36 @@ class ControladorAsistencias
 
             // print_r($lineas);
 
-            $i = 0;
+            // $i = 0;
 
-            foreach ($lineas as $linea) {
-                $cantidad_registros = count($lineas);
-                $cantidad_regist_agregados =  ($cantidad_registros - 1);
+            // foreach ($lineas as $linea) {
+            //     $cantidad_registros = count($lineas);
+            //     $cantidad_regist_agregados =  ($cantidad_registros - 1);
 
-                if ($i != 0) {
+            //     if ($i != 0) {
 
-                    $datos = explode(";", $linea);
-                    $semanas = [];
+            //         $datos = explode(",", $linea);
+            //         $semanas = [];
 
-                    $semana                = !empty($datos[1])  ? ($datos[1]) : '';
-                    $semana1                = !empty($datos[1])  ? ($datos[9]) : '';
-                    $celular               = !empty($datos[2])  ? ($datos[2]) : '';
-                }
+            //         $nombre                = !empty($datos[0])  ? ($datos[0]) : '';
+            //         $id                = !empty($datos[1])  ? ($datos[1]) : '';
+            //         $fecha               = !empty($datos[3])  ? ($datos[3]) : '';
+            //         $hora               = !empty($datos[4])  ? ($datos[4]) : '';
+            //         $in               = !empty($datos[5])  ? ($datos[5]) : '';
+            //         $checkInOn               = !empty($datos[9])  ? ($datos[9]) : '';
+            //     }
 
-                // $arrays = array_merge($semana, $semana1);
+            //     // $arrays = array_merge($semana, $semana1);
 
-                // $resultado = array_merge_recursive((array)$semana, (array)$semana1);
-                // print_r($resultado);
+            //     // $resultado = array_merge_recursive((array)$semana, (array)$semana1);
+            //     // print_r($resultado);
 
 
-                echo '<div>' . $i . "). " . $semana . '</div>';
-                $i++;
-            }
+            //     echo '<div>' . $i . "). " . $checkInOn . '</div>';
+            //     $i++;
+            // }
+
+            $insertar->crear($lineas);
 
 
             //     $insertarAgencia = new AsistenciaModelo();
@@ -300,16 +306,16 @@ class ControladorAsistencias
 
     public function imprimir()
     {
-        $consultaAgencia = new AsistenciaModelo();
+        $consulta = new AsistenciaModelo();
 
-        $tablaAgencia = $consultaAgencia->consultar();
+        $tabla = $consulta->consultar();
         $datosEstadisticos = new estadistica();
 
         $cantidad_agencias = $datosEstadisticos->cantidadAgencias();
         $cantidadAgenciasHabilitadas = $datosEstadisticos->cantidadAgenciasHabilitadas();
 
 
-        include_once("vistas/agencias/imprimir.php");
+        include_once("vistas/asistencia/imprimir.php");
     }
 
     public function imprimirInfo()

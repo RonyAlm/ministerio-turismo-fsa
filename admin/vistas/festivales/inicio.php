@@ -29,7 +29,7 @@ $rol_id = $_SESSION['rol_id'];
 
     <div class="card-header">
 
-        <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") : ?>
+        <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") : ?>
 
             <a class="btn btn-success" href="?controlador=festivales&accion=crear" role="button">Agregar</a>
 
@@ -40,24 +40,6 @@ $rol_id = $_SESSION['rol_id'];
         <a class="btn btn-secondary" href="?controlador=festivales&accion=imprimir" role="button">Imprimir</a>
 
     </div>
-
-    <!-- <div class="row">
-        <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box">
-                <span class="info-box-icon bg-info"><i class="fas fa-hotel"></i></span>
-
-                <div class="info-box-content">
-                    <span class="info-box-text text-center">Festival</span>
-                    <?php foreach ($cantidadPiletas as $estadistica) { ?>
-                        <span class="info-box-text">Cantidad Total: <?php echo $estadistica->conteo; ?> </span>
-                    <?php } ?>
-                </div>
-               
-            </div>
-           
-        </div>
-
-    </div> -->
 
 
     <div class="card-body">
@@ -105,9 +87,35 @@ $rol_id = $_SESSION['rol_id'];
                                             <a title="Editar" href="?controlador=festivales&accion=editar&id=<?php echo $festival["id_festivales"]; ?>" class="btn btn-success btn-sm">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            <a title="Borrar" href="?controlador=festivales&accion=borrar&id=<?php echo $festival["id_festivales"]; ?> &idDireccion=<?php echo $festival["id_direccion"]; ?>" class="btn btn-danger btn-sm">
+
+
+                                            <a title="Borrar" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModalCenter">
                                                 <i class="fas fa-trash"></i>
                                             </a>
+
+                                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <a>eliminar</a>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <a title="Borrar" href="?controlador=festivales&accion=borrar&id=<?php echo $festival["id_festivales"]; ?> &idDireccion=<?php echo $festival["id_direccion"]; ?>" class="btn btn-danger btn-sm">
+                                                                <i class="fas fa-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
 
                                         <?php else : ?>
 

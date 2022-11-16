@@ -63,6 +63,7 @@ class GastronomiaModelo
         $designacion,
         $diayhora,
         $observacion,
+        $caracteristicas_gastro,
         $rela_localidad_direccion,
         $calle_direccion,
         $telefonoAgencia,
@@ -90,11 +91,13 @@ class GastronomiaModelo
         /*-------- INSERTAMOS LA GASTRONOMIA--------*/
 
         $sql = $conexionBD->prepare("INSERT INTO `gastronomia`(`denominacion_gastro`, `observacion_gastro`,
-                                                 `rela_direccion_gastro`, `dias_horarios`)
-                                    VALUES (?,?,?,?)");
+                                                 rela_direccion_gastro, `dias_horarios`,
+                                                 `caracteristicas_gastronomia`,`date_updated_gastronomia`)
+                                    VALUES (?,?,?,?,?,CURRENT_TIMESTAMP())");
         $sql->execute(array(
             $designacion, $observacion,
-            $lastInsertIDdireccion, $diayhora
+            $lastInsertIDdireccion, $diayhora,
+            $caracteristicas_gastro
         ));
 
         $lastInsertIDAgencias = $conexionBD->lastInsertId();
@@ -173,7 +176,7 @@ class GastronomiaModelo
     {
         $conexionBD = BD::crearInstancia();
         $sql = $conexionBD->prepare("SELECT `id_gastronomia`, `denominacion_gastro`, `observacion_gastro`, `dias_horarios`, date_updated_gastronomia,
-        direccion.id_direccion,direccion.calle_direccion,
+        direccion.id_direccion,direccion.calle_direccion,`caracteristicas_gastronomia`,
         localidad.id_localidad,localidad.nombre_localidad,
         contacto.id_contacto,contacto.descripcion_contacto,
         departamentos_fsa.id_departamentos_fsa,departamentos_fsa.descripcion_departamentos
@@ -193,6 +196,7 @@ class GastronomiaModelo
         $designacion,
         $observacion,
         $diayhora,
+        $caracteristicas_gastro,
         $designacionID,
         $rela_localidad_direccion,
         $calle_direccion,
@@ -219,9 +223,11 @@ class GastronomiaModelo
 
         $conexionBD = BD::crearInstancia();
 
-        /*---------------SE ACTUALIZA LA AGENCIA-------------------*/
+        /*---------------SE ACTUALIZA LA GASTRONOMIA-------------------*/
         $sql = $conexionBD->prepare("UPDATE `gastronomia` 
-        SET`denominacion_gastro`='$designacion',`observacion_gastro`='$observacion',`dias_horarios`='$diayhora' 
+        SET`denominacion_gastro`='$designacion',`observacion_gastro`='$observacion',
+        `dias_horarios`='$diayhora',`caracteristicas_gastronomia`='$caracteristicas_gastro',
+        `date_updated_gastronomia`= CURRENT_TIMESTAMP()
         WHERE gastronomia.id_gastronomia = $designacionID;");
         $sql->execute();
 

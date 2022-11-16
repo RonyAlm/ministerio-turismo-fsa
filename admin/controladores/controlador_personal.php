@@ -15,10 +15,43 @@ class ControladorPersonal
         $consulta = new PersonalModelo();
 
         $tabla = $consulta->consultar();
-        // $datosEstadisticos = new estadistica();
 
-        // $cantidad = $datosEstadisticos->cantidadAgencias();
-        // $cantidad = $datosEstadisticos->cantidadAgenciasHabilitadas();
+        $select_tipo_agencia = new PersonalModelo();
+
+        $buscarSelectPersonal = $select_tipo_agencia->buscarSelectPersonal();
+
+        // print_r($_POST);
+
+        if ($_POST) {
+            // print_r($_POST);
+            $insertarModelLic = new PersonalModelo();
+
+            $selectPersonal = $_POST['selectPersonal23'];
+            $fechaIniLicencia = $_POST['fechaIniLicencia'];
+            $fechafinLicencia = $_POST['fechafinLicencia'];
+            $fechaIniArticulo = $_POST['fechaIniArticulo'];
+
+            $licencia = $_POST['licencia'];
+            $articulo = $_POST['articulo'];
+
+            $cantidadlicenciaF = $_POST['lista2'];
+            $CantLicenciaRestante = $_POST['CantLicencia'];
+            // $articulo = $_POST['articulo'];
+
+
+
+
+            $agregarLiAr = $insertarModelLic->agregarLiAr(
+                $selectPersonal,
+                $fechaIniLicencia,
+                $fechafinLicencia,
+                $CantLicenciaRestante,
+                $fechaIniArticulo,
+                $licencia,
+                $articulo,
+                $cantidadlicenciaF
+            );
+        }
 
 
         include_once("vistas/personal/inicio.php");
@@ -90,7 +123,7 @@ class ControladorPersonal
         }
 
 
-        include_once("vistas/agencias/crear.php");
+        include_once("vistas/modales/modal_ag_li_pe.php");
     }
     public function editar()
     {
@@ -107,6 +140,9 @@ class ControladorPersonal
         $buscarSelectRol = $select_tipo->buscarSelectRol();
         $buscarSelectArea = $select_tipo->buscarSelectArea();
         $buscarSelectContrato = $select_tipo->buscarSelectContrato();
+        $consultarCantidLicenciaEditar = $select_tipo->buscarCantidadLicencia($id);
+
+        // print_r($consultarLicencias);
 
         // //print_r("$idAgencia");
         // /*----------BUSCA LOS POST QUE SE ENCUENTRA EN EDITAR.PHP PARA PODER EDITARLO----------*/
@@ -147,7 +183,7 @@ class ControladorPersonal
             $rela_localidad_direccion = $_POST['localidad'];
             $calle_direccion = $_POST['direccion'];
 
-            // CONTANTOS 
+            // CONTACTOS 
 
             $idtelefonoAgencia = $_POST['agenciatelefonoID'];
             $telefonoCel = $_POST['telefonoCel'];
@@ -162,7 +198,12 @@ class ControladorPersonal
             $licenciasID = $_POST['licenciasID'];
             $fechaini = $_POST['fechaini'];
             $fechafin = $_POST['fechafin'];
+            $diasRestID = $_POST['diasRestID'];
             $diasrestante = $_POST['diasrestante'];
+
+
+
+            // var_dump($probando);
 
 
 
@@ -200,10 +241,11 @@ class ControladorPersonal
                 $idtelefonoAgencia,
                 $idtelefonoFijo,
                 $idcorreo,
-                $licenciasID
+                $licenciasID,
+                $diasRestID
             );
 
-            print_r($EditarAgencia);
+            // print_r($EditarAgencia);
 
 
 
@@ -214,7 +256,7 @@ class ControladorPersonal
 
         // /*----------BUSCA LOS ID Y LOS PONE EN EL FORMULARIO----------*/
 
-        $contactosDeagencia = new Contactos();
+        $contactosDeagencia = new ContactosPersonal();
 
         $contactosDeagencia1 = new ContactosInfoPersonal();
 
@@ -226,11 +268,18 @@ class ControladorPersonal
         $agenciaTwitter = $contactosDeagencia->consultarTwitter($idPersona);
         $agenciaWeb = $contactosDeagencia->consultarWeb($idPersona);
         $agenciaOtro = $contactosDeagencia->consultarOtro($idPersona);
+        $consultarLicencias = $contactosDeagencia->consultarLicencias($id);
 
+
+        // if (is_array($consultarLicenciasa) || is_object($consultarLicenciasa)) {
+        //     echo "holaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholahola";
+        // } ESTO VERIFICA SI ES UN ARRAY O UN OBJETO
 
         $buscarID = new PersonalModelo();
 
         $editar = $buscarID->buscar($id);
+
+
 
 
 
@@ -359,42 +408,57 @@ class ControladorPersonal
 
 
             str_replace(" ", "", $usuario);
-            // echo "</br>";
+            // echo "</>";
             $random = random_int(1000, 9999);
             $contraseña = $usuario . $random;
             str_replace(" ", "", $contraseña);
 
-            $insertar->guardar(
-                $nombre,
-                $apellido,
-                $cuil,
-                $profesion,
-                $fecha,
-                $educacion,
-                $rela_localidad_direccion,
-                $calle_direccion,
-                $telefonoCel,
-                $telefonoFijo,
-                $correo,
-                $departamento,
-                $area,
-                $n_legajo,
-                $n_expediente,
-                $tipo_contrato,
-                $cargo,
-                $usuario,
-                $contraseña,
-                $antiguedad,
-                $fechaini,
-                $fechafin,
-                $diasrestante
-            );
+            // $insertar->guardar(
+            //     $nombre,
+            //     $apellido,
+            //     $cuil,
+            //     $profesion,
+            //     $fecha,
+            //     $educacion,
+            //     $rela_localidad_direccion,
+            //     $calle_direccion,
+            //     $telefonoCel,
+            //     $telefonoFijo,
+            //     $correo,
+            //     $departamento,
+            //     $area,
+            //     $n_legajo,
+            //     $n_expediente,
+            //     $tipo_contrato,
+            //     $cargo,
+            //     $usuario,
+            //     $contraseña,
+            //     $antiguedad,
+            //     $fechaini,
+            //     $fechafin,
+            //     $diasrestante
+            // );
 
 
             // header("Location:index2.php?controlador=personal&accion=inicio");
-            echo "<script>location.href = 'index2.php?controlador=agencias&accion=inicio';</script>";
+            // echo "<script>location.href = 'index2.php?controlador=personal&accion=inicio';</script>";
         }
 
         include_once("vistas/personal/guardar.php");
+    }
+
+    public function licArt()
+    {
+        $conexionBD = BD::crearInstancia();
+
+        // print_r($_POST['personal']);
+
+        $personal = $_POST['personal'];
+
+
+
+
+
+        include_once("vistas/personal/rellenar.php");
     }
 }

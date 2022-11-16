@@ -84,8 +84,9 @@ class ControladorAgencias
                 $idoneoAgencia
             );
 
+            echo "<script>location.href='index2.php?controlador=agencias&accion=inicio';</script>";
 
-            header("Location:index2.php?controlador=agencias&accion=inicio");
+            // header("Location:index2.php?controlador=agencias&accion=inicio");
         }
 
 
@@ -303,5 +304,4 @@ class ControladorAgencias
 
         include_once("vistas/agencias/invoice-print.php");
     }
-
 }

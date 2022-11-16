@@ -31,7 +31,7 @@ class ControladorGastronomia
 
 
         if ($_POST) {
-            //print_r($_POST);
+            // print_r($_POST);
 
             $insertar = new GastronomiaModelo();
 
@@ -39,6 +39,8 @@ class ControladorGastronomia
             $designacion = $_POST['designacion'];
             $diayhora = $_POST['diayhora'];
             $observacion = $_POST['observacion'];
+            $caracteristicas_gastro = $_POST['caracteristicas_gastro'];
+
             // $idoneoAgencia = $_POST['idoneoAgencia'];
 
             $rela_localidad_direccion = $_POST['localidadAgencia'];
@@ -62,6 +64,7 @@ class ControladorGastronomia
                 $designacion,
                 $diayhora,
                 $observacion,
+                $caracteristicas_gastro,
                 $rela_localidad_direccion,
                 $calle_direccion,
                 $telefonoAgencia,
@@ -106,6 +109,7 @@ class ControladorGastronomia
             $designacion = $_POST['designacion'];
             $observacion = $_POST['observacion'];
             $diayhora = $_POST['diayhora'];
+            $caracteristicas_gastro = $_POST['caracteristicas_gastro'];
 
             $idDireccion = $_POST['agenciaDomicilioID'];
             $rela_localidad_direccion = $_POST['localidadAgencia'];
@@ -142,6 +146,7 @@ class ControladorGastronomia
                 $designacion,
                 $observacion,
                 $diayhora,
+                $caracteristicas_gastro,
                 $designacionID,
                 $rela_localidad_direccion,
                 $calle_direccion,

@@ -18,7 +18,7 @@ class Alojamientos
         $conexionBD = BD::crearInstancia();
 
 
-        $sql = $conexionBD->query("  SELECT alojamientos.id_alojamientos, alojamientos.descripcion_alojamientos, tipo_alojamiento.descripcion_tipo_alojamiento,
+        $sql = $conexionBD->prepare("SELECT alojamientos.id_alojamientos, alojamientos.descripcion_alojamientos, tipo_alojamiento.descripcion_tipo_alojamiento,
                                         direccion.calle_direccion,localidad.nombre_localidad, alojamientos.fecha_edit_alojamiento,
                                         (SELECT contacto.descripcion_contacto 
                                         FROM contacto 
@@ -36,6 +36,7 @@ class Alojamientos
                                         ORDER BY alojamientos.id_alojamientos DESC;");
 
         //recuperamos los datos y los retornamos
+        $sql->execute();
 
         while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
             $this->listaAlojamientoInicio[] = $filas;
