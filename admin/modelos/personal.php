@@ -297,7 +297,9 @@ class PersonalModelo
         $idtelefonoFijo,
         $idcorreo,
         $licenciasID,
-        $diasRestID
+        $diasRestID,
+        $articuloID,
+        $fechainiArticulo
     ) {
 
         $conexionBD = BD::crearInstancia();
@@ -334,15 +336,20 @@ class PersonalModelo
                                                 WHERE id_licencias = $key2");
             $sqlLicenciasFin->execute();
         }
-        // $sqlLicencias = $conexionBD->prepare("UPDATE `licencias` SET `fecha_ini`='$fechaini',
-        // `fecha_fin`='$fechafin' 
-        // WHERE id_licencias = $licenciasID;");
-        // $sqlLicencias->execute();
+
 
         /*---------------SE ACTUALIZA LAS LICENCIAS DIAS RESTANTES-------------------*/
         $sqlLicenciasDiasRestantes = $conexionBD->prepare("UPDATE `licencias` SET `dias_restante`='$diasrestante' 
         WHERE id_licencias = $diasRestID");
         $sqlLicenciasDiasRestantes->execute();
+
+        /*---------------SE ACTUALIZA LOS ARTICULOS-------------------*/
+        $razonparticular = array_combine($articuloID, $fechainiArticulo);
+
+        foreach ($razonparticular as $key3 => $inicio2) {
+            $sqlArticulo = $conexionBD->prepare("UPDATE `razon_particular` SET `fecha_ini_razonparticular`='$inicio2' WHERE id_razon_particular = $key3");
+            $sqlArticulo->execute();
+        }
 
         /*---------------SE ACTUALIZA LA DIRECCION CON LA LOCALIDAD-------------------*/
 
@@ -565,6 +572,20 @@ class PersonalModelo
 
         return $sqlcantLic->fetch(PDO::FETCH_OBJ);
     }
+    public function buscarCantidadArticulo($idpersonal)
+    {
+
+        $conexionBD = BD::crearInstancia();
+
+
+        $sqlcantArt = $conexionBD->query("SELECT `id_razon_particular`, `fecha_ini_razonparticular`, `comprobante_particular`, `rela_personal` 
+        FROM `razon_particular` 
+        WHERE rela_personal = $idpersonal");
+
+        $sqlcantArt->execute();
+
+        return $sqlcantArt->fetch(PDO::FETCH_OBJ);
+    }
 }
 
 class ContactosPersonal
@@ -696,6 +717,18 @@ class ContactosPersonal
         $conexionBD = BD::crearInstancia();
         $consultalicencia = $conexionBD->query("SELECT `id_licencias`, `fecha_ini`, `fecha_fin`, `dias_restante`, `estado`, `rela_personal` FROM `licencias`
         WHERE `rela_personal`=$id");
+
+        $consultalicencia->execute();
+
+        return $consultalicencia->fetchAll(PDO::FETCH_OBJ);
+    }
+    public function consultarArticulo($id)
+    {
+        // echo 'este es el id:' . $id;
+        $conexionBD = BD::crearInstancia();
+        $consultalicencia = $conexionBD->query("SELECT `id_razon_particular`, `fecha_ini_razonparticular`, `comprobante_particular`, `rela_personal` 
+        FROM `razon_particular` 
+        WHERE rela_personal = $id");
 
         $consultalicencia->execute();
 

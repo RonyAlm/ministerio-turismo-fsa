@@ -141,6 +141,7 @@ class ControladorPersonal
         $buscarSelectArea = $select_tipo->buscarSelectArea();
         $buscarSelectContrato = $select_tipo->buscarSelectContrato();
         $consultarCantidLicenciaEditar = $select_tipo->buscarCantidadLicencia($id);
+        $buscarCantidadArticuloEditar = $select_tipo->buscarCantidadArticulo($id);
 
         // print_r($consultarLicencias);
 
@@ -201,6 +202,11 @@ class ControladorPersonal
             $diasRestID = $_POST['diasRestID'];
             $diasrestante = $_POST['diasrestante'];
 
+            // ARTICULO
+
+            $articuloID = $_POST['articuloID'];
+            $fechainiArticulo = $_POST['fechainiArticulo'];
+
 
 
             // var_dump($probando);
@@ -242,7 +248,9 @@ class ControladorPersonal
                 $idtelefonoFijo,
                 $idcorreo,
                 $licenciasID,
-                $diasRestID
+                $diasRestID,
+                $articuloID,
+                $fechainiArticulo
             );
 
             // print_r($EditarAgencia);
@@ -269,6 +277,7 @@ class ControladorPersonal
         $agenciaWeb = $contactosDeagencia->consultarWeb($idPersona);
         $agenciaOtro = $contactosDeagencia->consultarOtro($idPersona);
         $consultarLicencias = $contactosDeagencia->consultarLicencias($id);
+        $consultarArticulo = $contactosDeagencia->consultarArticulo($id);
 
 
         // if (is_array($consultarLicenciasa) || is_object($consultarLicenciasa)) {

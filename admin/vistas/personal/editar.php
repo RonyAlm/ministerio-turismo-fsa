@@ -41,6 +41,7 @@
                 <li class="nav-item"><a class="nav-link active" href="#personal" data-toggle="tab">Personal</a></li>
                 <li class="nav-item"><a class="nav-link" href="#ministerio" data-toggle="tab">Ministerio</a></li>
                 <li class="nav-item"><a class="nav-link" href="#licencias" data-toggle="tab">Licencias</a></li>
+                <li class="nav-item"><a class="nav-link" href="#hola" data-toggle="tab">Articulo 5.9</a></li>
               </ul>
             </div><!-- /.card-header -->
             <div class="card-body">
@@ -254,14 +255,32 @@
                     </div>
                   </div>
 
+                </div>
+                <!-- ACA SE ENCUENTRA EL ARTICULO , PUSE ASI POR QUE NO ME TOMA EL ID articulo -->
+                <div class="tab-pane" id="hola">
+
+                  <?php foreach ($consultarArticulo as $articulos) { ?>
+
+                    <div class="form-group row">
+                      <label for="fechainiArticulo" class="col-sm-2 col-form-label">Fechas inicio</label>
+                      <div class="col-sm-10">
+                        <input type="hidden" id="articuloID" name="articuloID[]" value="<?= $articulos->id_razon_particular ?>">
+                        <input type="date" class="form-control" name="fechainiArticulo[]" id="fechainiArticulo" value="<?= $articulos->fecha_ini_razonparticular ?>">
+                      </div>
+                    </div>
+
+
+                  <?php  } ?>
                   <div class="form-group row">
                     <div class="offset-sm-2 col-sm-10">
                       <input name="" id="" class="btn btn-success" type="submit" value="Editar">
                       <a href="?controlador=personal&accion=inicio" class="btn btn-primary">Cancelar</a>
                     </div>
                   </div>
-                  <!-- </form> -->
+
                 </div>
+
+
 
               </div>
               <!-- /.tab-content -->
