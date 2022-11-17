@@ -142,6 +142,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
     .tblInfo tr td {
       text-align: center;
     }
+
+    .nav-pills .nav-link.active,
+    .nav-pills .show>.nav-link {
+      color: #fff;
+      background-color: var(--success) !important;
+    }
+
+    .nav-pills .nav-link:not(.active):hover {
+      color: var(--success) !important;
+    }
   </style>
 
 </head>
