@@ -81,7 +81,8 @@ $rol_id = $_SESSION['rol_id'];
                                         <a title="Editar" href="?controlador=personal&accion=editar&id=<?php echo $tabla1["id_personal"]; ?>&idPersona=<?php echo $tabla1["id_persona"]; ?>" class="btn btn-success btn-sm">
                                           <i class="fas fa-pencil-alt"></i>
                                         </a>
-                                        <a title="Borrar" href="?controlador=personal&accion=borrar&id=<?php echo $tabla1["id_personal"]; ?>" class="btn btn-danger btn-sm">
+                                        <a title="Borrar" onclick="AlertDeletePersonal(<?= $tabla1['id_personal']; ?>)" class="btn btn-danger btn-sm">
+
                                           <i class="fas fa-trash"></i>
                                         </a>
 

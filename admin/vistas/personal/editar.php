@@ -251,9 +251,9 @@
                               <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Minimizar">
                                 <i class="fas fa-minus"></i>
                               </button>
-                              <button type="button" class="btn btn-tool" data-card-widget="remove" title="Borrar">
+                              <a onclick="AlertDeleteLicencia(<?= $licencia->id_licencias ?>)" class="btn btn-tool" title="Borrar">
                                 <i class="fas fa-trash-can"></i>
-                              </button>
+                              </a>
                             </div>
                           </div>
                           <div class="card-body">
@@ -290,8 +290,6 @@
 
                   </div>
 
-
-
                   <div class="form-group row">
                     <label for="diasrestante" class="col-sm-2 col-form-label">Días Restantes</label>
                     <div class="col-sm-10">
@@ -321,9 +319,9 @@
                               <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Minimizar">
                                 <i class="fas fa-minus"></i>
                               </button>
-                              <button type="button" class="btn btn-tool" data-card-widget="remove" title="Borrar">
+                              <a onclick="AlertDeleteJuego(<?= $articulos->id_razon_particular ?>)" class="btn btn-tool" title="Borrar">
                                 <i class="fas fa-trash-can"></i>
-                              </button>
+                              </a>
                             </div>
                           </div>
                           <div class="card-body">
@@ -349,13 +347,7 @@
                     <?php  } ?>
                   </div>
 
-                  <!-- 
-                  <div class="form-group row">
-                    <div class="offset-sm-2 col-sm-10">
-                      <a href="?controlador=personal&accion=inicio" class="btn btn-secondary">Cancelar</a>
-                      <input name="" id="" class="btn btn-success" type="submit" value="Editar">
-                    </div>
-                  </div> -->
+
 
                 </div>
 

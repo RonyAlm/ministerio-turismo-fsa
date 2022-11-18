@@ -297,19 +297,21 @@ class ControladorPersonal
 
     public function borrar()
     {
-        //print_r($_GET);
+        // print_r($_GET);
 
-        $idAgenciaBorrar = $_GET["id"];
-        $id_direccion = $_GET['idDireccion'];
-        $idRazonSocial = $_GET['idRazonSocial'];
+        $idBorrarLicencia = $_GET["id"];
+        $idBorrarArticulo = $_GET["idArticulo"];
+        // $idBorrarPersonal = $_GET["idPersonal"];
 
-        $borrarAgencias = new PersonalModelo();
 
-        $buscarIDBorrado = $borrarAgencias->consultarID($idAgenciaBorrar);
+        $borrar = new PersonalModelo();
 
-        $borrado = $borrarAgencias->borrar($idAgenciaBorrar, $id_direccion, $idRazonSocial);
 
-        header("Location:index2.php?controlador=agencias&accion=inicio");
+
+        $borradoLicencia = $borrar->borrarLicencia($idBorrarLicencia);
+        $borradoArticulo = $borrar->borrarArticulo($idBorrarArticulo);
+
+        header("Location:index2.php?controlador=personal&accion=inicio");
     }
 
     public function info()
@@ -323,18 +325,6 @@ class ControladorPersonal
         $tablaInformes = $Info->info3($id);
         $tablaInfo2 = $Info->info2($id);
 
-        // $agenciasInfomacion = $agenciaInfo->buscar($id_agencia);
-
-
-        // $contactosDeagencia = new ContactosInfoPersonal();
-        // $agenciaTelefonoInfo = $contactosDeagencia->consultarTelefonos($id_agencia);
-        // $agenciaTelefonoFijo = $contactosDeagencia->consultarTelefonosFijos($id_agencia);
-        // $agenciaCorreo = $contactosDeagencia->consultarCorreo($id_agencia);
-        // $agenciaFacebook = $contactosDeagencia->consultarFacebook($id_agencia);
-        // $agenciaInstagram = $contactosDeagencia->consultarInstagram($id_agencia);
-        // $agenciaTwitter = $contactosDeagencia->consultarTwitter($id_agencia);
-        // $agenciaWeb = $contactosDeagencia->consultarWeb($id_agencia);
-        // $agenciaOtro = $contactosDeagencia->consultarOtro($id_agencia);
 
         include_once("vistas/personal/info.php");
     }
@@ -352,6 +342,7 @@ class ControladorPersonal
 
 
         $contactosDeagencia = new ContactosInfoPersonal();
+        $infoPersonal = new ContactosPersonal();
         $agenciaTelefonoInfo = $contactosDeagencia->consultarTelefonos($idpersona);
         $agenciaTelefonoFijo = $contactosDeagencia->consultarTelefonosFijos($idpersona);
         $agenciaCorreo = $contactosDeagencia->consultarCorreo($idpersona);
@@ -360,6 +351,10 @@ class ControladorPersonal
         // $agenciaTwitter = $contactosDeagencia->consultarTwitter($id_agencia);
         // $agenciaWeb = $contactosDeagencia->consultarWeb($id_agencia);
         // $agenciaOtro = $contactosDeagencia->consultarOtro($id_agencia);
+        $consultarCantidLicenciaEditar = $Info->buscarCantidadLicencia($id);
+        $buscarCantidadArticuloEditar = $Info->buscarCantidadArticulo($id);
+        $consultarLicencias = $infoPersonal->consultarLicencias($id);
+        $consultarArticulo = $infoPersonal->consultarArticulo($id);
 
         include_once("vistas/personal/infopersonal.php");
     }

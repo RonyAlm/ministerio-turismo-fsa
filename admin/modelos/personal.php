@@ -227,17 +227,17 @@ class PersonalModelo
     }
 
 
-    public static function borrar($idAgenciaBorrar, $id_direccion, $idRazonSocial)
+    public static function borrarLicencia($idlicencia)
     {
         $conexionBD = BD::crearInstancia();
-        $sqlAgenciaBorrar = $conexionBD->prepare("DELETE FROM agencias WHERE id_agencias =?");
-        $sqlAgenciaBorrar->execute(array($idAgenciaBorrar));
-
-        $sqlDireccionBorrar = $conexionBD->prepare("DELETE FROM direccion WHERE id_direccion =?");
-        $sqlDireccionBorrar->execute(array($id_direccion));
-
-        $sqlRazonBorrar = $conexionBD->prepare("DELETE FROM `razon_social` WHERE id_razon_social =?");
-        $sqlRazonBorrar->execute(array($idRazonSocial));
+        $sqlBorrar = $conexionBD->prepare("DELETE FROM `licencias` WHERE id_licencias =?");
+        $sqlBorrar->execute(array($idlicencia));
+    }
+    public static function borrarArticulo($idarticulo)
+    {
+        $conexionBD = BD::crearInstancia();
+        $sqlBorrar = $conexionBD->prepare("DELETE FROM `razon_particular` WHERE id_razon_particular =?");
+        $sqlBorrar->execute(array($idarticulo));
     }
     /*----------BUSCAR para ir imprimir en la seccion EDITAR----------*/
     public function buscar($id)
