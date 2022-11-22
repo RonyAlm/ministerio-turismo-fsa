@@ -82,7 +82,6 @@ $rol_id = $_SESSION['rol_id'];
                                           <i class="fas fa-pencil-alt"></i>
                                         </a>
                                         <a title="Borrar" onclick="AlertDeletePersonal(<?= $tabla1['id_personal']; ?>)" class="btn btn-danger btn-sm">
-
                                           <i class="fas fa-trash"></i>
                                         </a>
 
