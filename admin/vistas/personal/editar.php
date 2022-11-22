@@ -253,6 +253,7 @@
                               </button>
                               <a onclick="AlertDeleteLicencia(<?= $licencia->id_licencias ?>)" class="btn btn-tool" title="Borrar">
                                 <i class="fas fa-trash-can"></i>
+
                               </a>
                             </div>
                           </div>
