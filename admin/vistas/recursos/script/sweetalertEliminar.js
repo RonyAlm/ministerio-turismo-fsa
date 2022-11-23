@@ -64,13 +64,12 @@ function AlertDeletePersonal(identificador) {
 function AlertDeleteAlojamiento(id_alo, id_dire, id_rz, id_serv, id_sercomple) {
   console.log(id_alo, id_dire, id_rz, id_serv, id_sercomple);
   Swal.fire({
-    title:
-      "¿Está seguro de que desea la licencia?" +
-      id_alo +
-      id_dire +
-      id_rz +
-      id_serv +
-      id_sercomple,
+    title: "¿Está seguro de que desea el Alojamiento?",
+    // +id_alo +
+    // id_dire +
+    // id_rz +
+    // id_serv +
+    // id_sercomple
     text: "Esta acción no podrá revertirse",
     icon: "error",
     buttons: true,
