@@ -427,7 +427,7 @@ class PersonalModelo
             $sqlUdLicencia = $conexionBD->prepare("UPDATE `licencias` SET `estado`=0 WHERE `rela_personal`=$selectPersonal");
             $sqlUdLicencia->execute();
 
-            print_r($sqlUdLicencia);
+            // print_r($sqlUdLicencia);
 
             /*-------- INSERTAMOS LAS LICENCIAS en la tabla licencia--------*/
 
@@ -437,7 +437,7 @@ class PersonalModelo
 
                 $sqlLicencia = $conexionBD->prepare("INSERT INTO `licencias`( `fecha_ini`, `fecha_fin`, `dias_restante`, `estado`, `rela_personal`) VALUES (?,?,?,?,?)");
                 $sqlLicencia->execute(array($indice, $valor, $CantLicenciaRestante, 1, $selectPersonal));
-                print_r($sqlLicencia);
+                // print_r($sqlLicencia);
                 $lastInsertLicencia = $conexionBD->lastInsertId();
             }
         }
@@ -450,7 +450,7 @@ class PersonalModelo
                 $sqlArticulo = $conexionBD->prepare("INSERT INTO `razon_particular`(`fecha_ini_razonparticular`, `rela_personal`) 
                 VALUES (?,?)");
                 $sqlArticulo->execute(array($articuloFechas, $selectPersonal));
-                print_r($sqlArticulo);
+                // print_r($sqlArticulo);
                 $lastInsertArticulo = $conexionBD->lastInsertId();
             }
         }
