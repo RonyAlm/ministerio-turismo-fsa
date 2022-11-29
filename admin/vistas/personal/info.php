@@ -43,27 +43,24 @@ $rol_id = $_SESSION['rol_id'];
                   </h4>
                 </div>
 
-                <?php foreach ($tablaInformes as $tabla1) { ?>
+                <div id="collapse<?php echo $conteo ?>" class="collapse show" data-parent="#accordion">
+                  <div class="card-body">
+                    <div id="acordeon" class="row">
+                      <div class="col-lg-12">
 
-                  <?php if ($tabla["rela_area"] == $tabla1["rela_area"]) { ?>
+                        <table id="tblList" class="table table-bordered table-striped" cellspacing="0" width="100%">
+                          <thead>
+                            <tr style="background: linear-gradient(to right, #61ba6d, #83c331)">
+                              <th>id</th>
+                              <th>nombre</th>
+                              <th>estado</th>
+                              <th>Acción</th>
+                            </tr>
+                          </thead>
+                          <tbody>
 
-                    <div id="collapse<?php echo $conteo ?>" class="collapse show" data-parent="#accordion">
-                      <div class="card-body">
-                        <div id="acordeon" class="row">
-                          <div class="col-lg-12">
-
-                            <table id="tblList" class="table table-bordered table-striped" cellspacing="0" width="100%">
-                              <thead>
-                                <tr style="background: linear-gradient(to right, #61ba6d, #83c331)">
-                                  <th>id</th>
-                                  <th>nombre</th>
-                                  <th>estado</th>
-                                  <th>Acción</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-
-
+                            <?php foreach ($tablaInformes as $tabla1) : ?>
+                              <?php if ($tabla["rela_area"] == $tabla1["rela_area"]) : ?>
 
                                 <tr>
 
@@ -91,25 +88,27 @@ $rol_id = $_SESSION['rol_id'];
 
                                 </tr>
 
-                                <!-- fin del php -->
+                              <?php endif; ?>
+                            <?php endforeach; ?>
 
-                              </tbody>
-                              <tfoot>
-                                <tr style="background: linear-gradient(to right, #61ba6d, #83c331)">
-                                  <th>id</th>
-                                  <th>nombre</th>
-                                  <th>estado</th>
-                                  <th>Acción</th>
-                                </tr>
-                              </tfoot>
-                            </table>
-                          </div>
-                        </div>
+                            <!-- fin del php -->
+
+                          </tbody>
+                          <tfoot>
+                            <tr style="background: linear-gradient(to right, #61ba6d, #83c331)">
+                              <th>id</th>
+                              <th>nombre</th>
+                              <th>estado</th>
+                              <th>Acción</th>
+                            </tr>
+                          </tfoot>
+                        </table>
                       </div>
                     </div>
-                  <?php } ?>
+                  </div>
+                </div>
 
-                <?php } ?>
+
                 <?php
                 $conteo++;
                 ?>
