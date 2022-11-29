@@ -387,7 +387,7 @@ class ControladorPersonal
             $rela_localidad_direccion = $_POST['localidad'];
             $calle_direccion = $_POST['direccion'];
 
-            $telefonoCel = $_POST['telefonoCel'];
+            $telefonoCel = $_POST['telefonoAgencia'];
             $telefonoFijo = $_POST['telefonoFijo'];
             $correo = $_POST['correo'];
 
@@ -417,35 +417,35 @@ class ControladorPersonal
             $contraseña = $usuario . $random;
             str_replace(" ", "", $contraseña);
 
-            // $insertar->guardar(
-            //     $nombre,
-            //     $apellido,
-            //     $cuil,
-            //     $profesion,
-            //     $fecha,
-            //     $educacion,
-            //     $rela_localidad_direccion,
-            //     $calle_direccion,
-            //     $telefonoCel,
-            //     $telefonoFijo,
-            //     $correo,
-            //     $departamento,
-            //     $area,
-            //     $n_legajo,
-            //     $n_expediente,
-            //     $tipo_contrato,
-            //     $cargo,
-            //     $usuario,
-            //     $contraseña,
-            //     $antiguedad,
-            //     $fechaini,
-            //     $fechafin,
-            //     $diasrestante
-            // );
+            $insertar->guardar(
+                $nombre,
+                $apellido,
+                $cuil,
+                $profesion,
+                $fecha,
+                $educacion,
+                $rela_localidad_direccion,
+                $calle_direccion,
+                $telefonoCel,
+                $telefonoFijo,
+                $correo,
+                $departamento,
+                $area,
+                $n_legajo,
+                $n_expediente,
+                $tipo_contrato,
+                $cargo,
+                $usuario,
+                $contraseña,
+                $antiguedad,
+                $fechaini,
+                $fechafin,
+                $diasrestante
+            );
 
 
             // header("Location:index2.php?controlador=personal&accion=inicio");
-            // echo "<script>location.href = 'index2.php?controlador=personal&accion=inicio';</script>";
+            echo "<script>location.href = 'index2.php?controlador=personal&accion=inicio';</script>";
         }
 
         include_once("vistas/personal/guardar.php");
