@@ -19,9 +19,3 @@
   }
   
   include_once("vistas/template2.php");
-
-
-
-
-
-?>

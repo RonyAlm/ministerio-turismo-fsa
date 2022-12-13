@@ -59,6 +59,9 @@ $rol_id = $_SESSION['rol_id'];
 
             <?php foreach ($tabla as $asistencia) { ?>
 
+              <?php if ($asistencia["nombre_personal"] == "admin") {
+              } ?>
+
               <tr>
                 <td><?php echo $asistencia["id_asistencia2"]; ?></td>
                 <td><?php echo $asistencia["nombre_personal"]; ?></td>
