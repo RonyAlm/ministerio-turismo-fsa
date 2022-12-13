@@ -582,13 +582,41 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="?controlador=asistencias&accion=inicio" class="nav-link 
-                    <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'asistencias')) ? '' : '' ?>">
+                    <a href="#" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Asistencia</p>
+                      <p>
+                        Asistencias
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
                     </a>
+                    <ul class="nav nav-treeview" style="display: none;">
+                      <li class="nav-item">
+                        <a href="#" class="nav-link">
+                          <i class="far fa-dot-circle nav-icon"></i>
+                          <p>Administración</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="?controlador=asistencias&accion=inicio" class="nav-link 
+                          <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'asistencias')) ? '' : '' ?>">>
+                          <i class="far fa-dot-circle nav-icon"></i>
+                          <p>Central</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="#" class="nav-link">
+                          <i class="far fa-dot-circle nav-icon"></i>
+                          <p>Logística</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="#" class="nav-link">
+                          <i class="far fa-dot-circle nav-icon"></i>
+                          <p>Terminal</p>
+                        </a>
+                      </li>
+                    </ul>
                   </li>
-
                 </ul>
               </li>
             <?php } ?>
