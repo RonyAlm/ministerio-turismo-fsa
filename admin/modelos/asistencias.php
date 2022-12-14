@@ -19,8 +19,7 @@ class AsistenciaModelo
 
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->query("SELECT `id_asistencia2`, `nombre_personal`, `fecha_asistencia`, `hora_asistencia` 
-                                    FROM `asistencia2`");
+        $sql = $conexionBD->query("SELECT `id_asistencia3`, `nombre_per`, `fcha_asistencia`, `horas_asistencia`, `checkinout` FROM `asistencia3`");
 
         //recuperamos los datos y los retornamos
 
@@ -77,6 +76,13 @@ class AsistenciaModelo
                 $hora               = !empty($datos[4])  ? ($datos[4]) : '';
                 $in               = !empty($datos[5])  ? ($datos[5]) : '';
                 $checkInOn               = !empty($datos[9])  ? ($datos[9]) : '';
+
+                if ($nombre == '"admin"') {
+                    $nombre = "David Rolando Pereyra";
+                }
+                if ($checkInOn == 'overtimeIn') {
+                    $checkInOn = "E/S";
+                }
 
                 if ($hora <= '08:15:00') {
                     $checkInOn = "Entrada";
