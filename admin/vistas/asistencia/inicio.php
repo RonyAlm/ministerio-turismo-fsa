@@ -78,7 +78,6 @@ $rol_id = $_SESSION['rol_id'];
               <th>Fecha</th>
               <th>Hora</th>
               <th>Check-In-Out</th>
-
             </tr>
           </tfoot>
         </table>
