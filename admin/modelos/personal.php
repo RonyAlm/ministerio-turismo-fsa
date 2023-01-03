@@ -227,17 +227,17 @@ class PersonalModelo
     }
 
 
-    public static function borrar($idAgenciaBorrar, $id_direccion, $idRazonSocial)
+    public static function borrarLicencia($idlicencia)
     {
         $conexionBD = BD::crearInstancia();
-        $sqlAgenciaBorrar = $conexionBD->prepare("DELETE FROM agencias WHERE id_agencias =?");
-        $sqlAgenciaBorrar->execute(array($idAgenciaBorrar));
-
-        $sqlDireccionBorrar = $conexionBD->prepare("DELETE FROM direccion WHERE id_direccion =?");
-        $sqlDireccionBorrar->execute(array($id_direccion));
-
-        $sqlRazonBorrar = $conexionBD->prepare("DELETE FROM `razon_social` WHERE id_razon_social =?");
-        $sqlRazonBorrar->execute(array($idRazonSocial));
+        $sqlBorrar = $conexionBD->prepare("DELETE FROM `licencias` WHERE id_licencias =?");
+        $sqlBorrar->execute(array($idlicencia));
+    }
+    public static function borrarArticulo($idarticulo)
+    {
+        $conexionBD = BD::crearInstancia();
+        $sqlBorrar = $conexionBD->prepare("DELETE FROM `razon_particular` WHERE id_razon_particular =?");
+        $sqlBorrar->execute(array($idarticulo));
     }
     /*----------BUSCAR para ir imprimir en la seccion EDITAR----------*/
     public function buscar($id)
@@ -297,7 +297,9 @@ class PersonalModelo
         $idtelefonoFijo,
         $idcorreo,
         $licenciasID,
-        $diasRestID
+        $diasRestID,
+        $articuloID,
+        $fechainiArticulo
     ) {
 
         $conexionBD = BD::crearInstancia();
@@ -334,15 +336,20 @@ class PersonalModelo
                                                 WHERE id_licencias = $key2");
             $sqlLicenciasFin->execute();
         }
-        // $sqlLicencias = $conexionBD->prepare("UPDATE `licencias` SET `fecha_ini`='$fechaini',
-        // `fecha_fin`='$fechafin' 
-        // WHERE id_licencias = $licenciasID;");
-        // $sqlLicencias->execute();
+
 
         /*---------------SE ACTUALIZA LAS LICENCIAS DIAS RESTANTES-------------------*/
         $sqlLicenciasDiasRestantes = $conexionBD->prepare("UPDATE `licencias` SET `dias_restante`='$diasrestante' 
         WHERE id_licencias = $diasRestID");
         $sqlLicenciasDiasRestantes->execute();
+
+        /*---------------SE ACTUALIZA LOS ARTICULOS-------------------*/
+        $razonparticular = array_combine($articuloID, $fechainiArticulo);
+
+        foreach ($razonparticular as $key3 => $inicio2) {
+            $sqlArticulo = $conexionBD->prepare("UPDATE `razon_particular` SET `fecha_ini_razonparticular`='$inicio2' WHERE id_razon_particular = $key3");
+            $sqlArticulo->execute();
+        }
 
         /*---------------SE ACTUALIZA LA DIRECCION CON LA LOCALIDAD-------------------*/
 
@@ -420,7 +427,7 @@ class PersonalModelo
             $sqlUdLicencia = $conexionBD->prepare("UPDATE `licencias` SET `estado`=0 WHERE `rela_personal`=$selectPersonal");
             $sqlUdLicencia->execute();
 
-            print_r($sqlUdLicencia);
+            // print_r($sqlUdLicencia);
 
             /*-------- INSERTAMOS LAS LICENCIAS en la tabla licencia--------*/
 
@@ -430,7 +437,7 @@ class PersonalModelo
 
                 $sqlLicencia = $conexionBD->prepare("INSERT INTO `licencias`( `fecha_ini`, `fecha_fin`, `dias_restante`, `estado`, `rela_personal`) VALUES (?,?,?,?,?)");
                 $sqlLicencia->execute(array($indice, $valor, $CantLicenciaRestante, 1, $selectPersonal));
-                print_r($sqlLicencia);
+                // print_r($sqlLicencia);
                 $lastInsertLicencia = $conexionBD->lastInsertId();
             }
         }
@@ -443,7 +450,7 @@ class PersonalModelo
                 $sqlArticulo = $conexionBD->prepare("INSERT INTO `razon_particular`(`fecha_ini_razonparticular`, `rela_personal`) 
                 VALUES (?,?)");
                 $sqlArticulo->execute(array($articuloFechas, $selectPersonal));
-                print_r($sqlArticulo);
+                // print_r($sqlArticulo);
                 $lastInsertArticulo = $conexionBD->lastInsertId();
             }
         }
@@ -564,6 +571,20 @@ class PersonalModelo
         $sqlcantLic->execute();
 
         return $sqlcantLic->fetch(PDO::FETCH_OBJ);
+    }
+    public function buscarCantidadArticulo($idpersonal)
+    {
+
+        $conexionBD = BD::crearInstancia();
+
+
+        $sqlcantArt = $conexionBD->query("SELECT `id_razon_particular`, `fecha_ini_razonparticular`, `comprobante_particular`, `rela_personal` 
+        FROM `razon_particular` 
+        WHERE rela_personal = $idpersonal");
+
+        $sqlcantArt->execute();
+
+        return $sqlcantArt->fetch(PDO::FETCH_OBJ);
     }
 }
 
@@ -696,6 +717,18 @@ class ContactosPersonal
         $conexionBD = BD::crearInstancia();
         $consultalicencia = $conexionBD->query("SELECT `id_licencias`, `fecha_ini`, `fecha_fin`, `dias_restante`, `estado`, `rela_personal` FROM `licencias`
         WHERE `rela_personal`=$id");
+
+        $consultalicencia->execute();
+
+        return $consultalicencia->fetchAll(PDO::FETCH_OBJ);
+    }
+    public function consultarArticulo($id)
+    {
+        // echo 'este es el id:' . $id;
+        $conexionBD = BD::crearInstancia();
+        $consultalicencia = $conexionBD->query("SELECT `id_razon_particular`, `fecha_ini_razonparticular`, `comprobante_particular`, `rela_personal` 
+        FROM `razon_particular` 
+        WHERE rela_personal = $id");
 
         $consultalicencia->execute();
 

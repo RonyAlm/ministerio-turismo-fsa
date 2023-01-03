@@ -223,7 +223,13 @@ $rol_id = $_SESSION['rol_id'];
                       <a title="Editar" href="?controlador=Alojamientos&accion=editar&id=<?php echo $alojamiento["id_alojamientos"]; ?>" class="btn btn-success btn-sm">
                         <i class="fas fa-pencil-alt"></i>
                       </a>
-                      <a title="Borrar" href="?controlador=Alojamientos&accion=borrar&id=<?php echo $alojamiento["id_alojamientos"]; ?>  &idDireccion=<?php echo $alojamiento["id_direccion"]; ?>  &idRazonSocial=<?php echo $alojamiento["id_razon_social"]; ?>  &idServicios=<?php echo $alojamiento["rela_aloja_servicios"]; ?>  &idServiciosComple=<?php echo $alojamiento["rela_aloja_serv_adicionales"]; ?>" class="btn btn-danger btn-sm">
+
+                      <a title="Borrar" onclick="AlertDeleteAlojamiento(
+                      <?= $alojamiento['id_alojamientos']; ?>,
+                      <?= $alojamiento['id_direccion']; ?>,
+                      <?= $alojamiento['id_razon_social']; ?>,
+                      <?= $alojamiento['rela_aloja_servicios']; ?>,
+                      <?= $alojamiento['rela_aloja_serv_adicionales']; ?>,)" class="btn btn-danger btn-sm">
                         <i class="fas fa-trash"></i>
                       </a>
 

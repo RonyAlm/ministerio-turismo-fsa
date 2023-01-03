@@ -35,12 +35,13 @@
 
       <div class="col-md-12">
         <form action="" method="POST">
-          <div class="card">
+          <div class="card card-success card-outline">
             <div class="card-header p-2">
               <ul class="nav nav-pills">
                 <li class="nav-item"><a class="nav-link active" href="#personal" data-toggle="tab">Personal</a></li>
                 <li class="nav-item"><a class="nav-link" href="#ministerio" data-toggle="tab">Ministerio</a></li>
                 <li class="nav-item"><a class="nav-link" href="#licencias" data-toggle="tab">Licencias</a></li>
+                <li class="nav-item"><a class="nav-link" href="#hola" data-toggle="tab">Articulo 5.9</a></li>
               </ul>
             </div><!-- /.card-header -->
             <div class="card-body">
@@ -226,25 +227,69 @@
 
                 <div class="tab-pane" id="licencias">
 
-                  <?php foreach ($consultarLicencias as $licencia) { ?>
+                  <div class="row">
+                    <?php foreach ($consultarLicencias as $licencia) { ?>
 
-                    <div class="form-group row">
-                      <label for="fechaini" class="col-sm-2 col-form-label">Fechas inicio</label>
-                      <div class="col-sm-10">
-                        <input type="hidden" id="licenciasID" name="licenciasID[]" value="<?= $licencia->id_licencias ?>">
-                        <input type="date" class="form-control" name="fechaini[]" id="fechaini" value="<?= $licencia->fecha_ini ?>">
+                      <!-- MES -->
+                      <div class="col-md-6">
+
+                        <div class="card">
+                          <div class="card-header">
+                            <h3 class="card-title"><?php
+                                                    $fi = new DateTime($licencia->fecha_ini);
+                                                    $ff = new DateTime($licencia->fecha_fin);
+
+                                                    $meses = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
+                                                    if ($fi->format('m') == $ff->format('m')) {
+                                                      echo $meses[date($fi->format('m')) - 1];
+                                                    } else {
+                                                      echo $meses[date($fi->format('m')) - 1] . " - " . $meses[date($ff->format('m')) - 1];
+                                                    }
+                                                    ?></h3>
+
+                            <div class="card-tools">
+                              <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Minimizar">
+                                <i class="fas fa-minus"></i>
+                              </button>
+                              <a onclick="AlertDeleteLicencia(<?= $licencia->id_licencias ?>)" class="btn btn-tool" title="Borrar">
+                                <i class="fas fa-trash-can"></i>
+
+                              </a>
+                            </div>
+                          </div>
+                          <div class="card-body">
+                            <div class="form-group">
+                              <label>Fecha inicio:</label>
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                </div>
+                                <input type="hidden" id="licenciasID" name="licenciasID[]" value="<?= $licencia->id_licencias ?>">
+                                <input type="date" class="form-control" name="fechaini[]" id="fechaini" value="<?= $licencia->fecha_ini ?>">
+                              </div>
+                            </div>
+                            <!-- /.form-group -->
+                            <div class="form-group">
+                              <label>Fecha fin:</label>
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                </div>
+                                <input type="hidden" id="" name="" value="<?php echo $licencia->id_licencias ?>">
+                                <input type="date" class="form-control" name="fechafin[]" id="fechafin" value="<?= $licencia->fecha_fin ?>">
+                              </div>
+                            </div>
+                            <!-- /.form-group -->
+
+                          </div>
+                          <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
                       </div>
-                    </div>
 
-                    <div class="form-group row">
-                      <label for="fechafin" class="col-sm-2 col-form-label">Fechas fin</label>
-                      <div class="col-sm-10">
-                        <input type="hidden" id="" name="" value="<?php echo $licencia->id_licencias ?>">
-                        <input type="date" class="form-control" name="fechafin[]" id="fechafin" value="<?= $licencia->fecha_fin ?>">
-                      </div>
-                    </div>
+                    <?php  } ?>
 
-                  <?php  } ?>
+                  </div>
 
                   <div class="form-group row">
                     <label for="diasrestante" class="col-sm-2 col-form-label">Días Restantes</label>
@@ -254,18 +299,70 @@
                     </div>
                   </div>
 
-                  <div class="form-group row">
-                    <div class="offset-sm-2 col-sm-10">
-                      <input name="" id="" class="btn btn-success" type="submit" value="Editar">
-                      <a href="?controlador=personal&accion=inicio" class="btn btn-primary">Cancelar</a>
-                    </div>
+                </div>
+                <!-- ACA SE ENCUENTRA EL ARTICULO , PUSE ASI POR QUE NO ME TOMA EL ID articulo -->
+                <div class="tab-pane" id="hola">
+
+                  <div class="row">
+                    <?php foreach ($consultarArticulo as $articulos) { ?>
+
+                      <!-- MES -->
+                      <div class="col-md-6">
+
+                        <div class="card">
+                          <div class="card-header">
+                            <h3 class="card-title"><?php
+                                                    $fiArticulo = new DateTime($articulos->fecha_ini_razonparticular);
+                                                    echo $meses[date($fiArticulo->format('m')) - 1];
+                                                    ?></h3>
+
+                            <div class="card-tools">
+                              <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Minimizar">
+                                <i class="fas fa-minus"></i>
+                              </button>
+                              <a onclick="AlertDeleteJuego(<?= $articulos->id_razon_particular ?>)" class="btn btn-tool" title="Borrar">
+                                <i class="fas fa-trash-can"></i>
+                              </a>
+                            </div>
+                          </div>
+                          <div class="card-body">
+                            <div class="form-group">
+                              <label>Fecha inicio:</label>
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                </div>
+                                <input type="hidden" id="articuloID" name="articuloID[]" value="<?= $articulos->id_razon_particular ?>">
+                                <input type="date" class="form-control" name="fechainiArticulo[]" id="fechainiArticulo" value="<?= $articulos->fecha_ini_razonparticular ?>">
+                              </div>
+                            </div>
+                            <!-- /.form-group -->
+
+                          </div>
+                          <!-- /.card-body -->
+
+                        </div>
+                        <!-- /.card -->
+                      </div>
+
+                    <?php  } ?>
                   </div>
-                  <!-- </form> -->
+
+
+
                 </div>
 
               </div>
               <!-- /.tab-content -->
             </div><!-- /.card-body -->
+
+            <div class="card-footer">
+              <div class="float-right">
+                <a href="?controlador=personal&accion=inicio" class="btn btn-secondary">Cancelar</a>
+                <input name="" id="" class="btn btn-success" type="submit" value="Editar">
+              </div>
+            </div>
+
           </div>
           <!-- /.card -->
         </form>

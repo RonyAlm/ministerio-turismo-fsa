@@ -6,7 +6,7 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=asistencias&accion=inicio">Agencias</a></li>
+                    <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=asistencias&accion=inicio">Asistencias</a></li>
                     <li class="breadcrumb-item active">Imprimir</li>
                 </ol>
             </div>
@@ -30,6 +30,7 @@
                             <th>Nombre y Apellido</th>
                             <th>Fecha</th>
                             <th>Hora</th>
+                            <th>Check-In-Out</th>
 
                         </tr>
                     </thead>
@@ -39,9 +40,10 @@
 
                             <tr>
 
-                                <td><?php echo $asistencias["nombre_personal"]; ?></td>
-                                <td><?php echo $asistencias["fecha_asistencia"]; ?></td>
-                                <td><?php echo $asistencias["hora_asistencia"]; ?></td>
+                                <td><?php echo $asistencias["nombre_per"]; ?></td>
+                                <td><?php echo $asistencias["fcha_asistencia"]; ?></td>
+                                <td><?php echo $asistencias["horas_asistencia"]; ?></td>
+                                <td><?php echo $asistencias["checkinout"]; ?></td>
 
 
 

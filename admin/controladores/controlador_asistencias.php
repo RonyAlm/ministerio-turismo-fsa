@@ -309,10 +309,8 @@ class ControladorAsistencias
         $consulta = new AsistenciaModelo();
 
         $tabla = $consulta->consultar();
-        $datosEstadisticos = new estadistica();
 
-        $cantidad_agencias = $datosEstadisticos->cantidadAgencias();
-        $cantidadAgenciasHabilitadas = $datosEstadisticos->cantidadAgenciasHabilitadas();
+
 
 
         include_once("vistas/asistencia/imprimir.php");
