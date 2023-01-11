@@ -69,7 +69,7 @@ $rol_id = $_SESSION['rol_id'];
           <span class="info-box-icon bg-success"><i class="fa-solid fa-building"></i></span>
 
           <div class="info-box-content">
-            <span class="info-box-text text-center">Monicipios
+            <span class="info-box-text text-center">Municipios
               <!-- con sedes de turismo -->
             </span>
             <?php foreach ($estadistica2 as $esta) { ?>
