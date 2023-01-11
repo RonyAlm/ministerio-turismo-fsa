@@ -564,7 +564,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <?php } ?>
 
             <!-- PERSONAL -->
-            <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "rrhh") { ?>
+            <?php
+            $show_personal = $rol_id == 1 or ($rol_id == 3 and $usuario == "rrhh");
+            if ($show_personal) {
+            ?>
               <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'menu-open' : '' ?>">
                 <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-table"></i>
@@ -576,7 +579,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="?controlador=personal&accion=inicio" class="nav-link 
-                    <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'active' : '' ?>">
+        <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'active' : '' ?>">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Registro</p>
                     </a>
@@ -598,7 +601,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       </li>
                       <li class="nav-item">
                         <a href="?controlador=asistencias&accion=inicio" class="nav-link 
-                          <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'asistencias')) ? '' : '' ?>">>
+            <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'asistencias')) ? '' : '' ?>">
                           <i class="far fa-dot-circle nav-icon"></i>
                           <p>Central</p>
                         </a>
@@ -618,6 +621,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </ul>
                   </li>
                 </ul>
+
               </li>
             <?php } ?>
 
