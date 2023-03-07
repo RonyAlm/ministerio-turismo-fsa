@@ -75,6 +75,9 @@ $rol_id = $_SESSION['rol_id'];
       <!-- /.col -->
     </div>
 
+
+
+
     <div id="acordeon" class="row">
       <div class="col-lg-12">
         <table id="tblList" class="table table-bordered table-striped" cellspacing="0" width="100%">
