@@ -3,7 +3,9 @@
 session_start();
 // include_once "controladores/controlador_login.php";
 
+
 include_once("conexion.php");
+
 
 $conexion = BD::crearInstancia();
 
@@ -77,6 +79,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Favicon -->
   <link rel="icon" href="vistas/recursos/dist/img/favicon.png">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
+
+
+
 
   <style>
     .resaltar {
