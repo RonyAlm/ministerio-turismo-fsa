@@ -32,12 +32,5 @@ if ($rol_id == 3 or $rol_id == 1) {
 } else {
     $mensaje = array('msg' => 'Error al eliminar el evento', 'estado' => False, 'tipo' => 'danger');
 }
-
-
-
-
-
-
-
 echo json_encode($mensaje);
 // echo json_encode($mensaje, JSON_UNESCAPED_UNICODE);

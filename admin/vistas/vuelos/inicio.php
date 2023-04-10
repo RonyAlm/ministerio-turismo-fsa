@@ -25,86 +25,80 @@ $rol_id = $_SESSION['rol_id'];
     </section>
 
     <!-- Main content -->
-    <section class="content">
-        <div class="card">
+    <div id="calendar1">
+    </div>
 
-
-            <div class="card-body">
-
-                <div id="acordeon" class="row">
-                    <div class="col-lg-12">
-                        <table id="tblList" class="table table-bordered table-striped" cellspacing="0" width="100%">
-                            <thead>
-                                <tr style="background: linear-gradient(to right, #61ba6d, #83c331)">
-                                    <th>Empresa</th>
-                                    <th>Origen</th>
-                                    <th>Destino</th>
-                                    <th>Acción</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                <?php foreach ($tabla as $transporte) { ?>
-
-                                    <tr>
-
-                                        <td><?php echo $transporte["nombre_empresa"]; ?></td>
-                                        <td><?php echo $transporte["origen"]; ?></td>
-                                        <td><?php echo $transporte["destino"]; ?></td>
-                                        <td class="project-actions text-right">
-                                            <div class="btn-group" role="group" aria-label="">
-
-                                                <a title="Más Infomación" id="btn1" href="?controlador=transporte&accion=info&id=<?= $transporte["id_origen_destino"]; ?>" class="btn btn-primary btn-sm">
-                                                    <i class="fas fa-folder"></i>
-                                                </a>
-
-                                                <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") : ?>
-
-                                                    <a title="Editar" href="?controlador=transporte&accion=editar&id=<?php echo $transporte["id_origen_destino"]; ?>" class="btn btn-success btn-sm">
-                                                        <i class="fas fa-pencil-alt"></i>
-                                                    </a>
-                                                    <a title="Borrar" href="?controlador=transporte&accion=borrar&id=<?php echo $transporte["id_origen_destino"]; ?>" class="btn btn-danger btn-sm">
-                                                        <i class="fas fa-trash"></i>
-                                                    </a>
-
-                                                <?php else : ?>
-
-                                                    <a title="Editar" href="#" class="btn btn-success btn-sm disabled">
-                                                        <i class="fas fa-pencil-alt"></i>
-                                                    </a>
-                                                    <a title="Borrar" href="#" class="btn btn-danger btn-sm disabled">
-                                                        <i class="fas fa-trash"></i>
-                                                    </a>
-
-                                                <?php endif; ?>
-
-                                            </div>
-                                        </td>
-
-                                    </tr>
-
-
-                                <?php } ?>
-                            </tbody>
-                            <tfoot>
-                                <tr style="background: linear-gradient(to right, #61ba6d, #83c331)">
-                                    <th>Empresa</th>
-                                    <th>Origen</th>
-                                    <th>Destino</th>
-                                    <th>Acción</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
+    <!-- Modal -->
+    <!-- <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New Event</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="event_date">Fecha</label>
+                            <input type="text" class="form-control" id="event_date" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="event_title">Título</label>
+                            <input type="text" class="form-control" id="event_title">
+                        </div>
+                        <div class="form-group">
+                            <label for="event_desc">Descripción</label>
+                            <textarea class="form-control" id="event_desc"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="event_location">Localidad</label>
+                            <input type="text" class="form-control" id="event_location">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="saveEvent">Guardar</button>
+                </div>
             </div>
-
-            <div class="card-footer">
-
-            </div>
-
-
         </div>
-    </section>
+    </div> -->
+
+    <script>
+        var calendar12 = new FullCalendar.Calendar(document.getElementById('calendar12'), {
+            events: 'get_events.php',
+            dateClick: function(info) {
+                var date = info.dateStr;
+                $('#event_date').val(date);
+                $('#eventModal').modal();
+            }
+        });
+        calendar12.render();
+
+        // Save event data to server
+        $('#saveEvent').on('click', function() {
+            var title = $('#event_title').val();
+            var desc = $('#event_desc').val();
+            var location = $('#event_location').val();
+            var date = $('#event_date').val();
+
+            // Send data to server-side script
+            $.post('submit_event.php', {
+                event_title: title,
+                event_desc: desc,
+                event_location: location,
+                event_date: date
+            }, function(data) {
+                if (data == "success") {
+                    alert("Evento guardado correctamente.");
+                    $('#eventModal').modal('hide');
+                    calendar.refetchEvents(); //Refresca los eventos en el calendario
+                } else {
+                    alert("Error al guardar evento, por favor intente de nuevo.");
+                }
+            });
+        });
+    </script>
 </div>
