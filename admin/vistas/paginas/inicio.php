@@ -53,7 +53,7 @@
         </div>
     </div>
 </div>
-<div class="container">
+<!-- <div class="container">
     <h5 class="mb-2">Transportes hacia Laguna Blanca </h5>
     <div class="card card-success">
         <div class="card-body">
@@ -78,4 +78,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
