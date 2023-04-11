@@ -28,7 +28,7 @@ $rol_id = $_SESSION['rol_id'];
 <div class="card">
   <div class="card-header">
 
-    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") : ?>
+    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "ceciliag") : ?>
 
       <a name="" id="" class="btn btn-success" href="?controlador=agencias&accion=crear" role="button">Agregar</a>
 
@@ -75,6 +75,9 @@ $rol_id = $_SESSION['rol_id'];
       <!-- /.col -->
     </div>
 
+
+
+
     <div id="acordeon" class="row">
       <div class="col-lg-12">
         <table id="tblList" class="table table-bordered table-striped" cellspacing="0" width="100%">
@@ -106,7 +109,7 @@ $rol_id = $_SESSION['rol_id'];
                       <i class="fas fa-folder"></i>
                     </a>
 
-                    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") : ?>
+                    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "ceciliag") : ?>
 
                       <a title="Editar" href="?controlador=agencias&accion=editar&id=<?php echo $agencia["id_agencias"]; ?>" class="btn btn-success btn-sm">
                         <i class="fas fa-pencil-alt"></i>

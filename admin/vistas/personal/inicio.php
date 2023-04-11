@@ -12,35 +12,39 @@ $rol_id = $_SESSION['rol_id'];
 ?>
 <!-- Salto de linea -->
 <!-- <br> -->
-<?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "rrhh") { ?>
-  <div class="card-header">
-
-    <a name="" id="" class="btn btn-success" href="?controlador=personal&accion=guardar" role="button">Agregar Personal</a>
-
-    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
-      Agregar licencia o Artículo
-    </button>
 
 
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Personal</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=paginas&accion=inicio">Inicio</a></li>
+          <li class="breadcrumb-item active">Personal</li>
+        </ol>
+      </div>
+    </div>
   </div>
+</section>
 
-<?php } ?>
 <!-- Main content -->
 <section class="content">
 
   <!-- Default box -->
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">PERSONAL</h3>
+      <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "rrhh") { ?>
 
-      <div class="card-tools">
-        <!-- <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-          <i class="fas fa-minus"></i>
-        </button> -->
-        <!-- <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-          <i class="fas fa-times"></i>
-        </button> -->
-      </div>
+        <a class="btn btn-success" href="?controlador=personal&accion=guardar" role="button">Agregar Personal</a>
+
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">
+          Agregar licencia o Artículo
+        </button>
+
+      <?php } ?>
     </div>
 
     <div class="card-body p-0">
@@ -82,16 +86,16 @@ $rol_id = $_SESSION['rol_id'];
               <td>
                 <ul class="list-inline">
                   <li class="list-inline-item">
-                    <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar2.png">
+                    <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/imagen-perfil-sin-foto.jpg">
                   </li>
                   <li class="list-inline-item">
-                    <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar3.png">
+                    <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/imagen-perfil-sin-foto.jpg">
                   </li>
                   <li class="list-inline-item">
-                    <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar4.png">
+                    <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/imagen-perfil-sin-foto.jpg">
                   </li>
                   <li class="list-inline-item">
-                    <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/avatar5.png">
+                    <img alt="Avatar" class="table-avatar" src="vistas/recursos/dist/img/imagen-perfil-sin-foto.jpg">
                   </li>
                 </ul>
               </td>
@@ -106,9 +110,9 @@ $rol_id = $_SESSION['rol_id'];
               </td>
               <td class="project-actions text-right">
                 <a class="btn btn-primary btn-sm" href="?controlador=personal&accion=info&id=<?php echo $k["id_deptos_mintur"]; ?>">
-                  <i class="fas fa-folder">
+                  <i class="fas fa-folder mr-2">
                   </i>
-                  Vista
+                  Más Infomación
                 </a>
               </td>
             </tr>

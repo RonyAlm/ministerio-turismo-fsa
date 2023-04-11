@@ -26,13 +26,16 @@ $rol_id = $_SESSION['rol_id'];
 </section>
 
 <div class="card">
+
   <div class="card-header">
 
-    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") { ?>
+    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "roxana") : ?>
 
       <a name="" id="" class="btn btn-success" href="?controlador=gastronomia&accion=crear" role="button">Agregar</a>
 
-    <?php } ?>
+    <?php else : ?>
+      <a class="btn btn-success disabled" href="#" role="button">Agregar</a>
+    <?php endif; ?>
 
     <a name="" id="" class="btn btn-secondary" href="?controlador=gastronomia&accion=imprimir" role="button">Imprimir</a>
 
@@ -70,7 +73,7 @@ $rol_id = $_SESSION['rol_id'];
                       <i class="fas fa-folder"></i>
                     </a>
 
-                    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") { ?>
+                    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "roxana") { ?>
                       <a title="Editar" href="?controlador=gastronomia&accion=editar&id=<?php echo $gastronomia["id_gastronomia"]; ?>" class="btn btn-success btn-sm">
                         <i class="fas fa-pencil-alt"></i>
                       </a>

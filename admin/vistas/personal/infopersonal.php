@@ -41,7 +41,7 @@
                 <li class="nav-item"><a class="nav-link active" href="#personal" data-toggle="tab">Personal</a></li>
                 <li class="nav-item"><a class="nav-link" href="#ministerio" data-toggle="tab">Ministerio</a></li>
                 <li class="nav-item"><a class="nav-link" href="#licencias" data-toggle="tab">Licencias</a></li>
-                <li class="nav-item"><a class="nav-link" href="#articulos" data-toggle="tab">Artículos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#articulos" data-toggle="tab">Artículo 5.9</a></li>
               </ul>
             </div><!-- /.card-header -->
             <div class="card-body">
@@ -171,195 +171,118 @@
                 </div>
 
                 <div class="tab-pane" id="licencias">
-                  <div class="form-group row">
-                    <label for="fechaini" class="col-sm-2 col-form-label">Fechas inicio</label>
-                    <div class="col-sm-10">
-                      <input type="date" class="form-control" name="fechaini" id="fechaini" value="<?php echo $Infomacion->fecha_ini ?>">
-                    </div>
+                  <div class="row">
+                    <?php foreach ($consultarLicencias as $licencia) { ?>
+
+                      <!-- MES -->
+                      <div class="col-md-6">
+
+                        <div class="card">
+                          <div class="card-header">
+                            <h3 class="card-title"><?php
+                                                    $fi = new DateTime($licencia->fecha_ini);
+                                                    $ff = new DateTime($licencia->fecha_fin);
+
+                                                    $meses = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
+                                                    if ($fi->format('m') == $ff->format('m')) {
+                                                      echo $meses[date($fi->format('m')) - 1];
+                                                    } else {
+                                                      echo $meses[date($fi->format('m')) - 1] . " - " . $meses[date($ff->format('m')) - 1];
+                                                    }
+                                                    ?></h3>
+
+                            <div class="card-tools">
+                              <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Minimizar">
+                                <i class="fas fa-minus"></i>
+                              </button>
+
+                            </div>
+                          </div>
+                          <div class="card-body">
+                            <div class="form-group">
+                              <label>Fecha inicio:</label>
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                </div>
+                                <input type="hidden" id="licenciasID" name="licenciasID[]" value="<?= $licencia->id_licencias ?>">
+                                <input type="date" class="form-control" name="fechaini[]" id="fechaini" value="<?= $licencia->fecha_ini ?>">
+                              </div>
+                            </div>
+                            <!-- /.form-group -->
+                            <div class="form-group">
+                              <label>Fecha fin:</label>
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                </div>
+                                <input type="hidden" id="" name="" value="<?php echo $licencia->id_licencias ?>">
+                                <input type="date" class="form-control" name="fechafin[]" id="fechafin" value="<?= $licencia->fecha_fin ?>">
+                              </div>
+                            </div>
+                            <!-- /.form-group -->
+
+                          </div>
+                          <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                      </div>
+
+                    <?php  } ?>
+
                   </div>
-                  <div class="form-group row">
-                    <label for="fechafin" class="col-sm-2 col-form-label">Fechas fin</label>
-                    <div class="col-sm-10">
-                      <input type="date" class="form-control" name="fechafin" id="fechafin" value="<?php echo $Infomacion->fecha_fin ?>">
-                    </div>
-                  </div>
+
                   <div class="form-group row">
                     <label for="diasrestante" class="col-sm-2 col-form-label">Días Restantes</label>
                     <div class="col-sm-10">
-                      <input type="number" class="form-control" name="diasrestante" id="diasrestante" value="<?php echo $Infomacion->dias_restante ?>">
+                      <input type="hidden" id="diasRestID" name="diasRestID" value="<?= $consultarCantidLicenciaEditar->id_licencias ?>">
+                      <input type="number" class="form-control" name="diasrestante" id="diasrestante" value="<?= $consultarCantidLicenciaEditar->dias_restante ?>">
                     </div>
                   </div>
 
-                  <!-- <div class="form-group row">
-                    <div class="offset-sm-2 col-sm-10">
-                      <input name="" id="" class="btn btn-success" type="submit" value="Agregar">
-                      <a href="?controlador=personal&accion=inicio" class="btn btn-primary">Cancelar</a>
-                    </div>
-                  </div> -->
-                  <!-- </form> -->
                 </div>
                 <div class="tab-pane" id="articulos">
                   <div class="row">
-                    <div class="col-12">
-                      <div class="card">
-                        <div class="card-header">
-                          <h3 class="card-title">Expandable Table Tree</h3>
+                    <?php foreach ($consultarArticulo as $articulos) { ?>
+
+                      <!-- MES -->
+                      <div class="col-md-6">
+
+                        <div class="card">
+                          <div class="card-header">
+                            <h3 class="card-title"><?php
+                                                    $fiArticulo = new DateTime($articulos->fecha_ini_razonparticular);
+                                                    echo $meses[date($fiArticulo->format('m')) - 1];
+                                                    ?></h3>
+
+                            <div class="card-tools">
+                              <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Minimizar">
+                                <i class="fas fa-minus"></i>
+                              </button>
+
+                            </div>
+                          </div>
+                          <div class="card-body">
+                            <div class="form-group">
+                              <label>Fecha inicio:</label>
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                </div>
+                                <input type="hidden" id="articuloID" name="articuloID[]" value="<?= $articulos->id_razon_particular ?>">
+                                <input type="date" class="form-control" name="fechainiArticulo[]" id="fechainiArticulo" value="<?= $articulos->fecha_ini_razonparticular ?>">
+                              </div>
+                            </div>
+                            <!-- /.form-group -->
+
+                          </div>
+                          <!-- /.card-body -->
+
                         </div>
-                        <!-- ./card-header -->
-                        <div class="card-body p-0">
-                          <table class="table table-hover">
-                            <tbody>
-
-                              <tr data-widget="expandable-table" aria-expanded="true">
-                                <td>
-                                  <i class="expandable-table-caret fas fa-caret-right fa-fw"></i>
-                                  2021
-
-                                  <span class="badge bg-warning">4</span>
-                                </td>
-                              </tr>
-                              <tr class="expandable-body">
-                                <td>
-                                  <div class="p-0">
-                                    <table class="table table-hover">
-                                      <tbody>
-                                        <tr data-widget="expandable-table" aria-expanded="false">
-                                          <td>
-                                            <i class="expandable-table-caret fas fa-caret-right fa-fw"></i>
-                                            Enero
-                                            <span class="badge bg-danger">2</span>
-                                          </td>
-                                        </tr>
-                                        <tr class="expandable-body">
-                                          <td>
-                                            <div class="p-0">
-                                              <table class="table table-hover">
-                                                <tbody>
-                                                  <tr>
-                                                    <td>01/01/2021</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td>02/01/2021</td>
-                                                  </tr>
-                                                </tbody>
-                                              </table>
-                                            </div>
-                                          </td>
-                                        </tr>
-                                        <tr data-widget="expandable-table" aria-expanded="false">
-                                          <td>
-                                            <button type="button" class="btn btn-primary p-0">
-                                              <i class="expandable-table-caret fas fa-caret-right fa-fw"></i>
-                                            </button>
-                                            Febrero
-                                            <span class="badge bg-danger">2</span>
-                                          </td>
-                                        </tr>
-                                        <tr class="expandable-body">
-                                          <td>
-                                            <div class="p-0">
-                                              <table class="table table-hover">
-                                                <tbody>
-                                                  <tr>
-                                                    <td>01/02/2021</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td>02/02/2021</td>
-                                                  </tr>
-
-                                                </tbody>
-                                              </table>
-                                            </div>
-                                          </td>
-                                        </tr>
-                                        <tr>
-                                          <td>Marzo
-                                            <span class="badge bg-success">0</span>
-                                          </td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr data-widget="expandable-table" aria-expanded="true">
-                                <td>
-                                  <i class="expandable-table-caret fas fa-caret-right fa-fw"></i>
-                                  2022
-
-                                  <span class="badge bg-primary">3</span>
-                                </td>
-                              </tr>
-                              <tr class="expandable-body">
-                                <td>
-                                  <div class="p-0">
-                                    <table class="table table-hover">
-                                      <tbody>
-                                        <tr data-widget="expandable-table" aria-expanded="false">
-                                          <td>
-                                            <i class="expandable-table-caret fas fa-caret-right fa-fw"></i>
-                                            Enero
-                                            <span class="badge bg-success">1</span>
-                                          </td>
-                                        </tr>
-                                        <tr class="expandable-body">
-                                          <td>
-                                            <div class="p-0">
-                                              <table class="table table-hover">
-                                                <tbody>
-                                                  <tr>
-                                                    <td>01/01/2022</td>
-                                                  </tr>
-
-                                                </tbody>
-                                              </table>
-                                            </div>
-                                          </td>
-                                        </tr>
-                                        <tr data-widget="expandable-table" aria-expanded="false">
-                                          <td>
-                                            <button type="button" class="btn btn-primary p-0">
-                                              <i class="expandable-table-caret fas fa-caret-right fa-fw"></i>
-                                            </button>
-                                            Febrero
-                                            <span class="badge bg-danger">2</span>
-                                          </td>
-                                        </tr>
-                                        <tr class="expandable-body">
-                                          <td>
-                                            <div class="p-0">
-                                              <table class="table table-hover">
-                                                <tbody>
-                                                  <tr>
-                                                    <td>01/02/2022</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td>02/02/2022</td>
-                                                  </tr>
-
-                                                </tbody>
-                                              </table>
-                                            </div>
-                                          </td>
-                                        </tr>
-                                        <tr>
-                                          <td>Marzo
-                                            <span class="badge bg-success">0</span>
-                                          </td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                  </div>
-                                </td>
-                              </tr>
-
-                            </tbody>
-                          </table>
-                        </div>
-                        <!-- /.card-body -->
+                        <!-- /.card -->
                       </div>
-                      <!-- /.card -->
-                    </div>
+
+                    <?php  } ?>
                   </div>
 
 

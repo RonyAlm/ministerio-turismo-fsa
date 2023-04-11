@@ -62,6 +62,12 @@
                     </div>
                   </div>
                   <div class="form-group row">
+                    <label for="fecha" class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
+                    <div class="col-sm-10">
+                      <input type="date" class="form-control" name="fecha" id="fecha" placeholder="Fecha de Nacimiento">
+                    </div>
+                  </div>
+                  <div class="form-group row">
                     <label for="cuil" class="col-sm-2 col-form-label">Cuil</label>
                     <div class="col-sm-10">
                       <input type="number" class="form-control" name="cuil" id="cuil" placeholder="99-99.999.99-99">
@@ -84,27 +90,25 @@
                       </select>
                     </div>
                   </div>
-                  <div class="form-group row">
-                    <label for="fecha" class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
-                    <div class="col-sm-10">
-                      <input type="date" class="form-control" name="fecha" id="fecha" placeholder="Fecha de Nacimiento">
-                    </div>
-                  </div>
 
                   <div class="form-group row" id="celu">
                     <label for="telefonoAgencia" class="col-sm-2 col-form-label">Teléfono Celular</label>
-                    <input type="number" id="telefonoAgencia" name="telefonoAgencia[]" class="form-control">
-                    <div class="btn-der mt-3 mb-3">
-                      <!-- <button id="adicional" name="adicional" type="button" class="btn btn-warning"> Más + </button> -->
+                    <div class="col-sm-10">
+                      <input type="number" id="telefonoAgencia" name="telefonoAgencia[]" class="form-control">
+                    </div>
+
+                    <!-- <div class="btn-der mt-3 mb-3">
                       <span id="adicional" name="adicional" class="btn btn-success col fileinput-button dz-clickable">
                         <i class="fas fa-plus"></i>
                         <span>Más teléfono</span>
                       </span>
-                    </div>
+                    </div> -->
+
                   </div>
                   <div class="telefonos">
                     <!-- en este contenedor de agregar los demas teléfonos -->
                   </div>
+
                   <div class="form-group row">
                     <label for="telefonoFijo" class="col-sm-2 col-form-label">Teléfono Fijo</label>
                     <div class="col-sm-10">
@@ -118,10 +122,10 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="educacion" class="col-sm-2 col-form-label">Educacion</label>
+                    <label for="educacion" class="col-sm-2 col-form-label">Educación</label>
                     <div class="col-sm-10">
                       <select id="educacion" name="educacion" class="form-control select2" required>
-                        <option value="" selected disabled>Seleccionar educacion</option>
+                        <option value="" selected disabled>Seleccionar educación</option>
                         <?php foreach ($buscarSelectEstudios as $k) : ?>
                           <option value="<?php echo $k->id_educacion; ?>"> <?php echo $k->descriEducacion; ?></option>
                         <?php endforeach; ?>

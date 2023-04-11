@@ -19,8 +19,7 @@ class AsistenciaModelo
 
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->query("SELECT `id_asistencia2`, `nombre_personal`, `fecha_asistencia`, `hora_asistencia` 
-                                    FROM `asistencia2`");
+        $sql = $conexionBD->query("SELECT `id_asistencia3`, `nombre_per`, `fcha_asistencia`, `horas_asistencia`, `checkinout` FROM `asistencia3`");
 
         //recuperamos los datos y los retornamos
 
@@ -78,11 +77,46 @@ class AsistenciaModelo
                 $in               = !empty($datos[5])  ? ($datos[5]) : '';
                 $checkInOn               = !empty($datos[9])  ? ($datos[9]) : '';
 
-                /*-------- INSERTAMOS LA DIRECCION--------*/
+                if ($nombre == '"admin"') {
+                    $nombre = "David Rolando Pereyra";
+                }
+                if ($checkInOn == 'overtimeIn') {
+                    $checkInOn = "E/S";
+                }
 
-                $sqlDireccion = $conexionBD->prepare("INSERT INTO `asistencia2`(`nombre_personal`, `fecha_asistencia`, `hora_asistencia`) 
-                                                     VALUES (?,?,?)");
-                $sqlDireccion->execute(array($nombre, $fecha, $hora));
+                if ($hora <= '08:15:00') {
+                    $checkInOn = "Entrada";
+                };
+                if ($hora >= '08:16:00' && $hora <= '11:59:00') {
+                    $checkInOn = "E/S";
+                };
+                if ($hora >= '12:00:00' && $hora <= '13:15:00') {
+                    $checkInOn = "Salida";
+                };
+                if ($hora >= '13:16:00' && $hora <= '14:59:00') {
+                    $checkInOn = "E/S";
+                };
+                if ($hora >= '15:00:00' && $hora <= '16:15:00') {
+                    $checkInOn = "Entrada";
+                };
+                if ($hora >= '15:00:00' && $hora <= '16:15:00') {
+                    $checkInOn = "Entrada";
+                };
+                if ($hora >= '16:16:00' && $hora <= '19:59:00') {
+                    $checkInOn = "E/S";
+                };
+                if ($hora >= '20:00:00' && $hora <= '21:30:00') {
+                    $checkInOn = "Salida";
+                };
+                if ($hora >= '21:31:00' && $hora <= '06:00:00') {
+                    $checkInOn = "E/S";
+                };
+
+                /*-------- INSERTAMOS--------*/
+
+                $sqlDireccion = $conexionBD->prepare("INSERT INTO `asistencia3`(`nombre_per`, `fcha_asistencia`, `horas_asistencia`,`checkinout`) 
+                                                     VALUES (?,?,?,?)");
+                $sqlDireccion->execute(array($nombre, $fecha, $hora, $checkInOn));
             }
 
             // $arrays = array_merge($semana, $semana1);

@@ -142,6 +142,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
     .tblInfo tr td {
       text-align: center;
     }
+
+    .nav-pills .nav-link.active,
+    .nav-pills .show>.nav-link {
+      color: #fff;
+      background-color: var(--success) !important;
+    }
+
+    .nav-pills .nav-link:not(.active):hover {
+      color: var(--success) !important;
+    }
   </style>
 
 </head>
@@ -513,7 +523,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="?controlador=transporte&accion=inicio" class="nav-link">
+                    <a href="?controlador=vuelos&accion=inicio" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Aviones</p>
                     </a>
@@ -554,7 +564,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <?php } ?>
 
             <!-- PERSONAL -->
-            <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "rrhh") { ?>
+            <?php
+            $show_personal = $rol_id == 1 or ($rol_id == 3 and $usuario == "rrhh");
+            if ($show_personal) {
+            ?>
               <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'menu-open' : '' ?>">
                 <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-table"></i>
@@ -566,20 +579,49 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="?controlador=personal&accion=inicio" class="nav-link 
-                    <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'active' : '' ?>">
+        <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'active' : '' ?>">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Registro</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="?controlador=asistencias&accion=inicio" class="nav-link 
-                    <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'asistencias')) ? '' : '' ?>">
+                    <a href="#" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Asistencia</p>
+                      <p>
+                        Asistencias
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
                     </a>
+                    <ul class="nav nav-treeview" style="display: none;">
+                      <li class="nav-item">
+                        <a href="#" class="nav-link">
+                          <i class="far fa-dot-circle nav-icon"></i>
+                          <p>Administración</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="?controlador=asistencias&accion=inicio" class="nav-link 
+            <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'asistencias')) ? '' : '' ?>">
+                          <i class="far fa-dot-circle nav-icon"></i>
+                          <p>Central</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="#" class="nav-link">
+                          <i class="far fa-dot-circle nav-icon"></i>
+                          <p>Logística</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="#" class="nav-link">
+                          <i class="far fa-dot-circle nav-icon"></i>
+                          <p>Terminal</p>
+                        </a>
+                      </li>
+                    </ul>
                   </li>
-
                 </ul>
+
               </li>
             <?php } ?>
 
@@ -640,6 +682,66 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
   </footer>
 
+  <!-- MODAL DEL EVENTO CALENDARIO -->
+
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-success">
+          <h4 class="modal-title" id="titulo"></h4>
+          <button type="button" class="btn btn-close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form id="formularioModal">
+          <div class="modal-body">
+            <div class="form-floating mb-3">
+              <input type="hidden" id="id" name="id">
+              <label for="title" class="form-label">Evento</label>
+              <input type="text" class="form-control" name="title" id="title">
+            </div>
+
+            <div class="form-floating mb-3">
+              <label for="start" class="form-label">Fecha Inicio</label>
+              <input type="date" class="form-control" name="start" id="start">
+            </div>
+
+            <div class="form-floating mb-3">
+              <label for="fecha_fin" class="form-label">Fecha fin</label>
+              <input type="date" class="form-control" name="fecha_fin" id="fecha_fin">
+            </div>
+
+            <div class="form-floating mb-3">
+              <label for="descripcion" class="form-label">Descripción</label>
+              <!-- <textarea name="descripcion" id="descripcion" cols="62" rows="5"></textarea> -->
+              <input type="text" class="form-control" name="descripcion" id="descripcion">
+            </div>
+
+            <div class="form-floating mb-3">
+              <label for="color" class="form-label">Color</label>
+              <input type="color" class="form-control" name="color" id="color">
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+
+            <button type="submit" class="btn btn-success" id="btnAccion">Agregar</button>
+
+            <button type="button" id="btnEliminar" class="btn btn-danger">Borrar</button>
+
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+
+          </div>
+        </form>
+
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
   <!-- REQUIRED SCRIPTS -->
 
   <!-- jQuery -->
@@ -698,6 +800,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="vistas/recursos/script/formularios.js"></script>
 
   <script src="vistas/recursos/script/sweetalertEliminar.js"></script>
+  <script src="/admin/vistas/recursos/script/modal.js"></script>
 
 
 
@@ -803,17 +906,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 
-  <!-- MODAL DEL EVENTO CALENDARIO -->
-
-  <?php include_once("modales/modal_calendario.php"); ?>
-  <!-- /.modal -->
 
 
   <!-- MODALES -->
   <!-- <?php include_once("modales/modal_ag_li_pe.php"); ?> -->
   <!-- <?php include_once("festivales/inicio.php"); ?> -->
 
-  <script src="vistas/recursos/script/modal.js"></script>
+
 
 
 

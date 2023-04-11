@@ -52,7 +52,8 @@ $rol_id = $_SESSION['rol_id'];
               <th>Nombre y Apellido</th>
               <th>Fecha</th>
               <th>Hora</th>
-              <th>Acción</th>
+              <th>Check-In-Out</th>
+
             </tr>
           </thead>
           <tbody>
@@ -60,41 +61,11 @@ $rol_id = $_SESSION['rol_id'];
             <?php foreach ($tabla as $asistencia) { ?>
 
               <tr>
-                <td><?php echo $asistencia["id_asistencia2"]; ?></td>
-                <td><?php echo $asistencia["nombre_personal"]; ?></td>
-                <td><?php echo $asistencia["fecha_asistencia"]; ?></td>
-                <td><?php echo $asistencia["hora_asistencia"]; ?></td>
-
-                <td class="project-actions text-right">
-                  <div class="btn-group" role="group" aria-label="">
-
-                    <a title="Más Infomación" id="btn1" href="?controlador=asistencias&accion=info&id=<?= $asistencia["id_asistencia2"]; ?>" class="btn btn-primary btn-sm">
-                      <i class="fas fa-folder"></i>
-                    </a>
-
-                    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "matias") : ?>
-
-                      <a title="Editar" href="?controlador=asistencias&accion=editar&id=<?php echo $asistencia["id_asistencia2"]; ?>" class="btn btn-success btn-sm">
-                        <i class="fas fa-pencil-alt"></i>
-                      </a>
-                      <a title="Borrar" href="?controlador=asistencias&accion=borrar&id=<?php echo $asistencia["id_asistencia2"]; ?>" class="btn btn-danger btn-sm">
-                        <i class="fas fa-trash"></i>
-                      </a>
-
-                    <?php else : ?>
-
-                      <a title="Editar" href="#" class="btn btn-success btn-sm disabled">
-                        <i class="fas fa-pencil-alt"></i>
-                      </a>
-                      <a title="Borrar" href="#" class="btn btn-danger btn-sm disabled">
-                        <i class="fas fa-trash"></i>
-                      </a>
-
-                    <?php endif; ?>
-
-                  </div>
-                </td>
-
+                <td><?php echo $asistencia["id_asistencia3"]; ?></td>
+                <td><?php echo $asistencia["nombre_per"]; ?></td>
+                <td><?php echo $asistencia["fcha_asistencia"]; ?></td>
+                <td><?php echo $asistencia["horas_asistencia"]; ?></td>
+                <td><?php echo $asistencia["checkinout"]; ?></td>
               </tr>
 
 
@@ -106,7 +77,7 @@ $rol_id = $_SESSION['rol_id'];
               <th>Nombre y Apellido</th>
               <th>Fecha</th>
               <th>Hora</th>
-              <th>Acción</th>
+              <th>Check-In-Out</th>
             </tr>
           </tfoot>
         </table>

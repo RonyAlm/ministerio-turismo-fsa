@@ -141,6 +141,7 @@ class ControladorPersonal
         $buscarSelectArea = $select_tipo->buscarSelectArea();
         $buscarSelectContrato = $select_tipo->buscarSelectContrato();
         $consultarCantidLicenciaEditar = $select_tipo->buscarCantidadLicencia($id);
+        $buscarCantidadArticuloEditar = $select_tipo->buscarCantidadArticulo($id);
 
         // print_r($consultarLicencias);
 
@@ -201,6 +202,11 @@ class ControladorPersonal
             $diasRestID = $_POST['diasRestID'];
             $diasrestante = $_POST['diasrestante'];
 
+            // ARTICULO
+
+            $articuloID = $_POST['articuloID'];
+            $fechainiArticulo = $_POST['fechainiArticulo'];
+
 
 
             // var_dump($probando);
@@ -242,7 +248,9 @@ class ControladorPersonal
                 $idtelefonoFijo,
                 $idcorreo,
                 $licenciasID,
-                $diasRestID
+                $diasRestID,
+                $articuloID,
+                $fechainiArticulo
             );
 
             // print_r($EditarAgencia);
@@ -269,6 +277,7 @@ class ControladorPersonal
         $agenciaWeb = $contactosDeagencia->consultarWeb($idPersona);
         $agenciaOtro = $contactosDeagencia->consultarOtro($idPersona);
         $consultarLicencias = $contactosDeagencia->consultarLicencias($id);
+        $consultarArticulo = $contactosDeagencia->consultarArticulo($id);
 
 
         // if (is_array($consultarLicenciasa) || is_object($consultarLicenciasa)) {
@@ -288,19 +297,21 @@ class ControladorPersonal
 
     public function borrar()
     {
-        //print_r($_GET);
+        // print_r($_GET);
 
-        $idAgenciaBorrar = $_GET["id"];
-        $id_direccion = $_GET['idDireccion'];
-        $idRazonSocial = $_GET['idRazonSocial'];
+        $idBorrarLicencia = $_GET["id"];
+        $idBorrarArticulo = $_GET["idArticulo"];
+        // $idBorrarPersonal = $_GET["idPersonal"];
 
-        $borrarAgencias = new PersonalModelo();
 
-        $buscarIDBorrado = $borrarAgencias->consultarID($idAgenciaBorrar);
+        $borrar = new PersonalModelo();
 
-        $borrado = $borrarAgencias->borrar($idAgenciaBorrar, $id_direccion, $idRazonSocial);
 
-        header("Location:index2.php?controlador=agencias&accion=inicio");
+
+        $borradoLicencia = $borrar->borrarLicencia($idBorrarLicencia);
+        $borradoArticulo = $borrar->borrarArticulo($idBorrarArticulo);
+
+        header("Location:index2.php?controlador=personal&accion=inicio");
     }
 
     public function info()
@@ -314,18 +325,6 @@ class ControladorPersonal
         $tablaInformes = $Info->info3($id);
         $tablaInfo2 = $Info->info2($id);
 
-        // $agenciasInfomacion = $agenciaInfo->buscar($id_agencia);
-
-
-        // $contactosDeagencia = new ContactosInfoPersonal();
-        // $agenciaTelefonoInfo = $contactosDeagencia->consultarTelefonos($id_agencia);
-        // $agenciaTelefonoFijo = $contactosDeagencia->consultarTelefonosFijos($id_agencia);
-        // $agenciaCorreo = $contactosDeagencia->consultarCorreo($id_agencia);
-        // $agenciaFacebook = $contactosDeagencia->consultarFacebook($id_agencia);
-        // $agenciaInstagram = $contactosDeagencia->consultarInstagram($id_agencia);
-        // $agenciaTwitter = $contactosDeagencia->consultarTwitter($id_agencia);
-        // $agenciaWeb = $contactosDeagencia->consultarWeb($id_agencia);
-        // $agenciaOtro = $contactosDeagencia->consultarOtro($id_agencia);
 
         include_once("vistas/personal/info.php");
     }
@@ -343,6 +342,7 @@ class ControladorPersonal
 
 
         $contactosDeagencia = new ContactosInfoPersonal();
+        $infoPersonal = new ContactosPersonal();
         $agenciaTelefonoInfo = $contactosDeagencia->consultarTelefonos($idpersona);
         $agenciaTelefonoFijo = $contactosDeagencia->consultarTelefonosFijos($idpersona);
         $agenciaCorreo = $contactosDeagencia->consultarCorreo($idpersona);
@@ -351,6 +351,10 @@ class ControladorPersonal
         // $agenciaTwitter = $contactosDeagencia->consultarTwitter($id_agencia);
         // $agenciaWeb = $contactosDeagencia->consultarWeb($id_agencia);
         // $agenciaOtro = $contactosDeagencia->consultarOtro($id_agencia);
+        $consultarCantidLicenciaEditar = $Info->buscarCantidadLicencia($id);
+        $buscarCantidadArticuloEditar = $Info->buscarCantidadArticulo($id);
+        $consultarLicencias = $infoPersonal->consultarLicencias($id);
+        $consultarArticulo = $infoPersonal->consultarArticulo($id);
 
         include_once("vistas/personal/infopersonal.php");
     }
@@ -383,7 +387,7 @@ class ControladorPersonal
             $rela_localidad_direccion = $_POST['localidad'];
             $calle_direccion = $_POST['direccion'];
 
-            $telefonoCel = $_POST['telefonoCel'];
+            $telefonoCel = $_POST['telefonoAgencia'];
             $telefonoFijo = $_POST['telefonoFijo'];
             $correo = $_POST['correo'];
 
@@ -413,35 +417,35 @@ class ControladorPersonal
             $contraseña = $usuario . $random;
             str_replace(" ", "", $contraseña);
 
-            // $insertar->guardar(
-            //     $nombre,
-            //     $apellido,
-            //     $cuil,
-            //     $profesion,
-            //     $fecha,
-            //     $educacion,
-            //     $rela_localidad_direccion,
-            //     $calle_direccion,
-            //     $telefonoCel,
-            //     $telefonoFijo,
-            //     $correo,
-            //     $departamento,
-            //     $area,
-            //     $n_legajo,
-            //     $n_expediente,
-            //     $tipo_contrato,
-            //     $cargo,
-            //     $usuario,
-            //     $contraseña,
-            //     $antiguedad,
-            //     $fechaini,
-            //     $fechafin,
-            //     $diasrestante
-            // );
+            $insertar->guardar(
+                $nombre,
+                $apellido,
+                $cuil,
+                $profesion,
+                $fecha,
+                $educacion,
+                $rela_localidad_direccion,
+                $calle_direccion,
+                $telefonoCel,
+                $telefonoFijo,
+                $correo,
+                $departamento,
+                $area,
+                $n_legajo,
+                $n_expediente,
+                $tipo_contrato,
+                $cargo,
+                $usuario,
+                $contraseña,
+                $antiguedad,
+                $fechaini,
+                $fechafin,
+                $diasrestante
+            );
 
 
             // header("Location:index2.php?controlador=personal&accion=inicio");
-            // echo "<script>location.href = 'index2.php?controlador=personal&accion=inicio';</script>";
+            echo "<script>location.href = 'index2.php?controlador=personal&accion=inicio';</script>";
         }
 
         include_once("vistas/personal/guardar.php");
