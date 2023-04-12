@@ -129,7 +129,8 @@ class PersonalModelo
         $antiguedad,
         $fechaini,
         $fechafin,
-        $diasrestante
+        $diasrestante,
+        $fechainiArticulo
     ) {
 
         $conexionBD = BD::crearInstancia();
@@ -200,6 +201,15 @@ class PersonalModelo
         ));
 
         $lastInsertlicencias = $conexionBD->lastInsertId();
+
+        /*-------- INSERTAMOS LAS ARTICULOS--------*/
+
+        $sqlArticulos = $conexionBD->prepare("INSERT INTO `razon_particular`(`fecha_ini_razonparticular`, `rela_personal`) VALUES (?,?)");
+        $sqlArticulos->execute(array(
+            $fechainiArticulo, $lastInsertIDPersonal
+        ));
+
+        $lastInsertArticulo = $conexionBD->lastInsertId();
 
         /*-------- INSERTAMOS EL TELEFONO CELULAR--------*/
 

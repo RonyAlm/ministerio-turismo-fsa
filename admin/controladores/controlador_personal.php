@@ -213,12 +213,6 @@ class ControladorPersonal
             // $fechainiArticulo = $_POST['fechainiArticulo'];
             $fechainiArticulo = isset($_POST['fechainiArticulo']) ? $_POST['fechainiArticulo'] : "";
 
-
-
-            // var_dump($probando);
-
-
-
             $EditarAgencia->editar(
                 $nombre,
                 $apellido,
@@ -259,10 +253,6 @@ class ControladorPersonal
                 $fechainiArticulo
             );
 
-            // print_r($EditarAgencia);
-
-
-
             // header("Location:admin/index2.php?controlador=agencias&accion=inicio");
             echo "<script>location.href = 'index2.php?controlador=personal&accion=inicio';</script>";
         }
@@ -293,10 +283,6 @@ class ControladorPersonal
         $buscarID = new PersonalModelo();
 
         $editar = $buscarID->buscar($id);
-
-
-
-
 
         include_once("vistas/personal/editar.php");
     }
@@ -409,6 +395,8 @@ class ControladorPersonal
             $fechafin = $_POST['fechafin'];
             $diasrestante = $_POST['diasrestante'];
 
+            $fechainiArticulo = $_POST['fechainiArticulo'];
+
 
 
             $usuario = $nombre . strtoupper(substr($apellido, 0, 1)) . substr($apellido, 1, 1);
@@ -446,7 +434,8 @@ class ControladorPersonal
                 $antiguedad,
                 $fechaini,
                 $fechafin,
-                $diasrestante
+                $diasrestante,
+                $fechainiArticulo
             );
 
 
