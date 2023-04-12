@@ -584,7 +584,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <p>Registro</p>
                     </a>
                   </li>
-                  <?php if ($rol_id == 1 or $rol_id == 3) { ?>
+                  <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") { ?>
                     <li class="nav-item">
                       <a href="#" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
