@@ -11,6 +11,22 @@ $rol_id = $_SESSION['rol_id'];
 
 ?>
 
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Información de los Personales</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=personal&accion=inicio">Personales</a></li>
+          <li class="breadcrumb-item active">Información de los Personales</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Main content -->
 <section class="content">
 
@@ -18,7 +34,7 @@ $rol_id = $_SESSION['rol_id'];
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">INFORMACIÓN RESUMIDA DEL PERSONAL</h3>
+
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -34,10 +50,10 @@ $rol_id = $_SESSION['rol_id'];
               // echo $conteo;
               ?>
 
-              <div class="card card-primary">
+              <div class="card card-success card-outline">
                 <div class="card-header">
-                  <h4 class="card-title w-100">
-                    <a class="d-block w-100" data-toggle="collapse" href="#collapse<?php echo $conteo ?>">
+                  <h4 class="card-title text-success w-100">
+                    <a class="d-block w-100 text-success" data-toggle="collapse" href="#collapse<?php echo $conteo ?>">
                       <?php echo $tabla["descriArea"]; ?>
                     </a>
                   </h4>
@@ -48,12 +64,12 @@ $rol_id = $_SESSION['rol_id'];
                     <div id="acordeon" class="row">
                       <div class="col-lg-12">
 
-                        <table id="tblList" class="table table-bordered table-striped" cellspacing="0" width="100%">
+                        <table id="tblList" class="table  table-bordered table-striped" cellspacing="0" width="100%">
                           <thead>
-                            <tr style="background: linear-gradient(to right, #61ba6d, #83c331)">
-                              <th>id</th>
-                              <th>nombre</th>
-                              <th>estado</th>
+                            <tr class="table-success">
+                              <th>ID</th>
+                              <th>Nombre</th>
+                              <th>Estado</th>
                               <th>Acción</th>
                             </tr>
                           </thead>
@@ -95,10 +111,10 @@ $rol_id = $_SESSION['rol_id'];
 
                           </tbody>
                           <tfoot>
-                            <tr style="background: linear-gradient(to right, #61ba6d, #83c331)">
-                              <th>id</th>
-                              <th>nombre</th>
-                              <th>estado</th>
+                            <tr class="table-success">
+                              <th>ID</th>
+                              <th>Nombre</th>
+                              <th>Estado</th>
                               <th>Acción</th>
                             </tr>
                           </tfoot>

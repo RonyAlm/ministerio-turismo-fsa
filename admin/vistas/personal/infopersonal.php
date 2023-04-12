@@ -19,11 +19,17 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Perfil</h1>
+        <h1>Perfil Personal</h1>
       </div>
-
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=personal&accion=inicio">Personales</a></li>
+          <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=personal&accion=info&id=<?= $Infomacion->id_deptos_mintur ?>">Información de los Personales</a></li>
+          <li class="breadcrumb-item active">Perfil Personal</li>
+        </ol>
+      </div>
     </div>
-  </div><!-- /.container-fluid -->
+  </div>
 </section>
 
 <!-- Main content -->

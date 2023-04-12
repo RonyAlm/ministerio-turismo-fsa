@@ -19,11 +19,16 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Perfil</h1>
+        <h1>Agregar Personal</h1>
       </div>
-
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=personal&accion=inicio">Personales</a></li>
+          <li class="breadcrumb-item active">Agregar Personal</li>
+        </ol>
+      </div>
     </div>
-  </div><!-- /.container-fluid -->
+  </div>
 </section>
 
 <!-- Main content -->
@@ -141,6 +146,7 @@
                   <!-- </form> -->
                 </div>
                 <!-- /.tab-pane -->
+
                 <div class="tab-pane" id="ministerio">
                   <!-- <form class="form-horizontal"> -->
                   <div class="form-group row">
@@ -227,10 +233,10 @@
                     </div>
                   </div>
 
-                  <div class="form-group row">
-                    <div class="offset-sm-2 col-sm-10">
-                      <input name="" id="" class="btn btn-success" type="submit" value="Agregar">
-                      <a href="?controlador=personal&accion=inicio" class="btn btn-primary">Cancelar</a>
+                  <div class="form-group row ">
+                    <div class="offset-sm-2 col-sm-10 ">
+                      <a href="?controlador=personal&accion=inicio" class="btn btn-secondary float-right ml-2">Cancelar</a>
+                      <input name="" id="" class="btn btn-success float-right" type="submit" value="Agregar">
                     </div>
                   </div>
                   <!-- </form> -->
@@ -239,6 +245,9 @@
               </div>
               <!-- /.tab-content -->
             </div>
+
+            <!-- <div class="card-footer">
+            </div> -->
 
           </div>
           <!-- /.card -->
