@@ -299,7 +299,7 @@ class ControladorPersonal
         $borrar = new PersonalModelo();
 
 
-
+        $borradoPersonal = $borrar->borrarPersonal($idBorrarPersonal);
         $borradoLicencia = $borrar->borrarLicencia($idBorrarLicencia);
         $borradoArticulo = $borrar->borrarArticulo($idBorrarArticulo);
 

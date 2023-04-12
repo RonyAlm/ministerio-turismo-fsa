@@ -43,7 +43,7 @@ function AlertDeleteLicencia(identificador) {
 function AlertDeletePersonal(identificador) {
   console.log(identificador);
   Swal.fire({
-    title: "¿Está seguro de que desea la licencia?" + identificador,
+    title: "¿Está seguro de que deseas eliminar al Personal?",
     text: "Esta acción no podrá revertirse",
     icon: "error",
     buttons: true,

@@ -238,7 +238,10 @@ class PersonalModelo
     public static function borrarPersonal($idlicencia)
     {
         $conexionBD = BD::crearInstancia();
-        $sqlBorrar = $conexionBD->prepare("DELETE FROM `licencias` WHERE id_licencias =?");
+        $sqlBorrar = $conexionBD->prepare("DELETE usuario_contra FROM personales
+        INNER JOIN persona on personales.rela_persona = persona.id_persona
+        INNER JOIN usuario_contra on usuario_contra.id_usuario = persona.rela_usuario_contra
+        WHERE personales.id_personal = ?");
         $sqlBorrar->execute(array($idlicencia));
     }
 
