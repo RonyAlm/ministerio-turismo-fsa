@@ -12,7 +12,7 @@ class BD
             $opcionesPDO[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
 
 
-            self::$instancia = new PDO('mysql:host=localhost; dbname=prueba3', 'root', '', $opcionesPDO);
+            self::$instancia = new PDO('mysql:host=localhost; dbname=mintur', 'root', '', $opcionesPDO);
             //echo "conexion realizada";
             bd::$instancia->exec("SET CHARACTER SET utf8");
         }

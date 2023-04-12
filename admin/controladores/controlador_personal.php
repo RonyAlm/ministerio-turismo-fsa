@@ -119,7 +119,7 @@ class ControladorPersonal
             // );
 
 
-            header("Location:index2.php?controlador=agencias&accion=inicio");
+            header("Location:index2.php?controlador=personal&accion=inicio");
         }
 
 

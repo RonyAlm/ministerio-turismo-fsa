@@ -564,10 +564,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <?php } ?>
 
             <!-- PERSONAL -->
-            <?php
-            $show_personal = $rol_id == 1 or ($rol_id == 3 and $usuario == "rrhh");
-            if ($show_personal) {
-            ?>
+            <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "rrhh" or $usuario == "karla") { ?>
               <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'menu-open' : '' ?>">
                 <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-table"></i>
@@ -579,47 +576,49 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="?controlador=personal&accion=inicio" class="nav-link 
-        <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'active' : '' ?>">
+                      <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'active' : '' ?>">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Registro</p>
                     </a>
                   </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>
-                        Asistencias
-                        <i class="right fas fa-angle-left"></i>
-                      </p>
-                    </a>
-                    <ul class="nav nav-treeview" style="display: none;">
-                      <li class="nav-item">
-                        <a href="#" class="nav-link">
-                          <i class="far fa-dot-circle nav-icon"></i>
-                          <p>Administración</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="?controlador=asistencias&accion=inicio" class="nav-link 
-            <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'asistencias')) ? '' : '' ?>">
-                          <i class="far fa-dot-circle nav-icon"></i>
-                          <p>Central</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="#" class="nav-link">
-                          <i class="far fa-dot-circle nav-icon"></i>
-                          <p>Logística</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="#" class="nav-link">
-                          <i class="far fa-dot-circle nav-icon"></i>
-                          <p>Terminal</p>
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
+                  <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "rrhh") { ?>
+                    <li class="nav-item">
+                      <a href="#" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>
+                          Asistencias
+                          <i class="right fas fa-angle-left"></i>
+                        </p>
+                      </a>
+                      <ul class="nav nav-treeview" style="display: none;">
+                        <li class="nav-item">
+                          <a href="#" class="nav-link">
+                            <i class="far fa-dot-circle nav-icon"></i>
+                            <p>Administración</p>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="?controlador=asistencias&accion=inicio" class="nav-link 
+                          <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'asistencias')) ? '' : '' ?>">
+                            <i class="far fa-dot-circle nav-icon"></i>
+                            <p>Central</p>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="#" class="nav-link">
+                            <i class="far fa-dot-circle nav-icon"></i>
+                            <p>Logística</p>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="#" class="nav-link">
+                            <i class="far fa-dot-circle nav-icon"></i>
+                            <p>Terminal</p>
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+                  <?php } ?>
                 </ul>
 
               </li>
