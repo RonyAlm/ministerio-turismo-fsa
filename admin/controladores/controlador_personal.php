@@ -395,7 +395,8 @@ class ControladorPersonal
             $fechafin = $_POST['fechafin'];
             $diasrestante = $_POST['diasrestante'];
 
-            $fechainiArticulo = $_POST['fechainiArticulo'];
+            // $fechainiArticulo = $_POST['fechainiArticulo'];
+            $fechainiArticulo = isset($_POST['fechainiArticulo']) ? $_POST['fechainiArticulo'] : "";
 
 
 

@@ -237,7 +237,7 @@
                   <div class="form-group row">
                     <label for="fechainiArticulo" class="col-sm-2 col-form-label">Fechas inicio</label>
                     <div class="col-sm-2">
-                      <input type="date" class="form-control" name="fechainiArticulo" id="fechainiArticulo" placeholder="Año pendiente de licencia">
+                      <input type="date" class="form-control" name="fechainiArticulo" id="fechainiArticulo" placeholder="Año pendiente de licencia" required>
                     </div>
                   </div>
                   <div class="form-group row">
