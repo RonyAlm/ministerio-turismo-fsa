@@ -208,8 +208,10 @@ class ControladorPersonal
 
             // ARTICULO
 
-            $articuloID = $_POST['articuloID'];
-            $fechainiArticulo = $_POST['fechainiArticulo'];
+            // $articuloID = $_POST['articuloID'];
+            $articuloID = isset($_POST['articuloID']) ? $_POST['articuloID'] : "";
+            // $fechainiArticulo = $_POST['fechainiArticulo'];
+            $fechainiArticulo = isset($_POST['fechainiArticulo']) ? $_POST['fechainiArticulo'] : "";
 
 
 
