@@ -61,7 +61,7 @@ $rol_id = $_SESSION['rol_id'];
             <?php foreach ($tabla as $asistencia) { ?>
 
               <tr>
-                <td><?php echo $asistencia["id_asistencia3"]; ?></td>
+                <td><?php echo $asistencia["id_asistencia4"]; ?></td>
                 <td><?php echo $asistencia["nombre_per"]; ?></td>
                 <td><?php echo $asistencia["fcha_asistencia"]; ?></td>
                 <td><?php echo $asistencia["horas_asistencia"]; ?></td>

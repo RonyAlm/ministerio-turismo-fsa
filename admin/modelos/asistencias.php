@@ -1,10 +1,18 @@
 <?php
+require_once 'vistas/recursos/libreria/json/vendor/autoload.php';
+
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 class AsistenciaModelo
 {
 
     public $listaAgencia;
     public $listaAgenciaID;
     public $listaBuscar;
+    private $datos;
+    private $hoja_datos;
 
 
     public function __construct()
@@ -13,13 +21,40 @@ class AsistenciaModelo
         $this->listaAgenciaID = array();
         $this->listaBuscar = array();
     }
+    // esto es para agregar al excel
+    public function getHojaDatos()
+    {
+        return $this->hoja_datos;
+    }
+
+    public function generarExcel($datos_file)
+    {
+        $documento = new Spreadsheet();
+        $hoja_nueva = $documento->getActiveSheet();
+
+        $this->datos = IOFactory::load($datos_file);
+        $this->datos->setActiveSheetIndex(0);
+        $this->hoja_datos = $this->datos->getActiveSheet();
+
+        foreach ($this->hoja_datos->getRowIterator() as $fila) {
+            $datos_fila = $fila->getcellIterator();
+            $columna = 'A';
+            foreach ($datos_fila as $dato) {
+                $hoja_nueva->setCellValue($columna . $fila->getRowIndex(), $dato->getValue());
+                $columna++;
+            }
+        }
+
+        $writer = new Xlsx($documento);
+        $writer->save('datos.xlsx');
+    }
 
     public function consultar()
     {
 
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->query("SELECT `id_asistencia3`, `nombre_per`, `fcha_asistencia`, `horas_asistencia`, `checkinout` FROM `asistencia3`");
+        $sql = $conexionBD->query("SELECT `id_asistencia4`, `nombre_per`, `fcha_asistencia`, `horas_asistencia`, `checkinout` FROM `asistencia4`");
 
         //recuperamos los datos y los retornamos
 
@@ -53,175 +88,143 @@ class AsistenciaModelo
 
     }
 
-    public function crear(
-        $lineas
-    ) {
+    public function crear($lineas)
+    {
 
         $conexionBD = BD::crearInstancia();
 
         $i = 0;
 
-        foreach ($lineas as $linea) {
-            $cantidad_registros = count($lineas);
-            $cantidad_regist_agregados =  ($cantidad_registros - 1);
+        $inicio = new DateTime('2022-01-01');
+        $fin = new DateTime('2023-12-31');
+        $meses = array();
 
-            if ($i != 0) {
-
-                $datos = explode(",", $linea);
-                $semanas = [];
-
-                $nombre                = !empty($datos[0])  ? ($datos[0]) : '';
-                $id                = !empty($datos[1])  ? ($datos[1]) : '';
-                $fecha               = !empty($datos[3])  ? ($datos[3]) : '';
-                $hora               = !empty($datos[4])  ? ($datos[4]) : '';
-                $in               = !empty($datos[5])  ? ($datos[5]) : '';
-                $checkInOn               = !empty($datos[9])  ? ($datos[9]) : '';
-
-                if ($nombre == '"admin"') {
-                    $nombre = "David Rolando Pereyra";
-                }
-                if ($checkInOn == 'overtimeIn') {
-                    $checkInOn = "E/S";
-                }
-
-                if ($hora <= '08:15:00') {
-                    $checkInOn = "Entrada";
-                };
-                if ($hora >= '08:16:00' && $hora <= '11:59:00') {
-                    $checkInOn = "E/S";
-                };
-                if ($hora >= '12:00:00' && $hora <= '13:15:00') {
-                    $checkInOn = "Salida";
-                };
-                if ($hora >= '13:16:00' && $hora <= '14:59:00') {
-                    $checkInOn = "E/S";
-                };
-                if ($hora >= '15:00:00' && $hora <= '16:15:00') {
-                    $checkInOn = "Entrada";
-                };
-                if ($hora >= '15:00:00' && $hora <= '16:15:00') {
-                    $checkInOn = "Entrada";
-                };
-                if ($hora >= '16:16:00' && $hora <= '19:59:00') {
-                    $checkInOn = "E/S";
-                };
-                if ($hora >= '20:00:00' && $hora <= '21:30:00') {
-                    $checkInOn = "Salida";
-                };
-                if ($hora >= '21:31:00' && $hora <= '06:00:00') {
-                    $checkInOn = "E/S";
-                };
-
-                /*-------- INSERTAMOS--------*/
-
-                $sqlDireccion = $conexionBD->prepare("INSERT INTO `asistencia3`(`nombre_per`, `fcha_asistencia`, `horas_asistencia`,`checkinout`) 
-                                                     VALUES (?,?,?,?)");
-                $sqlDireccion->execute(array($nombre, $fecha, $hora, $checkInOn));
-            }
-
-            // $arrays = array_merge($semana, $semana1);
-
-            // $resultado = array_merge_recursive((array)$semana, (array)$semana1);
-            // print_r($resultado);
-
-
-            echo '<div>' . $i . "). " . $checkInOn . '</div>';
-            $i++;
+        while ($inicio <= $fin) {
+            $nombre_mes = strtolower($inicio->format('F_Y'));
+            $desde = $inicio->format('Y-m-d');
+            $hasta = $inicio->format('Y-m-t');
+            $meses[$nombre_mes] = array('desde' => $desde, 'hasta' => $hasta);
+            $inicio->modify('+1 month');
         }
 
+        // Usamos la función array_filter para eliminar las líneas vacías
+        $lineas = array_filter($lineas);
+        // Usamos la función array_map para aplicar la función trim a cada línea, lo que elimina los espacios en blanco al principio y al final
+        $lineas = array_map('trim', $lineas);
+        // Usamos el método array_map para aplicar la función explode a cada línea, lo que crea una matriz de valores separados por comas
+        $datos = array_map(function ($linea) {
+            return explode(',', $linea);
+        }, $lineas);
+
+        // Usamos la función array_filter para eliminar los datos vacíos
+        $datos = array_filter($datos);
+
+
+        foreach ($datos as $datos_linea) {
+
+
+            // Procesamos cada línea como antes, pero ahora estamos trabajando con una sola matriz de datos
+            $nombre = !empty($datos_linea[0]) ? $datos_linea[0] : '';
+            $id = !empty($datos_linea[1]) ? $datos_linea[1] : '';
+            $fecha = !empty($datos_linea[3]) ? $datos_linea[3] : '';
+            $hora = !empty($datos_linea[4]) ? $datos_linea[4] : '';
+            $in = !empty($datos_linea[5]) ? $datos_linea[5] : '';
+            $checkInOn = !empty($datos_linea[9]) ? $datos_linea[9] : '';
+
+            if ($fecha >= "2023-02-01") {
+                /*-------- VERIFICAMOS SI EL EMPLEADO YA EXISTE EN LA BD --------*/
+                $sqlVerificar = $conexionBD->prepare("SELECT COUNT(*) as existente FROM `asistencia4` WHERE `nombre_per` = ? AND `fcha_asistencia` = ?");
+                $sqlVerificar->execute(array($nombre, $fecha));
+                $resultadoVerificar = $sqlVerificar->fetch(PDO::FETCH_ASSOC);
+
+                if ($resultadoVerificar['existente'] == 0) {
+                    /*-------- INSERTAMOS--------*/
+                    $sqlDireccion = $conexionBD->prepare("INSERT INTO `asistencia4`(`nombre_per`, `fcha_asistencia`, `horas_asistencia`,`checkinout`) 
+                                         VALUES (?,?,?,?)");
+
+                    // $sqlDireccion->execute(array($nombre, $fecha, $hora, $checkInOn));
+                }
+            };
+            // }
+            // echo '<div>' . $nombre . ". " . $hora . ". " . $checkInOn . '</div>';
+            // Inicializamos el arreglo para almacenar los datos por mes
+            $datos_por_mes = [];
+            foreach ($meses as $mes => $rango) {
+                // Creamos un arreglo vacío para almacenar los datos de este mes
+                $datos_por_mes[$mes] = [];
+            }
+            foreach ($meses as $mes => $rango) {
+                if ($fecha >= $rango['desde'] && $fecha <= $rango['hasta']) {
+                    $datos_por_mes[$mes][] = [
+                        'nombre' => $nombre,
+                        'fecha' => $fecha,
+                        'hora' => $hora,
+                        'check_in_on' => $checkInOn,
+                    ];
+                }
+                // print_r($datos_por_mes);
+            }
+            // Creamos un archivo de Excel por cada mes
+            foreach ($datos_por_mes as $mes => $datos) {
+                // Creamos un objeto Spreadsheet
+                $spreadsheet = new Spreadsheet();
+
+                // Protegemos la hoja de cálculo para que sea de solo lectura
+                $protection = $spreadsheet->getActiveSheet()->getProtection();
+                $protection->setSheet(true)
+                    ->setSort(true)
+                    ->setInsertRows(false)
+                    ->setInsertColumns(false)
+                    ->setFormatCells(false)
+                    ->setFormatColumns(false)
+                    ->setFormatRows(false)
+                    ->setObjects(true)
+                    ->setScenarios(true);
+                // Obtenemos la hoja activa
+                $sheet = $spreadsheet->getActiveSheet();
+                // Definir los encabezados de las columnas 
+                $encabezados = ['Nombre', 'fecha', 'hora', 'E/S'];
+                $sheet->fromArray([$encabezados], NULL, 'A1');
+                $row = 2;
+                $writer = new Xlsx($spreadsheet);
+                foreach ($datos as $dato) {
+                    $sheet->setCellValue('A' . $row, $dato['nombre']);
+                    $sheet->setCellValue('B' . $row, $dato['fecha']);
+                    $sheet->setCellValue('C' . $row, $dato['hora']);
+                    $sheet->setCellValue('D' . $row, $dato['check_in_on']);
+
+                    echo '<div>' . $dato['nombre'] . ". " . $dato['fecha'] . ". " . $dato['check_in_on'] . '</div>';
+                    // Aplicamos algunos estilos a las celdas
+                    $styleHeader = [
+                        'font' => [
+                            'bold' => true,
+                            'color' => ['rgb' => 'FFFFFF'],
+                        ],
+                        'fill' => [
+                            'fillType' => 'solid',
+                            'startColor' => ['rgb' => '1f497d'],
+                        ],
+                    ];
+                    $sheet->getStyle('A1:D1')->applyFromArray($styleHeader);
+                    $sheet->getStyle('A2:D100')->getAlignment()->setVertical('center');
+                    $row++;
+                    // print_r($row);
+                }
+                // Creamos un objeto Writer y escribimos el archivo en el disco
+
+                // $writer->save($filename);
+                // Mensaje de confirmación
+                $filename = $mes . '.xlsx';
+                echo "Se han guardado " . count($datos) . " filas en el archivo " . $filename . "<br>";
+            }
+            $i++;
+        }
+    }
 
 
 
-
-        // $lastInsertIDdireccion = $conexionBD->lastInsertId();
-
-        //     /*-------- INSERTAMOS LA RAZON SOCIAL--------*/
-
-        //     $sqlRazonSocial = $conexionBD->prepare("INSERT INTO `razon_social`(`descripcion_razon_social`) 
-        //                                                 VALUES (?)");
-        //     $sqlRazonSocial->execute(array($razonsocial));
-
-        //     $lastInsertIDRazonSocial = $conexionBD->lastInsertId();
-
-        //     /*-------- INSERTAMOS LA AGENCIA--------*/
-
-        //     $sql = $conexionBD->prepare("INSERT INTO agencias (descripcion_agencias,matricula_agencia,
-        //                                                             legajo_agencia,cuit_agencia,categoria_agencia, fecha_edit_agencia,
-        //                                                             rela_agencia_direccion,rela_razon_social_agencia
-        //                                                             ,idoneo_agencia) 
-        //                                         VALUES (?,?,?,?,?,CURRENT_TIMESTAMP(),?,?,?)");
-        //     $sql->execute(array(
-        //         $descripcion_agencias, $matricula_agencia,
-        //         $legajo_agencia, $cuit_agencia, $categoria_agencia, $lastInsertIDdireccion,
-        //         $lastInsertIDRazonSocial, $idoneoAgencia
-        //     ));
-
-        //     $lastInsertIDAgencias = $conexionBD->lastInsertId();
-
-        //     /*-------- INSERTAMOS EL TELEFONO CELULAR--------*/
-
-        //     foreach ($telefonoAgencia as $telefonoAgencia1) {
-
-        //         $sqlTelefono = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-        //                                                                         `rela_contacto_agencia`) 
-        //                                                 VALUES (?,?,?)");
-        //         $sqlTelefono->execute(array($telefonoAgencia1, 2, $lastInsertIDAgencias));
-        //     }
-
-        //     /*-------- INSERTAMOS EL TELEFONO FIJO--------*/
-
-        //     $sqlFijo = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-        //                                                                         `rela_contacto_agencia`) 
-        //                                                 VALUES (?,?,?)");
-        //     $sqlFijo->execute(array($telefonoFijoAgencia, 9, $lastInsertIDAgencias));
-
-        //     /*-------- INSERTAMOS EL CORREO-------*/
-
-        //     $sqlCorreo = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-        //                                                                         `rela_contacto_agencia`) 
-        //                                                 VALUES (?,?,?)");
-        //     $sqlCorreo->execute(array($correoAgencia, 1, $lastInsertIDAgencias));
-
-        //     /*-------- INSERTAMOS EL FACEBOOK--------*/
-
-        //     $sqlFacebook = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-        //                                                                         `rela_contacto_agencia`) 
-        //                                                 VALUES (?,?,?)");
-        //     $sqlFacebook->execute(array($facebookAgencia, 4, $lastInsertIDAgencias));
-
-        //     /*-------- INSERTAMOS EL INSTAGRAM--------*/
-
-        //     $sqlInstagram = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-        //                                                                         `rela_contacto_agencia`) 
-        //                                                 VALUES (?,?,?)");
-        //     $sqlInstagram->execute(array($instagramAgencia, 5, $lastInsertIDAgencias));
-
-        //     /*-------- INSERTAMOS EL TWITTER--------*/
-
-        //     $sqlTwitter = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-        //                                                                         `rela_contacto_agencia`) 
-        //                                                 VALUES (?,?,?)");
-        //     $sqlTwitter->execute(array($twitterAgencia, 6, $lastInsertIDAgencias));
-
-        //     /*-------- INSERTAMOS EL SITIO WEB--------*/
-
-        //     $sqlWeb = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-        //                                                                         `rela_contacto_agencia`) 
-        //                                                 VALUES (?,?,?)");
-        //     $sqlWeb->execute(array($webAgencia, 7, $lastInsertIDAgencias));
-
-        //     /*-------- INSERTAMOS OTRO--------*/
-
-        //     $sqlOtro = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,`rela_tipo_contacto_cont`,
-        //                                                                         `rela_contacto_agencia`) 
-        //                                                 VALUES (?,?,?)");
-        //     $sqlOtro->execute(array($otroAgencia, 8, $lastInsertIDAgencias));
-
-        //     /*-------- INSERTAMOS EL ESTADO--------*/
-
-        //     $sqlEstado = $conexionBD->prepare("INSERT INTO `estado_actividad`(`rela_tipo_estado`, `rela_estado_agencia`) 
-        //                                         VALUES (?,?)");
-        //     $sqlEstado->execute(array($estadoAgencia, $lastInsertIDAgencias));
+    public function excel($lineas)
+    {
     }
 
     public static function borrar($idAgenciaBorrar, $id_direccion, $idRazonSocial)
@@ -260,148 +263,10 @@ class AsistenciaModelo
         return $sql->fetch(PDO::FETCH_OBJ);
     }
 
-    public static function editar(
-        $descripcion_agencias,
-        $matricula_agencia,
-        $legajo_agencia,
-        $cuit_agencia,
-        $categoria_agencia,
-        $idAgencia,
-        $idoneoAgencia,
-        $rela_localidad_direccion,
-        $calle_direccion,
-        $razonsocial,
-        $telefonoAgencia,
-        $telefonoFijoAgencia,
-        $correoAgencia,
-        $facebookAgencia,
-        $instagramAgencia,
-        $twitterAgencia,
-        $webAgencia,
-        $otroAgencia,
-        $estadoAgencia,
-
-        $idRazonSocial,
-        $idDireccion,
-        $idtelefonoAgencia,
-        $idtelefonoFijoAgencia,
-        $idcorreoAgencia,
-        $idfacebookAgencia,
-        $idinstagramAgencia,
-        $idtwitterAgencia,
-        $idwebAgencia,
-        $idotroAgencia,
-        $idestadoAgencia
-    ) {
+    public static function editar()
+    {
 
         $conexionBD = BD::crearInstancia();
-
-        /*---------------SE ACTUALIZA LA AGENCIA-------------------*/
-        $sql = $conexionBD->prepare("UPDATE `agencias` SET `descripcion_agencias` = '$descripcion_agencias',
-                                                    idoneo_agencia = '$idoneoAgencia', matricula_agencia ='$matricula_agencia',
-                                                    legajo_agencia = '$legajo_agencia', cuit_agencia= '$cuit_agencia',
-                                                    categoria_agencia= '$categoria_agencia',
-                                                    fecha_edit_agencia= CURRENT_TIMESTAMP()
-                                            WHERE `agencias`.`id_agencias` = $idAgencia;");
-        $sql->execute();
-
-        /*---------------SE ACTUALIZA LA DIRECCION CON LA LOCALIDAD-------------------*/
-
-        if ($rela_localidad_direccion == 0) {
-            $sqlDireccion = $conexionBD->prepare("UPDATE `direccion` SET `calle_direccion`='$calle_direccion'
-                                                        WHERE id_direccion = $idDireccion ");
-            $sqlDireccion->execute();
-        } else {
-            $sqlDireccion = $conexionBD->prepare("UPDATE `direccion` SET `calle_direccion`='$calle_direccion',
-                                                        `rela_localidad_direccion`=$rela_localidad_direccion 
-                                                        WHERE id_direccion = $idDireccion ");
-            $sqlDireccion->execute();
-        }
-
-        /*----------------SE ACTUALIZA EL ESTADO------------------*/
-
-        if ($estadoAgencia == 0) {
-            echo "actualizado";
-        } else {
-            $sqlEstado = $conexionBD->prepare("UPDATE `estado_actividad` SET `rela_tipo_estado`=$estadoAgencia
-                                                        WHERE id_estado = $idestadoAgencia");
-            $sqlEstado->execute();
-        }
-
-        /*----------------SE ACTUALIZA LA RAZON SOCIAL------------------*/
-
-        $sqlRazonSocial = $conexionBD->prepare("UPDATE `razon_social` SET `descripcion_razon_social`='$razonsocial' 
-                                                    WHERE id_razon_social = $idRazonSocial");
-        $sqlRazonSocial->execute();
-
-        /*----------------SE ACTUALIZA EL CONTACTO telefono------------------*/
-
-        $asociativo = array_combine($idtelefonoAgencia, $telefonoAgencia);
-
-
-
-        foreach ($asociativo as $indice => $valor) {
-
-            $sqlContacto = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`='$valor'
-                    WHERE id_contacto = $indice");
-            $sqlContacto->execute();
-            // print_r($sqlContacto);
-        }
-
-
-
-
-        /*----------------SE ACTUALIZA EL CONTACTO  telefono fijo------------------*/
-
-        if ($telefonoFijoAgencia == "") {
-            $telefonoFijoAgencia = "No se registró";
-
-            $sqlFijo = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`= '$telefonoFijoAgencia'
-                                                    WHERE id_contacto = $idtelefonoFijoAgencia");
-            $sqlFijo->execute();
-        } else {
-            $sqlFijo = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`= $telefonoFijoAgencia
-                                                    WHERE id_contacto = $idtelefonoFijoAgencia");
-            $sqlFijo->execute();
-        }
-
-
-
-        /*----------------SE ACTUALIZA EL CONTACTO correo------------------*/
-
-        $sqlCorreo = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`='$correoAgencia'
-                                                    WHERE id_contacto = $idcorreoAgencia");
-        $sqlCorreo->execute();
-
-        /*----------------SE ACTUALIZA EL CONTACTO facebook ------------------*/
-
-        $sqlFacebook = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`='$facebookAgencia'
-                                                    WHERE id_contacto = $idfacebookAgencia");
-        $sqlFacebook->execute();
-
-        /*----------------SE ACTUALIZA EL CONTACTO Instagram ------------------*/
-
-        $sqlInstagram = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`='$instagramAgencia'
-                                                    WHERE id_contacto = $idinstagramAgencia");
-        $sqlInstagram->execute();
-
-        /*----------------SE ACTUALIZA EL CONTACTO  twitter------------------*/
-
-        $sqlTwitter = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`='$twitterAgencia'
-                                                    WHERE id_contacto = $idtwitterAgencia");
-        $sqlTwitter->execute();
-
-        /*----------------SE ACTUALIZA EL CONTACTO  sitio web------------------*/
-
-        $sqlWeb = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`='$webAgencia'
-                                                    WHERE id_contacto = $idwebAgencia");
-        $sqlWeb->execute();
-
-        /*----------------SE ACTUALIZA EL CONTACTO otro------------------*/
-
-        $sqlOtro = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`='$otroAgencia'
-                                                    WHERE id_contacto = $idotroAgencia ");
-        $sqlOtro->execute();
     }
 
     public function buscarSelectLocalidad()

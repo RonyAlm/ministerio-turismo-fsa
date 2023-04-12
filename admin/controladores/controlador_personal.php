@@ -26,22 +26,26 @@ class ControladorPersonal
             // print_r($_POST);
             $insertarModelLic = new PersonalModelo();
 
-            $selectPersonal = $_POST['selectPersonal23'];
-            $fechaIniLicencia = $_POST['fechaIniLicencia'];
-            $fechafinLicencia = $_POST['fechafinLicencia'];
-            $fechaIniArticulo = $_POST['fechaIniArticulo'];
+            // $selectPersonal = $_POST['selectPersonal23'];
+            $selectPersonal = isset($_POST['selectPersonal23']) ? $_POST['selectPersonal23'] : "";
+            // $fechaIniLicencia = $_POST['fechaIniLicencia'];
+            $fechaIniLicencia = isset($_POST['fechaIniLicencia']) ? $_POST['fechaIniLicencia'] : "";
+            // $fechafinLicencia = $_POST['fechafinLicencia'];
+            $fechafinLicencia = isset($_POST['fechafinLicencia']) ? $_POST['fechafinLicencia'] : "";
+            // $fechaIniArticulo = $_POST['fechaIniArticulo'];
+            $fechaIniArticulo = isset($_POST['fechaIniArticulo']) ? $_POST['fechaIniArticulo'] : "";
 
-            $licencia = $_POST['licencia'];
-            $articulo = $_POST['articulo'];
-
-            $cantidadlicenciaF = $_POST['lista2'];
-            $CantLicenciaRestante = $_POST['CantLicencia'];
+            // $licencia = $_POST['licencia'];
+            $licencia = isset($_POST['licencia']) ? $_POST['licencia'] : "";
             // $articulo = $_POST['articulo'];
+            $articulo = isset($_POST['articulo']) ? $_POST['articulo'] : "";
 
+            // $cantidadlicenciaF = $_POST['lista2'];
+            $cantidadlicenciaF = isset($_POST['lista2']) ? $_POST['lista2'] : "";
+            // $CantLicenciaRestante = $_POST['CantLicencia'];
+            $CantLicenciaRestante = isset($_POST['CantLicencia']) ? $_POST['CantLicencia'] : "";
 
-
-
-            $agregarLiAr = $insertarModelLic->agregarLiAr(
+            $insertarModelLic->agregarLiAr(
                 $selectPersonal,
                 $fechaIniLicencia,
                 $fechafinLicencia,
@@ -301,7 +305,7 @@ class ControladorPersonal
 
         $idBorrarLicencia = $_GET["id"];
         $idBorrarArticulo = $_GET["idArticulo"];
-        // $idBorrarPersonal = $_GET["idPersonal"];
+        $idBorrarPersonal = $_GET["idPersonal"];
 
 
         $borrar = new PersonalModelo();
