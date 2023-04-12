@@ -17,13 +17,9 @@ $id = $_SESSION['id'];
 $usuario = $_SESSION['usuarios'];
 $rol_id = $_SESSION['rol_id'];
 
-$id_persona = $_SESSION['id_persona'];
+
 $nombre = $_SESSION['nombre_persona'];
 $apellido = $_SESSION['apellido_persona'];
-
-// print_r($apellido);
-
-
 
 if ($nombre) {
   $nombre = 1;
@@ -349,6 +345,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <p>Servicios Generales</p>
                     </a>
                   </li>
+
                   <li class="nav-item">
                     <a href="?controlador=gastronomia&accion=inicio" class="nav-link 
                     <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'gastronomia') ? 'active' : '' ?>">
@@ -356,6 +353,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <p>Gastronomías</p>
                     </a>
                   </li>
+
 
                 </ul>
               </li>
@@ -805,6 +803,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="vistas/recursos/script/formularios.js"></script>
 
   <script src="vistas/recursos/script/sweetalertEliminar.js"></script>
+  <script src="vistas/recursos/script/personalSiguiente.js"></script>
   <script src="/admin/vistas/recursos/script/modal.js"></script>
 
 
