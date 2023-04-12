@@ -1,3 +1,13 @@
+<?php
+
+if (!isset($_SESSION['id'])) {
+  header("Location: index.php");
+}
+// $id_usuario = $_SESSION['id'];
+$usuario = $_SESSION['usuarios'];
+$rol_id = $_SESSION['rol_id'];
+
+?>
 <div class="card card-success card-outline mt-3">
 
   <div class="card-header ">
@@ -31,6 +41,10 @@
               </div>
             </div>
             <div class="card-body">
+              <div class="form-group">
+                <label for="usuario_crear">Nombre de usuario:</label>
+                <input type="text" id="usuario_crear" name="usuario_crear" class="form-control" value="<?php echo $usuario; ?>">
+              </div>
               <div class="form-group">
                 <label for="designacion">Designación Comercial:</label>
                 <input type="text" id="designacion" name="designacion" class="form-control" required>

@@ -305,7 +305,7 @@ class ControladorPersonal
 
         $idBorrarLicencia = $_GET["id"];
         $idBorrarArticulo = $_GET["idArticulo"];
-        // $idBorrarPersonal = $_GET["idPersonal"];
+        $idBorrarPersonal = $_GET["idPersonal"];
 
 
         $borrar = new PersonalModelo();

@@ -1,38 +1,21 @@
 <?php
-
-
-
 include_once("modelos/asistencias.php");
-
 include_once("conexion.php");
-
-
-
 
 class ControladorAsistencias
 {
 
     public function inicio()
-    { //aca se muestra las tablas
-
-
+    {
+        //aca se muestra las tablas
         $consulta = new AsistenciaModelo();
-
         $tabla = $consulta->consultar();
-        // $datosEstadisticos = new estadistica();
-
-        // $cantidad_agencias = $datosEstadisticos->cantidadAgencias();
-        // $cantidadAgenciasHabilitadas = $datosEstadisticos->cantidadAgenciasHabilitadas();
-
 
         include_once("vistas/asistencia/inicio.php");
     }
 
     public function crear()
     {
-        // Creamos un objeto Spreadsheet
-        // $spreadsheet = new Spreadsheet();
-
 
         if ($_POST) {
             $insertar = new AsistenciaModelo();

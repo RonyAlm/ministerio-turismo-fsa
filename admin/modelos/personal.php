@@ -225,7 +225,12 @@ class PersonalModelo
                                                     VALUES (?,?,?)");
         $sqlCorreo->execute(array($correo, 1, $lastInsertIDAgencias));
     }
-
+    public static function borrarPersonal($idlicencia)
+    {
+        $conexionBD = BD::crearInstancia();
+        $sqlBorrar = $conexionBD->prepare("DELETE FROM `licencias` WHERE id_licencias =?");
+        $sqlBorrar->execute(array($idlicencia));
+    }
 
     public static function borrarLicencia($idlicencia)
     {
@@ -233,6 +238,7 @@ class PersonalModelo
         $sqlBorrar = $conexionBD->prepare("DELETE FROM `licencias` WHERE id_licencias =?");
         $sqlBorrar->execute(array($idlicencia));
     }
+
     public static function borrarArticulo($idarticulo)
     {
         $conexionBD = BD::crearInstancia();
