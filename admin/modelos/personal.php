@@ -22,7 +22,7 @@ class PersonalModelo
         $conexionBD = BD::crearInstancia();
 
         $sql = $conexionBD->query("SELECT `id_deptos_mintur`, dpm.descriDepartamento as descrDepto,
-        per.id_persona,
+        per.id_persona,per.rela_persona_direccion,
         CONCAT(per.nombre_persona, ' ', per.apellido_persona) full_name,
         tp.id_tipo_personal, tp.descri_tipo_personal as descrTP
         FROM `deptos_mintur` dpm
@@ -48,7 +48,7 @@ class PersonalModelo
 
         $sql = $conexionBD->query("SELECT `id_personal`, `rela_area`,a.descriArea,a.id_areas,
         tep.id_tipo_estado_personal, tep.descripcion as tipoestado,
-        pe.id_persona,CONCAT(pe.nombre_persona, ' ', pe.apellido_persona) full_name
+        pe.id_persona,pe.rela_persona_direccion,CONCAT(pe.nombre_persona, ' ', pe.apellido_persona) full_name
         FROM `personales` p
         INNER JOIN areas a on a.id_areas = p.rela_area
         INNER JOIN tipo_estado_personal tep on tep.id_tipo_estado_personal = p.rela_tipo_estado
@@ -235,7 +235,7 @@ class PersonalModelo
                                                     VALUES (?,?,?)");
         $sqlCorreo->execute(array($correo, 1, $lastInsertIDAgencias));
     }
-    public static function borrarPersonal($idlicencia)
+    public static function borrarPersonal($idlicencia, $id_direccion)
     {
         $conexionBD = BD::crearInstancia();
         $sqlBorrar = $conexionBD->prepare("DELETE usuario_contra FROM personales
@@ -243,6 +243,9 @@ class PersonalModelo
         INNER JOIN usuario_contra on usuario_contra.id_usuario = persona.rela_usuario_contra
         WHERE personales.id_personal = ?");
         $sqlBorrar->execute(array($idlicencia));
+
+        $sqlDireccionBorrar = $conexionBD->prepare("DELETE FROM direccion WHERE id_direccion =?");
+        $sqlDireccionBorrar->execute(array($id_direccion));
     }
 
     public static function borrarLicencia($idlicencia)

@@ -3,7 +3,7 @@
   <div class="card-header ">
     <h3 class="card-title text-success">
       <i class="fas fa-solid fa-plus-minus  mr-2"></i>
-      Agregar Alojamiento
+      Agregar Salones
     </h3>
   </div>
   <div class="mb-1">
@@ -13,7 +13,7 @@
 
   <!-- Main content -->
   <div class="card-body">
-    <form action="" id="agregarAlojamiento" method="post" enctype="multipart/form-data">
+    <form action="" id="agregarsalones" method="post" enctype="multipart/form-data">
 
       <div class="row">
         <!-- CREAR GENERAL -->
@@ -30,65 +30,39 @@
             </div>
             <div class="card-body">
 
+
               <div class="form-group">
-                <label for="categoriaAlojamiento">Categoría</label>
-                <select id="categoriaAlojamiento" name="categoriaAlojamiento" class="form-control select2" required>
-                  <option value="0" selected disabled>Seleccionar la Categoría</option>
-                  <?php foreach ($buscarSelectTipoAlojamiento as $k) : ?>
-                    <option value="<?php echo $k->id_tipo_alojamiento; ?>"> <?php echo $k->descripcion_tipo_alojamiento; ?></option>
-                  <?php endforeach; ?>
-                </select>
+                <label for="nombresalones">Designación Comercial:</label>
+                <input type="text" id="nombresalones" name="nombresalones" class="form-control">
               </div>
               <div class="form-group">
-                <label for="nombreAlojamiento">Designación Comercial:</label>
-                <input type="text" id="nombreAlojamiento" name="nombreAlojamiento" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="localidadAlojamiento">Localidad</label>
-                <select id="localidadAlojamiento" name="localidadAlojamiento" class="form-control select2" required>
+                <label for="localidadsalones">Localidad</label>
+                <select id="localidadsalones" name="localidadsalones" class="form-control select2" required>
                   <option value="0" selected disabled>Seleccionar la localidad</option>
                   <?php foreach ($buscarSelectLocalidad as $k) : ?>
                     <option value="<?php echo $k->id_localidad; ?>"> <?php echo $k->nombre_localidad; ?></option>
                   <?php endforeach; ?>
                 </select>
               </div>
+
               <div class="form-group">
-                <label for="razonsocialAlojamiento">Razón Social:</label>
-                <input type="text" id="razonsocialAlojamiento" name="razonsocialAlojamiento" class="form-control"></input>
+                <label for="idoneosalones">Idóneo - Encargado/a</label>
+                <input type="text" id="idoneosalones" name="idoneosalones" class="form-control">
               </div>
 
               <div class="form-group">
-                <label for="estrellaAlojamiento">Estrella:</label>
-                <input type="text" id="estrellaAlojamiento" name="estrellaAlojamiento" class="form-control"></input>
+                <label for="cuitsalones">Cuit</label>
+                <input type="text" id="cuitsalones" name="cuitsalones" class="form-control">
               </div>
 
               <div class="form-group">
-                <label for="rubroAlojamiento">Rubro</label>
-                <select id="rubroAlojamiento" name="rubroAlojamiento" class="form-control select2" required>
-                  <option value="0" selected disabled>Seleccionar el Rubro</option>
-                  <?php foreach ($buscarSelectRubro as $k) : ?>
-                    <option value="<?php echo $k->id_rubro_alojamiento; ?>"> <?php echo $k->descripcion_rubro; ?></option>
-                  <?php endforeach; ?>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="idoneoAlojamiento">Idóneo - Encargado/a</label>
-                <input type="text" id="idoneoAlojamiento" name="idoneoAlojamiento" class="form-control">
+                <label for="domiciliosalones">Domicilio</label>
+                <input type="text" id="domiciliosalones" name="domiciliosalones" class="form-control">
               </div>
 
               <div class="form-group">
-                <label for="cuitAlojamiento">Cuit</label>
-                <input type="text" id="cuitAlojamiento" name="cuitAlojamiento" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label for="domicilioAlojamiento">Domicilio</label>
-                <input type="text" id="domicilioAlojamiento" name="domicilioAlojamiento" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label for="habilitacionAlojamiento">Habilitación Municipal</label>
-                <select id="habilitacionAlojamiento" name="habilitacionAlojamiento" class="form-control select2" required>
+                <label for="habilitacionsalones">Habilitación Municipal</label>
+                <select id="habilitacionsalones" name="habilitacionsalones" class="form-control select2" required>
                   <option value="0" selected disabled>Seleccionar el Estado de la Habilitación</option>
                   <?php foreach ($buscarSelecthabilitacion as $k) : ?>
                     <option value="<?php echo $k->id_habi_municipal; ?>"> <?php echo $k->descripcion; ?></option>
@@ -97,9 +71,9 @@
               </div>
 
               <div class="form-group">
-                <label for="estadoAlojamiento">Estado</label>
-                <select id="estadoAlojamiento" name="estadoAlojamiento" class="form-control select2" required>
-                  <option value="0" selected disabled>Seleccionar el Estado del Alojamiento</option>
+                <label for="estadosalones">Estado</label>
+                <select id="estadosalones" name="estadosalones" class="form-control select2" required>
+                  <option value="0" selected disabled>Seleccionar el Estado del salón</option>
                   <?php foreach ($buscarSelectEstado as $k) : ?>
                     <option value="<?php echo $k->id_tipo_estado; ?>"> <?php echo $k->descripcion_tipo_estado; ?></option>
                   <?php endforeach; ?>
@@ -176,89 +150,6 @@
           <!-- /.card -->
         </div>
 
-        <!-- CREAR SERVICIOS GENERALES -->
-        <div class="col-md-6">
-          <div class="card card-success card-outline">
-            <div class="card-header">
-              <h3 class="card-title">Servicios Generales</h3>
-
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
-              </div>
-            </div>
-            <div class="card-body">
-
-              <div class="form-group">
-                <label for="cantTotalPlazasAlojamiento">Cantidad total de Plazas:</label>
-                <input type="text" id="cantTotalPlazasAlojamiento" name="cantTotalPlazasAlojamiento" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label for="cantTotalAlojamiento">Cantidad total de habitaciones:</label>
-                <input type="text" id="cantTotalAlojamiento" name="cantTotalAlojamiento" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label for="singleAlojamiento">Cantidad de habitaciones Single:</label>
-                <input type="text" id="singleAlojamiento" name="singleAlojamiento" class="form-control"></input>
-              </div>
-
-              <div class="form-group">
-                <label for="dobleAlojamiento">Cantidad de habitaciones Doble:</label>
-                <input type="text" id="dobleAlojamiento" name="dobleAlojamiento" class="form-control"></input>
-              </div>
-
-              <div class="form-group">
-                <label for="tripleAlojamiento">Cantidad de habitaciones Triple:</label>
-                <input type="text" id="tripleAlojamiento" name="tripleAlojamiento" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label for="cuadrupleAlojamiento">Cantidad de habitaciones Cuadruples:</label>
-                <input type="text" id="cuadrupleAlojamiento" name="cuadrupleAlojamiento" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label for="matrimonialAlojamiento">Cantidad de habitaciones Matrimoniales:</label>
-                <input type="text" id="matrimonialAlojamiento" name="matrimonialAlojamiento" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label for="apartamentoAlojamiento">Apartamento:</label>
-                <input type="text" id="apartamentoAlojamiento" name="apartamentoAlojamiento" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label for="wifiAlojamiento">Wifi:</label>
-                <input type="text" id="wifiAlojamiento" name="wifiAlojamiento" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label for="estacionamientoAlojamiento">Estacionamiento:</label>
-                <input type="text" id="estacionamientoAlojamiento" name="estacionamientoAlojamiento" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="desayunoAlojamiento">Desayuno:</label>
-                <input type="text" id="desayunoAlojamiento" name="desayunoAlojamiento" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label for="piscinaAlojamiento">Piscina:</label>
-                <input type="text" id="piscinaAlojamiento" name="piscinaAlojamiento" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label for="otroServicioAlojamiento">Otro Servicio</label>
-                <input type="text" id="otroServicioAlojamiento" name="otroServicioAlojamiento" class="form-control">
-              </div>
-
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
-        </div>
 
         <!-- CREAR SERVICIOS COMPLEMENTARIOS -->
         <div class="col-md-6">
@@ -274,43 +165,40 @@
             </div>
             <div class="card-body">
               <div class="form-group">
-                <label for="seminarioAlojamiento">Cantidad de salones:</label>
-                <input type="number" id="seminarioAlojamiento" name="seminarioAlojamiento" class="form-control">
+                <label for="seminariosalones">Cantidad de salones:</label>
+                <input type="number" id="seminariosalones" name="seminariosalones" class="form-control">
               </div>
 
               <div class="form-group">
-                <label for="congresoAlojamiento">Capacidad:</label>
-                <input type="text" id="congresoAlojamiento" name="congresoAlojamiento" class="form-control"></input>
+                <label for="congresosalones">Capacidad:</label>
+                <input type="text" id="congresosalones" name="congresosalones" class="form-control"></input>
               </div>
 
               <div class="form-group">
-                <label for="eventoSocialAlojamiento">Wifi:</label>
-                <input type="text" id="eventoSocialAlojamiento" name="eventoSocialAlojamiento" class="form-control"></input>
+                <label for="eventoSocialsalones">Wifi:</label>
+                <input type="text" id="eventoSocialsalones" name="eventoSocialsalones" class="form-control"></input>
               </div>
 
               <div class="form-group">
-                <label for="salonAlojamiento">Estacionamiento:</label>
-                <input type="text" id="salonAlojamiento" name="salonAlojamiento" class="form-control">
+                <label for="salonsalones">Estacionamiento:</label>
+                <input type="text" id="salonsalones" name="salonsalones" class="form-control">
               </div>
 
               <div class="form-group">
-                <label for="reunionAlojamiento">Otros Servicios:</label>
-                <input type="text" id="reunionAlojamiento" name="reunionAlojamiento" class="form-control">
+                <label for="reunionsalones">Otros Servicios:</label>
+                <input type="text" id="reunionsalones" name="reunionsalones" class="form-control">
               </div>
-
             </div>
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
         </div>
-
-
       </div>
 
   </div>
   <div class="card-footer">
     <div class="float-right">
-      <a href="?controlador=Alojamientos&accion=inicio" class="btn btn-secondary">Cancelar</a>
+      <a href="?controlador=salones&accion=inicio" class="btn btn-secondary">Cancelar</a>
       <input name="" id="" class="btn btn-success " type="submit" value="Agregar">
     </div>
     </form>

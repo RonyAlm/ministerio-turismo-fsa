@@ -1,44 +1,31 @@
 <?php
 
-include_once("modelos/alojamiento.php");
+include_once("modelos/salones.php");
 include_once("conexion.php");
 
 
-
-
-class ControladorAlojamientos
+class ControladorSalones
 {
 
     public function inicio()
     { //aca se muestra las tablas
 
-        $consultarAlojamientosInicio = new Alojamientos();
+        $consultarSalonesInicio = new SalonesModelo();
 
-        $inicioAlojamiento = $consultarAlojamientosInicio->consultar();
+        $inicio = $consultarSalonesInicio->consultar();
 
         $datosEstadisticos = new estadistica();
 
         $cantidad_hotel = $datosEstadisticos->cantidadHotel();
         $cantidad_hotel_plazas = $datosEstadisticos->cantidadHotelPlazas();
 
-        $cantidad_Cabaña = $datosEstadisticos->cantidadCabaña();
-        $cantidad_Cabaña_plazas = $datosEstadisticos->cantidadCabañaPlazas();
-
-        $cantidad_Hospedaje = $datosEstadisticos->cantidadHospedaje();
-        $cantidad_Hospedaje_plazas = $datosEstadisticos->cantidadHospedajePlazas();
-
-        $cantidad_Total_Alojamientos = $datosEstadisticos->cantidadTotalAlojamiento();
-        $cantidad_Total_Alojamientos_Plazas = $datosEstadisticos->cantidadAlojamientoPlazas();
-
-
-
-        include_once("vistas/Alojamientos/inicio.php");
+        include_once("vistas/salones/inicio.php");
     }
 
     public function crear()
     {
 
-        $select_tipo_alo = new Alojamientos();
+        $select_tipo_alo = new SalonesModelo();
 
         $buscarSelectTipoAlojamiento = $select_tipo_alo->buscarSelectTipoAlojamiento();
         $buscarSelectLocalidad = $select_tipo_alo->buscarSelectLocalidad();
@@ -48,20 +35,17 @@ class ControladorAlojamientos
 
 
         if ($_POST) {
-            // print_r($_POST);
+            print_r($_POST);
 
-            $crearAlojamiento = new Alojamientos();
+            $crearSalones = new SalonesModelo();
 
-            $categoriaAlojamiento = $_POST['categoriaAlojamiento'];
-            $nombreAlojamiento = $_POST['nombreAlojamiento'];
-            $localidadAlojamiento = $_POST['localidadAlojamiento'];
-            $razonsocialAlojamiento = $_POST['razonsocialAlojamiento'];
-            $estrellaAlojamiento = $_POST['estrellaAlojamiento'];
-            $rubroAlojamiento = $_POST['rubroAlojamiento'];
-            $idoneoAlojamiento = $_POST['idoneoAlojamiento'];
-            $cuitAlojamiento = $_POST['cuitAlojamiento'];
-            $domicilioAlojamiento = $_POST['domicilioAlojamiento'];
-            $estadoAlojamiento = $_POST['estadoAlojamiento'];
+            $nombresalones = $_POST['nombresalones'];
+            $localidadsalones = $_POST['localidadsalones'];
+
+            $idoneosalones = $_POST['idoneosalones'];
+            $cuitsalones = $_POST['cuitsalones'];
+            $domiciliosalones = $_POST['domiciliosalones'];
+            $estadosalones = $_POST['estadosalones'];
 
             $telefonoAlojamiento = $_POST['telefonoAlojamiento'];
             $telefonoFijoAlojamiento = $_POST['telefonoFijoAlojamiento'];
@@ -72,41 +56,22 @@ class ControladorAlojamientos
             $webAlojamiento = $_POST['webAlojamiento'];
             $otroAlojamiento = $_POST['otroAlojamiento'];
 
+            $seminariosalones = $_POST['seminariosalones'];
+            $congresosalones = $_POST['congresosalones'];
+            $eventoSocialsalones = $_POST['eventoSocialsalones'];
+            $salonsalones = $_POST['salonsalones'];
+            $reunionsalones = $_POST['reunionsalones'];
 
-            $cantTotalPlazasAlojamiento = $_POST['cantTotalPlazasAlojamiento'];
-            $cantTotalAlojamiento = $_POST['cantTotalAlojamiento'];
-            $singleAlojamiento = $_POST['singleAlojamiento'];
-            $dobleAlojamiento = $_POST['dobleAlojamiento'];
-            $tripleAlojamiento = $_POST['tripleAlojamiento'];
-            $cuadrupleAlojamiento = $_POST['cuadrupleAlojamiento'];
-            $matrimonialAlojamiento = $_POST['matrimonialAlojamiento'];
-            $apartamentoAlojamiento = $_POST['apartamentoAlojamiento'];
-            $wifiAlojamiento = $_POST['wifiAlojamiento'];
-            $estacionamientoAlojamiento = $_POST['estacionamientoAlojamiento'];
-            $desayunoAlojamiento = $_POST['desayunoAlojamiento'];
-            $piscinaAlojamiento = $_POST['piscinaAlojamiento'];
-            $otroServicioAlojamiento = $_POST['otroServicioAlojamiento'];
-
-            $seminarioAlojamiento = $_POST['seminarioAlojamiento'];
-            $congresoAlojamiento = $_POST['congresoAlojamiento'];
-            $eventoSocialAlojamiento = $_POST['eventoSocialAlojamiento'];
-            $salonAlojamiento = $_POST['salonAlojamiento'];
-            $reunionAlojamiento = $_POST['reunionAlojamiento'];
-
-            $habilitacionAlojamiento = $_POST['habilitacionAlojamiento'];
+            $habilitacionsalones = $_POST['habilitacionsalones'];
 
 
-            $insertarAlojamiento = $crearAlojamiento->crear(
-                $categoriaAlojamiento,
-                $nombreAlojamiento,
-                $localidadAlojamiento,
-                $razonsocialAlojamiento,
-                $estrellaAlojamiento,
-                $rubroAlojamiento,
-                $idoneoAlojamiento,
-                $cuitAlojamiento,
-                $domicilioAlojamiento,
-                $estadoAlojamiento,
+            $crearSalones->crear(
+                $nombresalones,
+                $localidadsalones,
+                $idoneosalones,
+                $cuitsalones,
+                $domiciliosalones,
+                $estadosalones,
                 $telefonoAlojamiento,
                 $telefonoFijoAlojamiento,
                 $correoAlojamiento,
@@ -115,34 +80,21 @@ class ControladorAlojamientos
                 $twitterAlojamiento,
                 $webAlojamiento,
                 $otroAlojamiento,
-                $cantTotalAlojamiento,
-                $singleAlojamiento,
-                $dobleAlojamiento,
-                $tripleAlojamiento,
-                $cuadrupleAlojamiento,
-                $matrimonialAlojamiento,
-                $apartamentoAlojamiento,
-                $wifiAlojamiento,
-                $estacionamientoAlojamiento,
-                $desayunoAlojamiento,
-                $piscinaAlojamiento,
-                $otroServicioAlojamiento,
-                $seminarioAlojamiento,
-                $congresoAlojamiento,
-                $eventoSocialAlojamiento,
-                $salonAlojamiento,
-                $reunionAlojamiento,
-                $habilitacionAlojamiento,
-                $cantTotalPlazasAlojamiento
+                $seminariosalones,
+                $congresosalones,
+                $eventoSocialsalones,
+                $salonsalones,
+                $reunionsalones,
+                $habilitacionsalones
             );
 
             // header("Location:index2.php?controlador=Alojamientos&accion=inicio");
-            echo "<script>location.href='index2.php?controlador=Alojamientos&accion=inicio';</script>";
+            // echo "<script>location.href='index2.php?controlador=salones&accion=inicio';</script>";
         }
 
-        include_once("vistas/Alojamientos/crear.php");
+        include_once("vistas/salones/crear.php");
     }
-    
+
     public function editar()
     {
 
@@ -150,7 +102,7 @@ class ControladorAlojamientos
 
         //print_r($id_alojamientos);
 
-        $buscarID = new Alojamientos();
+        $buscarID = new SalonesModelo();
 
         $buscarSelectTipoAlojamiento = $buscarID->buscarSelectTipoAlojamiento();
         $buscarSelectLocalidad = $buscarID->buscarSelectLocalidad();
@@ -162,27 +114,23 @@ class ControladorAlojamientos
         if ($_POST) {
             //print_r($_POST);
 
-            $insertarDatosAlojamiento = new Alojamientos();
+            $insertar = new SalonesModelo();
 
             $IDAlojamiento = $_POST['IDAlojamiento'];
-            $categoriaAlojamiento = $_POST['categoriaAlojamiento'];
+            $nombresalones = $_POST['nombresalones'];
             $nombreAlojamiento = $_POST['nombreAlojamiento'];
-            $estrellaAlojamiento = $_POST['estrellaAlojamiento'];
-            $idoneoAlojamiento = $_POST['idoneoAlojamiento'];
-            $cuitAlojamiento = $_POST['cuitAlojamiento'];
 
-            $IDRazonSocialAlojamiento = $_POST['IDRazonSocialAlojamiento'];
-            $razonsocialAlojamiento = $_POST['razonsocialAlojamiento'];
+            $idoneosalones = $_POST['idoneosalones'];
+            $cuitsalones = $_POST['cuitsalones'];
 
-            $rubroAlojamiento = $_POST['rubroAlojamiento'];
-
+            $ID = $_POST['ID'];
 
             $IDdireccionAlojamiento = $_POST['IDdireccionAlojamiento'];
-            $domicilioAlojamiento = $_POST['domicilioAlojamiento'];
-            $localidadAlojamiento = $_POST['localidadAlojamiento'];
+            $domiciliosalones = $_POST['domiciliosalones'];
+            $localidadsalones = $_POST['localidadsalones'];
 
-            $IDestadoAlojamiento = $_POST['IDestadoAlojamiento'];
-            $estadoAlojamiento = $_POST['estadoAlojamiento'];
+            $IDestadosalones = $_POST['IDestadosalones'];
+            $estadosalones = $_POST['estadosalones'];
 
             $alojamientoIDtelefono = $_POST['alojamientoIDtelefono'];
             $telefonoAlojamiento = $_POST['telefonoAlojamiento'];
@@ -208,44 +156,24 @@ class ControladorAlojamientos
             $alojamientoIDotro = $_POST['alojamientoIDotro'];
             $otroAlojamiento = $_POST['otroAlojamiento'];
 
-
-
             $IDservicios = $_POST['IDservicios'];
-            $cantTotalPlazasAlojamiento = $_POST['cantTotalPlazasAlojamiento'];
-            $cantTotalAlojamiento = $_POST['cantTotalAlojamiento'];
-            $singleAlojamiento = $_POST['singleAlojamiento'];
-            $dobleAlojamiento = $_POST['dobleAlojamiento'];
-            $tripleAlojamiento = $_POST['tripleAlojamiento'];
-            $cuadrupleAlojamiento = $_POST['cuadrupleAlojamiento'];
-            $matrimonialAlojamiento = $_POST['matrimonialAlojamiento'];
-            $apartamentoAlojamiento = $_POST['apartamentoAlojamiento'];
-            $wifiAlojamiento = $_POST['wifiAlojamiento'];
-            $estacionamientoAlojamiento = $_POST['estacionamientoAlojamiento'];
-            $desayunoAlojamiento = $_POST['desayunoAlojamiento'];
-            $piscinaAlojamiento = $_POST['piscinaAlojamiento'];
-            $otroServicioAlojamiento = $_POST['otroServicioAlojamiento'];
-
             $IDserviciosComplementarios = $_POST['IDserviciosComplementarios'];
-            $seminarioAlojamiento = $_POST['seminarioAlojamiento'];
-            $congresoAlojamiento = $_POST['congresoAlojamiento'];
-            $eventoSocialAlojamiento = $_POST['eventoSocialAlojamiento'];
-            $salonAlojamiento = $_POST['salonAlojamiento'];
-            $reunionAlojamiento = $_POST['reunionAlojamiento'];
+            $seminariosalones = $_POST['seminariosalones'];
+            $congresosalones = $_POST['congresosalones'];
+            $eventoSocialsalones = $_POST['eventoSocialsalones'];
+            $salonsalones = $_POST['salonsalones'];
+            $reunionsalones = $_POST['reunionsalones'];
 
-            $habilitacionAlojamiento = $_POST['habilitacionAlojamiento'];
-            $IDhabilitacionAlojamiento = $_POST['IDhabilitacionAlojamiento'];
+            $habilitacionsalones = $_POST['habilitacionsalones'];
+            $IDhabilitacionsalones = $_POST['IDhabilitacionsalones'];
 
-            $insertarAlojamiento = $insertarDatosAlojamiento->editar(
-                $categoriaAlojamiento,
-                $nombreAlojamiento,
-                $localidadAlojamiento,
-                $razonsocialAlojamiento,
-                $estrellaAlojamiento,
-                $rubroAlojamiento,
-                $idoneoAlojamiento,
-                $cuitAlojamiento,
-                $domicilioAlojamiento,
-                $estadoAlojamiento,
+            $insertar->editar(
+                $nombresalones,
+                $localidadsalones,
+                $idoneosalones,
+                $cuitsalones,
+                $domiciliosalones,
+                $estadosalones,
                 $telefonoAlojamiento,
                 $telefonoFijoAlojamiento,
                 $correoAlojamiento,
@@ -254,23 +182,11 @@ class ControladorAlojamientos
                 $twitterAlojamiento,
                 $webAlojamiento,
                 $otroAlojamiento,
-                $cantTotalAlojamiento,
-                $singleAlojamiento,
-                $dobleAlojamiento,
-                $tripleAlojamiento,
-                $cuadrupleAlojamiento,
-                $matrimonialAlojamiento,
-                $apartamentoAlojamiento,
-                $wifiAlojamiento,
-                $estacionamientoAlojamiento,
-                $desayunoAlojamiento,
-                $piscinaAlojamiento,
-                $otroServicioAlojamiento,
-                $seminarioAlojamiento,
-                $congresoAlojamiento,
-                $eventoSocialAlojamiento,
-                $salonAlojamiento,
-                $reunionAlojamiento,
+                $seminariosalones,
+                $congresosalones,
+                $eventoSocialsalones,
+                $salonsalones,
+                $reunionsalones,
                 $IDservicios,
                 $IDserviciosComplementarios,
                 $alojamientoIDtelefono,
@@ -282,12 +198,11 @@ class ControladorAlojamientos
                 $alojamientoIDweb,
                 $alojamientoIDotro,
                 $IDAlojamiento,
-                $IDRazonSocialAlojamiento,
+                $ID,
                 $IDdireccionAlojamiento,
-                $IDestadoAlojamiento,
-                $habilitacionAlojamiento,
-                $IDhabilitacionAlojamiento,
-                $cantTotalPlazasAlojamiento
+                $IDestadosalones,
+                $habilitacionsalones,
+                $IDhabilitacionsalones
             );
 
 
@@ -312,23 +227,22 @@ class ControladorAlojamientos
 
         $insertar = $buscarID->buscarInsertar($id_alojamientos);
 
-        include_once("vistas/Alojamientos/editar.php");
+        include_once("vistas/salones/editar.php");
     }
 
     public function borrar()
     {
         //print_r($_GET);
 
-        $borrado = new Alojamientos();
+        $borrado = new SalonesModelo();
 
-        $id_alojamientos = $_GET['id'];
+        $id_salones = $_GET['id'];
         $id_direccion = $_GET['idDireccion'];
-        $idRazonSocial = $_GET['idRazonSocial'];
-        $idServicios = $_GET['idServicios'];
-        $idServiciosComple = $_GET['idServiciosComple'];
+        $id_serv = $_GET['id_serv_comple_alojamiento'];
 
 
-        $borrar = $borrado->borrar($id_alojamientos, $id_direccion, $idRazonSocial, $idServicios, $idServiciosComple);
+
+        $borrado->borrar($id_salones, $id_direccion, $id_serv);
 
         // header("Location:index2.php?controlador=Alojamientos&accion=inicio");
         echo "<script>location.href='index2.php?controlador=Alojamientos&accion=inicio';</script>";
@@ -338,7 +252,7 @@ class ControladorAlojamientos
     {
         $id_alojamientos = $_GET['id'];
 
-        $alojamientosInfo = new Alojamientos();
+        $alojamientosInfo = new SalonesModelo();
 
         $infoAlojamiento = $alojamientosInfo->buscarInsertar($id_alojamientos);
 
@@ -355,7 +269,7 @@ class ControladorAlojamientos
         $alojamientosOtro = $contactosDelAlojamiento->consultarOtro($id_alojamientos);
         //print_r($alojamientosCorreo);
 
-        include_once("vistas/Alojamientos/info.php");
+        include_once("vistas/salones/info.php");
     }
 
     public function imprimir()
@@ -363,17 +277,17 @@ class ControladorAlojamientos
         $datosEstadisticos = new estadistica();
         $cantidad_Total_Alojamientos = $datosEstadisticos->cantidadTotalAlojamiento();
 
-        $consultarAlojamientosInicio = new Alojamientos();
+        $consultarAlojamientosInicio = new SalonesModelo();
 
         $inicioAlojamiento = $consultarAlojamientosInicio->consultar();
-        include_once("vistas/Alojamientos/imprimir.php");
+        include_once("vistas/salones/imprimir.php");
     }
-    
+
     public function imprimirInfo()
     {
         $id_alojamientos = $_GET['id'];
 
-        $alojamientosInfo = new Alojamientos();
+        $alojamientosInfo = new SalonesModelo();
 
         $infoAlojamiento = $alojamientosInfo->buscarInsertar($id_alojamientos);
 
@@ -388,6 +302,6 @@ class ControladorAlojamientos
         $alojamientosTwitter = $contactosDelAlojamiento->consultarTwitter($id_alojamientos);
         $alojamientosWeb = $contactosDelAlojamiento->consultarWeb($id_alojamientos);
         $alojamientosOtro = $contactosDelAlojamiento->consultarOtro($id_alojamientos);
-        include_once("vistas/Alojamientos/invoice-print.php");
+        include_once("vistas/salones/invoice-print.php");
     }
 }

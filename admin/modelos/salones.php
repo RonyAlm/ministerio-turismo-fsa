@@ -1,16 +1,16 @@
 <?php
 
-class Alojamientos
+class SalonesModelo
 {
 
-    public $listaAlojamientoInicio;
+    public $listaSalonesInicio;
 
 
 
     //contruimos el constructor para recibir y crear una lista de objetos
     public function __construct()
     {
-        $this->listaAlojamientoInicio = array();
+        $this->listaSalonesInicio = array();
     }
 
     public function consultar()
@@ -18,45 +18,33 @@ class Alojamientos
         $conexionBD = BD::crearInstancia();
 
 
-        $sql = $conexionBD->prepare("SELECT alojamientos.id_alojamientos, alojamientos.descripcion_alojamientos, tipo_alojamiento.descripcion_tipo_alojamiento,
-                                        direccion.calle_direccion,localidad.nombre_localidad, alojamientos.fecha_edit_alojamiento,
-                                        (SELECT contacto.descripcion_contacto 
-                                        FROM contacto 
-                                        WHERE alojamientos.id_alojamientos = contacto.rela_alojamiento_contacto 
-                                        AND contacto.rela_tipo_contacto_cont = 2 LIMIT 1) descripcion_contacto,
-                                        tipo_estado.descripcion_tipo_estado,direccion.id_direccion,razon_social.id_razon_social,
-                                        alojamientos.rela_aloja_servicios,alojamientos.rela_aloja_serv_adicionales
-                                        FROM alojamientos
-                                        INNER JOIN tipo_alojamiento on tipo_alojamiento.id_tipo_alojamiento = alojamientos.rela_tipo_alojamiento_aloja
-                                        INNER JOIN direccion on direccion.id_direccion = alojamientos.rela_alojamiento_direccion
-                                        INNER JOIN localidad on localidad.id_localidad = direccion.rela_localidad_direccion
-                                        INNER JOIN estado_actividad on estado_actividad.rela_estado_alojamiento = alojamientos.id_alojamientos
-                                        INNER JOIN tipo_estado on tipo_estado.id_tipo_estado = estado_actividad.rela_tipo_estado
-                                        INNER JOIN razon_social on razon_social.id_razon_social = alojamientos.rela_razon_social_alo
-                                        ORDER BY alojamientos.id_alojamientos DESC;");
+        $sql = $conexionBD->prepare("SELECT s.id_salones, s.nombre_salones,s.cuit_salones, s.idoneo_salones,d.id_direccion ,d.calle_direccion,l.id_localidad,l.nombre_localidad, `rela_servi_complementarios`, hm.descripcion, `fecha_edit_salones`, tea.descripcion_tipo_estado,hm.id_habi_municipal,sca.id_serv_comple_alojamiento,sca.cantidad_salones,sca.capacidad_salones,sca.wifi_salones,sca.estacionamiento_salones,sca.otros_servicio_salones,
+        (SELECT contacto.descripcion_contacto FROM contacto WHERE s.id_salones = contacto.rela_contacto_salones AND contacto.rela_tipo_contacto_cont = 2 LIMIT 1) descripcion_contacto
+        FROM `salones` s
+        INNER JOIN direccion d on d.id_direccion = s.rela_direccion
+        INNER JOIN localidad l on l.id_localidad = d.rela_localidad_direccion
+        INNER JOIN estado_actividad ea on ea.rela_estado_salones = s.id_salones
+        INNER JOIN tipo_estado tea on tea.id_tipo_estado = ea.rela_tipo_estado
+        INNER JOIN habilitacion_municipal hm on hm.id_habi_municipal = s.rela_habilitacion
+        INNER JOIN serv_complemetarios_alojamiento sca on sca.id_serv_comple_alojamiento = s.rela_servi_complementarios
+        ORDER BY s.id_salones DESC");
 
         //recuperamos los datos y los retornamos
         $sql->execute();
 
         while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
-            $this->listaAlojamientoInicio[] = $filas;
+            $this->listaSalonesInicio[] = $filas;
         }
-        return $this->listaAlojamientoInicio; //este return se va a llamar en el controlador_alojamiento.php clase inicio
-
-
+        return $this->listaSalonesInicio; //este return se va a llamar en el controlador_alojamiento.php clase inicio
     }
 
     public static function crear(
-        $categoriaAlojamiento,
-        $nombreAlojamiento,
-        $localidadAlojamiento,
-        $razonsocialAlojamiento,
-        $estrellaAlojamiento,
-        $rubroAlojamiento,
-        $idoneoAlojamiento,
-        $cuitAlojamiento,
-        $domicilioAlojamiento,
-        $estadoAlojamiento,
+        $nombresalones,
+        $localidadsalones,
+        $idoneosalones,
+        $cuitsalones,
+        $domiciliosalones,
+        $estadosalones,
         $telefonoAlojamiento,
         $telefonoFijoAlojamiento,
         $correoAlojamiento,
@@ -65,25 +53,12 @@ class Alojamientos
         $twitterAlojamiento,
         $webAlojamiento,
         $otroAlojamiento,
-        $cantTotalAlojamiento,
-        $singleAlojamiento,
-        $dobleAlojamiento,
-        $tripleAlojamiento,
-        $cuadrupleAlojamiento,
-        $matrimonialAlojamiento,
-        $apartamentoAlojamiento,
-        $wifiAlojamiento,
-        $estacionamientoAlojamiento,
-        $desayunoAlojamiento,
-        $piscinaAlojamiento,
-        $otroServicioAlojamiento,
-        $seminarioAlojamiento,
-        $congresoAlojamiento,
-        $eventoSocialAlojamiento,
-        $salonAlojamiento,
-        $reunionAlojamiento,
-        $habilitacionAlojamiento,
-        $cantTotalPlazasAlojamiento
+        $seminariosalones,
+        $congresosalones,
+        $eventoSocialsalones,
+        $salonsalones,
+        $reunionsalones,
+        $habilitacionsalones
     ) {
 
         $conexionBD = BD::crearInstancia();
@@ -92,71 +67,33 @@ class Alojamientos
 
         $sqlDireccion = $conexionBD->prepare("INSERT INTO direccion (calle_direccion,rela_localidad_direccion)
                                                     VALUES(?,?)");
-        $sqlDireccion->execute(array($domicilioAlojamiento, $localidadAlojamiento));
+        $sqlDireccion->execute(array($domiciliosalones, $localidadsalones));
 
         $lastInsertIDdireccion = $conexionBD->lastInsertId();
 
-        /*-------- INSERTAMOS LA RAZON SOCIAL--------*/
-
-        $sqlRazonSocial = $conexionBD->prepare("INSERT INTO `razon_social`(`descripcion_razon_social`) 
-                                                  VALUES (?)");
-        $sqlRazonSocial->execute(array($razonsocialAlojamiento));
-
-        $lastInsertIDRazonSocial = $conexionBD->lastInsertId();
 
 
         /*-------- INSERTAMOS LOS SERVICIOS COMPLEMENTARIOS--------*/
 
-        $sqlServiciosComplementarios = $conexionBD->prepare("INSERT INTO `serv_complemetarios_alojamiento`(`cantidad_salones`, `capacidad_salones`,
-                                                                             `wifi_salones`, `estacionamiento_salones`,
-                                                                              `otros_servicio_salones`)
+        $sqlServiciosComplementarios = $conexionBD->prepare("INSERT INTO `serv_complemetarios_alojamiento`(`cantidad_salones`, `capacidad_salones`,`wifi_salones`, `estacionamiento_salones`,`otros_servicio_salones`)
                                             VALUES (?,?,?,?,?)");
         $sqlServiciosComplementarios->execute(array(
-            $seminarioAlojamiento, $congresoAlojamiento,
-            $eventoSocialAlojamiento, $salonAlojamiento,
-            $reunionAlojamiento
+            $seminariosalones, $congresosalones,
+            $eventoSocialsalones, $salonsalones,
+            $reunionsalones
         ));
 
         $lastInsertIDServiciosComplementarios = $conexionBD->lastInsertId();
 
-        /*-------- INSERTAMOS LOS SEVICIOS--------*/
 
-        $sqlServicios = $conexionBD->prepare("INSERT INTO `servicios_alojamiento`(`cantidad_total_hab`,
-                                                                     `cantidad_hab_single`, `cantidad_hab_doble`,
-                                                                      `cantidad_hab_matrimoniales`, `cantidad_hab_triple`,
-                                                                       `cantidad_hab_cuadruple`, `apartamento_alojamiento`,
-                                                                        `otros_servicios`, `wifi_alojamiento`,
-                                                                         `estacionamiento_alojamiento`, `desayuno_alojamiento`,
-                                                                          `piscina_alojamiento`,`cantidad_plazas`)
-                                            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
-        $sqlServicios->execute(array(
-            $cantTotalAlojamiento, $singleAlojamiento,
-            $dobleAlojamiento, $matrimonialAlojamiento,
-            $tripleAlojamiento, $cuadrupleAlojamiento,
-            $apartamentoAlojamiento, $otroServicioAlojamiento,
-            $wifiAlojamiento, $estacionamientoAlojamiento,
-            $desayunoAlojamiento, $piscinaAlojamiento,
-            $cantTotalPlazasAlojamiento
-        ));
+        /*-------- INSERTAMOS LOS SALONES--------*/
 
-        $lastInsertIlServicios = $conexionBD->lastInsertId();
-
-        /*-------- INSERTAMOS LOS ALOJAMIENTOS--------*/
-
-        $sql = $conexionBD->prepare("INSERT INTO alojamientos ( `descripcion_alojamientos`, `cuit_alojamiento`,
-                                                                      `idoneo_alojamiento`, `estrella_alojamiento`,
-                                                                      rela_tipo_alojamiento_aloja,rela_razon_social_alo,
-                                                                      rela_alojamiento_direccion,rela_alojamiento_rubro,
-                                                                      rela_aloja_servicios,rela_aloja_serv_adicionales,
-                                                                      rela_habilitaciones, fecha_edit_alojamiento) 
-                                                        VALUES (?,?,?,?,?,?,?,?,?,?,?, CURRENT_TIMESTAMP())");
+        $sql = $conexionBD->prepare("INSERT INTO `salones`( `nombre_salones`, `cuit_salones`, `idoneo_salones`, `rela_direccion`, `rela_servi_complementarios`, `rela_habilitacion`, `fecha_edit_salones`) VALUES (?,?,?,?,?,?,CURRENT_TIMESTAMP())");
         $sql->execute(array(
-            $nombreAlojamiento, $cuitAlojamiento,
-            $idoneoAlojamiento, $estrellaAlojamiento,
-            $categoriaAlojamiento, $lastInsertIDRazonSocial,
-            $lastInsertIDdireccion, $rubroAlojamiento,
-            $lastInsertIlServicios, $lastInsertIDServiciosComplementarios,
-            $habilitacionAlojamiento
+            $nombresalones, $cuitsalones,
+            $idoneosalones, $lastInsertIDdireccion,
+            $lastInsertIDServiciosComplementarios,
+            $habilitacionsalones
         ));
 
         $lastInsertIDAlojamiento = $conexionBD->lastInsertId();
@@ -165,7 +102,7 @@ class Alojamientos
         foreach ($telefonoAlojamiento as $tefonoAlojamiento) {
 
             $sqlTelefono = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,rela_tipo_contacto_cont,
-                                                            `rela_alojamiento_contacto`) 
+                                                            `rela_contacto_salones`) 
                                                 VALUES (?,?,?)");
             $sqlTelefono->execute(array($tefonoAlojamiento, 2, $lastInsertIDAlojamiento));
         }
@@ -173,78 +110,72 @@ class Alojamientos
         /*-------- INSERTAMOS EL TELEFONO FIJO--------*/
 
         $sqlFijo = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,rela_tipo_contacto_cont,
-                                                        `rela_alojamiento_contacto`) 
+                                                        `rela_contacto_salones`) 
                                             VALUES (?,?,?)");
         $sqlFijo->execute(array($telefonoFijoAlojamiento, 9, $lastInsertIDAlojamiento));
 
         /*-------- INSERTAMOS EL CORREO-------*/
 
         $sqlCorreo = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,rela_tipo_contacto_cont,
-                                                        `rela_alojamiento_contacto`) 
+                                                        `rela_contacto_salones`) 
                                             VALUES (?,?,?)");
         $sqlCorreo->execute(array($correoAlojamiento, 1, $lastInsertIDAlojamiento));
 
         /*-------- INSERTAMOS EL FACEBOOK--------*/
 
         $sqlFacebook = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,rela_tipo_contacto_cont,
-                                                        `rela_alojamiento_contacto`) 
+                                                        `rela_contacto_salones`) 
                                             VALUES (?,?,?)");
         $sqlFacebook->execute(array($facebookAlojamiento, 4, $lastInsertIDAlojamiento));
 
         /*-------- INSERTAMOS EL INSTAGRAM--------*/
 
         $sqlInstagram = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,rela_tipo_contacto_cont,
-                                                        `rela_alojamiento_contacto`) 
+                                                        `rela_contacto_salones`) 
                                             VALUES (?,?,?)");
         $sqlInstagram->execute(array($instagramAlojamiento, 5, $lastInsertIDAlojamiento));
 
         /*-------- INSERTAMOS EL TWITTER--------*/
 
         $sqlTwitter = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,rela_tipo_contacto_cont,
-                                                        `rela_alojamiento_contacto`) 
+                                                        `rela_contacto_salones`) 
                                             VALUES (?,?,?)");
         $sqlTwitter->execute(array($twitterAlojamiento, 6, $lastInsertIDAlojamiento));
 
         /*-------- INSERTAMOS EL SITIO WEB--------*/
 
         $sqlWeb = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,rela_tipo_contacto_cont,
-                                                        `rela_alojamiento_contacto`) 
+                                                        `rela_contacto_salones`) 
                                             VALUES (?,?,?)");
         $sqlWeb->execute(array($webAlojamiento, 7, $lastInsertIDAlojamiento));
 
         /*-------- INSERTAMOS OTRO--------*/
 
         $sqlOtro = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,rela_tipo_contacto_cont,
-                                                        `rela_alojamiento_contacto`) 
+                                                        `rela_contacto_salones`) 
                                             VALUES (?,?,?)");
         $sqlOtro->execute(array($otroAlojamiento, 8, $lastInsertIDAlojamiento));
 
         /*-------- INSERTAMOS EL ESTADO--------*/
 
-        $sqlEstado = $conexionBD->prepare("INSERT INTO `estado_actividad`(`rela_tipo_estado`, rela_estado_alojamiento) 
+        $sqlEstado = $conexionBD->prepare("INSERT INTO `estado_actividad`(`rela_tipo_estado`, rela_estado_salones) 
                                             VALUES (?,?)");
-        $sqlEstado->execute(array($estadoAlojamiento, $lastInsertIDAlojamiento));
+        $sqlEstado->execute(array($estadosalones, $lastInsertIDAlojamiento));
     }
 
-    public static function borrar($id_alojamientos, $id_direccion, $idRazonSocial, $idServicios, $idServiciosComple)
+    public static function borrar($id_salones, $id_direccion, $id_serv)
     {
 
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->prepare("DELETE FROM alojamientos WHERE id_alojamientos =?");
-        $sql->execute(array($id_alojamientos));
+        $sql = $conexionBD->prepare("DELETE FROM `salones` WHERE id_salones = ?");
+        $sql->execute(array($id_salones));
 
         $sqlDireccionBorrar = $conexionBD->prepare("DELETE FROM direccion WHERE id_direccion =?");
         $sqlDireccionBorrar->execute(array($id_direccion));
 
-        $sqlRazonBorrar = $conexionBD->prepare("DELETE FROM `razon_social` WHERE id_razon_social =?");
-        $sqlRazonBorrar->execute(array($idRazonSocial));
-
-        $sqlServiciosBorrar = $conexionBD->prepare("DELETE FROM `servicios_alojamiento` WHERE id_servicio_alojamiento=?");
-        $sqlServiciosBorrar->execute(array($idServicios));
-
         $sqlServiciosComplementariosBorrar = $conexionBD->prepare("DELETE FROM `serv_complemetarios_alojamiento` WHERE id_serv_comple_alojamiento =?");
-        $sqlServiciosComplementariosBorrar->execute(array($idServiciosComple));
+        $sqlServiciosComplementariosBorrar->execute(array($id_serv));
     }
 
     public static function buscar($id_alojamientos)
@@ -254,10 +185,10 @@ class Alojamientos
                                         direccion.calle_direccion, contacto.descripcion_contacto,
                                         tipo_estado.descripcion_tipo_estado,localidad.nombre_localidad 
                                         FROM `alojamientos`
-                                        INNER JOIN  contacto ON alojamientos.id_alojamientos = contacto.rela_alojamiento_contacto
+                                        INNER JOIN  contacto ON alojamientos.id_alojamientos = contacto.rela_contacto_salones
                                         INNER JOIN direccion ON alojamientos.rela_tipo_alojamiento_aloja = direccion.id_direccion
                                         INNER JOIN tipo_alojamiento on alojamientos.rela_tipo_alojamiento_aloja = tipo_alojamiento.id_tipo_alojamiento
-                                        INNER JOIN estado_actividad on estado_actividad.rela_estado_alojamiento = alojamientos.id_alojamientos
+                                        INNER JOIN estado_actividad on estado_actividad.rela_estado_salones = alojamientos.id_alojamientos
                                         INNER JOIN tipo_estado on tipo_estado.id_tipo_estado = estado_actividad.rela_tipo_estado
                                         INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad
                                         WHERE id_alojamientos =?");
@@ -277,16 +208,12 @@ class Alojamientos
     }
 
     public static function editar(
-        $categoriaAlojamiento,
-        $nombreAlojamiento,
-        $localidadAlojamiento,
-        $razonsocialAlojamiento,
-        $estrellaAlojamiento,
-        $rubroAlojamiento,
-        $idoneoAlojamiento,
-        $cuitAlojamiento,
-        $domicilioAlojamiento,
-        $estadoAlojamiento,
+        $nombresalones,
+        $localidadsalones,
+        $idoneosalones,
+        $cuitsalones,
+        $domiciliosalones,
+        $estadosalones,
         $telefonoAlojamiento,
         $telefonoFijoAlojamiento,
         $correoAlojamiento,
@@ -295,23 +222,11 @@ class Alojamientos
         $twitterAlojamiento,
         $webAlojamiento,
         $otroAlojamiento,
-        $cantTotalAlojamiento,
-        $singleAlojamiento,
-        $dobleAlojamiento,
-        $tripleAlojamiento,
-        $cuadrupleAlojamiento,
-        $matrimonialAlojamiento,
-        $apartamentoAlojamiento,
-        $wifiAlojamiento,
-        $estacionamientoAlojamiento,
-        $desayunoAlojamiento,
-        $piscinaAlojamiento,
-        $otroServicioAlojamiento,
-        $seminarioAlojamiento,
-        $congresoAlojamiento,
-        $eventoSocialAlojamiento,
-        $salonAlojamiento,
-        $reunionAlojamiento,
+        $seminariosalones,
+        $congresosalones,
+        $eventoSocialsalones,
+        $salonsalones,
+        $reunionsalones,
         $IDservicios,
         $IDserviciosComplementarios,
         $alojamientoIDtelefono,
@@ -323,12 +238,11 @@ class Alojamientos
         $alojamientoIDweb,
         $alojamientoIDotro,
         $IDAlojamiento,
-        $IDRazonSocialAlojamiento,
+        $ID,
         $IDdireccionAlojamiento,
-        $IDestadoAlojamiento,
-        $habilitacionAlojamiento,
-        $IDhabilitacionAlojamiento,
-        $cantTotalPlazasAlojamiento
+        $IDestadosalones,
+        $habilitacionsalones,
+        $IDhabilitacionsalones
     ) {
 
         $conexionBD = BD::crearInstancia();
@@ -400,14 +314,14 @@ class Alojamientos
 
         /*---------------SE ACTUALIZA LA DIRECCION CON LA LOCALIDAD-------------------*/
 
-        if ($localidadAlojamiento == 0) {
-            $sqlDireccion = $conexionBD->prepare("UPDATE `direccion` SET `calle_direccion`='$domicilioAlojamiento'
+        if ($localidadsalones == 0) {
+            $sqlDireccion = $conexionBD->prepare("UPDATE `direccion` SET `calle_direccion`='$domiciliosalones'
                                                     WHERE id_direccion = $IDdireccionAlojamiento ");
             // echo "no se actualiza la localidad cuando es null  ///  ";
             $sqlDireccion->execute();
         } else {
-            $sqlDireccion = $conexionBD->prepare("UPDATE `direccion` SET `calle_direccion`='$domicilioAlojamiento',
-                                                    `rela_localidad_direccion`=$localidadAlojamiento 
+            $sqlDireccion = $conexionBD->prepare("UPDATE `direccion` SET `calle_direccion`='$domiciliosalones',
+                                                    `rela_localidad_direccion`=$localidadsalones 
                                                     WHERE id_direccion = $IDdireccionAlojamiento ");
             // echo "se actualiza la localidad /// ";
             $sqlDireccion->execute();
@@ -521,9 +435,9 @@ class Alojamientos
 
         /*----------------SE ACTUALIZA EL SERVICIO COMPLEMENTARIO------------------*/
 
-        $sqlOtro = $conexionBD->prepare("UPDATE `serv_complemetarios_alojamiento` SET `cantidad_salones`=$seminarioAlojamiento,`capacidad_salones`='$congresoAlojamiento',
-                                                                                                `wifi_salones`='$eventoSocialAlojamiento',`estacionamiento_salones`='$salonAlojamiento',
-                                                                                                `otros_servicio_salones`='$reunionAlojamiento' 
+        $sqlOtro = $conexionBD->prepare("UPDATE `serv_complemetarios_alojamiento` SET `cantidad_salones`=$seminariosalones,`capacidad_salones`='$congresosalones',
+                                                                                                `wifi_salones`='$eventoSocialsalones',`estacionamiento_salones`='$salonsalones',
+                                                                                                `otros_servicio_salones`='$reunionsalones' 
                                                                                         WHERE `id_serv_comple_alojamiento`=$IDserviciosComplementarios");
         $sqlOtro->execute();
     }
@@ -629,7 +543,7 @@ class Alojamientos
             INNER JOIN razon_social on razon_social.id_razon_social = alojamientos.rela_razon_social_alo
             INNER JOIN direccion ON alojamientos.rela_alojamiento_direccion = direccion.id_direccion
             INNER JOIN localidad on localidad.id_localidad = direccion.rela_localidad_direccion
-            INNER JOIN estado_actividad on estado_actividad.rela_estado_alojamiento = alojamientos.id_alojamientos
+            INNER JOIN estado_actividad on estado_actividad.rela_estado_salones = alojamientos.id_alojamientos
             INNER JOIN tipo_estado on tipo_estado.id_tipo_estado = estado_actividad.rela_tipo_estado
             INNER JOIN departamentos_fsa on localidad.rela_departamento = departamentos_fsa.id_departamentos_fsa
             INNER JOIN rubro_alojamiento on rubro_alojamiento.id_rubro_alojamiento = alojamientos.rela_alojamiento_rubro
@@ -653,7 +567,7 @@ class Alojamientos
     }
 }
 
-class ContactosAlojamiento
+class ContactosSalones
 {
     public $telefonoAgencia;
     public $correoAgencia;
@@ -678,7 +592,7 @@ class ContactosAlojamiento
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 2
-                                            and contacto.rela_alojamiento_contacto = $id_alojamientos");
+                                            and contacto.rela_contacto_salones = $id_alojamientos");
 
         $consulta->execute();
 
@@ -691,7 +605,7 @@ class ContactosAlojamiento
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 9
-                                            and contacto.rela_alojamiento_contacto = $id_alojamientos");
+                                            and contacto.rela_contacto_salones = $id_alojamientos");
 
         $consulta->execute();
 
@@ -704,7 +618,7 @@ class ContactosAlojamiento
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 1
-                                            and contacto.rela_alojamiento_contacto = $id_alojamientos");
+                                            and contacto.rela_contacto_salones = $id_alojamientos");
 
         $consulta->execute();
 
@@ -717,7 +631,7 @@ class ContactosAlojamiento
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 4
-                                            and contacto.rela_alojamiento_contacto = $id_alojamientos");
+                                            and contacto.rela_contacto_salones = $id_alojamientos");
 
         $consulta->execute();
 
@@ -730,7 +644,7 @@ class ContactosAlojamiento
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 5
-                                            and contacto.rela_alojamiento_contacto = $id_alojamientos");
+                                            and contacto.rela_contacto_salones = $id_alojamientos");
 
         $consulta->execute();
 
@@ -743,7 +657,7 @@ class ContactosAlojamiento
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 6
-                                            and contacto.rela_alojamiento_contacto = $id_alojamientos");
+                                            and contacto.rela_contacto_salones = $id_alojamientos");
 
         $consulta->execute();
 
@@ -756,7 +670,7 @@ class ContactosAlojamiento
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 7
-                                            and contacto.rela_alojamiento_contacto = $id_alojamientos");
+                                            and contacto.rela_contacto_salones = $id_alojamientos");
 
         $consulta->execute();
 
@@ -769,7 +683,7 @@ class ContactosAlojamiento
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 8
-                                            and contacto.rela_alojamiento_contacto = $id_alojamientos");
+                                            and contacto.rela_contacto_salones = $id_alojamientos");
 
         $consulta->execute();
 
@@ -812,7 +726,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 2
-                                            and contacto.rela_alojamiento_contacto = $id_alojamiento");
+                                            and contacto.rela_contacto_salones = $id_alojamiento");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->telefonoAlojamientoInfo[] = $filas;
@@ -826,7 +740,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 9
-                                            and contacto.rela_alojamiento_contacto = $id_alojamiento");
+                                            and contacto.rela_contacto_salones = $id_alojamiento");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->telefonoFijoAlojamiento[] = $filas;
@@ -840,7 +754,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 1
-                                            and contacto.rela_alojamiento_contacto = $id_alojamiento");
+                                            and contacto.rela_contacto_salones = $id_alojamiento");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->correoAlojamiento[] = $filas;
@@ -854,7 +768,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 4
-                                            and contacto.rela_alojamiento_contacto = $id_alojamiento");
+                                            and contacto.rela_contacto_salones = $id_alojamiento");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->facebookAlojamiento[] = $filas;
@@ -868,7 +782,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 5
-                                            and contacto.rela_alojamiento_contacto = $id_alojamiento");
+                                            and contacto.rela_contacto_salones = $id_alojamiento");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->instagramAlojamiento[] = $filas;
@@ -882,7 +796,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 6
-                                            and contacto.rela_alojamiento_contacto = $id_alojamiento");
+                                            and contacto.rela_contacto_salones = $id_alojamiento");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->twitterAlojamiento[] = $filas;
@@ -896,7 +810,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 7
-                                            and contacto.rela_alojamiento_contacto = $id_alojamiento");
+                                            and contacto.rela_contacto_salones = $id_alojamiento");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->webAlojamiento[] = $filas;
@@ -910,7 +824,7 @@ class ContactosInfo
         $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
                                             FROM contacto 
                                             WHERE contacto.rela_tipo_contacto_cont = 8
-                                            and contacto.rela_alojamiento_contacto = $id_alojamiento");
+                                            and contacto.rela_contacto_salones = $id_alojamiento");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->otroAlojamiento[] = $filas;

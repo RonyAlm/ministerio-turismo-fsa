@@ -294,12 +294,13 @@ class ControladorPersonal
         $idBorrarLicencia = $_GET["id"];
         $idBorrarArticulo = $_GET["idArticulo"];
         $idBorrarPersonal = $_GET["idPersonal"];
+        $idBorrarDireccion = $_GET["idDireccion"];
 
 
         $borrar = new PersonalModelo();
 
 
-        $borradoPersonal = $borrar->borrarPersonal($idBorrarPersonal);
+        $borradoPersonal = $borrar->borrarPersonal($idBorrarPersonal, $idBorrarDireccion);
         $borradoLicencia = $borrar->borrarLicencia($idBorrarLicencia);
         $borradoArticulo = $borrar->borrarArticulo($idBorrarArticulo);
 
@@ -309,8 +310,6 @@ class ControladorPersonal
     public function info()
     {
         $id = $_GET['id'];
-
-
 
         $Info = new PersonalModelo();
 
