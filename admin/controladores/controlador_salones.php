@@ -35,7 +35,7 @@ class ControladorSalones
 
 
         if ($_POST) {
-            print_r($_POST);
+            // print_r($_POST);
 
             $crearSalones = new SalonesModelo();
 
@@ -88,8 +88,8 @@ class ControladorSalones
                 $habilitacionsalones
             );
 
-            // header("Location:index2.php?controlador=Alojamientos&accion=inicio");
-            // echo "<script>location.href='index2.php?controlador=salones&accion=inicio';</script>";
+            // header("Location:index2.php?controlador=salones&accion=inicio");
+            echo "<script>location.href='index2.php?controlador=salones&accion=inicio';</script>";
         }
 
         include_once("vistas/salones/crear.php");
@@ -98,9 +98,9 @@ class ControladorSalones
     public function editar()
     {
 
-        $id_alojamientos = $_GET['id'];
+        $id_salones = $_GET['id'];
 
-        //print_r($id_alojamientos);
+        //print_r($id_salones);
 
         $buscarID = new SalonesModelo();
 
@@ -207,8 +207,8 @@ class ControladorSalones
 
 
 
-            // header("Location:index2.php?controlador=Alojamientos&accion=inicio");
-            echo "<script>location.href='index2.php?controlador=Alojamientos&accion=inicio';</script>";
+            // header("Location:index2.php?controlador=salones&accion=inicio");
+            echo "<script>location.href='index2.php?controlador=salones&accion=inicio';</script>";
         }
 
         $contactosDelAlojamiento = new ContactosAlojamiento();
@@ -216,16 +216,16 @@ class ControladorSalones
         $contactosDelAlojamiento1 = new ContactosInfo();
 
 
-        $alojamientosTelefono = $contactosDelAlojamiento1->consultarTelefonos($id_alojamientos);
-        $alojamientosTelefonoFijo = $contactosDelAlojamiento->consultarTelefonosFijos($id_alojamientos);
-        $alojamientosCorreo = $contactosDelAlojamiento->consultarCorreo($id_alojamientos);
-        $alojamientosFacebook = $contactosDelAlojamiento->consultarFacebook($id_alojamientos);
-        $alojamientosInstagram = $contactosDelAlojamiento->consultarInstagram($id_alojamientos);
-        $alojamientosTwitter = $contactosDelAlojamiento->consultarTwitter($id_alojamientos);
-        $alojamientosWeb = $contactosDelAlojamiento->consultarWeb($id_alojamientos);
-        $alojamientosOtro = $contactosDelAlojamiento->consultarOtro($id_alojamientos);
+        $alojamientosTelefono = $contactosDelAlojamiento1->consultarTelefonos($id_salones);
+        $alojamientosTelefonoFijo = $contactosDelAlojamiento->consultarTelefonosFijos($id_salones);
+        $alojamientosCorreo = $contactosDelAlojamiento->consultarCorreo($id_salones);
+        $alojamientosFacebook = $contactosDelAlojamiento->consultarFacebook($id_salones);
+        $alojamientosInstagram = $contactosDelAlojamiento->consultarInstagram($id_salones);
+        $alojamientosTwitter = $contactosDelAlojamiento->consultarTwitter($id_salones);
+        $alojamientosWeb = $contactosDelAlojamiento->consultarWeb($id_salones);
+        $alojamientosOtro = $contactosDelAlojamiento->consultarOtro($id_salones);
 
-        $insertar = $buscarID->buscarInsertar($id_alojamientos);
+        $insertar = $buscarID->buscarInsertar($id_salones);
 
         include_once("vistas/salones/editar.php");
     }
@@ -244,29 +244,29 @@ class ControladorSalones
 
         $borrado->borrar($id_salones, $id_direccion, $id_serv);
 
-        // header("Location:index2.php?controlador=Alojamientos&accion=inicio");
-        echo "<script>location.href='index2.php?controlador=Alojamientos&accion=inicio';</script>";
+        // header("Location:index2.php?controlador=salones&accion=inicio");
+        echo "<script>location.href='index2.php?controlador=salones&accion=inicio';</script>";
     }
 
     public function info()
     {
-        $id_alojamientos = $_GET['id'];
+        $id_salones = $_GET['id'];
 
         $alojamientosInfo = new SalonesModelo();
 
-        $infoAlojamiento = $alojamientosInfo->buscarInsertar($id_alojamientos);
+        $infoAlojamiento = $alojamientosInfo->buscarInsertar($id_salones);
 
 
         $contactosDelAlojamiento = new ContactosInfo();
 
-        $alojamientosTelefono = $contactosDelAlojamiento->consultarTelefonos($id_alojamientos);
-        $alojamientoTelefonoFijo = $contactosDelAlojamiento->consultarTelefonosFijos($id_alojamientos);
-        $alojamientosCorreo = $contactosDelAlojamiento->consultarCorreo($id_alojamientos);
-        $alojamientosFacebook = $contactosDelAlojamiento->consultarFacebook($id_alojamientos);
-        $alojamientosInstagram = $contactosDelAlojamiento->consultarInstagram($id_alojamientos);
-        $alojamientosTwitter = $contactosDelAlojamiento->consultarTwitter($id_alojamientos);
-        $alojamientosWeb = $contactosDelAlojamiento->consultarWeb($id_alojamientos);
-        $alojamientosOtro = $contactosDelAlojamiento->consultarOtro($id_alojamientos);
+        $alojamientosTelefono = $contactosDelAlojamiento->consultarTelefonos($id_salones);
+        $alojamientoTelefonoFijo = $contactosDelAlojamiento->consultarTelefonosFijos($id_salones);
+        $alojamientosCorreo = $contactosDelAlojamiento->consultarCorreo($id_salones);
+        $alojamientosFacebook = $contactosDelAlojamiento->consultarFacebook($id_salones);
+        $alojamientosInstagram = $contactosDelAlojamiento->consultarInstagram($id_salones);
+        $alojamientosTwitter = $contactosDelAlojamiento->consultarTwitter($id_salones);
+        $alojamientosWeb = $contactosDelAlojamiento->consultarWeb($id_salones);
+        $alojamientosOtro = $contactosDelAlojamiento->consultarOtro($id_salones);
         //print_r($alojamientosCorreo);
 
         include_once("vistas/salones/info.php");
@@ -285,23 +285,23 @@ class ControladorSalones
 
     public function imprimirInfo()
     {
-        $id_alojamientos = $_GET['id'];
+        $id_salones = $_GET['id'];
 
         $alojamientosInfo = new SalonesModelo();
 
-        $infoAlojamiento = $alojamientosInfo->buscarInsertar($id_alojamientos);
+        $infoAlojamiento = $alojamientosInfo->buscarInsertar($id_salones);
 
 
         $contactosDelAlojamiento = new ContactosInfo();
 
-        $alojamientosTelefono = $contactosDelAlojamiento->consultarTelefonos($id_alojamientos);
-        $alojamientoTelefonoFijo = $contactosDelAlojamiento->consultarTelefonosFijos($id_alojamientos);
-        $alojamientosCorreo = $contactosDelAlojamiento->consultarCorreo($id_alojamientos);
-        $alojamientosFacebook = $contactosDelAlojamiento->consultarFacebook($id_alojamientos);
-        $alojamientosInstagram = $contactosDelAlojamiento->consultarInstagram($id_alojamientos);
-        $alojamientosTwitter = $contactosDelAlojamiento->consultarTwitter($id_alojamientos);
-        $alojamientosWeb = $contactosDelAlojamiento->consultarWeb($id_alojamientos);
-        $alojamientosOtro = $contactosDelAlojamiento->consultarOtro($id_alojamientos);
+        $alojamientosTelefono = $contactosDelAlojamiento->consultarTelefonos($id_salones);
+        $alojamientoTelefonoFijo = $contactosDelAlojamiento->consultarTelefonosFijos($id_salones);
+        $alojamientosCorreo = $contactosDelAlojamiento->consultarCorreo($id_salones);
+        $alojamientosFacebook = $contactosDelAlojamiento->consultarFacebook($id_salones);
+        $alojamientosInstagram = $contactosDelAlojamiento->consultarInstagram($id_salones);
+        $alojamientosTwitter = $contactosDelAlojamiento->consultarTwitter($id_salones);
+        $alojamientosWeb = $contactosDelAlojamiento->consultarWeb($id_salones);
+        $alojamientosOtro = $contactosDelAlojamiento->consultarOtro($id_salones);
         include_once("vistas/salones/invoice-print.php");
     }
 }

@@ -15,7 +15,7 @@ class ControladorGastronomia
 
         // Ejemplo: si la acción es "editar", ejecutamos el método "editar()"
         if ($accion == 'inicio') {
-            echo "esto es un: " . $accion . " y el controlador es: " . $controlador1;
+            // echo "esto es un: " . $accion . " y el controlador es: " . $controlador1;
         }
 
 
@@ -41,7 +41,7 @@ class ControladorGastronomia
 
         // Ejemplo: si la acción es "editar", ejecutamos el método "editar()"
         if ($accion == 'crear') {
-            echo "esto es un " . $accion . " y el id es: " . $id;
+            // echo "esto es un " . $accion . " y el id es: " . $id;
         }
 
         $select_tipo_agencia = new GastronomiaModelo();
@@ -115,7 +115,7 @@ class ControladorGastronomia
 
         // Ejemplo: si la acción es "editar", ejecutamos el método "editar()"
         if ($accion == 'editar') {
-            echo "esto es un " . $accion . " y el id es: " . $id;
+            // echo "esto es un " . $accion . " y el id es: " . $id;
         }
 
         $idAgencia = $_GET["id"];
@@ -199,7 +199,7 @@ class ControladorGastronomia
             );
             if ($EditarAgencia) {
                 $EditarAgencia->trigger($accion, $id, $controlador1);
-                print_r($EditarAgencia);
+                // print_r($EditarAgencia);
                 // print_r($usuario_crear);
                 // echo "<script>location.href='index2.php?controlador=gastronomia&accion=inicio';</script>";
             }
@@ -244,7 +244,7 @@ class ControladorGastronomia
 
         // Ejemplo: si la acción es "editar", ejecutamos el método "editar()"
         if ($accion == 'borrar') {
-            echo "esto es un " . $accion . " y el id es: " . $id;
+            // echo "esto es un " . $accion . " y el id es: " . $id;
         }
 
         $idAgenciaBorrar = $_GET["id"];
@@ -257,7 +257,7 @@ class ControladorGastronomia
         $borrado = $borrarAgencias->borrar($idAgenciaBorrar, $id_direccion);
         if ($borrarAgencias) {
             $borrarAgencias->trigger($accion, $id, $controlador1);
-            print_r($borrarAgencias);
+            // print_r($borrarAgencias);
 
             // echo "<script>location.href='index2.php?controlador=gastronomia&accion=inicio';</script>";
         }
