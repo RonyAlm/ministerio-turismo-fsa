@@ -8,7 +8,6 @@ $usuario = $_SESSION['usuarios'];
 $rol_id = $_SESSION['rol_id'];
 
 
-
 ?>
 
 <!-- Para ordenar alfabeticamente los select -->

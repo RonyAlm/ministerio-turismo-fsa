@@ -134,13 +134,13 @@ $rol_id = $_SESSION['rol_id'];
                 <td class="project-actions text-right">
                   <div class="btn-group" role="group" aria-label="">
 
-                    <a title="Más Infomación" href="?controlador=saloness&accion=info&id=<?php echo $salones["id_salones"]; ?>" class="btn btn-primary btn-sm ">
+                    <a title="Más Infomación" href="?controlador=salones&accion=info&id=<?php echo $salones["id_salones"]; ?>" class="btn btn-primary btn-sm ">
                       <i class="fas fa-folder"></i>
                     </a>
 
                     <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") : ?>
 
-                      <a title="Editar" href="?controlador=saloness&accion=editar&id=<?php echo $salones["id_salones"]; ?>" class="btn btn-success btn-sm">
+                      <a title="Editar" href="?controlador=salones&accion=editar&id=<?php echo $salones["id_salones"]; ?>" class="btn btn-success btn-sm">
                         <i class="fas fa-pencil-alt"></i>
                       </a>
 
