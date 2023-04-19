@@ -100,14 +100,7 @@ function AlertDeleteAlojamiento(id_alo, id_dire, id_rz, id_serv, id_sercomple) {
 function AlertDeletesalones(id_alo, id_dire, id_sercomple) {
   // console.log(id_alo, id_dire, id_rz, id_serv, id_sercomple);
   Swal.fire({
-    title:
-      "¿Está seguro que desea eliminar el Salón?" +
-      "salon: " +
-      id_alo +
-      "direccion: " +
-      id_dire +
-      "servi: " +
-      id_sercomple,
+    title: "¿Está seguro que desea eliminar el Salón?",
     text: "Esta acción no podrá revertirse",
     icon: "error",
     buttons: true,

@@ -55,24 +55,15 @@ $rol_id = $_SESSION['rol_id'];
             </div>
             <div class="card-body">
 
+
               <div class="form-group">
-                <label for="categoriaAlojamiento">Categoría</label>
-                <input type="hidden" id="IDcategoriaAlojamiento" name="IDcategoriaAlojamiento" value="<?php echo $insertar->id_tipo_alojamiento; ?>">
-                <?php $id_tipo_alojamiento_actual = $insertar->id_tipo_alojamiento; ?>
-                <select id="categoriaAlojamiento" name="categoriaAlojamiento" class="form-control select2" required>
-                  <?php foreach ($buscarSelectTipoAlojamiento as $k) : ?>
-                    <option value="<?= $k->id_tipo_alojamiento; ?>" <?= ($k->id_tipo_alojamiento == $id_tipo_alojamiento_actual) ? 'selected="selected"' : ''; ?>> <?= $k->descripcion_tipo_alojamiento; ?></option>
-                  <?php endforeach; ?>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="nombreAlojamiento">Designación Comercial:</label>
-                <input type="hidden" id="IDAlojamiento" name="IDAlojamiento" value="<?php echo $insertar->id_alojamientos; ?>">
-                <input type="text" value="<?php echo $insertar->descripcion_alojamientos; ?>" id="nombreAlojamiento" name="nombreAlojamiento" class="form-control" required>
+                <label for="nombreSalon">Designación Comercial:</label>
+                <input type="hidden" id="IdSalon" name="IdSalon" value="<?php echo $insertar->id_salones; ?>">
+                <input type="text" value="<?php echo $insertar->nombre_salones; ?>" id="nombreSalon" name="nombreSalon" class="form-control" required>
               </div>
               <div class="form-group">
                 <label for="localidadAlojamiento">Localidad</label>
-                <input type="hidden" id="localidadIDAlojamiento" name="localidadIDAlojamiento" value="<?php echo $insertar->id_direccion; ?>">
+                <input type="hidden" id="localidadIdSalon" name="localidadIdSalon" value="<?php echo $insertar->id_direccion; ?>">
                 <?php $nombre_localidad_actual = $insertar->nombre_localidad; ?>
                 <select id="localidadAlojamiento" name="localidadAlojamiento" class="form-control select2" required>
                   <?php foreach ($buscarSelectLocalidad as $k) : ?>
@@ -80,52 +71,31 @@ $rol_id = $_SESSION['rol_id'];
                   <?php endforeach; ?>
                 </select>
               </div>
+
               <div class="form-group">
-                <label for="razonsocialAlojamiento">Razón Social:</label>
-                <input type="hidden" id="IDRazonSocialAlojamiento" name="IDRazonSocialAlojamiento" value="<?php echo $insertar->id_razon_social; ?>">
-                <input type="text" value="<?php echo $insertar->descripcion_razon_social; ?>" id="razonsocialAlojamiento" name="razonsocialAlojamiento" class="form-control"></input>
+                <label for="idoneoSalones">Idóneo - Encargado/a</label>
+                <input type="hidden" id="" name="" value="<?php echo $insertar->id_salones; ?>">
+                <input type="text" value="<?php echo $insertar->idoneo_salones; ?>" id="idoneoSalones" name="idoneoSalones" class="form-control">
               </div>
 
               <div class="form-group">
-                <label for="estrellaAlojamiento">Estrella:</label>
-                <input type="hidden" id="" name="" value="<?php echo $insertar->id_alojamientos; ?>">
-                <input type="text" value="<?php echo $insertar->estrella_alojamiento; ?>" id="estrellaAlojamiento" name="estrellaAlojamiento" class="form-control"></input>
+                <label for="cuit_salones">Cuit</label>
+                <input type="hidden" id="" name="" value="<?php echo $insertar->id_salones; ?>">
+                <input type="text" value="<?php echo $insertar->cuit_salones; ?>" id="cuit_salones" name="cuit_salones" class="form-control">
               </div>
 
               <div class="form-group">
-                <label for="rubroAlojamiento">Rubro</label>
-                <input type="hidden" id="" name="" value="<?php echo $insertar->id_alojamientos; ?>">
-                <?php $descri_rubro_actual = $insertar->descripcion_rubro; ?>
-                <select id="rubroAlojamiento" name="rubroAlojamiento" class="form-control select2">
-                  <?php foreach ($buscarSelectRubro as $k) : ?>
-                    <option value="<?= $k->id_rubro_alojamiento; ?>" <?= ($k->descripcion_rubro == $descri_rubro_actual) ? 'selected="selected"' : ''; ?>> <?= $k->descripcion_rubro; ?></option>
-                  <?php endforeach; ?>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="idoneoAlojamiento">Idóneo - Encargado/a</label>
-                <input type="hidden" id="" name="" value="<?php echo $insertar->id_alojamientos; ?>">
-                <input type="text" value="<?php echo $insertar->idoneo_alojamiento; ?>" id="idoneoAlojamiento" name="idoneoAlojamiento" class="form-control">
+                <label for="domicilioSalones">Domicilio</label>
+                <input type="hidden" id="IDdireccionSalones" name="IDdireccionSalones" value="<?php echo $insertar->id_direccion; ?>">
+                <input type="text" value="<?php echo $insertar->calle_direccion; ?>" id="domicilioSalones" name="domicilioSalones" class="form-control">
               </div>
 
               <div class="form-group">
-                <label for="cuitAlojamiento">Cuit</label>
-                <input type="hidden" id="" name="" value="<?php echo $insertar->id_alojamientos; ?>">
-                <input type="text" value="<?php echo $insertar->cuit_alojamiento; ?>" id="cuitAlojamiento" name="cuitAlojamiento" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label for="domicilioAlojamiento">Domicilio</label>
-                <input type="hidden" id="IDdireccionAlojamiento" name="IDdireccionAlojamiento" value="<?php echo $insertar->id_direccion; ?>">
-                <input type="text" value="<?php echo $insertar->calle_direccion; ?>" id="domicilioAlojamiento" name="domicilioAlojamiento" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label for="habilitacionAlojamiento">Habilitación Municipal</label>
-                <input type="hidden" id="IDhabilitacionAlojamiento" name="IDhabilitacionAlojamiento" value="<?php echo $insertar->id_habi_municipal; ?>">
+                <label for="habilitacionsalones">Habilitación Municipal</label>
+                <input type="hidden" id="IDhabilitacionsalones" name="IDhabilitacionsalones" value="<?php echo $insertar->id_habi_municipal; ?>">
 
                 <?php $id_habi_municipal_actual = $insertar->id_habi_municipal; ?>
-                <select id="habilitacionAlojamiento" name="habilitacionAlojamiento" class="form-control select2" required>
+                <select id="habilitacionsalones" name="habilitacionsalones" class="form-control select2" required>
                   <?php foreach ($buscarSelecthabilitacion as $k) : ?>
                     <option value="<?= $k->id_habi_municipal; ?>" <?= ($k->id_habi_municipal == $id_habi_municipal_actual) ? 'selected="selected"' : ''; ?>> <?= $k->descripcion; ?></option>
                   <?php endforeach; ?>
@@ -133,10 +103,10 @@ $rol_id = $_SESSION['rol_id'];
               </div>
 
               <div class="form-group">
-                <label for="estadoAlojamiento">Estado</label>
-                <input type="hidden" id="IDestadoAlojamiento" name="IDestadoAlojamiento" value="<?php echo $insertar->id_estado; ?>">
+                <label for="estadoSalones">Estado</label>
+                <input type="hidden" id="IDestadoSalones" name="IDestadoSalones" value="<?php echo $insertar->id_estado; ?>">
                 <?php $desc_tipo_estado_actual = $insertar->descripcion_tipo_estado; ?>
-                <select id="estadoAlojamiento" name="estadoAlojamiento" class="form-control select2" required>
+                <select id="estadoSalones" name="estadoSalones" class="form-control select2" required>
                   <?php foreach ($buscarSelectEstado as $k) : ?>
                     <option value="<?= $k->id_tipo_estado; ?>" <?= ($k->descripcion_tipo_estado == $desc_tipo_estado_actual) ? 'selected="selected"' : ''; ?>> <?= $k->descripcion_tipo_estado; ?></option>
                   <?php endforeach; ?>
@@ -211,103 +181,6 @@ $rol_id = $_SESSION['rol_id'];
           <!-- /.card -->
         </div>
 
-        <!-- CREAR SERVICIOS GENERALES -->
-        <div class="col-md-6">
-          <div class="card card-success card-outline">
-            <div class="card-header">
-              <h3 class="card-title">Servicios Generales</h3>
-
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
-              </div>
-            </div>
-            <div class="card-body">
-
-              <div class="form-group">
-                <label for="cantTotalPlazasAlojamiento">Cantidad total de Plazas:</label>
-                <input type="hidden" id="" name="" value="<?php echo $insertar->id_servicio_alojamiento; ?>">
-                <input type="text" value="<?php echo $insertar->cantidad_plazas; ?>" id="cantTotalPlazasAlojamiento" name="cantTotalPlazasAlojamiento" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label for="cantTotalAlojamiento">Cantidad total de habitaciones:</label>
-                <input type="hidden" id="IDservicios" name="IDservicios" value="<?php echo $insertar->id_servicio_alojamiento; ?>">
-                <input type="text" value="<?php echo $insertar->cantidad_total_hab; ?>" id="cantTotalAlojamiento" name="cantTotalAlojamiento" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label for="singleAlojamiento">Cantidad de habitaciones Single:</label>
-                <input type="hidden" id="" name="" value="<?php echo $insertar->id_servicio_alojamiento; ?>">
-                <input type="text" value="<?php echo $insertar->cantidad_hab_single; ?>" id="singleAlojamiento" name="singleAlojamiento" class="form-control"></input>
-              </div>
-
-              <div class="form-group">
-                <label for="dobleAlojamiento">Cantidad de habitaciones Doble:</label>
-                <input type="hidden" id="" name="" value="<?php echo $insertar->id_servicio_alojamiento; ?>">
-                <input type="text" value="<?php echo $insertar->cantidad_hab_doble; ?>" id="dobleAlojamiento" name="dobleAlojamiento" class="form-control"></input>
-              </div>
-
-              <div class="form-group">
-                <label for="tripleAlojamiento">Cantidad de habitaciones Triple:</label>
-                <input type="hidden" id="" name="" value="<?php echo $insertar->id_servicio_alojamiento; ?>">
-                <input type="text" value="<?php echo $insertar->cantidad_hab_triple; ?>" id="tripleAlojamiento" name="tripleAlojamiento" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label for="cuadrupleAlojamiento">Cantidad de habitaciones Cuadruples:</label>
-                <input type="hidden" id="" name="" value="<?php echo $insertar->id_servicio_alojamiento; ?>">
-                <input type="text" value="<?php echo $insertar->cantidad_hab_cuadruple; ?>" id="cuadrupleAlojamiento" name="cuadrupleAlojamiento" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label for="matrimonialAlojamiento">Cantidad de habitaciones Matrimoniales:</label>
-                <input type="hidden" id="" name="" value="<?php echo $insertar->id_servicio_alojamiento; ?>">
-                <input type="text" value="<?php echo $insertar->cantidad_hab_matrimoniales; ?>" id="matrimonialAlojamiento" name="matrimonialAlojamiento" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label for="apartamentoAlojamiento">Apartamento:</label>
-                <input type="hidden" id="" name="" value="<?php echo $insertar->id_servicio_alojamiento; ?>">
-                <input type="text" value="<?php echo $insertar->apartamento_alojamiento; ?>" id="apartamentoAlojamiento" name="apartamentoAlojamiento" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label for="wifiAlojamiento">Wifi:</label>
-                <input type="hidden" id="" name="" value="<?php echo $insertar->id_servicio_alojamiento; ?>">
-                <input type="text" value="<?php echo $insertar->wifi_alojamiento; ?>" id="wifiAlojamiento" name="wifiAlojamiento" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label for="estacionamientoAlojamiento">Estacionamiento:</label>
-                <input type="hidden" id="" name="" value="<?php echo $insertar->id_servicio_alojamiento; ?>">
-                <input type="text" value="<?php echo $insertar->estacionamiento_alojamiento; ?>" id="estacionamientoAlojamiento" name="estacionamientoAlojamiento" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="desayunoAlojamiento">Desayuno:</label>
-                <input type="hidden" id="" name="" value="<?php echo $insertar->id_servicio_alojamiento; ?>">
-                <input type="text" value="<?php echo $insertar->desayuno_alojamiento; ?>" id="desayunoAlojamiento" name="desayunoAlojamiento" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label for="piscinaAlojamiento">Piscina:</label>
-                <input type="hidden" id="" name="" value="<?php echo $insertar->id_servicio_alojamiento; ?>">
-                <input type="text" value="<?php echo $insertar->piscina_alojamiento; ?>" id="piscinaAlojamiento" name="piscinaAlojamiento" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label for="otroServicioAlojamiento">Otro Servicio</label>
-                <input type="hidden" id="" name="" value="<?php echo $insertar->id_servicio_alojamiento; ?>">
-                <input type="text" value="<?php echo $insertar->otros_servicios; ?>" id="otroServicioAlojamiento" name="otroServicioAlojamiento" class="form-control">
-              </div>
-
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
-        </div>
-
         <!-- CREAR SERVICIOS COMPLEMENTARIOS -->
         <div class="col-md-6">
           <div class="card card-success card-outline">
@@ -362,7 +235,7 @@ $rol_id = $_SESSION['rol_id'];
   </div>
   <div class="card-footer">
     <div class="float-right">
-      <a href="index2.php?controlador=Alojamientos&accion=inicio" class="btn btn-secondary">Cancelar</a>
+      <a href="index2.php?controlador=salones&accion=inicio" class="btn btn-secondary">Cancelar</a>
       <input name="" id="" class="btn btn-success" type="submit" value="Editar">
     </div>
     </form>

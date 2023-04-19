@@ -7,8 +7,7 @@
   <title></title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
@@ -24,9 +23,8 @@
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a class="text-success"
-                href="index2.php?controlador=Alojamientos&accion=inicio">Alojamientos</a></li>
-            <li class="breadcrumb-item active">Imprimir Información Alojamiento</li>
+            <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=salones&accion=inicio">salones</a></li>
+            <li class="breadcrumb-item active">Imprimir Información Salones</li>
           </ol>
         </div>
       </div>
@@ -41,12 +39,12 @@
           <div class="row">
             <div class="col-12">
               <h2 class="page-header">
-                Alojamiento
+                Salones
                 <small class="float-right">Fecha: <?php
-                  $Object = new DateTime();  
-                  $DateAndTime = $Object->format("d/m/Y");  
-                  echo "$DateAndTime";
-                  ?>
+                                                  $Object = new DateTime();
+                                                  $DateAndTime = $Object->format("d/m/Y");
+                                                  echo "$DateAndTime";
+                                                  ?>
                 </small>
               </h2>
             </div>
@@ -80,7 +78,7 @@
 
                     <tr>
                       <th class="sorting_1">Designación Comercial</th>
-                      <td><?php echo $infoAlojamiento->descripcion_alojamientos; ?></td>
+                      <td><?php echo $infoAlojamiento->nombre_salones; ?></td>
                     </tr>
                     <tr>
                       <th class="sorting_1">Localidad</th>
@@ -95,28 +93,12 @@
                       <td><?php echo $infoAlojamiento->descripcion_departamentos; ?></td>
                     </tr>
                     <tr>
-                      <th class="sorting_1">Razón Social</th>
-                      <td><?= $infoAlojamiento->descripcion_razon_social; ?></td>
-                    </tr>
-                    <tr>
                       <th class="sorting_1">Idóneo o Responsable</th>
-                      <td><?php echo $infoAlojamiento->idoneo_alojamiento; ?></td>
+                      <td><?php echo $infoAlojamiento->idoneo_salones; ?></td>
                     </tr>
                     <tr>
                       <th class="sorting_1">Cuit</th>
-                      <td><?php echo $infoAlojamiento->cuit_alojamiento; ?></td>
-                    </tr>
-                    <tr>
-                      <th class="sorting_1">Estrellas</th>
-                      <td><?php echo $infoAlojamiento->estrella_alojamiento; ?></td>
-                    </tr>
-                    <tr>
-                      <th class="sorting_1">Categoria</th>
-                      <td><?php echo $infoAlojamiento->descripcion_tipo_alojamiento; ?></td>
-                    </tr>
-                    <tr>
-                      <th class="sorting_1">Rubro</th>
-                      <td><?php echo $infoAlojamiento->descripcion_rubro; ?></td>
+                      <td><?php echo $infoAlojamiento->cuit_salones; ?></td>
                     </tr>
                     <tr>
                       <th class="sorting_1">Habilitación Municipal</th>
@@ -128,85 +110,7 @@
                     </tr>
                     <tr>
                       <th class="sorting_1">Última actualización</th>
-                      <td><?= $infoAlojamiento->fecha_edit_alojamiento; ?></td>
-                    </tr>
-
-                  </table>
-
-                </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
-
-                </div>
-              </div>
-              <!-- /.card -->
-            </div>
-            <!-- Servicios -->
-            <div class="col-md-6">
-              <div class="card card-secondary card-outline">
-                <div class="card-header sorting_1" style="display: flex;flex-direction: column-reverse;">
-                  <h3 class="card-title text-center ">
-                    <!-- <i class="fas fa-folder mr-2"></i> -->
-                    Información de los Servicios
-                  </h3>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-
-                  <table id="tblInfoServ" class="tblInfo table table-bordered table-striped" cellspacing="0"
-                    width="100%">
-
-                    <tr>
-                      <th class="sorting_1">Cantidad total de Plazas</th>
-                      <td><?php echo $infoAlojamiento->cantidad_plazas; ?></td>
-                    </tr>
-                    <tr>
-                      <th class="sorting_1">Cantidad total de habitaciones</th>
-                      <td><?php echo $infoAlojamiento->cantidad_total_hab; ?></td>
-                    </tr>
-                    <tr>
-                      <th class="sorting_1">Cantidad de habitaciones Single</th>
-                      <td><?php echo $infoAlojamiento->cantidad_hab_single; ?></td>
-                    </tr>
-                    <tr>
-                      <th class="sorting_1">Cantidad de habitaciones Doble</th>
-                      <td><?php echo $infoAlojamiento->cantidad_hab_doble; ?></td>
-                    </tr>
-                    <tr>
-                      <th class="sorting_1">Cantidad de habitaciones Triple</th>
-                      <td><?php echo $infoAlojamiento->cantidad_hab_triple; ?></td>
-                    </tr>
-                    <tr>
-                      <th class="sorting_1">Cantidad de habitaciones Cuadruples</th>
-                      <td><?php echo $infoAlojamiento->cantidad_hab_cuadruple; ?></td>
-                    </tr>
-                    <tr>
-                      <th class="sorting_1">Cantidad de habitaciones Matrimoniales</th>
-                      <td><?php echo $infoAlojamiento->cantidad_hab_matrimoniales; ?></td>
-                    </tr>
-                    <tr>
-                      <th class="sorting_1">Apartamento</th>
-                      <td><?php echo $infoAlojamiento->apartamento_alojamiento; ?></td>
-                    </tr>
-                    <tr>
-                      <th class="sorting_1">Wifi</th>
-                      <td><?php echo $infoAlojamiento->wifi_alojamiento; ?></td>
-                    </tr>
-                    <tr>
-                      <th class="sorting_1">Estacionamiento</th>
-                      <td><?php echo $infoAlojamiento->estacionamiento_alojamiento; ?></td>
-                    </tr>
-                    <tr>
-                      <th class="sorting_1">Desayuno</th>
-                      <td><?php echo $infoAlojamiento->desayuno_alojamiento; ?></td>
-                    </tr>
-                    <tr>
-                      <th class="sorting_1">Piscina</th>
-                      <td><?php echo $infoAlojamiento->piscina_alojamiento; ?></td>
-                    </tr>
-                    <tr>
-                      <th class="sorting_1">Otros Servicios</th>
-                      <td><?php echo $infoAlojamiento->otros_servicios; ?></td>
+                      <td><?= $infoAlojamiento->fecha_edit_salones; ?></td>
                     </tr>
 
                   </table>
@@ -231,88 +135,87 @@
                 <!-- /.card-header -->
                 <div class="card-body">
 
-                  <table id="tblContacto" class="tblInfo tblIm table table-bordered table-striped" cellspacing="0"
-                    width="100%">
+                  <table id="tblContacto" class="tblInfo tblIm table table-bordered table-striped" cellspacing="0" width="100%">
 
                     <?php foreach ($alojamientosTelefono as $telefonos) : ?>
-                    <tr>
-                      <th class="sorting_1">
-                        <i class="fas fa-phone mr-1"></i>
-                        Teléfono Celular
-                      </th>
-                      <td><?= $telefonos["descripcion_contacto"]; ?></td>
-                    </tr>
+                      <tr>
+                        <th class="sorting_1">
+                          <i class="fas fa-phone mr-1"></i>
+                          Teléfono Celular
+                        </th>
+                        <td><?= $telefonos["descripcion_contacto"]; ?></td>
+                      </tr>
                     <?php endforeach; ?>
 
                     <?php foreach ($alojamientoTelefonoFijo as $telefonosFijo) : ?>
-                    <tr>
-                      <th class="sorting_1">
-                        <i class="fas fa-phone mr-1"></i>
-                        Teléfono Fijo
-                      </th>
-                      <td><?= $telefonosFijo["descripcion_contacto"]; ?></td>
-                    </tr>
+                      <tr>
+                        <th class="sorting_1">
+                          <i class="fas fa-phone mr-1"></i>
+                          Teléfono Fijo
+                        </th>
+                        <td><?= $telefonosFijo["descripcion_contacto"]; ?></td>
+                      </tr>
                     <?php endforeach; ?>
 
                     <?php foreach ($alojamientosCorreo as $correos) : ?>
-                    <tr>
-                      <th class="sorting_1">
-                        <!-- <i class="fas fa-at mr-2"></i> -->
-                        <i class=" fas fa-solid fa-envelope mr-1"></i>
-                        Correo
-                      </th>
-                      <td><?php echo $correos["descripcion_contacto"]; ?></td>
-                    </tr>
+                      <tr>
+                        <th class="sorting_1">
+                          <!-- <i class="fas fa-at mr-2"></i> -->
+                          <i class=" fas fa-solid fa-envelope mr-1"></i>
+                          Correo
+                        </th>
+                        <td><?php echo $correos["descripcion_contacto"]; ?></td>
+                      </tr>
                     <?php endforeach; ?>
 
                     <?php foreach ($alojamientosFacebook as $facebook) : ?>
-                    <tr>
-                      <th class="sorting_1">
-                        <i class="fab fa-facebook mr-1"></i>
-                        Facebook
-                      </th>
-                      <td><?php echo $facebook["descripcion_contacto"]; ?></td>
-                    </tr>
+                      <tr>
+                        <th class="sorting_1">
+                          <i class="fab fa-facebook mr-1"></i>
+                          Facebook
+                        </th>
+                        <td><?php echo $facebook["descripcion_contacto"]; ?></td>
+                      </tr>
                     <?php endforeach; ?>
 
                     <?php foreach ($alojamientosInstagram as $instagram) : ?>
-                    <tr>
-                      <th class="sorting_1">
-                        <i class="fa-brands fa-instagram mr-1"></i>
-                        Instagram
-                      </th>
-                      <td><?php echo $instagram["descripcion_contacto"]; ?></td>
-                    </tr>
+                      <tr>
+                        <th class="sorting_1">
+                          <i class="fa-brands fa-instagram mr-1"></i>
+                          Instagram
+                        </th>
+                        <td><?php echo $instagram["descripcion_contacto"]; ?></td>
+                      </tr>
                     <?php endforeach; ?>
 
                     <?php foreach ($alojamientosTwitter as $twitter) : ?>
-                    <tr>
-                      <th class="sorting_1">
-                        <i class="fab fa-twitter-square mr-1"></i>
-                        Twitter
-                      </th>
-                      <td><?php echo $twitter["descripcion_contacto"]; ?></td>
-                    </tr>
+                      <tr>
+                        <th class="sorting_1">
+                          <i class="fab fa-twitter-square mr-1"></i>
+                          Twitter
+                        </th>
+                        <td><?php echo $twitter["descripcion_contacto"]; ?></td>
+                      </tr>
                     <?php endforeach; ?>
 
                     <?php foreach ($alojamientosWeb  as $web) : ?>
-                    <tr>
-                      <th class="sorting_1">
-                        <i class="fas fa-globe mr-1"></i>
-                        Sitio Web
-                      </th>
-                      <td><?php echo $web["descripcion_contacto"]; ?></td>
-                    </tr>
+                      <tr>
+                        <th class="sorting_1">
+                          <i class="fas fa-globe mr-1"></i>
+                          Sitio Web
+                        </th>
+                        <td><?php echo $web["descripcion_contacto"]; ?></td>
+                      </tr>
                     <?php endforeach; ?>
 
                     <?php foreach ($alojamientosOtro as $otro) : ?>
-                    <tr>
-                      <th class="sorting_1">
-                        <i class="fas fa-street-view mr-1"></i>
-                        Otro
-                      </th>
-                      <td><?php echo $otro["descripcion_contacto"]; ?></td>
-                    </tr>
+                      <tr>
+                        <th class="sorting_1">
+                          <i class="fas fa-street-view mr-1"></i>
+                          Otro
+                        </th>
+                        <td><?php echo $otro["descripcion_contacto"]; ?></td>
+                      </tr>
                     <?php endforeach; ?>
 
                   </table>
@@ -335,8 +238,7 @@
                 <!-- /.card-header -->
                 <div class="card-body">
 
-                  <table id="tblInfoServC" class="tblInfo table table-bordered table-striped" cellspacing="0"
-                    width="100%">
+                  <table id="tblInfoServC" class="tblInfo table table-bordered table-striped" cellspacing="0" width="100%">
 
                     <tr>
                       <th class="sorting_1">Cantidad de salones:</th>

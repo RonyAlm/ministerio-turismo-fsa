@@ -97,10 +97,9 @@ class ControladorSalones
 
     public function editar()
     {
-
         $id_salones = $_GET['id'];
 
-        //print_r($id_salones);
+        // print_r($id_salones);
 
         $buscarID = new SalonesModelo();
 
@@ -112,25 +111,23 @@ class ControladorSalones
 
 
         if ($_POST) {
-            //print_r($_POST);
+            // print_r($_POST);
 
             $insertar = new SalonesModelo();
 
-            $IDAlojamiento = $_POST['IDAlojamiento'];
-            $nombresalones = $_POST['nombresalones'];
-            $nombreAlojamiento = $_POST['nombreAlojamiento'];
+            $id_salones = $_POST['IdSalon'];
+            $nombreSalon = $_POST['nombreSalon'];
 
-            $idoneosalones = $_POST['idoneosalones'];
-            $cuitsalones = $_POST['cuitsalones'];
 
-            $ID = $_POST['ID'];
+            $idoneoSalones = $_POST['idoneoSalones'];
+            $cuit_salones = $_POST['cuit_salones'];
 
-            $IDdireccionAlojamiento = $_POST['IDdireccionAlojamiento'];
-            $domiciliosalones = $_POST['domiciliosalones'];
-            $localidadsalones = $_POST['localidadsalones'];
+            $IDdireccionSalones = $_POST['IDdireccionSalones'];
+            $domicilioSalones = $_POST['domicilioSalones'];
+            $localidadAlojamiento = $_POST['localidadAlojamiento'];
 
-            $IDestadosalones = $_POST['IDestadosalones'];
-            $estadosalones = $_POST['estadosalones'];
+            $IDestadosalones = $_POST['IDestadoSalones'];
+            $estadosalones = $_POST['estadoSalones'];
 
             $alojamientoIDtelefono = $_POST['alojamientoIDtelefono'];
             $telefonoAlojamiento = $_POST['telefonoAlojamiento'];
@@ -156,23 +153,22 @@ class ControladorSalones
             $alojamientoIDotro = $_POST['alojamientoIDotro'];
             $otroAlojamiento = $_POST['otroAlojamiento'];
 
-            $IDservicios = $_POST['IDservicios'];
             $IDserviciosComplementarios = $_POST['IDserviciosComplementarios'];
-            $seminariosalones = $_POST['seminariosalones'];
-            $congresosalones = $_POST['congresosalones'];
-            $eventoSocialsalones = $_POST['eventoSocialsalones'];
-            $salonsalones = $_POST['salonsalones'];
-            $reunionsalones = $_POST['reunionsalones'];
+            $seminariosalones = $_POST['seminarioAlojamiento'];
+            $congresosalones = $_POST['congresoAlojamiento'];
+            $eventoSocialsalones = $_POST['eventoSocialAlojamiento'];
+            $salonsalones = $_POST['salonAlojamiento'];
+            $reunionsalones = $_POST['reunionAlojamiento'];
 
             $habilitacionsalones = $_POST['habilitacionsalones'];
             $IDhabilitacionsalones = $_POST['IDhabilitacionsalones'];
 
             $insertar->editar(
-                $nombresalones,
-                $localidadsalones,
-                $idoneosalones,
-                $cuitsalones,
-                $domiciliosalones,
+                $nombreSalon,
+                $localidadAlojamiento,
+                $idoneoSalones,
+                $cuit_salones,
+                $domicilioSalones,
                 $estadosalones,
                 $telefonoAlojamiento,
                 $telefonoFijoAlojamiento,
@@ -187,7 +183,6 @@ class ControladorSalones
                 $eventoSocialsalones,
                 $salonsalones,
                 $reunionsalones,
-                $IDservicios,
                 $IDserviciosComplementarios,
                 $alojamientoIDtelefono,
                 $alojamientoIDtelefonoFijo,
@@ -197,9 +192,8 @@ class ControladorSalones
                 $alojamientoIDtwitter,
                 $alojamientoIDweb,
                 $alojamientoIDotro,
-                $IDAlojamiento,
-                $ID,
-                $IDdireccionAlojamiento,
+                $id_salones,
+                $IDdireccionSalones,
                 $IDestadosalones,
                 $habilitacionsalones,
                 $IDhabilitacionsalones
@@ -211,7 +205,7 @@ class ControladorSalones
             echo "<script>location.href='index2.php?controlador=salones&accion=inicio';</script>";
         }
 
-        $contactosDelAlojamiento = new ContactosAlojamiento();
+        $contactosDelAlojamiento = new ContactosSalones();
 
         $contactosDelAlojamiento1 = new ContactosInfo();
 

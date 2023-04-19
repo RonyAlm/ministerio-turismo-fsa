@@ -2,11 +2,11 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Información Alojamiento</h1>
+        <h1>Información Salones</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=Alojamientos&accion=inicio">Alojamientos</a></li>
+          <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=salones&accion=inicio">Salones</a></li>
           <li class="breadcrumb-item active">Información</li>
         </ol>
       </div>
@@ -43,7 +43,7 @@
 
             <tr>
               <th class="sorting_1">Designación Comercial</th>
-              <td><?php echo $infoAlojamiento->descripcion_alojamientos; ?></td>
+              <td><?php echo $infoAlojamiento->nombre_salones; ?></td>
             </tr>
             <tr>
               <th class="sorting_1">Localidad</th>
@@ -57,30 +57,17 @@
               <th class="sorting_1">Departamento</th>
               <td><?php echo $infoAlojamiento->descripcion_departamentos; ?></td>
             </tr>
-            <tr>
-              <th class="sorting_1">Razón Social</th>
-              <td><?= $infoAlojamiento->descripcion_razon_social; ?></td>
-            </tr>
+
             <tr>
               <th class="sorting_1">Idóneo o Responsable</th>
-              <td><?php echo $infoAlojamiento->idoneo_alojamiento; ?></td>
+              <td><?php echo $infoAlojamiento->idoneo_salones; ?></td>
             </tr>
             <tr>
               <th class="sorting_1">Cuit</th>
-              <td><?php echo $infoAlojamiento->cuit_alojamiento; ?></td>
+              <td><?php echo $infoAlojamiento->cuit_salones; ?></td>
             </tr>
-            <tr>
-              <th class="sorting_1">Estrellas</th>
-              <td><?php echo $infoAlojamiento->estrella_alojamiento; ?></td>
-            </tr>
-            <tr>
-              <th class="sorting_1">Categoria</th>
-              <td><?php echo $infoAlojamiento->descripcion_tipo_alojamiento; ?></td>
-            </tr>
-            <tr>
-              <th class="sorting_1">Rubro</th>
-              <td><?php echo $infoAlojamiento->descripcion_rubro; ?></td>
-            </tr>
+
+
             <tr>
               <th class="sorting_1">Habilitación Municipal</th>
               <td><?php echo $infoAlojamiento->descripcion; ?></td>
@@ -91,89 +78,7 @@
             </tr>
             <tr>
               <th class="sorting_1">Última actualización</th>
-              <td><?= $infoAlojamiento->fecha_edit_alojamiento; ?></td>
-            </tr>
-
-          </table>
-
-        </div>
-        <!-- /.card-body -->
-        <div class="card-footer">
-
-        </div>
-      </div>
-      <!-- /.card -->
-    </div>
-    <!-- Servicios -->
-    <div class="col-md-6">
-      <div class="card card-success card-outline">
-        <div class="card-header">
-          <h3 class="card-title text-success">
-            <i class="fas fa-folder mr-2"></i>
-            Información de los Servicios
-          </h3>
-          <div class="card-tools text-success">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-              <i class="fas fa-minus"></i>
-            </button>
-          </div>
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body">
-
-          <table id="tblInfoServ" class="tblInfo table table-bordered table-striped" cellspacing="0" width="100%">
-
-            <tr>
-              <th class="sorting_1">Cantidad total de Plazas</th>
-              <td><?php echo $infoAlojamiento->cantidad_plazas; ?></td>
-            </tr>
-            <tr>
-              <th class="sorting_1">Cantidad total de habitaciones</th>
-              <td><?php echo $infoAlojamiento->cantidad_total_hab; ?></td>
-            </tr>
-            <tr>
-              <th class="sorting_1">Cantidad de habitaciones Single</th>
-              <td><?php echo $infoAlojamiento->cantidad_hab_single; ?></td>
-            </tr>
-            <tr>
-              <th class="sorting_1">Cantidad de habitaciones Doble</th>
-              <td><?php echo $infoAlojamiento->cantidad_hab_doble; ?></td>
-            </tr>
-            <tr>
-              <th class="sorting_1">Cantidad de habitaciones Triple</th>
-              <td><?php echo $infoAlojamiento->cantidad_hab_triple; ?></td>
-            </tr>
-            <tr>
-              <th class="sorting_1">Cantidad de habitaciones Cuadruples</th>
-              <td><?php echo $infoAlojamiento->cantidad_hab_cuadruple; ?></td>
-            </tr>
-            <tr>
-              <th class="sorting_1">Cantidad de habitaciones Matrimoniales</th>
-              <td><?php echo $infoAlojamiento->cantidad_hab_matrimoniales; ?></td>
-            </tr>
-            <tr>
-              <th class="sorting_1">Apartamento</th>
-              <td><?php echo $infoAlojamiento->apartamento_alojamiento; ?></td>
-            </tr>
-            <tr>
-              <th class="sorting_1">Wifi</th>
-              <td><?php echo $infoAlojamiento->wifi_alojamiento; ?></td>
-            </tr>
-            <tr>
-              <th class="sorting_1">Estacionamiento</th>
-              <td><?php echo $infoAlojamiento->estacionamiento_alojamiento; ?></td>
-            </tr>
-            <tr>
-              <th class="sorting_1">Desayuno</th>
-              <td><?php echo $infoAlojamiento->desayuno_alojamiento; ?></td>
-            </tr>
-            <tr>
-              <th class="sorting_1">Piscina</th>
-              <td><?php echo $infoAlojamiento->piscina_alojamiento; ?></td>
-            </tr>
-            <tr>
-              <th class="sorting_1">Otros Servicios</th>
-              <td><?php echo $infoAlojamiento->otros_servicios; ?></td>
+              <td><?= $infoAlojamiento->fecha_edit_salones; ?></td>
             </tr>
 
           </table>
@@ -350,7 +255,7 @@
   <div class="card-footer mb-4 card">
     <div class="row no-print">
       <div class="col-12">
-        <a href="?controlador=Alojamientos&accion=imprimirInfo&id=<?php echo $infoAlojamiento->id_alojamientos; ?>" rel="noopener" class="btn btn-default float-right"><i class="fas fa-print mr-2"></i> Imprimir</a>
+        <a href="?controlador=salones&accion=imprimirInfo&id=<?php echo $infoAlojamiento->id_salones; ?>" rel="noopener" class="btn btn-default float-right"><i class="fas fa-print mr-2"></i> Imprimir</a>
       </div>
     </div>
   </div>

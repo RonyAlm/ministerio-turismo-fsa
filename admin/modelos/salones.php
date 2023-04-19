@@ -96,7 +96,7 @@ class SalonesModelo
             $habilitacionsalones
         ));
 
-        $lastInsertIDAlojamiento = $conexionBD->lastInsertId();
+        $lastInsertid_salones = $conexionBD->lastInsertId();
 
         /*-------- INSERTAMOS EL TELEFONO CELULAR--------*/
         foreach ($telefonoAlojamiento as $tefonoAlojamiento) {
@@ -104,7 +104,7 @@ class SalonesModelo
             $sqlTelefono = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,rela_tipo_contacto_cont,
                                                             `rela_contacto_salones`) 
                                                 VALUES (?,?,?)");
-            $sqlTelefono->execute(array($tefonoAlojamiento, 2, $lastInsertIDAlojamiento));
+            $sqlTelefono->execute(array($tefonoAlojamiento, 2, $lastInsertid_salones));
         }
 
         /*-------- INSERTAMOS EL TELEFONO FIJO--------*/
@@ -112,55 +112,55 @@ class SalonesModelo
         $sqlFijo = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,rela_tipo_contacto_cont,
                                                         `rela_contacto_salones`) 
                                             VALUES (?,?,?)");
-        $sqlFijo->execute(array($telefonoFijoAlojamiento, 9, $lastInsertIDAlojamiento));
+        $sqlFijo->execute(array($telefonoFijoAlojamiento, 9, $lastInsertid_salones));
 
         /*-------- INSERTAMOS EL CORREO-------*/
 
         $sqlCorreo = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,rela_tipo_contacto_cont,
                                                         `rela_contacto_salones`) 
                                             VALUES (?,?,?)");
-        $sqlCorreo->execute(array($correoAlojamiento, 1, $lastInsertIDAlojamiento));
+        $sqlCorreo->execute(array($correoAlojamiento, 1, $lastInsertid_salones));
 
         /*-------- INSERTAMOS EL FACEBOOK--------*/
 
         $sqlFacebook = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,rela_tipo_contacto_cont,
                                                         `rela_contacto_salones`) 
                                             VALUES (?,?,?)");
-        $sqlFacebook->execute(array($facebookAlojamiento, 4, $lastInsertIDAlojamiento));
+        $sqlFacebook->execute(array($facebookAlojamiento, 4, $lastInsertid_salones));
 
         /*-------- INSERTAMOS EL INSTAGRAM--------*/
 
         $sqlInstagram = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,rela_tipo_contacto_cont,
                                                         `rela_contacto_salones`) 
                                             VALUES (?,?,?)");
-        $sqlInstagram->execute(array($instagramAlojamiento, 5, $lastInsertIDAlojamiento));
+        $sqlInstagram->execute(array($instagramAlojamiento, 5, $lastInsertid_salones));
 
         /*-------- INSERTAMOS EL TWITTER--------*/
 
         $sqlTwitter = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,rela_tipo_contacto_cont,
                                                         `rela_contacto_salones`) 
                                             VALUES (?,?,?)");
-        $sqlTwitter->execute(array($twitterAlojamiento, 6, $lastInsertIDAlojamiento));
+        $sqlTwitter->execute(array($twitterAlojamiento, 6, $lastInsertid_salones));
 
         /*-------- INSERTAMOS EL SITIO WEB--------*/
 
         $sqlWeb = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,rela_tipo_contacto_cont,
                                                         `rela_contacto_salones`) 
                                             VALUES (?,?,?)");
-        $sqlWeb->execute(array($webAlojamiento, 7, $lastInsertIDAlojamiento));
+        $sqlWeb->execute(array($webAlojamiento, 7, $lastInsertid_salones));
 
         /*-------- INSERTAMOS OTRO--------*/
 
         $sqlOtro = $conexionBD->prepare("INSERT INTO `contacto`(`descripcion_contacto`,rela_tipo_contacto_cont,
                                                         `rela_contacto_salones`) 
                                             VALUES (?,?,?)");
-        $sqlOtro->execute(array($otroAlojamiento, 8, $lastInsertIDAlojamiento));
+        $sqlOtro->execute(array($otroAlojamiento, 8, $lastInsertid_salones));
 
         /*-------- INSERTAMOS EL ESTADO--------*/
 
         $sqlEstado = $conexionBD->prepare("INSERT INTO `estado_actividad`(`rela_tipo_estado`, rela_estado_salones) 
                                             VALUES (?,?)");
-        $sqlEstado->execute(array($estadosalones, $lastInsertIDAlojamiento));
+        $sqlEstado->execute(array($estadosalones, $lastInsertid_salones));
     }
 
     public static function borrar($id_salones, $id_direccion, $id_serv)
@@ -208,11 +208,11 @@ class SalonesModelo
     }
 
     public static function editar(
-        $nombresalones,
-        $localidadsalones,
-        $idoneosalones,
-        $cuitsalones,
-        $domiciliosalones,
+        $nombreSalon,
+        $localidadAlojamiento,
+        $idoneoSalones,
+        $cuit_salones,
+        $domicilioSalones,
         $estadosalones,
         $telefonoAlojamiento,
         $telefonoFijoAlojamiento,
@@ -227,7 +227,6 @@ class SalonesModelo
         $eventoSocialsalones,
         $salonsalones,
         $reunionsalones,
-        $IDservicios,
         $IDserviciosComplementarios,
         $alojamientoIDtelefono,
         $alojamientoIDtelefonoFijo,
@@ -237,9 +236,8 @@ class SalonesModelo
         $alojamientoIDtwitter,
         $alojamientoIDweb,
         $alojamientoIDotro,
-        $IDAlojamiento,
-        $ID,
-        $IDdireccionAlojamiento,
+        $id_salones,
+        $IDdireccionSalones,
         $IDestadosalones,
         $habilitacionsalones,
         $IDhabilitacionsalones
@@ -249,63 +247,23 @@ class SalonesModelo
 
         /*---------------SE ACTUALIZA EL ALOJAMIENTO-------------------*/
 
-        if ($rubroAlojamiento == 0) {
-            // echo "rubro igual a 0        /// ";
-            $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
-                                                                    `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
-                                                                    `estrella_alojamiento`=$estrellaAlojamiento,
-                                                                    `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()
-                                        WHERE id_alojamientos=$IDAlojamiento");
+
+        if ($habilitacionsalones == 0) {
+            // echo "habilitacion igual a 0  ";
+            $sql = $conexionBD->prepare("UPDATE `salones` 
+            SET `id_salones`=$id_salones,`nombre_salones`='$nombreSalon',
+            `cuit_salones`='$cuit_salones',`idoneo_salones`='$idoneoSalones',
+            `fecha_edit_salones`= CURRENT_TIMESTAMP()
+            WHERE id_salones = $id_salones");
 
             $sql->execute();
         } else {
-            // echo "rubro igual conectado   ///        ";
-            $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
-                                                                    `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
-                                                                    `estrella_alojamiento`=$estrellaAlojamiento,`rela_alojamiento_rubro`=$rubroAlojamiento,
-                                                                    `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()
-                                        WHERE id_alojamientos=$IDAlojamiento");
-
-            $sql->execute();
-        }
-        if ($categoriaAlojamiento == 0) {
-            // echo "categoria igual a 0    ///  ";
-            $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
-                                                                    `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
-                                                                    `estrella_alojamiento`=$estrellaAlojamiento,
-                                                                    `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()
-                                        WHERE id_alojamientos=$IDAlojamiento");
-
-            $sql->execute();
-        } else {
-            // echo "categoria igual a  conectado    ///  ";
-            $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
-                                                                    `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
-                                                                    `estrella_alojamiento`=$estrellaAlojamiento
-                                                                    ,`rela_tipo_alojamiento_aloja`=$categoriaAlojamiento,
-                                                                    `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()
-                                        WHERE id_alojamientos=$IDAlojamiento");
-
-            $sql->execute();
-        }
-
-        if ($habilitacionAlojamiento == 0) {
-            // echo "habilitacion igual a 0    ///  ";
-            $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
-                                                                    `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
-                                                                    `estrella_alojamiento`=$estrellaAlojamiento,
-                                                                    `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()
-                                        WHERE id_alojamientos=$IDAlojamiento");
-
-            $sql->execute();
-        } else {
-            // echo "categoria igual a  conectado    ///  ";
-            $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
-                                                                    `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
-                                                                    `estrella_alojamiento`=$estrellaAlojamiento
-                                                                    ,`rela_habilitaciones`=$habilitacionAlojamiento,
-                                                                    `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()
-                                        WHERE id_alojamientos=$IDAlojamiento");
+            // echo "categoria igual a  conectado  ";
+            $sql = $conexionBD->prepare("UPDATE `salones` 
+            SET `id_salones`=$id_salones,`nombre_salones`='$nombreSalon',
+            `cuit_salones`='$cuit_salones',`idoneo_salones`='$idoneoSalones',
+            `rela_habilitacion`=$habilitacionsalones,`fecha_edit_salones`= CURRENT_TIMESTAMP()
+            WHERE id_salones =$id_salones");
 
             $sql->execute();
         }
@@ -314,35 +272,29 @@ class SalonesModelo
 
         /*---------------SE ACTUALIZA LA DIRECCION CON LA LOCALIDAD-------------------*/
 
-        if ($localidadsalones == 0) {
-            $sqlDireccion = $conexionBD->prepare("UPDATE `direccion` SET `calle_direccion`='$domiciliosalones'
-                                                    WHERE id_direccion = $IDdireccionAlojamiento ");
+        if ($localidadAlojamiento == 0) {
+            $sqlDireccion = $conexionBD->prepare("UPDATE `direccion` SET `calle_direccion`='$domicilioSalones'
+                                                    WHERE id_direccion = $IDdireccionSalones ");
             // echo "no se actualiza la localidad cuando es null  ///  ";
             $sqlDireccion->execute();
         } else {
-            $sqlDireccion = $conexionBD->prepare("UPDATE `direccion` SET `calle_direccion`='$domiciliosalones',
-                                                    `rela_localidad_direccion`=$localidadsalones 
-                                                    WHERE id_direccion = $IDdireccionAlojamiento ");
+            $sqlDireccion = $conexionBD->prepare("UPDATE `direccion` SET `calle_direccion`='$domicilioSalones',
+                                                    `rela_localidad_direccion`=$localidadAlojamiento 
+                                                    WHERE id_direccion = $IDdireccionSalones ");
             // echo "se actualiza la localidad /// ";
             $sqlDireccion->execute();
         }
 
         /*----------------SE ACTUALIZA EL ESTADO------------------*/
 
-        if ($estadoAlojamiento == 0) {
+        if ($estadosalones == 0) {
             // echo "no se actualiza el estado cuando es null /// ";
         } else {
-            $sqlEstado = $conexionBD->prepare("UPDATE `estado_actividad` SET `rela_tipo_estado`=$estadoAlojamiento
-                                                    WHERE id_estado = $IDestadoAlojamiento");
+            $sqlEstado = $conexionBD->prepare("UPDATE `estado_actividad` SET `rela_tipo_estado`=$estadosalones
+                                                    WHERE id_estado = $IDestadosalones");
             // echo "se actualiza el estado   ///";
             $sqlEstado->execute();
         }
-
-        /*----------------SE ACTUALIZA LA RAZON SOCIAL------------------*/
-
-        $sqlRazonSocial = $conexionBD->prepare("UPDATE `razon_social` SET `descripcion_razon_social`='$razonsocialAlojamiento' 
-                                                WHERE id_razon_social = $IDRazonSocialAlojamiento");
-        $sqlRazonSocial->execute();
 
         /*----------------SE ACTUALIZA EL CONTACTO telefono------------------*/
 
@@ -355,19 +307,6 @@ class SalonesModelo
             $sqlContacto->execute();
             // print_r($sqlContacto);
         }
-
-        // if ($telefonoAlojamiento == "") {
-        //     $telefonoAlojamiento = "No se registró";
-        //     $sqlContacto = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`='$telefonoAlojamiento'
-        //                                             WHERE id_contacto = $alojamientoIDtelefono");
-        //     $sqlContacto->execute();
-        // } else {
-        //     $sqlContacto = $conexionBD->prepare("UPDATE `contacto` SET `descripcion_contacto`=$telefonoAlojamiento
-        //                                                 WHERE id_contacto = $alojamientoIDtelefono");
-        //     $sqlContacto->execute();
-        // }
-
-
 
         /*----------------SE ACTUALIZA EL CONTACTO  telefono fijo------------------*/
 
@@ -421,17 +360,7 @@ class SalonesModelo
                                                     WHERE id_contacto = $alojamientoIDotro ");
         $sqlOtro->execute();
 
-        /*----------------SE ACTUALIZA EL SERVICIO------------------*/
 
-        $sqlOtro = $conexionBD->prepare("UPDATE `servicios_alojamiento` SET `cantidad_total_hab`=$cantTotalAlojamiento,`cantidad_hab_single`=$singleAlojamiento,
-                                                                                    `cantidad_hab_doble`=$dobleAlojamiento,`cantidad_hab_matrimoniales`=$matrimonialAlojamiento,
-                                                                                    `cantidad_hab_triple`=$tripleAlojamiento,`cantidad_hab_cuadruple`=$cuadrupleAlojamiento,
-                                                                                    `apartamento_alojamiento`='$apartamentoAlojamiento',`otros_servicios`='$otroServicioAlojamiento',
-                                                                                    `wifi_alojamiento`='$wifiAlojamiento',`estacionamiento_alojamiento`='$estacionamientoAlojamiento',
-                                                                                    `desayuno_alojamiento`='$desayunoAlojamiento',`piscina_alojamiento`='$piscinaAlojamiento',
-                                                                                    `cantidad_plazas`= $cantTotalPlazasAlojamiento
-                                                                                WHERE id_servicio_alojamiento = $IDservicios ");
-        $sqlOtro->execute();
 
         /*----------------SE ACTUALIZA EL SERVICIO COMPLEMENTARIO------------------*/
 
@@ -511,56 +440,24 @@ class SalonesModelo
         return $sqlRubro->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function buscarInsertar($idAlojamiento)
+    public function buscarInsertar($idSalon)
     {
 
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->query("SELECT alojamientos.id_alojamientos,alojamientos.descripcion_alojamientos,alojamientos.cuit_alojamiento,
-            alojamientos.idoneo_alojamiento,alojamientos.estrella_alojamiento,
-            alojamientos.fecha_edit_alojamiento,
-            razon_social.id_razon_social,razon_social.descripcion_razon_social,
-            direccion.id_direccion,direccion.calle_direccion,
-            estado_actividad.id_estado,estado_actividad.rela_tipo_estado,
-            tipo_estado.descripcion_tipo_estado,
-            departamentos_fsa.descripcion_departamentos,
-            rubro_alojamiento.descripcion_rubro,
-            localidad.nombre_localidad,
-            tipo_alojamiento.descripcion_tipo_alojamiento,
-              tipo_alojamiento.id_tipo_alojamiento,
-              servicios_alojamiento.id_servicio_alojamiento,servicios_alojamiento.`cantidad_plazas`,
-              servicios_alojamiento.`cantidad_total_hab`, servicios_alojamiento.`cantidad_hab_single`,
-              servicios_alojamiento.`cantidad_hab_doble`, servicios_alojamiento.`cantidad_hab_matrimoniales`, servicios_alojamiento.`cantidad_hab_triple`,
-              servicios_alojamiento.`cantidad_hab_cuadruple`, servicios_alojamiento.`apartamento_alojamiento`, servicios_alojamiento.`otros_servicios`,
-              servicios_alojamiento.`wifi_alojamiento`, servicios_alojamiento.`estacionamiento_alojamiento`, servicios_alojamiento.`desayuno_alojamiento`,
-              servicios_alojamiento.`piscina_alojamiento`,
-              serv_complemetarios_alojamiento.cantidad_salones,   serv_complemetarios_alojamiento.`capacidad_salones`,serv_complemetarios_alojamiento.`wifi_salones`,
-              serv_complemetarios_alojamiento.`estacionamiento_salones`, serv_complemetarios_alojamiento.`otros_servicio_salones`,
-              serv_complemetarios_alojamiento.id_serv_comple_alojamiento,
-              habilitacion_municipal.id_habi_municipal, habilitacion_municipal.descripcion
-              
-            FROM `alojamientos`
-            INNER JOIN razon_social on razon_social.id_razon_social = alojamientos.rela_razon_social_alo
-            INNER JOIN direccion ON alojamientos.rela_alojamiento_direccion = direccion.id_direccion
-            INNER JOIN localidad on localidad.id_localidad = direccion.rela_localidad_direccion
-            INNER JOIN estado_actividad on estado_actividad.rela_estado_salones = alojamientos.id_alojamientos
-            INNER JOIN tipo_estado on tipo_estado.id_tipo_estado = estado_actividad.rela_tipo_estado
-            INNER JOIN departamentos_fsa on localidad.rela_departamento = departamentos_fsa.id_departamentos_fsa
-            INNER JOIN rubro_alojamiento on rubro_alojamiento.id_rubro_alojamiento = alojamientos.rela_alojamiento_rubro
-            INNER JOIN tipo_alojamiento on tipo_alojamiento.id_tipo_alojamiento = alojamientos.rela_tipo_alojamiento_aloja
-            INNER JOIN servicios_alojamiento on servicios_alojamiento.id_servicio_alojamiento = alojamientos.rela_aloja_servicios
-            INNER JOIN serv_complemetarios_alojamiento on serv_complemetarios_alojamiento.id_serv_comple_alojamiento =
-            alojamientos.rela_aloja_serv_adicionales
-            INNER JOIN habilitacion_municipal on alojamientos.rela_habilitaciones = habilitacion_municipal.id_habi_municipal
-
-                        
-            WHERE alojamientos.id_alojamientos =$idAlojamiento");
+        $sql = $conexionBD->query("SELECT * 
+        FROM `salones` s
+        INNER JOIN direccion d on d.id_direccion = s.rela_direccion
+        INNER JOIN localidad l on l.id_localidad = d.rela_localidad_direccion
+        INNER JOIN departamentos_fsa on l.rela_departamento = departamentos_fsa.id_departamentos_fsa
+        INNER JOIN estado_actividad ea on ea.rela_estado_salones = s.id_salones
+        INNER JOIN tipo_estado tea on tea.id_tipo_estado = ea.rela_tipo_estado
+        INNER JOIN habilitacion_municipal hm on hm.id_habi_municipal = s.rela_habilitacion
+        INNER JOIN serv_complemetarios_alojamiento sca on sca.id_serv_comple_alojamiento = s.rela_servi_complementarios
+        WHERE s.id_salones =$idSalon");
 
         //recuperamos los datos y los retornamos
-
         $sql->execute();
-
-
 
         return $sql->fetch(PDO::FETCH_OBJ); //este return se va a llamar en el controlador_agencia.php clase inicio
 

@@ -2,11 +2,11 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Imprimir Alojamiento</h1>
+                <h1>Imprimir Salones</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=Alojamientos&accion=inicio">Alojamientos</a></li>
+                    <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=salones&accion=inicio">Salones</a></li>
                     <li class="breadcrumb-item active">Imprimir</li>
                 </ol>
             </div>
@@ -27,7 +27,6 @@
                         <tr style="background: linear-gradient(to right, #61ba6d, #83c331)">
 
                             <th>Localidad</th>
-                            <th>Categoría</th>
                             <th>Designacion Comercial</th>
                             <th>Contacto</th>
                             <th>Dirección</th>
@@ -42,8 +41,7 @@
                             <tr>
 
                                 <td><?php echo $alojamiento["nombre_localidad"]; ?></td>
-                                <td><?php echo $alojamiento["descripcion_tipo_alojamiento"]; ?></td>
-                                <td><?php echo $alojamiento["descripcion_alojamientos"]; ?></td>
+                                <td><?php echo $alojamiento["nombre_salones"]; ?></td>
                                 <td><?php echo $alojamiento["descripcion_contacto"]; ?></td>
                                 <td><?php echo $alojamiento["calle_direccion"]; ?></td>
 
