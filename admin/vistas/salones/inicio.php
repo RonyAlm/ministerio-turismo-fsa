@@ -61,13 +61,6 @@ $rol_id = $_SESSION['rol_id'];
               </span>
             <?php } ?>
 
-            <?php foreach ($cantidad_hotel_plazas as $estadistica) { ?>
-              <span class="info-box-text">
-                Plazas:
-                <strong><?php echo $estadistica->conteo; ?></strong>
-              </span>
-            <?php } ?>
-
           </div>
 
         </div>

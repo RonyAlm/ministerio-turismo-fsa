@@ -740,9 +740,7 @@ class estadistica
         $conexionBD = BD::crearInstancia();
 
 
-        $sqlestadistica = $conexionBD->query("SELECT COUNT(*) conteo 
-                                                        FROM `alojamientos` 
-                                                        WHERE alojamientos.rela_tipo_alojamiento_aloja = 1");
+        $sqlestadistica = $conexionBD->query("SELECT COUNT(*) conteo FROM salones;");
 
         $sqlestadistica->execute();
 
