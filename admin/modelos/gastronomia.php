@@ -17,37 +17,76 @@ class GastronomiaModelo
     public function trigger($accion, $id, $controlador1)
     {
         $conexionBD = BD::crearInstancia();
+        // $conexionBD->beginTransaction();
+        BD::iniciarTransaccion();
 
-        $triggerName = $accion . $controlador1;
-        $tableName = 'gastronomia';
+        try {
+            $triggerName = $accion . $controlador1;
+            $tableName = 'gastronomia';
 
-        $sql = "SELECT trigger_name
-        FROM information_schema.triggers
-        WHERE trigger_name = :triggerName
-          AND event_object_table = :tableName";
+            $sql = "SELECT trigger_name
+                    FROM information_schema.triggers
+                    WHERE trigger_name = :triggerName
+                    AND event_object_table = :tableName";
 
-        $stmt = $conexionBD->prepare($sql);
-        $stmt->bindParam(':triggerName', $triggerName, PDO::PARAM_STR);
-        $stmt->bindParam(':tableName', $tableName, PDO::PARAM_STR);
-        $stmt->execute();
+            $stmt = $conexionBD->prepare($sql);
+            $stmt->bindParam(':triggerName', $triggerName, PDO::PARAM_STR);
+            $stmt->bindParam(':tableName', $tableName, PDO::PARAM_STR);
+            $stmt->execute();
 
-        // Eliminar trigger existente si existe
-        $eliminarTriggerSql = "DROP TRIGGER IF EXISTS `$triggerName`";
-        $conexionBD->query($eliminarTriggerSql);
+            // Eliminar trigger existente si existe
+            $eliminarTriggerSql = "DROP TRIGGER IF EXISTS `$triggerName`";
+            $conexionBD->query($eliminarTriggerSql);
 
-        switch ($accion) {
-            case 'crear':
-                $crearTriggerSql = "CREATE TRIGGER `$triggerName` AFTER INSERT ON `$controlador1` FOR EACH ROW INSERT INTO auditoria(tabla, accion, new_value,usuario_id) VALUES ('$controlador1', 'insert', new.denominacion_gastro, $id)";
-                $conexionBD->query($crearTriggerSql);
-                break;
-            case 'editar':
-                $crearTriggerSql = "CREATE TRIGGER `$triggerName` AFTER UPDATE ON `$controlador1` FOR EACH ROW INSERT INTO auditoria(tabla, accion,old_value,new_value,usuario_id) VALUES ('$controlador1','update',old.denominacion_gastro,new.denominacion_gastro,$id)";
-                $conexionBD->query($crearTriggerSql);
-                break;
-            case 'borrar':
-                $crearTriggerSql = "CREATE TRIGGER `$triggerName` AFTER DELETE ON `$controlador1` FOR EACH ROW INSERT INTO auditoria(tabla, accion,old_value,usuario_id) VALUES ('$controlador1','delete',old.denominacion_gastro,$id)";
-                $conexionBD->query($crearTriggerSql);
-                break;
+            switch ($accion) {
+                case 'crear':
+                    $crearTriggerSql = "CREATE TRIGGER `$triggerName` AFTER INSERT ON `$controlador1` FOR EACH ROW INSERT INTO auditoria(tabla, accion, new_value,usuario_id) VALUES ('$controlador1', 'insert', new.denominacion_gastro, $id)";
+                    $stmt = $conexionBD->prepare($crearTriggerSql);
+                    $stmt->execute();
+                    $ultimoID = $conexionBD->query("SELECT MAX(id) FROM auditoria")->fetchColumn();
+                    echo '<pre>';
+                    print_r($ultimoID);
+                    echo '</pre>';
+                    $actualizarIDSql = "UPDATE auditoria SET usuario_id=$id WHERE id=$ultimoID";
+                    $conexionBD->query($actualizarIDSql);
+                    break;
+                case 'editar':
+                    $crearTriggerSql = "CREATE TRIGGER `$triggerName` AFTER UPDATE ON `$controlador1` FOR EACH ROW INSERT INTO auditoria(tabla, accion, old_value, new_value, usuario_id) VALUES ('$controlador1','update', old.denominacion_gastro, new.denominacion_gastro, $id)";
+                    $stmt = $conexionBD->prepare($crearTriggerSql);
+                    $stmt->execute();
+                    $ultimoID = $conexionBD->query("SELECT MAX(id) FROM auditoria")->fetchColumn();
+                    echo '<pre>';
+                    print_r($ultimoID);
+                    echo '</pre>';
+                    $actualizarIDSql = "UPDATE auditoria SET usuario_id = $id WHERE id = $ultimoID";
+                    $conexionBD->query($actualizarIDSql);
+                    break;
+                case 'borrar':
+                    $crearTriggerSql = "CREATE TRIGGER `$triggerName` AFTER DELETE ON `$controlador1` FOR EACH ROW
+                    BEGIN
+                        DECLARE lastInsertID INT;
+                        INSERT INTO auditoria(tabla, accion, old_value) VALUES ('$controlador1','delete',old.denominacion_gastro);
+                        SELECT LAST_INSERT_ID() INTO lastInsertID;
+                        IF ROW_COUNT() > 0 THEN
+                            UPDATE `auditoria` SET `usuario_id`=$id WHERE id = lastInsertID;
+                        END IF;
+                    END";
+                    $stmt = $conexionBD->prepare($crearTriggerSql);
+                    $stmt->execute();
+                    $ultimoID = $conexionBD->query("SELECT MAX(id) FROM auditoria")->fetchColumn();
+                    echo '<pre>';
+                    print_r($ultimoID);
+                    echo '</pre>';
+                    $actualizarIDSql = "UPDATE auditoria SET usuario_id=$id WHERE id=$ultimoID";
+                    $conexionBD->query($actualizarIDSql);
+                    break;
+            }
+
+            BD::confirmarTransaccion();
+        } catch (PDOException $e) {
+            BD::revertirTransaccion();
+            // Manejar el error
+            // throw $e;
         }
     }
 

@@ -29,7 +29,7 @@ $rol_id = $_SESSION['rol_id'];
 
   <div class="card-header">
 
-    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "roxana") : ?>
+    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "roxana" or $usuario == "rrhh") : ?>
 
       <a name="" id="" class="btn btn-success" href="?controlador=gastronomia&accion=crear" role="button">Agregar</a>
 
@@ -73,7 +73,7 @@ $rol_id = $_SESSION['rol_id'];
                       <i class="fas fa-folder"></i>
                     </a>
 
-                    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "roxana") { ?>
+                    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "roxana" or $usuario == "rrhh") { ?>
                       <a title="Editar" href="?controlador=gastronomia&accion=editar&id=<?php echo $gastronomia["id_gastronomia"]; ?>" class="btn btn-success btn-sm">
                         <i class="fas fa-pencil-alt"></i>
                       </a>

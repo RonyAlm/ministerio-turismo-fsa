@@ -95,7 +95,7 @@ class ControladorGastronomia
             );
             if ($insertar) {
                 $insertar->trigger($accion, $id, $controlador1);
-                print_r($insertar);
+                // print_r($insertar);
                 // print_r($usuario_crear);
                 // echo "<script>location.href='index2.php?controlador=gastronomia&accion=inicio';</script>";
             }
@@ -206,7 +206,7 @@ class ControladorGastronomia
 
 
             // header("Location:admin/index2.php?controlador=agencias&accion=inicio");
-            echo "<script>location.href='index2.php?controlador=gastronomia&accion=inicio';</script>";
+            // echo "<script>location.href='index2.php?controlador=gastronomia&accion=inicio';</script>";
         }
 
 
@@ -257,7 +257,7 @@ class ControladorGastronomia
         $borrado = $borrarAgencias->borrar($idAgenciaBorrar, $id_direccion);
         if ($borrarAgencias) {
             $borrarAgencias->trigger($accion, $id, $controlador1);
-            // print_r($borrarAgencias);
+            print_r($borrarAgencias);
 
             // echo "<script>location.href='index2.php?controlador=gastronomia&accion=inicio';</script>";
         }
