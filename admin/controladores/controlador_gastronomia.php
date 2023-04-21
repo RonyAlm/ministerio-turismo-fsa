@@ -22,10 +22,7 @@ class ControladorGastronomia
         $consulta = new GastronomiaModelo();
 
         $tabla = $consulta->consultar();
-        // $datosEstadisticos = new estadistica();
 
-        // $cantidad_agencias = $datosEstadisticos->cantidadAgencias();
-        // $cantidadAgenciasHabilitadas = $datosEstadisticos->cantidadAgenciasHabilitadas();
 
 
         include_once("vistas/gastronomia/inicio.php");

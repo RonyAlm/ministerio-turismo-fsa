@@ -40,14 +40,38 @@ class GastronomiaModelo
 
             switch ($accion) {
                 case 'crear':
-                    $crearTriggerSql = "CREATE TRIGGER `$triggerName` AFTER INSERT ON `$controlador1` FOR EACH ROW INSERT INTO auditoria(tabla, accion, new_value,usuario_id) VALUES ('$controlador1', 'insert', new.denominacion_gastro, $id)";
+                    // Obtener los nombres de las columnas y valores a insertar
+                    $columnas = array();
+                    $valores = array();
+                    $query = "INSERT INTO `$controlador1` (";
+                    $result = $conexionBD->query("SHOW COLUMNS FROM `$controlador1`");
+                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                        $columnas[] = "`" . $row['Field'] . "`";
+                        $valores[] = ":" . $row['Field'];
+                    }
+                    $query .= implode(",", $columnas) . ") VALUES (" . implode(",", $valores) . ")";
+                    $stmt = $conexionBD->prepare($query);
+
+                    // Vincular los valores a los marcadores de posición
+                    foreach ($valores as $valor) {
+                        $stmt->bindValue($valor, $_POST[substr($valor, 1)]);
+                    }
+                    // Crear el trigger
+                    $new_value = "CONCAT(";
+                    foreach ($columnas as $columna) {
+                        $new_value .= "'`$columna`: ', NEW.`$columna`, ', ',";
+                    }
+                    $new_value = substr($new_value, 0, -1) . ")";
+                    // Eliminar la última coma y cerrar el objeto JSON
+                    echo '<pre>';
+                    print_r($new_value);
+                    echo '</pre>';
+                    $crearTriggerSql = "CREATE TRIGGER `$triggerName` AFTER INSERT ON `$controlador1` FOR EACH ROW INSERT INTO auditoria(tabla, accion, new_value, usuario_id) VALUES ('$controlador1', 'insert', $new_value, $id)";
                     $stmt = $conexionBD->prepare($crearTriggerSql);
                     $stmt->execute();
+                    // Actualizar el usuario_id en la última fila de la tabla de auditoría
                     $ultimoID = $conexionBD->query("SELECT MAX(id) FROM auditoria")->fetchColumn();
-                    echo '<pre>';
-                    print_r($ultimoID);
-                    echo '</pre>';
-                    $actualizarIDSql = "UPDATE auditoria SET usuario_id=$id WHERE id=$ultimoID";
+                    $actualizarIDSql = "UPDATE auditoria SET usuario_id='$id' WHERE id=$ultimoID";
                     $conexionBD->query($actualizarIDSql);
                     break;
                 case 'editar':

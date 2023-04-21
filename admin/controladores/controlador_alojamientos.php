@@ -37,6 +37,10 @@ class ControladorAlojamientos
 
     public function crear()
     {
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
 
         $select_tipo_alo = new Alojamientos();
 
@@ -96,7 +100,7 @@ class ControladorAlojamientos
             $habilitacionAlojamiento = $_POST['habilitacionAlojamiento'];
 
 
-            $insertarAlojamiento = $crearAlojamiento->crear(
+            $crearAlojamiento->crear(
                 $categoriaAlojamiento,
                 $nombreAlojamiento,
                 $localidadAlojamiento,
@@ -135,6 +139,12 @@ class ControladorAlojamientos
                 $habilitacionAlojamiento,
                 $cantTotalPlazasAlojamiento
             );
+            if ($crearAlojamiento) {
+                $crearAlojamiento->trigger($accion, $id, $controlador1);
+                // print_r($insertar);
+                // print_r($usuario_crear);
+                echo "<script>location.href='index2.php?controlador=gastronomia&accion=inicio';</script>";
+            }
 
             // header("Location:index2.php?controlador=Alojamientos&accion=inicio");
             echo "<script>location.href='index2.php?controlador=Alojamientos&accion=inicio';</script>";
@@ -142,7 +152,7 @@ class ControladorAlojamientos
 
         include_once("vistas/Alojamientos/crear.php");
     }
-    
+
     public function editar()
     {
 
@@ -368,7 +378,7 @@ class ControladorAlojamientos
         $inicioAlojamiento = $consultarAlojamientosInicio->consultar();
         include_once("vistas/Alojamientos/imprimir.php");
     }
-    
+
     public function imprimirInfo()
     {
         $id_alojamientos = $_GET['id'];
