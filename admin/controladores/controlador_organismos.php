@@ -23,6 +23,13 @@ class ControladorOrganismos
 
     public function crear()
     {
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        echo '<pre>';
+        print_r($controlador1);
+        echo '</pre>';
 
         $select_tipo_agencia = new OrganismoModelo();
 
