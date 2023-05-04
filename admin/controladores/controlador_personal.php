@@ -62,6 +62,13 @@ class ControladorPersonal
     }
     public function crear()
     {
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        echo '<pre>';
+        print_r($controlador1);
+        echo '</pre>';
 
         $select_tipo_agencia = new PersonalModelo();
 
@@ -121,6 +128,12 @@ class ControladorPersonal
             //     $estadoAgencia,
             //     $idoneoAgencia
             // );
+            if ($insertarAgencia) {
+                $insertarAgencia->trigger($accion, $id, $controlador1);
+                // print_r($insertar);
+                // print_r($usuario_crear);
+                echo "<script>location.href='index2.php?controlador=personal&accion=inicio';</script>";
+            }
 
 
             header("Location:index2.php?controlador=personal&accion=inicio");
@@ -131,6 +144,13 @@ class ControladorPersonal
     }
     public function editar()
     {
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        echo '<pre>';
+        print_r($controlador1);
+        echo '</pre>';
 
         $id = $_GET["id"];
         $idPersona = $_GET["idPersona"];
@@ -252,6 +272,12 @@ class ControladorPersonal
                 $articuloID,
                 $fechainiArticulo
             );
+            if ($EditarAgencia) {
+                $EditarAgencia->trigger($accion, $id, $controlador1);
+                // print_r($insertar);
+                // print_r($usuario_crear);
+                echo "<script>location.href='index2.php?controlador=personal&accion=inicio';</script>";
+            }
 
             // header("Location:admin/index2.php?controlador=agencias&accion=inicio");
             echo "<script>location.href = 'index2.php?controlador=personal&accion=inicio';</script>";
@@ -289,6 +315,13 @@ class ControladorPersonal
 
     public function borrar()
     {
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        echo '<pre>';
+        print_r($controlador1);
+        echo '</pre>';
         // print_r($_GET);
 
         $idBorrarLicencia = $_GET["id"];
@@ -300,9 +333,14 @@ class ControladorPersonal
         $borrar = new PersonalModelo();
 
 
-        $borradoPersonal = $borrar->borrarPersonal($idBorrarPersonal, $idBorrarDireccion);
-        $borradoLicencia = $borrar->borrarLicencia($idBorrarLicencia);
-        $borradoArticulo = $borrar->borrarArticulo($idBorrarArticulo);
+        $borrar->borrarPersonal($idBorrarPersonal, $idBorrarDireccion);
+        $borrar->borrarLicencia($idBorrarLicencia);
+        $borrar->borrarArticulo($idBorrarArticulo);
+        if ($borrar) {
+            $borrar->trigger($accion, $id, $controlador1);
+
+            echo "<script>location.href='index2.php?controlador=personal&accion=inicio';</script>";
+        }
 
         header("Location:index2.php?controlador=personal&accion=inicio");
     }
@@ -352,6 +390,13 @@ class ControladorPersonal
 
     public function guardar()
     {
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        echo '<pre>';
+        print_r($controlador1);
+        echo '</pre>';
         $select_tipo = new PersonalModelo();
 
         $buscarSelectLocalidad = $select_tipo->buscarSelectLocalidad();
@@ -437,6 +482,11 @@ class ControladorPersonal
                 $diasrestante,
                 $fechainiArticulo
             );
+            if ($insertar) {
+                $insertar->trigger($accion, $id, $controlador1);
+
+                echo "<script>location.href='index2.php?controlador=personal&accion=inicio';</script>";
+            }
 
 
             // header("Location:index2.php?controlador=personal&accion=inicio");

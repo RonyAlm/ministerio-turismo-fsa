@@ -26,6 +26,13 @@ class ControladorPrestadores
 
     public function crear()
     {
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        echo '<pre>';
+        print_r($controlador1);
+        echo '</pre>';
 
         $selectPrestadores = new PrestadoresModelo();
 
@@ -64,7 +71,7 @@ class ControladorPrestadores
             $otroserviciosPrestador = $_POST['otroserviciosPrestador'];
             //print_r($serviciosPrestador);
 
-            $insertarPrestador = $crearPrestador->crear(
+            $crearPrestador->crear(
                 $categoriaPrestador,
                 $nombrePrestador,
                 $dniPrestador,
@@ -84,6 +91,11 @@ class ControladorPrestadores
                 $serviciosPrestador,
                 $otroserviciosPrestador
             );
+            if ($crearPrestador) {
+                $crearPrestador->trigger($accion, $id, $controlador1);
+
+                echo "<script>location.href='index2.php?controlador=Prestadores&accion=inicio';</script>";
+            }
 
 
             // header("Location:index2.php?controlador=Prestadores&accion=inicio");
@@ -95,6 +107,13 @@ class ControladorPrestadores
 
     public function editar()
     {
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        echo '<pre>';
+        print_r($controlador1);
+        echo '</pre>';
 
         $id_Prestador = $_GET['id'];
 
@@ -170,7 +189,7 @@ class ControladorPrestadores
             $otroserviciosPrestador = $_POST['otroserviciosPrestador'];
             //print_r($serviciosPrestador);
 
-            $insertarPrestador = $insertarDatosPrestadores->editar(
+            $insertarDatosPrestadores->editar(
                 $categoriaPrestador,
                 $IDnombre,
                 $nombrePrestador,
@@ -201,9 +220,11 @@ class ControladorPrestadores
                 $IDsitio,
                 $IDotro
             );
+            if ($insertarDatosPrestadores) {
+                $insertarDatosPrestadores->trigger($accion, $id, $controlador1);
 
-            // print_r($insertarPrestador);
-
+                echo "<script>location.href='index2.php?controlador=Prestadores&accion=inicio';</script>";
+            }
             // header("Location:index2.php?controlador=Prestadores&accion=inicio");
             echo "<script>location.href = 'index2.php?controlador=Prestadores&accion=inicio';</script>";
         }
@@ -212,15 +233,26 @@ class ControladorPrestadores
 
     public function borrar()
     {
-        // print_r($_GET);
+
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        echo '<pre>';
+        print_r($controlador1);
+        echo '</pre>';
 
         $borradoPrestadores = new PrestadoresModelo();
 
         $id_Prestador = $_GET['id'];
         $id_direccion = $_GET['idDireccion'];
 
-        $borrado = $borradoPrestadores->borrar($id_Prestador, $id_direccion);
+        $borradoPrestadores->borrar($id_Prestador, $id_direccion);
+        if ($borradoPrestadores) {
+            $borradoPrestadores->trigger($accion, $id, $controlador1);
 
+            echo "<script>location.href='index2.php?controlador=Prestadores&accion=inicio';</script>";
+        }
 
         echo "<script>location.href = 'index2.php?controlador=Prestadores&accion=inicio';</script>";
 

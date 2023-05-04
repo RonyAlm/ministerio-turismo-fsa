@@ -25,6 +25,14 @@ class ControladorSalones
     public function crear()
     {
 
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        echo '<pre>';
+        print_r($controlador1);
+        echo '</pre>';
+
         $select_tipo_alo = new SalonesModelo();
 
         $buscarSelectTipoAlojamiento = $select_tipo_alo->buscarSelectTipoAlojamiento();
@@ -87,6 +95,11 @@ class ControladorSalones
                 $reunionsalones,
                 $habilitacionsalones
             );
+            if ($crearSalones) {
+                $crearSalones->trigger($accion, $id, $controlador1);
+
+                echo "<script>location.href='index2.php?controlador=salones&accion=inicio';</script>";
+            }
 
             // header("Location:index2.php?controlador=salones&accion=inicio");
             echo "<script>location.href='index2.php?controlador=salones&accion=inicio';</script>";
@@ -97,6 +110,14 @@ class ControladorSalones
 
     public function editar()
     {
+
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        echo '<pre>';
+        print_r($controlador1);
+        echo '</pre>';
         $id_salones = $_GET['id'];
 
         // print_r($id_salones);
@@ -198,6 +219,11 @@ class ControladorSalones
                 $habilitacionsalones,
                 $IDhabilitacionsalones
             );
+            if ($insertar) {
+                $insertar->trigger($accion, $id, $controlador1);
+
+                echo "<script>location.href='index2.php?controlador=salones&accion=inicio';</script>";
+            }
 
 
 
@@ -226,6 +252,14 @@ class ControladorSalones
 
     public function borrar()
     {
+
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        echo '<pre>';
+        print_r($controlador1);
+        echo '</pre>';
         //print_r($_GET);
 
         $borrado = new SalonesModelo();
@@ -237,6 +271,11 @@ class ControladorSalones
 
 
         $borrado->borrar($id_salones, $id_direccion, $id_serv);
+        if ($borrado) {
+            $borrado->trigger($accion, $id, $controlador1);
+
+            echo "<script>location.href='index2.php?controlador=salones&accion=inicio';</script>";
+        }
 
         // header("Location:index2.php?controlador=salones&accion=inicio");
         echo "<script>location.href='index2.php?controlador=salones&accion=inicio';</script>";

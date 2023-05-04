@@ -12,6 +12,142 @@ class SalonesModelo
     {
         $this->listaSalonesInicio = array();
     }
+    public function trigger($accion, $id, $controlador1)
+    {
+        $conexionBD = BD::crearInstancia();
+
+        BD::iniciarTransaccion();
+
+        try {
+            $triggerName = $accion . $controlador1;
+            $tableName = 'salones';
+
+            $sql = "SELECT trigger_name
+                    FROM information_schema.triggers
+                    WHERE trigger_name = :triggerName
+                    AND event_object_table = :tableName";
+
+            $stmt = $conexionBD->prepare($sql);
+            $stmt->bindParam(':triggerName', $triggerName, PDO::PARAM_STR);
+            $stmt->bindParam(':tableName', $tableName, PDO::PARAM_STR);
+            $stmt->execute();
+
+            // Eliminar trigger existente si existe
+            $eliminarTriggerSql = "DROP TRIGGER IF EXISTS `$triggerName`";
+            $conexionBD->query($eliminarTriggerSql);
+
+            switch ($accion) {
+                case 'crear':
+                    // Obtener los nombres de las columnas y valores a insertar
+                    $columnas = array();
+                    $valores = array();
+                    $query = "INSERT INTO `$tableName` (";
+                    $result = $conexionBD->query("SHOW COLUMNS FROM `$tableName`");
+                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                        if (strpos($row['Field'], 'id') === 0) {
+                            $columnas[] = "`" . $row['Field'] . "`";
+                        }
+                        $valores[] = ":" . $row['Field'];
+                    }
+                    $query .= implode(",", $columnas) . ") VALUES (" . implode(",", $valores) . ")";
+                    $stmt = $conexionBD->prepare($query);
+
+                    // Crear el trigger
+                    $new_value = "CONCAT('{";
+                    foreach ($columnas as $columna) {
+                        $new_value .= "\\\"" . $columna . "\\\":', new." . $columna . ", ',";
+                    }
+                    $new_value = substr($new_value, 0, -1) . "}')";
+
+                    $crearTriggerSql = "CREATE TRIGGER `$triggerName` AFTER INSERT ON `$tableName` FOR EACH ROW INSERT INTO auditoria(tabla, accion, new_value, usuario_id) VALUES ('$tableName', 'INSERT', $new_value, $id)";
+                    $stmt = $conexionBD->prepare($crearTriggerSql);
+                    $stmt->execute();
+
+                    // Actualizar el usuario_id en la última fila de la tabla de auditoría
+                    $ultimoID = $conexionBD->query("SELECT MAX(id) FROM auditoria")->fetchColumn();
+                    $actualizarIDSql = "UPDATE auditoria SET usuario_id='$id' WHERE id=$ultimoID";
+                    $conexionBD->query($actualizarIDSql);
+                    break;
+                case 'editar':
+                    // Obtener los nombres de las columnas y valores a insertar
+                    $columnas = array();
+                    $valores = array();
+                    $query = "INSERT INTO `$tableName` (";
+                    $result = $conexionBD->query("SHOW COLUMNS FROM `$tableName`");
+                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                        if (strpos($row['Field'], 'id') === 0) {
+                            $columnas[] = "`" . $row['Field'] . "`";
+                        }
+                        $valores[] = ":" . $row['Field'];
+                    }
+                    $query .= implode(",", $columnas) . ") VALUES (" . implode(",", $valores) . ")";
+                    $stmt = $conexionBD->prepare($query);
+
+                    // Crear el trigger
+                    $new_value = "CONCAT('{";
+                    $old_value = "CONCAT('{";
+                    foreach ($columnas as $columna) {
+                        $new_value .= "\\\"" . $columna . "\\\":', new." . $columna . ", ',";
+                        $old_value .= "\\\"" . $columna . "\\\":', old." . $columna . ", ',";
+                    }
+                    $new_value = substr($new_value, 0, -1) . "}')";
+                    $old_value = substr($old_value, 0, -1) . "}')";
+
+
+                    $crearTriggerSql = "CREATE TRIGGER `$triggerName` AFTER UPDATE ON `$tableName` FOR EACH ROW INSERT INTO auditoria(tabla, accion,old_value, new_value, usuario_id) VALUES ('$tableName', 'UPDATE',$old_value, $new_value, $id)";
+                    $stmt = $conexionBD->prepare($crearTriggerSql);
+                    $stmt->execute();
+
+                    // Actualizar el usuario_id en la última fila de la tabla de auditoría
+                    $ultimoID = $conexionBD->query("SELECT MAX(id) FROM auditoria")->fetchColumn();
+                    $actualizarIDSql = "UPDATE auditoria SET usuario_id='$id' WHERE id=$ultimoID";
+                    $conexionBD->query($actualizarIDSql);
+                    break;
+                case 'borrar':
+                    // Obtener los nombres de las columnas y valores a insertar
+                    $columnas = array();
+                    $valores = array();
+                    $query = "INSERT INTO `$tableName` (";
+                    $result = $conexionBD->query("SHOW COLUMNS FROM `$tableName`");
+                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                        if (strpos($row['Field'], 'id') === 0) {
+                            $columnas[] = "`" . $row['Field'] . "`";
+                        }
+                        $valores[] = ":" . $row['Field'];
+                    }
+                    $query .= implode(",", $columnas) . ") VALUES (" . implode(",", $valores) . ")";
+                    $stmt = $conexionBD->prepare($query);
+
+
+                    // Crear el trigger
+
+                    $old_value = "CONCAT('{";
+                    foreach ($columnas as $columna) {
+
+                        $old_value .= "\\\"" . $columna . "\\\":', old." . $columna . ", ',";
+                    }
+
+                    $old_value = substr($old_value, 0, -1) . "}')";
+
+
+                    $crearTriggerSql = "CREATE TRIGGER `$triggerName` AFTER DELETE ON `$tableName` FOR EACH ROW INSERT INTO auditoria(tabla, accion,old_value, usuario_id) VALUES ('$tableName', 'DELETE',$old_value, $id)";
+                    $stmt = $conexionBD->prepare($crearTriggerSql);
+                    $stmt->execute();
+
+                    // Actualizar el usuario_id en la última fila de la tabla de auditoría
+                    $ultimoID = $conexionBD->query("SELECT MAX(id) FROM auditoria")->fetchColumn();
+                    $actualizarIDSql = "UPDATE auditoria SET usuario_id='$id' WHERE id=$ultimoID";
+                    $conexionBD->query($actualizarIDSql);
+                    break;
+            }
+
+            BD::confirmarTransaccion();
+        } catch (PDOException $e) {
+            BD::revertirTransaccion();
+            // Manejar el error
+            // throw $e;
+        }
+    }
 
     public function consultar()
     {
