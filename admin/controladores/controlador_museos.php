@@ -24,6 +24,14 @@ class ControladorMuseos
 
     public function crear()
     {
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        echo '<pre>';
+        print_r($controlador1);
+        echo '</pre>';
+
 
         $select_tipo_museo = new MuseoModelo();
 
@@ -68,6 +76,12 @@ class ControladorMuseos
                 $otroAgencia,
                 $idoneoMuseo
             );
+            if ($insertarMuseo) {
+                $insertarMuseo->trigger($accion, $id, $controlador1);
+                // print_r($insertar);
+                // print_r($usuario_crear);
+                echo "<script>location.href='index2.php?controlador=museos&accion=inicio';</script>";
+            }
 
             // header("Location:index2.php?controlador=museos&accion=inicio");
             echo "<script>location.href='index2.php?controlador=museos&accion=inicio';</script>";
@@ -79,6 +93,13 @@ class ControladorMuseos
 
     public function editar()
     {
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        echo '<pre>';
+        print_r($controlador1);
+        echo '</pre>';
 
         $idMuseo = $_GET["id"];
         // print_r($idMuseo);
@@ -156,12 +177,17 @@ class ControladorMuseos
                 $idotroAgencia,
                 $idDireccion
             );
+            if ($EditarAgencia) {
+                $EditarAgencia->trigger($accion, $id, $controlador1);
+                // print_r($insertar);
+                // print_r($usuario_crear);
+                echo "<script>location.href='index2.php?controlador=museos&accion=inicio';</script>";
+            }
 
 
 
             // header("Location:index2.php?controlador=museos&accion=inicio");
             echo "<script>location.href='index2.php?controlador=museos&accion=inicio';</script>";
-            
         }
 
 
@@ -194,13 +220,26 @@ class ControladorMuseos
     public function borrar()
     {
         //print_r($_GET);
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        echo '<pre>';
+        print_r($controlador1);
+        echo '</pre>';
 
         $idBorrar = $_GET["id"];
         $id_direccion = $_GET['idDireccion'];
 
         $borrarMuseos = new MuseoModelo();
 
-        $IDBorrado = $borrarMuseos->borrar($idBorrar, $id_direccion);
+        $borrarMuseos->borrar($idBorrar, $id_direccion);
+        if ($borrarMuseos) {
+            $borrarMuseos->trigger($accion, $id, $controlador1);
+            // print_r($insertar);
+            // print_r($usuario_crear);
+            echo "<script>location.href='index2.php?controlador=museos&accion=inicio';</script>";
+        }
 
         // header("Location:index2.php?controlador=museos&accion=inicio");
         echo "<script>location.href='index2.php?controlador=museos&accion=inicio';</script>";
@@ -272,5 +311,4 @@ class ControladorMuseos
 
         include_once("vistas/museos/invoice-print.php");
     }
-
 }

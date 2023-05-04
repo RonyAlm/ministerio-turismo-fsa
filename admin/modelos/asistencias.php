@@ -46,7 +46,7 @@ class AsistenciaModelo
 
         $response = $client->post('/v1/engines/text-davinci-003/completions', [
             'headers' => [
-                'Authorization' => 'Bearer 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',
+                'Authorization' => 'Bearer ',
             ],
             'json' => [
                 'prompt' => 'Genera un resumen del texto: ' . $content,
@@ -108,7 +108,7 @@ class AsistenciaModelo
 
         $response = $client->post('/v1/engines/davinci-codex/completions', [
             'headers' => [
-                'Authorization' => 'Bearer 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',
+                'Authorization' => 'Bearer sk-',
             ],
             'json' => [
                 'prompt' => 'Genera un resumen del texto: ' . $text,
