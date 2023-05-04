@@ -55,111 +55,82 @@
 </div>
 <section class="content">
     <div class="container-fluid">
-
-        <!-- Timelime example  -->
         <div class="row">
-            <div class="col-md-12">
-                <!-- The time line -->
-                <div class="timeline">
-                    <!-- timeline time label -->
-                    <div class="time-label">
-                        <span class="bg-red">10 Feb. 2014</span>
+            <div class="col-md-6">
+                <div class="card card-default">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Modificaciones
+                        </h3>
                     </div>
-                    <!-- /.timeline-label -->
-                    <!-- timeline item -->
-                    <div>
-                        <i class="fas fa-envelope bg-blue"></i>
-                        <div class="timeline-item">
-                            <span class="time"><i class="fas fa-clock"></i> 12:05</span>
-                            <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <h5><i class="icon fas fa-ban"></i> Alert!</h5>
+                            Danger alert preview. This alert is dismissable. A wonderful serenity has taken possession of my
+                            entire
+                            soul, like these sweet mornings of spring which I enjoy with my whole heart.
+                        </div>
+                        <div class="alert alert-info alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <h5><i class="icon fas fa-info"></i> Alert!</h5>
+                            Info alert preview. This alert is dismissable.
+                        </div>
+                        <div class="alert alert-warning alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <h5><i class="icon fas fa-exclamation-triangle"></i> Alert!</h5>
+                            Warning alert preview. This alert is dismissable.
+                        </div>
+                        <div class="alert alert-success alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <h5><i class="icon fas fa-check"></i> Alert!</h5>
+                            Success alert preview. This alert is dismissable.
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Tareas
+                        </h3>
+                    </div>
+                    <form action="?controlador=paginas&accion=inicio" method="post" name="formTarea">
+                        <div class="card-body">
+                            <?php foreach ($tabla as $tablas) { ?>
+                                <ul class="todo-list" data-widget="todo-list">
+                                    <li>
+                                        <div class="icheck-primary d-inline ml-2">
+                                            <input type="checkbox" value="" name="todo1" id="todoCheck1" data-task-id="<?= $lastInsertIDdireccion ?>">
+                                            <label for="todoCheck1"></label>
+                                        </div>
+                                        <span class="text">Design a nice theme</span>
+                                        <small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small>
+                                        <div class="tools">
+                                            <i class="fas fa-edit"></i>
+                                            <i class="fas fa-trash-o"></i>
+                                        </div>
 
-                            <div class="timeline-body">
-                                Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                                weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                                jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                                quora plaxo ideeli hulu weebly balihoo...
-                            </div>
-                            <div class="timeline-footer">
-                                <a class="btn btn-primary btn-sm">Read more</a>
-                                <a class="btn btn-danger btn-sm">Delete</a>
-                            </div>
+                                    </li>
+                                </ul>
+                            <?php } ?>
                         </div>
-                    </div>
-                    <!-- END timeline item -->
-                    <!-- timeline item -->
-                    <div>
-                        <i class="fas fa-user bg-green"></i>
-                        <div class="timeline-item">
-                            <span class="time"><i class="fas fa-clock"></i> 5 mins ago</span>
-                            <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request</h3>
+                        <div class="card-footer clearfix">
+                            <button type="button" class="btn btn-primary float-right" id="addButton"><i class="fas fa-plus"></i> Add tarea</button>
                         </div>
-                    </div>
-                    <!-- END timeline item -->
-                    <!-- timeline item -->
-                    <div>
-                        <i class="fas fa-comments bg-yellow"></i>
-                        <div class="timeline-item">
-                            <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
-                            <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-                            <div class="timeline-body">
-                                Take me to your leader!
-                                Switzerland is small and neutral!
-                                We are more like Germany, ambitious and misunderstood!
-                            </div>
-                            <div class="timeline-footer">
-                                <a class="btn btn-warning btn-sm">View comment</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END timeline item -->
-                    <!-- timeline time label -->
-                    <div class="time-label">
-                        <span class="bg-green">3 Jan. 2014</span>
-                    </div>
-                    <!-- /.timeline-label -->
-                    <!-- timeline item -->
-                    <div>
-                        <i class="fa fa-camera bg-purple"></i>
-                        <div class="timeline-item">
-                            <span class="time"><i class="fas fa-clock"></i> 2 days ago</span>
-                            <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-                            <div class="timeline-body">
-                                <img src="https://placehold.it/150x100" alt="...">
-                                <img src="https://placehold.it/150x100" alt="...">
-                                <img src="https://placehold.it/150x100" alt="...">
-                                <img src="https://placehold.it/150x100" alt="...">
-                                <img src="https://placehold.it/150x100" alt="...">
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END timeline item -->
-                    <!-- timeline item -->
-                    <div>
-                        <i class="fas fa-video bg-maroon"></i>
-
-                        <div class="timeline-item">
-                            <span class="time"><i class="fas fa-clock"></i> 5 days ago</span>
-
-                            <h3 class="timeline-header"><a href="#">Mr. Doe</a> shared a video</h3>
-
-                            <div class="timeline-body">
-                                <div class="embed-responsive embed-responsive-16by9">
-                                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/tMWkeBIohBs" allowfullscreen></iframe>
-                                </div>
-                            </div>
-                            <div class="timeline-footer">
-                                <a href="#" class="btn btn-sm bg-maroon">See comments</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END timeline item -->
-                    <div>
-                        <i class="fas fa-clock bg-gray"></i>
-                    </div>
+                    </form>
                 </div>
             </div>
             <!-- /.col -->
         </div>
+
     </div>
     <!-- /.timeline -->
 

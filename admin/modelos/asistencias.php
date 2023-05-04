@@ -1,9 +1,12 @@
 <?php
 require_once 'vistas/recursos/libreria/json/vendor/autoload.php';
+require_once 'vistas/recursos/vendor/autoload.php';
+// require_once 'vistas/recursos/vendo';
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use GuzzleHttp\Client;
 
 class AsistenciaModelo
 {
@@ -20,6 +23,42 @@ class AsistenciaModelo
         $this->listaAgencia = array();
         $this->listaAgenciaID = array();
         $this->listaBuscar = array();
+    }
+    public function generarResumen($archivo)
+    {
+        $file = fopen($archivo, "r, 'UTF-8'");
+        if ($file === false) {
+            throw new Exception("No se pudo abrir el archivo: " . $archivo);
+        }
+
+        $content = '';
+        while (($line = fgets($file)) !== false) {
+            $line = trim($line);
+            $line = addslashes($line);
+            $content .= $line . ' ';
+        }
+        fclose($file);
+        $content = utf8_encode($content);
+
+        $client = new Client([
+            'base_uri' => 'https://api.openai.com',
+        ]);
+
+        $response = $client->post('/v1/engines/text-davinci-003/completions', [
+            'headers' => [
+                'Authorization' => 'Bearer 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',
+            ],
+            'json' => [
+                'prompt' => 'Genera un resumen del texto: ' . $content,
+                'max_tokens' => 100,
+                'temperature' => 0.7,
+            ],
+        ]);
+
+        $json = json_decode($response->getBody(), true);
+        $summary = $json['choices'][0]['text'];
+
+        return $summary;
     }
     // esto es para agregar al excel
     public function getHojaDatos()
@@ -47,6 +86,60 @@ class AsistenciaModelo
 
         $writer = new Xlsx($documento);
         $writer->save('datos.xlsx');
+    }
+    public function generarResumenYExcel($datos_file)
+    {
+
+        $reader = IOFactory::createReader('Pdf');
+        $reader->setReadDataOnly(true);
+        $spreadsheet = $reader->load($datos_file);
+
+
+        $worksheet = $spreadsheet->getActiveSheet();
+        $text = $worksheet->toArray();
+        $text = implode("\n", array_map(function ($row) {
+            return implode(" ", $row);
+        }, $text));
+
+        $client = new Client([
+            'base_uri' => 'https://api.openai.com',
+        ]);
+        // $hola = new Client();
+
+        $response = $client->post('/v1/engines/davinci-codex/completions', [
+            'headers' => [
+                'Authorization' => 'Bearer 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',
+            ],
+            'json' => [
+                'prompt' => 'Genera un resumen del texto: ' . $text,
+                'max_tokens' => 100,
+                'temperature' => 0.7,
+            ],
+        ]);
+
+        $json = json_decode($response->getBody(), true);
+        $summary = $json['choices'][0]['text'];
+
+        $documento = new Spreadsheet();
+        $hoja_nueva = $documento->getActiveSheet();
+
+        $this->datos = IOFactory::load($datos_file);
+        $this->datos->setActiveSheetIndex(0);
+        $this->hoja_datos = $this->datos->getActiveSheet();
+
+        foreach ($this->hoja_datos->getRowIterator() as $fila) {
+            $datos_fila = $fila->getcellIterator();
+            $columna = 'A';
+            foreach ($datos_fila as $dato) {
+                $hoja_nueva->setCellValue($columna . $fila->getRowIndex(), $dato->getValue());
+                $columna++;
+            }
+        }
+
+        $writer = new Xlsx($documento);
+        $writer->save('datos.xlsx');
+
+        return array("resumen" => $summary, "excel" => "datos.xlsx");
     }
 
     public function consultar()

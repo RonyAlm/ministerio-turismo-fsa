@@ -32,6 +32,18 @@ class ControladorAsistencias
 
         include_once("vistas/asistencia/crear.php");
     }
+    public function imprimirpdf()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $model = new AsistenciaModelo();
+            $archivo = $_FILES['archivo']['tmp_name'];
+
+            $summary = $model->generarResumen($archivo);
+        }
+
+        include_once("vistas/asistencia/imprimirpdf.php");
+    }
 
     public function editar()
     {

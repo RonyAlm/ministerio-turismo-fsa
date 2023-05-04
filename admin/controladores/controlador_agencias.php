@@ -24,6 +24,14 @@ class ControladorAgencias
 
     public function crear()
     {
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        echo '<pre>';
+        print_r($controlador1);
+        echo '</pre>';
+
 
         $select_tipo_agencia = new AgenciaModelo();
 
@@ -59,10 +67,6 @@ class ControladorAgencias
 
             $estadoAgencia = $_POST['estadoAgencia'];
 
-
-
-
-
             $insertarAgencia->crear(
                 $descripcion_agencias,
                 $matricula_agencia,
@@ -83,6 +87,12 @@ class ControladorAgencias
                 $estadoAgencia,
                 $idoneoAgencia
             );
+            if ($insertarAgencia) {
+                $insertarAgencia->trigger($accion, $id, $controlador1);
+                // print_r($insertar);
+                // print_r($usuario_crear);
+                echo "<script>location.href='index2.php?controlador=agencias&accion=inicio';</script>";
+            }
 
             echo "<script>location.href='index2.php?controlador=agencias&accion=inicio';</script>";
 
@@ -95,6 +105,14 @@ class ControladorAgencias
 
     public function editar()
     {
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        echo '<pre>';
+        print_r($controlador1);
+        echo '</pre>';
+
 
         $idAgencia = $_GET["id"];
 
@@ -188,10 +206,12 @@ class ControladorAgencias
                 $idotroAgencia,
                 $idestadoAgencia
             );
-
-            // print_r($EditarAgencia);
-
-
+            if ($EditarAgencia) {
+                $EditarAgencia->trigger($accion, $id, $controlador1);
+                // print_r($insertar);
+                // print_r($usuario_crear);
+                echo "<script>location.href='index2.php?controlador=agencias&accion=inicio';</script>";
+            }
 
             // header("Location:admin/index2.php?controlador=agencias&accion=inicio");
             echo "<script>location.href='index2.php?controlador=agencias&accion=inicio';</script>";
@@ -227,6 +247,13 @@ class ControladorAgencias
     public function borrar()
     {
         //print_r($_GET);
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        echo '<pre>';
+        print_r($controlador1);
+        echo '</pre>';
 
         $idAgenciaBorrar = $_GET["id"];
         $id_direccion = $_GET['idDireccion'];
@@ -236,7 +263,13 @@ class ControladorAgencias
 
         $buscarIDBorrado = $borrarAgencias->consultarID($idAgenciaBorrar);
 
-        $borrado = $borrarAgencias->borrar($idAgenciaBorrar, $id_direccion, $idRazonSocial);
+        $borrarAgencias->borrar($idAgenciaBorrar, $id_direccion, $idRazonSocial);
+        if ($borrarAgencias) {
+            $borrarAgencias->trigger($accion, $id, $controlador1);
+            // print_r($insertar);
+            // print_r($usuario_crear);
+            echo "<script>location.href='index2.php?controlador=agencias&accion=inicio';</script>";
+        }
 
         header("Location:index2.php?controlador=agencias&accion=inicio");
     }

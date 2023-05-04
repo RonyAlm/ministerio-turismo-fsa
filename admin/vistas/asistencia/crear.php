@@ -29,14 +29,14 @@
       </form>
     </div>
 
-    <form method="post" action="">
+    <!-- <form method="post" action="">
       <div class="drop-zone">
         <div class="icon"><i class="fas fa-file-excel"></i></div>
         <div class="message">Arrastra y suelta el archivo Excel aquí</div>
         <input type="file" name="archivo" id="archivo" class="visually-hidden">
       </div>
       <input type="submit" value="Generar Excel">
-    </form>
+    </form> -->
 
 
   </div>

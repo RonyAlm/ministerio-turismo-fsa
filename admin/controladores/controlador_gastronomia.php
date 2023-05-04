@@ -27,9 +27,6 @@ class ControladorGastronomia
 
         include_once("vistas/gastronomia/inicio.php");
     }
-    public function llamarAccion()
-    {
-    }
 
     public function crear()
     {
@@ -58,12 +55,13 @@ class ControladorGastronomia
             $observacion = $_POST['observacion'];
             $caracteristicas_gastro = $_POST['caracteristicas_gastro'];
 
-            // $idoneoAgencia = $_POST['idoneoAgencia'];
+
 
             $rela_localidad_direccion = $_POST['localidadAgencia'];
             $calle_direccion = $_POST['domicilioAgencia'];
 
-            $telefonoAgencia = $_POST['telefonoAgencia'];
+            // $telefonoAgencia = $_POST['telefonoAgencia'];
+            $telefonoAgencia = isset($_POST['telefonoAgencia']) ? $_POST['telefonoAgencia'] : '0';
             $telefonoFijoAgencia = $_POST['telefonoFijoAgencia'];
             $correoAgencia = $_POST['correoAgencia'];
             $facebookAgencia = $_POST['facebookAgencia'];
@@ -71,7 +69,7 @@ class ControladorGastronomia
             $twitterAgencia = $_POST['twitterAgencia'];
             $webAgencia = $_POST['webAgencia'];
             $otroAgencia = $_POST['otroAgencia'];
-            // echo ($usuario_crear);
+
 
 
             $insertar->crear(
@@ -94,10 +92,10 @@ class ControladorGastronomia
                 $insertar->trigger($accion, $id, $controlador1);
                 // print_r($insertar);
                 // print_r($usuario_crear);
-                // echo "<script>location.href='index2.php?controlador=gastronomia&accion=inicio';</script>";
+                echo "<script>location.href='index2.php?controlador=gastronomia&accion=inicio';</script>";
             }
 
-            // echo "<script>location.href='index2.php?controlador=gastronomia&accion=inicio';</script>";
+            echo "<script>location.href='index2.php?controlador=gastronomia&accion=inicio';</script>";
         }
 
 
@@ -198,12 +196,12 @@ class ControladorGastronomia
                 $EditarAgencia->trigger($accion, $id, $controlador1);
                 // print_r($EditarAgencia);
                 // print_r($usuario_crear);
-                // echo "<script>location.href='index2.php?controlador=gastronomia&accion=inicio';</script>";
+                echo "<script>location.href='index2.php?controlador=gastronomia&accion=inicio';</script>";
             }
 
 
             // header("Location:admin/index2.php?controlador=agencias&accion=inicio");
-            // echo "<script>location.href='index2.php?controlador=gastronomia&accion=inicio';</script>";
+            echo "<script>location.href='index2.php?controlador=gastronomia&accion=inicio';</script>";
         }
 
 
@@ -254,13 +252,13 @@ class ControladorGastronomia
         $borrado = $borrarAgencias->borrar($idAgenciaBorrar, $id_direccion);
         if ($borrarAgencias) {
             $borrarAgencias->trigger($accion, $id, $controlador1);
-            print_r($borrarAgencias);
+            // print_r($borrarAgencias);
 
-            // echo "<script>location.href='index2.php?controlador=gastronomia&accion=inicio';</script>";
+            echo "<script>location.href='index2.php?controlador=gastronomia&accion=inicio';</script>";
         }
 
         // header("Location:index2.php?controlador=gastronomia&accion=inicio");
-        // echo "<script>location.href='index2.php?controlador=gastronomia&accion=inicio';</script>";
+        echo "<script>location.href='index2.php?controlador=gastronomia&accion=inicio';</script>";
     }
 
     public function info()

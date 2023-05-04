@@ -3,14 +3,14 @@
 include_once("modelos/alojamiento.php");
 include_once("conexion.php");
 
-
-
-
 class ControladorAlojamientos
 {
 
     public function inicio()
     { //aca se muestra las tablas
+
+        global $accion, $controlador1;
+        echo "esto es un controlador: " . $controlador1;
 
         $consultarAlojamientosInicio = new Alojamientos();
 
@@ -143,7 +143,7 @@ class ControladorAlojamientos
                 $crearAlojamiento->trigger($accion, $id, $controlador1);
                 // print_r($insertar);
                 // print_r($usuario_crear);
-                echo "<script>location.href='index2.php?controlador=gastronomia&accion=inicio';</script>";
+                echo "<script>location.href='index2.php?controlador=Alojamientos&accion=inicio';</script>";
             }
 
             // header("Location:index2.php?controlador=Alojamientos&accion=inicio");
@@ -155,6 +155,10 @@ class ControladorAlojamientos
 
     public function editar()
     {
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
 
         $id_alojamientos = $_GET['id'];
 
@@ -245,7 +249,7 @@ class ControladorAlojamientos
             $habilitacionAlojamiento = $_POST['habilitacionAlojamiento'];
             $IDhabilitacionAlojamiento = $_POST['IDhabilitacionAlojamiento'];
 
-            $insertarAlojamiento = $insertarDatosAlojamiento->editar(
+            $insertarDatosAlojamiento->editar(
                 $categoriaAlojamiento,
                 $nombreAlojamiento,
                 $localidadAlojamiento,
@@ -299,6 +303,12 @@ class ControladorAlojamientos
                 $IDhabilitacionAlojamiento,
                 $cantTotalPlazasAlojamiento
             );
+            if ($insertarDatosAlojamiento) {
+                $insertarDatosAlojamiento->trigger($accion, $id, $controlador1);
+                // print_r($insertar);
+                // print_r($usuario_crear);
+                echo "<script>location.href='index2.php?controlador=Alojamientos&accion=inicio';</script>";
+            }
 
 
 
@@ -327,6 +337,10 @@ class ControladorAlojamientos
 
     public function borrar()
     {
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
         //print_r($_GET);
 
         $borrado = new Alojamientos();
@@ -338,8 +352,13 @@ class ControladorAlojamientos
         $idServiciosComple = $_GET['idServiciosComple'];
 
 
-        $borrar = $borrado->borrar($id_alojamientos, $id_direccion, $idRazonSocial, $idServicios, $idServiciosComple);
-
+        $borrado->borrar($id_alojamientos, $id_direccion, $idRazonSocial, $idServicios, $idServiciosComple);
+        if ($borrado) {
+            $borrado->trigger($accion, $id, $controlador1);
+            // print_r($insertar);
+            // print_r($usuario_crear);
+            echo "<script>location.href='index2.php?controlador=Alojamientos&accion=inicio';</script>";
+        }
         // header("Location:index2.php?controlador=Alojamientos&accion=inicio");
         echo "<script>location.href='index2.php?controlador=Alojamientos&accion=inicio';</script>";
     }

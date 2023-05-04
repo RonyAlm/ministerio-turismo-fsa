@@ -38,6 +38,8 @@ $rol_id = $_SESSION['rol_id'];
 
     <a name="" id="" class="btn btn-secondary" href="?controlador=asistencias&accion=imprimir" role="button">Imprimir</a>
 
+    <a name="" id="" class="btn btn-secondary" href="?controlador=asistencias&accion=imprimirpdf" role="button">imprimir pdf</a>
+
   </div>
 
   <div class="card-body">
