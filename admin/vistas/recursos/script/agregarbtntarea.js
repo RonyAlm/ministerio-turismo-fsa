@@ -1,5 +1,34 @@
-// Selecciona el botón "Agregar tarea"
 const addButton = document.querySelector(".btn-primary");
+// Selecciona todos los checkboxes
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+// Agrega un EventListener a cada checkbox
+checkboxes.forEach(function (checkbox) {
+  checkbox.addEventListener("click", function () {
+    // Obtiene el id del checkbox
+    const checkboxId = checkbox.getAttribute("id");
+    const isCheckedeado = checkbox.checked;
+
+    // Imprime el id del checkbox en la consola
+    // console.log(checkboxId);
+    // console.log(isCheckedeado);
+    // Envía el estado del checkbox y el ID de la tarea al controlador mediante AJAX
+    $.ajax({
+      type: "POST",
+      url:
+        "?controlador=paginas&accion=inicio&idcheckbox=" +
+        checkboxId +
+        "&checkboxtarea=" +
+        isCheckedeado,
+      data: { checkboxId, isCheckedeado },
+      success: function (response) {
+        console.log("La información se envió por POST");
+        console.log("Datos enviados ID: " + JSON.stringify(checkboxId));
+        console.log("Datos enviados boton: " + JSON.stringify(isCheckedeado));
+      },
+    });
+  });
+});
 
 // Agrega un EventListener al botón
 addButton.addEventListener("click", function () {
@@ -40,24 +69,24 @@ addButton.addEventListener("click", function () {
     },
   });
 
-  // Selecciona el checkbox
-  const checkbox = newLi.querySelector("input[type=checkbox]");
+  // // Selecciona el checkbox
+  // const checkbox = newLi.querySelector("input[type=checkbox]");
 
-  // Agrega un EventListener al checkbox
-  checkbox.addEventListener("click", function () {
-    // Obtiene el estado actual del checkbox y el ID de la tarea
-    const isChecked = checkbox.checked;
-    const tareaId = newLi.getAttribute("data-tarea-id");
+  // // Agrega un EventListener al checkbox
+  // checkbox.addEventListener("click", function () {
+  //   // Obtiene el estado actual del checkbox y el ID de la tarea
+  //   const isChecked = checkbox.checked;
+  //   const tareaId = newLi.getAttribute("data-tarea-id");
 
-    // Envía el estado del checkbox y el ID de la tarea al controlador mediante AJAX
-    $.ajax({
-      type: "POST",
-      url: "?controlador=paginas&accion=inicio&checkbox=" + isChecked,
-      data: { isChecked, tareaId },
-      success: function (response) {
-        console.log("La información se envió por POST");
-        console.log("Datos enviados boton: " + JSON.stringify(isChecked));
-      },
-    });
-  });
+  //   // Envía el estado del checkbox y el ID de la tarea al controlador mediante AJAX
+  //   $.ajax({
+  //     type: "POST",
+  //     url: "?controlador=paginas&accion=inicio&checkbox=" + isChecked,
+  //     data: { isChecked, tareaId },
+  //     success: function (response) {
+  //       console.log("La información se envió por POST");
+  //       console.log("Datos enviados boton: " + JSON.stringify(isChecked));
+  //     },
+  //   });
+  // });
 });

@@ -139,14 +139,14 @@ $rol_id = $_SESSION['rol_id'];
                         </div>
                         <form action="?controlador=paginas&accion=inicio" method="post" name="formTarea">
                             <div class="card-body">
-                                <?php foreach ($tabla as $tablas) { ?>
+                                <?php foreach ($tablaTarea as $tablas) { ?>
                                     <ul class="todo-list" data-widget="todo-list">
                                         <li>
                                             <div class="icheck-primary d-inline ml-2">
-                                                <input type="checkbox" value="" name="todo1" id="todoCheck1" data-task-id="<?= $lastInsertIDdireccion ?>">
-                                                <label for="todoCheck1"></label>
+                                                <input type="checkbox" value="" name="checkbox_id_<?php echo $tablas['id_tareas']; ?>" id="<?php echo $tablas["id_tareas"]; ?>">
+                                                <label for="<?php echo $tablas["id_tareas"]; ?>"></label>
                                             </div>
-                                            <span class="text">Design a nice theme</span>
+                                            <span class="text"><?php echo $tablas["descripcion_tareas"]; ?></span>
                                             <small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small>
                                             <div class="tools">
                                                 <i class="fas fa-edit"></i>

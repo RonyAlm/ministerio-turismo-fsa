@@ -7,8 +7,9 @@ class ControladorPaginas
     public function inicio()
     {
         $paginasModelo = new PaginasModelo();
-        $tabla = $paginasModelo->consultar();
+        $tablaTarea = $paginasModelo->consultar();
         $tablaTimeLine = $paginasModelo->consultarTimeLine();
+
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {
@@ -19,14 +20,22 @@ class ControladorPaginas
                         throw new Exception('La tarea no puede estar vacía');
                     }
                     // $paginasModelo->crear($nuevaTarea);
-                } elseif (isset($_POST['taskId']) && isset($_POST['isChecked'])) {
+                } elseif (isset($_GET['idcheckbox']) && isset($_GET['checkboxtarea'])) {
                     // Actualizar el estado de una tarea existente
-                    $taskId = (int)$_POST['taskId'];
-                    $isChecked = (bool)$_POST['isChecked'];
-                    if ($taskId <= 0) {
-                        throw new Exception('ID de tarea no válido');
-                    }
-                    // $paginasModelo->actualizar($taskId, $isChecked);
+                    $idtarea = $_GET['idcheckbox'];
+                    $tareacheckbox = $_GET['checkboxtarea'];
+
+                    echo '<pre>';
+                    echo "esto es un idtarea ";
+                    print_r($idtarea);
+                    echo '</pre>';
+                    echo '<pre>';
+                    echo "esto es un tarea ";
+                    print_r($tareacheckbox);
+                    echo '</pre>';
+
+
+                    $paginasModelo->actualizar($idtarea, $tareacheckbox);
                 } else {
                     throw new Exception('Solicitud no válida');
                 }

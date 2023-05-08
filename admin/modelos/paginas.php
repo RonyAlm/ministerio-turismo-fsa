@@ -2,6 +2,7 @@
 class PaginasModelo
 {
     public $listaAgencia;
+    public $consultartarea;
     public $listaAgenciaID;
     public $listaBuscar;
 
@@ -9,6 +10,7 @@ class PaginasModelo
     public function __construct()
     {
         $this->listaAgencia = array();
+        $this->consultartarea = array();
         $this->listaAgenciaID = array();
         $this->listaBuscar = array();
     }
@@ -35,14 +37,22 @@ class PaginasModelo
         $sql->execute();
     }
 
+
+
     public function consultar()
     {
+
         $conexionBD = BD::crearInstancia();
-        $sql = $conexionBD->prepare("SELECT * FROM `tareas`");
 
-        $sql->execute();
+        $sql = $conexionBD->query("SELECT * FROM `tareas`");
 
-        return $sql->fetch(PDO::FETCH_OBJ);
+        //recuperamos los datos y los retornamos
+
+        while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
+            $this->consultartarea[] = $filas;
+        }
+        return $this->consultartarea; //este return se va a llamar en el controlador_alojamiento.php clase inicio
+
     }
 
     public function consultarTimeLine()
