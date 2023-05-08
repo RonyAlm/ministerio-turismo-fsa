@@ -56,37 +56,16 @@ addButton.addEventListener("click", function () {
 
   // Obtiene el valor de la nueva tarea y su ID
   const nuevaTarea = newLi.querySelector(".text").textContent;
-  const tareaId = newLi.getAttribute("data-tarea-id");
 
   // Envía la nueva tarea y su ID al controlador mediante AJAX
   $.ajax({
     type: "POST",
     url: "?controlador=paginas&accion=inicio",
-    data: { nuevaTarea, tareaId },
+    data: { nuevaTarea },
     success: function (response) {
       console.log("La información se envió por POST");
       console.log("Datos enviados: " + JSON.stringify(nuevaTarea));
+      location.reload(); // Recarga la página después de agregar la nueva tarea
     },
   });
-
-  // // Selecciona el checkbox
-  // const checkbox = newLi.querySelector("input[type=checkbox]");
-
-  // // Agrega un EventListener al checkbox
-  // checkbox.addEventListener("click", function () {
-  //   // Obtiene el estado actual del checkbox y el ID de la tarea
-  //   const isChecked = checkbox.checked;
-  //   const tareaId = newLi.getAttribute("data-tarea-id");
-
-  //   // Envía el estado del checkbox y el ID de la tarea al controlador mediante AJAX
-  //   $.ajax({
-  //     type: "POST",
-  //     url: "?controlador=paginas&accion=inicio&checkbox=" + isChecked,
-  //     data: { isChecked, tareaId },
-  //     success: function (response) {
-  //       console.log("La información se envió por POST");
-  //       console.log("Datos enviados boton: " + JSON.stringify(isChecked));
-  //     },
-  //   });
-  // });
 });

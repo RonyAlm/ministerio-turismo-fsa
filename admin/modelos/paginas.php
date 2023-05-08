@@ -22,8 +22,8 @@ class PaginasModelo
 
         /*-------- INSERTAMOS LA NUEVA TAREA--------*/
 
-        $sql = $conexionBD->prepare("INSERT INTO `tareas`(`descripcion_tareas`) VALUES (?)");
-        $sql->execute(array($nuevaTarea));
+        $sql = $conexionBD->prepare("INSERT INTO `tareas`(`descripcion_tareas`,checkbox_tareas) VALUES (?,?)");
+        $sql->execute(array($nuevaTarea, 0));
 
         $lastInsertID = $conexionBD->lastInsertId();
 

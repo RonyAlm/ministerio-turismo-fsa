@@ -141,10 +141,12 @@ $rol_id = $_SESSION['rol_id'];
                             <div class="card-body">
                                 <?php foreach ($tablaTarea as $tablas) { ?>
                                     <ul class="todo-list" data-widget="todo-list">
-                                        <li>
+                                        <li <?php if ($tablas['checkbox_tareas'] == '1') {
+                                                echo 'class="done"';
+                                            } ?>>
                                             <div class="icheck-primary d-inline ml-2">
-                                                <input type="checkbox" value="" name="checkbox_id_<?php echo $tablas['id_tareas']; ?>" id="<?php echo $tablas["id_tareas"]; ?>">
-                                                <label for="<?php echo $tablas["id_tareas"]; ?>"></label>
+                                                <input type="checkbox" value="" name="checkbox_id_<?php echo $tablas['id_tareas']; ?>" id="<?php echo $tablas["id_tareas"]; ?>" <?php echo ($tablas['checkbox_tareas'] == '0') ? 'checked' : ''; ?>>
+                                                <label for=""></label>
                                             </div>
                                             <span class="text"><?php echo $tablas["descripcion_tareas"]; ?></span>
                                             <small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small>

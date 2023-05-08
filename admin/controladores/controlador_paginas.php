@@ -19,7 +19,7 @@ class ControladorPaginas
                     if (empty($nuevaTarea)) {
                         throw new Exception('La tarea no puede estar vacía');
                     }
-                    // $paginasModelo->crear($nuevaTarea);
+                    $paginasModelo->crear($nuevaTarea);
                 } elseif (isset($_GET['idcheckbox']) && isset($_GET['checkboxtarea'])) {
                     // Actualizar el estado de una tarea existente
                     $idtarea = $_GET['idcheckbox'];
