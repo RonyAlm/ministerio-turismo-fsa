@@ -72,7 +72,7 @@ $rol_id = $_SESSION['rol_id'];
                         <div class="card-header">
                             <h3 class="card-title">
                                 <i class="fas fa-exclamation-triangle"></i>
-                                Modificaciones
+                                Modificaciones 1
                             </h3>
                         </div>
                         <!-- /.card-header -->
@@ -95,7 +95,7 @@ $rol_id = $_SESSION['rol_id'];
                                                         <i class="fas fa-envelope bg-blue"></i>
                                                         <div class="timeline-item">
                                                             <span class="time"><i class="fas fa-clock"></i> <?php echo $tablas["hora"]; ?></span>
-                                                            <h3 class="timeline-header"><a href="#"><?php echo $tablas["usuario"]; ?> </a> <?php echo $tablas["accion"]; ?> a la tabla: <?php echo $tablas["tabla"]; ?>
+                                                            <h3 class="timeline-header"><a href="#"><?php echo $tablas["usuario"]; ?> </a> <?php echo $tablas["accion"]; ?> a la tablass: <?php echo $tablas["tabla"]; ?>
                                                             </h3>
 
                                                             <div class="timeline-body">
