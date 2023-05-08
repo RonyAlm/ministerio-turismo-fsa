@@ -8,6 +8,7 @@ class ControladorPaginas
     {
         $paginasModelo = new PaginasModelo();
         $tabla = $paginasModelo->consultar();
+        $tablaTimeLine = $paginasModelo->consultarTimeLine();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {

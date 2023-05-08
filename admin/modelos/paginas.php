@@ -1,6 +1,17 @@
 <?php
 class PaginasModelo
 {
+    public $listaAgencia;
+    public $listaAgenciaID;
+    public $listaBuscar;
+
+
+    public function __construct()
+    {
+        $this->listaAgencia = array();
+        $this->listaAgenciaID = array();
+        $this->listaBuscar = array();
+    }
 
     public function crear($nuevaTarea)
     {
@@ -32,5 +43,22 @@ class PaginasModelo
         $sql->execute();
 
         return $sql->fetch(PDO::FETCH_OBJ);
+    }
+
+    public function consultarTimeLine()
+    {
+
+        $conexionBD = BD::crearInstancia();
+
+        $sql = $conexionBD->query("SELECT DATE(fecha) as fechas, time(fecha) as hora, tabla, `accion`,  `old_value`, `new_value`, u.usuario FROM `auditoria` INNER JOIN usuario_contra u on u.id_usuario = auditoria.usuario_id 
+        ORDER BY `auditoria`.`fecha` DESC");
+
+        //recuperamos los datos y los retornamos
+
+        while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
+            $this->listaAgencia[] = $filas;
+        }
+        return $this->listaAgencia; //este return se va a llamar en el controlador_alojamiento.php clase inicio
+
     }
 }

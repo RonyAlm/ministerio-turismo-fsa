@@ -1,3 +1,13 @@
+<?php
+
+if (!isset($_SESSION['id'])) {
+    header("Location: index.php");
+}
+
+$usuario = $_SESSION['usuarios'];
+$rol_id = $_SESSION['rol_id'];
+
+?>
 <div class="p-5 bg-light">
     <div class="container">
         <h3 class="text-center display-5">BIENVENIDO AL MINISTERIO DE TURISMO</h3>
@@ -53,85 +63,112 @@
         </div>
     </div>
 </div>
-<section class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card card-default">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            Modificaciones
-                        </h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <div class="alert alert-danger alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <h5><i class="icon fas fa-ban"></i> Alert!</h5>
-                            Danger alert preview. This alert is dismissable. A wonderful serenity has taken possession of my
-                            entire
-                            soul, like these sweet mornings of spring which I enjoy with my whole heart.
+<?php if ($rol_id == 1 and $usuario == "admin") : ?>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card direct-chat direct-chat-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                Modificaciones
+                            </h3>
                         </div>
-                        <div class="alert alert-info alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <h5><i class="icon fas fa-info"></i> Alert!</h5>
-                            Info alert preview. This alert is dismissable.
-                        </div>
-                        <div class="alert alert-warning alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <h5><i class="icon fas fa-exclamation-triangle"></i> Alert!</h5>
-                            Warning alert preview. This alert is dismissable.
-                        </div>
-                        <div class="alert alert-success alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <h5><i class="icon fas fa-check"></i> Alert!</h5>
-                            Success alert preview. This alert is dismissable.
-                        </div>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
-                <!-- /.card -->
-            </div>
-            <!-- /.col -->
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            Tareas
-                        </h3>
-                    </div>
-                    <form action="?controlador=paginas&accion=inicio" method="post" name="formTarea">
+                        <!-- /.card-header -->
                         <div class="card-body">
-                            <?php foreach ($tabla as $tablas) { ?>
-                                <ul class="todo-list" data-widget="todo-list">
-                                    <li>
-                                        <div class="icheck-primary d-inline ml-2">
-                                            <input type="checkbox" value="" name="todo1" id="todoCheck1" data-task-id="<?= $lastInsertIDdireccion ?>">
-                                            <label for="todoCheck1"></label>
-                                        </div>
-                                        <span class="text">Design a nice theme</span>
-                                        <small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small>
-                                        <div class="tools">
-                                            <i class="fas fa-edit"></i>
-                                            <i class="fas fa-trash-o"></i>
-                                        </div>
+                            <!-- Conversations are loaded here -->
+                            <div class="direct-chat-messages">
+                                <!-- Message. Default to the left -->
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <!-- The time line -->
+                                            <div class="timeline">
+                                                <?php foreach ($tablaTimeLine as $tablas) { ?>
 
-                                    </li>
-                                </ul>
-                            <?php } ?>
+                                                    <div class="time-label">
+                                                        <span class="bg-red"><?php echo $tablas["fechas"]; ?></span>
+                                                    </div>
+
+                                                    <div>
+                                                        <i class="fas fa-envelope bg-blue"></i>
+                                                        <div class="timeline-item">
+                                                            <span class="time"><i class="fas fa-clock"></i> <?php echo $tablas["hora"]; ?></span>
+                                                            <h3 class="timeline-header"><a href="#"><?php echo $tablas["usuario"]; ?> </a> <?php echo $tablas["accion"]; ?> a la tabla: <?php echo $tablas["tabla"]; ?>
+                                                            </h3>
+
+                                                            <div class="timeline-body">
+                                                                <?php echo $tablas["old_value"]; ?>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                <?php } ?>
+
+                                                <div>
+                                                    <i class="fas fa-clock bg-gray"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+                                </div>
+                                <!-- /.direct-chat-msg -->
+
+                            </div>
+                            <!--/.direct-chat-messages-->
+
+
+                            <!-- /.direct-chat-pane -->
                         </div>
-                        <div class="card-footer clearfix">
-                            <button type="button" class="btn btn-primary float-right" id="addButton"><i class="fas fa-plus"></i> Add tarea</button>
-                        </div>
-                    </form>
+                        <!-- /.card-body -->
+
+                        <!-- /.card-footer-->
+                    </div>
+                    <!-- /.card -->
                 </div>
+                <!-- /.col -->
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                Tareas
+                            </h3>
+                        </div>
+                        <form action="?controlador=paginas&accion=inicio" method="post" name="formTarea">
+                            <div class="card-body">
+                                <?php foreach ($tabla as $tablas) { ?>
+                                    <ul class="todo-list" data-widget="todo-list">
+                                        <li>
+                                            <div class="icheck-primary d-inline ml-2">
+                                                <input type="checkbox" value="" name="todo1" id="todoCheck1" data-task-id="<?= $lastInsertIDdireccion ?>">
+                                                <label for="todoCheck1"></label>
+                                            </div>
+                                            <span class="text">Design a nice theme</span>
+                                            <small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small>
+                                            <div class="tools">
+                                                <i class="fas fa-edit"></i>
+                                                <i class="fas fa-trash-o"></i>
+                                            </div>
+
+                                        </li>
+                                    </ul>
+                                <?php } ?>
+                            </div>
+                            <div class="card-footer clearfix">
+                                <button type="button" class="btn btn-primary float-right" id="addButton"><i class="fas fa-plus"></i> Add tarea</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- /.col -->
             </div>
-            <!-- /.col -->
+
         </div>
+        <!-- /.timeline -->
 
-    </div>
-    <!-- /.timeline -->
-
-</section>
+    </section>
+<?php endif; ?>
