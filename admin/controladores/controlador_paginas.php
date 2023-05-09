@@ -25,29 +25,13 @@ class ControladorPaginas
                     $idtarea = $_GET['idcheckbox'];
                     $tareacheckbox = $_GET['checkboxtarea'];
 
-                    echo '<pre>';
-                    echo "esto es un idtarea ";
-                    print_r($idtarea);
-                    echo '</pre>';
-                    echo '<pre>';
-                    echo "esto es un tarea ";
-                    print_r($tareacheckbox);
-                    echo '</pre>';
-
 
                     $paginasModelo->actualizar($idtarea, $tareacheckbox);
                 } elseif (isset($_POST['nuevoTexto']) && isset($_POST['checkboxIdedit'])) {
                     // Actualizar el estado de una tarea existente
                     $nuevotexto = $_POST['nuevoTexto'];
                     $nuevotextoid = $_POST['checkboxIdedit'];
-                    echo '<pre>';
-                    echo "esto es un nuevotextoid ";
-                    print_r($nuevotextoid);
-                    echo '</pre>';
-                    echo '<pre>';
-                    echo "esto es un nuevotexto ";
-                    print_r($nuevotexto);
-                    echo '</pre>';
+
 
                     $paginasModelo->editartarea($nuevotextoid, $nuevotexto);
                 } else {
@@ -72,6 +56,40 @@ class ControladorPaginas
     public function error()
     {
         include_once("vistas/paginas/error.php");
+    }
+    public function eliminarTarea()
+    {
+
+        $paginasModelo = new PaginasModelo();
+
+
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            try {
+
+                if (isset($_POST['id_tarea'])) {
+                    // Crear una nueva tarea
+                    $id_tarea = $_POST['id_tarea'];
+
+                    $paginasModelo->eliminar($id_tarea);
+                    echo "<script>location.href='index2.php?controlador=paginas&accion=inicio';</script>";
+                } else {
+                    throw new Exception('Solicitud no válida');
+                }
+
+                // Devuelve la respuesta como un JSON
+                $jsonResponse = new JsonResponse('success');
+                $jsonResponse->send();
+                exit();
+            } catch (Exception $e) {
+                $jsonResponse = new JsonResponse($e->getMessage());
+                $jsonResponse->send();
+                exit();
+            }
+        } else {
+            // Si la solicitud no es por POST, muestra la página de inicio
+            include_once("vistas/paginas/inicio.php");
+        }
     }
 
     public function login()

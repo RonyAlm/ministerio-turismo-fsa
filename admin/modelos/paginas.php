@@ -42,6 +42,12 @@ class PaginasModelo
         $sql = $conexionBD->prepare("UPDATE `tareas` SET `descripcion_tareas`='$nuevatarea' WHERE id_tareas =$idTarea");
         $sql->execute();
     }
+    public function eliminar($idTarea)
+    {
+        $conexionBD = BD::crearInstancia();
+        $sql = $conexionBD->prepare("DELETE FROM `tareas` WHERE id_tareas = $idTarea");
+        $sql->execute();
+    }
 
 
 

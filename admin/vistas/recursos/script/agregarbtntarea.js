@@ -113,3 +113,23 @@ function editText(event) {
     });
   });
 }
+function deleteText(event) {
+  event.preventDefault();
+  let checkbox = event.target.parentNode.parentNode.querySelector(
+    'input[type="checkbox"]'
+  );
+  let id = checkbox.id;
+  if (confirm("¿Está seguro que desea eliminar esta tarea?")) {
+    let form = document.createElement("form");
+    form.method = "POST";
+    form.action = "?controlador=paginas&accion=eliminarTarea";
+    let input = document.createElement("input");
+    input.type = "hidden";
+    input.name = "id_tarea";
+    input.value = id;
+    form.appendChild(input);
+    document.body.appendChild(form);
+    form.submit();
+    // location.reload();
+  }
+}
