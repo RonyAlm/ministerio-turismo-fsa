@@ -72,7 +72,7 @@ $rol_id = $_SESSION['rol_id'];
                         <div class="card-header">
                             <h3 class="card-title">
                                 <i class="fas fa-exclamation-triangle"></i>
-                                Modificaciones 1
+                                Modificaciones
                             </h3>
                         </div>
                         <!-- /.card-header -->
@@ -95,7 +95,7 @@ $rol_id = $_SESSION['rol_id'];
                                                         <i class="fas fa-envelope bg-blue"></i>
                                                         <div class="timeline-item">
                                                             <span class="time"><i class="fas fa-clock"></i> <?php echo $tablas["hora"]; ?></span>
-                                                            <h3 class="timeline-header"><a href="#"><?php echo $tablas["usuario"]; ?> </a> <?php echo $tablas["accion"]; ?> a la tablass: <?php echo $tablas["tabla"]; ?>
+                                                            <h3 class="timeline-header"><a href="#"><?php echo $tablas["usuario"]; ?> </a> <?php echo $tablas["accion"]; ?> a la tablas: <?php echo $tablas["tabla"]; ?>
                                                             </h3>
 
                                                             <div class="timeline-body">
@@ -141,21 +141,21 @@ $rol_id = $_SESSION['rol_id'];
                             <div class="card-body">
                                 <?php foreach ($tablaTarea as $tablas) { ?>
                                     <ul class="todo-list" data-widget="todo-list">
-                                        <li <?php if ($tablas['checkbox_tareas'] == '1') {
-                                                echo 'class="done"';
-                                            } ?>>
+                                        <li class=" <?= ($tablas['checkbox_tareas'] == '1') ? 'done' : '' ?>" ?>
                                             <div class="icheck-primary d-inline ml-2">
-                                                <input type="checkbox" value="" name="checkbox_id_<?php echo $tablas['id_tareas']; ?>" id="<?php echo $tablas["id_tareas"]; ?>" <?php echo ($tablas['checkbox_tareas'] == '0') ? 'checked' : ''; ?>>
+                                                <input type="checkbox" name="checkbox_id_<?= $tablas['id_tareas']; ?>" id="<?= $tablas["id_tareas"]; ?>" <?= ($tablas['checkbox_tareas'] == '1') ? 'checked' : '' ?>>
                                                 <label for=""></label>
                                             </div>
                                             <span class="text"><?php echo $tablas["descripcion_tareas"]; ?></span>
                                             <small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small>
                                             <div class="tools">
-                                                <i class="fas fa-edit"></i>
+                                                <i class="fas fa-edit" onclick="editText(event)"></i>
                                                 <i class="fas fa-trash-o"></i>
                                             </div>
 
                                         </li>
+
+
                                     </ul>
                                 <?php } ?>
                             </div>

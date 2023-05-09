@@ -36,6 +36,12 @@ class PaginasModelo
         $sql = $conexionBD->prepare("UPDATE `tareas` SET `checkbox_tareas`=$checkbox WHERE id_tareas =$idTarea");
         $sql->execute();
     }
+    public function editartarea($idTarea, $nuevatarea)
+    {
+        $conexionBD = BD::crearInstancia();
+        $sql = $conexionBD->prepare("UPDATE `tareas` SET `descripcion_tareas`='$nuevatarea' WHERE id_tareas =$idTarea");
+        $sql->execute();
+    }
 
 
 

@@ -69,3 +69,47 @@ addButton.addEventListener("click", function () {
     },
   });
 });
+
+function editText(event) {
+  // obtiene el elemento span que contiene el texto
+  let spanElement = event.target.parentNode.parentNode.querySelector(".text");
+  let checkboxIdedit = event.target.parentNode.parentNode
+    .querySelector('input[type="checkbox"]')
+    .getAttribute("id");
+
+  // crea un nuevo elemento input
+  let inputElement = document.createElement("input");
+  inputElement.type = "text";
+  inputElement.value = spanElement.textContent;
+
+  // reemplaza el elemento span con el nuevo elemento input
+  spanElement.parentNode.replaceChild(inputElement, spanElement);
+
+  // enfoca el nuevo elemento input
+  inputElement.focus();
+
+  // agrega un evento blur al nuevo elemento input para guardar los cambios
+  inputElement.addEventListener("blur", function () {
+    // obtiene el valor del input y lo asigna al span
+    spanElement.textContent = inputElement.value;
+
+    // reemplaza el input con el span
+    inputElement.parentNode.replaceChild(spanElement, inputElement);
+
+    // Captura el valor del editText
+    var nuevoTexto = inputElement.value;
+
+    // Envía la nueva tarea y su ID al controlador mediante AJAX
+    $.ajax({
+      type: "POST",
+      url: "?controlador=paginas&accion=inicio",
+      data: { nuevoTexto: nuevoTexto, checkboxIdedit },
+      success: function (response) {
+        console.log("La información se envió por POST");
+        console.log("Datos enviados: " + JSON.stringify(nuevoTexto));
+        console.log("Datos enviados: " + JSON.stringify(checkboxIdedit));
+        location.reload(); // Recarga la página después de agregar la nueva tarea
+      },
+    });
+  });
+}

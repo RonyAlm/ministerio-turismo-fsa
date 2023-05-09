@@ -36,6 +36,20 @@ class ControladorPaginas
 
 
                     $paginasModelo->actualizar($idtarea, $tareacheckbox);
+                } elseif (isset($_POST['nuevoTexto']) && isset($_POST['checkboxIdedit'])) {
+                    // Actualizar el estado de una tarea existente
+                    $nuevotexto = $_POST['nuevoTexto'];
+                    $nuevotextoid = $_POST['checkboxIdedit'];
+                    echo '<pre>';
+                    echo "esto es un nuevotextoid ";
+                    print_r($nuevotextoid);
+                    echo '</pre>';
+                    echo '<pre>';
+                    echo "esto es un nuevotexto ";
+                    print_r($nuevotexto);
+                    echo '</pre>';
+
+                    $paginasModelo->editartarea($nuevotextoid, $nuevotexto);
                 } else {
                     throw new Exception('Solicitud no válida');
                 }
