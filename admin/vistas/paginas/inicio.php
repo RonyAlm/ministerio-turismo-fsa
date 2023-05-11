@@ -99,7 +99,11 @@ $rol_id = $_SESSION['rol_id'];
                                                             </h3>
 
                                                             <div class="timeline-body">
-                                                                <?php echo $tablas["old_value"]; ?>
+                                                                <?php echo "Fila vieja: " . $tablas["old_value"]; ?>
+                                                                <?php echo '<pre>';
+                                                                echo "Fila nueva: " .
+                                                                    print_r($tablas["new_value"]);
+                                                                echo '</pre>'; ?>
                                                             </div>
 
                                                         </div>
@@ -184,7 +188,7 @@ $rol_id = $_SESSION['rol_id'];
                                                     <input type="checkbox" name="checkbox_id_<?= $tablas['id_tareas']; ?>" id="<?= $tablas["id_tareas"]; ?>" <?= ($tablas['checkbox_tareas'] == '1') ? 'checked' : '' ?>>
                                                     <label for=""></label>
                                                 </div>
-                                                <span class="text"><?php echo $tablas["descripcion_tareas"]; ?></span>
+                                                <span class="textarea"><?php echo $tablas["descripcion_tareas"]; ?></span>
                                                 <!-- <small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small> -->
                                                 <div class="tools">
                                                     <i class="fas fa-edit" onclick="editText(event)"></i>

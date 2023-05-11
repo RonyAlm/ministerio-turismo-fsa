@@ -42,7 +42,7 @@ addButton.addEventListener("click", function () {
       <input type="checkbox" value="" name="todo1" id="todoCheck1">
       <label for="todoCheck1"></label>
     </div>
-    <span class="text">Nueva Tarea</span>
+    <span class="textarea">Nueva Tarea</span>
     <small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small>
     <div class="tools">
       <i class="fas fa-edit"></i>
@@ -55,7 +55,7 @@ addButton.addEventListener("click", function () {
   todoList.appendChild(newLi);
 
   // Obtiene el valor de la nueva tarea y su ID
-  const nuevaTarea = newLi.querySelector(".text").textContent;
+  const nuevaTarea = newLi.querySelector(".textarea").textContent;
 
   // Envía la nueva tarea y su ID al controlador mediante AJAX
   $.ajax({
@@ -72,14 +72,15 @@ addButton.addEventListener("click", function () {
 
 function editText(event) {
   // obtiene el elemento span que contiene el texto
-  let spanElement = event.target.parentNode.parentNode.querySelector(".text");
+  let spanElement =
+    event.target.parentNode.parentNode.querySelector(".textarea");
   let checkboxIdedit = event.target.parentNode.parentNode
     .querySelector('input[type="checkbox"]')
     .getAttribute("id");
 
   // crea un nuevo elemento input
   let inputElement = document.createElement("input");
-  inputElement.type = "text";
+  inputElement.type = "textarea";
   inputElement.value = spanElement.textContent;
 
   // reemplaza el elemento span con el nuevo elemento input
