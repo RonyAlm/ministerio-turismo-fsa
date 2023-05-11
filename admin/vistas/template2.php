@@ -816,7 +816,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="/admin/vistas/recursos/script/modal.js"></script>
 
 
-
   <script>
     $(function() {
       $("#articulo").hide();
@@ -915,11 +914,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     });
   </script>
-
-
-
-
-
 
   <!-- MODALES -->
   <!-- <?php include_once("modales/modal_ag_li_pe.php"); ?> -->
