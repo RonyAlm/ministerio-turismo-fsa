@@ -45,6 +45,13 @@ $rol_id = $_SESSION['rol_id'];
         </button>
 
       <?php } ?>
+      <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") { ?>
+
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">
+          Agregar Roles y Usuarios
+        </button>
+
+      <?php } ?>
     </div>
 
     <div class="card-body p-0">
