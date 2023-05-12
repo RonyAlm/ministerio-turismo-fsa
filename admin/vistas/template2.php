@@ -813,6 +813,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="vistas/recursos/script/personalSiguiente.js"></script>
   <script src="vistas/recursos/script/agregarbtntarea.js"></script>
   <script src="vistas/recursos/script/checkboxInicio.js"></script>
+  <script src="vistas/recursos/script/contraseñaTablas.js"></script>
   <script src="/admin/vistas/recursos/script/modal.js"></script>
 
 

@@ -159,6 +159,13 @@ class PersonalModelo
             // throw $e;
         }
     }
+    public static function agregarUsuarios($inputUsuario, $inputPasswordtablas1, $selectRoles, $selectTablas)
+    {
+        $conexionBD = BD::crearInstancia();
+        $sql = $conexionBD->prepare("INSERT INTO `usuario_contra`( `usuario`, `contraseña`, `rela_rol_id`, `rela_tablas`)
+                VALUES (?,?,?,?)");
+        $sql->execute(array($inputUsuario, $inputPasswordtablas1, $selectRoles, $selectTablas));
+    }
 
     public function consultar()
     {
@@ -673,15 +680,12 @@ class PersonalModelo
     }
     public function buscarSelectRol()
     {
-
         $conexionBD = BD::crearInstancia();
 
+        $sql = $conexionBD->query("SELECT `id_roles`, `roles` FROM `roles`");
+        $sql->execute();
 
-        $sqlLocalidad = $conexionBD->query("SELECT `id_roles`, `roles` FROM `roles`");
-
-        $sqlLocalidad->execute();
-
-        return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
+        return $sql->fetchAll(PDO::FETCH_OBJ);
     }
     public function buscarSelectArea()
     {
@@ -723,6 +727,25 @@ class PersonalModelo
         $sqlLocalidad->execute();
 
         return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
+    }
+    public function buscarSelectUsuario()
+    {
+        $conexionBD = BD::crearInstancia();
+
+        $sql = $conexionBD->query("SELECT * FROM `usuario_contra`");
+        $sql->execute();
+
+        return $sql->fetchAll(PDO::FETCH_OBJ);
+    }
+    public function buscarSelecttabla()
+    {
+
+        $conexionBD = BD::crearInstancia();
+
+        $sql = $conexionBD->query("SELECT * FROM `tablas`");
+        $sql->execute();
+
+        return $sql->fetchAll(PDO::FETCH_OBJ);
     }
     public function buscarCantidadLicencia($idpersonal)
     {

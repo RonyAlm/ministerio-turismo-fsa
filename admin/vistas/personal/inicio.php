@@ -47,8 +47,11 @@ $rol_id = $_SESSION['rol_id'];
       <?php } ?>
       <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") { ?>
 
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-ejemploUsuario">
           Agregar Roles y Usuarios
+        </button>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-ejemploUsuarioEditar">
+          Editar Roles y Usuarios
         </button>
 
       <?php } ?>
@@ -134,7 +137,7 @@ $rol_id = $_SESSION['rol_id'];
   <!-- /.card -->
 
 </section>
-
+<!-- MODAL DE AGREGAR LICENCIAS Y ARTICULOS -->
 <div class="modal fade" id="modal-default">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -270,4 +273,115 @@ $rol_id = $_SESSION['rol_id'];
     <!-- /.modal-content -->
   </div>
   <!-- /.modal-dialog -->
+</div>
+<!-- MODAL DE AGREGAR USUARIO Y ROLES -->
+<div class="modal fade" id="modal-ejemploUsuario">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Agregar Usuarios y Roles</h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <form id="formularioModalUsuarioRol" name="agregarUsuarioRol" method="POST">
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label for="inputUsuario">Usuario</label>
+            <input type="text" class="form-control" name="inputUsuario" id="inputUsuario" placeholder="Ingrese su usuario">
+          </div>
+          <div class="form-group">
+            <label for="inputPasswordtablas1">Contraseña</label>
+            <div class="input-group">
+              <input type="password" class="form-control" name="inputPasswordtablas1" id="inputPasswordtablas1" placeholder="Ingrese su contraseña">
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fas fa-eye" id="togglePasswordtablas1"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="selectRoles">Roles</label>
+            <select id="selectRoles" name="selectRoles" class="form-control select2" style="width: 100%;" required>
+              <option value="" selected disabled>Seleccione un rol</option>
+              <?php foreach ($buscarSelectRol as $k) : ?>
+                <option value="<?php echo $k->id_roles; ?>"> <?php echo $k->roles; ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="selectTablas">Tablas</label>
+            <select id="selectTablas" name="selectTablas" class="form-control select2" style="width: 100%;" required>
+              <option value="" selected disabled>Seleccione una tabla</option>
+              <?php foreach ($buscarSelecttabla as $k) : ?>
+                <option value="<?php echo $k->id_tablas; ?>"> <?php echo $k->descriTablas; ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DE EDITAR USUARIO Y ROLES -->
+<div class="modal fade" id="modal-ejemploUsuarioEditar">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">EDITAR Usuarios y Roles</h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <form form id="formularioModalEditarUsuarioRol" name="editarUsuarioRol" method="POST">
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label for="inputUsuario">Usuario</label>
+            <input type="text" class="form-control" id="inputUsuario" placeholder="Ingrese su usuario">
+          </div>
+          <div class="form-group">
+            <label for="inputPasswordtablas">Contraseña</label>
+            <div class="input-group">
+              <input type="password" class="form-control" id="inputPasswordtablas" placeholder="Ingrese su contraseña">
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fas fa-eye" id="togglePasswordtablas"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="selectRoles">Roles</label>
+            <select id="selectRoles" name="selectRoles" class="form-control select2" style="width: 100%;" required>
+              <option value="" selected disabled>Seleccione un rol</option>
+              <?php foreach ($buscarSelectRol as $k) : ?>
+                <option value="<?php echo $k->id_roles; ?>"> <?php echo $k->roles; ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="selectTablas">Tablas</label>
+            <select id="selectTablas" name="selectTablas" class="form-control select2" style="width: 100%;" required>
+              <option value="" selected disabled>Seleccione una tabla</option>
+              <?php foreach ($buscarSelecttabla as $k) : ?>
+                <option value="<?php echo $k->id_tablas; ?>"> <?php echo $k->descriTablas; ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
