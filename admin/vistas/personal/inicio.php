@@ -284,7 +284,6 @@ $rol_id = $_SESSION['rol_id'];
       </div>
       <form id="formularioModalUsuarioRol" name="agregarUsuarioRol" method="POST">
         <div class="modal-body">
-
           <div class="form-group">
             <label for="inputUsuario">Usuario</label>
             <input type="text" class="form-control" name="inputUsuario" id="inputUsuario" placeholder="Ingrese su usuario">
@@ -329,7 +328,6 @@ $rol_id = $_SESSION['rol_id'];
     </div>
   </div>
 </div>
-
 <!-- MODAL DE EDITAR USUARIO Y ROLES -->
 <div class="modal fade" id="modal-ejemploUsuarioEditar">
   <div class="modal-dialog">
@@ -338,17 +336,22 @@ $rol_id = $_SESSION['rol_id'];
         <h5 class="modal-title">EDITAR Usuarios y Roles</h5>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-      <form form id="formularioModalEditarUsuarioRol" name="editarUsuarioRol" method="POST">
+      <form id="formularioModalEditarUsuarioRol" name="editarUsuarioRol" method="POST">
         <div class="modal-body">
 
           <div class="form-group">
-            <label for="inputUsuario">Usuario</label>
-            <input type="text" class="form-control" id="inputUsuario" placeholder="Ingrese su usuario">
+            <label for="usuario">Usuario</label> <!-- enviamos el name="usuario a contraseñaTablas.js" -->
+            <select id="usuario" name="usuario" class="form-control select2" style="width: 100%;" required>
+              <option value="" selected disabled>Seleccione un rol</option>
+              <?php foreach ($buscarSelectUsuario as $k) : ?>
+                <option value="<?php echo $k->id_usuario; ?>"> <?php echo $k->usuario; ?></option>
+              <?php endforeach; ?>
+            </select>
           </div>
           <div class="form-group">
             <label for="inputPasswordtablas">Contraseña</label>
             <div class="input-group">
-              <input type="password" class="form-control" id="inputPasswordtablas" placeholder="Ingrese su contraseña">
+              <input type="password" class="form-control" name="inputPasswordtablas" id="inputPasswordtablas" placeholder="Ingrese su contraseña">
               <div class="input-group-append">
                 <span class="input-group-text">
                   <i class="fas fa-eye" id="togglePasswordtablas"></i>
@@ -358,8 +361,8 @@ $rol_id = $_SESSION['rol_id'];
           </div>
 
           <div class="form-group">
-            <label for="selectRoles">Roles</label>
-            <select id="selectRoles" name="selectRoles" class="form-control select2" style="width: 100%;" required>
+            <label for="selectRolesEditar">Roles</label>
+            <select id="selectRolesEditar" name="selectRolesEditar" class="form-control select2" style="width: 100%;" required>
               <option value="" selected disabled>Seleccione un rol</option>
               <?php foreach ($buscarSelectRol as $k) : ?>
                 <option value="<?php echo $k->id_roles; ?>"> <?php echo $k->roles; ?></option>
@@ -367,8 +370,8 @@ $rol_id = $_SESSION['rol_id'];
             </select>
           </div>
           <div class="form-group">
-            <label for="selectTablas">Tablas</label>
-            <select id="selectTablas" name="selectTablas" class="form-control select2" style="width: 100%;" required>
+            <label for="selectTablasEditar">Tablas</label>
+            <select id="selectTablasEditar" name="selectTablasEditar" class="form-control select2" style="width: 100%;" required>
               <option value="" selected disabled>Seleccione una tabla</option>
               <?php foreach ($buscarSelecttabla as $k) : ?>
                 <option value="<?php echo $k->id_tablas; ?>"> <?php echo $k->descriTablas; ?></option>

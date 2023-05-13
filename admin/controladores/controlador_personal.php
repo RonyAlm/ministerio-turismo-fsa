@@ -23,9 +23,7 @@ class ControladorPersonal
         $buscarSelectRol = $select_tipo_agencia->buscarSelectRol();
         $buscarSelecttabla = $select_tipo_agencia->buscarSelecttabla();
 
-
-
-
+        // $editarUsuario = $select_tipo_agencia->buscarUsuario($id);
         if ($_POST) {
             // print_r($_POST);
             $insertarModelLic = new PersonalModelo();
@@ -57,13 +55,29 @@ class ControladorPersonal
                 $articulo,
                 $cantidadlicenciaF
             );
+            if (isset($_POST['inputUsuario'])) {
+                // echo "agregar usuario";
+                $agregarusuario = new PersonalModelo();
+                print_r($_POST);
+                $inputUsuario = isset($_POST['inputUsuario']) ? $_POST['inputUsuario'] : "";
+                $inputPasswordtablas1 = isset($_POST['inputPasswordtablas1']) ? $_POST['inputPasswordtablas1'] : "";
+                $selectRoles = isset($_POST['selectRoles']) ? $_POST['selectRoles'] : "";
+                $selectTablas = isset($_POST['selectTablas']) ? $_POST['selectTablas'] : "";
 
-            $inputUsuario = isset($_POST['inputUsuario']) ? $_POST['inputUsuario'] : "";
-            $inputPasswordtablas1 = isset($_POST['inputPasswordtablas1']) ? $_POST['inputPasswordtablas1'] : "";
-            $selectRoles = isset($_POST['selectRoles']) ? $_POST['selectRoles'] : "";
-            $selectTablas = isset($_POST['selectTablas']) ? $_POST['selectTablas'] : "";
-            $selectRoles = isset($_POST['selectRoles']) ? $_POST['selectRoles'] : "";
-            $insertarModelLic->agregarUsuarios($inputUsuario, $inputPasswordtablas1, $selectRoles, $selectTablas);
+                $agregarusuario->agregarUsuarios($inputUsuario, $inputPasswordtablas1, $selectRoles, $selectTablas);
+                echo "<script>location.href = 'index2.php?controlador=personal&accion=inicio';</script>";
+            }
+            if (isset($_POST['usuario'])) {
+                $editarusuario = new PersonalModelo();
+
+                print_r($_POST);
+                $usuario = isset($_POST['usuario']) ? $_POST['usuario'] : "";
+                $inputPasswordtablas = isset($_POST['inputPasswordtablas']) ? $_POST['inputPasswordtablas'] : "";
+                $selectRolesEditar = isset($_POST['selectRolesEditar']) ? $_POST['selectRolesEditar'] : "";
+                $selectTablasEditar = isset($_POST['selectTablasEditar']) ? $_POST['selectTablasEditar'] : "";
+                $editarusuario->editarUsuariosRoles($usuario, $inputPasswordtablas, $selectRolesEditar, $selectTablasEditar);
+                echo "<script>location.href = 'index2.php?controlador=personal&accion=inicio';</script>";
+            }
         }
 
 
@@ -161,7 +175,7 @@ class ControladorPersonal
         print_r($controlador1);
         echo '</pre>';
 
-        $id = $_GET["id"];
+        $ids = $_GET["id"];
         $idPersona = $_GET["idPersona"];
 
         $select_tipo = new PersonalModelo();
@@ -176,9 +190,6 @@ class ControladorPersonal
         $consultarCantidLicenciaEditar = $select_tipo->buscarCantidadLicencia($id);
         $buscarCantidadArticuloEditar = $select_tipo->buscarCantidadArticulo($id);
 
-        // print_r($consultarLicencias);
-
-        // //print_r("$idAgencia");
         // /*----------BUSCA LOS POST QUE SE ENCUENTRA EN EDITAR.PHP PARA PODER EDITARLO----------*/
 
         if ($_POST) {
@@ -317,7 +328,8 @@ class ControladorPersonal
 
         $buscarID = new PersonalModelo();
 
-        $editar = $buscarID->buscar($id);
+        $editar = $buscarID->buscar($ids);
+
 
         include_once("vistas/personal/editar.php");
     }

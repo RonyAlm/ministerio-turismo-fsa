@@ -166,6 +166,12 @@ class PersonalModelo
                 VALUES (?,?,?,?)");
         $sql->execute(array($inputUsuario, $inputPasswordtablas1, $selectRoles, $selectTablas));
     }
+    public static function editarUsuariosRoles($usuario, $inputPasswordtablas, $selectRolesEditar, $selectTablasEditar)
+    {
+        $conexionBD = BD::crearInstancia();
+        $sql = $conexionBD->prepare("UPDATE `usuario_contra` SET `contraseña`='$inputPasswordtablas',`rela_rol_id`='$selectRolesEditar',`rela_tablas`='$selectTablasEditar' WHERE id_usuario = $usuario;");
+        $sql->execute();
+    }
 
     public function consultar()
     {
@@ -429,6 +435,18 @@ class PersonalModelo
         INNER JOIN tipo_personal tiper on tiper.id_tipo_personal = per.rela_tipo_personal
         INNER JOIN licencias li on li.rela_personal = per.id_personal
         WHERE per.id_personal = $id");
+
+        $sql->execute();
+
+        return $sql->fetch(PDO::FETCH_OBJ);
+    }
+    public function buscarUsuario($id)
+    {
+        $conexionBD = BD::crearInstancia();
+        $sql = $conexionBD->prepare("SELECT * FROM `usuario_contra` u
+        INNER JOIN roles r on r.id_roles = u.rela_rol_id
+        INNER JOIN tablas t on t.id_tablas = u.rela_tablas
+        WHERE u.id_usuario = $id");
 
         $sql->execute();
 
@@ -732,7 +750,7 @@ class PersonalModelo
     {
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->query("SELECT * FROM `usuario_contra`");
+        $sql = $conexionBD->query("SELECT `id_usuario`, `usuario`, `contraseña`, `rela_rol_id`, `rela_tablas` FROM `usuario_contra`");
         $sql->execute();
 
         return $sql->fetchAll(PDO::FETCH_OBJ);
