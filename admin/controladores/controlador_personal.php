@@ -3,9 +3,6 @@
 include_once("modelos/personal.php");
 include_once("conexion.php");
 
-
-
-
 class ControladorPersonal
 {
 

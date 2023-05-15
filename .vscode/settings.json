@@ -18,5 +18,7 @@
   "trailingComma": "es5",
   "useTabs": false,
   "vueIndentScriptAndStyle": false,
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "editor.minimap.autohide": true,
+  "editor.minimap.enabled": false
 }
