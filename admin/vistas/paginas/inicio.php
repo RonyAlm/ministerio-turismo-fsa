@@ -67,6 +67,7 @@ $rol_id = $_SESSION['rol_id'];
     <section class="content">
         <div class="container-fluid">
             <div class="row">
+                <!-- COMIENZA MODIFICACIONES -->
                 <div class="col-md-6">
                     <div class="card direct-chat direct-chat-primary">
                         <div class="card-header">
@@ -100,10 +101,8 @@ $rol_id = $_SESSION['rol_id'];
 
                                                             <div class="timeline-body">
                                                                 <?php echo "Fila vieja: " . $tablas["old_value"]; ?>
-                                                                <?php echo '<pre>';
-                                                                echo "Fila nueva: " .
-                                                                    print_r($tablas["new_value"]);
-                                                                echo '</pre>'; ?>
+                                                                <?php echo '</br>' ?>
+                                                                <?php echo "Fila nueva: " . $tablas["new_value"]; ?>
                                                             </div>
 
                                                         </div>
@@ -133,82 +132,84 @@ $rol_id = $_SESSION['rol_id'];
                     <!-- /.card -->
                 </div>
                 <!-- /.col -->
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">
-                                <i class="fas fa-exclamation-triangle"></i>
-                                Tareas
-                            </h3>
+
+                <!-- COMIENZA TAREAS -->
+                <?php if ($rol_id == 1 and $usuario == "admin") : ?>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    Tareas
+                                </h3>
+                            </div>
+                            <?php if (empty($tablaTarea)) { ?>
+                                <p class="animated-text">No hay tareas disponibles.</p>
+
+                                <style>
+                                    .animated-text {
+                                        position: relative;
+                                        /* Establece la posición relativa */
+                                    }
+
+                                    .animated-text:hover:after {
+                                        content: "No se encontraron tareas en la lista wey";
+                                        /* Agrega el texto emergente */
+                                        position: absolute;
+                                        /* Establece la posición absoluta */
+                                        top: 20px;
+                                        /* Alinea el cuadro emergente con el párrafo */
+                                        left: 0;
+                                        /* Alinea el cuadro emergente con el párrafo */
+                                        padding: 10px;
+                                        /* Establece el espaciado interno */
+                                        background-color: #FF69B4;
+                                        /* Establece el color de fondo */
+                                        color: white;
+                                        /* Establece el color del texto */
+                                        font-size: 12px;
+                                        /* Establece el tamaño de fuente */
+                                        border-radius: 5px;
+                                        /* Agrega esquinas redondeadas */
+                                        z-index: 1;
+                                        /* Establece el orden de apilamiento */
+                                        width: 150px;
+                                        /* Establece el ancho del cuadro */
+                                    }
+                                </style>
+
+                            <?php } else { ?>
+                                <!-- Aquí va el código del formulario con el ciclo foreach -->
+                                <form action="?controlador=paginas&accion=inicio" method="post" name="formTarea">
+                                    <div class="card-body">
+                                        <?php foreach ($tablaTarea as $tablas) { ?>
+                                            <ul class="todo-list" data-widget="todo-list">
+                                                <li onkeydown="return (event.keyCode != 13);">
+                                                    <!-- el evento onkeydown lo que hace es que no deja presionar el ENTER por que si se presiona el enter me genera un error-->
+                                                    <div class="icheck-primary d-inline ml-2">
+                                                        <input type="checkbox" name="checkbox_id_<?= $tablas['id_tareas']; ?>" id="<?= $tablas["id_tareas"]; ?>" <?= ($tablas['checkbox_tareas'] == '1') ? 'checked' : '' ?>>
+                                                        <label for=""></label>
+                                                    </div>
+                                                    <span class="text"><?php echo $tablas["descripcion_tareas"]; ?></span>
+                                                    <!-- <small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small> -->
+                                                    <div class="tools">
+                                                        <i class="fas fa-edit" onclick="editText(event)"></i>
+                                                        <i class="fas fa-trash" onclick="deleteText(event)"></i>
+                                                    </div>
+
+                                                </li>
+                                            </ul>
+                                        <?php } ?>
+                                    </div>
+                                    <div class="card-footer clearfix">
+                                        <button type="button" class="btn btn-primary float-right" id="addButton"><i class="fas fa-plus"></i> Add tarea</button>
+                                    </div>
+                                </form>
+                            <?php } ?>
+
                         </div>
-                        <?php if (empty($tablaTarea)) { ?>
-                            <p class="animated-text">No hay tareas disponibles.</p>
-
-                            <style>
-                                .animated-text {
-                                    position: relative;
-                                    /* Establece la posición relativa */
-                                }
-
-                                .animated-text:hover:after {
-                                    content: "No se encontraron tareas en la lista wey";
-                                    /* Agrega el texto emergente */
-                                    position: absolute;
-                                    /* Establece la posición absoluta */
-                                    top: 20px;
-                                    /* Alinea el cuadro emergente con el párrafo */
-                                    left: 0;
-                                    /* Alinea el cuadro emergente con el párrafo */
-                                    padding: 10px;
-                                    /* Establece el espaciado interno */
-                                    background-color: #FF69B4;
-                                    /* Establece el color de fondo */
-                                    color: white;
-                                    /* Establece el color del texto */
-                                    font-size: 12px;
-                                    /* Establece el tamaño de fuente */
-                                    border-radius: 5px;
-                                    /* Agrega esquinas redondeadas */
-                                    z-index: 1;
-                                    /* Establece el orden de apilamiento */
-                                    width: 150px;
-                                    /* Establece el ancho del cuadro */
-                                }
-                            </style>
-
-                        <?php } else { ?>
-                            <!-- Aquí va el código del formulario con el ciclo foreach -->
-                            <form action="?controlador=paginas&accion=inicio" method="post" name="formTarea">
-                                <div class="card-body">
-                                    <?php foreach ($tablaTarea as $tablas) { ?>
-                                        <ul class="todo-list" data-widget="todo-list">
-                                            <li class=" <?= ($tablas['checkbox_tareas'] == '1') ? 'done' : '' ?>" ? onkeydown="return (event.keyCode != 13);">
-                                                <!-- el evento onkeydown lo que hace es que no deja presionar el ENTER por que si se presiona el enter me genera un error-->
-                                                <div class="icheck-primary d-inline ml-2">
-                                                    <input type="checkbox" name="checkbox_id_<?= $tablas['id_tareas']; ?>" id="<?= $tablas["id_tareas"]; ?>" <?= ($tablas['checkbox_tareas'] == '1') ? 'checked' : '' ?>>
-                                                    <label for=""></label>
-                                                </div>
-                                                <span class="textarea"><?php echo $tablas["descripcion_tareas"]; ?></span>
-                                                <!-- <small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small> -->
-                                                <div class="tools">
-                                                    <i class="fas fa-edit" onclick="editText(event)"></i>
-                                                    <i class="fas fa-trash" onclick="deleteText(event)"></i>
-                                                </div>
-
-                                            </li>
-
-
-                                        </ul>
-                                    <?php } ?>
-                                </div>
-                                <div class="card-footer clearfix">
-                                    <button type="button" class="btn btn-primary float-right" id="addButton"><i class="fas fa-plus"></i> Add tarea</button>
-                                </div>
-                            </form>
-                        <?php } ?>
-
                     </div>
-                </div>
+                <?php endif; ?>
 
                 <!-- /.col -->
             </div>
