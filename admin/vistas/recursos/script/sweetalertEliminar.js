@@ -124,3 +124,28 @@ function AlertDeletesalones(id_alo, id_dire, id_sercomple) {
     return false;
   });
 }
+function AlertDeleteTransportes(id_transporte, id_dire) {
+  // console.log(id_transporte, id_dire, id_rz, id_serv, id_sercomple);
+  Swal.fire({
+    title: "¿Está seguro que desea eliminar el Transporte?",
+    text: "Esta acción no podrá revertirse",
+    icon: "error",
+    buttons: true,
+    showCancelButton: true,
+    dangerMode: true,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url:
+          "?controlador=transportes&accion=borrar&id_transporte=" +
+          id_transporte +
+          "&idDireccion=" +
+          id_dire,
+        success: function (r) {
+          window.location = "?controlador=transportes&accion=inicio";
+        },
+      });
+    }
+    return false;
+  });
+}
