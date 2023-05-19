@@ -40,57 +40,37 @@
 
             <tr>
               <th class="sorting_1">Designación Comercial</th>
-              <td><?php echo $agenciasInfomacion->descripcion_agencias ?></td>
+              <td><?php echo $TransportesInfomacion->designacion_transporte ?></td>
             </tr>
 
             <tr>
               <th class="sorting_1">Localidad</th>
-              <td><?php echo $agenciasInfomacion->nombre_localidad; ?></td>
+              <td><?php echo $TransportesInfomacion->nombre_localidad; ?></td>
             </tr>
 
             <tr>
               <th class="sorting_1">Dirección</th>
-              <td><?php echo $agenciasInfomacion->calle_direccion; ?></td>
+              <td><?php echo $TransportesInfomacion->calle_direccion; ?></td>
             </tr>
 
             <tr>
               <th class="sorting_1">Departamento</th>
-              <td><?php echo $agenciasInfomacion->descripcion_departamentos; ?></td>
-            </tr>
-
-            <tr>
-              <th class="sorting_1">Razón Social</th>
-              <td><?php echo $agenciasInfomacion->descripcion_razon_social; ?></td>
+              <td><?php echo $TransportesInfomacion->descripcion_departamentos; ?></td>
             </tr>
 
             <tr>
               <th class="sorting_1">Idóneo</th>
-              <td><?php echo $agenciasInfomacion->idoneo_agencia; ?></td>
+              <td><?php echo $TransportesInfomacion->idoneo_transportes; ?></td>
             </tr>
 
             <tr>
-              <th class="sorting_1">Matrícula</th>
-              <td><?php echo $agenciasInfomacion->matricula_agencia; ?></td>
-            </tr>
-
-            <tr>
-              <th class="sorting_1">Legajo</th>
-              <td><?php echo $agenciasInfomacion->legajo_agencia; ?></td>
-            </tr>
-
-            <tr>
-              <th class="sorting_1">Categoría</th>
-              <td><?php echo $agenciasInfomacion->categoria_agencia; ?></td>
-            </tr>
-
-            <tr>
-              <th class="sorting_1">Cuit</th>
-              <td><?php echo $agenciasInfomacion->cuit_agencia; ?></td>
+              <th class="sorting_1">Servicios</th>
+              <td><?php echo $TransportesInfomacion->descripcion_serv_transportes; ?></td>
             </tr>
 
             <tr>
               <th class="sorting_1">Estado</th>
-              <td><?php echo $agenciasInfomacion->descripcion_tipo_estado; ?></td>
+              <td><?php echo $TransportesInfomacion->descripcion_tipo_estado; ?></td>
             </tr>
 
           </table>
@@ -103,7 +83,7 @@
     <!-- ./col -->
 
     <!-- Contactos -->
-    <div class="col-md-6">                                   
+    <div class="col-md-6">
       <div class="card card-success card-outline">
         <div class="card-header">
           <h3 class="card-title text-success">
@@ -126,7 +106,7 @@
 
               <tr>
                 <th class="sorting_1"><i class="fas fa-phone mr-1"></i> Teléfono Celular</th>
-                <td><?php echo $telefonos["descripcion_contacto"]; ?></td>
+                <td><?php echo $telefonos["descri_contacto_transporte"]; ?></td>
               </tr>
 
             <?php  } ?>
@@ -135,7 +115,7 @@
 
               <tr>
                 <th class="sorting_1"><i class="fas fa-phone mr-1"></i> Teléfonos Fijos</th>
-                <td><?php echo $telefonosFijo["descripcion_contacto"]; ?></td>
+                <td><?php echo $telefonosFijo["descri_contacto_transporte"]; ?></td>
               </tr>
 
             <?php  } ?>
@@ -145,7 +125,7 @@
 
               <tr>
                 <th class="sorting_1"><i class=" fas fa-solid fa-envelope mr-1"></i> Correo</th>
-                <td><?php echo $correos["descripcion_contacto"]; ?></td>
+                <td><?php echo $correos["descri_contacto_transporte"]; ?></td>
               </tr>
 
             <?php } ?>
@@ -154,7 +134,7 @@
 
               <tr>
                 <th class="sorting_1"><i class="fab fa-facebook mr-1"></i> Facebook</th>
-                <td><?php echo $facebook["descripcion_contacto"]; ?></td>
+                <td><?php echo $facebook["descri_contacto_transporte"]; ?></td>
               </tr>
 
             <?php } ?>
@@ -163,7 +143,7 @@
 
               <tr>
                 <th class="sorting_1"><i class="fa-brands fa-instagram mr-1"></i> Instagram</th>
-                <td><?php echo $instagram["descripcion_contacto"]; ?></td>
+                <td><?php echo $instagram["descri_contacto_transporte"]; ?></td>
               </tr>
 
             <?php } ?>
@@ -172,7 +152,7 @@
 
               <tr>
                 <th class="sorting_1"><i class="fab fa-twitter-square mr-1"></i> Twitter</th>
-                <td><?php echo $twitter["descripcion_contacto"]; ?></td>
+                <td><?php echo $twitter["descri_contacto_transporte"]; ?></td>
               </tr>
 
             <?php } ?>
@@ -181,7 +161,7 @@
 
               <tr>
                 <th class="sorting_1"><i class="fas fa-globe mr-1"></i> Sitio Web</th>
-                <td><?php echo $web["descripcion_contacto"]; ?></td>
+                <td><?php echo $web["descri_contacto_transporte"]; ?></td>
               </tr>
 
             <?php } ?>
@@ -190,14 +170,14 @@
 
               <tr>
                 <th class="sorting_1"><i class="fas fa-street-view mr-1"></i> Otro</th>
-                <td><?php echo $otro["descripcion_contacto"]; ?></td>
+                <td><?php echo $otro["descri_contacto_transporte"]; ?></td>
               </tr>
 
             <?php } ?>
 
             <tr>
               <th class="sorting_1">Última actualización</th>
-              <td><?= $agenciasInfomacion->fecha_edit_agencia; ?></td>
+              <td><?= $TransportesInfomacion->fecha_edit_transporte; ?></td>
             </tr>
 
           </table>
@@ -215,7 +195,7 @@
   <div class="card-footer mb-4 card">
     <div class="row no-print">
       <div class="col-12">
-        <a href="?controlador=agencias&accion=imprimirInfo&id=<?=$agenciasInfomacion->id_agencias; ?>" rel="noopener" class="btn btn-default float-right">
+        <a href="?controlador=agencias&accion=imprimirInfo&id=<?= $TransportesInfomacion->id_agencias; ?>" rel="noopener" class="btn btn-default float-right">
           <i class="fas fa-print mr-2"></i> Imprimir
         </a>
       </div>

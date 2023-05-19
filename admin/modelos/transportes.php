@@ -342,7 +342,7 @@ class TransportesModelo
     {
         $conexionBD = BD::crearInstancia();
         $sql = $conexionBD->prepare("SELECT t.id_transportes,t.designacion_transporte,t.idoneo_transportes,
-        direccion.calle_direccion,direccion.id_direccion,localidad.id_localidad,
+        direccion.calle_direccion,direccion.id_direccion,localidad.id_localidad,t.fecha_edit_transporte,
         localidad.nombre_localidad,estado_actividad.id_estado,tipo_estado.id_tipo_estado,
         tipo_estado.descripcion_tipo_estado,ct.id_contacto_transporte,departamentos_fsa.descripcion_departamentos,
         st.id_servicios_transportes,st.descripcion_serv_transportes
@@ -638,7 +638,7 @@ class ContactosAgencia
     }
 }
 
-class ContactosInfo
+class ContactosInfoTransporte
 {
     public $telefonoAgenciaInfo;
     public $telefonoFijoAgencia;

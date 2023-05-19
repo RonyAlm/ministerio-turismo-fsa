@@ -250,7 +250,7 @@ class ControladorTransportes
         $TransportesInfomacion = $agenciaInfo->buscar($id_agencia);
 
 
-        $contactosDeagencia = new ContactosInfo();
+        $contactosDeagencia = new ContactosInfoTransporte();
         $agenciaTelefonoInfo = $contactosDeagencia->consultarTelefonos($id_agencia);
         $agenciaTelefonoFijo = $contactosDeagencia->consultarTelefonosFijos($id_agencia);
         $agenciaCorreo = $contactosDeagencia->consultarCorreo($id_agencia);

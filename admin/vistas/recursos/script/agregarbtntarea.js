@@ -42,7 +42,7 @@ addButton.addEventListener("click", function () {
       <input type="checkbox" value="" name="todo1" id="todoCheck1">
       <label for="todoCheck1"></label>
     </div>
-    <span class="textarea">Nueva Tarea</span>
+    <span class="text">Nueva Tarea</span>
     <small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small>
     <div class="tools">
       <i class="fas fa-edit"></i>
@@ -55,7 +55,7 @@ addButton.addEventListener("click", function () {
   todoList.appendChild(newLi);
 
   // Obtiene el valor de la nueva tarea y su ID
-  const nuevaTarea = newLi.querySelector(".textarea").textContent;
+  const nuevaTarea = newLi.querySelector(".text").textContent;
 
   // Envía la nueva tarea y su ID al controlador mediante AJAX
   $.ajax({
@@ -72,15 +72,16 @@ addButton.addEventListener("click", function () {
 
 function editText(event) {
   // obtiene el elemento span que contiene el texto
-  let spanElement =
-    event.target.parentNode.parentNode.querySelector(".textarea");
+  let spanElement = event.target.parentNode.parentNode.querySelector(".text");
   let checkboxIdedit = event.target.parentNode.parentNode
     .querySelector('input[type="checkbox"]')
     .getAttribute("id");
+  console.log(checkboxIdedit);
+  console.log(spanElement);
 
   // crea un nuevo elemento input
   let inputElement = document.createElement("input");
-  inputElement.type = "textarea";
+  inputElement.type = "text";
   inputElement.value = spanElement.textContent;
 
   // reemplaza el elemento span con el nuevo elemento input
@@ -99,21 +100,63 @@ function editText(event) {
 
     // Captura el valor del editText
     var nuevoTexto = inputElement.value;
+    console.log(nuevoTexto);
 
     // Envía la nueva tarea y su ID al controlador mediante AJAX
     $.ajax({
       type: "POST",
       url: "?controlador=paginas&accion=inicio",
-      data: { nuevoTexto: nuevoTexto, checkboxIdedit },
+      data: { nuevoTexto: nuevoTexto, checkboxIdedit: checkboxIdedit },
       success: function (response) {
         console.log("La información se envió por POST");
         console.log("Datos enviados: " + JSON.stringify(nuevoTexto));
         console.log("Datos enviados: " + JSON.stringify(checkboxIdedit));
-        location.reload(); // Recarga la página después de agregar la nueva tarea
+        // location.reload(); // Recarga la página después de agregar la nueva tarea
       },
     });
   });
 }
+
+// function editText(event) {
+//   // obtiene el elemento span que contiene el texto
+//   let spanElement = event.target.parentNode.parentNode.querySelector(".text");
+
+//   // crea un nuevo elemento input
+//   let inputElement = document.createElement("input");
+//   inputElement.type = "text";
+//   inputElement.value = spanElement.textContent;
+
+//   // reemplaza el elemento span con el nuevo elemento input
+//   spanElement.parentNode.replaceChild(inputElement, spanElement);
+
+//   // enfoca el nuevo elemento input
+//   inputElement.focus();
+
+//   // agrega un evento blur al nuevo elemento input para guardar los cambios
+//   inputElement.addEventListener("blur", function () {
+//     // obtiene el valor del input y lo asigna al span
+//     spanElement.textContent = inputElement.value;
+
+//     // reemplaza el input con el span
+//     inputElement.parentNode.replaceChild(spanElement, inputElement);
+
+//     // Captura el valor del editText
+//     var nuevoTexto = inputElement.value;
+
+//     // Envía la nueva tarea y su ID al controlador mediante AJAX
+//     $.ajax({
+//       type: "POST",
+//       url: "?controlador=paginas&accion=inicio",
+//       data: { nuevoTexto: nuevoTexto },
+//       success: function (response) {
+//         console.log("La información se envió por POST");
+//         console.log("Datos enviados: " + JSON.stringify(nuevoTexto));
+//         location.reload(); // Recarga la página después de agregar la nueva tarea
+//       },
+//     });
+//   });
+// }
+
 function deleteText(event) {
   event.preventDefault();
   let checkbox = event.target.parentNode.parentNode.querySelector(

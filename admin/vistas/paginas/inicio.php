@@ -184,7 +184,7 @@ $rol_id = $_SESSION['rol_id'];
                                     <div class="card-body">
                                         <?php foreach ($tablaTarea as $tablas) { ?>
                                             <ul class="todo-list" data-widget="todo-list">
-                                                <li onkeydown="return (event.keyCode != 13);">
+                                                <li tabindex="0" onkeydown="return (event.keyCode != 13);">
                                                     <!-- el evento onkeydown lo que hace es que no deja presionar el ENTER por que si se presiona el enter me genera un error-->
                                                     <div class="icheck-primary d-inline ml-2">
                                                         <input type="checkbox" name="checkbox_id_<?= $tablas['id_tareas']; ?>" id="<?= $tablas["id_tareas"]; ?>" <?= ($tablas['checkbox_tareas'] == '1') ? 'checked' : '' ?>>
