@@ -6,6 +6,7 @@ if (!isset($_SESSION['id'])) {
 
 $usuario = $_SESSION['usuarios'];
 $rol_id = $_SESSION['rol_id'];
+$acceso = $_SESSION['tablas_acceso'];
 
 ?>
 
@@ -28,7 +29,7 @@ $rol_id = $_SESSION['rol_id'];
 <div class="card">
   <div class="card-header">
 
-    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "ceciliag") : ?>
+    <?php if ($rol_id == 1 or $acceso == 3) : ?>
 
       <a name="" id="" class="btn btn-success" href="?controlador=agencias&accion=crear" role="button">Agregar</a>
 

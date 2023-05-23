@@ -6,3 +6,4 @@ if (!isset($_SESSION['id'])) {
 
 $usuario = $_SESSION['usuarios'];
 $rol_id = $_SESSION['rol_id'];
+$acceso = $_SESSION['tablas_acceso'];

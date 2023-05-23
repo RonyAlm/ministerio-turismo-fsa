@@ -20,10 +20,7 @@ if ($_POST) {
   $usuario = $_POST['usuario'];
   $contraseña = $_POST['contraseña'];
 
-  // print_r($usuario);
-  // print_r($contraseña);
-
-  $sql = "SELECT id_usuario, usuario, contraseña, rela_rol_id from usuario_contra where usuario='$usuario'";
+  $sql = "SELECT id_usuario, usuario, contraseña, rela_rol_id,rela_tablas from usuario_contra where usuario='$usuario'";
 
   $resultado = $conexion->prepare($sql);
   $resultado->execute(array());
@@ -55,12 +52,13 @@ if ($_POST) {
       $_SESSION['usuarios'] = $row['usuario'];
       $_SESSION['contraseña'] = $row['contraseña'];
       $_SESSION['rol_id'] = $row['rela_rol_id'];
+      $_SESSION['tablas_acceso'] = $row['rela_tablas'];
       $_SESSION['nombre_persona'] = $rowActivo['nombre_persona'];
       $_SESSION['apellido_persona'] = $rowActivo['apellido_persona'];
       $_SESSION['id_persona'] = $rowActivo['id_persona'];
 
       header("Location: index2.php");
-      // print_r($_SESSION['nombre_persona']);
+      print_r($_SESSION['tablas_acceso']);
       echo "entraste wey";
     } else {
       $error = "La contraseña no coincide";

@@ -261,6 +261,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </div>
           <div class="info">
             <a href="#" class="d-block"><?php echo "$usuario" . " " . "$tablas_acceso" ?></a>
+            <h5 style="color: #ccc;">Template 3</h5>
           </div>
         </div>
 
@@ -305,6 +306,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
+
                   <li class="nav-item">
                     <a href="?controlador=alojamientos&accion=inicio" class="nav-link 
                     <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'alojamientos') ? 'active' : '' ?>">
@@ -312,6 +314,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <p>Alojamientos</p>
                     </a>
                   </li>
+
                   <li class="nav-item">
                     <a href="?controlador=agencias&accion=inicio" class="nav-link 
                     <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'agencias') ? 'active' : '' ?>">
@@ -408,6 +411,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <a href="?controlador=gastronomia&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'gastronomia') ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Gastronomía</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="?controlador=salones&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'salones') ? 'active' : '' ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Salones</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="?controlador=transportes&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'transportes') ? 'active' : '' ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Transportes</p>
                 </a>
               </li>
 

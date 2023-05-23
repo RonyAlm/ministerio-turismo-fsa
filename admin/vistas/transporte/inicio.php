@@ -6,7 +6,7 @@
 
     $usuario = $_SESSION['usuarios'];
     $rol_id = $_SESSION['rol_id'];
-
+    $acceso = $_SESSION['tablas_acceso'];
     ?>
   <div class="card">
       <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") { ?>

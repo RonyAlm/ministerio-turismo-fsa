@@ -1,21 +1,18 @@
 <?php
-  
-  $controlador="paginas";
 
-  $accion="inicio";
+$controlador = "paginas";
+
+$accion = "inicio";
 
 
-  if (isset($_GET['controlador']) && isset($_GET['accion']) ) {
+if (isset($_GET['controlador']) && isset($_GET['accion'])) {
 
-    if(($_GET['controlador']!="") && ($_GET['accion']!="")){
-      
-      $controlador= $_GET['controlador'];
+  if (($_GET['controlador'] != "") && ($_GET['accion'] != "")) {
 
-      $accion = $_GET['accion'];
-      
-    }
+    $controlador = $_GET['controlador'];
 
-    
+    $accion = $_GET['accion'];
   }
-  
-  include_once("vistas/template2.php");
+}
+
+include_once("vistas/template3.php");

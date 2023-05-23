@@ -11,7 +11,7 @@ $conexion = BD::crearInstancia();
 $id = $_SESSION['id'];
 $usuario = $_SESSION['usuarios'];
 $rol_id = $_SESSION['rol_id'];
-
+$acceso = $_SESSION['tablas_acceso'];
 $id_persona = $_SESSION['id_persona'];
 $nombre = $_SESSION['nombre_persona'];
 $apellido = $_SESSION['apellido_persona'];

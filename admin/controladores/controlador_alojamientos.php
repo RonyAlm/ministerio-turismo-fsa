@@ -10,7 +10,7 @@ class ControladorAlojamientos
     { //aca se muestra las tablas
 
         global $accion, $controlador1;
-        echo "esto es un controlador: " . $controlador1;
+        // echo "esto es un controlador: " . $controlador1;
 
         $consultarAlojamientosInicio = new Alojamientos();
 
