@@ -22,7 +22,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-lg-12">
-                <table id="example1" class="table table-bordered table-striped" cellspacing="0" width="100%">
+                <table id="example123" class="table table-bordered table-striped" cellspacing="0" width="100%">
                     <thead>
                         <tr style="background: linear-gradient(to right, #61ba6d, #83c331)">
 

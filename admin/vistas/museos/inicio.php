@@ -32,7 +32,7 @@ $acceso = $_SESSION['tablas_acceso'];
 
     <div class="card-header">
 
-        <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") : ?>
+        <?php if ($rol_id == 1 or $acceso == 8) : ?>
 
             <a name="" id="" class="btn btn-success" href="?controlador=museos&accion=crear" role="button">Agregar</a>
 
@@ -97,7 +97,7 @@ $acceso = $_SESSION['tablas_acceso'];
                                         <a title="Más Información" id="btn1" href="?controlador=museos&accion=info&id=<?php echo $museos["id_museo"]; ?>" class="btn btn-primary btn-sm"><i class="fas fa-folder"></i>
                                         </a>
 
-                                        <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") : ?>
+                                        <?php if ($rol_id == 1 or $acceso == 8) : ?>
 
                                             <a title="Editar" href="?controlador=museos&accion=editar&id=<?php echo $museos["id_museo"]; ?>" class="btn btn-success btn-sm"><i class="fas fa-pencil-alt"></i>
                                             </a>

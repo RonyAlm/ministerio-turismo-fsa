@@ -223,10 +223,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </nav>
     <!-- /.navbar -->
 
-    <!-- Content Wrapper. Contains page content -->
+
     <div class="content-wrapper">
 
-      <!-- Main content -->
+      <!-- RUTEADOR -->
       <section class="content">
         <div class="container-fluid">
           <div class="row">
@@ -240,9 +240,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- /.row -->
         </div><!-- /.container-fluid -->
       </section>
-      <!-- /.content -->
+      <!-- FIN RUTEADOR -->
     </div>
-    <!-- /.content-wrapper -->
+
 
     <aside class="main-sidebar sidebar-dark-success elevation-4">
       <!-- Brand Logo -->
@@ -297,7 +297,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <li class="nav-item 
                 <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'alojamientos' || $_GET['controlador'] == 'agencias' ||
                   $_GET['controlador'] == 'prestadores' || $_GET['controlador'] == 'referentes' || $_GET['controlador'] == 'servigenerales' || $_GET['controlador'] == 'gastronomia')) ? 'menu-open' : '' ?>">
-                <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'alojamientos' || $_GET['controlador'] == 'agencias' ||
+                <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'alojamientos' ||  $_GET['controlador'] == 'agencias' ||
                                               $_GET['controlador'] == 'prestadores' || $_GET['controlador'] == 'referentes' || $_GET['controlador'] == 'servigenerales' || $_GET['controlador'] == 'gastronomia' || $_GET['controlador'] == 'salones' || $_GET['controlador'] == 'transportes')) ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-edit"></i>
                   <p>
@@ -368,9 +368,75 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                   </li>
 
-
+                  <li class="nav-item">
+                    <a href="?controlador=museos&accion=inicio" class="nav-link 
+                    <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'museos') ? 'active' : '' ?>">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Museos</p>
+                    </a>
+                  </li>
                 </ul>
               </li>
+              <!-- REGISTRO PERSONAL SOLO ADMIN POR EL MOMENTO -->
+              <?php if ($usuario == "admin") { ?>
+                <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'menu-open' : '' ?>">
+                  <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'active' : '' ?>">
+                    <i class="nav-icon fas fa-table"></i>
+                    <p>
+                      Personal
+                      <i class="right fas fa-angle-left"></i>
+                    </p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                      <a href="?controlador=personal&accion=inicio" class="nav-link 
+                      <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'active' : '' ?>">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Registro</p>
+                      </a>
+                    </li>
+
+                    <li class="nav-item">
+                      <a href="#" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>
+                          Asistencias
+                          <i class="right fas fa-angle-left"></i>
+                        </p>
+                      </a>
+                      <ul class="nav nav-treeview" style="display: none;">
+                        <li class="nav-item">
+                          <a href="#" class="nav-link">
+                            <i class="far fa-dot-circle nav-icon"></i>
+                            <p>Administración</p>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="?controlador=asistencias&accion=inicio" class="nav-link 
+                          <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'asistencias')) ? '' : '' ?>">
+                            <i class="far fa-dot-circle nav-icon"></i>
+                            <p>Central</p>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="#" class="nav-link">
+                            <i class="far fa-dot-circle nav-icon"></i>
+                            <p>Logística</p>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="#" class="nav-link">
+                            <i class="far fa-dot-circle nav-icon"></i>
+                            <p>Terminal</p>
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+
+                  </ul>
+
+                </li>
+              <?php } ?>
 
             <?php endif; ?>
 
@@ -426,6 +492,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
               </li>
 
+              <li class="nav-item">
+                <a href="?controlador=museos&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'museos') ? 'active' : '' ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Museos</p>
+                </a>
+              </li>
+
             <?php endif; ?>
 
             <!-- CALENDARIO -->
@@ -459,55 +532,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                   </li> -->
                 </ul>
-              </li>
-            <?php } ?>
-
-            <!-- RELIGION -->
-            <?php if ($rol_id == 8  and $usuario == "matias") : ?>
-              <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'museos')) ? 'menu-open' : '' ?>">
-                <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'museos')) ? 'active' : '' ?>">
-                  <i class="nav-icon fas fa-columns"></i>
-                  <p>
-                    Religión
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="?controlador=museos&accion=inicio" class="nav-link 
-                    <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'museos')) ? 'active' : '' ?>">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Museos</p>
-                    </a>
-                  </li>
-                  <!-- <li class="nav-item">
-                    <a href="?controlador=agencias&accion=inicio" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Festividades</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="?controlador=prestadores&accion=inicio" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Iglesías</p>
-                    </a>
-                  </li> -->
-
-                </ul>
-              </li>
-            <?php endif; ?>
-
-            <!-- MUSEOS -->
-            <?php if ($rol_id == 1 or $rol_id == 2 or $rol_id == 3) { ?>
-              <li class="nav-item">
-                <a href="?controlador=museos&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'museos')) ? 'active' : '' ?>">
-                  <!-- <i class="nav-icon fas fa-home"></i> -->
-                  <i class="nav-icon fa-solid fas fa-hotel"></i>
-                  <!-- <i class="fas fa-hotel"></i> -->
-                  <p>
-                    Museos
-                  </p>
-                </a>
               </li>
             <?php } ?>
 
@@ -594,63 +618,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <!-- PERSONAL -->
             <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "rrhh" or $usuario == "karla") { ?>
-              <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'menu-open' : '' ?>">
-                <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'active' : '' ?>">
-                  <i class="nav-icon fas fa-table"></i>
-                  <p>
-                    Personal
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="?controlador=personal&accion=inicio" class="nav-link 
-                      <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'active' : '' ?>">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Registro</p>
-                    </a>
-                  </li>
-                  <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") { ?>
-                    <li class="nav-item">
-                      <a href="#" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>
-                          Asistencias
-                          <i class="right fas fa-angle-left"></i>
-                        </p>
-                      </a>
-                      <ul class="nav nav-treeview" style="display: none;">
-                        <li class="nav-item">
-                          <a href="#" class="nav-link">
-                            <i class="far fa-dot-circle nav-icon"></i>
-                            <p>Administración</p>
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a href="?controlador=asistencias&accion=inicio" class="nav-link 
-                          <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'asistencias')) ? '' : '' ?>">
-                            <i class="far fa-dot-circle nav-icon"></i>
-                            <p>Central</p>
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a href="#" class="nav-link">
-                            <i class="far fa-dot-circle nav-icon"></i>
-                            <p>Logística</p>
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a href="#" class="nav-link">
-                            <i class="far fa-dot-circle nav-icon"></i>
-                            <p>Terminal</p>
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                  <?php } ?>
-                </ul>
 
-              </li>
             <?php } ?>
 
           </ul>
@@ -931,6 +899,47 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 
+    });
+
+    $(function() {
+      var table = $("#example123").DataTable({
+        responsive: true,
+        lengthChange: true,
+        autoWidth: true,
+        language: {
+          url: "vistas/recursos/plugins/datatables/Spanish.json"
+        },
+        dom: 'Bfrtip',
+        buttons: [{
+            extend: 'excel',
+            exportOptions: {
+              columns: ':visible' // Exporta solo las columnas visibles
+            }
+          },
+          {
+            extend: 'pdf',
+            exportOptions: {
+              columns: ':visible' // Exporta solo las columnas visibles
+            }
+          },
+          {
+            extend: 'print',
+            exportOptions: {
+              columns: ':visible' // Exporta solo las columnas visibles
+            }
+          },
+          {
+            extend: 'colvis',
+            collectionLayout: 'fixed two-column',
+            postfixButtons: ['colvisRestore'],
+            text: 'Columnas',
+            columns: ':gt(0)', // Excluye la primera columna (índice 0) del selector de columnas
+            columnText: function(dt, idx, title) {
+              return (idx + 1) + ': ' + title;
+            }
+          }
+        ]
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
   </script>
 

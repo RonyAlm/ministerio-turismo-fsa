@@ -33,7 +33,7 @@ $acceso = $_SESSION['tablas_acceso'];
 
   <div class="card-header">
 
-    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") : ?>
+    <?php if ($rol_id == 1 or $acceso == 2) : ?>
 
       <a name="" id="" class="btn btn-success" href="?controlador=Alojamientos&accion=crear" role="button">Agregar</a>
 
@@ -219,7 +219,7 @@ $acceso = $_SESSION['tablas_acceso'];
                       <i class="fas fa-folder"></i>
                     </a>
 
-                    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") : ?>
+                    <?php if ($rol_id == 1 or $acceso == 3) : ?>
 
                       <a title="Editar" href="?controlador=Alojamientos&accion=editar&id=<?php echo $alojamiento["id_alojamientos"]; ?>" class="btn btn-success btn-sm">
                         <i class="fas fa-pencil-alt"></i>

@@ -37,7 +37,7 @@ $acceso = $_SESSION['tablas_acceso'];
   <!-- Default box -->
   <div class="card">
     <div class="card-header">
-      <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "rrhh" or $usuario == "karla") { ?>
+      <?php if ($rol_id == 1 or $acceso == 10) { ?>
 
         <a class="btn btn-success" href="?controlador=personal&accion=guardar" role="button">Agregar Personal</a>
 
