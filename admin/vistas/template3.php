@@ -378,7 +378,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </ul>
               </li>
               <!-- REGISTRO PERSONAL SOLO ADMIN POR EL MOMENTO -->
-              <?php if ($usuario == "admin") { ?>
+              <?php if ($usuario == "admin" and $usuario == "karla") { ?>
                 <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'menu-open' : '' ?>">
                   <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'active' : '' ?>">
                     <i class="nav-icon fas fa-table"></i>
@@ -437,6 +437,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 </li>
               <?php } ?>
+
+              <li class="nav-item">
+                <a href="?controlador=notas&accion=inicio" class="nav-link 
+                    <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'notas') ? 'active' : '' ?>">
+                  <i class="far fa-file-alt nav-icon"></i>
+                  <p>Notas</p>
+                </a>
+              </li>
 
             <?php endif; ?>
 
@@ -614,11 +622,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 </ul>
               </li>
-            <?php } ?>
-
-            <!-- PERSONAL -->
-            <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "rrhh" or $usuario == "karla") { ?>
-
             <?php } ?>
 
           </ul>

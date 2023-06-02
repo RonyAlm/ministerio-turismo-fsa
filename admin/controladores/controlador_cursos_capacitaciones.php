@@ -1,24 +1,24 @@
 <?php
 
-include_once("modelos/notas.php");
+include_once("modelos/transportes.php");
 include_once("conexion.php");
 
 
-class ControladorNotas
+class ControladorTransportes
 {
 
     public function inicio()
     { //aca se muestra las tablas
 
-        $consultaTransporte = new NotasModelo();
+        $consultaTransporte = new TransportesModelo();
 
         $tabla = $consultaTransporte->consultar();
         $datosEstadisticos = new estadistica();
 
-        // $cantidad_notas = $datosEstadisticos->cantidadnotas();
+        $cantidad_Transportes = $datosEstadisticos->cantidadTransportes();
 
 
-        include_once("vistas/notas/inicio.php");
+        include_once("vistas/transportes/inicio.php");
     }
 
     public function crear()
@@ -28,27 +28,22 @@ class ControladorNotas
         global $id;
         //
 
-        $select_busquedas = new NotasModelo();
+        $select_tipo_Transporte = new TransportesModelo();
 
-        $buscarSelectLocalidad = $select_busquedas->buscarSelectLocalidad();
-        $buscarSelectMotivo = $select_busquedas->buscarSelectMotivo();
-        $buscarSelectOrganismos = $select_busquedas->buscarSelectOrganismos();
+        $buscarSelectLocalidad = $select_tipo_Transporte->buscarSelectLocalidad();
+        $buscarSelectEstado = $select_tipo_Transporte->buscarSelectEstado();
 
         if ($_POST) {
-            print_r($_POST);
+            // print_r($_POST);
 
-            $insertarTransporte = new NotasModelo();
+            $insertarTransporte = new TransportesModelo();
 
-            $fecha_ingreso = $_POST['fecha_ingreso'];
-            $organismos = $_POST['organismos'];
-            $tipo_motivo = $_POST['tipo_motivo'];
-            $numero_nota = $_POST['numero_nota'];
-            $remitente = $_POST['remitente'];
-            $descripcion_motivo = $_POST['descripcion_motivo'];
-            $respuesta_notas = $_POST['respuesta_notas'];
+            $designacionTransportes = $_POST['designacionTransportes'];
+            $ServiciosTransportes = $_POST['ServiciosTransportes'];
+            $idoneoTransportes = $_POST['idoneoTransportes'];
 
-            $rela_localidad_direccion = $_POST['localidad'];
-            $domicilioTransporte = $_POST['domicilio'];
+            $rela_localidad_direccion = $_POST['localidadAgencia'];
+            $domicilioTransporte = $_POST['domicilioTransporte'];
 
             $telefonoAgencia = $_POST['telefonoAgencia'];
             $telefonoFijoAgencia = $_POST['telefonoFijoAgencia'];
@@ -59,14 +54,11 @@ class ControladorNotas
             $webAgencia = $_POST['webAgencia'];
             $otroAgencia = $_POST['otroAgencia'];
 
+            $estadoAgencia = $_POST['estadoAgencia'];
+
             $insertarTransporte->crear(
-                $fecha_ingreso,
-                $organismos,
-                $tipo_motivo,
-                $numero_nota,
-                $remitente,
-                $descripcion_motivo,
-                $respuesta_notas,
+                $designacionTransportes,
+                $ServiciosTransportes,
                 $rela_localidad_direccion,
                 $domicilioTransporte,
                 $telefonoAgencia,
@@ -77,19 +69,21 @@ class ControladorNotas
                 $twitterAgencia,
                 $webAgencia,
                 $otroAgencia,
+                $estadoAgencia,
+                $idoneoTransportes
             );
             if ($insertarTransporte) {
                 $insertarTransporte->trigger($accion, $id, $controlador1);
                 // print_r($insertar);
                 // print_r($usuario_crear);
-                // echo "<script>location.href='index2.php?controlador=notas&accion=inicio';</script>";
+                echo "<script>location.href='index2.php?controlador=transportes&accion=inicio';</script>";
             }
 
-            // echo "<script>location.href='index2.php?controlador=notas&accion=inicio';</script>";
+            echo "<script>location.href='index2.php?controlador=transportes&accion=inicio';</script>";
         }
 
 
-        include_once("vistas/notas/crear.php");
+        include_once("vistas/transportes/crear.php");
     }
 
     public function editar()
@@ -104,23 +98,22 @@ class ControladorNotas
 
         $idAgencia = $_GET["id"];
 
-        $buscarnotas = new NotasModelo();
+        $buscarTransportes = new TransportesModelo();
 
-        $buscarSelectLocalidad = $buscarnotas->buscarSelectLocalidad();
-        $buscarSelectMotivo = $buscarnotas->buscarSelectMotivo();
-        $buscarSelectOrganismos = $buscarnotas->buscarSelectOrganismos();
+        $buscarSelectLocalidad = $buscarTransportes->buscarSelectLocalidad();
+        $buscarSelectEstado = $buscarTransportes->buscarSelectEstado();
 
         //print_r("$idAgencia");
         /*----------BUSCA LOS POST QUE SE ENCUENTRA EN EDITAR.PHP PARA PODER EDITARLO----------*/
 
         if ($_POST) {
-            $EditarAgencia = new NotasModelo();
+            $EditarAgencia = new TransportesModelo();
             // echo '<pre>';
             // print_r($_POST);
             // echo '</pre>';
 
             $tranposteID =  $_POST['tranposteID'];
-            $descripcion_notas = $_POST['nombreTransporte'];
+            $descripcion_Transportes = $_POST['nombreTransporte'];
 
             $servicioTransporte = $_POST['servicioTransporte'];
             $idoneoTransporte = $_POST['idoneoTransporte'];
@@ -159,7 +152,7 @@ class ControladorNotas
             $estadoAgencia = $_POST['estadoAgencia'];
 
             $EditarAgencia->editar(
-                $descripcion_notas,
+                $descripcion_Transportes,
                 $servicioTransporte,
                 $tranposteID,
                 $idoneoTransporte,
@@ -189,11 +182,11 @@ class ControladorNotas
                 $EditarAgencia->trigger($accion, $id, $controlador1);
                 // print_r($insertar);
                 // print_r($usuario_crear);
-                echo "<script>location.href='index2.php?controlador=notas&accion=inicio';</script>";
+                echo "<script>location.href='index2.php?controlador=Transportes&accion=inicio';</script>";
             }
 
-            // header("Location:admin/index2.php?controlador=notas&accion=inicio");
-            echo "<script>location.href='index2.php?controlador=notas&accion=inicio';</script>";
+            // header("Location:admin/index2.php?controlador=Transportes&accion=inicio");
+            echo "<script>location.href='index2.php?controlador=Transportes&accion=inicio';</script>";
         }
 
 
@@ -201,7 +194,7 @@ class ControladorNotas
 
         $contactosDeagencia = new ContactosAgencia();
 
-        $contactosDeagencia1 = new ContactosInfoNotas();
+        $contactosDeagencia1 = new ContactosInfo();
 
         $agenciaTelefono = $contactosDeagencia1->consultarTelefonos($idAgencia);
         $agenciaTelefonoFijo = $contactosDeagencia->consultarTelefonosFijos($idAgencia);
@@ -212,14 +205,14 @@ class ControladorNotas
         $agenciaWeb = $contactosDeagencia->consultarWeb($idAgencia);
         $agenciaOtro = $contactosDeagencia->consultarOtro($idAgencia);
 
-        $buscarID = new NotasModelo();
+        $buscarID = new TransportesModelo();
 
         $editar = $buscarID->buscar($idAgencia);
 
         $InsertarID = $buscarID->consultarID($idAgencia);
 
 
-        include_once("vistas/notas/editar.php");
+        include_once("vistas/Transportes/editar.php");
     }
 
     public function borrar()
@@ -233,31 +226,31 @@ class ControladorNotas
         $idAgenciaBorrar = $_GET["id_transporte"];
         $id_direccion = $_GET['idDireccion'];
 
-        $borrarnotas = new NotasModelo();
+        $borrarTransportes = new TransportesModelo();
 
-        $borrarnotas->consultarID($idAgenciaBorrar);
+        $borrarTransportes->consultarID($idAgenciaBorrar);
 
-        $borrarnotas->borrar($idAgenciaBorrar, $id_direccion);
-        if ($borrarnotas) {
-            $borrarnotas->trigger($accion, $id, $controlador1);
+        $borrarTransportes->borrar($idAgenciaBorrar, $id_direccion);
+        if ($borrarTransportes) {
+            $borrarTransportes->trigger($accion, $id, $controlador1);
             // print_r($insertar);
             // print_r($usuario_crear);
-            echo "<script>location.href='index2.php?controlador=notas&accion=inicio';</script>";
+            echo "<script>location.href='index2.php?controlador=Transportes&accion=inicio';</script>";
         }
 
-        header("Location:index2.php?controlador=notas&accion=inicio");
+        header("Location:index2.php?controlador=Transportes&accion=inicio");
     }
 
     public function info()
     {
         $id_agencia = $_GET['id'];
 
-        $agenciaInfo = new NotasModelo();
+        $agenciaInfo = new TransportesModelo();
 
-        $notasInfomacion = $agenciaInfo->buscar($id_agencia);
+        $TransportesInfomacion = $agenciaInfo->buscar($id_agencia);
 
 
-        $contactosDeagencia = new ContactosInfoNotas();
+        $contactosDeagencia = new ContactosInfoTransporte();
         $agenciaTelefonoInfo = $contactosDeagencia->consultarTelefonos($id_agencia);
         $agenciaTelefonoFijo = $contactosDeagencia->consultarTelefonosFijos($id_agencia);
         $agenciaCorreo = $contactosDeagencia->consultarCorreo($id_agencia);
@@ -267,34 +260,39 @@ class ControladorNotas
         $agenciaWeb = $contactosDeagencia->consultarWeb($id_agencia);
         $agenciaOtro = $contactosDeagencia->consultarOtro($id_agencia);
 
-        include_once("vistas/notas/info.php");
+        include_once("vistas/Transportes/info.php");
     }
 
+    public function sucursal()
+    {
+
+        $id_agencia = $_GET['id'];
+    }
 
     public function imprimir()
     {
-        $consultaAgencia = new NotasModelo();
+        $consultaAgencia = new TransportesModelo();
 
         $tablaAgencia = $consultaAgencia->consultar();
         $datosEstadisticos = new estadistica();
 
-        // $cantidad_notas = $datosEstadisticos->cantidadnotas();
-        // $cantidadnotasHabilitadas = $datosEstadisticos->cantidadnotasHabilitadas();
+        $cantidad_Transportes = $datosEstadisticos->cantidadTransportes();
+        $cantidadTransportesHabilitadas = $datosEstadisticos->cantidadTransportesHabilitadas();
 
 
-        include_once("vistas/notas/imprimir.php");
+        include_once("vistas/Transportes/imprimir.php");
     }
 
     public function imprimirInfo()
     {
         $id_agencia = $_GET['id'];
 
-        $agenciaInfo = new NotasModelo();
+        $agenciaInfo = new TransportesModelo();
 
-        $notasInfomacion = $agenciaInfo->buscar($id_agencia);
+        $TransportesInfomacion = $agenciaInfo->buscar($id_agencia);
 
 
-        $contactosDeagencia = new ContactosInfoNotas();
+        $contactosDeagencia = new ContactosInfo();
         $agenciaTelefonoInfo = $contactosDeagencia->consultarTelefonos($id_agencia);
         $agenciaTelefonoFijo = $contactosDeagencia->consultarTelefonosFijos($id_agencia);
         $agenciaCorreo = $contactosDeagencia->consultarCorreo($id_agencia);
@@ -304,6 +302,6 @@ class ControladorNotas
         $agenciaWeb = $contactosDeagencia->consultarWeb($id_agencia);
         $agenciaOtro = $contactosDeagencia->consultarOtro($id_agencia);
 
-        include_once("vistas/notas/invoice-print.php");
+        include_once("vistas/Transportes/invoice-print.php");
     }
 }

@@ -1,5 +1,5 @@
 <?php
-class NotasModelo
+class TransportesModelo
 {
 
     public $listaAgencia;
@@ -21,7 +21,7 @@ class NotasModelo
 
         try {
             $triggerName = $accion . $controlador1;
-            $tableName = 'notas';
+            $tableName = 'transportes';
 
             $sql = "SELECT trigger_name
                     FROM information_schema.triggers
@@ -166,21 +166,19 @@ class NotasModelo
 
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->query("SELECT `id_notas`, `numero_nota`, `fecha_ig_notas`, `remitente_nota`, `descrip_motivo`, `respuesta_nota`, `fecha_sl_nota`, `rela_tipo_org`, `fecha_edit_notas`,
-        d.id_direccion_notas,d.calle_direccion_notas,
-        l.id_localidad,l.nombre_localidad,
-        tpn.id_tipo_motivo_notas,tpn.descripcion_tipo_mot_notas,
-        ton.id_tipo_org_nota,ton.descripcion_org_nota,
-        (SELECT ct.descri_contacto_notas 
-        FROM contacto_notas ct
-        WHERE n.id_notas = ct.rela_contacto_notas 
+        $sql = $conexionBD->query("SELECT t.id_transportes,t.designacion_transporte,t.idoneo_transportes,
+        direccion.calle_direccion,direccion.id_direccion,localidad.id_localidad,
+        localidad.nombre_localidad,estado_actividad.id_estado,tipo_estado.id_tipo_estado,
+        tipo_estado.descripcion_tipo_estado,
+        (SELECT ct.descri_contacto_transporte 
+        FROM contacto_transporte ct
+        WHERE t.id_transportes = ct.rela_contacto_transporte 
         and ct.rela_contacto_con = 2
-        LIMIT 1) descri_contacto_notas
-        FROM `notas` n
-        INNER JOIN direccion_notas d ON n.rela_dire_nota = d.id_direccion_notas
-        INNER JOIN localidad l on d.rela_localidad_nota = l.id_localidad
-        INNER JOIN tipo_motivo_notas tpn on tpn.id_tipo_motivo_notas = n.rela_tipo_motivo
-        INNER JOIN tipo_organismo_nota ton on ton.id_tipo_org_nota =n.rela_tipo_org");
+        LIMIT 1) descri_contacto_transporte FROM `transportes` t
+        INNER JOIN direccion ON t.rela_direccion = direccion.id_direccion
+        INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad
+        INNER JOIN estado_actividad on estado_actividad.rela_estado_transportes = t.id_transportes
+        INNER JOIN tipo_estado on tipo_estado.id_tipo_estado = estado_actividad.rela_tipo_estado");
 
         //recuperamos los datos y los retornamos
 
@@ -197,10 +195,10 @@ class NotasModelo
 
         $sql = $conexionBD->query("SELECT t.id_transportes,direccion.id_direccion,localidad.id_localidad,
         estado_actividad.id_estado,tipo_estado.id_tipo_estado,
-        ct.id_contacto_notas,departamentos_fsa.id_departamentos_fsa,
+        ct.id_contacto_transporte,departamentos_fsa.id_departamentos_fsa,
         st.id_servicios_transportes
         FROM `transportes` t
-        INNER JOIN contacto_notas ct on ct.rela_contacto_notas = t.id_transportes
+        INNER JOIN contacto_transporte ct on ct.rela_contacto_transporte = t.id_transportes
         INNER JOIN direccion ON t.rela_direccion = direccion.id_direccion
         INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad
         INNER JOIN estado_actividad on estado_actividad.rela_estado_transportes = t.id_transportes
@@ -218,13 +216,8 @@ class NotasModelo
     }
 
     public function crear(
-        $fecha_ingreso,
-        $organismos,
-        $tipo_motivo,
-        $numero_nota,
-        $remitente,
-        $descripcion_motivo,
-        $respuesta_notas,
+        $designacionTransportes,
+        $ServiciosTransportes,
         $rela_localidad_direccion,
         $domicilioTransporte,
         $telefonoAgencia,
@@ -235,91 +228,104 @@ class NotasModelo
         $twitterAgencia,
         $webAgencia,
         $otroAgencia,
+        $estadoAgencia,
+        $idoneoTransportes
     ) {
 
         $conexionBD = BD::crearInstancia();
 
         /*-------- INSERTAMOS LA DIRECCION--------*/
 
-        $sqlDireccion = $conexionBD->prepare("INSERT INTO direccion_notas (calle_direccion_notas,rela_localidad_nota)
+        $sqlDireccion = $conexionBD->prepare("INSERT INTO direccion (calle_direccion,rela_localidad_direccion)
                                                     VALUES(?,?)");
         $sqlDireccion->execute(array($domicilioTransporte, $rela_localidad_direccion));
 
         $lastInsertIDdireccion = $conexionBD->lastInsertId();
 
-        /*-------- INSERTAMOS LA NOTA--------*/
 
-        $sql = $conexionBD->prepare("INSERT INTO `notas`(`numero_nota`, `fecha_ig_notas`,
-         `remitente_nota`, `descrip_motivo`, `respuesta_nota`,  `rela_tipo_org`,
-          `rela_tipo_motivo`, `rela_dire_nota`, `fecha_edit_notas`) 
-          VALUES (?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP())");
+        /*-------- INSERTAMOS EL TRANSPORTE--------*/
+
+        $sql = $conexionBD->prepare("INSERT INTO `transportes`(`designacion_transporte`, `idoneo_transportes`, `rela_direccion`, `fecha_edit_transporte`) VALUES (?,?,?,CURRENT_TIMESTAMP())");
         $sql->execute(array(
-            $numero_nota, $fecha_ingreso,
-            $remitente, $descripcion_motivo,
-            $respuesta_notas, $organismos,
-            $tipo_motivo, $lastInsertIDdireccion
+            $designacionTransportes, $idoneoTransportes,
+            $lastInsertIDdireccion
         ));
-        $lastInsertNotas = $conexionBD->lastInsertId();
 
+        $lastInserttranposteIDs = $conexionBD->lastInsertId();
+
+        /*-------- INSERTAMOS EL SERVICIO DEL TRANSPORTE--------*/
+
+        $sqlServicioTransportes = $conexionBD->prepare("INSERT INTO `servicios_transportes`(`descripcion_serv_transportes`, `fecha_edit_serv_transporte`, `rela_serv_transporte`) VALUES (?,CURRENT_TIMESTAMP(),?)");
+        $sqlServicioTransportes->execute(array(
+            $ServiciosTransportes, $lastInserttranposteIDs
+        ));
+
+        $lastInsertIdServicios = $conexionBD->lastInsertId();
 
         /*-------- INSERTAMOS EL TELEFONO CELULAR--------*/
 
         foreach ($telefonoAgencia as $telefonoAgencia1) {
 
-            $sqlTelefono = $conexionBD->prepare("INSERT INTO `contacto_notas`(`descri_contacto_notas`,`rela_contacto_con`,
-                                                                            `rela_contacto_notas`) 
+            $sqlTelefono = $conexionBD->prepare("INSERT INTO `contacto_transporte`(`descri_contacto_transporte`,`rela_contacto_con`,
+                                                                            `rela_contacto_transporte`) 
                                                     VALUES (?,?,?)");
-            $sqlTelefono->execute(array($telefonoAgencia1, 2, $lastInsertNotas));
+            $sqlTelefono->execute(array($telefonoAgencia1, 2, $lastInserttranposteIDs));
         }
 
         /*-------- INSERTAMOS EL TELEFONO FIJO--------*/
 
-        $sqlFijo = $conexionBD->prepare("INSERT INTO `contacto_notas`(`descri_contacto_notas`,`rela_contacto_con`,
-                                                                            `rela_contacto_notas`) 
+        $sqlFijo = $conexionBD->prepare("INSERT INTO `contacto_transporte`(`descri_contacto_transporte`,`rela_contacto_con`,
+                                                                            `rela_contacto_transporte`) 
                                                     VALUES (?,?,?)");
-        $sqlFijo->execute(array($telefonoFijoAgencia, 9, $lastInsertNotas));
+        $sqlFijo->execute(array($telefonoFijoAgencia, 9, $lastInserttranposteIDs));
 
         /*-------- INSERTAMOS EL CORREO-------*/
 
-        $sqlCorreo = $conexionBD->prepare("INSERT INTO `contacto_notas`(`descri_contacto_notas`,`rela_contacto_con`,
-                                                                            `rela_contacto_notas`) 
+        $sqlCorreo = $conexionBD->prepare("INSERT INTO `contacto_transporte`(`descri_contacto_transporte`,`rela_contacto_con`,
+                                                                            `rela_contacto_transporte`) 
                                                     VALUES (?,?,?)");
-        $sqlCorreo->execute(array($correoAgencia, 1, $lastInsertNotas));
+        $sqlCorreo->execute(array($correoAgencia, 1, $lastInserttranposteIDs));
 
         /*-------- INSERTAMOS EL FACEBOOK--------*/
 
-        $sqlFacebook = $conexionBD->prepare("INSERT INTO `contacto_notas`(`descri_contacto_notas`,`rela_contacto_con`,
-                                                                            `rela_contacto_notas`) 
+        $sqlFacebook = $conexionBD->prepare("INSERT INTO `contacto_transporte`(`descri_contacto_transporte`,`rela_contacto_con`,
+                                                                            `rela_contacto_transporte`) 
                                                     VALUES (?,?,?)");
-        $sqlFacebook->execute(array($facebookAgencia, 4, $lastInsertNotas));
+        $sqlFacebook->execute(array($facebookAgencia, 4, $lastInserttranposteIDs));
 
         /*-------- INSERTAMOS EL INSTAGRAM--------*/
 
-        $sqlInstagram = $conexionBD->prepare("INSERT INTO `contacto_notas`(`descri_contacto_notas`,`rela_contacto_con`,
-                                                                            `rela_contacto_notas`) 
+        $sqlInstagram = $conexionBD->prepare("INSERT INTO `contacto_transporte`(`descri_contacto_transporte`,`rela_contacto_con`,
+                                                                            `rela_contacto_transporte`) 
                                                     VALUES (?,?,?)");
-        $sqlInstagram->execute(array($instagramAgencia, 5, $lastInsertNotas));
+        $sqlInstagram->execute(array($instagramAgencia, 5, $lastInserttranposteIDs));
 
         /*-------- INSERTAMOS EL TWITTER--------*/
 
-        $sqlTwitter = $conexionBD->prepare("INSERT INTO `contacto_notas`(`descri_contacto_notas`,`rela_contacto_con`,
-                                                                            `rela_contacto_notas`) 
+        $sqlTwitter = $conexionBD->prepare("INSERT INTO `contacto_transporte`(`descri_contacto_transporte`,`rela_contacto_con`,
+                                                                            `rela_contacto_transporte`) 
                                                     VALUES (?,?,?)");
-        $sqlTwitter->execute(array($twitterAgencia, 6, $lastInsertNotas));
+        $sqlTwitter->execute(array($twitterAgencia, 6, $lastInserttranposteIDs));
 
         /*-------- INSERTAMOS EL SITIO WEB--------*/
 
-        $sqlWeb = $conexionBD->prepare("INSERT INTO `contacto_notas`(`descri_contacto_notas`,`rela_contacto_con`,
-                                                                            `rela_contacto_notas`) 
+        $sqlWeb = $conexionBD->prepare("INSERT INTO `contacto_transporte`(`descri_contacto_transporte`,`rela_contacto_con`,
+                                                                            `rela_contacto_transporte`) 
                                                     VALUES (?,?,?)");
-        $sqlWeb->execute(array($webAgencia, 7, $lastInsertNotas));
+        $sqlWeb->execute(array($webAgencia, 7, $lastInserttranposteIDs));
 
         /*-------- INSERTAMOS OTRO--------*/
 
-        $sqlOtro = $conexionBD->prepare("INSERT INTO `contacto_notas`(`descri_contacto_notas`,`rela_contacto_con`,
-                                                                            `rela_contacto_notas`) 
+        $sqlOtro = $conexionBD->prepare("INSERT INTO `contacto_transporte`(`descri_contacto_transporte`,`rela_contacto_con`,
+                                                                            `rela_contacto_transporte`) 
                                                     VALUES (?,?,?)");
-        $sqlOtro->execute(array($otroAgencia, 8, $lastInsertNotas));
+        $sqlOtro->execute(array($otroAgencia, 8, $lastInserttranposteIDs));
+
+        /*-------- INSERTAMOS EL ESTADO--------*/
+
+        $sqlEstado = $conexionBD->prepare("INSERT INTO `estado_actividad`(`rela_tipo_estado`, `rela_estado_transportes`) 
+                                            VALUES (?,?)");
+        $sqlEstado->execute(array($estadoAgencia, $lastInserttranposteIDs));
     }
 
     public static function borrar($tranposteIDBorrar, $id_direccion)
@@ -338,10 +344,10 @@ class NotasModelo
         $sql = $conexionBD->prepare("SELECT t.id_transportes,t.designacion_transporte,t.idoneo_transportes,
         direccion.calle_direccion,direccion.id_direccion,localidad.id_localidad,t.fecha_edit_transporte,
         localidad.nombre_localidad,estado_actividad.id_estado,tipo_estado.id_tipo_estado,
-        tipo_estado.descripcion_tipo_estado,ct.id_contacto_notas,departamentos_fsa.descripcion_departamentos,
+        tipo_estado.descripcion_tipo_estado,ct.id_contacto_transporte,departamentos_fsa.descripcion_departamentos,
         st.id_servicios_transportes,st.descripcion_serv_transportes
         FROM `transportes` t
-        INNER JOIN contacto_notas ct on ct.rela_contacto_notas = t.id_transportes
+        INNER JOIN contacto_transporte ct on ct.rela_contacto_transporte = t.id_transportes
         INNER JOIN direccion ON t.rela_direccion = direccion.id_direccion
         INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad
         INNER JOIN estado_actividad on estado_actividad.rela_estado_transportes = t.id_transportes
@@ -425,8 +431,8 @@ class NotasModelo
 
         foreach ($asociativo as $indice => $valor) {
 
-            $sqlContacto = $conexionBD->prepare("UPDATE `contacto_notas` SET `descri_contacto_notas`='$valor'
-                    WHERE id_contacto_notas = $indice");
+            $sqlContacto = $conexionBD->prepare("UPDATE `contacto_transporte` SET `descri_contacto_transporte`='$valor'
+                    WHERE id_contacto_transporte = $indice");
             $sqlContacto->execute();
             // print_r($sqlContacto);
         }
@@ -435,48 +441,48 @@ class NotasModelo
         if ($telefonoFijoAgencia == "") {
             $telefonoFijoAgencia = "No se registró";
 
-            $sqlFijo = $conexionBD->prepare("UPDATE `contacto_notas` SET `descri_contacto_notas`= '$telefonoFijoAgencia'
-                                                    WHERE id_contacto_notas = $idtelefonoFijoAgencia");
+            $sqlFijo = $conexionBD->prepare("UPDATE `contacto_transporte` SET `descri_contacto_transporte`= '$telefonoFijoAgencia'
+                                                    WHERE id_contacto_transporte = $idtelefonoFijoAgencia");
             $sqlFijo->execute();
         } else {
-            $sqlFijo = $conexionBD->prepare("UPDATE `contacto_notas` SET `descri_contacto_notas`= $telefonoFijoAgencia
-                                                    WHERE id_contacto_notas = $idtelefonoFijoAgencia");
+            $sqlFijo = $conexionBD->prepare("UPDATE `contacto_transporte` SET `descri_contacto_transporte`= $telefonoFijoAgencia
+                                                    WHERE id_contacto_transporte = $idtelefonoFijoAgencia");
             $sqlFijo->execute();
         }
         /*----------------SE ACTUALIZA EL CONTACTO correo------------------*/
 
-        $sqlCorreo = $conexionBD->prepare("UPDATE `contacto_notas` SET `descri_contacto_notas`='$correoAgencia'
-                                                    WHERE id_contacto_notas = $idcorreoAgencia");
+        $sqlCorreo = $conexionBD->prepare("UPDATE `contacto_transporte` SET `descri_contacto_transporte`='$correoAgencia'
+                                                    WHERE id_contacto_transporte = $idcorreoAgencia");
         $sqlCorreo->execute();
 
         /*----------------SE ACTUALIZA EL CONTACTO facebook ------------------*/
 
-        $sqlFacebook = $conexionBD->prepare("UPDATE `contacto_notas` SET `descri_contacto_notas`='$facebookAgencia'
-                                                    WHERE id_contacto_notas = $idfacebookAgencia");
+        $sqlFacebook = $conexionBD->prepare("UPDATE `contacto_transporte` SET `descri_contacto_transporte`='$facebookAgencia'
+                                                    WHERE id_contacto_transporte = $idfacebookAgencia");
         $sqlFacebook->execute();
 
         /*----------------SE ACTUALIZA EL CONTACTO Instagram ------------------*/
 
-        $sqlInstagram = $conexionBD->prepare("UPDATE `contacto_notas` SET `descri_contacto_notas`='$instagramAgencia'
-                                                    WHERE id_contacto_notas = $idinstagramAgencia");
+        $sqlInstagram = $conexionBD->prepare("UPDATE `contacto_transporte` SET `descri_contacto_transporte`='$instagramAgencia'
+                                                    WHERE id_contacto_transporte = $idinstagramAgencia");
         $sqlInstagram->execute();
 
         /*----------------SE ACTUALIZA EL CONTACTO  twitter------------------*/
 
-        $sqlTwitter = $conexionBD->prepare("UPDATE `contacto_notas` SET `descri_contacto_notas`='$twitterAgencia'
-                                                    WHERE id_contacto_notas = $idtwitterAgencia");
+        $sqlTwitter = $conexionBD->prepare("UPDATE `contacto_transporte` SET `descri_contacto_transporte`='$twitterAgencia'
+                                                    WHERE id_contacto_transporte = $idtwitterAgencia");
         $sqlTwitter->execute();
 
         /*----------------SE ACTUALIZA EL CONTACTO  sitio web------------------*/
 
-        $sqlWeb = $conexionBD->prepare("UPDATE `contacto_notas` SET `descri_contacto_notas`='$webAgencia'
-                                                    WHERE id_contacto_notas = $idwebAgencia");
+        $sqlWeb = $conexionBD->prepare("UPDATE `contacto_transporte` SET `descri_contacto_transporte`='$webAgencia'
+                                                    WHERE id_contacto_transporte = $idwebAgencia");
         $sqlWeb->execute();
 
         /*----------------SE ACTUALIZA EL CONTACTO otro------------------*/
 
-        $sqlOtro = $conexionBD->prepare("UPDATE `contacto_notas` SET `descri_contacto_notas`='$otroAgencia'
-                                                    WHERE id_contacto_notas = $idotroAgencia ");
+        $sqlOtro = $conexionBD->prepare("UPDATE `contacto_transporte` SET `descri_contacto_transporte`='$otroAgencia'
+                                                    WHERE id_contacto_transporte = $idotroAgencia ");
         $sqlOtro->execute();
     }
 
@@ -493,26 +499,14 @@ class NotasModelo
         return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function buscarSelectMotivo()
+    public function buscarSelectEstado()
     {
 
         $conexionBD = BD::crearInstancia();
 
 
-        $sqlLocalidad = $conexionBD->query("SELECT * FROM `tipo_motivo_notas` ORDER BY `tipo_motivo_notas`.`descripcion_tipo_mot_notas` ASC");
-
-        $sqlLocalidad->execute();
-
-
-        return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
-    }
-    public function buscarSelectOrganismos()
-    {
-
-        $conexionBD = BD::crearInstancia();
-
-
-        $sqlLocalidad = $conexionBD->query("SELECT * FROM `tipo_organismo_nota` ORDER BY `tipo_organismo_nota`.`descripcion_org_nota` ASC");
+        $sqlLocalidad = $conexionBD->query("SELECT `id_tipo_estado`, `descripcion_tipo_estado` 
+                                                       FROM `tipo_estado`");
 
         $sqlLocalidad->execute();
 
@@ -542,10 +536,10 @@ class ContactosAgencia
     public function consultarTelefonos($id_agencia)
     {
         $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT id_contacto_notas, descri_contacto_notas 
-                                            FROM contacto_notas 
-                                            WHERE contacto_notas.rela_contacto_con = 2
-                                            and contacto_notas.rela_contacto_notas = $id_agencia");
+        $consulta = $conexionBD->query(" SELECT id_contacto_transporte, descri_contacto_transporte 
+                                            FROM contacto_transporte 
+                                            WHERE contacto_transporte.rela_contacto_con = 2
+                                            and contacto_transporte.rela_contacto_transporte = $id_agencia");
 
         $consulta->execute();
 
@@ -555,10 +549,10 @@ class ContactosAgencia
     public function consultarTelefonosFijos($id_agencia)
     {
         $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT id_contacto_notas, descri_contacto_notas 
-                                            FROM contacto_notas 
-                                            WHERE contacto_notas.rela_contacto_con = 9
-                                            and contacto_notas.rela_contacto_notas = $id_agencia");
+        $consulta = $conexionBD->query(" SELECT id_contacto_transporte, descri_contacto_transporte 
+                                            FROM contacto_transporte 
+                                            WHERE contacto_transporte.rela_contacto_con = 9
+                                            and contacto_transporte.rela_contacto_transporte = $id_agencia");
 
         $consulta->execute();
 
@@ -568,10 +562,10 @@ class ContactosAgencia
     public function consultarCorreo($id_agencia)
     {
         $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT id_contacto_notas, descri_contacto_notas 
-                                            FROM contacto_notas 
-                                            WHERE contacto_notas.rela_contacto_con = 1
-                                            and contacto_notas.rela_contacto_notas = $id_agencia");
+        $consulta = $conexionBD->query(" SELECT id_contacto_transporte, descri_contacto_transporte 
+                                            FROM contacto_transporte 
+                                            WHERE contacto_transporte.rela_contacto_con = 1
+                                            and contacto_transporte.rela_contacto_transporte = $id_agencia");
 
         $consulta->execute();
 
@@ -581,10 +575,10 @@ class ContactosAgencia
     public function consultarFacebook($id_agencia)
     {
         $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT id_contacto_notas, descri_contacto_notas 
-                                            FROM contacto_notas 
-                                            WHERE contacto_notas.rela_contacto_con = 4
-                                            and contacto_notas.rela_contacto_notas = $id_agencia");
+        $consulta = $conexionBD->query(" SELECT id_contacto_transporte, descri_contacto_transporte 
+                                            FROM contacto_transporte 
+                                            WHERE contacto_transporte.rela_contacto_con = 4
+                                            and contacto_transporte.rela_contacto_transporte = $id_agencia");
 
         $consulta->execute();
 
@@ -594,10 +588,10 @@ class ContactosAgencia
     public function consultarInstagram($id_agencia)
     {
         $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT id_contacto_notas, descri_contacto_notas 
-                                            FROM contacto_notas 
-                                            WHERE contacto_notas.rela_contacto_con = 5
-                                            and contacto_notas.rela_contacto_notas = $id_agencia");
+        $consulta = $conexionBD->query(" SELECT id_contacto_transporte, descri_contacto_transporte 
+                                            FROM contacto_transporte 
+                                            WHERE contacto_transporte.rela_contacto_con = 5
+                                            and contacto_transporte.rela_contacto_transporte = $id_agencia");
 
         $consulta->execute();
 
@@ -607,10 +601,10 @@ class ContactosAgencia
     public function consultarTwitter($id_agencia)
     {
         $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT id_contacto_notas, descri_contacto_notas 
-                                            FROM contacto_notas 
-                                            WHERE contacto_notas.rela_contacto_con = 6
-                                            and contacto_notas.rela_contacto_notas = $id_agencia");
+        $consulta = $conexionBD->query(" SELECT id_contacto_transporte, descri_contacto_transporte 
+                                            FROM contacto_transporte 
+                                            WHERE contacto_transporte.rela_contacto_con = 6
+                                            and contacto_transporte.rela_contacto_transporte = $id_agencia");
 
         $consulta->execute();
 
@@ -620,10 +614,10 @@ class ContactosAgencia
     public function consultarWeb($id_agencia)
     {
         $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT id_contacto_notas, descri_contacto_notas 
-                                            FROM contacto_notas 
-                                            WHERE contacto_notas.rela_contacto_con = 7
-                                            and contacto_notas.rela_contacto_notas = $id_agencia");
+        $consulta = $conexionBD->query(" SELECT id_contacto_transporte, descri_contacto_transporte 
+                                            FROM contacto_transporte 
+                                            WHERE contacto_transporte.rela_contacto_con = 7
+                                            and contacto_transporte.rela_contacto_transporte = $id_agencia");
 
         $consulta->execute();
 
@@ -633,10 +627,10 @@ class ContactosAgencia
     public function consultarOtro($id_agencia)
     {
         $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT id_contacto_notas, descri_contacto_notas 
-                                            FROM contacto_notas 
-                                            WHERE contacto_notas.rela_contacto_con = 8
-                                            and contacto_notas.rela_contacto_notas = $id_agencia");
+        $consulta = $conexionBD->query(" SELECT id_contacto_transporte, descri_contacto_transporte 
+                                            FROM contacto_transporte 
+                                            WHERE contacto_transporte.rela_contacto_con = 8
+                                            and contacto_transporte.rela_contacto_transporte = $id_agencia");
 
         $consulta->execute();
 
@@ -644,7 +638,7 @@ class ContactosAgencia
     }
 }
 
-class ContactosInfoNotas
+class ContactosInfoTransporte
 {
     public $telefonoAgenciaInfo;
     public $telefonoFijoAgencia;
@@ -676,10 +670,10 @@ class ContactosInfoNotas
     public function consultarTelefonos($id_agencia)
     {
         $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT id_contacto_notas, contacto_notas.descri_contacto_notas 
-                                            FROM contacto_notas 
-                                            WHERE contacto_notas.rela_contacto_con = 2
-                                            and contacto_notas.rela_contacto_notas = $id_agencia");
+        $consulta = $conexionBD->query(" SELECT id_contacto_transporte, contacto_transporte.descri_contacto_transporte 
+                                            FROM contacto_transporte 
+                                            WHERE contacto_transporte.rela_contacto_con = 2
+                                            and contacto_transporte.rela_contacto_transporte = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->telefonoAgenciaInfo[] = $filas;
@@ -690,10 +684,10 @@ class ContactosInfoNotas
     public function consultarTelefonosFijos($id_agencia)
     {
         $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT contacto_notas.descri_contacto_notas 
-                                            FROM contacto_notas 
-                                            WHERE contacto_notas.rela_contacto_con = 9
-                                            and contacto_notas.rela_contacto_notas = $id_agencia");
+        $consulta = $conexionBD->query(" SELECT contacto_transporte.descri_contacto_transporte 
+                                            FROM contacto_transporte 
+                                            WHERE contacto_transporte.rela_contacto_con = 9
+                                            and contacto_transporte.rela_contacto_transporte = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->telefonoFijoAgencia[] = $filas;
@@ -704,10 +698,10 @@ class ContactosInfoNotas
     public function consultarCorreo($id_agencia)
     {
         $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT contacto_notas.descri_contacto_notas 
-                                            FROM contacto_notas 
-                                            WHERE contacto_notas.rela_contacto_con = 1
-                                            and contacto_notas.rela_contacto_notas = $id_agencia");
+        $consulta = $conexionBD->query(" SELECT contacto_transporte.descri_contacto_transporte 
+                                            FROM contacto_transporte 
+                                            WHERE contacto_transporte.rela_contacto_con = 1
+                                            and contacto_transporte.rela_contacto_transporte = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->correoAgencia[] = $filas;
@@ -718,10 +712,10 @@ class ContactosInfoNotas
     public function consultarFacebook($id_agencia)
     {
         $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT contacto_notas.descri_contacto_notas 
-                                            FROM contacto_notas 
-                                            WHERE contacto_notas.rela_contacto_con = 4
-                                            and contacto_notas.rela_contacto_notas = $id_agencia");
+        $consulta = $conexionBD->query(" SELECT contacto_transporte.descri_contacto_transporte 
+                                            FROM contacto_transporte 
+                                            WHERE contacto_transporte.rela_contacto_con = 4
+                                            and contacto_transporte.rela_contacto_transporte = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->facebookAgencia[] = $filas;
@@ -732,10 +726,10 @@ class ContactosInfoNotas
     public function consultarInstagram($id_agencia)
     {
         $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT contacto_notas.descri_contacto_notas 
-                                            FROM contacto_notas 
-                                            WHERE contacto_notas.rela_contacto_con = 5
-                                            and contacto_notas.rela_contacto_notas = $id_agencia");
+        $consulta = $conexionBD->query(" SELECT contacto_transporte.descri_contacto_transporte 
+                                            FROM contacto_transporte 
+                                            WHERE contacto_transporte.rela_contacto_con = 5
+                                            and contacto_transporte.rela_contacto_transporte = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->instagramAgencia[] = $filas;
@@ -746,10 +740,10 @@ class ContactosInfoNotas
     public function consultarTwitter($id_agencia)
     {
         $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT contacto_notas.descri_contacto_notas 
-                                            FROM contacto_notas 
-                                            WHERE contacto_notas.rela_contacto_con = 6
-                                            and contacto_notas.rela_contacto_notas = $id_agencia");
+        $consulta = $conexionBD->query(" SELECT contacto_transporte.descri_contacto_transporte 
+                                            FROM contacto_transporte 
+                                            WHERE contacto_transporte.rela_contacto_con = 6
+                                            and contacto_transporte.rela_contacto_transporte = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->twitterAgencia[] = $filas;
@@ -760,10 +754,10 @@ class ContactosInfoNotas
     public function consultarWeb($id_agencia)
     {
         $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT contacto_notas.descri_contacto_notas 
-                                            FROM contacto_notas 
-                                            WHERE contacto_notas.rela_contacto_con = 7
-                                            and contacto_notas.rela_contacto_notas = $id_agencia");
+        $consulta = $conexionBD->query(" SELECT contacto_transporte.descri_contacto_transporte 
+                                            FROM contacto_transporte 
+                                            WHERE contacto_transporte.rela_contacto_con = 7
+                                            and contacto_transporte.rela_contacto_transporte = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->webAgencia[] = $filas;
@@ -774,10 +768,10 @@ class ContactosInfoNotas
     public function consultarOtro($id_agencia)
     {
         $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT contacto_notas.descri_contacto_notas 
-                                            FROM contacto_notas 
-                                            WHERE contacto_notas.rela_contacto_con = 8
-                                            and contacto_notas.rela_contacto_notas = $id_agencia");
+        $consulta = $conexionBD->query(" SELECT contacto_transporte.descri_contacto_transporte 
+                                            FROM contacto_transporte 
+                                            WHERE contacto_transporte.rela_contacto_con = 8
+                                            and contacto_transporte.rela_contacto_transporte = $id_agencia");
 
         while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $this->otroAgencia[] = $filas;
