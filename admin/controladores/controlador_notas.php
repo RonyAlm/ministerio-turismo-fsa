@@ -119,11 +119,18 @@ class ControladorNotas
             // print_r($_POST);
             // echo '</pre>';
 
-            $tranposteID =  $_POST['tranposteID'];
-            $descripcion_notas = $_POST['nombreTransporte'];
+            $notasID =  $_POST['notasID'];
+            $fecha_ingreso = $_POST['fecha_ingreso'];
+            $numero_nota = $_POST['numero_nota'];
+            $remitente = $_POST['remitente'];
+            $descripcion_motivo = $_POST['descripcion_motivo'];
+            $respuesta_notas = $_POST['respuesta_notas'];
 
-            $servicioTransporte = $_POST['servicioTransporte'];
-            $idoneoTransporte = $_POST['idoneoTransporte'];
+            $organismoID = $_POST['organismoID'];
+            $organismos = $_POST['organismos'];
+
+            $motivoID = $_POST['motivoID'];
+            $tipo_motivo = $_POST['tipo_motivo'];
 
 
             $idDireccion = $_POST['agenciaDomicilioID'];
@@ -155,14 +162,18 @@ class ControladorNotas
             $idotroAgencia = $_POST['agenciaOtroID'];
             $otroAgencia = $_POST['otroAgencia'];
 
-            $idestadoAgencia = $_POST['agenciaEstadoID'];
-            $estadoAgencia = $_POST['estadoAgencia'];
 
             $EditarAgencia->editar(
-                $descripcion_notas,
-                $servicioTransporte,
-                $tranposteID,
-                $idoneoTransporte,
+                $fecha_ingreso,
+                $organismoID,
+                $notasID,
+                $organismos,
+                $numero_nota,
+                $remitente,
+                $motivoID,
+                $tipo_motivo,
+                $descripcion_motivo,
+                $respuesta_notas,
                 $rela_localidad_direccion,
                 $calle_direccion,
                 $telefonoAgencia,
@@ -173,7 +184,6 @@ class ControladorNotas
                 $twitterAgencia,
                 $webAgencia,
                 $otroAgencia,
-                $estadoAgencia,
                 $idDireccion,
                 $idtelefonoAgencia,
                 $idtelefonoFijoAgencia,
@@ -182,17 +192,14 @@ class ControladorNotas
                 $idinstagramAgencia,
                 $idtwitterAgencia,
                 $idwebAgencia,
-                $idotroAgencia,
-                $idestadoAgencia
+                $idotroAgencia
             );
             if ($EditarAgencia) {
                 $EditarAgencia->trigger($accion, $id, $controlador1);
-                // print_r($insertar);
-                // print_r($usuario_crear);
+
                 echo "<script>location.href='index2.php?controlador=notas&accion=inicio';</script>";
             }
 
-            // header("Location:admin/index2.php?controlador=notas&accion=inicio");
             echo "<script>location.href='index2.php?controlador=notas&accion=inicio';</script>";
         }
 
@@ -216,7 +223,7 @@ class ControladorNotas
 
         $editar = $buscarID->buscar($idAgencia);
 
-        $InsertarID = $buscarID->consultarID($idAgencia);
+        $InsertarID = $buscarID->buscar($idAgencia);
 
 
         include_once("vistas/notas/editar.php");

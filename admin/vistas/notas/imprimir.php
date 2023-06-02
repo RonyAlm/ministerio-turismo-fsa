@@ -2,11 +2,11 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Imprimir Agencias</h1>
+                <h1>Imprimir Notas</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=agencias&accion=inicio">Agencias</a></li>
+                    <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=notas&accion=inicio">Notas</a></li>
                     <li class="breadcrumb-item active">Imprimir</li>
                 </ol>
             </div>
@@ -41,7 +41,7 @@
                             <tr>
 
                                 <td><?php echo $agencia["nombre_localidad"]; ?></td>
-                                <td><?php echo $agencia["descripcion_agencias"]; ?></td>
+                                <td><?php echo $agencia["descripcion_notas"]; ?></td>
                                 <td><?php echo $agencia["descripcion_contacto"]; ?></td>
                                 <td><?php echo $agencia["calle_direccion"]; ?></td>
                                 <?php if ($agencia["descripcion_tipo_estado"] == "Activo") { ?>

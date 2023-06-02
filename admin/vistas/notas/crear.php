@@ -3,7 +3,7 @@
   <div class="card-header ">
     <h3 class="card-title text-success">
       <i class="fas fa-solid fa-plus-minus  mr-2"></i>
-      Agregar Transportes
+      Agregar Notas
     </h3>
   </div>
 
@@ -30,44 +30,63 @@
                 </button>
               </div>
             </div>
+
+
             <div class="card-body">
+
               <div class="form-group">
-                <label for="designacionTransportes">Designación:</label>
-                <input type="text" id="designacionTransportes" name="designacionTransportes" class="form-control" required>
+                <label for="fecha_ingreso">Fecha de Ingreso:</label>
+                <input type="date" id="fecha_ingreso" name="fecha_ingreso" class="form-control" required>
               </div>
 
               <div class="form-group">
-                <label for="localidadAgencia">Localidad</label>
-                <select id="localidadAgencia" name="localidadAgencia" class="form-control select2" required>
+                <label for="organismos">Organismos</label>
+                <select id="organismos" name="organismos" class="form-control select2" required>
+                  <option value="" selected disabled>Seleccionar el Organismo</option>
+                  <?php foreach ($buscarSelectOrganismos as $k) : ?>
+                    <option value="<?php echo $k->id_tipo_org_nota; ?>"> <?php echo $k->descripcion_org_nota; ?></option>
+                  <?php endforeach; ?>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="tipo_motivo">Tipo de Motivo</label>
+                <select id="tipo_motivo" name="tipo_motivo" class="form-control select2" required>
+                  <option value="" selected disabled>Seleccionar el motivo</option>
+                  <?php foreach ($buscarSelectMotivo as $k) : ?>
+                    <option value="<?php echo $k->id_tipo_motivo_notas; ?>"> <?php echo $k->descripcion_tipo_mot_notas; ?></option>
+                  <?php endforeach; ?>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="localidad">Localidad</label>
+                <select id="localidad" name="localidad" class="form-control select2" required>
                   <option value="" selected disabled>Seleccionar la localidad</option>
                   <?php foreach ($buscarSelectLocalidad as $k) : ?>
                     <option value="<?php echo $k->id_localidad; ?>"> <?php echo $k->nombre_localidad; ?></option>
                   <?php endforeach; ?>
                 </select>
               </div>
-
               <div class="form-group">
-                <label for="idoneoTransportes">Idóneo:</label>
-                <input type="text" id="idoneoTransportes" name="idoneoTransportes" class="form-control"></input>
+                <label for="numero_nota">N° Nota:</label>
+                <input type="text" id="numero_nota" name="numero_nota" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="remitente">Remitente:</label>
+                <input type="text" id="remitente" name="remitente" class="form-control" required>
               </div>
 
               <div class="form-group">
-                <label for="domicilioTransporte">Domicilio</label>
-                <input type="text" id="domicilioTransporte" name="domicilioTransporte" class="form-control">
+                <label for="descripcion_motivo">Descripción del Motivo</label>
+                <input type="text" id="descripcion_motivo" name="descripcion_motivo" class="form-control">
               </div>
               <div class="form-group">
-                <label for="ServiciosTransportes">Servicios</label>
-                <input type="text" id="ServiciosTransportes" name="ServiciosTransportes" class="form-control">
+                <label for="respuesta_notas">Respuesta</label>
+                <input type="text" id="respuesta_notas" name="respuesta_notas" class="form-control">
               </div>
 
               <div class="form-group">
-                <label for="estadoAgencia">Estado</label>
-                <select id="estadoAgencia" name="estadoAgencia" class="form-control select2" required>
-                  <option value="0" selected disabled>Seleccionar el Estado de la Agencia</option>
-                  <?php foreach ($buscarSelectEstado as $k) : ?>
-                    <option value="<?php echo $k->id_tipo_estado; ?>"> <?php echo $k->descripcion_tipo_estado; ?></option>
-                  <?php endforeach; ?>
-                </select>
+                <label for="domicilio">Domicilio</label>
+                <input type="text" id="domicilio" name="domicilio" class="form-control">
               </div>
 
             </div>

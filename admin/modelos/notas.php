@@ -332,23 +332,16 @@ class NotasModelo
         $sqlDireccionBorrar->execute(array($id_direccion));
     }
     /*----------BUSCAR para ir imprimir en la seccion EDITAR----------*/
-    public function buscar($id_agencia)
+    public function buscar($id)
     {
         $conexionBD = BD::crearInstancia();
-        $sql = $conexionBD->prepare("SELECT t.id_transportes,t.designacion_transporte,t.idoneo_transportes,
-        direccion.calle_direccion,direccion.id_direccion,localidad.id_localidad,t.fecha_edit_transporte,
-        localidad.nombre_localidad,estado_actividad.id_estado,tipo_estado.id_tipo_estado,
-        tipo_estado.descripcion_tipo_estado,ct.id_contacto_notas,departamentos_fsa.descripcion_departamentos,
-        st.id_servicios_transportes,st.descripcion_serv_transportes
-        FROM `transportes` t
-        INNER JOIN contacto_notas ct on ct.rela_contacto_notas = t.id_transportes
-        INNER JOIN direccion ON t.rela_direccion = direccion.id_direccion
-        INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad
-        INNER JOIN estado_actividad on estado_actividad.rela_estado_transportes = t.id_transportes
-        INNER JOIN tipo_estado on tipo_estado.id_tipo_estado = estado_actividad.rela_tipo_estado
-        INNER JOIN departamentos_fsa on localidad.rela_departamento = departamentos_fsa.id_departamentos_fsa
-        INNER JOIN servicios_transportes st on st.rela_serv_transporte = t.id_transportes
-        WHERE t.id_transportes =$id_agencia");
+        $sql = $conexionBD->prepare("SELECT * FROM `notas` n
+        INNER JOIN direccion_notas d ON n.rela_dire_nota = d.id_direccion_notas
+        INNER JOIN localidad l on d.rela_localidad_nota = l.id_localidad
+        INNER JOIN tipo_motivo_notas tpn on tpn.id_tipo_motivo_notas = n.rela_tipo_motivo
+        INNER JOIN tipo_organismo_nota ton on ton.id_tipo_org_nota =n.rela_tipo_org
+        INNER JOIN contacto_notas cn on cn.rela_contacto_notas = n.id_notas
+        WHERE n.id_notas =$id");
 
         $sql->execute();
 
@@ -356,10 +349,16 @@ class NotasModelo
     }
 
     public static function editar(
-        $descripcion_Transportes,
-        $servicioTransporte,
-        $tranposteID,
-        $idoneoTransporte,
+        $fecha_ingreso,
+        $organismoID,
+        $notasID,
+        $organismos,
+        $numero_nota,
+        $remitente,
+        $motivoID,
+        $tipo_motivo,
+        $descripcion_motivo,
+        $respuesta_notas,
         $rela_localidad_direccion,
         $calle_direccion,
         $telefonoAgencia,
@@ -370,7 +369,6 @@ class NotasModelo
         $twitterAgencia,
         $webAgencia,
         $otroAgencia,
-        $estadoAgencia,
         $idDireccion,
         $idtelefonoAgencia,
         $idtelefonoFijoAgencia,
@@ -379,42 +377,33 @@ class NotasModelo
         $idinstagramAgencia,
         $idtwitterAgencia,
         $idwebAgencia,
-        $idotroAgencia,
-        $idestadoAgencia
+        $idotroAgencia
+
     ) {
 
         $conexionBD = BD::crearInstancia();
 
         /*---------------SE ACTUALIZA EL TRANSPORTE-------------------*/
-        $sql = $conexionBD->prepare("UPDATE `transportes` SET `designacion_transporte`='$descripcion_Transportes',`idoneo_transportes`='$idoneoTransporte',`fecha_edit_transporte`=CURRENT_TIMESTAMP() WHERE `id_transportes`= $tranposteID;");
+        $sql = $conexionBD->prepare("UPDATE `notas` SET `numero_nota`='$numero_nota',`fecha_ig_notas`='$fecha_ingreso',
+        `remitente_nota`='$remitente',`descrip_motivo`='$descripcion_motivo',
+        `respuesta_nota`='$respuesta_notas',`rela_tipo_org`=$organismos,
+        `rela_tipo_motivo`=$tipo_motivo,`fecha_edit_notas`=CURRENT_TIMESTAMP() 
+        WHERE id_notas = $notasID;");
         $sql->execute();
-
-        /*---------------SE ACTUALIZA EL SERVICIO DEL TRANSPORTE-------------------*/
-        $sql = $conexionBD->prepare("UPDATE `servicios_transportes` SET `descripcion_serv_transportes`='$servicioTransporte',`fecha_edit_serv_transporte`=CURRENT_TIMESTAMP() WHERE rela_serv_transporte= $tranposteID;");
-        $sql->execute();
-
         /*---------------SE ACTUALIZA LA DIRECCION CON LA LOCALIDAD-------------------*/
 
         if ($rela_localidad_direccion == 0) {
-            $sqlDireccion = $conexionBD->prepare("UPDATE `direccion` SET `calle_direccion`='$calle_direccion'
-                                                        WHERE id_direccion = $idDireccion ");
+            $sqlDireccion = $conexionBD->prepare("UPDATE `direccion_notas` SET `calle_direccion_notas`='$calle_direccion'
+                                                        WHERE id_direccion_notas  = $idDireccion ");
             $sqlDireccion->execute();
         } else {
-            $sqlDireccion = $conexionBD->prepare("UPDATE `direccion` SET `calle_direccion`='$calle_direccion',
-                                                        `rela_localidad_direccion`=$rela_localidad_direccion 
-                                                        WHERE id_direccion = $idDireccion ");
+            $sqlDireccion = $conexionBD->prepare("UPDATE `direccion_notas` SET `calle_direccion_notas`='$calle_direccion',
+                                                        `rela_localidad_nota`=$rela_localidad_direccion 
+                                                        WHERE id_direccion_notas  = $idDireccion ");
             $sqlDireccion->execute();
         }
 
-        /*----------------SE ACTUALIZA EL ESTADO------------------*/
 
-        if ($estadoAgencia == 0) {
-            echo "actualizado";
-        } else {
-            $sqlEstado = $conexionBD->prepare("UPDATE `estado_actividad` SET `rela_tipo_estado`=$estadoAgencia
-                                                        WHERE id_estado = $idestadoAgencia");
-            $sqlEstado->execute();
-        }
 
 
         /*----------------SE ACTUALIZA EL CONTACTO telefono------------------*/

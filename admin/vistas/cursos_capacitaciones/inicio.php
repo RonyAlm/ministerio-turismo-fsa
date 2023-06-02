@@ -13,12 +13,12 @@ $acceso = $_SESSION['tablas_acceso'];
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Transportes</h1>
+        <h1>Cursos y Capacitaciones</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=transportes&accion=inicio">Inicio</a></li>
-          <li class="breadcrumb-item active">Transportes</li>
+          <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=cursos_capacitaciones&accion=inicio">Inicio</a></li>
+          <li class="breadcrumb-item active">Cursos y Capacitaciones</li>
         </ol>
       </div>
     </div>
@@ -30,13 +30,13 @@ $acceso = $_SESSION['tablas_acceso'];
 
     <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "ceciliag") : ?>
 
-      <a name="" id="" class="btn btn-success" href="?controlador=Transportes&accion=crear" role="button">Agregar</a>
+      <a name="" id="" class="btn btn-success" href="?controlador=cursos_capacitaciones&accion=crear" role="button">Agregar</a>
 
     <?php else : ?>
       <a class="btn btn-success disabled" href="#" role="button">Agregar</a>
     <?php endif; ?>
 
-    <a name="" id="" class="btn btn-secondary" href="?controlador=Transportes&accion=imprimir" role="button">Imprimir</a>
+    <a name="" id="" class="btn btn-secondary" href="?controlador=cursos_capacitaciones&accion=imprimir" role="button">Imprimir</a>
 
   </div>
 
@@ -48,8 +48,8 @@ $acceso = $_SESSION['tablas_acceso'];
           <span class="info-box-icon bg-success"><i class="fa-solid fa-building"></i></span>
 
           <div class="info-box-content">
-            <span class="info-box-text text-center">Transportes</span>
-            <?php foreach ($cantidad_Transportes as $estadistica) { ?>
+            <span class="info-box-text text-center">cursos_capacitaciones</span>
+            <?php foreach ($cantidad_cursos_capacitaciones as $estadistica) { ?>
               <span class="info-box-text">Cantidad Total: <?php echo $estadistica->conteo; ?> </span>
             <?php } ?>
           </div>
@@ -89,18 +89,18 @@ $acceso = $_SESSION['tablas_acceso'];
                 <td class="project-actions text-right">
                   <div class="btn-group" role="group" aria-label="">
 
-                    <a title="Más Infomación" id="btn1" href="?controlador=Transportes&accion=info&id=<?= $transporte["id_transportes"]; ?>" class="btn btn-primary btn-sm">
+                    <a title="Más Infomación" id="btn1" href="?controlador=cursos_capacitaciones&accion=info&id=<?= $transporte["id_cursos_capacitaciones"]; ?>" class="btn btn-primary btn-sm">
                       <i class="fas fa-folder"></i>
                     </a>
 
                     <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "ceciliag") : ?>
 
-                      <a title="Editar" href="?controlador=Transportes&accion=editar&id=<?php echo $transporte["id_transportes"]; ?>" class="btn btn-success btn-sm">
+                      <a title="Editar" href="?controlador=cursos_capacitaciones&accion=editar&id=<?php echo $transporte["id_cursos_capacitaciones"]; ?>" class="btn btn-success btn-sm">
                         <i class="fas fa-pencil-alt"></i>
                       </a>
 
-                      <a title="Borrar" onclick="AlertDeleteTransportes(
-                      <?= $transporte['id_transportes']; ?>,
+                      <a title="Borrar" onclick="AlertDeletecursos_capacitaciones(
+                      <?= $transporte['id_cursos_capacitaciones']; ?>,
                       <?= $transporte['id_direccion']; ?>)" class="btn btn-danger btn-sm">
                         <i class="fas fa-trash"></i>
                       </a>
