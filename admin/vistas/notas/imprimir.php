@@ -22,58 +22,31 @@
     <div class="card-body">
         <div class="row">
             <div class="col-lg-12">
-                <table id="example1" class="table table-bordered table-striped" cellspacing="0" width="100%">
+                <table id="example123" class="table table-bordered table-striped" cellspacing="0" width="100%">
                     <thead>
                         <tr style="background: linear-gradient(to right, #61ba6d, #83c331)">
+                            <?php
+                            // Obtener los nombres de las columnas de tu consulta
+                            $columnas = array_keys($tablaAgencia[0]);
 
-                            <th>Localidad</th>
-                            <th>Designacion Comercial</th>
-                            <th>Contacto</th>
-                            <th>Dirección</th>
-                            <th>Estado</th>
-
+                            // Iterar sobre los nombres de las columnas y generar los elementos th
+                            foreach ($columnas as $columna) {
+                                echo "<th>$columna</th>";
+                            }
+                            ?>
                         </tr>
                     </thead>
                     <tbody>
 
                         <?php foreach ($tablaAgencia as $agencia) { ?>
-
                             <tr>
-
-                                <td><?php echo $agencia["nombre_localidad"]; ?></td>
-                                <td><?php echo $agencia["descripcion_notas"]; ?></td>
-                                <td><?php echo $agencia["descripcion_contacto"]; ?></td>
-                                <td><?php echo $agencia["calle_direccion"]; ?></td>
-                                <?php if ($agencia["descripcion_tipo_estado"] == "Activo") { ?>
-                                    <td class="badge badge-success"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
-                                <?php } ?>
-                                <?php if ($agencia["descripcion_tipo_estado"] == "Falta Verificar") { ?>
-                                    <td class="badge badge-warning"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
-                                <?php } ?>
-                                <?php if ($agencia["descripcion_tipo_estado"] == "Baja") { ?>
-                                    <td class="badge badge-danger"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
-                                <?php } ?>
-                                <?php if ($agencia["descripcion_tipo_estado"] == "Centro de aislamiento") { ?>
-                                    <td class="badge badge-secondary"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
-                                <?php } ?>
-                                <?php if ($agencia["descripcion_tipo_estado"] == "Cambio de domicilio") { ?>
-                                    <td class="badge bg-lime"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
-                                <?php } ?>
-                                <?php if ($agencia["descripcion_tipo_estado"] == "Se desconoce situación") { ?>
-                                    <td class="badge bg-orange"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
-                                <?php } ?>
-                                <?php if ($agencia["descripcion_tipo_estado"] == "Cierre temporario") { ?>
-                                    <td class="badge bg-purple"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
-                                <?php } ?>
-                                <?php if ($agencia["descripcion_tipo_estado"] == "No Fiscalizadas") { ?>
-                                    <td class="badge bg-navy"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
-                                <?php } ?>
-                                <?php if ($agencia["descripcion_tipo_estado"] == "Domicilio Virtual") { ?>
-                                    <td class="badge bg-info"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
-                                <?php } ?>
-
+                                <?php
+                                // Iterar sobre los valores de cada fila y generar los elementos td
+                                foreach ($agencia as $valor) {
+                                    echo "<td>$valor</td>";
+                                }
+                                ?>
                             </tr>
-
                         <?php } ?>
 
                     </tbody>

@@ -282,7 +282,7 @@ class ControladorNotas
     {
         $consultaAgencia = new NotasModelo();
 
-        $tablaAgencia = $consultaAgencia->consultar();
+        $tablaAgencia = $consultaAgencia->paraImprimir();
         $datosEstadisticos = new estadistica();
 
         // $cantidad_notas = $datosEstadisticos->cantidadnotas();

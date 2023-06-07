@@ -71,7 +71,7 @@
               </div>
 
               <div class="form-group">
-                <input type="text" id="agenciaLocalidadID" name="agenciaLocalidadID" value="<?= $InsertarID->id_direccion_notas ?>">
+                <input type="hidden" id="agenciaLocalidadID" name="agenciaLocalidadID" value="<?= $InsertarID->id_direccion_notas ?>">
                 <label for="localidadAgencia">Localidad</label>
                 <?php $nombre_localidad_actual = $editar->nombre_localidad; ?>
                 <select id="localidadAgencia" name="localidadAgencia" class="form-control custom-select" required>
@@ -107,7 +107,7 @@
 
               <div class="form-group">
                 <label for="domicilioAgencia">Domicilio</label>
-                <input type="text" id="agenciaDomicilioID" name="agenciaDomicilioID" value="<?php echo $InsertarID->id_direccion_notas; ?>">
+                <input type="hidden" id="agenciaDomicilioID" name="agenciaDomicilioID" value="<?php echo $InsertarID->id_direccion_notas; ?>">
                 <input type="text" id="domicilioAgencia" value="<?php echo $editar->calle_direccion_notas; ?>" name="domicilioAgencia" class="form-control" required>
               </div>
 

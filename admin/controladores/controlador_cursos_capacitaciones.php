@@ -1,34 +1,57 @@
 <?php
 
-include_once("modelos/transportes.php");
+include_once("modelos/cursos_capacitaciones.php");
 include_once("conexion.php");
 
 
-class ControladorTransportes
+class ControladorCursos_capacitaciones
 {
 
     public function inicio()
     { //aca se muestra las tablas
 
-        $consultaTransporte = new TransportesModelo();
+        $consultaTransporte = new CursosModelo();
 
         $tabla = $consultaTransporte->consultar();
         $datosEstadisticos = new estadistica();
 
-        $cantidad_Transportes = $datosEstadisticos->cantidadTransportes();
+        $cantidad_TotalInscriptos = $datosEstadisticos->cantidadInscriptos();
+        $cantidad_TotalAusentes = $datosEstadisticos->cantidadAusentes();
+        $cantidad_TotalPresentes = $datosEstadisticos->cantidadPresentes();
 
 
-        include_once("vistas/transportes/inicio.php");
+        include_once("vistas/cursos_capacitaciones/inicio.php");
     }
+    public function checkbox()
+    {
+        $insertarpresente = new CursosModelo();
+
+        if ($_POST) {
+            $id_curso = $_POST['checkboxId'];
+            $presente = $_POST['isChecked'];
+
+            if ($presente == 'true') {
+                $presente = "Presente";
+                echo $presente;
+                $insertarpresente->crearPresente($id_curso, $presente);
+            } else {
+                $presente = "Ausente";
+                echo $presente;
+                $insertarpresente->crearPresente($id_curso, $presente);
+            }
+        }
+
+        include_once("vistas/cursos_capacitaciones/inicio.php");
+    }
+
 
     public function crear()
     {
         // ESTÓ ES PARA LA AUDITORÍA
         global $accion, $controlador1;
         global $id;
-        //
 
-        $select_tipo_Transporte = new TransportesModelo();
+        $select_tipo_Transporte = new CursosModelo();
 
         $buscarSelectLocalidad = $select_tipo_Transporte->buscarSelectLocalidad();
         $buscarSelectEstado = $select_tipo_Transporte->buscarSelectEstado();
@@ -36,14 +59,15 @@ class ControladorTransportes
         if ($_POST) {
             // print_r($_POST);
 
-            $insertarTransporte = new TransportesModelo();
+            $insertarCursos = new CursosModelo();
 
-            $designacionTransportes = $_POST['designacionTransportes'];
-            $ServiciosTransportes = $_POST['ServiciosTransportes'];
-            $idoneoTransportes = $_POST['idoneoTransportes'];
+            $nombreyapellido = $_POST['nombreyapellido'];
+            $dnicursos = $_POST['dnicursos'];
+            $ocupacioncursos = $_POST['ocupacioncursos'];
+            $presente_cursos = $_POST['presente_cursos'];
 
             $rela_localidad_direccion = $_POST['localidadAgencia'];
-            $domicilioTransporte = $_POST['domicilioTransporte'];
+            // $domicilioTransporte = $_POST['domicilioTransporte'];
 
             $telefonoAgencia = $_POST['telefonoAgencia'];
             $telefonoFijoAgencia = $_POST['telefonoFijoAgencia'];
@@ -54,13 +78,11 @@ class ControladorTransportes
             $webAgencia = $_POST['webAgencia'];
             $otroAgencia = $_POST['otroAgencia'];
 
-            $estadoAgencia = $_POST['estadoAgencia'];
-
-            $insertarTransporte->crear(
-                $designacionTransportes,
-                $ServiciosTransportes,
+            $insertarCursos->crear(
                 $rela_localidad_direccion,
-                $domicilioTransporte,
+                $nombreyapellido,
+                $dnicursos,
+                $presente_cursos,
                 $telefonoAgencia,
                 $telefonoFijoAgencia,
                 $correoAgencia,
@@ -69,21 +91,20 @@ class ControladorTransportes
                 $twitterAgencia,
                 $webAgencia,
                 $otroAgencia,
-                $estadoAgencia,
-                $idoneoTransportes
+                $ocupacioncursos
             );
-            if ($insertarTransporte) {
-                $insertarTransporte->trigger($accion, $id, $controlador1);
+            if ($insertarCursos) {
+                $insertarCursos->trigger($accion, $id, $controlador1);
                 // print_r($insertar);
                 // print_r($usuario_crear);
-                echo "<script>location.href='index2.php?controlador=transportes&accion=inicio';</script>";
+                echo "<script>location.href='index2.php?controlador=cursos_capacitaciones&accion=inicio';</script>";
             }
 
-            echo "<script>location.href='index2.php?controlador=transportes&accion=inicio';</script>";
+            // echo "<script>location.href='index2.php?controlador=cursos_capacitaciones&accion=inicio';</script>";
         }
 
 
-        include_once("vistas/transportes/crear.php");
+        include_once("vistas/cursos_capacitaciones/crear.php");
     }
 
     public function editar()
@@ -91,38 +112,31 @@ class ControladorTransportes
         // ESTÓ ES PARA LA AUDITORÍA
         global $accion, $controlador1;
         global $id;
-        //
-        // echo '<pre>';
-        // print_r($controlador1);
-        // echo '</pre>';
+
 
         $idAgencia = $_GET["id"];
 
-        $buscarTransportes = new TransportesModelo();
+        $buscarTransportes = new CursosModelo();
 
         $buscarSelectLocalidad = $buscarTransportes->buscarSelectLocalidad();
-        $buscarSelectEstado = $buscarTransportes->buscarSelectEstado();
 
-        //print_r("$idAgencia");
+
         /*----------BUSCA LOS POST QUE SE ENCUENTRA EN EDITAR.PHP PARA PODER EDITARLO----------*/
 
         if ($_POST) {
-            $EditarAgencia = new TransportesModelo();
-            // echo '<pre>';
-            // print_r($_POST);
-            // echo '</pre>';
-
-            $tranposteID =  $_POST['tranposteID'];
-            $descripcion_Transportes = $_POST['nombreTransporte'];
-
-            $servicioTransporte = $_POST['servicioTransporte'];
-            $idoneoTransporte = $_POST['idoneoTransporte'];
+            $EditarAgencia = new CursosModelo();
 
 
-            $idDireccion = $_POST['agenciaDomicilioID'];
+            $cursosID =  $_POST['cursosID'];
+            $nombreyapellido = $_POST['nombreyapellido'];
+            $dnicursos = $_POST['dnicursos'];
+            $ocupacioncursos = $_POST['ocupacioncursos'];
+            $presente_cursos = $_POST['presente_cursos'];
+
+
+            // $idDireccion = $_POST['agenciaDomicilioID'];
             $rela_localidad_direccion = $_POST['localidadAgencia'];
-
-            $calle_direccion = $_POST['domicilioAgencia'];
+            // $calle_direccion = $_POST['domicilioAgencia'];
 
             $idtelefonoAgencia = $_POST['agenciatelefonoID'];
             $telefonoAgencia = $_POST['telefonoAgencia'];
@@ -148,16 +162,16 @@ class ControladorTransportes
             $idotroAgencia = $_POST['agenciaOtroID'];
             $otroAgencia = $_POST['otroAgencia'];
 
-            $idestadoAgencia = $_POST['agenciaEstadoID'];
-            $estadoAgencia = $_POST['estadoAgencia'];
+            // $idestadoAgencia = $_POST['agenciaEstadoID'];
+            // $estadoAgencia = $_POST['estadoAgencia'];
 
             $EditarAgencia->editar(
-                $descripcion_Transportes,
-                $servicioTransporte,
-                $tranposteID,
-                $idoneoTransporte,
                 $rela_localidad_direccion,
-                $calle_direccion,
+                $nombreyapellido,
+                $dnicursos,
+                $cursosID,
+                $presente_cursos,
+                $ocupacioncursos,
                 $telefonoAgencia,
                 $telefonoFijoAgencia,
                 $correoAgencia,
@@ -166,8 +180,6 @@ class ControladorTransportes
                 $twitterAgencia,
                 $webAgencia,
                 $otroAgencia,
-                $estadoAgencia,
-                $idDireccion,
                 $idtelefonoAgencia,
                 $idtelefonoFijoAgencia,
                 $idcorreoAgencia,
@@ -175,18 +187,17 @@ class ControladorTransportes
                 $idinstagramAgencia,
                 $idtwitterAgencia,
                 $idwebAgencia,
-                $idotroAgencia,
-                $idestadoAgencia
+                $idotroAgencia
             );
             if ($EditarAgencia) {
                 $EditarAgencia->trigger($accion, $id, $controlador1);
                 // print_r($insertar);
                 // print_r($usuario_crear);
-                echo "<script>location.href='index2.php?controlador=Transportes&accion=inicio';</script>";
+                echo "<script>location.href='index2.php?controlador=cursos_capacitaciones&accion=inicio';</script>";
             }
 
             // header("Location:admin/index2.php?controlador=Transportes&accion=inicio");
-            echo "<script>location.href='index2.php?controlador=Transportes&accion=inicio';</script>";
+            echo "<script>location.href='index2.php?controlador=cursos_capacitaciones&accion=inicio';</script>";
         }
 
 
@@ -205,14 +216,14 @@ class ControladorTransportes
         $agenciaWeb = $contactosDeagencia->consultarWeb($idAgencia);
         $agenciaOtro = $contactosDeagencia->consultarOtro($idAgencia);
 
-        $buscarID = new TransportesModelo();
+        $buscarID = new CursosModelo();
 
         $editar = $buscarID->buscar($idAgencia);
 
         $InsertarID = $buscarID->consultarID($idAgencia);
 
 
-        include_once("vistas/Transportes/editar.php");
+        include_once("vistas/cursos_capacitaciones/editar.php");
     }
 
     public function borrar()
@@ -226,7 +237,7 @@ class ControladorTransportes
         $idAgenciaBorrar = $_GET["id_transporte"];
         $id_direccion = $_GET['idDireccion'];
 
-        $borrarTransportes = new TransportesModelo();
+        $borrarTransportes = new CursosModelo();
 
         $borrarTransportes->consultarID($idAgenciaBorrar);
 
@@ -235,7 +246,7 @@ class ControladorTransportes
             $borrarTransportes->trigger($accion, $id, $controlador1);
             // print_r($insertar);
             // print_r($usuario_crear);
-            echo "<script>location.href='index2.php?controlador=Transportes&accion=inicio';</script>";
+            echo "<script>location.href='index2.php?controlador=cursos_capacitaciones&accion=inicio';</script>";
         }
 
         header("Location:index2.php?controlador=Transportes&accion=inicio");
@@ -245,7 +256,7 @@ class ControladorTransportes
     {
         $id_agencia = $_GET['id'];
 
-        $agenciaInfo = new TransportesModelo();
+        $agenciaInfo = new CursosModelo();
 
         $TransportesInfomacion = $agenciaInfo->buscar($id_agencia);
 
@@ -260,7 +271,7 @@ class ControladorTransportes
         $agenciaWeb = $contactosDeagencia->consultarWeb($id_agencia);
         $agenciaOtro = $contactosDeagencia->consultarOtro($id_agencia);
 
-        include_once("vistas/Transportes/info.php");
+        include_once("vistas/cursos_capacitaciones/info.php");
     }
 
     public function sucursal()
@@ -271,7 +282,7 @@ class ControladorTransportes
 
     public function imprimir()
     {
-        $consultaAgencia = new TransportesModelo();
+        $consultaAgencia = new CursosModelo();
 
         $tablaAgencia = $consultaAgencia->consultar();
         $datosEstadisticos = new estadistica();
@@ -280,14 +291,14 @@ class ControladorTransportes
         $cantidadTransportesHabilitadas = $datosEstadisticos->cantidadTransportesHabilitadas();
 
 
-        include_once("vistas/Transportes/imprimir.php");
+        include_once("vistas/cursos_capacitaciones/imprimir.php");
     }
 
     public function imprimirInfo()
     {
         $id_agencia = $_GET['id'];
 
-        $agenciaInfo = new TransportesModelo();
+        $agenciaInfo = new CursosModelo();
 
         $TransportesInfomacion = $agenciaInfo->buscar($id_agencia);
 
@@ -302,6 +313,6 @@ class ControladorTransportes
         $agenciaWeb = $contactosDeagencia->consultarWeb($id_agencia);
         $agenciaOtro = $contactosDeagencia->consultarOtro($id_agencia);
 
-        include_once("vistas/Transportes/invoice-print.php");
+        include_once("vistas/cursos_capacitaciones/invoice-print.php");
     }
 }

@@ -347,6 +347,38 @@ class NotasModelo
 
         return $sql->fetch(PDO::FETCH_OBJ);
     }
+    public function paraImprimir()
+    {
+        $conexionBD = BD::crearInstancia();
+
+        $sql = $conexionBD->query("SELECT `numero_nota`, `fecha_ig_notas`, `remitente_nota`, `descrip_motivo`, `respuesta_nota`, `fecha_sl_nota`, `rela_tipo_org`, `fecha_edit_notas`,
+        d.calle_direccion_notas,
+        l.nombre_localidad,
+        tpn.descripcion_tipo_mot_notas,
+        ton.descripcion_org_nota,
+        (SELECT ct.descri_contacto_notas 
+        FROM contacto_notas ct
+        WHERE n.id_notas = ct.rela_contacto_notas 
+        and ct.rela_contacto_con = 2
+        LIMIT 1) telefono,
+        (SELECT ct.descri_contacto_notas 
+        FROM contacto_notas ct
+        WHERE n.id_notas = ct.rela_contacto_notas 
+        and ct.rela_contacto_con = 1
+        LIMIT 1) correo
+        FROM `notas` n
+        INNER JOIN direccion_notas d ON n.rela_dire_nota = d.id_direccion_notas
+        INNER JOIN localidad l on d.rela_localidad_nota = l.id_localidad
+        INNER JOIN tipo_motivo_notas tpn on tpn.id_tipo_motivo_notas = n.rela_tipo_motivo
+        INNER JOIN tipo_organismo_nota ton on ton.id_tipo_org_nota =n.rela_tipo_org");
+
+        //recuperamos los datos y los retornamos
+
+        while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
+            $this->listaAgencia[] = $filas;
+        }
+        return $this->listaAgencia; //este return se va a llamar en el controlador_alojamiento.php clase inicio
+    }
 
     public static function editar(
         $fecha_ingreso,

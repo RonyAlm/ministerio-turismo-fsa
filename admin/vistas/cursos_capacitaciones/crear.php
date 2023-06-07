@@ -3,7 +3,7 @@
   <div class="card-header ">
     <h3 class="card-title text-success">
       <i class="fas fa-solid fa-plus-minus  mr-2"></i>
-      Agregar Transportes
+      Agregar Participante
     </h3>
   </div>
 
@@ -32,11 +32,6 @@
             </div>
             <div class="card-body">
               <div class="form-group">
-                <label for="designacionTransportes">Designación:</label>
-                <input type="text" id="designacionTransportes" name="designacionTransportes" class="form-control" required>
-              </div>
-
-              <div class="form-group">
                 <label for="localidadAgencia">Localidad</label>
                 <select id="localidadAgencia" name="localidadAgencia" class="form-control select2" required>
                   <option value="" selected disabled>Seleccionar la localidad</option>
@@ -45,30 +40,28 @@
                   <?php endforeach; ?>
                 </select>
               </div>
-
               <div class="form-group">
-                <label for="idoneoTransportes">Idóneo:</label>
-                <input type="text" id="idoneoTransportes" name="idoneoTransportes" class="form-control"></input>
+                <label for="nombreyapellido">Nombre y Apellido:</label>
+                <input type="text" id="nombreyapellido" name="nombreyapellido" class="form-control" required>
               </div>
 
+
               <div class="form-group">
-                <label for="domicilioTransporte">Domicilio</label>
-                <input type="text" id="domicilioTransporte" name="domicilioTransporte" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="ServiciosTransportes">Servicios</label>
-                <input type="text" id="ServiciosTransportes" name="ServiciosTransportes" class="form-control">
+                <label for="dnicursos">Dni:</label>
+                <input type="text" id="dnicursos" name="dnicursos" class="form-control"></input>
               </div>
 
               <div class="form-group">
-                <label for="estadoAgencia">Estado</label>
-                <select id="estadoAgencia" name="estadoAgencia" class="form-control select2" required>
-                  <option value="0" selected disabled>Seleccionar el Estado de la Agencia</option>
-                  <?php foreach ($buscarSelectEstado as $k) : ?>
-                    <option value="<?php echo $k->id_tipo_estado; ?>"> <?php echo $k->descripcion_tipo_estado; ?></option>
-                  <?php endforeach; ?>
-                </select>
+                <label for="ocupacioncursos">Ocupacion</label>
+                <input type="text" id="ocupacioncursos" name="ocupacioncursos" class="form-control">
               </div>
+
+
+              <div class="form-group">
+                <label for="presente_cursos">Presente</label>
+                <input type="text" id="presente_cursos" name="presente_cursos" class="form-control">
+              </div>
+
 
             </div>
             <!-- /.card-body -->
@@ -141,7 +134,7 @@
   </div>
   <div class="card-footer">
     <div class="float-right">
-      <a href="?controlador=agencias&accion=inicio" class="btn btn-secondary">Cancelar</a>
+      <a href="?controlador=cursos_capacitaciones&accion=inicio" class="btn btn-secondary">Cancelar</a>
       <input name="" id="" class="btn btn-success" type="submit" value="Agregar">
     </div>
     </form>

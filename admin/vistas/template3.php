@@ -445,6 +445,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <p>Notas</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="?controlador=cursos_capacitaciones&accion=inicio" class="nav-link 
+                    <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'cursos_capacitaciones') ? 'active' : '' ?>">
+                  <i class="far fa-file-alt nav-icon"></i>
+                  <p>Cursos y capacitaciones</p>
+                </a>
+              </li>
 
             <?php endif; ?>
 
@@ -803,6 +810,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="vistas/recursos/script/agregarbtntarea.js"></script>
   <script src="vistas/recursos/script/checkboxInicio.js"></script>
   <script src="vistas/recursos/script/contraseñaTablas.js"></script>
+  <script src="vistas/recursos/script/cursosbotonpresente.js"></script>
   <script src="/admin/vistas/recursos/script/modal.js"></script>
 
 
@@ -908,7 +916,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       var table = $("#example123").DataTable({
         responsive: true,
         lengthChange: true,
-        autoWidth: true,
+        autoWidth: false,
         language: {
           url: "vistas/recursos/plugins/datatables/Spanish.json"
         },
