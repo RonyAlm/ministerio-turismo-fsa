@@ -16,7 +16,7 @@ if (!isset($_SESSION['id'])) {
 $id = $_SESSION['id'];
 $usuario = $_SESSION['usuarios'];
 $rol_id = $_SESSION['rol_id'];
-$tablas_acceso = $_SESSION['tablas_acceso'];
+// $tablas_acceso = $_SESSION['tablas_acceso'];
 
 $nombre = $_SESSION['nombre_persona'];
 $apellido = $_SESSION['apellido_persona'];
