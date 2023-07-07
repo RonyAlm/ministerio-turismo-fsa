@@ -16,8 +16,6 @@ class ControladorNotas
         $datosEstadisticos = new estadistica();
 
         // $cantidad_notas = $datosEstadisticos->cantidadnotas();
-
-
         include_once("vistas/notas/inicio.php");
     }
 
@@ -82,10 +80,10 @@ class ControladorNotas
                 $insertarTransporte->trigger($accion, $id, $controlador1);
                 // print_r($insertar);
                 // print_r($usuario_crear);
-                // echo "<script>location.href='index2.php?controlador=notas&accion=inicio';</script>";
+                echo "<script>location.href='index2.php?controlador=notas&accion=inicio';</script>";
             }
 
-            // echo "<script>location.href='index2.php?controlador=notas&accion=inicio';</script>";
+            echo "<script>location.href='index2.php?controlador=notas&accion=inicio';</script>";
         }
 
 
