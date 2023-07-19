@@ -325,10 +325,10 @@ class NotasModelo
     public static function borrar($tranposteIDBorrar, $id_direccion)
     {
         $conexionBD = BD::crearInstancia();
-        $sqlAgenciaBorrar = $conexionBD->prepare("DELETE FROM `transportes` WHERE id_transportes =?");
+        $sqlAgenciaBorrar = $conexionBD->prepare("DELETE FROM `notas` WHERE id_notas=?");
         $sqlAgenciaBorrar->execute(array($tranposteIDBorrar));
 
-        $sqlDireccionBorrar = $conexionBD->prepare("DELETE FROM direccion WHERE id_direccion =?");
+        $sqlDireccionBorrar = $conexionBD->prepare("DELETE FROM direccion_notas WHERE id_direccion_notas=?");
         $sqlDireccionBorrar->execute(array($id_direccion));
     }
     /*----------BUSCAR para ir imprimir en la seccion EDITAR----------*/
@@ -810,28 +810,40 @@ class estadistica
 {
 
 
-    public function cantidadTransportes()
+    public function cantidadnotas()
     {
 
         $conexionBD = BD::crearInstancia();
 
 
-        $sqlestadistica = $conexionBD->query("SELECT COUNT(*) conteo FROM `transportes`");
+        $sqlestadistica = $conexionBD->query("SELECT COUNT(*) conteo FROM `notas`");
 
         $sqlestadistica->execute();
 
         return $sqlestadistica->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function cantidadTransportesHabilitadas()
+    public function cantidadfechaIng()
     {
 
         $conexionBD = BD::crearInstancia();
 
 
-        $sqlestadistica = $conexionBD->query("SELECT COUNT(estado_actividad.rela_estado_transportes) conteo 
-                                                    FROM `estado_actividad` 
-                                                    WHERE  estado_actividad.rela_tipo_estado = 1");
+        $sqlestadistica = $conexionBD->query("SELECT COUNT(fecha_ig_notas) conteoIngreso 
+                                                    FROM `notas`");
+
+        $sqlestadistica->execute();
+
+        return $sqlestadistica->fetchAll(PDO::FETCH_OBJ);
+    }
+    public function cantidadfechaSal()
+    {
+
+        $conexionBD = BD::crearInstancia();
+
+
+        $sqlestadistica = $conexionBD->query("SELECT COUNT(fecha_sl_nota) conteoSalida
+                                                    FROM `notas`");
 
         $sqlestadistica->execute();
 

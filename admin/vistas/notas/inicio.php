@@ -38,6 +38,16 @@ $rol_id = $_SESSION['rol_id'];
 
     <a name="" id="" class="btn btn-secondary" href="?controlador=notas&accion=imprimir" role="button">Imprimir</a>
 
+    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") { ?>
+
+      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-ejemploUsuario">
+        Agregar Org y Mot
+      </button>
+      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-ejemploUsuarioEditar">
+        Editar Org y Mot
+      </button>
+
+    <?php } ?>
   </div>
 
   <div class="card-body">
@@ -49,10 +59,10 @@ $rol_id = $_SESSION['rol_id'];
 
           <div class="info-box-content">
             <span class="info-box-text text-center">Notas Recibidas</span>
-            <p>55</p>
-            <!-- <?php foreach ($cantidad_notas as $estadistica) { ?>
-              <span class="info-box-text">Cantidad Total: <?php echo $estadistica->conteo; ?> </span>
-            <?php } ?> -->
+
+            <?php foreach ($cantidad_notasIngreso as $estadistica) { ?>
+              <span class="info-box-text">Cantidad Total: <?php echo $estadistica->conteoIngreso; ?> </span>
+            <?php } ?>
           </div>
           <!-- /.info-box-content -->
         </div>
@@ -64,10 +74,10 @@ $rol_id = $_SESSION['rol_id'];
 
           <div class="info-box-content">
             <span class="info-box-text text-center">Salida de Notas</span>
-            <p>44</p>
-            <!-- <?php foreach ($cantidad_notas as $estadistica) { ?>
-              <span class="info-box-text">Cantidad Total: <?php echo $estadistica->conteo; ?> </span>
-            <?php } ?> -->
+
+            <?php foreach ($cantidad_notasSalida as $estadistica) { ?>
+              <span class="info-box-text">Cantidad Total: <?php echo $estadistica->conteoSalida; ?> </span>
+            <?php } ?>
           </div>
           <!-- /.info-box-content -->
         </div>
@@ -79,10 +89,10 @@ $rol_id = $_SESSION['rol_id'];
 
           <div class="info-box-content">
             <span class="info-box-text text-center">Total de Notas</span>
-            <p>99</p>
-            <!-- <?php foreach ($cantidad_notas as $estadistica) { ?>
+
+            <?php foreach ($cantidad_notas as $estadistica) { ?>
               <span class="info-box-text">Cantidad Total: <?php echo $estadistica->conteo; ?> </span>
-            <?php } ?> -->
+            <?php } ?>
           </div>
           <!-- /.info-box-content -->
         </div>

@@ -15,7 +15,9 @@ class ControladorNotas
         $tabla = $consultaTransporte->consultar();
         $datosEstadisticos = new estadistica();
 
-        // $cantidad_notas = $datosEstadisticos->cantidadnotas();
+        $cantidad_notas = $datosEstadisticos->cantidadnotas();
+        $cantidad_notasIngreso = $datosEstadisticos->cantidadfechaIng();
+        $cantidad_notasSalida = $datosEstadisticos->cantidadfechaSal();
         include_once("vistas/notas/inicio.php");
     }
 
