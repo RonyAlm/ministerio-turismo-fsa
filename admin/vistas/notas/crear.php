@@ -160,7 +160,7 @@
   </div>
   <div class="card-footer">
     <div class="float-right">
-      <a href="?controlador=agencias&accion=inicio" class="btn btn-secondary">Cancelar</a>
+      <a href="?controlador=notas&accion=inicio" class="btn btn-secondary">Cancelar</a>
       <input name="" id="" class="btn btn-success" type="submit" value="Agregar">
     </div>
     </form>
