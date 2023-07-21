@@ -287,8 +287,8 @@ class ControladorCursos_capacitaciones
         $tablaAgencia = $consultaAgencia->consultar();
         $datosEstadisticos = new estadistica();
 
-        $cantidad_Transportes = $datosEstadisticos->cantidadTransportes();
-        $cantidadTransportesHabilitadas = $datosEstadisticos->cantidadTransportesHabilitadas();
+        // $cantidad_Transportes = $datosEstadisticos->cantidadTransportes();
+        // $cantidadTransportesHabilitadas = $datosEstadisticos->cantidadTransportesHabilitadas();
 
 
         include_once("vistas/cursos_capacitaciones/imprimir.php");
