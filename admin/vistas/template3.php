@@ -260,8 +260,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- <i class="nav-icon fas fa-user mr-2"></i> -->
           </div>
           <div class="info">
-            <a href="#" class="d-block"><?php echo "$usuario" . " " . "$tablas_acceso" ?></a>
-            <h5 style="color: #ccc;">Template 3</h5>
+            <a href="#" class="d-block"><?php echo "$usuario" ?></a>
+            <!-- <h5 style="color: #ccc;">Template 3</h5> -->
           </div>
         </div>
 
