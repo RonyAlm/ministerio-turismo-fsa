@@ -40,7 +40,7 @@ $rol_id = $_SESSION['rol_id'];
 
     <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") { ?>
 
-      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-ejemploUsuario">
+      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-MotivoNotas">
         Agregar Org y Mot
       </button>
       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-ejemploUsuarioEditar">
@@ -186,4 +186,33 @@ $rol_id = $_SESSION['rol_id'];
   </div>
 
 
+</div>
+
+<!-- MODAL DE AGREGAR USUARIO Y ROLES -->
+<div class="modal fade" id="modal-MotivoNotas">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Agregar Motivos y Organismos</h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <form id="formularioModalUsuarioRol" name="agregarUsuarioRol" method="POST">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="inputMotivo">Motivo</label>
+            <input type="text" class="form-control" name="inputMotivo" id="inputMotivo" placeholder="Ingrese el motivo">
+          </div>
+          <div class="form-group">
+            <label for="inputOrg">Organismo</label>
+            <input type="text" class="form-control" name="inputOrg" id="inputOrg" placeholder="Ingrese el Organismo">
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
