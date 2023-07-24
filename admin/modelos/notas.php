@@ -539,6 +539,24 @@ class NotasModelo
 
         return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
     }
+
+    public static function agregarMyO($motivo, $organismo)
+    {
+        $conexionBD = BD::crearInstancia();
+        if ($motivo == "") {
+        } else {
+            $sql = $conexionBD->prepare("INSERT INTO `tipo_motivo_notas`(`descripcion_tipo_mot_notas`) VALUES (?)");
+            $sql->execute(array($motivo));
+        }
+        if ($organismo == "") {
+        } else {
+            $sql = $conexionBD->prepare("INSERT INTO `tipo_organismo_nota`(`descripcion_org_nota`) VALUES (?)");
+            $sql->execute(array($organismo));
+        }
+        // $sql = $conexionBD->prepare("INSERT INTO `usuario_contra`( `usuario`, `contraseña`, `rela_rol_id`, `rela_tablas`)
+        //         VALUES (?,?,?,?)");
+        // $sql->execute(array($inputUsuario, $inputPasswordtablas1, $selectRoles, $selectTablas));
+    }
 }
 
 class ContactosAgencia
