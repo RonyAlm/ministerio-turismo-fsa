@@ -18,6 +18,18 @@ class ControladorNotas
         $cantidad_notas = $datosEstadisticos->cantidadnotas();
         $cantidad_notasIngreso = $datosEstadisticos->cantidadfechaIng();
         $cantidad_notasSalida = $datosEstadisticos->cantidadfechaSal();
+
+        if (isset($_POST['inputMotivo'])) {
+            // echo "agregar usuario";
+            $agregarusuario = new NotasModelo();
+            print_r($_POST);
+            $inputMotivo = isset($_POST['inputMotivo']) ? $_POST['inputMotivo'] : "";
+            $inputOrg = isset($_POST['inputOrg']) ? $_POST['inputOrg'] : "";
+
+
+            $agregarusuario->agregarMyO($inputMotivo, $inputOrg);
+            echo "<script>location.href = 'index2.php?controlador=notas&accion=inicio';</script>";
+        }
         include_once("vistas/notas/inicio.php");
     }
 
