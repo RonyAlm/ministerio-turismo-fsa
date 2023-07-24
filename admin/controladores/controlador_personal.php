@@ -519,12 +519,7 @@ class ControladorPersonal
         $conexionBD = BD::crearInstancia();
 
         // print_r($_POST['personal']);
-
         $personal = $_POST['personal'];
-
-
-
-
 
         include_once("vistas/personal/rellenar.php");
     }
