@@ -79,6 +79,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 
+
+
+
+
   <style>
     .resaltar {
       background-color: yellow;
@@ -813,7 +817,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="vistas/recursos/script/cursosbotonpresente.js"></script>
   <script src="/admin/vistas/recursos/script/modal.js"></script>
 
-
+  <!-- dataTables nuevo -->
+  <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
+  <script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
+  <script src="vistas/recursos/libreria/datatables/dataTables.editor.min.js"></script>
   <script>
     $(function() {
       $("#articulo").hide();
