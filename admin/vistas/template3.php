@@ -823,6 +823,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
   <script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
   <script src="vistas/recursos/libreria/datatables/dataTables.editor.min.js"></script>
+  <script src="vistas/recursos/script/nuevodatatables.js"></script>
+
+
+
+
+
+
   <script>
     $(function() {
       $("#articulo").hide();
