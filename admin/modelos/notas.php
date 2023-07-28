@@ -382,6 +382,7 @@ class NotasModelo
 
     public static function editar(
         $fecha_ingreso,
+        $fecha_salida,
         $organismoID,
         $notasID,
         $organismos,
@@ -415,8 +416,9 @@ class NotasModelo
 
         $conexionBD = BD::crearInstancia();
 
-        /*---------------SE ACTUALIZA EL TRANSPORTE-------------------*/
+        /*---------------SE ACTUALIZA LAS NOTAS-------------------*/
         $sql = $conexionBD->prepare("UPDATE `notas` SET `numero_nota`='$numero_nota',`fecha_ig_notas`='$fecha_ingreso',
+        `fecha_sl_nota`='$fecha_salida',
         `remitente_nota`='$remitente',`descrip_motivo`='$descripcion_motivo',
         `respuesta_nota`='$respuesta_notas',`rela_tipo_org`=$organismos,
         `rela_tipo_motivo`=$tipo_motivo,`fecha_edit_notas`=CURRENT_TIMESTAMP() 

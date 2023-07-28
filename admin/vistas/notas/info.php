@@ -42,6 +42,10 @@
               <td><?php echo $notasInfomacion->fecha_ig_notas ?></td>
             </tr>
             <tr>
+              <th class="sorting_1">Fecha de Salida</th>
+              <td><?php echo $notasInfomacion->fecha_sl_nota; ?></td>
+            </tr>
+            <tr>
               <th class="sorting_1">Organismo</th>
               <td><?php echo $notasInfomacion->descripcion_org_nota ?></td>
             </tr>
@@ -69,10 +73,11 @@
               <td><?php echo $notasInfomacion->descrip_motivo; ?></td>
             </tr>
 
-            <tr>
+            <!-- <tr>
               <th class="sorting_1">Respuesta</th>
               <td><?php echo $notasInfomacion->respuesta_nota; ?></td>
-            </tr>
+            </tr> -->
+
 
             <tr>
               <th class="sorting_1">Domicilio</th>
@@ -201,7 +206,7 @@
   <div class="card-footer mb-4 card">
     <div class="row no-print">
       <div class="col-12">
-        <a href="?controlador=agencias&accion=imprimirInfo&id=<?= $notasInfomacion->id_agencias; ?>" rel="noopener" class="btn btn-default float-right">
+        <a href="?controlador=notas&accion=imprimirInfo&id=<?= $notasInfomacion->id_notas; ?>" rel="noopener" class="btn btn-default float-right">
           <i class="fas fa-print mr-2"></i> Imprimir
         </a>
       </div>

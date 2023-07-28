@@ -133,6 +133,8 @@ class ControladorNotas
 
             $notasID =  $_POST['notasID'];
             $fecha_ingreso = $_POST['fecha_ingreso'];
+            // $fecha_salida = $_POST['fecha_salida'];
+            $fecha_salida = isset($_POST['fecha_salida']) ? $_POST['fecha_salida'] : "";
             $numero_nota = $_POST['numero_nota'];
             $remitente = $_POST['remitente'];
             $descripcion_motivo = $_POST['descripcion_motivo'];
@@ -177,6 +179,7 @@ class ControladorNotas
 
             $EditarAgencia->editar(
                 $fecha_ingreso,
+                $fecha_salida,
                 $organismoID,
                 $notasID,
                 $organismos,

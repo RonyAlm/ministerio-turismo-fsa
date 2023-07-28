@@ -39,7 +39,7 @@
           <div class="row">
             <div class="col-12">
               <h2 class="page-header">
-                Agencia
+                Notas
                 <small class="float-right">Fecha:
                   <?php
                   $Object = new DateTime();
@@ -59,100 +59,99 @@
           </div>
           <!-- /.row -->
 
-          <!-- Table row -->
           <div class="row">
 
             <!-- Información general -->
             <div class="col-md-6">
-              <div class="card card-secondary card-outline">
-                <div class="card-header sorting_1" style="display: flex;flex-direction: column-reverse;">
-                  <h3 class="card-title text-center ">
-                    <!-- <i class="fas fa-folder mr-2"></i> -->
+              <div class="card card-success card-outline ">
+                <div class="card-header">
+                  <h3 class="card-title text-success">
+                    <i class="fas fa-folder mr-2"></i>
                     Información General
                   </h3>
+                  <div class="card-tools text-success">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <!-- /.card-header -->
                 <div class="card-body">
 
                   <table id="tblInfoGe" class="tblInfo table table-bordered table-striped" cellspacing="0" width="100%">
-
                     <tr>
-                      <th class="sorting_1">Designación Comercial</th>
-                      <td><?php echo $agenciasInfomacion->descripcion_agencias ?></td>
+                      <th class="sorting_1">Fecha de Ingreso:</th>
+                      <td><?php echo $notasInfomacion->fecha_ig_notas ?></td>
                     </tr>
-
+                    <tr>
+                      <th class="sorting_1">Fecha de Salida</th>
+                      <td><?php echo $notasInfomacion->fecha_sl_nota; ?></td>
+                    </tr>
+                    <tr>
+                      <th class="sorting_1">Organismo</th>
+                      <td><?php echo $notasInfomacion->descripcion_org_nota ?></td>
+                    </tr>
+                    <tr>
+                      <th class="sorting_1">Tipo de Motivo</th>
+                      <td><?php echo $notasInfomacion->descripcion_tipo_mot_notas ?></td>
+                    </tr>
                     <tr>
                       <th class="sorting_1">Localidad</th>
-                      <td><?php echo $agenciasInfomacion->nombre_localidad; ?></td>
+                      <td><?php echo $notasInfomacion->nombre_localidad ?></td>
                     </tr>
 
                     <tr>
-                      <th class="sorting_1">Dirección</th>
-                      <td><?php echo $agenciasInfomacion->calle_direccion; ?></td>
+                      <th class="sorting_1">N° de Nota</th>
+                      <td><?php echo $notasInfomacion->numero_nota ?></td>
                     </tr>
 
                     <tr>
-                      <th class="sorting_1">Departamento</th>
-                      <td><?php echo $agenciasInfomacion->descripcion_departamentos; ?></td>
+                      <th class="sorting_1">Remitente</th>
+                      <td><?php echo $notasInfomacion->remitente_nota; ?></td>
                     </tr>
 
                     <tr>
-                      <th class="sorting_1">Razón Social</th>
-                      <td><?php echo $agenciasInfomacion->descripcion_razon_social; ?></td>
+                      <th class="sorting_1">Descripción del Motivo</th>
+                      <td><?php echo $notasInfomacion->descrip_motivo; ?></td>
                     </tr>
 
-                    <tr>
-                      <th class="sorting_1">Idóneo</th>
-                      <td><?php echo $agenciasInfomacion->idoneo_agencia; ?></td>
-                    </tr>
+                    <!-- <tr>
+                      <th class="sorting_1">Respuesta</th>
+                      <td><?php echo $notasInfomacion->respuesta_nota; ?></td>
+                    </tr> -->
+
 
                     <tr>
-                      <th class="sorting_1">Matrícula</th>
-                      <td><?php echo $agenciasInfomacion->matricula_agencia; ?></td>
-                    </tr>
-
-                    <tr>
-                      <th class="sorting_1">Legajo</th>
-                      <td><?php echo $agenciasInfomacion->legajo_agencia; ?></td>
-                    </tr>
-
-                    <tr>
-                      <th class="sorting_1">Categoria</th>
-                      <td><?php echo $agenciasInfomacion->categoria_agencia; ?></td>
-                    </tr>
-
-                    <tr>
-                      <th class="sorting_1">Cuit</th>
-                      <td><?php echo $agenciasInfomacion->cuit_agencia; ?></td>
-                    </tr>
-
-                    <tr>
-                      <th class="sorting_1">Estado</th>
-                      <td><?php echo $agenciasInfomacion->descripcion_tipo_estado; ?></td>
+                      <th class="sorting_1">Domicilio</th>
+                      <td><?php echo $notasInfomacion->calle_direccion_notas; ?></td>
                     </tr>
 
                   </table>
 
                 </div>
                 <!-- /.card-body -->
-                <div class="card-footer">
-
-                </div>
               </div>
               <!-- /.card -->
             </div>
+            <!-- ./col -->
 
             <!-- Contactos -->
             <div class="col-md-6">
-              <div class="card card-secondary card-outline">
-                <div class="card-header sorting_1" style="display: flex;flex-direction: column-reverse;">
-                  <h3 class="card-title text-center ">
-                    <!-- <i class="fas fa-folder mr-2"></i> -->
+              <div class="card card-success card-outline">
+                <div class="card-header">
+                  <h3 class="card-title text-success">
+                    <i class="fas fa-folder mr-2"></i>
                     Contactos
                   </h3>
+                  <div class="card-tools text-success">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                  </div>
                 </div>
                 <!-- /.card-header -->
+
                 <div class="card-body">
 
                   <table id="tblContacto" class="tblInfo table table-bordered table-striped" cellspacing="0" width="100%">
@@ -161,7 +160,7 @@
 
                       <tr>
                         <th class="sorting_1"><i class="fas fa-phone mr-1"></i> Teléfono Celular</th>
-                        <td><?php echo $telefonos["descripcion_contacto"]; ?></td>
+                        <td><?php echo $telefonos["descri_contacto_notas"]; ?></td>
                       </tr>
 
                     <?php  } ?>
@@ -169,8 +168,8 @@
                     <?php foreach ($agenciaTelefonoFijo as $telefonosFijo) { ?>
 
                       <tr>
-                        <th class="sorting_1"><i class="fas fa-phone mr-1"></i> Teléfonos Fijo</th>
-                        <td><?php echo $telefonosFijo["descripcion_contacto"]; ?></td>
+                        <th class="sorting_1"><i class="fas fa-phone mr-1"></i> Teléfonos Fijos</th>
+                        <td><?php echo $telefonosFijo["descri_contacto_notas"]; ?></td>
                       </tr>
 
                     <?php  } ?>
@@ -180,7 +179,7 @@
 
                       <tr>
                         <th class="sorting_1"><i class=" fas fa-solid fa-envelope mr-1"></i> Correo</th>
-                        <td><?php echo $correos["descripcion_contacto"]; ?></td>
+                        <td><?php echo $correos["descri_contacto_notas"]; ?></td>
                       </tr>
 
                     <?php } ?>
@@ -189,7 +188,7 @@
 
                       <tr>
                         <th class="sorting_1"><i class="fab fa-facebook mr-1"></i> Facebook</th>
-                        <td><?php echo $facebook["descripcion_contacto"]; ?></td>
+                        <td><?php echo $facebook["descri_contacto_notas"]; ?></td>
                       </tr>
 
                     <?php } ?>
@@ -198,7 +197,7 @@
 
                       <tr>
                         <th class="sorting_1"><i class="fa-brands fa-instagram mr-1"></i> Instagram</th>
-                        <td><?php echo $instagram["descripcion_contacto"]; ?></td>
+                        <td><?php echo $instagram["descri_contacto_notas"]; ?></td>
                       </tr>
 
                     <?php } ?>
@@ -207,7 +206,7 @@
 
                       <tr>
                         <th class="sorting_1"><i class="fab fa-twitter-square mr-1"></i> Twitter</th>
-                        <td><?php echo $twitter["descripcion_contacto"]; ?></td>
+                        <td><?php echo $twitter["descri_contacto_notas"]; ?></td>
                       </tr>
 
                     <?php } ?>
@@ -216,7 +215,7 @@
 
                       <tr>
                         <th class="sorting_1"><i class="fas fa-globe mr-1"></i> Sitio Web</th>
-                        <td><?php echo $web["descripcion_contacto"]; ?></td>
+                        <td><?php echo $web["descri_contacto_notas"]; ?></td>
                       </tr>
 
                     <?php } ?>
@@ -225,24 +224,24 @@
 
                       <tr>
                         <th class="sorting_1"><i class="fas fa-street-view mr-1"></i> Otro</th>
-                        <td><?php echo $otro["descripcion_contacto"]; ?></td>
+                        <td><?php echo $otro["descri_contacto_notas"]; ?></td>
                       </tr>
 
                     <?php } ?>
 
-                    <tr>
+                    <!-- <tr>
                       <th class="sorting_1">Última actualización</th>
-                      <td><?= $agenciasInfomacion->fecha_edit_agencia; ?></td>
-                    </tr>
+                      <td><?= $notasInfomacion->fecha_edit_notas; ?></td>
+                    </tr> -->
 
                   </table>
 
                 </div>
                 <!-- /.card-body -->
-                <div class="card-footer"></div>
               </div>
               <!-- /.card -->
             </div>
+            <!-- ./col -->
 
           </div>
           <!-- /.row -->

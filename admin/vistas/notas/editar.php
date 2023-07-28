@@ -48,6 +48,11 @@
                 <input type="hidden" id="notasID" name="notasID" value="<?php echo $InsertarID->id_notas; ?>">
                 <input type="date" id="fecha_ingreso" value="<?php echo $editar->fecha_ig_notas; ?>" name="fecha_ingreso" class="form-control"></input>
               </div>
+              <div class="form-group">
+                <label for="fecha_salida">Fecha de Salida:</label>
+                <input type="hidden" id="notasID" name="notasID" value="<?php echo $InsertarID->id_notas; ?>">
+                <input type="date" id="fecha_salida" value="<?php echo $editar->fecha_sl_nota; ?>" name="fecha_salida" class="form-control"></input>
+              </div>
 
               <div class="form-group">
                 <input type="hidden" id="organismoID" name="organismoID" value="<?= $InsertarID->id_tipo_org_nota ?>">
