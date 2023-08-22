@@ -438,13 +438,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </li>
               <?php } ?>
 
-              <li class="nav-item">
-                <a href="?controlador=notas&accion=inicio" class="nav-link 
+              <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "secretaria") { ?>
+                <li class="nav-item">
+                  <a href="?controlador=notas&accion=inicio" class="nav-link 
                     <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'notas') ? 'active' : '' ?>">
-                  <i class="far fa-file-alt nav-icon"></i>
-                  <p>Notas</p>
-                </a>
-              </li>
+                    <i class="far fa-file-alt nav-icon"></i>
+                    <p>Notas</p>
+                  </a>
+                </li>
+              <?php } ?>
               <li class="nav-item">
                 <a href="?controlador=cursos_capacitaciones&accion=inicio" class="nav-link 
                     <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'cursos_capacitaciones') ? 'active' : '' ?>">
@@ -546,6 +548,35 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <p>Calendario Cultural y Religioso</p>
                     </a>
                   </li> -->
+                </ul>
+              </li>
+            <?php } ?>
+
+            <!-- COMUNICACION -->
+            <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "comunicacion") { ?>
+              <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'comunicacion')) ? 'menu-open' : '' ?>">
+                <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'comunicacion')) ? 'active' : '' ?>">
+                  <i class="nav-icon far fa-calendar-alt"></i>
+                  <p>
+                    comunicacion
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="?controlador=comunicacion&accion=inicio" class="nav-link 
+                    <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'comunicacion') ? 'active' : '' ?>">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Imagenes</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="?controlador=comunicacion&accion=inicio" class="nav-link 
+                    <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'comunicacion') ? 'active' : '' ?>">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Fiesta del pomelo</p>
+                    </a>
+                  </li>
                 </ul>
               </li>
             <?php } ?>
