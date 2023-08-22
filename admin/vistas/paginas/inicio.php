@@ -128,6 +128,7 @@ $rol_id = $_SESSION['rol_id'];
                         </div>
                         <!-- /.card-body -->
 
+                        <div class="card-footer"> </div>
                         <!-- /.card-footer-->
                     </div>
                     <!-- /.card -->
