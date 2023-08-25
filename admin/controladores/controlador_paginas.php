@@ -53,6 +53,22 @@ class ControladorPaginas
         }
     }
 
+    private function buscarEnModulos($terminoBusqueda)
+    {
+        $resultados = [];
+
+        // Agregar aquí la lógica para buscar en cada módulo
+        $consultaAgencia = new AgenciaModelo();
+        $resultados['agencias'] = $consultaAgencia->buscarPorTermino($terminoBusqueda);
+
+        $consultarAlojamientos = new Alojamientos();
+        $resultados['alojamientos'] = $consultarAlojamientos->buscarPorTermino($terminoBusqueda);
+
+        // Agregar más módulos aquí...
+
+        return $resultados;
+    }
+
     public function error()
     {
         include_once("vistas/paginas/error.php");

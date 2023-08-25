@@ -10,58 +10,56 @@ $rol_id = $_SESSION['rol_id'];
 
 ?>
 <div class="p-5 bg-light">
+
     <div class="container">
         <h3 class="text-center display-5">BIENVENIDO AL MINISTERIO DE TURISMO</h3>
         <!-- <p class=" lead">Probando la página del administrador</p> -->
         <hr class="my-2">
         <br>
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="text-center ">
-                    <div class="info-box">
-                        <span class="info-box-icon bg-success"><i class="fas fa-bed"></i></span>
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">Alojamientos</span>
-                            <span>
-                                <br>
-                            </span>
-
-                            <a href="?controlador=alojamientos&accion=inicio" class="small-box-footer">
-                                Más información <i class="fas fa-arrow-circle-right"></i>
-                            </a>
-                        </div>
-
-                        <!-- /.info-box-content -->
+        <section class="content">
+            <div class="container-fluid">
+                <h2 class="text-center display-4">Busqueda</h2>
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                        <form action="simple-results.html">
+                            <div class="input-group">
+                                <input type="search" class="form-control form-control-lg" placeholder="Por favor Ingrese la localidad">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-lg btn-default">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <!-- /.info-box -->
                 </div>
             </div>
-            <!-- /.col -->
-            <div class="col-md-6">
-                <div class="text-center ">
-                    <div class="info-box">
-                        <span class="info-box-icon bg-success"><i class="fa-solid fa-utensils"></i></span>
+        </section>
 
-                        <div class="info-box-content">
-                            <span class="info-box-text">Gastronomía</span>
+        <?php if (empty($resultados)) : ?>
+            <p>No se encontraron resultados.</p>
+        <?php else : ?>
+            <?php if (!empty($resultados['agencias'])) : ?>
+                <h2>Agencias</h2>
+                <ul>
+                    <?php foreach ($resultados['agencias'] as $agencia) : ?>
+                        <li><?php echo $agencia['nombre']; ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
 
-                            <span>
-                                <br>
-                            </span>
+            <?php if (!empty($resultados['alojamientos'])) : ?>
+                <h2>Alojamientos</h2>
+                <ul>
+                    <?php foreach ($resultados['alojamientos'] as $alojamiento) : ?>
+                        <li><?php echo $alojamiento['nombre']; ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
 
-                            <a href="?controlador=gastronomia&accion=inicio" class="small-box-footer">
-                                Más información <i class="fas fa-arrow-circle-right"></i>
-                            </a>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-            </div>
-
-        </div>
+            <!-- Agregar más secciones para otros módulos aquí... -->
+        <?php endif; ?>
     </div>
 </div>
 <?php if ($rol_id == 1 and $usuario == "admin") : ?>
