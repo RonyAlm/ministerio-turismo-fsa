@@ -4,7 +4,7 @@ include_once("modelos/comunicacion.php");
 include_once("conexion.php");
 
 
-class ControladorNotas
+class ControladorComunicacion
 {
 
     public function inicio()
@@ -327,5 +327,12 @@ class ControladorNotas
         $agenciaOtro = $contactosDeagencia->consultarOtro($id_agencia);
 
         include_once("vistas/notas/invoice-print.php");
+    }
+    public function fiestapomelo()
+    { //aca se muestra las tablas
+
+        $consultaTransporte = new ComunicacionModelo();
+
+        include_once("vistas/comunicacion/fiestapomelo.php");
     }
 }

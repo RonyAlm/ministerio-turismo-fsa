@@ -565,14 +565,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="?controlador=comunicacion&accion=inicio" class="nav-link 
-                    <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'comunicacion') ? 'active' : '' ?>">
+                    <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'comunicacion') ? '' : '' ?>">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Imagenes</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="?controlador=comunicacion&accion=inicio" class="nav-link 
-                    <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'comunicacion') ? 'active' : '' ?>">
+                    <a href="?controlador=comunicacion&accion=fiestapomelo" class="nav-link 
+                    <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'comunicacion') ? '' : '' ?>">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Fiesta del pomelo</p>
                     </a>

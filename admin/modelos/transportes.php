@@ -174,11 +174,12 @@ class TransportesModelo
         FROM contacto_transporte ct
         WHERE t.id_transportes = ct.rela_contacto_transporte 
         and ct.rela_contacto_con = 2
-        LIMIT 1) descri_contacto_transporte FROM `transportes` t
+        LIMIT 1) descri_contacto_transporte, st.id_servicios_transportes,st.descripcion_serv_transportes FROM `transportes` t
         INNER JOIN direccion ON t.rela_direccion = direccion.id_direccion
         INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad
         INNER JOIN estado_actividad on estado_actividad.rela_estado_transportes = t.id_transportes
-        INNER JOIN tipo_estado on tipo_estado.id_tipo_estado = estado_actividad.rela_tipo_estado");
+        INNER JOIN tipo_estado on tipo_estado.id_tipo_estado = estado_actividad.rela_tipo_estado
+        INNER JOIN servicios_transportes st on st.rela_serv_transporte = t.id_transportes");
 
         //recuperamos los datos y los retornamos
 

@@ -84,7 +84,7 @@ $acceso = $_SESSION['tablas_acceso'];
                 <td><?php echo $transporte["nombre_localidad"]; ?></td>
                 <td><?php echo $transporte["designacion_transporte"]; ?></td>
                 <td><?php echo $transporte["descri_contacto_transporte"]; ?></td>
-                <td><?php echo $transporte["calle_direccion"]; ?></td>
+                <td><?php echo $transporte["descripcion_serv_transportes"]; ?></td>
                 <td><?php echo $transporte["descripcion_tipo_estado"]; ?></td>
                 <td class="project-actions text-right">
                   <div class="btn-group" role="group" aria-label="">
