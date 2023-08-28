@@ -1,5 +1,6 @@
 <?php
 include_once("modelos/paginas.php");
+include_once("modelos/agencias.php");
 include_once("conexion.php");
 
 class ControladorPaginas
@@ -53,6 +54,20 @@ class ControladorPaginas
         }
     }
 
+    public function buscar()
+    {
+        // Recoge la entrada del formulario de búsqueda
+        $terminoBusqueda = $_POST['busquedaGeneral'];
+        // print_r($terminoBusqueda);
+
+        // Realiza la búsqueda en los módulos y obtiene los resultados
+        $resultados = $this->buscarEnModulos($terminoBusqueda);
+        // print_r($resultados);
+
+        // Pasa los resultados a la vista
+        include_once("vistas/paginas/busqueda.php");
+    }
+
     private function buscarEnModulos($terminoBusqueda)
     {
         $resultados = [];
@@ -61,8 +76,8 @@ class ControladorPaginas
         $consultaAgencia = new AgenciaModelo();
         $resultados['agencias'] = $consultaAgencia->buscarPorTermino($terminoBusqueda);
 
-        $consultarAlojamientos = new Alojamientos();
-        $resultados['alojamientos'] = $consultarAlojamientos->buscarPorTermino($terminoBusqueda);
+        // $consultarAlojamientos = new Alojamientos();
+        // $resultados['alojamientos'] = $consultarAlojamientos->buscarPorTermino($terminoBusqueda);
 
         // Agregar más módulos aquí...
 

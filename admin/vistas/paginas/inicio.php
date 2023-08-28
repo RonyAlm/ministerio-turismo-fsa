@@ -22,11 +22,12 @@ $rol_id = $_SESSION['rol_id'];
                 <h2 class="text-center display-4">Busqueda</h2>
                 <div class="row">
                     <div class="col-md-8 offset-md-2">
-                        <form action="simple-results.html">
+                        <form action="?controlador=paginas&accion=buscar" method="post">
                             <div class="input-group">
-                                <input type="search" class="form-control form-control-lg" placeholder="Por favor Ingrese la localidad">
+                                <!-- Agrega el atributo 'name' al campo de búsqueda -->
+                                <input type="search" class="form-control form-control-lg" name="busquedaGeneral" placeholder="Por favor Ingrese la localidad">
                                 <div class="input-group-append">
-                                    <button type="submit" class="btn btn-lg btn-default">
+                                    <button type="submit" class="btn btn-lg btn-default" id="busquedaGeneral">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </div>
@@ -37,6 +38,7 @@ $rol_id = $_SESSION['rol_id'];
             </div>
         </section>
 
+
         <?php if (empty($resultados)) : ?>
             <p>No se encontraron resultados.</p>
         <?php else : ?>
@@ -44,7 +46,7 @@ $rol_id = $_SESSION['rol_id'];
                 <h2>Agencias</h2>
                 <ul>
                     <?php foreach ($resultados['agencias'] as $agencia) : ?>
-                        <li><?php echo $agencia['nombre']; ?></li>
+                        <li><?php echo $agencia['descripcion_agencias']; ?></li>
                     <?php endforeach; ?>
                 </ul>
             <?php endif; ?>

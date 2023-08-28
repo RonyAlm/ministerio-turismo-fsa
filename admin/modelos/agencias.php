@@ -160,6 +160,28 @@ class AgenciaModelo
             // throw $e;
         }
     }
+    public function buscarPorTermino($terminoBusqueda)
+    {
+        $conexionBD = BD::crearInstancia();
+        $sql = $conexionBD->prepare("SELECT id_agencias, descripcion_agencias , `idoneo_agencia`, `matricula_agencia`,
+                                                    `legajo_agencia`, `cuit_agencia`, `categoria_agencia`, fecha_edit_agencia, razon_social.descripcion_razon_social,
+                                                     direccion.calle_direccion,
+                                                    contacto.descripcion_contacto, tipo_estado.descripcion_tipo_estado,localidad.nombre_localidad
+                                                    ,estado_actividad.rela_tipo_estado,departamentos_fsa.descripcion_departamentos 
+                                            FROM `agencias`
+                                            INNER JOIN contacto ON contacto.rela_contacto_agencia = agencias.id_agencias
+                                            INNER JOIN razon_social on razon_social.id_razon_social = agencias.rela_razon_social_agencia
+                                            INNER JOIN direccion ON agencias.rela_agencia_direccion = direccion.id_direccion
+                                            INNER JOIN estado_actividad on estado_actividad.rela_estado_agencia = agencias.id_agencias
+                                            INNER JOIN tipo_estado on tipo_estado.id_tipo_estado = estado_actividad.rela_tipo_estado
+                                            INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad
+                                            INNER JOIN departamentos_fsa on localidad.rela_departamento = departamentos_fsa.id_departamentos_fsa
+                                            WHERE localidad.nombre_localidad = '$terminoBusqueda'");
+
+        $sql->execute();
+
+        return $sql->fetch(PDO::FETCH_OBJ);
+    }
 
     public function consultar()
     {
