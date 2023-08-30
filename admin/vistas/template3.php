@@ -2,13 +2,9 @@
 
 session_start();
 // include_once "controladores/controlador_login.php";
-
-
 include_once("conexion.php");
 
-
 $conexion = BD::crearInstancia();
-
 
 if (!isset($_SESSION['id'])) {
   header("Location: index.php");
@@ -16,8 +12,7 @@ if (!isset($_SESSION['id'])) {
 $id = $_SESSION['id'];
 $usuario = $_SESSION['usuarios'];
 $rol_id = $_SESSION['rol_id'];
-// $tablas_acceso = $_SESSION['tablas_acceso'];
-
+$tablas_acceso = $_SESSION['tablas_acceso'];
 $nombre = $_SESSION['nombre_persona'];
 $apellido = $_SESSION['apellido_persona'];
 
@@ -438,7 +433,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </li>
               <?php } ?>
 
-              <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "secretaria") { ?>
+              <?php if ($rol_id == 1 or $tablas_acceso == 16) { ?>
                 <li class="nav-item">
                   <a href="?controlador=notas&accion=inicio" class="nav-link 
                     <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'notas') ? 'active' : '' ?>">
@@ -662,6 +657,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
             <?php } ?>
 
+            <!-- PRUEBA -->
+
+            <?php if (($tablas_acceso == 1 || $tablas_acceso == 2)) { ?>
+
+              <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'organismos')) ? 'menu-open' : '' ?>">
+                <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'organismos')) ? 'active' : '' ?>">
+                  <i class="nav-icon fas fa-table"></i>
+                  <p>
+                    PRUEBA
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="?controlador=organismos&accion=inicio" class="nav-link 
+                    <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'organismos')) ? 'active' : '' ?>">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Colegios - PRUEBA</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="?controlador=institucion&accion=inicio" class="nav-link 
+                    <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'institucion')) ? '' : '' ?>">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Organismos - PRUEBA</p>
+                    </a>
+                  </li>
+
+                </ul>
+              </li>
+            <?php } ?>
           </ul>
         </nav>
 

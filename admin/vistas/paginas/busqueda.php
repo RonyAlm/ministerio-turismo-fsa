@@ -30,26 +30,23 @@ $rol_id = $_SESSION['rol_id'];
             <?php if (!empty($resultados['agencias'])) : ?>
                 <h2>Agencias</h2>
                 <ul>
-                    <?php foreach ($resultados['agencias'] as $agencia) : ?>
-                        <li><?php echo $agencia['descripcion_agencias']; ?></li>
-                        <div class="row mt-3">
-                            <div class="col-md-10 offset-md-1">
-                                <div class="list-group">
-                                    <div class="list-group-item">
-                                        <div class="row">
-                                            <div class="col px-4">
-                                                <div>
-
-                                                    <h3>Lorem ipsum dolor sit amet</h3>
-                                                    <p class="mb-0">consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-                                                </div>
+                    <li><?php echo $resultados->id_agencias; ?></li>
+                    <div class="row mt-3">
+                        <div class="col-md-10 offset-md-1">
+                            <div class="list-group">
+                                <div class="list-group-item">
+                                    <div class="row">
+                                        <div class="col px-4">
+                                            <div>
+                                                <h3><?php echo $resultados->descripcion_agencias ?></h3>
+                                                <p class="mb-0">consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    <?php endforeach; ?>
+                    </div>
                 </ul>
             <?php endif; ?>
 

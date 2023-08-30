@@ -58,7 +58,7 @@ class ControladorPaginas
     {
         // Recoge la entrada del formulario de búsqueda
         $terminoBusqueda = $_POST['busquedaGeneral'];
-        // print_r($terminoBusqueda);
+
 
         // Realiza la búsqueda en los módulos y obtiene los resultados
         $resultados = $this->buscarEnModulos($terminoBusqueda);

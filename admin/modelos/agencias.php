@@ -180,7 +180,7 @@ class AgenciaModelo
 
         $sql->execute();
 
-        return $sql->fetch(PDO::FETCH_OBJ);
+        return $sql->fetchAll(PDO::FETCH_OBJ);
     }
 
     public function consultar()
