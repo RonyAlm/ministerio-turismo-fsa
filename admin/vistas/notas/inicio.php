@@ -38,7 +38,7 @@ $acceso = $_SESSION['tablas_acceso'];
 
     <a name="" id="" class="btn btn-secondary" href="?controlador=notas&accion=imprimir" role="button">Imprimir</a>
 
-    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") { ?>
+    <?php if ($rol_id == 1 or $acceso == 16) { ?>
 
       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-MotivoNotas">
         Agregar Org y Mot
