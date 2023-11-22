@@ -373,7 +373,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </ul>
               </li>
               <!-- REGISTRO PERSONAL SOLO ADMIN POR EL MOMENTO -->
-              <?php if ($usuario == "admin" and $usuario == "karla") { ?>
+              <?php if ($usuario == "admin") { ?>
                 <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'menu-open' : '' ?>">
                   <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'active' : '' ?>">
                     <i class="nav-icon fas fa-table"></i>
