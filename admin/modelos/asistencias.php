@@ -147,7 +147,7 @@ class AsistenciaModelo
 
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->query("SELECT `id_asistencia4`, `nombre_per`, `fcha_asistencia`, `horas_asistencia`, `checkinout` FROM `asistencia4`");
+        $sql = $conexionBD->query("SELECT `id_asistencia2`, `nombre_personal`, `fecha_asistencia`, `hora_asistencia`, `checkinout` FROM `asistencia2`");
 
         //recuperamos los datos y los retornamos
 
@@ -226,16 +226,17 @@ class AsistenciaModelo
 
             if ($fecha >= "2023-02-01") {
                 /*-------- VERIFICAMOS SI EL EMPLEADO YA EXISTE EN LA BD --------*/
-                $sqlVerificar = $conexionBD->prepare("SELECT COUNT(*) as existente FROM `asistencia4` WHERE `nombre_per` = ? AND `fcha_asistencia` = ?");
+                $sqlVerificar = $conexionBD->prepare("SELECT COUNT(*) as existente FROM `asistencia2` WHERE `nombre_personal` = ? AND `fecha_asistencia` = ?");
                 $sqlVerificar->execute(array($nombre, $fecha));
                 $resultadoVerificar = $sqlVerificar->fetch(PDO::FETCH_ASSOC);
 
                 if ($resultadoVerificar['existente'] == 0) {
                     /*-------- INSERTAMOS--------*/
-                    $sqlDireccion = $conexionBD->prepare("INSERT INTO `asistencia4`(`nombre_per`, `fcha_asistencia`, `horas_asistencia`,`checkinout`) 
-                                         VALUES (?,?,?,?)");
+                    $sqlDireccion = $conexionBD->prepare("INSERT INTO `asistencia2`(`nombre_personal`, `fecha_asistencia`, `hora_asistencia`,`checkinout`) 
+                                VALUES (?,?,?,?)");
 
-                    // $sqlDireccion->execute(array($nombre, $fecha, $hora, $checkInOn));
+                    $sqlDireccion->execute(array($nombre, $fecha, $hora, $checkInOn));
+                    echo '<div>' . $nombre . ". " . $fecha . ". " . $hora . ". " . $checkInOn . '</div>';
                 }
             };
             // }
@@ -313,82 +314,9 @@ class AsistenciaModelo
             $i++;
         }
     }
-
-
-
-    public function excel($lineas)
-    {
-    }
-
-    public static function borrar($idAgenciaBorrar, $id_direccion, $idRazonSocial)
-    {
-        $conexionBD = BD::crearInstancia();
-        $sqlAgenciaBorrar = $conexionBD->prepare("DELETE FROM agencias WHERE id_agencias =?");
-        $sqlAgenciaBorrar->execute(array($idAgenciaBorrar));
-
-        $sqlDireccionBorrar = $conexionBD->prepare("DELETE FROM direccion WHERE id_direccion =?");
-        $sqlDireccionBorrar->execute(array($id_direccion));
-
-        $sqlRazonBorrar = $conexionBD->prepare("DELETE FROM `razon_social` WHERE id_razon_social =?");
-        $sqlRazonBorrar->execute(array($idRazonSocial));
-    }
-    /*----------BUSCAR para ir imprimir en la seccion EDITAR----------*/
-    public function buscar($id_agencia)
-    {
-        $conexionBD = BD::crearInstancia();
-        $sql = $conexionBD->prepare("SELECT id_agencias, descripcion_agencias , `idoneo_agencia`, `matricula_agencia`,
-                                                    `legajo_agencia`, `cuit_agencia`, `categoria_agencia`, fecha_edit_agencia, razon_social.descripcion_razon_social,
-                                                     direccion.calle_direccion,
-                                                    contacto.descripcion_contacto, tipo_estado.descripcion_tipo_estado,localidad.nombre_localidad
-                                                    ,estado_actividad.rela_tipo_estado,departamentos_fsa.descripcion_departamentos 
-                                            FROM `agencias`
-                                            INNER JOIN contacto ON contacto.rela_contacto_agencia = agencias.id_agencias
-                                            INNER JOIN razon_social on razon_social.id_razon_social = agencias.rela_razon_social_agencia
-                                            INNER JOIN direccion ON agencias.rela_agencia_direccion = direccion.id_direccion
-                                            INNER JOIN estado_actividad on estado_actividad.rela_estado_agencia = agencias.id_agencias
-                                            INNER JOIN tipo_estado on tipo_estado.id_tipo_estado = estado_actividad.rela_tipo_estado
-                                            INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad
-                                            INNER JOIN departamentos_fsa on localidad.rela_departamento = departamentos_fsa.id_departamentos_fsa
-                                            WHERE agencias.id_agencias = $id_agencia");
-
-        $sql->execute();
-
-        return $sql->fetch(PDO::FETCH_OBJ);
-    }
-
-    public static function editar()
-    {
-
-        $conexionBD = BD::crearInstancia();
-    }
-
-    public function buscarSelectLocalidad()
-    {
-
-        $conexionBD = BD::crearInstancia();
-
-
-        $sqlLocalidad = $conexionBD->query("SELECT id_localidad, nombre_localidad, rela_provincia, rela_departamento FROM localidad");
-
-        $sqlLocalidad->execute();
-
-        return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
-    }
-
-    public function buscarSelectEstado()
-    {
-
-        $conexionBD = BD::crearInstancia();
-
-
-        $sqlLocalidad = $conexionBD->query("SELECT `id_tipo_estado`, `descripcion_tipo_estado` 
-                                                       FROM `tipo_estado`");
-
-        $sqlLocalidad->execute();
-
-        return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
-    }
 }
+
+
 
 class ContactosAgencia
 {

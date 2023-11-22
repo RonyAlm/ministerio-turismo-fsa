@@ -3,7 +3,7 @@
   <div class="card-header ">
     <h3 class="card-title text-success">
       <i class="fas fa-solid fa-plus-minus  mr-2"></i>
-      Agregar Agencia
+      AGREGAR REGISTROS
     </h3>
   </div>
 
@@ -29,14 +29,6 @@
       </form>
     </div>
 
-    <!-- <form method="post" action="">
-      <div class="drop-zone">
-        <div class="icon"><i class="fas fa-file-excel"></i></div>
-        <div class="message">Arrastra y suelta el archivo Excel aquí</div>
-        <input type="file" name="archivo" id="archivo" class="visually-hidden">
-      </div>
-      <input type="submit" value="Generar Excel">
-    </form> -->
 
 
   </div>

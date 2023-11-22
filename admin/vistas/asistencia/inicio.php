@@ -64,10 +64,10 @@ $acceso = $_SESSION['tablas_acceso'];
             <?php foreach ($tabla as $asistencia) { ?>
 
               <tr>
-                <td><?php echo $asistencia["id_asistencia4"]; ?></td>
-                <td><?php echo $asistencia["nombre_per"]; ?></td>
-                <td><?php echo $asistencia["fcha_asistencia"]; ?></td>
-                <td><?php echo $asistencia["horas_asistencia"]; ?></td>
+                <td><?php echo $asistencia["id_asistencia2"]; ?></td>
+                <td><?php echo $asistencia["nombre_personal"]; ?></td>
+                <td><?php echo $asistencia["fecha_asistencia"]; ?></td>
+                <td><?php echo $asistencia["hora_asistencia"]; ?></td>
                 <td><?php echo $asistencia["checkinout"]; ?></td>
               </tr>
 
