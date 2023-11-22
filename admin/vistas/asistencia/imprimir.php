@@ -30,25 +30,36 @@
                             <th>Nombre y Apellido</th>
                             <th>Fecha</th>
                             <th>Hora</th>
-                            <th>Check-In-Out</th>
+                            <th>Turno</th>
 
                         </tr>
                     </thead>
                     <tbody>
 
-                        <?php foreach ($tabla as $asistencias) { ?>
-
+                        <?php foreach ($tabla as $asistencia) { ?>
                             <tr>
 
-                                <td><?php echo $asistencias["nombre_per"]; ?></td>
-                                <td><?php echo $asistencias["fcha_asistencia"]; ?></td>
-                                <td><?php echo $asistencias["horas_asistencia"]; ?></td>
-                                <td><?php echo $asistencias["checkinout"]; ?></td>
+                                <td><?php echo $asistencia["nombre_personal"]; ?></td>
+                                <td><?php echo $asistencia["fecha_asistencia"]; ?></td>
+                                <td><?php echo $asistencia["hora_asistencia"]; ?></td>
+                                <td>
+                                    <?php
+                                    $hora_asistencia = strtotime($asistencia["hora_asistencia"]);
+                                    $hora_mañana_inicio = strtotime('05:00:00');
+                                    $hora_mañana_fin = strtotime('14:00:00');
+                                    $hora_tarde_inicio = strtotime('15:00:00');
+                                    $hora_tarde_fin = strtotime('23:59:59');
 
-
-
+                                    if ($hora_asistencia >= $hora_mañana_inicio && $hora_asistencia <= $hora_mañana_fin) {
+                                        echo "Turno mañana";
+                                    } elseif ($hora_asistencia >= $hora_tarde_inicio && $hora_asistencia <= $hora_tarde_fin) {
+                                        echo "Turno tarde";
+                                    } else {
+                                        echo "Fuera de turno";
+                                    }
+                                    ?>
+                                </td>
                             </tr>
-
                         <?php } ?>
 
                     </tbody>

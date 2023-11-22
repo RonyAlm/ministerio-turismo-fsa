@@ -147,7 +147,7 @@ class AsistenciaModelo
 
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->query("SELECT `id_asistencia2`, `nombre_personal`, `fecha_asistencia`, `hora_asistencia`, `checkinout` FROM `asistencia2`");
+        $sql = $conexionBD->query("SELECT `id_asistencia3`, `nombre_personal`, `fecha_asistencia`, `hora_asistencia`, `checkinout` FROM `asistencia3`");
 
         //recuperamos los datos y los retornamos
 
@@ -158,28 +158,7 @@ class AsistenciaModelo
 
     }
 
-    public function consultarID($id_agencia)
-    {
 
-        $conexionBD = BD::crearInstancia();
-
-        $sql = $conexionBD->query("SELECT id_agencias, razon_social.id_razon_social, direccion.id_direccion,
-                                                estado_actividad.id_estado
-                                        FROM `agencias`                                    
-                                        INNER JOIN razon_social on razon_social.id_razon_social = agencias.rela_razon_social_agencia
-                                        INNER JOIN direccion ON agencias.rela_agencia_direccion = direccion.id_direccion
-                                        INNER JOIN estado_actividad on estado_actividad.rela_estado_agencia = agencias.id_agencias
-                                        WHERE agencias.id_agencias = $id_agencia");
-
-        //recuperamos los datos y los retornamos
-
-        $sql->execute();
-
-
-
-        return $sql->fetch(PDO::FETCH_OBJ); //este return se va a llamar en el controlador_agencia.php clase inicio
-
-    }
 
     public function crear($lineas)
     {
@@ -226,91 +205,91 @@ class AsistenciaModelo
 
             if ($fecha >= "2023-02-01") {
                 /*-------- VERIFICAMOS SI EL EMPLEADO YA EXISTE EN LA BD --------*/
-                $sqlVerificar = $conexionBD->prepare("SELECT COUNT(*) as existente FROM `asistencia2` WHERE `nombre_personal` = ? AND `fecha_asistencia` = ?");
-                $sqlVerificar->execute(array($nombre, $fecha));
-                $resultadoVerificar = $sqlVerificar->fetch(PDO::FETCH_ASSOC);
+                // $sqlVerificar = $conexionBD->prepare("SELECT COUNT(*) as existente FROM `asistencia2` WHERE `nombre_personal` = ? AND `fecha_asistencia` = ?");
+                // $sqlVerificar->execute(array($nombre, $fecha));
+                // $resultadoVerificar = $sqlVerificar->fetch(PDO::FETCH_ASSOC);
 
-                if ($resultadoVerificar['existente'] == 0) {
-                    /*-------- INSERTAMOS--------*/
-                    $sqlDireccion = $conexionBD->prepare("INSERT INTO `asistencia2`(`nombre_personal`, `fecha_asistencia`, `hora_asistencia`,`checkinout`) 
+                // if ($resultadoVerificar['existente'] == 0) {
+                /*-------- INSERTAMOS--------*/
+                $sqlDireccion = $conexionBD->prepare("INSERT INTO `asistencia3`(`nombre_personal`, `fecha_asistencia`, `hora_asistencia`,`checkinout`) 
                                 VALUES (?,?,?,?)");
 
-                    $sqlDireccion->execute(array($nombre, $fecha, $hora, $checkInOn));
-                    echo '<div>' . $nombre . ". " . $fecha . ". " . $hora . ". " . $checkInOn . '</div>';
-                }
+                $sqlDireccion->execute(array($nombre, $fecha, $hora, $checkInOn));
+                echo '<div>' . $nombre . ". " . $fecha . ". " . $hora . ". " . $checkInOn . '</div>';
+                //}
             };
             // }
             // echo '<div>' . $nombre . ". " . $hora . ". " . $checkInOn . '</div>';
             // Inicializamos el arreglo para almacenar los datos por mes
-            $datos_por_mes = [];
-            foreach ($meses as $mes => $rango) {
-                // Creamos un arreglo vacío para almacenar los datos de este mes
-                $datos_por_mes[$mes] = [];
-            }
-            foreach ($meses as $mes => $rango) {
-                if ($fecha >= $rango['desde'] && $fecha <= $rango['hasta']) {
-                    $datos_por_mes[$mes][] = [
-                        'nombre' => $nombre,
-                        'fecha' => $fecha,
-                        'hora' => $hora,
-                        'check_in_on' => $checkInOn,
-                    ];
-                }
-                // print_r($datos_por_mes);
-            }
+            // $datos_por_mes = [];
+            // foreach ($meses as $mes => $rango) {
+            //     // Creamos un arreglo vacío para almacenar los datos de este mes
+            //     $datos_por_mes[$mes] = [];
+            // }
+            // foreach ($meses as $mes => $rango) {
+            //     if ($fecha >= $rango['desde'] && $fecha <= $rango['hasta']) {
+            //         $datos_por_mes[$mes][] = [
+            //             'nombre' => $nombre,
+            //             'fecha' => $fecha,
+            //             'hora' => $hora,
+            //             'check_in_on' => $checkInOn,
+            //         ];
+            //     }
+            //     // print_r($datos_por_mes);
+            // }
             // Creamos un archivo de Excel por cada mes
-            foreach ($datos_por_mes as $mes => $datos) {
-                // Creamos un objeto Spreadsheet
-                $spreadsheet = new Spreadsheet();
+            // foreach ($datos_por_mes as $mes => $datos) {
+            //     // Creamos un objeto Spreadsheet
+            //     $spreadsheet = new Spreadsheet();
 
-                // Protegemos la hoja de cálculo para que sea de solo lectura
-                $protection = $spreadsheet->getActiveSheet()->getProtection();
-                $protection->setSheet(true)
-                    ->setSort(true)
-                    ->setInsertRows(false)
-                    ->setInsertColumns(false)
-                    ->setFormatCells(false)
-                    ->setFormatColumns(false)
-                    ->setFormatRows(false)
-                    ->setObjects(true)
-                    ->setScenarios(true);
-                // Obtenemos la hoja activa
-                $sheet = $spreadsheet->getActiveSheet();
-                // Definir los encabezados de las columnas 
-                $encabezados = ['Nombre', 'fecha', 'hora', 'E/S'];
-                $sheet->fromArray([$encabezados], NULL, 'A1');
-                $row = 2;
-                $writer = new Xlsx($spreadsheet);
-                foreach ($datos as $dato) {
-                    $sheet->setCellValue('A' . $row, $dato['nombre']);
-                    $sheet->setCellValue('B' . $row, $dato['fecha']);
-                    $sheet->setCellValue('C' . $row, $dato['hora']);
-                    $sheet->setCellValue('D' . $row, $dato['check_in_on']);
+            //     // Protegemos la hoja de cálculo para que sea de solo lectura
+            //     $protection = $spreadsheet->getActiveSheet()->getProtection();
+            //     $protection->setSheet(true)
+            //         ->setSort(true)
+            //         ->setInsertRows(false)
+            //         ->setInsertColumns(false)
+            //         ->setFormatCells(false)
+            //         ->setFormatColumns(false)
+            //         ->setFormatRows(false)
+            //         ->setObjects(true)
+            //         ->setScenarios(true);
+            //     // Obtenemos la hoja activa
+            //     $sheet = $spreadsheet->getActiveSheet();
+            //     // Definir los encabezados de las columnas 
+            //     $encabezados = ['Nombre', 'fecha', 'hora', 'E/S'];
+            //     $sheet->fromArray([$encabezados], NULL, 'A1');
+            //     $row = 2;
+            //     $writer = new Xlsx($spreadsheet);
+            //     foreach ($datos as $dato) {
+            //         $sheet->setCellValue('A' . $row, $dato['nombre']);
+            //         $sheet->setCellValue('B' . $row, $dato['fecha']);
+            //         $sheet->setCellValue('C' . $row, $dato['hora']);
+            //         $sheet->setCellValue('D' . $row, $dato['check_in_on']);
 
-                    echo '<div>' . $dato['nombre'] . ". " . $dato['fecha'] . ". " . $dato['check_in_on'] . '</div>';
-                    // Aplicamos algunos estilos a las celdas
-                    $styleHeader = [
-                        'font' => [
-                            'bold' => true,
-                            'color' => ['rgb' => 'FFFFFF'],
-                        ],
-                        'fill' => [
-                            'fillType' => 'solid',
-                            'startColor' => ['rgb' => '1f497d'],
-                        ],
-                    ];
-                    $sheet->getStyle('A1:D1')->applyFromArray($styleHeader);
-                    $sheet->getStyle('A2:D100')->getAlignment()->setVertical('center');
-                    $row++;
-                    // print_r($row);
-                }
-                // Creamos un objeto Writer y escribimos el archivo en el disco
+            //         echo '<div>' . $dato['nombre'] . ". " . $dato['fecha'] . ". " . $dato['check_in_on'] . '</div>';
+            //         // Aplicamos algunos estilos a las celdas
+            //         $styleHeader = [
+            //             'font' => [
+            //                 'bold' => true,
+            //                 'color' => ['rgb' => 'FFFFFF'],
+            //             ],
+            //             'fill' => [
+            //                 'fillType' => 'solid',
+            //                 'startColor' => ['rgb' => '1f497d'],
+            //             ],
+            //         ];
+            //         $sheet->getStyle('A1:D1')->applyFromArray($styleHeader);
+            //         $sheet->getStyle('A2:D100')->getAlignment()->setVertical('center');
+            //         $row++;
+            //         // print_r($row);
+            //     }
+            //     // Creamos un objeto Writer y escribimos el archivo en el disco
 
-                // $writer->save($filename);
-                // Mensaje de confirmación
-                $filename = $mes . '.xlsx';
-                echo "Se han guardado " . count($datos) . " filas en el archivo " . $filename . "<br>";
-            }
+            //     // $writer->save($filename);
+            //     // Mensaje de confirmación
+            //     $filename = $mes . '.xlsx';
+            //     echo "Se han guardado " . count($datos) . " filas en el archivo " . $filename . "<br>";
+            // }
             $i++;
         }
     }

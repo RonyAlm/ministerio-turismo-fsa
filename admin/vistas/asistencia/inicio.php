@@ -45,7 +45,6 @@ $acceso = $_SESSION['tablas_acceso'];
 
   <div class="card-body">
 
-
     <div id="acordeon" class="row">
       <div class="col-lg-12">
         <table id="tblList" class="table table-bordered table-striped" cellspacing="0" width="100%">
@@ -55,23 +54,86 @@ $acceso = $_SESSION['tablas_acceso'];
               <th>Nombre y Apellido</th>
               <th>Fecha</th>
               <th>Hora</th>
-              <th>Check-In-Out</th>
-
+              <th>Turno</th>
             </tr>
           </thead>
           <tbody>
-
             <?php foreach ($tabla as $asistencia) { ?>
-
               <tr>
-                <td><?php echo $asistencia["id_asistencia2"]; ?></td>
+                <td><?php echo $asistencia["id_asistencia3"]; ?></td>
                 <td><?php echo $asistencia["nombre_personal"]; ?></td>
                 <td><?php echo $asistencia["fecha_asistencia"]; ?></td>
                 <td><?php echo $asistencia["hora_asistencia"]; ?></td>
-                <td><?php echo $asistencia["checkinout"]; ?></td>
+                <td>
+                  <?php
+                  $hora_asistencia = strtotime($asistencia["hora_asistencia"]);
+                  $hora_mañana_inicio = strtotime('05:00:00');
+                  $hora_mañana_fin = strtotime('14:00:00');
+                  $hora_tarde_inicio = strtotime('15:00:00');
+                  $hora_tarde_fin = strtotime('23:59:59');
+
+                  if ($hora_asistencia >= $hora_mañana_inicio && $hora_asistencia <= $hora_mañana_fin) {
+                    echo "Turno mañana";
+                  } elseif ($hora_asistencia >= $hora_tarde_inicio && $hora_asistencia <= $hora_tarde_fin) {
+                    echo "Turno tarde";
+                  } else {
+                    echo "Fuera de turno";
+                  }
+                  ?>
+                </td>
               </tr>
+            <?php } ?>
+          </tbody>
+          <tfoot>
+            <tr style="background: linear-gradient(to right, #61ba6d, #83c331)">
+              <th>id</th>
+              <th>Nombre y Apellido</th>
+              <th>Fecha</th>
+              <th>Hora</th>
+              <th>Turno</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
 
 
+
+    <!-- <div id="acordeon" class="row">
+      <div class="col-lg-12">
+        <table id="tblList" class="table table-bordered table-striped" cellspacing="0" width="100%">
+          <thead>
+            <tr style="background: linear-gradient(to right, #61ba6d, #83c331)">
+              <th>id</th>
+              <th>Nombre y Apellido</th>
+              <th>Fecha</th>
+              <th>Hora</th>
+              <th>Check-In-Out</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach ($tabla as $asistencia) { ?>
+              <tr>
+                <td><?php echo $asistencia["id_asistencia3"]; ?></td>
+                <td><?php echo $asistencia["nombre_personal"]; ?></td>
+                <td><?php echo $asistencia["fecha_asistencia"]; ?></td>
+                <td><?php echo $asistencia["hora_asistencia"]; ?></td>
+                <td>
+                  <?php
+                  $checkInOut = $asistencia["checkinout"];
+                  if ($checkInOut === "overtimeIn") {
+                    echo "Entrada/Salida";
+                  } elseif ($checkInOut === "checkIn") {
+                    echo "Entrada";
+                  } elseif ($checkInOut === "checkOut") {
+                    echo "Salida";
+                  } else {
+                    // Si no coincide con ninguno de los valores anteriores, puedes mostrar un mensaje por defecto o dejarlo en blanco
+                    echo "Estado desconocido";
+                  }
+                  ?>
+                </td>
+              </tr>
             <?php } ?>
           </tbody>
           <tfoot>
@@ -85,7 +147,8 @@ $acceso = $_SESSION['tablas_acceso'];
           </tfoot>
         </table>
       </div>
-    </div>
+    </div> -->
+
 
   </div>
 
