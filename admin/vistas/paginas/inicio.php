@@ -37,6 +37,10 @@ $rol_id = $_SESSION['rol_id'];
                 </div>
             </div>
         </section>
+        <!-- Botón estilizado para dirigirse al juego -->
+        <a href="?controlador=paginas&accion=juego" class="btn btn-customJuego">
+            Ir al juego
+        </a>
 
 
         <?php if (empty($resultados)) : ?>
