@@ -1,4 +1,5 @@
-const addButton = document.querySelector(".btn-primary");
+const addButton = document.querySelector(".btn-primary1");
+// const addButton = document.getElementById("boton-agregar-tarea");
 // Selecciona todos los checkboxes
 const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 

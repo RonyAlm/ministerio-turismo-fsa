@@ -3,6 +3,7 @@ class PaginasModelo
 {
     public $listaAgencia;
     public $consultartarea;
+    public $consultarPreguntas;
     public $listaAgenciaID;
     public $listaBuscar;
 
@@ -11,6 +12,7 @@ class PaginasModelo
     {
         $this->listaAgencia = array();
         $this->consultartarea = array();
+        $this->consultarPreguntas = array();
         $this->listaAgenciaID = array();
         $this->listaBuscar = array();
     }
@@ -48,9 +50,6 @@ class PaginasModelo
         $sql = $conexionBD->prepare("DELETE FROM `tareas` WHERE id_tareas = $idTarea");
         $sql->execute();
     }
-
-
-
     public function consultar()
     {
 
@@ -66,6 +65,32 @@ class PaginasModelo
         return $this->consultartarea; //este return se va a llamar en el controlador_alojamiento.php clase inicio
 
     }
+    public function consultarPreguntas()
+    {
+
+        $conexionBD = BD::crearInstancia();
+
+        $sql = $conexionBD->query("SELECT * FROM `preguntas`");
+
+        //recuperamos los datos y los retornamos
+
+        while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
+            $this->consultarPreguntas[] = $filas;
+        }
+        return $this->consultarPreguntas;
+    }
+
+    public function obtenerRespuestaCorrecta($preguntaId)
+    {
+        $conexionBD = BD::crearInstancia();
+
+        $consulta = $conexionBD->prepare("SELECT opcion_correcta FROM `preguntas` WHERE id = :preguntaId");
+        $consulta->execute(array(':preguntaId' => $preguntaId));
+        $respuestaCorrecta = $consulta->fetch(PDO::FETCH_ASSOC);
+
+        return $respuestaCorrecta['opcion_correcta'];
+    }
+
 
     public function consultarTimeLine()
     {

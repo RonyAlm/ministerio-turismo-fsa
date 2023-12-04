@@ -53,6 +53,23 @@ class ControladorPaginas
             include_once("vistas/paginas/inicio.php");
         }
     }
+    public function juego()
+    {
+        $paginasModelo = new PaginasModelo();
+        $tablaPreguntas = $paginasModelo->consultarPreguntas();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Obtener todas las respuestas enviadas
+            $respuestas = $_POST;
+
+            // Hacer algo con las respuestas (procesarlas, almacenarlas, etc.)
+            print_r($respuestas);
+        }
+        // Pasar las preguntas y las respuestas correctas a la vista juego.php
+        include_once("vistas/paginas/juego.php");
+    }
+
+
 
     public function buscar()
     {

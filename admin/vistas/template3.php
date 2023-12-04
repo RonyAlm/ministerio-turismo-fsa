@@ -104,13 +104,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 
-    /* #tblList_filter label input{
-      width: 90%;
-    }
-    #tblList_filter label i{
-      margin-right: 10px;
-    } */
-
     div.dataTables_wrapper div.dataTables_filter input {
       margin-left: 0;
       display: inline-block;
@@ -454,7 +447,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <!-- VISUALIZACION -->
             <?php if ($rol_id == 2) : ?>
-
+              <li class="nav-item">
+                <a href="?controlador=paginas&accion=juego" class="nav-link <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'paginas') ? 'active' : '' ?>">
+                  <i class="nav-icon far fa-solid fa-dice"></i>
+                  <p> JUEGO</p>
+                </a>
+              </li>
               <li class="nav-item">
                 <a href="?controlador=alojamientos&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'alojamientos') ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
@@ -868,7 +866,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="vistas/recursos/script/checkboxInicio.js"></script>
   <script src="vistas/recursos/script/contraseñaTablas.js"></script>
   <script src="vistas/recursos/script/cursosbotonpresente.js"></script>
+  <script src="vistas/recursos/script/juegoquiz.js"></script>
   <script src="/admin/vistas/recursos/script/modal.js"></script>
+  <script src="/admin/vistas/recursos/script/juegoministerio.js"></script>
 
 
   <script>
