@@ -37,7 +37,7 @@ $acceso = $_SESSION['tablas_acceso'];
   <!-- Default box -->
   <div class="card">
     <div class="card-header">
-      <?php if ($rol_id == 1 or $acceso == 10) { ?>
+      <?php if ($rol_id == 1 || in_array(10, $acceso)) : ?>
 
         <a class="btn btn-success" href="?controlador=personal&accion=guardar" role="button">Agregar Personal</a>
 
@@ -45,8 +45,8 @@ $acceso = $_SESSION['tablas_acceso'];
           Agregar licencia o Artículo
         </button>
 
-      <?php } ?>
-      <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") { ?>
+      <?php endif; ?>
+      <?php if ($rol_id == 1 || in_array(10, $acceso)) : ?>
 
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-ejemploUsuario">
           Agregar Roles y Usuarios
@@ -55,7 +55,7 @@ $acceso = $_SESSION['tablas_acceso'];
           Editar Roles y Usuarios
         </button>
 
-      <?php } ?>
+      <?php endif; ?>
     </div>
 
     <div class="card-body p-0">

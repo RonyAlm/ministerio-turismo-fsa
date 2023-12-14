@@ -29,7 +29,7 @@ $acceso = $_SESSION['tablas_acceso'];
 
   <div class="card-header">
 
-    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") : ?>
+    <?php if ($rol_id == 1 || in_array(14, $acceso)) : ?>
 
       <a name="" id="" class="btn btn-success" href="?controlador=servigenerales&accion=crear" role="button">Agregar</a>
 
@@ -135,7 +135,7 @@ $acceso = $_SESSION['tablas_acceso'];
                     <a title="Más información" id="btn1" href="?controlador=servigenerales&accion=info&id=<?php echo $servigeneral["id_servicios_generales"]; ?>" class="btn btn-primary btn-sm"> <i class="fas fa-folder"></i>
                     </a>
 
-                    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") : ?>
+                    <?php if ($rol_id == 1 || in_array(14, $acceso)) : ?>
 
                       <a title="Editar" href="?controlador=servigenerales&accion=editar&id=<?php echo $servigeneral["id_servicios_generales"]; ?>" class="btn btn-success btn-sm">
                         <i class="fas fa-pencil-alt"></i>

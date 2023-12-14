@@ -30,7 +30,7 @@ $acceso = $_SESSION['tablas_acceso'];
 
   <div class="card-header">
 
-    <?php if ($rol_id == 1 or $acceso == 11) : ?>
+    <?php if ($rol_id == 1 || in_array(11, $acceso)) : ?>
 
       <a name="" id="" class="btn btn-success" href="?controlador=prestadores&accion=crear" role="button">Agregar</a>
 
@@ -146,7 +146,7 @@ $acceso = $_SESSION['tablas_acceso'];
                       <i class="fas fa-folder"></i>
                     </a>
 
-                    <?php if ($rol_id == 1 or $acceso == 11) : ?>
+                    <?php if ($rol_id == 1 || in_array(11, $acceso)) : ?>
 
                       <a title="Editar" href="?controlador=prestadores&accion=editar&id=<?php echo $prestadore["id_prestador"]; ?>" class="btn btn-success btn-sm">
                         <i class="fas fa-pencil-alt"></i>

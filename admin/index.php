@@ -54,7 +54,22 @@ if ($_POST) {
 
     $numTablas = $resultadoTablas->rowCount();
 
-    $rowTablas = $resultadoTablas->fetch(PDO::FETCH_ASSOC); //lo que hago es sacar el usuario
+    // Creamos un array para almacenar todas las tablas de acceso
+    $tablasAcceso = array();
+
+    // Recorremos todas las filas y almacenamos las tablas de acceso en el array
+    while ($rowTablas = $resultadoTablas->fetch(PDO::FETCH_ASSOC)) {
+      $tablasAcceso[] = $rowTablas['rela_acceso_tablas'];
+    }
+
+    // Ahora $tablasAcceso contendrá todas las tablas a las que tiene acceso el usuario
+    // Puedes guardar este array en la sesión o usarlo según tus necesidades
+    // $_SESSION['tablas_acceso'] = $tablasAcceso;
+
+    // Verificar las tablas de acceso obtenidas
+
+
+    // print_r($rowTablas);
     //----------------------FIN-----------------------//
 
     $contraseña_bd = $row['contraseña'];
@@ -63,13 +78,15 @@ if ($_POST) {
       $_SESSION['usuarios'] = $row['usuario'];
       $_SESSION['contraseña'] = $row['contraseña'];
       $_SESSION['rol_id'] = $row['rela_rol_id'];
-      $_SESSION['tablas_acceso'] = $rowTablas['rela_acceso_tablas'];
+
+      $_SESSION['tablas_acceso'] = $tablasAcceso;
       $_SESSION['nombre_persona'] = $rowActivo['nombre_persona'];
       $_SESSION['apellido_persona'] = $rowActivo['apellido_persona'];
       $_SESSION['id_persona'] = $rowActivo['id_persona'];
 
       header("Location: index2.php");
-      print_r($_SESSION['tablas_acceso']);
+      // print_r($_SESSION['tablas_acceso']);
+
       echo "entraste wey";
     } else {
       $error = "La contraseña no coincide";

@@ -41,10 +41,10 @@ $rol_id = $_SESSION['rol_id'];
               </div>
             </div>
             <div class="card-body">
-              <div class="form-group">
-                <label for="usuario_crear">Nombre de usuario:</label>
-                <input type="text" id="usuario_crear" name="usuario_crear" class="form-control" value="<?php echo $usuario; ?>">
-              </div>
+
+              <!-- <label for="usuario_crear">Nombre de usuario:</label> -->
+              <input type="hidden" id="usuario_crear" name="usuario_crear" class="form-control" value="<?php echo $usuario; ?>">
+
               <div class="form-group">
                 <label for="designacion">Designación Comercial:</label>
                 <input type="text" id="designacion" name="designacion" class="form-control" required>

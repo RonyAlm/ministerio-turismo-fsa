@@ -433,7 +433,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </li>
               <?php } ?>
 
-              <?php if ($rol_id == 1 or $tablas_acceso == 16) { ?>
+              <?php if ($rol_id == 1 || in_array(16, $tablas_acceso)) : ?>
                 <li class="nav-item">
                   <a href="?controlador=notas&accion=inicio" class="nav-link 
                     <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'notas') ? 'active' : '' ?>">
@@ -441,7 +441,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <p>Notas</p>
                   </a>
                 </li>
-              <?php } ?>
+              <?php endif; ?>
               <li class="nav-item">
                 <a href="?controlador=cursos_capacitaciones&accion=inicio" class="nav-link 
                     <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'cursos_capacitaciones') ? 'active' : '' ?>">
@@ -659,7 +659,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <!-- PRUEBA -->
 
-            <?php if (($tablas_acceso == 1 || $tablas_acceso == 2)) { ?>
+            <?php if ($rol_id == 1 || in_array(1, $tablas_acceso)) : ?>
 
               <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'organismos')) ? 'menu-open' : '' ?>">
                 <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'organismos')) ? 'active' : '' ?>">
@@ -687,7 +687,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 </ul>
               </li>
-            <?php } ?>
+            <?php endif; ?>
           </ul>
         </nav>
 
@@ -941,6 +941,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     });
 
     $(function() {
+
       $("#example1").DataTable({
         "responsive": true,
         "lengthChange": true,
@@ -954,6 +955,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
       $('#example2').DataTable({
         "paging": true,
         "lengthChange": false,
@@ -1008,6 +1010,47 @@ scratch. This page gets rid of all links and provides the needed markup only.
           }
         ]
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    });
+
+    $(function() {
+      var table = $("#example1234").DataTable({
+        responsive: true,
+        lengthChange: true,
+        autoWidth: false,
+        language: {
+          url: "vistas/recursos/plugins/datatables/Spanish.json"
+        },
+        dom: 'Bfrtip',
+        buttons: [{
+            extend: 'excel',
+            exportOptions: {
+              columns: ':visible' // Exporta solo las columnas visibles
+            }
+          },
+          {
+            extend: 'pdf',
+            exportOptions: {
+              columns: ':visible' // Exporta solo las columnas visibles
+            }
+          },
+          {
+            extend: 'print',
+            exportOptions: {
+              columns: ':visible' // Exporta solo las columnas visibles
+            }
+          },
+          {
+            extend: 'colvis',
+            collectionLayout: 'fixed two-column',
+            postfixButtons: ['colvisRestore'],
+            text: 'Columnas',
+            columns: ':gt(0)', // Excluye la primera columna (índice 0) del selector de columnas
+            columnText: function(dt, idx, title) {
+              return (idx + 1) + ': ' + title;
+            }
+          }
+        ]
+      }).buttons().container().appendTo('#example1234_wrapper .col-md-6:eq(0)');
     });
   </script>
 

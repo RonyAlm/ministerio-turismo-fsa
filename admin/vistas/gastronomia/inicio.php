@@ -6,8 +6,8 @@ if (!isset($_SESSION['id'])) {
 
 $usuario = $_SESSION['usuarios'];
 $rol_id = $_SESSION['rol_id'];
-// $acceso = $_SESSION['tablas_acceso'];
-
+$acceso = $_SESSION['tablas_acceso'];
+// print_r($acceso);
 ?>
 
 <section class="content-header">
@@ -30,7 +30,7 @@ $rol_id = $_SESSION['rol_id'];
 
   <div class="card-header">
 
-    <?php if ($rol_id == 1  or $usuario == "roxana") : ?>
+    <?php if ($rol_id == 1 || in_array(7, $acceso)) : ?>
 
       <a name="" id="" class="btn btn-success" href="?controlador=gastronomia&accion=crear" role="button">Agregar</a>
 
@@ -74,16 +74,29 @@ $rol_id = $_SESSION['rol_id'];
                       <i class="fas fa-folder"></i>
                     </a>
 
-                    <?php if ($rol_id == 1 or $usuario == "roxana") { ?>
+
+                    <?php if ($rol_id == 1 || in_array(7, $acceso)) : ?>
+
                       <a title="Editar" href="?controlador=gastronomia&accion=editar&id=<?php echo $gastronomia["id_gastronomia"]; ?>" class="btn btn-success btn-sm">
                         <i class="fas fa-pencil-alt"></i>
                       </a>
-                      <a title="Borrar" href="?controlador=gastronomia&accion=borrar&id=<?php echo $gastronomia["id_gastronomia"]; ?>
-                                                                            &idDireccion=<?php echo $gastronomia["id_direccion"]; ?>" class="btn btn-danger btn-sm">
+
+                      <a title="Borrar" onclick="AlertDeleteGastronomia(
+                        <?= $gastronomia['id_gastronomia']; ?>,
+                        <?= $gastronomia['id_direccion']; ?>,)" class="btn btn-danger btn-sm">
                         <i class="fas fa-trash"></i>
                       </a>
 
-                    <?php } ?>
+                    <?php else : ?>
+
+                      <a title="Editar" href="#" class="btn btn-success btn-sm disabled">
+                        <i class="fas fa-pencil-alt"></i>
+                      </a>
+                      <a title="Borrar" href="#" class="btn btn-danger btn-sm disabled">
+                        <i class="fas fa-trash"></i>
+                      </a>
+
+                    <?php endif; ?>
                   </div>
                 </td>
 

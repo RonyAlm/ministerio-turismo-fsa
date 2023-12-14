@@ -28,7 +28,7 @@ $acceso = $_SESSION['tablas_acceso'];
 <div class="card">
   <div class="card-header">
 
-    <?php if ($rol_id == 1 or $acceso == 16) : ?>
+    <?php if ($rol_id == 1 || in_array(16, $acceso)) : ?>
 
       <a name="" id="" class="btn btn-success" href="?controlador=notas&accion=crear" role="button">Agregar</a>
 
@@ -38,7 +38,7 @@ $acceso = $_SESSION['tablas_acceso'];
 
     <a name="" id="" class="btn btn-secondary" href="?controlador=notas&accion=imprimir" role="button">Imprimir</a>
 
-    <?php if ($rol_id == 1 or $acceso == 16) { ?>
+    <?php if ($rol_id == 1 || in_array(16, $acceso)) : ?>
 
       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-MotivoNotas">
         Agregar Org y Mot
@@ -47,7 +47,7 @@ $acceso = $_SESSION['tablas_acceso'];
         Editar Org y Mot
       </button>
 
-    <?php } ?>
+    <?php endif; ?>
   </div>
 
   <div class="card-body">
@@ -134,7 +134,7 @@ $acceso = $_SESSION['tablas_acceso'];
                       <i class="fas fa-folder"></i>
                     </a>
 
-                    <?php if ($rol_id == 1 or $acceso == 16) : ?>
+                    <?php if ($rol_id == 1 || in_array(16, $acceso)) : ?>
 
                       <a title="Editar" href="?controlador=notas&accion=editar&id=<?php echo $notas["id_notas"]; ?>" class="btn btn-success btn-sm">
                         <i class="fas fa-pencil-alt"></i>

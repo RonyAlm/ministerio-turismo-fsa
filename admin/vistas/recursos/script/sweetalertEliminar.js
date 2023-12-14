@@ -175,3 +175,29 @@ function AlertDeletenotas(id_transporte, id_dire) {
     return false;
   });
 }
+
+function AlertDeleteGastronomia(id_gastronomia, id_dire) {
+  // console.log(id_transporte, id_dire, id_rz, id_serv, id_sercomple);
+  Swal.fire({
+    title: "¿Está seguro que desea eliminar la Nota?",
+    text: "Esta acción no podrá revertirse",
+    icon: "error",
+    buttons: true,
+    showCancelButton: true,
+    dangerMode: true,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url:
+          "?controlador=gastronomia&accion=borrar&id_gastronomia=" +
+          id_gastronomia +
+          "&idDireccion=" +
+          id_dire,
+        success: function (r) {
+          window.location = "?controlador=gastronomia&accion=inicio";
+        },
+      });
+    }
+    return false;
+  });
+}

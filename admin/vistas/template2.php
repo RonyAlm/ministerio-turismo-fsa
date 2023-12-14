@@ -887,6 +887,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       }).buttons().container().appendTo('#tblAlojamiento_wrapper .col-md-6:eq(0)');
 
+      $("#tblAgencias").DataTable({
+        "responsive": true,
+        "lengthChange": true,
+        "autoWidth": true,
+        "language": {
+          "url": "vistas/recursos/plugins/datatables/Spanish.json"
+        },
+        dom: 'Bfrtip',
+        buttons: ['excel', 'pdf', 'print', 'colvis'],
+
+
+
+      }).buttons().container().appendTo('#tblAgencias_wrapper .col-md-6:eq(0)');
+
     });
 
     $(function() {

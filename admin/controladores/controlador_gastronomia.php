@@ -9,21 +9,15 @@ class ControladorGastronomia
 
     public function inicio()
     { //aca se muestra las tablas
-
-
         global $accion, $controlador1;
 
         // Ejemplo: si la acción es "editar", ejecutamos el método "editar()"
         if ($accion == 'inicio') {
             // echo "esto es un: " . $accion . " y el controlador es: " . $controlador1;
         }
-
-
         $consulta = new GastronomiaModelo();
 
         $tabla = $consulta->consultar();
-
-
 
         include_once("vistas/gastronomia/inicio.php");
     }
@@ -242,7 +236,7 @@ class ControladorGastronomia
             // echo "esto es un " . $accion . " y el id es: " . $id;
         }
 
-        $idAgenciaBorrar = $_GET["id"];
+        $idAgenciaBorrar = $_GET["id_gastronomia"];
         $id_direccion = $_GET['idDireccion'];
 
         $borrarAgencias = new GastronomiaModelo();
