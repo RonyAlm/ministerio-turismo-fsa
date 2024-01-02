@@ -321,7 +321,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <a href="?controlador=prestadores&accion=inicio" class="nav-link 
                     <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'prestadores') ? 'active' : '' ?>">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Prestadores</p>
+                      <p>Servicio Auxiliar de tur</p>
                     </a>
                   </li>
                   <li class="nav-item">
@@ -373,7 +373,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </ul>
               </li>
               <!-- REGISTRO PERSONAL SOLO ADMIN POR EL MOMENTO -->
-              <?php if ($usuario == "admin" or $usuario == "rrhh") { ?>
+              <?php if ($usuario == "admin" or $usuario == "rrhh" || in_array(10, $tablas_acceso)) { ?>
                 <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'menu-open' : '' ?>">
                   <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'active' : '' ?>">
                     <i class="nav-icon fas fa-table"></i>
@@ -470,15 +470,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <li class="nav-item">
                 <a href="?controlador=prestadores&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'prestadores') ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Prestadores</p>
+                  <p>Servicio Auxiliar de tur</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="?controlador=referentes&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'referentes') ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Referentes municipales</p>
                 </a>
-              </li>
+              </li> -->
               <li class="nav-item">
                 <a href="?controlador=servigenerales&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'servigenerales') ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
@@ -599,7 +599,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <?php } ?>
 
             <!-- TRANSPORTE -->
-            <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") { ?>
+            <!-- <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") { ?>
               <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'transporte')) ? 'menu-open' : '' ?>">
                 <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'transporte')) ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-table"></i>
@@ -625,7 +625,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 </ul>
               </li>
-            <?php } ?>
+            <?php } ?> -->
 
             <!-- Organismos -->
             <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") { ?>

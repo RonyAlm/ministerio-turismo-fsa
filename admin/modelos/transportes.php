@@ -515,7 +515,7 @@ class TransportesModelo
     }
 }
 
-class ContactosAgencia
+class ContactosTransportes
 {
     public $telefonoAgencia;
     public $correoAgencia;

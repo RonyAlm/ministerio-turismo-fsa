@@ -29,7 +29,7 @@ $acceso = $_SESSION['tablas_acceso'];
 <div class="card">
   <div class="card-header">
 
-    <?php if ($rol_id == 1 or $acceso == 1) : ?>
+    <?php if ($rol_id == 1 || in_array(10, $acceso)) : ?>
 
       <a name="" id="" class="btn btn-success" href="?controlador=asistencias&accion=crear" role="button">Agregar</a>
 

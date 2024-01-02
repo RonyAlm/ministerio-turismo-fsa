@@ -2,11 +2,11 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Información Agencia</h1>
+        <h1>Información Transporte</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=agencias&accion=inicio">Agencias</a></li>
+          <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=transportes&accion=inicio">Transporte</a></li>
           <li class="breadcrumb-item active">Información</li>
         </ol>
       </div>
@@ -195,7 +195,7 @@
   <div class="card-footer mb-4 card">
     <div class="row no-print">
       <div class="col-12">
-        <a href="?controlador=agencias&accion=imprimirInfo&id=<?= $TransportesInfomacion->id_agencias; ?>" rel="noopener" class="btn btn-default float-right">
+        <a href="?controlador=transportes&accion=imprimirInfo&id=<?= $TransportesInfomacion->id_transportes; ?>" rel="noopener" class="btn btn-default float-right">
           <i class="fas fa-print mr-2"></i> Imprimir
         </a>
       </div>

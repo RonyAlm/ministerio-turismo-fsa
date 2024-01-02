@@ -8,7 +8,7 @@ class BD
         if (!isset(self::$instancia)) {
             $opcionesPDO[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
 
-            self::$instancia = new PDO('mysql:host=localhost; dbname=mintur', 'root', '', $opcionesPDO);
+            self::$instancia = new PDO('mysql:host=localhost; dbname=turismo', 'root', '', $opcionesPDO);
             self::$instancia->exec("SET CHARACTER SET utf8");
         }
         return self::$instancia;

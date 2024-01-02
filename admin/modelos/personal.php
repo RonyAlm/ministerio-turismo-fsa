@@ -770,7 +770,6 @@ class PersonalModelo
 
         $conexionBD = BD::crearInstancia();
 
-
         $sqlcantLic = $conexionBD->query("SELECT `id_licencias`, `fecha_ini`, `fecha_fin`, `dias_restante`, `estado`, `rela_personal` 
         FROM `licencias` 
         WHERE rela_personal=$idpersonal AND estado = 1 LIMIT 1");
@@ -920,7 +919,7 @@ class ContactosPersonal
     }
     public function consultarLicencias($id)
     {
-        // echo 'este es el id:' . $id;
+
         $conexionBD = BD::crearInstancia();
         $consultalicencia = $conexionBD->query("SELECT `id_licencias`, `fecha_ini`, `fecha_fin`, `dias_restante`, `estado`, `rela_personal` FROM `licencias`
         WHERE `rela_personal`=$id");

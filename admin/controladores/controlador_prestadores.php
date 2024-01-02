@@ -30,9 +30,9 @@ class ControladorPrestadores
         global $accion, $controlador1;
         global $id;
         //
-        echo '<pre>';
-        print_r($controlador1);
-        echo '</pre>';
+        // echo '<pre>';
+        // print_r($controlador1);
+        // echo '</pre>';
 
         $selectPrestadores = new PrestadoresModelo();
 
@@ -111,9 +111,9 @@ class ControladorPrestadores
         global $accion, $controlador1;
         global $id;
         //
-        echo '<pre>';
-        print_r($controlador1);
-        echo '</pre>';
+        // echo '<pre>';
+        // print_r($controlador1);
+        // echo '</pre>';
 
         $id_Prestador = $_GET['id'];
 
@@ -238,9 +238,9 @@ class ControladorPrestadores
         global $accion, $controlador1;
         global $id;
         //
-        echo '<pre>';
-        print_r($controlador1);
-        echo '</pre>';
+        // echo '<pre>';
+        // print_r($controlador1);
+        // echo '</pre>';
 
         $borradoPrestadores = new PrestadoresModelo();
 

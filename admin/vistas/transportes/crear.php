@@ -48,16 +48,16 @@
 
               <div class="form-group">
                 <label for="idoneoTransportes">Idóneo:</label>
-                <input type="text" id="idoneoTransportes" name="idoneoTransportes" class="form-control"></input>
+                <input type="text" id="idoneoTransportes" name="idoneoTransportes" class="form-control" required></input>
               </div>
 
               <div class="form-group">
                 <label for="domicilioTransporte">Domicilio</label>
-                <input type="text" id="domicilioTransporte" name="domicilioTransporte" class="form-control">
+                <input type="text" id="domicilioTransporte" name="domicilioTransporte" class="form-control" required>
               </div>
               <div class="form-group">
                 <label for="ServiciosTransportes">Servicios</label>
-                <input type="text" id="ServiciosTransportes" name="ServiciosTransportes" class="form-control">
+                <input type="text" id="ServiciosTransportes" name="ServiciosTransportes" class="form-control" required>
               </div>
 
               <div class="form-group">

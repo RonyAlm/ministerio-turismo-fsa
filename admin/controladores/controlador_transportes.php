@@ -1,5 +1,4 @@
 <?php
-
 include_once("modelos/transportes.php");
 include_once("conexion.php");
 
@@ -91,10 +90,7 @@ class ControladorTransportes
         // ESTÓ ES PARA LA AUDITORÍA
         global $accion, $controlador1;
         global $id;
-        //
-        // echo '<pre>';
-        // print_r($controlador1);
-        // echo '</pre>';
+
 
         $idAgencia = $_GET["id"];
 
@@ -192,9 +188,9 @@ class ControladorTransportes
 
         /*----------BUSCA LOS ID Y LOS PONE EN EL FORMULARIO----------*/
 
-        $contactosDeagencia = new ContactosAgencia();
+        $contactosDeagencia = new ContactosTransportes();
 
-        $contactosDeagencia1 = new ContactosInfo();
+        $contactosDeagencia1 = new ContactosInfoTransporte();
 
         $agenciaTelefono = $contactosDeagencia1->consultarTelefonos($idAgencia);
         $agenciaTelefonoFijo = $contactosDeagencia->consultarTelefonosFijos($idAgencia);
@@ -263,11 +259,6 @@ class ControladorTransportes
         include_once("vistas/Transportes/info.php");
     }
 
-    public function sucursal()
-    {
-
-        $id_agencia = $_GET['id'];
-    }
 
     public function imprimir()
     {
@@ -292,7 +283,7 @@ class ControladorTransportes
         $TransportesInfomacion = $agenciaInfo->buscar($id_agencia);
 
 
-        $contactosDeagencia = new ContactosInfo();
+        $contactosDeagencia = new ContactosInfoTransporte();
         $agenciaTelefonoInfo = $contactosDeagencia->consultarTelefonos($id_agencia);
         $agenciaTelefonoFijo = $contactosDeagencia->consultarTelefonosFijos($id_agencia);
         $agenciaCorreo = $contactosDeagencia->consultarCorreo($id_agencia);

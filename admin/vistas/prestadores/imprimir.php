@@ -2,11 +2,11 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Imprimir Prestadores</h1>
+                <h1>Imprimir Servicios Auxiliares de Turismo</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=prestadores&accion=inicio">Prestadores</a></li>
+                    <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=prestadores&accion=inicio">Servicios Auxiliares de Turismo</a></li>
                     <li class="breadcrumb-item active">Imprimir</li>
                 </ol>
             </div>
@@ -30,6 +30,7 @@
                             <th>Institución / Emprendimiento</th>
                             <th>Contacto</th>
                             <th>Dirección</th>
+                            <th>Servicios</th>
                             <th>Estado</th>
                         </tr>
                     </thead>
@@ -45,6 +46,7 @@
                                 <td><?php echo $prestadore["institucion_prestador"]; ?></td>
                                 <td><?php echo $prestadore["descripcion_contacto"]; ?></td>
                                 <td><?php echo $prestadore["calle_direccion"]; ?></td>
+                                <td><?php echo $prestadore["descrip_tipo_serv_prestadores"]; ?></td>
                                 <?php if ($prestadore["descripcion_tipo_estado"] == "Activo") { ?>
                                     <td class="badge badge-success"><?php echo $prestadore["descripcion_tipo_estado"]; ?></td>
                                 <?php } ?>

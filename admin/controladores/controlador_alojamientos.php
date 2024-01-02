@@ -1,5 +1,7 @@
 <?php
 
+use function PHPSTORM_META\type;
+
 include_once("modelos/alojamiento.php");
 include_once("conexion.php");
 
@@ -174,7 +176,7 @@ class ControladorAlojamientos
 
 
         if ($_POST) {
-            //print_r($_POST);
+            // print_r($_POST);
 
             $insertarDatosAlojamiento = new Alojamientos();
 

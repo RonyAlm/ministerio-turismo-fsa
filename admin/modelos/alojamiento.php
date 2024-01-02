@@ -482,10 +482,11 @@ class Alojamientos
 
         /*---------------SE ACTUALIZA EL ALOJAMIENTO-------------------*/
 
+
         if ($rubroAlojamiento == 0) {
-            // echo "rubro igual a 0        /// ";
+
             $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
-                                                                    `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
+                                                                    `cuit_alojamiento`='$cuitAlojamiento',`idoneo_alojamiento`='$idoneoAlojamiento',
                                                                     `estrella_alojamiento`=$estrellaAlojamiento,
                                                                     `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()
                                         WHERE id_alojamientos=$IDAlojamiento");
@@ -494,9 +495,9 @@ class Alojamientos
         } else {
             // echo "rubro igual conectado   ///        ";
             $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
-                                                                    `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
-                                                                    `estrella_alojamiento`=$estrellaAlojamiento,`rela_alojamiento_rubro`=$rubroAlojamiento,
-                                                                    `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()
+                    `cuit_alojamiento`='$cuitAlojamiento',`idoneo_alojamiento`='$idoneoAlojamiento',
+                    `estrella_alojamiento`=$estrellaAlojamiento,`rela_alojamiento_rubro`=$rubroAlojamiento,
+                    `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()
                                         WHERE id_alojamientos=$IDAlojamiento");
 
             $sql->execute();
@@ -504,20 +505,20 @@ class Alojamientos
         if ($categoriaAlojamiento == 0) {
             // echo "categoria igual a 0    ///  ";
             $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
-                                                                    `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
-                                                                    `estrella_alojamiento`=$estrellaAlojamiento,
-                                                                    `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()
-                                        WHERE id_alojamientos=$IDAlojamiento");
+            `cuit_alojamiento`='$cuitAlojamiento',`idoneo_alojamiento`='$idoneoAlojamiento',
+            `estrella_alojamiento`=$estrellaAlojamiento,
+            `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()
+            WHERE id_alojamientos=$IDAlojamiento");
 
             $sql->execute();
         } else {
             // echo "categoria igual a  conectado    ///  ";
             $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
-                                                                    `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
-                                                                    `estrella_alojamiento`=$estrellaAlojamiento
-                                                                    ,`rela_tipo_alojamiento_aloja`=$categoriaAlojamiento,
-                                                                    `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()
-                                        WHERE id_alojamientos=$IDAlojamiento");
+            `cuit_alojamiento`='$cuitAlojamiento',`idoneo_alojamiento`='$idoneoAlojamiento',
+            `estrella_alojamiento`=$estrellaAlojamiento,
+            `rela_tipo_alojamiento_aloja`=$categoriaAlojamiento,
+            `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()
+            WHERE id_alojamientos=$IDAlojamiento");
 
             $sql->execute();
         }
@@ -525,7 +526,7 @@ class Alojamientos
         if ($habilitacionAlojamiento == 0) {
             // echo "habilitacion igual a 0    ///  ";
             $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
-                                                                    `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
+                                                                    `cuit_alojamiento`='$cuitAlojamiento',`idoneo_alojamiento`='$idoneoAlojamiento',
                                                                     `estrella_alojamiento`=$estrellaAlojamiento,
                                                                     `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()
                                         WHERE id_alojamientos=$IDAlojamiento");
@@ -534,7 +535,7 @@ class Alojamientos
         } else {
             // echo "categoria igual a  conectado    ///  ";
             $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
-                                                                    `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
+                                                                    `cuit_alojamiento`='$cuitAlojamiento',`idoneo_alojamiento`='$idoneoAlojamiento',
                                                                     `estrella_alojamiento`=$estrellaAlojamiento
                                                                     ,`rela_habilitaciones`=$habilitacionAlojamiento,
                                                                     `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()

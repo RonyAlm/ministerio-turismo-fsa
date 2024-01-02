@@ -2,11 +2,11 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Información Prestador</h1>
+        <h1>Información Servicios Auxiliares de Turismo</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=prestadores&accion=inicio">Prestador</a></li>
+          <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=prestadores&accion=inicio">Servicios Auxiliares de Turismo</a></li>
           <li class="breadcrumb-item active">Información</li>
         </ol>
       </div>

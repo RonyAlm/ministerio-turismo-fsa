@@ -86,9 +86,9 @@ class ControladorPersonal
         global $accion, $controlador1;
         global $id;
         //
-        echo '<pre>';
-        print_r($controlador1);
-        echo '</pre>';
+        // echo '<pre>';
+        // print_r($controlador1);
+        // echo '</pre>';
 
         $select_tipo_agencia = new PersonalModelo();
 
@@ -167,13 +167,15 @@ class ControladorPersonal
         // ESTÓ ES PARA LA AUDITORÍA
         global $accion, $controlador1;
         global $id;
-        //
-        echo '<pre>';
-        print_r($controlador1);
-        echo '</pre>';
+
+
+        // echo '<pre>';
+        // print_r($controlador1);
+        // echo '</pre>';
 
         $ids = $_GET["id"];
         $idPersona = $_GET["idPersona"];
+
 
         $select_tipo = new PersonalModelo();
 
@@ -184,8 +186,9 @@ class ControladorPersonal
         $buscarSelectRol = $select_tipo->buscarSelectRol();
         $buscarSelectArea = $select_tipo->buscarSelectArea();
         $buscarSelectContrato = $select_tipo->buscarSelectContrato();
-        $consultarCantidLicenciaEditar = $select_tipo->buscarCantidadLicencia($id);
-        $buscarCantidadArticuloEditar = $select_tipo->buscarCantidadArticulo($id);
+        $consultarCantidLicenciaEditar = $select_tipo->buscarCantidadLicencia($ids);
+        $buscarCantidadArticuloEditar = $select_tipo->buscarCantidadArticulo($ids);
+        // $consultarLicencias = $infoPersonal->consultarLicencias($id);
 
         // /*----------BUSCA LOS POST QUE SE ENCUENTRA EN EDITAR.PHP PARA PODER EDITARLO----------*/
 
@@ -245,9 +248,8 @@ class ControladorPersonal
 
             // ARTICULO
 
-            // $articuloID = $_POST['articuloID'];
             $articuloID = isset($_POST['articuloID']) ? $_POST['articuloID'] : "";
-            // $fechainiArticulo = $_POST['fechainiArticulo'];
+
             $fechainiArticulo = isset($_POST['fechainiArticulo']) ? $_POST['fechainiArticulo'] : "";
 
             $EditarAgencia->editar(
@@ -315,13 +317,8 @@ class ControladorPersonal
         $agenciaTwitter = $contactosDeagencia->consultarTwitter($idPersona);
         $agenciaWeb = $contactosDeagencia->consultarWeb($idPersona);
         $agenciaOtro = $contactosDeagencia->consultarOtro($idPersona);
-        $consultarLicencias = $contactosDeagencia->consultarLicencias($id);
-        $consultarArticulo = $contactosDeagencia->consultarArticulo($id);
-
-
-        // if (is_array($consultarLicenciasa) || is_object($consultarLicenciasa)) {
-        //     echo "holaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholahola";
-        // } ESTO VERIFICA SI ES UN ARRAY O UN OBJETO
+        $consultarLicencias = $contactosDeagencia->consultarLicencias($ids);
+        $consultarArticulo = $contactosDeagencia->consultarArticulo($ids);
 
         $buscarID = new PersonalModelo();
 
@@ -412,9 +409,9 @@ class ControladorPersonal
         global $accion, $controlador1;
         global $id;
         //
-        echo '<pre>';
-        print_r($controlador1);
-        echo '</pre>';
+        // echo '<pre>';
+        // print_r($controlador1);
+        // echo '</pre>';
         $select_tipo = new PersonalModelo();
 
         $buscarSelectLocalidad = $select_tipo->buscarSelectLocalidad();

@@ -2,11 +2,11 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Imprimir Agencias</h1>
+                <h1>Imprimir Transportes</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=agencias&accion=inicio">Agencias</a></li>
+                    <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=transportes&accion=inicio">Transportes</a></li>
                     <li class="breadcrumb-item active">Imprimir</li>
                 </ol>
             </div>
@@ -29,8 +29,7 @@
                             <th>Localidad</th>
                             <th>Designacion Comercial</th>
                             <th>Contacto</th>
-                            <th>Dirección</th>
-                            <th>Estado</th>
+                            <th>Servicios</th>
 
                         </tr>
                     </thead>
@@ -41,37 +40,9 @@
                             <tr>
 
                                 <td><?php echo $agencia["nombre_localidad"]; ?></td>
-                                <td><?php echo $agencia["descripcion_agencias"]; ?></td>
-                                <td><?php echo $agencia["descripcion_contacto"]; ?></td>
-                                <td><?php echo $agencia["calle_direccion"]; ?></td>
-                                <?php if ($agencia["descripcion_tipo_estado"] == "Activo") { ?>
-                                    <td class="badge badge-success"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
-                                <?php } ?>
-                                <?php if ($agencia["descripcion_tipo_estado"] == "Falta Verificar") { ?>
-                                    <td class="badge badge-warning"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
-                                <?php } ?>
-                                <?php if ($agencia["descripcion_tipo_estado"] == "Baja") { ?>
-                                    <td class="badge badge-danger"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
-                                <?php } ?>
-                                <?php if ($agencia["descripcion_tipo_estado"] == "Centro de aislamiento") { ?>
-                                    <td class="badge badge-secondary"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
-                                <?php } ?>
-                                <?php if ($agencia["descripcion_tipo_estado"] == "Cambio de domicilio") { ?>
-                                    <td class="badge bg-lime"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
-                                <?php } ?>
-                                <?php if ($agencia["descripcion_tipo_estado"] == "Se desconoce situación") { ?>
-                                    <td class="badge bg-orange"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
-                                <?php } ?>
-                                <?php if ($agencia["descripcion_tipo_estado"] == "Cierre temporario") { ?>
-                                    <td class="badge bg-purple"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
-                                <?php } ?>
-                                <?php if ($agencia["descripcion_tipo_estado"] == "No Fiscalizadas") { ?>
-                                    <td class="badge bg-navy"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
-                                <?php } ?>
-                                <?php if ($agencia["descripcion_tipo_estado"] == "Domicilio Virtual") { ?>
-                                    <td class="badge bg-info"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
-                                <?php } ?>
-
+                                <td><?php echo $agencia["designacion_transporte"]; ?></td>
+                                <td><?php echo $agencia["descri_contacto_transporte"]; ?></td>
+                                <td><?php echo $agencia["descripcion_serv_transportes"]; ?></td>
                             </tr>
 
                         <?php } ?>

@@ -53,19 +53,19 @@
                   <div class="form-group row">
                     <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" require>
+                      <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" required>
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="apellido" class="col-sm-2 col-form-label">Apellido</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Apellido" require>
+                      <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Apellido" required>
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="fecha" class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
                     <div class="col-sm-10">
-                      <input type="date" class="form-control" name="fecha" id="fecha" placeholder="Fecha de Nacimiento">
+                      <input type="date" class="form-control" name="fecha" id="fecha" placeholder="Fecha de Nacimiento" required>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -98,12 +98,6 @@
                       <input type="number" id="telefonoAgencia" name="telefonoAgencia[]" class="form-control">
                     </div>
 
-                    <!-- <div class="btn-der mt-3 mb-3">
-                      <span id="adicional" name="adicional" class="btn btn-success col fileinput-button dz-clickable">
-                        <i class="fas fa-plus"></i>
-                        <span>Más teléfono</span>
-                      </span>
-                    </div> -->
 
                   </div>
                   <div class="telefonos">
@@ -113,13 +107,13 @@
                   <div class="form-group row">
                     <label for="telefonoFijo" class="col-sm-2 col-form-label">Teléfono Fijo</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="telefonoFijo" id="telefonoFijo" placeholder="Teléfono Fijo">
+                      <input type="text" class="form-control" name="telefonoFijo" id="telefonoFijo" placeholder="Teléfono Fijo" required>
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="correo" class="col-sm-2 col-form-label">Correo</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="correo" id="correo" placeholder="Correo">
+                      <input type="text" class="form-control" name="correo" id="correo" placeholder="Correo" required>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -170,13 +164,13 @@
                   <div class="form-group row">
                     <label for="n_legajo" class="col-sm-2 col-form-label">Nº de Legajo</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="n_legajo" id="n_legajo" placeholder="Nº de Legajo">
+                      <input type="text" class="form-control" name="n_legajo" id="n_legajo" placeholder="Nº de Legajo" required>
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="n_expediente" class="col-sm-2 col-form-label">Nº de Expediente</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="n_expediente" id="n_expediente" placeholder="Nº de Expediente">
+                      <input type="text" class="form-control" name="n_expediente" id="n_expediente" placeholder="Nº de Expediente" required>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -204,7 +198,7 @@
                   <div class="form-group row">
                     <label for="antiguedad" class="col-sm-2 col-form-label">Años de antigüedad</label>
                     <div class="col-sm-10">
-                      <input type="number" class="form-control" name="antiguedad" id="antiguedad" placeholder="Años de antigüedad">
+                      <input type="number" class="form-control" name="antiguedad" id="antiguedad" placeholder="Años de antigüedad" required>
                     </div>
                   </div>
                 </div>
@@ -213,19 +207,19 @@
                   <div class="form-group row">
                     <label for="fechaini" class="col-sm-2 col-form-label">Fechas inicio</label>
                     <div class="col-sm-2">
-                      <input type="date" class="form-control" name="fechaini" id="fechaini" placeholder="Año pendiente de licencia">
+                      <input type="date" class="form-control" name="fechaini" id="fechaini" placeholder="Año pendiente de licencia" required>
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="fechafin" class="col-sm-2 col-form-label">Fechas fin</label>
                     <div class="col-sm-2">
-                      <input type="date" class="form-control" name="fechafin" id="fechafin" placeholder="Año pendiente de licencia">
+                      <input type="date" class="form-control" name="fechafin" id="fechafin" placeholder="Año pendiente de licencia" required>
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="diasrestante" class="col-sm-2 col-form-label">Días Restantes</label>
                     <div class="col-sm-2">
-                      <input type="number" class="form-control" name="diasrestante" id="diasrestante" placeholder="Días pendientes de lincencias">
+                      <input type="number" class="form-control" name="diasrestante" id="diasrestante" placeholder="Días pendientes de lincencias" required>
                     </div>
                   </div>
 
