@@ -33,6 +33,10 @@ $acceso = $_SESSION['tablas_acceso'];
 
       <a name="" id="" class="btn btn-success" href="?controlador=agencias&accion=crear" role="button">Agregar</a>
 
+      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAgregarArchivosAgencia">
+        Legajo
+      </button>
+
     <?php else : ?>
       <a class="btn btn-success disabled" href="#" role="button">Agregar</a>
     <?php endif; ?>
@@ -161,4 +165,48 @@ $acceso = $_SESSION['tablas_acceso'];
   </div>
 
 
+</div>
+
+<!-- MODAL PARA AGREGAR ARCHIVOS -->
+<div class="modal fade" id="modalAgregarArchivosAgencia">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Agregar Archivos</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="formularioAgregarArchivos" method="POST" enctype="multipart/form-data">
+        <div class="modal-body">
+
+          <!-- Select para elegir la designacion -->
+          <div class="form-group">
+            <label for="selectDesignacion">Seleccionar la designación</label>
+            <select id="selectDesignacion" name="selectDesignacion" class="form-control select2" style="width: 100%;" required>
+              <option value="" selected disabled>Seleccionar designación</option>
+              <?php foreach ($designacion as $desi) : ?>
+                <option value="<?php echo $desi['id_agencias']; ?>"><?php echo $desi['descripcion_agencias']; ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+
+          <!-- Campo para cargar archivos -->
+          <div class="form-group">
+            <label for="archivo">Seleccionar Archivo</label>
+            <input type="file" class="form-control-file" id="archivo" name="archivo">
+          </div>
+
+        </div>
+
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary" name="submitAgregarArchivo">Agregar</button>
+        </div>
+      </form>
+
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
 </div>

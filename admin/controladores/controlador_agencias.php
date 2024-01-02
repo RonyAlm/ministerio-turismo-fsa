@@ -13,10 +13,29 @@ class ControladorAgencias
         $consultaAgencia = new AgenciaModelo();
 
         $tablaAgencia = $consultaAgencia->consultar();
+        $designacion = $consultaAgencia->consultar();
         $datosEstadisticos = new estadistica();
 
         $cantidad_agencias = $datosEstadisticos->cantidadAgencias();
         $cantidadAgenciasHabilitadas = $datosEstadisticos->cantidadAgenciasHabilitadas();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitAgregarArchivo'])) {
+            // Obtener los datos del formulario
+            print_r($_POST);
+            $selectDesignacion = isset($_POST['selectDesignacion']) ? $_POST['selectDesignacion'] : "";
+            $nombreArchivo = isset($_FILES['archivo']['name']) ? $_FILES['archivo']['name'] : "";
+            $tipoArchivo = isset($_FILES['archivo']['type']) ? $_FILES['archivo']['type'] : "";
+            $archivoTemporal = isset($_FILES['archivo']['tmp_name']) ? $_FILES['archivo']['tmp_name'] : "";
+
+            // Lee el archivo en binario
+            $archivoBinario = file_get_contents($archivoTemporal);
+
+            // Llamar al modelo para agregar el archivo
+            $insertarArchivo = new AgenciaModelo();
+            $insertarArchivo->agregarArchivo($selectDesignacion, $nombreArchivo, $tipoArchivo, $archivoBinario);
+            echo "<script>location.href='index2.php?controlador=agencias&accion=inicio';</script>";
+        }
+
 
 
         include_once("vistas/agencias/inicio.php");

@@ -560,6 +560,15 @@ class AgenciaModelo
 
         return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
     }
+    public function agregarArchivo($selectDesignacion, $nombreArchivo, $tipoArchivo, $archivoBinario)
+    {
+        // AGREGAR LOS ARCHIVOS EN LA TABLA archivos_ima_video
+        $conexionBD = BD::crearInstancia();
+        /*-------- INSERTAMOS LA RAZON SOCIAL--------*/
+
+        $sqlRazonSocial = $conexionBD->prepare("INSERT INTO `archivos_ima_video`(`nombre_archivo`, `tipo`, `imagen_video`,`rela_agencia`) VALUES (?,?,?,?)");
+        $sqlRazonSocial->execute(array($nombreArchivo, $tipoArchivo, $archivoBinario, $selectDesignacion));
+    }
 }
 
 class ContactosAgencia
