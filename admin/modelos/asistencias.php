@@ -89,7 +89,6 @@ class AsistenciaModelo
     }
     public function generarResumenYExcel($datos_file)
     {
-
         $reader = IOFactory::createReader('Pdf');
         $reader->setReadDataOnly(true);
         $spreadsheet = $reader->load($datos_file);
@@ -158,410 +157,120 @@ class AsistenciaModelo
 
     }
 
+    // public function crear($lineas)
+    // {
+
+    //     $conexionBD = BD::crearInstancia();
+
+    //     $i = 0;
+
+    //     $inicio = new DateTime('2022-01-01');
+    //     $fin = new DateTime('2023-12-31');
+    //     $meses = array();
+
+    //     while ($inicio <= $fin) {
+    //         $nombre_mes = strtolower($inicio->format('F_Y'));
+    //         $desde = $inicio->format('Y-m-d');
+    //         $hasta = $inicio->format('Y-m-t');
+    //         $meses[$nombre_mes] = array('desde' => $desde, 'hasta' => $hasta);
+    //         $inicio->modify('+1 month');
+    //     }
+
+    //     // Usamos la función array_filter para eliminar las líneas vacías
+    //     $lineas = array_filter($lineas);
+    //     // Usamos la función array_map para aplicar la función trim a cada línea, lo que elimina los espacios en blanco al principio y al final
+    //     $lineas = array_map('trim', $lineas);
+    //     // Usamos el método array_map para aplicar la función explode a cada línea, lo que crea una matriz de valores separados por comas
+    //     $datos = array_map(function ($linea) {
+    //         return explode(',', $linea);
+    //     }, $lineas);
+
+    //     // Usamos la función array_filter para eliminar los datos vacíos
+    //     $datos = array_filter($datos);
 
 
+    //     foreach ($datos as $datos_linea) {
+
+
+    //         // Procesamos cada línea como antes, pero ahora estamos trabajando con una sola matriz de datos
+    //         $nombre = !empty($datos_linea[0]) ? $datos_linea[0] : '';
+    //         $id = !empty($datos_linea[1]) ? $datos_linea[1] : '';
+    //         $fecha = !empty($datos_linea[3]) ? $datos_linea[3] : '';
+    //         $hora = !empty($datos_linea[4]) ? $datos_linea[4] : '';
+    //         $in = !empty($datos_linea[5]) ? $datos_linea[5] : '';
+    //         $checkInOn = !empty($datos_linea[9]) ? $datos_linea[9] : '';
+
+    //         if ($fecha >= "2023-01-01") {
+    //             /*-------- VERIFICAMOS SI EL EMPLEADO YA EXISTE EN LA BD --------*/
+    //             $sqlVerificar = $conexionBD->prepare("SELECT COUNT(*) as existente FROM `asistencia3` WHERE `nombre_personal` = ? AND `fecha_asistencia` = ?");
+    //             $sqlVerificar->execute(array($nombre, $fecha));
+    //             $resultadoVerificar = $sqlVerificar->fetch(PDO::FETCH_ASSOC);
+
+    //             if ($resultadoVerificar['existente'] == 0) {
+    //                 /*-------- INSERTAMOS--------*/
+    //                 $sqlDireccion = $conexionBD->prepare("INSERT INTO `asistencia3`(`nombre_personal`, `fecha_asistencia`, `hora_asistencia`,`checkinout`) 
+    //                             VALUES (?,?,?,?)");
+
+    //                 $sqlDireccion->execute(array($nombre, $fecha, $hora, $checkInOn));
+    //                 echo '<div>' . $nombre . ". " . $fecha . ". " . $hora . ". " . $checkInOn . '</div>';
+    //             }
+    //         };
+
+    //         $i++;
+    //     }
+    // }
     public function crear($lineas)
     {
-
         $conexionBD = BD::crearInstancia();
-
-        $i = 0;
-
-        $inicio = new DateTime('2022-01-01');
-        $fin = new DateTime('2023-12-31');
-        $meses = array();
-
-        while ($inicio <= $fin) {
-            $nombre_mes = strtolower($inicio->format('F_Y'));
-            $desde = $inicio->format('Y-m-d');
-            $hasta = $inicio->format('Y-m-t');
-            $meses[$nombre_mes] = array('desde' => $desde, 'hasta' => $hasta);
-            $inicio->modify('+1 month');
-        }
 
         // Usamos la función array_filter para eliminar las líneas vacías
         $lineas = array_filter($lineas);
         // Usamos la función array_map para aplicar la función trim a cada línea, lo que elimina los espacios en blanco al principio y al final
         $lineas = array_map('trim', $lineas);
-        // Usamos el método array_map para aplicar la función explode a cada línea, lo que crea una matriz de valores separados por comas
-        $datos = array_map(function ($linea) {
-            return explode(',', $linea);
-        }, $lineas);
+        // Usamos el método array_map para aplicar la función str_getcsv a cada línea, lo que crea un array de valores separados por comas
+        $datos = array_map('str_getcsv', $lineas);
 
-        // Usamos la función array_filter para eliminar los datos vacíos
-        $datos = array_filter($datos);
+        // Eliminamos la primera fila (encabezado) del archivo
+        unset($datos[0]);
 
+        // Contador para el seguimiento de filas insertadas
+        $filasInsertadas = 0;
 
         foreach ($datos as $datos_linea) {
-
-
             // Procesamos cada línea como antes, pero ahora estamos trabajando con una sola matriz de datos
             $nombre = !empty($datos_linea[0]) ? $datos_linea[0] : '';
-            $id = !empty($datos_linea[1]) ? $datos_linea[1] : '';
-            $fecha = !empty($datos_linea[3]) ? $datos_linea[3] : '';
-            $hora = !empty($datos_linea[4]) ? $datos_linea[4] : '';
-            $in = !empty($datos_linea[5]) ? $datos_linea[5] : '';
+            // No se usa la variable $id en este contexto, se omitirá
+            $fecha = !empty($datos_linea[2]) ? $datos_linea[2] : '';
+            $hora = !empty($datos_linea[3]) ? $datos_linea[3] : '';
+            // No se usa la variable $in en este contexto, se omitirá
             $checkInOn = !empty($datos_linea[9]) ? $datos_linea[9] : '';
 
-            if ($fecha >= "2023-02-01") {
-                /*-------- VERIFICAMOS SI EL EMPLEADO YA EXISTE EN LA BD --------*/
-                // $sqlVerificar = $conexionBD->prepare("SELECT COUNT(*) as existente FROM `asistencia2` WHERE `nombre_personal` = ? AND `fecha_asistencia` = ?");
-                // $sqlVerificar->execute(array($nombre, $fecha));
-                // $resultadoVerificar = $sqlVerificar->fetch(PDO::FETCH_ASSOC);
+            if ($fecha >= "2023-01-01") {
+                // Verificamos si el empleado ya existe en la BD
+                $sqlVerificar = $conexionBD->prepare("SELECT COUNT(*) as existente FROM `asistencia3` WHERE `nombre_personal` = ? AND `fecha_asistencia` = ?");
+                $sqlVerificar->execute(array($nombre, $fecha));
+                $resultadoVerificar = $sqlVerificar->fetch(PDO::FETCH_ASSOC);
 
-                // if ($resultadoVerificar['existente'] == 0) {
-                /*-------- INSERTAMOS--------*/
-                $sqlDireccion = $conexionBD->prepare("INSERT INTO `asistencia3`(`nombre_personal`, `fecha_asistencia`, `hora_asistencia`,`checkinout`) 
-                                VALUES (?,?,?,?)");
+                if ($resultadoVerificar['existente'] == 0) {
+                    // Insertamos los datos si el empleado no existe en la BD
+                    $sqlDireccion = $conexionBD->prepare("INSERT INTO `asistencia3`(`nombre_personal`, `fecha_asistencia`, `hora_asistencia`,`checkinout`) 
+                            VALUES (?,?,?,?)");
 
-                $sqlDireccion->execute(array($nombre, $fecha, $hora, $checkInOn));
-                echo '<div>' . $nombre . ". " . $fecha . ". " . $hora . ". " . $checkInOn . '</div>';
-                //}
-            };
-            // }
-            // echo '<div>' . $nombre . ". " . $hora . ". " . $checkInOn . '</div>';
-            // Inicializamos el arreglo para almacenar los datos por mes
-            // $datos_por_mes = [];
-            // foreach ($meses as $mes => $rango) {
-            //     // Creamos un arreglo vacío para almacenar los datos de este mes
-            //     $datos_por_mes[$mes] = [];
-            // }
-            // foreach ($meses as $mes => $rango) {
-            //     if ($fecha >= $rango['desde'] && $fecha <= $rango['hasta']) {
-            //         $datos_por_mes[$mes][] = [
-            //             'nombre' => $nombre,
-            //             'fecha' => $fecha,
-            //             'hora' => $hora,
-            //             'check_in_on' => $checkInOn,
-            //         ];
-            //     }
-            //     // print_r($datos_por_mes);
-            // }
-            // Creamos un archivo de Excel por cada mes
-            // foreach ($datos_por_mes as $mes => $datos) {
-            //     // Creamos un objeto Spreadsheet
-            //     $spreadsheet = new Spreadsheet();
-
-            //     // Protegemos la hoja de cálculo para que sea de solo lectura
-            //     $protection = $spreadsheet->getActiveSheet()->getProtection();
-            //     $protection->setSheet(true)
-            //         ->setSort(true)
-            //         ->setInsertRows(false)
-            //         ->setInsertColumns(false)
-            //         ->setFormatCells(false)
-            //         ->setFormatColumns(false)
-            //         ->setFormatRows(false)
-            //         ->setObjects(true)
-            //         ->setScenarios(true);
-            //     // Obtenemos la hoja activa
-            //     $sheet = $spreadsheet->getActiveSheet();
-            //     // Definir los encabezados de las columnas 
-            //     $encabezados = ['Nombre', 'fecha', 'hora', 'E/S'];
-            //     $sheet->fromArray([$encabezados], NULL, 'A1');
-            //     $row = 2;
-            //     $writer = new Xlsx($spreadsheet);
-            //     foreach ($datos as $dato) {
-            //         $sheet->setCellValue('A' . $row, $dato['nombre']);
-            //         $sheet->setCellValue('B' . $row, $dato['fecha']);
-            //         $sheet->setCellValue('C' . $row, $dato['hora']);
-            //         $sheet->setCellValue('D' . $row, $dato['check_in_on']);
-
-            //         echo '<div>' . $dato['nombre'] . ". " . $dato['fecha'] . ". " . $dato['check_in_on'] . '</div>';
-            //         // Aplicamos algunos estilos a las celdas
-            //         $styleHeader = [
-            //             'font' => [
-            //                 'bold' => true,
-            //                 'color' => ['rgb' => 'FFFFFF'],
-            //             ],
-            //             'fill' => [
-            //                 'fillType' => 'solid',
-            //                 'startColor' => ['rgb' => '1f497d'],
-            //             ],
-            //         ];
-            //         $sheet->getStyle('A1:D1')->applyFromArray($styleHeader);
-            //         $sheet->getStyle('A2:D100')->getAlignment()->setVertical('center');
-            //         $row++;
-            //         // print_r($row);
-            //     }
-            //     // Creamos un objeto Writer y escribimos el archivo en el disco
-
-            //     // $writer->save($filename);
-            //     // Mensaje de confirmación
-            //     $filename = $mes . '.xlsx';
-            //     echo "Se han guardado " . count($datos) . " filas en el archivo " . $filename . "<br>";
-            // }
-            $i++;
+                    // $sqlDireccion->execute(array($nombre, $fecha, $hora, $checkInOn));
+                    // Incrementamos el contador de filas insertadas
+                    $filasInsertadas++;
+                    // Imprimimos para verificación, puedes eliminar esta línea si no es necesaria
+                    echo '<div>' . $nombre . ". " . $fecha . ". " . $hora . ". " . $checkInOn . '</div>';
+                }
+            }
         }
+        // Mostrar el total de filas insertadas
+        echo "Total de filas insertadas: " . $filasInsertadas;
     }
 }
 
 
 
-class ContactosAgencia
-{
-    public $telefonoAgencia;
-    public $correoAgencia;
-    public $facebookAgencia;
-    public $instagramAgencia;
-    public $twitterAgencia;
-    public $webAgencia;
-    public $otroAgencia;
-
-    private $BD;
-
-
-    public function __construct()
-    {
-        require_once("conexion.php");
-        $this->BD = BD::crearInstancia();
-    }
-
-    public function consultarTelefonos($id_agencia)
-    {
-        $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
-                                            FROM contacto 
-                                            WHERE contacto.rela_tipo_contacto_cont = 2
-                                            and contacto.rela_contacto_agencia = $id_agencia");
-
-        $consulta->execute();
-
-        return $consulta->fetch(PDO::FETCH_OBJ);
-    }
-
-    public function consultarTelefonosFijos($id_agencia)
-    {
-        $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
-                                            FROM contacto 
-                                            WHERE contacto.rela_tipo_contacto_cont = 9
-                                            and contacto.rela_contacto_agencia = $id_agencia");
-
-        $consulta->execute();
-
-        return $consulta->fetch(PDO::FETCH_OBJ);
-    }
-
-    public function consultarCorreo($id_agencia)
-    {
-        $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
-                                            FROM contacto 
-                                            WHERE contacto.rela_tipo_contacto_cont = 1
-                                            and contacto.rela_contacto_agencia = $id_agencia");
-
-        $consulta->execute();
-
-        return $consulta->fetch(PDO::FETCH_OBJ);
-    }
-
-    public function consultarFacebook($id_agencia)
-    {
-        $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
-                                            FROM contacto 
-                                            WHERE contacto.rela_tipo_contacto_cont = 4
-                                            and contacto.rela_contacto_agencia = $id_agencia");
-
-        $consulta->execute();
-
-        return $consulta->fetch(PDO::FETCH_OBJ);
-    }
-
-    public function consultarInstagram($id_agencia)
-    {
-        $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
-                                            FROM contacto 
-                                            WHERE contacto.rela_tipo_contacto_cont = 5
-                                            and contacto.rela_contacto_agencia = $id_agencia");
-
-        $consulta->execute();
-
-        return $consulta->fetch(PDO::FETCH_OBJ);
-    }
-
-    public function consultarTwitter($id_agencia)
-    {
-        $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
-                                            FROM contacto 
-                                            WHERE contacto.rela_tipo_contacto_cont = 6
-                                            and contacto.rela_contacto_agencia = $id_agencia");
-
-        $consulta->execute();
-
-        return $consulta->fetch(PDO::FETCH_OBJ);
-    }
-
-    public function consultarWeb($id_agencia)
-    {
-        $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
-                                            FROM contacto 
-                                            WHERE contacto.rela_tipo_contacto_cont = 7
-                                            and contacto.rela_contacto_agencia = $id_agencia");
-
-        $consulta->execute();
-
-        return $consulta->fetch(PDO::FETCH_OBJ);
-    }
-
-    public function consultarOtro($id_agencia)
-    {
-        $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
-                                            FROM contacto 
-                                            WHERE contacto.rela_tipo_contacto_cont = 8
-                                            and contacto.rela_contacto_agencia = $id_agencia");
-
-        $consulta->execute();
-
-        return $consulta->fetch(PDO::FETCH_OBJ);
-    }
-}
-
-class ContactosInfo
-{
-    public $telefonoAgenciaInfo;
-    public $telefonoFijoAgencia;
-    public $correoAgencia;
-    public $facebookAgencia;
-    public $instagramAgencia;
-    public $twitterAgencia;
-    public $webAgencia;
-    public $otroAgencia;
-
-    private $BD;
-
-
-    public function __construct()
-    {
-        require_once("conexion.php");
-        $this->BD = BD::crearInstancia();
-
-        $this->telefonoAgenciaInfo = array();
-        $this->telefonoFijoAgencia = array();
-        $this->correoAgencia = array();
-        $this->facebookAgencia = array();
-        $this->instagramAgencia = array();
-        $this->twitterAgencia = array();
-        $this->webAgencia = array();
-        $this->otroAgencia = array();
-    }
-
-    public function consultarTelefonos($id_agencia)
-    {
-        $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT id_contacto, contacto.descripcion_contacto 
-                                            FROM contacto 
-                                            WHERE contacto.rela_tipo_contacto_cont = 2
-                                            and contacto.rela_contacto_agencia = $id_agencia");
-
-        while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
-            $this->telefonoAgenciaInfo[] = $filas;
-        }
-        return $this->telefonoAgenciaInfo;
-    }
-
-    public function consultarTelefonosFijos($id_agencia)
-    {
-        $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
-                                            FROM contacto 
-                                            WHERE contacto.rela_tipo_contacto_cont = 9
-                                            and contacto.rela_contacto_agencia = $id_agencia");
-
-        while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
-            $this->telefonoFijoAgencia[] = $filas;
-        }
-        return $this->telefonoFijoAgencia;
-    }
-
-    public function consultarCorreo($id_agencia)
-    {
-        $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
-                                            FROM contacto 
-                                            WHERE contacto.rela_tipo_contacto_cont = 1
-                                            and contacto.rela_contacto_agencia = $id_agencia");
-
-        while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
-            $this->correoAgencia[] = $filas;
-        }
-        return $this->correoAgencia;
-    }
-
-    public function consultarFacebook($id_agencia)
-    {
-        $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
-                                            FROM contacto 
-                                            WHERE contacto.rela_tipo_contacto_cont = 4
-                                            and contacto.rela_contacto_agencia = $id_agencia");
-
-        while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
-            $this->facebookAgencia[] = $filas;
-        }
-        return $this->facebookAgencia;
-    }
-
-    public function consultarInstagram($id_agencia)
-    {
-        $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
-                                            FROM contacto 
-                                            WHERE contacto.rela_tipo_contacto_cont = 5
-                                            and contacto.rela_contacto_agencia = $id_agencia");
-
-        while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
-            $this->instagramAgencia[] = $filas;
-        }
-        return $this->instagramAgencia;
-    }
-
-    public function consultarTwitter($id_agencia)
-    {
-        $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
-                                            FROM contacto 
-                                            WHERE contacto.rela_tipo_contacto_cont = 6
-                                            and contacto.rela_contacto_agencia = $id_agencia");
-
-        while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
-            $this->twitterAgencia[] = $filas;
-        }
-        return $this->twitterAgencia;
-    }
-
-    public function consultarWeb($id_agencia)
-    {
-        $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
-                                            FROM contacto 
-                                            WHERE contacto.rela_tipo_contacto_cont = 7
-                                            and contacto.rela_contacto_agencia = $id_agencia");
-
-        while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
-            $this->webAgencia[] = $filas;
-        }
-        return $this->webAgencia;
-    }
-
-    public function consultarOtro($id_agencia)
-    {
-        $conexionBD = BD::crearInstancia();
-        $consulta = $conexionBD->query(" SELECT contacto.descripcion_contacto 
-                                            FROM contacto 
-                                            WHERE contacto.rela_tipo_contacto_cont = 8
-                                            and contacto.rela_contacto_agencia = $id_agencia");
-
-        while ($filas = $consulta->fetch(PDO::FETCH_ASSOC)) {
-            $this->otroAgencia[] = $filas;
-        }
-        return $this->otroAgencia;
-    }
-}
 class estadistica
 {
 

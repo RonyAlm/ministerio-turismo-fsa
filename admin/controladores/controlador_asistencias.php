@@ -59,7 +59,7 @@ class ControladorAsistencias
 
         $borrarAgencias = new AsistenciaModelo();
 
-        $buscarIDBorrado = $borrarAgencias->consultarID($idAgenciaBorrar);
+        // $buscarIDBorrado = $borrarAgencias->consultarID($idAgenciaBorrar);
 
         // $borrado = $borrarAgencias->borrar($idAgenciaBorrar, $id_direccion, $idRazonSocial);
 

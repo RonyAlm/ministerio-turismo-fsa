@@ -38,59 +38,6 @@ $rol_id = $_SESSION['rol_id'];
             </div>
         </section>
         <!-- Botón estilizado para dirigirse al juego -->
-
-        <?php
-        // Lógica para manejar las preguntas del quiz
-        if ($rol_id == 1 && $usuario == "admin") {
-            // Obtener preguntas de la base de datos
-            $stmt = $conn->prepare("SELECT * FROM preguntas");
-            $stmt->execute();
-            $preguntas = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            if ($preguntas) {
-                // Mostrar las preguntas y opciones
-                foreach ($preguntas as $pregunta) {
-                    echo "<h3>{$pregunta['pregunta']}</h3>";
-                    echo "<ul>";
-                    echo "<li>{$pregunta['opcion1']}</li>";
-                    echo "<li>{$pregunta['opcion2']}</li>";
-                    echo "<li>{$pregunta['opcion3']}</li>";
-                    echo "</ul>";
-                    // Aquí puedes agregar lógica para manejar las respuestas usando JavaScript
-                }
-            } else {
-                echo "<p>No hay preguntas disponibles.</p>";
-            }
-        }
-
-        $conn = null; // Cerrar la conexión al finalizar
-        ?>
-
-
-
-        <?php if (empty($resultados)) : ?>
-            <p>No se encontraron resultados.</p>
-        <?php else : ?>
-            <?php if (!empty($resultados['agencias'])) : ?>
-                <h2>Agencias</h2>
-                <ul>
-                    <?php foreach ($resultados['agencias'] as $agencia) : ?>
-                        <li><?php echo $agencia['descripcion_agencias']; ?></li>
-                    <?php endforeach; ?>
-                </ul>
-            <?php endif; ?>
-
-            <?php if (!empty($resultados['alojamientos'])) : ?>
-                <h2>Alojamientos</h2>
-                <ul>
-                    <?php foreach ($resultados['alojamientos'] as $alojamiento) : ?>
-                        <li><?php echo $alojamiento['nombre']; ?></li>
-                    <?php endforeach; ?>
-                </ul>
-            <?php endif; ?>
-
-            <!-- Agregar más secciones para otros módulos aquí... -->
-        <?php endif; ?>
     </div>
 </div>
 <?php if ($rol_id == 1 and $usuario == "admin") : ?>

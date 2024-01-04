@@ -1,20 +1,14 @@
 <div class="card card-success card-outline mt-3">
-
   <div class="card-header ">
     <h3 class="card-title text-success">
       <i class="fas fa-solid fa-plus-minus  mr-2"></i>
       AGREGAR REGISTROS
     </h3>
   </div>
-
   <div class="mb-1">
-
   </div>
-
-
   <!-- Main content -->
   <div class="card-body">
-
     <div class="col-md-7">
       <form action="" method="POST" enctype="multipart/form-data">
         <div class="file-input text-center">
@@ -28,12 +22,5 @@
         </div>
       </form>
     </div>
-
-
-
   </div>
-
-
-
-
 </div>

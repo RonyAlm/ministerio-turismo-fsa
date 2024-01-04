@@ -314,7 +314,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <a href="?controlador=prestadores&accion=inicio" class="nav-link 
                     <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'prestadores') ? 'active' : '' ?>">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Prestadores</p>
+                      <p>Servicio Auxiliar de Tur</p>
                     </a>
                   </li>
                   <li class="nav-item">
@@ -468,15 +468,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <li class="nav-item">
                 <a href="?controlador=prestadores&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'prestadores') ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Prestadores</p>
+                  <p>Servicio Auxiliar de Tur</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="?controlador=referentes&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'referentes') ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Referentes municipales</p>
                 </a>
-              </li>
+              </li> -->
               <li class="nav-item">
                 <a href="?controlador=servigenerales&accion=inicio" class="nav-link <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'servigenerales') ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
