@@ -560,14 +560,38 @@ class AgenciaModelo
 
         return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
     }
-    public function agregarArchivo($selectDesignacion, $nombreArchivo, $tipoArchivo, $archivoBinario)
+    public function agregarArchivo($selectDesignacion, $nombreArchivo)
     {
         // AGREGAR LOS ARCHIVOS EN LA TABLA archivos_ima_video
         $conexionBD = BD::crearInstancia();
         /*-------- INSERTAMOS LA RAZON SOCIAL--------*/
 
-        $sqlRazonSocial = $conexionBD->prepare("INSERT INTO `archivos_ima_video`(`nombre_archivo`, `tipo`, `imagen_video`,`rela_agencia`) VALUES (?,?,?,?)");
-        $sqlRazonSocial->execute(array($nombreArchivo, $tipoArchivo, $archivoBinario, $selectDesignacion));
+        $sqlRazonSocial = $conexionBD->prepare("INSERT INTO `documento`(`archivo_documento`, `rela_agencia`) VALUES (?,?)");
+        $sqlRazonSocial->execute(array($nombreArchivo, $selectDesignacion));
+    }
+
+    public function buscarArchivo($id)
+    {
+
+        $conexionBD = BD::crearInstancia();
+
+
+        $sqlLocalidad = $conexionBD->query("SELECT `id_documentos`, `descripcion_documento`, `archivo_documento`, `rela_agencia`, `rela_alojamiento`, `rela_gastronomia`, `rela_serv_aux`, `rela_servi_generales`, `rela_notas` FROM `documento` WHERE rela_agencia = $id");
+
+        $sqlLocalidad->execute();
+
+        return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
+    }
+    public function buscarArchivo1($id)
+    {
+        $conexionBD = BD::crearInstancia();
+        $sql = "SELECT `id_documentos`, `descripcion_documento`, `archivo_documento`, `rela_agencia`, `rela_alojamiento`, `rela_gastronomia`, `rela_serv_aux`, `rela_servi_generales`, `rela_notas` FROM `documento` WHERE id_documentos = :id";
+
+        $stmt = $conexionBD->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC); // Utiliza fetch() en lugar de fetchAll() para obtener un solo resultado como array asociativo
     }
 }
 

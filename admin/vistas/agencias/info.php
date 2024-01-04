@@ -103,7 +103,7 @@
     <!-- ./col -->
 
     <!-- Contactos -->
-    <div class="col-md-6">                                   
+    <div class="col-md-6">
       <div class="card card-success card-outline">
         <div class="card-header">
           <h3 class="card-title text-success">
@@ -211,11 +211,41 @@
 
   </div>
   <!-- /.row -->
+  <!-- Sección de archivos -->
+  <div class="col-md-12">
+    <div class="card card-success card-outline">
+      <div class="card-header">
+        <h3 class="card-title text-success">
+          <i class="fas fa-folder-open mr-2"></i>
+          Archivos Adjuntos
+        </h3>
+        <div class="card-tools text-success">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <ul>
+          <?php foreach ($archivosDeLaBaseDeDatos as $archivo) { ?>
+            <li>
+              <?php echo $archivo['nombre_archivo']; ?>
+              <a href="descargar.php?id=<?php echo $archivo['id']; ?>" class="btn btn-sm btn-primary">
+                Descargar
+              </a>
+            </li>
+          <?php } ?>
+        </ul>
+      </div>
+    </div>
+  </div>
+
 
   <div class="card-footer mb-4 card">
     <div class="row no-print">
       <div class="col-12">
-        <a href="?controlador=agencias&accion=imprimirInfo&id=<?=$agenciasInfomacion->id_agencias; ?>" rel="noopener" class="btn btn-default float-right">
+        <a href="?controlador=agencias&accion=imprimirInfo&id=<?= $agenciasInfomacion->id_agencias; ?>" rel="noopener" class="btn btn-default float-right">
           <i class="fas fa-print mr-2"></i> Imprimir
         </a>
       </div>
