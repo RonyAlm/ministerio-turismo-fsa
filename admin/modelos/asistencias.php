@@ -218,78 +218,7 @@ class AsistenciaModelo
                 echo '<div>' . $nombre . ". " . $fecha . ". " . $hora . ". " . $checkInOn . '</div>';
                 //}
             };
-            // }
-            // echo '<div>' . $nombre . ". " . $hora . ". " . $checkInOn . '</div>';
-            // Inicializamos el arreglo para almacenar los datos por mes
-            // $datos_por_mes = [];
-            // foreach ($meses as $mes => $rango) {
-            //     // Creamos un arreglo vacío para almacenar los datos de este mes
-            //     $datos_por_mes[$mes] = [];
-            // }
-            // foreach ($meses as $mes => $rango) {
-            //     if ($fecha >= $rango['desde'] && $fecha <= $rango['hasta']) {
-            //         $datos_por_mes[$mes][] = [
-            //             'nombre' => $nombre,
-            //             'fecha' => $fecha,
-            //             'hora' => $hora,
-            //             'check_in_on' => $checkInOn,
-            //         ];
-            //     }
-            //     // print_r($datos_por_mes);
-            // }
-            // Creamos un archivo de Excel por cada mes
-            // foreach ($datos_por_mes as $mes => $datos) {
-            //     // Creamos un objeto Spreadsheet
-            //     $spreadsheet = new Spreadsheet();
 
-            //     // Protegemos la hoja de cálculo para que sea de solo lectura
-            //     $protection = $spreadsheet->getActiveSheet()->getProtection();
-            //     $protection->setSheet(true)
-            //         ->setSort(true)
-            //         ->setInsertRows(false)
-            //         ->setInsertColumns(false)
-            //         ->setFormatCells(false)
-            //         ->setFormatColumns(false)
-            //         ->setFormatRows(false)
-            //         ->setObjects(true)
-            //         ->setScenarios(true);
-            //     // Obtenemos la hoja activa
-            //     $sheet = $spreadsheet->getActiveSheet();
-            //     // Definir los encabezados de las columnas 
-            //     $encabezados = ['Nombre', 'fecha', 'hora', 'E/S'];
-            //     $sheet->fromArray([$encabezados], NULL, 'A1');
-            //     $row = 2;
-            //     $writer = new Xlsx($spreadsheet);
-            //     foreach ($datos as $dato) {
-            //         $sheet->setCellValue('A' . $row, $dato['nombre']);
-            //         $sheet->setCellValue('B' . $row, $dato['fecha']);
-            //         $sheet->setCellValue('C' . $row, $dato['hora']);
-            //         $sheet->setCellValue('D' . $row, $dato['check_in_on']);
-
-            //         echo '<div>' . $dato['nombre'] . ". " . $dato['fecha'] . ". " . $dato['check_in_on'] . '</div>';
-            //         // Aplicamos algunos estilos a las celdas
-            //         $styleHeader = [
-            //             'font' => [
-            //                 'bold' => true,
-            //                 'color' => ['rgb' => 'FFFFFF'],
-            //             ],
-            //             'fill' => [
-            //                 'fillType' => 'solid',
-            //                 'startColor' => ['rgb' => '1f497d'],
-            //             ],
-            //         ];
-            //         $sheet->getStyle('A1:D1')->applyFromArray($styleHeader);
-            //         $sheet->getStyle('A2:D100')->getAlignment()->setVertical('center');
-            //         $row++;
-            //         // print_r($row);
-            //     }
-            //     // Creamos un objeto Writer y escribimos el archivo en el disco
-
-            //     // $writer->save($filename);
-            //     // Mensaje de confirmación
-            //     $filename = $mes . '.xlsx';
-            //     echo "Se han guardado " . count($datos) . " filas en el archivo " . $filename . "<br>";
-            // }
             $i++;
         }
     }
