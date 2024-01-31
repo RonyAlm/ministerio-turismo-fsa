@@ -49,22 +49,7 @@ class ControladorAsistencias
     {
     }
 
-    public function borrar()
-    {
-        //print_r($_GET);
 
-        $idAgenciaBorrar = $_GET["id"];
-        $id_direccion = $_GET['idDireccion'];
-        $idRazonSocial = $_GET['idRazonSocial'];
-
-        $borrarAgencias = new AsistenciaModelo();
-
-        $buscarIDBorrado = $borrarAgencias->consultarID($idAgenciaBorrar);
-
-        // $borrado = $borrarAgencias->borrar($idAgenciaBorrar, $id_direccion, $idRazonSocial);
-
-        header("Location:index2.php?controlador=agencias&accion=inicio");
-    }
 
     public function info()
     {
