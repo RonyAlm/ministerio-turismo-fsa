@@ -60,7 +60,7 @@ $acceso = $_SESSION['tablas_acceso'];
           <tbody>
             <?php foreach ($tabla as $asistencia) { ?>
               <tr>
-                <td><?php echo $asistencia["id_asistencia3"]; ?></td>
+                <td><?php echo $asistencia["id_asistencia4"]; ?></td>
                 <td><?php echo $asistencia["nombre_personal"]; ?></td>
                 <td><?php echo $asistencia["fecha_asistencia"]; ?></td>
                 <td><?php echo $asistencia["hora_asistencia"]; ?></td>

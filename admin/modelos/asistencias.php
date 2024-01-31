@@ -147,7 +147,7 @@ class AsistenciaModelo
 
         $conexionBD = BD::crearInstancia();
 
-        $sql = $conexionBD->query("SELECT `id_asistencia3`, `nombre_personal`, `fecha_asistencia`, `hora_asistencia`, `checkinout` FROM `asistencia3`");
+        $sql = $conexionBD->query("SELECT `id_asistencia4`, `nombre_personal`, `fecha_asistencia`, `hora_asistencia`, `checkinout` FROM `asistencia4`");
 
         //recuperamos los datos y los retornamos
 
@@ -211,7 +211,7 @@ class AsistenciaModelo
 
                 // if ($resultadoVerificar['existente'] == 0) {
                 /*-------- INSERTAMOS--------*/
-                $sqlDireccion = $conexionBD->prepare("INSERT INTO `asistencia3`(`nombre_personal`, `fecha_asistencia`, `hora_asistencia`,`checkinout`) 
+                $sqlDireccion = $conexionBD->prepare("INSERT INTO `asistencia4`(`nombre_personal`, `fecha_asistencia`, `hora_asistencia`,`checkinout`) 
                                 VALUES (?,?,?,?)");
 
                 $sqlDireccion->execute(array($nombre, $fecha, $hora, $checkInOn));
