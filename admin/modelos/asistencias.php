@@ -205,18 +205,18 @@ class AsistenciaModelo
 
             if ($fecha >= "2023-02-01") {
                 /*-------- VERIFICAMOS SI EL EMPLEADO YA EXISTE EN LA BD --------*/
-                // $sqlVerificar = $conexionBD->prepare("SELECT COUNT(*) as existente FROM `asistencia2` WHERE `nombre_personal` = ? AND `fecha_asistencia` = ?");
-                // $sqlVerificar->execute(array($nombre, $fecha));
-                // $resultadoVerificar = $sqlVerificar->fetch(PDO::FETCH_ASSOC);
+                $sqlVerificar = $conexionBD->prepare("SELECT COUNT(*) as existente FROM `asistencia4` WHERE `nombre_personal` = ? AND `fecha_asistencia` = ? AND hora_asistencia =?");
+                $sqlVerificar->execute(array($nombre, $fecha, $hora));
+                $resultadoVerificar = $sqlVerificar->fetch(PDO::FETCH_ASSOC);
 
-                // if ($resultadoVerificar['existente'] == 0) {
-                /*-------- INSERTAMOS--------*/
-                $sqlDireccion = $conexionBD->prepare("INSERT INTO `asistencia4`(`nombre_personal`, `fecha_asistencia`, `hora_asistencia`,`checkinout`) 
+                if ($resultadoVerificar['existente'] == 0) {
+                    /*-------- INSERTAMOS--------*/
+                    $sqlDireccion = $conexionBD->prepare("INSERT INTO `asistencia4`(`nombre_personal`, `fecha_asistencia`, `hora_asistencia`,`checkinout`) 
                                 VALUES (?,?,?,?)");
 
-                $sqlDireccion->execute(array($nombre, $fecha, $hora, $checkInOn));
-                echo '<div>' . $nombre . ". " . $fecha . ". " . $hora . ". " . $checkInOn . '</div>';
-                //}
+                    $sqlDireccion->execute(array($nombre, $fecha, $hora, $checkInOn));
+                    echo '<div>' . $nombre . ". " . $fecha . ". " . $hora . ". " . $checkInOn . '</div>';
+                }
             };
 
             $i++;
