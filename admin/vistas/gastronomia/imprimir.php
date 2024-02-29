@@ -28,7 +28,15 @@
 
                             <th>Localidad</th>
                             <th>Designacion Comercial</th>
+                            <th>Descripción</th>
+                            <th>Horarios</th>
                             <th>Contacto</th>
+                            <th>Facebook</th>
+                            <th>Instagram</th>
+                            <th>Twitter</th>
+                            <th>Correo</th>
+                            <th>Web</th>
+                            <th>Otro</th>
                             <th>Dirección</th>
 
                         </tr>
@@ -41,7 +49,15 @@
 
                                 <td><?php echo $agencia["nombre_localidad"]; ?></td>
                                 <td><?php echo $agencia["denominacion_gastro"]; ?></td>
+                                <td><?php echo $agencia["observacion_gastro"]; ?></td>
+                                <td><?php echo  $agencia["dias_horarios"]; ?></td>
                                 <td><?php echo $agencia["descripcion_contacto"]; ?></td>
+                                <td><?php echo $agencia["descripcion_contacto_4"]; ?></td>
+                                <td><?php echo $agencia["descripcion_contacto_5"]; ?></td>
+                                <td><?php echo $agencia["descripcion_contacto_6"]; ?></td>
+                                <td><?php echo $agencia["descripcion_contacto_1"]; ?></td>
+                                <td><?php echo $agencia["descripcion_contacto_7"]; ?></td>
+                                <td><?php echo $agencia["descripcion_contacto_8"]; ?></td>
                                 <td><?php echo $agencia["calle_direccion"]; ?></td>
 
 

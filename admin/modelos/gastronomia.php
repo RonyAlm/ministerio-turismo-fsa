@@ -187,6 +187,60 @@ class GastronomiaModelo
         return $this->listaAgencia; //este return se va a llamar en el controlador_alojamiento.php clase inicio
 
     }
+    public function consultarImprimirVarios()
+    {
+
+        $conexionBD = BD::crearInstancia();
+
+        $sql = $conexionBD->query("SELECT `id_gastronomia`, `denominacion_gastro`, `observacion_gastro`, `dias_horarios`, date_updated_gastronomia,
+        (SELECT contacto.descripcion_contacto 
+        FROM contacto 
+        WHERE gastronomia.id_gastronomia= contacto.rela_gastronomia_contacto
+        and contacto.rela_tipo_contacto_cont = 2
+        LIMIT 1) descripcion_contacto,
+        (SELECT contacto.descripcion_contacto 
+        FROM contacto 
+        WHERE gastronomia.id_gastronomia= contacto.rela_gastronomia_contacto
+        and contacto.rela_tipo_contacto_cont = 1
+        LIMIT 1) descripcion_contacto_1,
+        (SELECT contacto.descripcion_contacto 
+        FROM contacto 
+        WHERE gastronomia.id_gastronomia= contacto.rela_gastronomia_contacto
+        and contacto.rela_tipo_contacto_cont = 6
+        LIMIT 1) descripcion_contacto_6,
+        (SELECT contacto.descripcion_contacto 
+        FROM contacto 
+        WHERE gastronomia.id_gastronomia= contacto.rela_gastronomia_contacto
+        and contacto.rela_tipo_contacto_cont = 5
+        LIMIT 1) descripcion_contacto_5,
+        (SELECT contacto.descripcion_contacto 
+        FROM contacto 
+        WHERE gastronomia.id_gastronomia= contacto.rela_gastronomia_contacto
+        and contacto.rela_tipo_contacto_cont = 4
+        LIMIT 1) descripcion_contacto_4,
+        (SELECT contacto.descripcion_contacto 
+        FROM contacto 
+        WHERE gastronomia.id_gastronomia= contacto.rela_gastronomia_contacto
+        and contacto.rela_tipo_contacto_cont = 7
+        LIMIT 1) descripcion_contacto_7,
+        (SELECT contacto.descripcion_contacto 
+        FROM contacto 
+        WHERE gastronomia.id_gastronomia= contacto.rela_gastronomia_contacto
+        and contacto.rela_tipo_contacto_cont = 8
+        LIMIT 1) descripcion_contacto_8,
+        localidad.nombre_localidad,direccion.id_direccion,direccion.calle_direccion
+        FROM `gastronomia`
+        INNER JOIN direccion ON gastronomia.rela_direccion_gastro = direccion.id_direccion
+        INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad");
+
+        //recuperamos los datos y los retornamos
+
+        while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
+            $this->listaAgencia[] = $filas;
+        }
+        return $this->listaAgencia; //este return se va a llamar en el controlador_alojamiento.php clase inicio
+
+    }
 
     public function consultarID($id)
     {

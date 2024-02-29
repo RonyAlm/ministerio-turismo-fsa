@@ -285,13 +285,18 @@ class ControladorGastronomia
 
     public function imprimir()
     {
+
+
         $consultaAgencia = new GastronomiaModelo();
 
-        $tablaAgencia = $consultaAgencia->consultar();
+        // $tablaAgencia = $consultaAgencia->consultar();
+        $tablaAgencia = $consultaAgencia->consultarImprimirVarios();
+
         $datosEstadisticos = new estadistica();
 
         $cantidad_agencias = $datosEstadisticos->cantidadAgencias();
         $cantidadAgenciasHabilitadas = $datosEstadisticos->cantidadAgenciasHabilitadas();
+
 
 
         include_once("vistas/gastronomia/imprimir.php");
