@@ -32,6 +32,22 @@ class ControladorAsistencias
 
         include_once("vistas/asistencia/crear.php");
     }
+
+    public function faltas()
+    {
+        $consulta = new AsistenciaModelo();
+
+        // Fechas de inicio y fin para buscar faltas
+        $inicio = '2023-12-01';
+        $fin = '2024-12-31';
+
+        // Obtener las faltas de los empleados
+        $faltas = $consulta->obtenerFaltas($inicio, $fin);
+
+
+
+        include_once("vistas/asistencia/faltas.php");
+    }
     public function imprimirpdf()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {

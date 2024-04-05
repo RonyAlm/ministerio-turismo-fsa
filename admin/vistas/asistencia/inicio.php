@@ -35,7 +35,9 @@ $acceso = $_SESSION['tablas_acceso'];
 
     <?php else : ?>
       <a class="btn btn-success disabled" href="#" role="button">Agregar</a>
+      <!-- <a class="btn btn-success disabled" href="#" role="button">Faltas</a> -->
     <?php endif; ?>
+    <a name="" id="" class="btn btn-success" href="?controlador=asistencias&accion=faltas" role="button">Faltas</a>
 
     <a name="" id="" class="btn btn-secondary" href="?controlador=asistencias&accion=imprimir" role="button">Imprimir</a>
 
@@ -47,10 +49,11 @@ $acceso = $_SESSION['tablas_acceso'];
 
     <div id="acordeon" class="row">
       <div class="col-lg-12">
+
         <table id="tblList" class="table table-bordered table-striped" cellspacing="0" width="100%">
           <thead>
             <tr style="background: linear-gradient(to right, #61ba6d, #83c331)">
-              <th>id</th>
+              <!-- <th style="hidden">id</th> -->
               <th>Nombre y Apellido</th>
               <th>Fecha</th>
               <th>Hora</th>
@@ -60,10 +63,22 @@ $acceso = $_SESSION['tablas_acceso'];
           <tbody>
             <?php foreach ($tabla as $asistencia) { ?>
               <tr>
-                <td><?php echo $asistencia["id_asistencia4"]; ?></td>
+                <!-- <td><?php echo $asistencia["id_asistencia4"]; ?></td> -->
                 <td><?php echo $asistencia["nombre_personal"]; ?></td>
                 <td><?php echo $asistencia["fecha_asistencia"]; ?></td>
-                <td><?php echo $asistencia["hora_asistencia"]; ?></td>
+                <td <?php
+                    $hora_asistencia = strtotime($asistencia["hora_asistencia"]);
+                    $hora_mañana_inicio = strtotime('07:45:00');
+                    $hora_mañana_fin = strtotime('09:00:00');
+                    $hora_tarde_inicio = strtotime('16:15:00');
+                    $hora_tarde_fin = strtotime('17:00:00');
+
+                    if (($hora_asistencia >= $hora_mañana_inicio && $hora_asistencia <= $hora_mañana_fin) || ($hora_asistencia >= $hora_tarde_inicio && $hora_asistencia <= $hora_tarde_fin)) {
+                      echo 'style="color: red;"';
+                    }
+                    ?>>
+                  <?php echo $asistencia["hora_asistencia"]; ?>
+                </td>
                 <td>
                   <?php
                   $hora_asistencia = strtotime($asistencia["hora_asistencia"]);
@@ -86,7 +101,7 @@ $acceso = $_SESSION['tablas_acceso'];
           </tbody>
           <tfoot>
             <tr style="background: linear-gradient(to right, #61ba6d, #83c331)">
-              <th>id</th>
+              <!-- <th>id</th> -->
               <th>Nombre y Apellido</th>
               <th>Fecha</th>
               <th>Hora</th>
@@ -94,6 +109,10 @@ $acceso = $_SESSION['tablas_acceso'];
             </tr>
           </tfoot>
         </table>
+
+
+
+
       </div>
     </div>
 

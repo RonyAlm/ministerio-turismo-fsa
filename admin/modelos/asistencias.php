@@ -24,6 +24,58 @@ class AsistenciaModelo
         $this->listaAgenciaID = array();
         $this->listaBuscar = array();
     }
+
+    public function obtenerFaltas($inicio, $fin)
+    {
+        $conexionBD = BD::crearInstancia();
+
+        $asistencias = array(); // Almacenará las asistencias de cada empleado
+        $faltas = array(); // Almacenará las faltas de cada empleado
+
+        // Configurar el idioma local a español
+        setlocale(LC_TIME, 'es_ES.UTF-8');
+
+        // Consulta SQL para obtener las asistencias entre las fechas especificadas
+        $consulta = "SELECT DISTINCT nombre_personal, fecha_asistencia FROM asistencia4 WHERE fecha_asistencia BETWEEN :inicio AND :fin";
+        $statement = $conexionBD->prepare($consulta);
+        $statement->bindParam(':inicio', $inicio);
+        $statement->bindParam(':fin', $fin);
+        $statement->execute();
+
+        // Iterar sobre los resultados y determinar las asistencias
+        while ($fila = $statement->fetch(PDO::FETCH_ASSOC)) {
+            $nombre = $fila['nombre_personal'];
+            $fecha = $fila['fecha_asistencia'];
+
+            // Agregar la asistencia al array de asistencias
+            $asistencias[$nombre][$fecha] = (new DateTime($fecha))->format('l'); // Guarda el día de la semana en español
+        }
+
+        // Obtener todas las fechas entre el inicio y el fin
+        $fechas = array();
+        $fechaInicio = new DateTime($inicio);
+        $fechaFin = new DateTime($fin);
+        $intervalo = new DateInterval('P1D');
+        $periodo = new DatePeriod($fechaInicio, $intervalo, $fechaFin);
+        foreach ($periodo as $fecha) {
+            $fechas[$fecha->format('Y-m-d')] = (new DateTime($fecha->format('Y-m-d')))->format('l'); // Guarda el día de la semana en español
+        }
+
+        // Iterar sobre las asistencias para determinar las faltas
+        foreach ($asistencias as $nombre => $asistencia) {
+            foreach ($fechas as $fecha => $dia_semana) {
+                if (!isset($asistencia[$fecha])) {
+                    // Si no hay asistencia para esta fecha, se considera una falta
+                    $faltas[$nombre][] = array(
+                        'fecha' => $fecha,
+                        'dia_semana' => $dia_semana
+                    );
+                }
+            }
+        }
+
+        return array('asistencias' => $asistencias, 'faltas' => $faltas);
+    }
     public function generarResumen($archivo)
     {
         $file = fopen($archivo, "r, 'UTF-8'");
