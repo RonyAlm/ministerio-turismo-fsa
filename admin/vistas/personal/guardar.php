@@ -229,12 +229,6 @@
                     </div>
                   </div>
 
-<<<<<<< HEAD
-                  <div class="form-group row ">
-                    <div class="offset-sm-2 col-sm-10 ">
-                      <a href="?controlador=personal&accion=inicio" class="btn btn-secondary float-right ml-2">Cancelar</a>
-                      <input name="" id="" class="btn btn-success float-right" type="submit" value="Agregar">
-=======
                   <!-- </form> -->
                 </div>
 
@@ -250,7 +244,6 @@
                     <div class="offset-sm-2 col-sm-10">
                       <input name="" id="" class="btn btn-success" type="submit" value="Agregar">
                       <a href="?controlador=personal&accion=inicio" class="btn btn-primary">Cancelar</a>
->>>>>>> develop
                     </div>
                   </div>
 
