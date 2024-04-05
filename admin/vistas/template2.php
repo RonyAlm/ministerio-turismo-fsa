@@ -3,7 +3,9 @@
 session_start();
 // include_once "controladores/controlador_login.php";
 
+
 include_once("conexion.php");
+
 
 $conexion = BD::crearInstancia();
 
@@ -14,14 +16,10 @@ if (!isset($_SESSION['id'])) {
 $id = $_SESSION['id'];
 $usuario = $_SESSION['usuarios'];
 $rol_id = $_SESSION['rol_id'];
+$tablas_acceso = $_SESSION['tablas_acceso'];
 
-$id_persona = $_SESSION['id_persona'];
 $nombre = $_SESSION['nombre_persona'];
 $apellido = $_SESSION['apellido_persona'];
-
-// print_r($apellido);
-
-
 
 if ($nombre) {
   $nombre = 1;
@@ -77,6 +75,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Favicon -->
   <link rel="icon" href="vistas/recursos/dist/img/favicon.png">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
+
+
+
 
   <style>
     .resaltar {
@@ -203,13 +204,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="dropdown-divider"></div>
             <a href="#" class="dropdown-item">
               <i class="fas fa-user mr-2"></i>Mi Perfil<?php
-                                                        if ($nombre) {
-                                                          // $nombre = 1;
-                                                          // echo "mi nombre es " . $apellido;
-                                                        } else {
-                                                          // $nombre = 0;
-                                                          // echo "mi nombre es otro " . $apellido;
-                                                        } ?>
+                                                        // echo "mi nombre es " . $tablas_acceso;
+                                                        ?>
             </a>
             <div class="dropdown-divider"></div>
             <a href="vistas/logout.php" class="dropdown-item">
@@ -264,7 +260,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- <i class="nav-icon fas fa-user mr-2"></i> -->
           </div>
           <div class="info">
-            <a href="#" class="d-block"><?php echo "$usuario" ?></a>
+            <a href="#" class="d-block"><?php echo "$usuario" . " " . "$tablas_acceso" ?></a>
           </div>
         </div>
 
@@ -301,7 +297,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'alojamientos' || $_GET['controlador'] == 'agencias' ||
                   $_GET['controlador'] == 'prestadores' || $_GET['controlador'] == 'referentes' || $_GET['controlador'] == 'servigenerales' || $_GET['controlador'] == 'gastronomia')) ? 'menu-open' : '' ?>">
                 <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'alojamientos' || $_GET['controlador'] == 'agencias' ||
-                                              $_GET['controlador'] == 'prestadores' || $_GET['controlador'] == 'referentes' || $_GET['controlador'] == 'servigenerales' || $_GET['controlador'] == 'gastronomia')) ? 'active' : '' ?>">
+                                              $_GET['controlador'] == 'prestadores' || $_GET['controlador'] == 'referentes' || $_GET['controlador'] == 'servigenerales' || $_GET['controlador'] == 'gastronomia' || $_GET['controlador'] == 'salones' || $_GET['controlador'] == 'transportes')) ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-edit"></i>
                   <p>
                     Registro
@@ -344,6 +340,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <p>Servicios Generales</p>
                     </a>
                   </li>
+
                   <li class="nav-item">
                     <a href="?controlador=gastronomia&accion=inicio" class="nav-link 
                     <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'gastronomia') ? 'active' : '' ?>">
@@ -352,12 +349,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                   </li>
 
+                  <li class="nav-item">
+                    <a href="?controlador=salones&accion=inicio" class="nav-link 
+                    <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'salones') ? 'active' : '' ?>">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Salones</p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="?controlador=transportes&accion=inicio" class="nav-link 
+                    <?= (isset($_GET['controlador']) && $_GET['controlador'] == 'transportes') ? 'active' : '' ?>">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Transportes</p>
+                    </a>
+                  </li>
+
+
                 </ul>
               </li>
 
             <?php endif; ?>
 
-            <!-- REGISTRO VISUALIZACION -->
+            <!-- VISUALIZACION -->
             <?php if ($rol_id == 2) : ?>
 
               <li class="nav-item">
@@ -564,10 +578,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <?php } ?>
 
             <!-- PERSONAL -->
-            <?php
-            $show_personal = $rol_id == 1 or ($rol_id == 3 and $usuario == "rrhh");
-            if ($show_personal) {
-            ?>
+            <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "rrhh" or $usuario == "karla") { ?>
               <li class="nav-item <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'menu-open' : '' ?>">
                 <a href="#" class="nav-link <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-table"></i>
@@ -579,47 +590,49 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="?controlador=personal&accion=inicio" class="nav-link 
-        <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'active' : '' ?>">
+                      <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'personal')) ? 'active' : '' ?>">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Registro</p>
                     </a>
                   </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>
-                        Asistencias
-                        <i class="right fas fa-angle-left"></i>
-                      </p>
-                    </a>
-                    <ul class="nav nav-treeview" style="display: none;">
-                      <li class="nav-item">
-                        <a href="#" class="nav-link">
-                          <i class="far fa-dot-circle nav-icon"></i>
-                          <p>Administración</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="?controlador=asistencias&accion=inicio" class="nav-link 
-            <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'asistencias')) ? '' : '' ?>">
-                          <i class="far fa-dot-circle nav-icon"></i>
-                          <p>Central</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="#" class="nav-link">
-                          <i class="far fa-dot-circle nav-icon"></i>
-                          <p>Logística</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="#" class="nav-link">
-                          <i class="far fa-dot-circle nav-icon"></i>
-                          <p>Terminal</p>
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
+                  <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") { ?>
+                    <li class="nav-item">
+                      <a href="#" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>
+                          Asistencias
+                          <i class="right fas fa-angle-left"></i>
+                        </p>
+                      </a>
+                      <ul class="nav nav-treeview" style="display: none;">
+                        <li class="nav-item">
+                          <a href="#" class="nav-link">
+                            <i class="far fa-dot-circle nav-icon"></i>
+                            <p>Administración</p>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="?controlador=asistencias&accion=inicio" class="nav-link 
+                          <?= (isset($_GET['controlador']) && ($_GET['controlador'] == 'asistencias')) ? '' : '' ?>">
+                            <i class="far fa-dot-circle nav-icon"></i>
+                            <p>Central</p>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="#" class="nav-link">
+                            <i class="far fa-dot-circle nav-icon"></i>
+                            <p>Logística</p>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="#" class="nav-link">
+                            <i class="far fa-dot-circle nav-icon"></i>
+                            <p>Terminal</p>
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+                  <?php } ?>
                 </ul>
 
               </li>
@@ -800,8 +813,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="vistas/recursos/script/formularios.js"></script>
 
   <script src="vistas/recursos/script/sweetalertEliminar.js"></script>
+  <script src="vistas/recursos/script/personalSiguiente.js"></script>
+  <script src="vistas/recursos/script/agregarbtntarea.js"></script>
+  <script src="vistas/recursos/script/checkboxInicio.js"></script>
+  <script src="vistas/recursos/script/contraseñaTablas.js"></script>
   <script src="/admin/vistas/recursos/script/modal.js"></script>
-
 
 
   <script>
@@ -871,6 +887,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       }).buttons().container().appendTo('#tblAlojamiento_wrapper .col-md-6:eq(0)');
 
+      $("#tblAgencias").DataTable({
+        "responsive": true,
+        "lengthChange": true,
+        "autoWidth": true,
+        "language": {
+          "url": "vistas/recursos/plugins/datatables/Spanish.json"
+        },
+        dom: 'Bfrtip',
+        buttons: ['excel', 'pdf', 'print', 'colvis'],
+
+
+
+      }).buttons().container().appendTo('#tblAgencias_wrapper .col-md-6:eq(0)');
+
     });
 
     $(function() {
@@ -902,11 +932,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     });
   </script>
-
-
-
-
-
 
   <!-- MODALES -->
   <!-- <?php include_once("modales/modal_ag_li_pe.php"); ?> -->

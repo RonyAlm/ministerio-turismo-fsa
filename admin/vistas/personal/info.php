@@ -6,9 +6,7 @@ if (!isset($_SESSION['id'])) {
 
 $usuario = $_SESSION['usuarios'];
 $rol_id = $_SESSION['rol_id'];
-
-
-
+$acceso = $_SESSION['tablas_acceso'];
 ?>
 
 <section class="content-header">
@@ -90,15 +88,16 @@ $rol_id = $_SESSION['rol_id'];
                                         <i class="fas fa-folder"></i>
                                       </a>
 
-                                      <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "rrhh") { ?>
+                                      <?php if ($rol_id == 1 || in_array(10, $acceso)) : ?>
                                         <a title="Editar" href="?controlador=personal&accion=editar&id=<?php echo $tabla1["id_personal"]; ?>&idPersona=<?php echo $tabla1["id_persona"]; ?>" class="btn btn-success btn-sm">
                                           <i class="fas fa-pencil-alt"></i>
                                         </a>
-                                        <a title="Borrar" onclick="AlertDeletePersonal(<?= $tabla1['id_personal']; ?>)" class="btn btn-danger btn-sm">
+                                        <a title="Borrar" onclick="AlertDeletePersonal(<?= $tabla1['id_personal']; ?>,
+                                        <?= $tabla1['rela_persona_direccion']; ?>)" class="btn btn-danger btn-sm">
                                           <i class="fas fa-trash"></i>
                                         </a>
 
-                                      <?php } ?>
+                                      <?php endif; ?>
                                     </div>
                                   </td>
 

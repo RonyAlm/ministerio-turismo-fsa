@@ -6,6 +6,7 @@ if (!isset($_SESSION['id'])) {
 
 $usuario = $_SESSION['usuarios'];
 $rol_id = $_SESSION['rol_id'];
+$acceso = $_SESSION['tablas_acceso'];
 
 ?>
 
@@ -29,7 +30,7 @@ $rol_id = $_SESSION['rol_id'];
 
     <div class="card-header">
 
-        <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") : ?>
+        <?php if ($rol_id == 1 or $acceso == 1) : ?>
 
             <a class="btn btn-success" href="?controlador=festivales&accion=crear" role="button">Agregar</a>
 

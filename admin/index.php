@@ -20,24 +20,19 @@ if ($_POST) {
   $usuario = $_POST['usuario'];
   $contraseña = $_POST['contraseña'];
 
-  // print_r($usuario);
-  // print_r($contraseña);
-
   $sql = "SELECT id_usuario, usuario, contraseña, rela_rol_id from usuario_contra where usuario='$usuario'";
 
   $resultado = $conexion->prepare($sql);
   $resultado->execute(array());
 
   $num = $resultado->rowCount();
-
+  //----------------------FIN-----------------------//
   $error = "";
   if ($num > 0) {
 
     $row = $resultado->fetch(PDO::FETCH_ASSOC);
 
     $id_usuario_contraseña = $row['id_usuario'];
-    // echo "hola";
-    // print_r($id_usuario_contraseña);
 
     // DESDE ESTE PUNTO LO QUE SE VA A HACER ES SACAR SI LA PERSONA ESTA ACTIVA O INACTIVA
     $sqlACTIVO = "SELECT id_persona, nombre_persona, apellido_persona FROM `persona` where rela_usuario_contra =$id_usuario_contraseña";
@@ -46,8 +41,36 @@ if ($_POST) {
     $resultadoActivo->execute(array());
 
     $numActivo = $resultadoActivo->rowCount();
-    // FIN 
+
     $rowActivo = $resultadoActivo->fetch(PDO::FETCH_ASSOC); //lo que hago es sacar el usuario
+
+    //----------------------FIN-----------------------//
+
+    // DESDE ESTE PUNTO OBTENDREMOS LOS ACCESOS A LAS TABLAS CON LOS USUARIOS REGISTRADOS A ESAS TABLAS
+    $sqlTablas = "SELECT `id_acceso_usuario`, `rela_acceso_usuarios`, `rela_acceso_tablas` FROM `acceso_usuario` WHERE rela_acceso_usuarios = $id_usuario_contraseña";
+
+    $resultadoTablas = $conexion->prepare($sqlTablas);
+    $resultadoTablas->execute(array());
+
+    $numTablas = $resultadoTablas->rowCount();
+
+    // Creamos un array para almacenar todas las tablas de acceso
+    $tablasAcceso = array();
+
+    // Recorremos todas las filas y almacenamos las tablas de acceso en el array
+    while ($rowTablas = $resultadoTablas->fetch(PDO::FETCH_ASSOC)) {
+      $tablasAcceso[] = $rowTablas['rela_acceso_tablas'];
+    }
+
+    // Ahora $tablasAcceso contendrá todas las tablas a las que tiene acceso el usuario
+    // Puedes guardar este array en la sesión o usarlo según tus necesidades
+    // $_SESSION['tablas_acceso'] = $tablasAcceso;
+
+    // Verificar las tablas de acceso obtenidas
+
+
+    // print_r($rowTablas);
+    //----------------------FIN-----------------------//
 
     $contraseña_bd = $row['contraseña'];
     if ($contraseña_bd == $contraseña) {
@@ -55,12 +78,15 @@ if ($_POST) {
       $_SESSION['usuarios'] = $row['usuario'];
       $_SESSION['contraseña'] = $row['contraseña'];
       $_SESSION['rol_id'] = $row['rela_rol_id'];
+
+      $_SESSION['tablas_acceso'] = $tablasAcceso;
       $_SESSION['nombre_persona'] = $rowActivo['nombre_persona'];
       $_SESSION['apellido_persona'] = $rowActivo['apellido_persona'];
       $_SESSION['id_persona'] = $rowActivo['id_persona'];
 
       header("Location: index2.php");
-      // print_r($_SESSION['nombre_persona']);
+      // print_r($_SESSION['tablas_acceso']);
+
       echo "entraste wey";
     } else {
       $error = "La contraseña no coincide";

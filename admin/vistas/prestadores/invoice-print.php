@@ -23,8 +23,8 @@
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=prestadores&accion=inicio">Prestadores</a></li>
-            <li class="breadcrumb-item active">Imprimir Información Prestador</li>
+            <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=prestadores&accion=inicio">Servicios Auxiliares de Turismo</a></li>
+            <li class="breadcrumb-item active">Imprimir Información de los servicios</li>
           </ol>
         </div>
       </div>

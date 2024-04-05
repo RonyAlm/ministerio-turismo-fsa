@@ -22,6 +22,13 @@ class ControladorReferentes
 
     public function crear()
     {
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        echo '<pre>';
+        print_r($controlador1);
+        echo '</pre>';
 
         $select_tipo_referente = new ReferenteModelo();
 
@@ -63,6 +70,11 @@ class ControladorReferentes
                 $otroReferente,
                 $referenteEncargado
             );
+            if ($insertarReferente) {
+                $insertarReferente->trigger($accion, $id, $controlador1);
+
+                echo "<script>location.href='index2.php?controlador=referentes&accion=inicio';</script>";
+            }
 
             // header("Location:./index2.php?controlador=referentes&accion=inicio");
             echo "<script>location.href='index2.php?controlador=referentes&accion=inicio';</script>";
@@ -74,6 +86,13 @@ class ControladorReferentes
 
     public function editar()
     { //aca se muestra las tablas
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        echo '<pre>';
+        print_r($controlador1);
+        echo '</pre>';
 
         $idReferente = $_GET["id"];
         $buscarReferente = new ReferenteModelo();
@@ -145,7 +164,10 @@ class ControladorReferentes
                 $referenteDomicilioID,
                 $referenteEncargado
             );
-
+            if ($insertarReferente) {
+                $insertarReferente->trigger($accion, $id, $controlador1);
+                echo "<script>location.href='index2.php?controlador=referentes&accion=inicio';</script>";
+            }
             // header("Location: index2.php?controlador=referentes&accion=inicio");
             echo "<script>location.href='index2.php?controlador=referentes&accion=inicio';</script>";
         }
@@ -172,18 +194,27 @@ class ControladorReferentes
 
     public function borrar()
     { //aca se muestra las tablas
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        echo '<pre>';
+        print_r($controlador1);
+        echo '</pre>';
 
         // print_r($_GET);
 
         $borradoReferente = new ReferenteModelo();
 
-        $id = $_GET['id'];
+        $ids = $_GET['id'];
         $id_direccion = $_GET['idDireccion'];
 
-        $borrado = $borradoReferente->borrar($id, $id_direccion);
+        $borradoReferente->borrar($ids, $id_direccion);
+        if ($borradoReferente) {
+            $borradoReferente->trigger($accion, $id, $controlador1);
 
-
-
+            echo "<script>location.href='index2.php?controlador=referentes&accion=inicio';</script>";
+        }
 
         // header("Location:index2.php?controlador=Referentes&accion=inicio");
         echo "<script>location.href='index2.php?controlador=referentes&accion=inicio';</script>";
@@ -250,5 +281,4 @@ class ControladorReferentes
 
         include_once("vistas/referentes_municipio/invoice-print.php");
     }
-
 }

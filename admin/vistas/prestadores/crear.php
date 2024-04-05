@@ -3,7 +3,7 @@
   <div class="card-header ">
     <h3 class="card-title text-success">
       <i class="fas fa-solid fa-plus-minus  mr-2"></i>
-      Agregar Prestador
+      Agregar Servicios Auxiliares de Turismo
     </h3>
   </div>
 

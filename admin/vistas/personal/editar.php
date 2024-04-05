@@ -268,7 +268,6 @@
                                 <input type="date" class="form-control" name="fechaini[]" id="fechaini" value="<?= $licencia->fecha_ini ?>">
                               </div>
                             </div>
-                            <!-- /.form-group -->
                             <div class="form-group">
                               <label>Fecha fin:</label>
                               <div class="input-group">
@@ -279,7 +278,6 @@
                                 <input type="date" class="form-control" name="fechafin[]" id="fechafin" value="<?= $licencia->fecha_fin ?>">
                               </div>
                             </div>
-                            <!-- /.form-group -->
 
                           </div>
                           <!-- /.card-body -->
@@ -302,6 +300,7 @@
                 </div>
                 <!-- ACA SE ENCUENTRA EL ARTICULO , PUSE ASI POR QUE NO ME TOMA EL ID articulo -->
                 <div class="tab-pane" id="hola">
+
 
                   <div class="row">
                     <?php foreach ($consultarArticulo as $articulos) { ?>

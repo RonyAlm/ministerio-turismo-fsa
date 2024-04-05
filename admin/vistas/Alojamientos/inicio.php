@@ -6,9 +6,7 @@ if (!isset($_SESSION['id'])) {
 
 $usuario = $_SESSION['usuarios'];
 $rol_id = $_SESSION['rol_id'];
-
-
-
+$acceso = $_SESSION['tablas_acceso'];
 ?>
 
 <section class="content-header">
@@ -32,7 +30,7 @@ $rol_id = $_SESSION['rol_id'];
 
   <div class="card-header">
 
-    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") : ?>
+    <?php if ($rol_id == 1 || in_array(2, $acceso)) : ?>
 
       <a name="" id="" class="btn btn-success" href="?controlador=Alojamientos&accion=crear" role="button">Agregar</a>
 
@@ -218,7 +216,7 @@ $rol_id = $_SESSION['rol_id'];
                       <i class="fas fa-folder"></i>
                     </a>
 
-                    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") : ?>
+                    <?php if ($rol_id == 1 || in_array(2, $acceso)) : ?>
 
                       <a title="Editar" href="?controlador=Alojamientos&accion=editar&id=<?php echo $alojamiento["id_alojamientos"]; ?>" class="btn btn-success btn-sm">
                         <i class="fas fa-pencil-alt"></i>

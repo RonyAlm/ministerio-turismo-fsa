@@ -26,6 +26,13 @@ class ControladorServigenerales
 
     public function crear()
     {
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        echo '<pre>';
+        print_r($controlador1);
+        echo '</pre>';
 
         $select_tipo_servigeneral = new ServigeneralModelo();
 
@@ -63,9 +70,6 @@ class ControladorServigenerales
             $otroAgencia = $_POST['otroAgencia'];
 
 
-
-
-
             $insertar->crear(
                 $nombre,
                 $descripcion,
@@ -84,7 +88,11 @@ class ControladorServigenerales
                 $webAgencia,
                 $otroAgencia
             );
-            // print_r($insertar);
+            if ($insertar) {
+                $insertar->trigger($accion, $id, $controlador1);
+
+                echo "<script>location.href='index2.php?controlador=servigenerales&accion=inicio';</script>";
+            }
 
             echo "<script>location.href='index2.php?controlador=servigenerales&accion=inicio';</script>";
 
@@ -97,8 +105,15 @@ class ControladorServigenerales
 
     public function editar()
     {
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        echo '<pre>';
+        print_r($controlador1);
+        echo '</pre>';
 
-        $id = $_GET["id"];
+        $idss = $_GET["id"];
 
         $select_tipo_servigeneral = new ServigeneralModelo();
 
@@ -114,7 +129,7 @@ class ControladorServigenerales
             $EditarAgencia = new ServigeneralModelo();
 
 
-            $id =  $_POST['nombreID'];
+            $ids =  $_POST['nombreID'];
             $nombre = $_POST['nombre'];
             $descripcion = $_POST['descripcion'];
             $idoneo = $_POST['idoneo'];
@@ -162,7 +177,7 @@ class ControladorServigenerales
             $EditarAgencia->editar(
                 $nombre,
                 $descripcion,
-                $id,
+                $ids,
                 $idoneo,
                 $localidad,
                 $domicilio,
@@ -192,8 +207,11 @@ class ControladorServigenerales
                 $idwebAgencia,
                 $idotroAgencia
             );
+            if ($EditarAgencia) {
+                $EditarAgencia->trigger($accion, $id, $controlador1);
 
-            // print_r($EditarAgencia);
+                echo "<script>location.href='index2.php?controlador=servigenerales&accion=inicio';</script>";
+            }
 
 
             echo "<script>location.href='index2.php?controlador=servigenerales&accion=inicio';</script>";
@@ -208,21 +226,21 @@ class ControladorServigenerales
 
         $contactosDeagencia1 = new ContactosInfo();
 
-        $agenciaTelefono = $contactosDeagencia1->consultarTelefonos($id);
-        $agenciaTelefonoFijo = $contactosDeagencia->consultarTelefonosFijos($id);
-        $agenciaCorreo = $contactosDeagencia->consultarCorreo($id);
-        $agenciaFacebook = $contactosDeagencia->consultarFacebook($id);
-        $agenciaInstagram = $contactosDeagencia->consultarInstagram($id);
-        $agenciaTwitter = $contactosDeagencia->consultarTwitter($id);
-        $agenciaWeb = $contactosDeagencia->consultarWeb($id);
-        $agenciaOtro = $contactosDeagencia->consultarOtro($id);
+        $agenciaTelefono = $contactosDeagencia1->consultarTelefonos($idss);
+        $agenciaTelefonoFijo = $contactosDeagencia->consultarTelefonosFijos($idss);
+        $agenciaCorreo = $contactosDeagencia->consultarCorreo($idss);
+        $agenciaFacebook = $contactosDeagencia->consultarFacebook($idss);
+        $agenciaInstagram = $contactosDeagencia->consultarInstagram($idss);
+        $agenciaTwitter = $contactosDeagencia->consultarTwitter($idss);
+        $agenciaWeb = $contactosDeagencia->consultarWeb($idss);
+        $agenciaOtro = $contactosDeagencia->consultarOtro($idss);
 
 
         $buscarID = new ServigeneralModelo();
 
-        $editar = $buscarID->buscar($id);
+        $editar = $buscarID->buscar($idss);
 
-        $InsertarID = $buscarID->consultarID($id);
+        $Insertaridss = $buscarID->consultarID($idss);
 
 
         include_once("vistas/servigenerales/editar.php");
@@ -230,6 +248,14 @@ class ControladorServigenerales
 
     public function borrar()
     {
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        echo '<pre>';
+        print_r($controlador1);
+        echo '</pre>';
+
         //print_r($_GET);
 
         $idServigeneralBorrar = $_GET["id"];
@@ -239,7 +265,13 @@ class ControladorServigenerales
 
         $buscarIDBorrado = $borrarAgencias->consultarID($idServigeneralBorrar);
 
-        $borrado = $borrarAgencias->borrar($idServigeneralBorrar, $id_direccion);
+        $borrarAgencias->borrar($idServigeneralBorrar, $id_direccion);
+        if ($borrarAgencias) {
+            $borrarAgencias->trigger($accion, $id, $controlador1);
+
+            echo "<script>location.href='index2.php?controlador=servigenerales&accion=inicio';</script>";
+        }
+
 
         header("Location:index2.php?controlador=servigenerales&accion=inicio");
     }

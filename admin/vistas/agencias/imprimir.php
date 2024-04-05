@@ -22,16 +22,14 @@
     <div class="card-body">
         <div class="row">
             <div class="col-lg-12">
-                <table id="example1" class="table table-bordered table-striped" cellspacing="0" width="100%">
+                <table id="example1234" class="table table-bordered table-striped" cellspacing="0" width="100%">
                     <thead>
                         <tr style="background: linear-gradient(to right, #61ba6d, #83c331)">
-
                             <th>Localidad</th>
                             <th>Designacion Comercial</th>
                             <th>Contacto</th>
                             <th>Dirección</th>
                             <th>Estado</th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -48,6 +46,9 @@
                                     <td class="badge badge-success"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
                                 <?php } ?>
                                 <?php if ($agencia["descripcion_tipo_estado"] == "Falta Verificar") { ?>
+                                    <td class="badge badge-warning"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
+                                <?php } ?>
+                                <?php if ($agencia["descripcion_tipo_estado"] == "Suspendido") { ?>
                                     <td class="badge badge-warning"><?php echo $agencia["descripcion_tipo_estado"]; ?></td>
                                 <?php } ?>
                                 <?php if ($agencia["descripcion_tipo_estado"] == "Baja") { ?>
@@ -77,7 +78,6 @@
                         <?php } ?>
 
                     </tbody>
-
                 </table>
             </div>
         </div>

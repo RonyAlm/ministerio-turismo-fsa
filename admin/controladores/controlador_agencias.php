@@ -1,5 +1,6 @@
 <?php
-
+// Iniciar el búfer de salida para almacenar la salida
+ob_start();
 include_once("modelos/agencias.php");
 include_once("conexion.php");
 
@@ -13,10 +14,65 @@ class ControladorAgencias
         $consultaAgencia = new AgenciaModelo();
 
         $tablaAgencia = $consultaAgencia->consultar();
+        $designacion = $consultaAgencia->consultar();
         $datosEstadisticos = new estadistica();
 
         $cantidad_agencias = $datosEstadisticos->cantidadAgencias();
         $cantidadAgenciasHabilitadas = $datosEstadisticos->cantidadAgenciasHabilitadas();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitAgregarArchivo'])) {
+            // Obtener los datos del formulario
+
+            $selectDesignacion = isset($_POST['selectDesignacion']) ? $_POST['selectDesignacion'] : "";
+
+            // Definir la carpeta de destino
+            $carpeta_destino = "files/";
+
+            // Verificar si la carpeta de destino existe, si no, crearla
+            if (!is_dir($carpeta_destino)) {
+                mkdir($carpeta_destino, 0777, true);
+            }
+
+            // Obtener el nombre y la extensión del archivo
+            $nombre_archivo = basename($_FILES["archivo"]["name"]);
+            $extension = strtolower(pathinfo($nombre_archivo, PATHINFO_EXTENSION));
+
+            // Validar la extensión del archivo
+            if ($extension == "pdf" || $extension == "doc" || $extension == "docx") {
+
+                // Mover el archivo a la carpeta de destino
+                if (move_uploaded_file($_FILES["archivo"]["tmp_name"], $carpeta_destino . $nombre_archivo)) {
+                    // Insertar la información del archivo en la base de datos
+                    // Llamar al modelo para agregar el archivo
+                    $insertarArchivo = new AgenciaModelo();
+                    $insertarArchivo->agregarArchivo($selectDesignacion, $nombre_archivo);
+
+                    if ($insertarArchivo) {
+                        echo "<script language='JavaScript'>
+                                alert('Archivo Subido');
+                                location.href='index2.php?controlador=agencias&accion=inicio';
+                                </script>";
+                    } else {
+
+                        echo "<script language='JavaScript'>
+                                alert('Error al subir el archivo: ');
+                                location.href='index2.php?controlador=agencias&accion=inicio';
+                                </script>";
+                    }
+                } else {
+                    echo "<script language='JavaScript'>
+                            alert('Error al subir el archivo. ');
+                            location.href='index2.php?controlador=agencias&accion=inicio';
+                            </script>";
+                }
+            } else {
+                echo "<script language='JavaScript'>
+                        alert('Solo se permiten archivos PDF, DOC y DOCX.');
+                        location.href='index2.php?controlador=agencias&accion=inicio';
+                        </script>";
+            }
+        }
+
 
 
         include_once("vistas/agencias/inicio.php");
@@ -24,6 +80,14 @@ class ControladorAgencias
 
     public function crear()
     {
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        echo '<pre>';
+        print_r($controlador1);
+        echo '</pre>';
+
 
         $select_tipo_agencia = new AgenciaModelo();
 
@@ -59,10 +123,6 @@ class ControladorAgencias
 
             $estadoAgencia = $_POST['estadoAgencia'];
 
-
-
-
-
             $insertarAgencia->crear(
                 $descripcion_agencias,
                 $matricula_agencia,
@@ -83,6 +143,12 @@ class ControladorAgencias
                 $estadoAgencia,
                 $idoneoAgencia
             );
+            if ($insertarAgencia) {
+                $insertarAgencia->trigger($accion, $id, $controlador1);
+                // print_r($insertar);
+                // print_r($usuario_crear);
+                echo "<script>location.href='index2.php?controlador=agencias&accion=inicio';</script>";
+            }
 
             echo "<script>location.href='index2.php?controlador=agencias&accion=inicio';</script>";
 
@@ -95,6 +161,14 @@ class ControladorAgencias
 
     public function editar()
     {
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        echo '<pre>';
+        print_r($controlador1);
+        echo '</pre>';
+
 
         $idAgencia = $_GET["id"];
 
@@ -188,10 +262,12 @@ class ControladorAgencias
                 $idotroAgencia,
                 $idestadoAgencia
             );
-
-            // print_r($EditarAgencia);
-
-
+            if ($EditarAgencia) {
+                $EditarAgencia->trigger($accion, $id, $controlador1);
+                // print_r($insertar);
+                // print_r($usuario_crear);
+                echo "<script>location.href='index2.php?controlador=agencias&accion=inicio';</script>";
+            }
 
             // header("Location:admin/index2.php?controlador=agencias&accion=inicio");
             echo "<script>location.href='index2.php?controlador=agencias&accion=inicio';</script>";
@@ -227,6 +303,13 @@ class ControladorAgencias
     public function borrar()
     {
         //print_r($_GET);
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        echo '<pre>';
+        print_r($controlador1);
+        echo '</pre>';
 
         $idAgenciaBorrar = $_GET["id"];
         $id_direccion = $_GET['idDireccion'];
@@ -236,7 +319,13 @@ class ControladorAgencias
 
         $buscarIDBorrado = $borrarAgencias->consultarID($idAgenciaBorrar);
 
-        $borrado = $borrarAgencias->borrar($idAgenciaBorrar, $id_direccion, $idRazonSocial);
+        $borrarAgencias->borrar($idAgenciaBorrar, $id_direccion, $idRazonSocial);
+        if ($borrarAgencias) {
+            $borrarAgencias->trigger($accion, $id, $controlador1);
+            // print_r($insertar);
+            // print_r($usuario_crear);
+            echo "<script>location.href='index2.php?controlador=agencias&accion=inicio';</script>";
+        }
 
         header("Location:index2.php?controlador=agencias&accion=inicio");
     }
@@ -249,6 +338,7 @@ class ControladorAgencias
 
         $agenciasInfomacion = $agenciaInfo->buscar($id_agencia);
 
+        $archivosDeLaBaseDeDatos = $agenciaInfo->buscarArchivo($id_agencia);
 
         $contactosDeagencia = new ContactosInfo();
         $agenciaTelefonoInfo = $contactosDeagencia->consultarTelefonos($id_agencia);
@@ -303,5 +393,48 @@ class ControladorAgencias
         $agenciaOtro = $contactosDeagencia->consultarOtro($id_agencia);
 
         include_once("vistas/agencias/invoice-print.php");
+    }
+    public function descargarArchivo()
+    {
+        // Limpiar cualquier búfer de salida existente
+        ob_clean();
+        $archivoID = $_GET['id'];
+
+        $agenciaModelo = new AgenciaModelo();
+
+        // Obtener el archivo de la base de datos según el ID proporcionado
+        $archivo = $agenciaModelo->buscarArchivo1($archivoID);
+
+        if ($archivo) {
+            // Habilitar el almacenamiento en búfer de salida
+            ob_start();
+            $ruta_archivo = "files/" . $archivo['archivo_documento'];
+
+            // Verificar que el archivo exista en el servidor
+            if (file_exists($ruta_archivo)) {
+                // Configurar las cabeceras para la descarga
+                header('Content-Description: File Transfer');
+                header('Content-Type: application/octet-stream');
+                header('Content-Disposition: attachment; filename="' . basename($ruta_archivo) . '"');
+                header('Expires: 0');
+                header('Cache-Control: must-revalidate');
+                header('Pragma: public');
+                header('Content-Length: ' . filesize($ruta_archivo));
+
+                // Leer el archivo y enviarlo al navegador
+                readfile($ruta_archivo);
+                // Limpiar el búfer de salida y enviar todo el contenido al navegador
+                ob_end_flush();
+
+                // Finalizar la ejecución del script para evitar que se agreguen otros contenidos
+                exit;
+            } else {
+                echo "El archivo no existe en el servidor.";
+            }
+        } else {
+            // Manejar el caso cuando el archivo no se encuentra
+            echo "Archivo no encontrado en la base de datos.";
+        }
+        include_once("vistas/agencias/includes/download.php");
     }
 }

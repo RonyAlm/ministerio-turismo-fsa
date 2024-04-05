@@ -12,6 +12,153 @@ class Alojamientos
     {
         $this->listaAlojamientoInicio = array();
     }
+    public function trigger($accion, $id, $controlador1)
+    {
+        $conexionBD = BD::crearInstancia();
+        // $conexionBD->beginTransaction();
+        BD::iniciarTransaccion();
+
+        try {
+            $triggerName = $accion . $controlador1;
+            $tableName = 'alojamientos';
+
+            $sql = "SELECT trigger_name
+                    FROM information_schema.triggers
+                    WHERE trigger_name = :triggerName
+                    AND event_object_table = :tableName";
+
+            $stmt = $conexionBD->prepare($sql);
+            $stmt->bindParam(':triggerName', $triggerName, PDO::PARAM_STR);
+            $stmt->bindParam(':tableName', $tableName, PDO::PARAM_STR);
+            $stmt->execute();
+
+            // Eliminar trigger existente si existe
+            $eliminarTriggerSql = "DROP TRIGGER IF EXISTS `$triggerName`";
+            $conexionBD->query($eliminarTriggerSql);
+
+            switch ($accion) {
+                case 'crear':
+                    // Obtener los nombres de las columnas y valores a insertar
+                    $columnas = array();
+                    $valores = array();
+                    $query = "INSERT INTO `$controlador1` (";
+                    $result = $conexionBD->query("SHOW COLUMNS FROM `$controlador1`");
+                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                        if (strpos($row['Field'], 'id') === 0) {
+                            $columnas[] = "`" . $row['Field'] . "`";
+                        }
+                        $valores[] = ":" . $row['Field'];
+                    }
+                    $query .= implode(",", $columnas) . ") VALUES (" . implode(",", $valores) . ")";
+                    $stmt = $conexionBD->prepare($query);
+
+                    // Vincular los valores a los marcadores de posición
+                    // foreach ($valores as $valor) {
+                    //     $stmt->bindValue($valor, $_POST[substr($valor, 1)]);
+                    // }
+
+                    // Crear el trigger
+                    $new_value = "CONCAT('{";
+                    foreach ($columnas as $columna) {
+                        $new_value .= "\\\"" . $columna . "\\\":', new." . $columna . ", ',";
+                    }
+                    $new_value = substr($new_value, 0, -1) . "}')";
+
+                    $crearTriggerSql = "CREATE TRIGGER `$triggerName` AFTER INSERT ON `$controlador1` FOR EACH ROW INSERT INTO auditoria(tabla, accion, new_value, usuario_id) VALUES ('$controlador1', 'INSERT', $new_value, $id)";
+                    $stmt = $conexionBD->prepare($crearTriggerSql);
+                    $stmt->execute();
+
+                    // Actualizar el usuario_id en la última fila de la tabla de auditoría
+                    $ultimoID = $conexionBD->query("SELECT MAX(id) FROM auditoria")->fetchColumn();
+                    $actualizarIDSql = "UPDATE auditoria SET usuario_id='$id' WHERE id=$ultimoID";
+                    $conexionBD->query($actualizarIDSql);
+                    break;
+                case 'editar':
+                    // Obtener los nombres de las columnas y valores a insertar
+                    $columnas = array();
+                    $valores = array();
+                    $query = "INSERT INTO `$controlador1` (";
+                    $result = $conexionBD->query("SHOW COLUMNS FROM `$controlador1`");
+                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                        if (strpos($row['Field'], 'id') === 0) {
+                            $columnas[] = "`" . $row['Field'] . "`";
+                        }
+                        $valores[] = ":" . $row['Field'];
+                    }
+                    $query .= implode(",", $columnas) . ") VALUES (" . implode(",", $valores) . ")";
+                    $stmt = $conexionBD->prepare($query);
+
+
+
+                    // Crear el trigger
+                    $new_value = "CONCAT('{";
+                    $old_value = "CONCAT('{";
+                    foreach ($columnas as $columna) {
+                        $new_value .= "\\\"" . $columna . "\\\":', new." . $columna . ", ',";
+                        $old_value .= "\\\"" . $columna . "\\\":', old." . $columna . ", ',";
+                    }
+                    $new_value = substr($new_value, 0, -1) . "}')";
+                    $old_value = substr($old_value, 0, -1) . "}')";
+
+
+                    $crearTriggerSql = "CREATE TRIGGER `$triggerName` AFTER UPDATE ON `$controlador1` FOR EACH ROW INSERT INTO auditoria(tabla, accion,old_value, new_value, usuario_id) VALUES ('$controlador1', 'UPDATE',$old_value, $new_value, $id)";
+                    $stmt = $conexionBD->prepare($crearTriggerSql);
+                    $stmt->execute();
+
+                    // Actualizar el usuario_id en la última fila de la tabla de auditoría
+                    $ultimoID = $conexionBD->query("SELECT MAX(id) FROM auditoria")->fetchColumn();
+                    $actualizarIDSql = "UPDATE auditoria SET usuario_id='$id' WHERE id=$ultimoID";
+                    $conexionBD->query($actualizarIDSql);
+                    break;
+                case 'borrar':
+                    // Obtener los nombres de las columnas y valores a insertar
+                    $columnas = array();
+                    $valores = array();
+                    $query = "INSERT INTO `$controlador1` (";
+                    $result = $conexionBD->query("SHOW COLUMNS FROM `$controlador1`");
+                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                        if (strpos($row['Field'], 'id') === 0) {
+                            $columnas[] = "`" . $row['Field'] . "`";
+                        }
+                        $valores[] = ":" . $row['Field'];
+                    }
+                    $query .= implode(",", $columnas) . ") VALUES (" . implode(",", $valores) . ")";
+                    $stmt = $conexionBD->prepare($query);
+
+                    // Vincular los valores a los marcadores de posición
+                    // foreach ($valores as $valor) {
+                    //     $stmt->bindValue($valor, $_POST[substr($valor, 1)]);
+                    // }
+
+                    // Crear el trigger
+
+                    $old_value = "CONCAT('{";
+                    foreach ($columnas as $columna) {
+
+                        $old_value .= "\\\"" . $columna . "\\\":', old." . $columna . ", ',";
+                    }
+
+                    $old_value = substr($old_value, 0, -1) . "}')";
+
+
+                    $crearTriggerSql = "CREATE TRIGGER `$triggerName` AFTER DELETE ON `$controlador1` FOR EACH ROW INSERT INTO auditoria(tabla, accion,old_value, usuario_id) VALUES ('$controlador1', 'DELETE',$old_value, $id)";
+                    $stmt = $conexionBD->prepare($crearTriggerSql);
+                    $stmt->execute();
+
+                    // Actualizar el usuario_id en la última fila de la tabla de auditoría
+                    $ultimoID = $conexionBD->query("SELECT MAX(id) FROM auditoria")->fetchColumn();
+                    $actualizarIDSql = "UPDATE auditoria SET usuario_id='$id' WHERE id=$ultimoID";
+                    $conexionBD->query($actualizarIDSql);
+                    break;
+            }
+
+            BD::confirmarTransaccion();
+        } catch (PDOException $e) {
+            BD::revertirTransaccion();
+            // Manejar el error
+            // throw $e;
+        }
+    }
 
     public function consultar()
     {
@@ -335,10 +482,11 @@ class Alojamientos
 
         /*---------------SE ACTUALIZA EL ALOJAMIENTO-------------------*/
 
+
         if ($rubroAlojamiento == 0) {
-            // echo "rubro igual a 0        /// ";
+
             $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
-                                                                    `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
+                                                                    `cuit_alojamiento`='$cuitAlojamiento',`idoneo_alojamiento`='$idoneoAlojamiento',
                                                                     `estrella_alojamiento`=$estrellaAlojamiento,
                                                                     `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()
                                         WHERE id_alojamientos=$IDAlojamiento");
@@ -347,9 +495,9 @@ class Alojamientos
         } else {
             // echo "rubro igual conectado   ///        ";
             $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
-                                                                    `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
-                                                                    `estrella_alojamiento`=$estrellaAlojamiento,`rela_alojamiento_rubro`=$rubroAlojamiento,
-                                                                    `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()
+                    `cuit_alojamiento`='$cuitAlojamiento',`idoneo_alojamiento`='$idoneoAlojamiento',
+                    `estrella_alojamiento`=$estrellaAlojamiento,`rela_alojamiento_rubro`=$rubroAlojamiento,
+                    `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()
                                         WHERE id_alojamientos=$IDAlojamiento");
 
             $sql->execute();
@@ -357,20 +505,20 @@ class Alojamientos
         if ($categoriaAlojamiento == 0) {
             // echo "categoria igual a 0    ///  ";
             $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
-                                                                    `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
-                                                                    `estrella_alojamiento`=$estrellaAlojamiento,
-                                                                    `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()
-                                        WHERE id_alojamientos=$IDAlojamiento");
+            `cuit_alojamiento`='$cuitAlojamiento',`idoneo_alojamiento`='$idoneoAlojamiento',
+            `estrella_alojamiento`=$estrellaAlojamiento,
+            `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()
+            WHERE id_alojamientos=$IDAlojamiento");
 
             $sql->execute();
         } else {
             // echo "categoria igual a  conectado    ///  ";
             $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
-                                                                    `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
-                                                                    `estrella_alojamiento`=$estrellaAlojamiento
-                                                                    ,`rela_tipo_alojamiento_aloja`=$categoriaAlojamiento,
-                                                                    `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()
-                                        WHERE id_alojamientos=$IDAlojamiento");
+            `cuit_alojamiento`='$cuitAlojamiento',`idoneo_alojamiento`='$idoneoAlojamiento',
+            `estrella_alojamiento`=$estrellaAlojamiento,
+            `rela_tipo_alojamiento_aloja`=$categoriaAlojamiento,
+            `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()
+            WHERE id_alojamientos=$IDAlojamiento");
 
             $sql->execute();
         }
@@ -378,7 +526,7 @@ class Alojamientos
         if ($habilitacionAlojamiento == 0) {
             // echo "habilitacion igual a 0    ///  ";
             $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
-                                                                    `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
+                                                                    `cuit_alojamiento`='$cuitAlojamiento',`idoneo_alojamiento`='$idoneoAlojamiento',
                                                                     `estrella_alojamiento`=$estrellaAlojamiento,
                                                                     `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()
                                         WHERE id_alojamientos=$IDAlojamiento");
@@ -387,7 +535,7 @@ class Alojamientos
         } else {
             // echo "categoria igual a  conectado    ///  ";
             $sql = $conexionBD->prepare("UPDATE `alojamientos` SET `descripcion_alojamientos`='$nombreAlojamiento',
-                                                                    `cuit_alojamiento`=$cuitAlojamiento,`idoneo_alojamiento`='$idoneoAlojamiento',
+                                                                    `cuit_alojamiento`='$cuitAlojamiento',`idoneo_alojamiento`='$idoneoAlojamiento',
                                                                     `estrella_alojamiento`=$estrellaAlojamiento
                                                                     ,`rela_habilitaciones`=$habilitacionAlojamiento,
                                                                     `fecha_edit_alojamiento`= CURRENT_TIMESTAMP()

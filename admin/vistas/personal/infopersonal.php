@@ -178,6 +178,7 @@
 
                 <div class="tab-pane" id="licencias">
                   <div class="row">
+
                     <?php foreach ($consultarLicencias as $licencia) { ?>
 
                       <!-- MES -->

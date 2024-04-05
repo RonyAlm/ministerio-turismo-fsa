@@ -16,13 +16,170 @@ class PersonalModelo
         $this->listaBuscar = array();
     }
 
+    public function trigger($accion, $id, $controlador1)
+    {
+        $conexionBD = BD::crearInstancia();
+
+        BD::iniciarTransaccion();
+
+        try {
+            $triggerName = $accion . $controlador1;
+            $tableName = 'personales';
+
+            $sql = "SELECT trigger_name
+                    FROM information_schema.triggers
+                    WHERE trigger_name = :triggerName
+                    AND event_object_table = :tableName";
+
+            $stmt = $conexionBD->prepare($sql);
+            $stmt->bindParam(':triggerName', $triggerName, PDO::PARAM_STR);
+            $stmt->bindParam(':tableName', $tableName, PDO::PARAM_STR);
+            $stmt->execute();
+
+            // Eliminar trigger existente si existe
+            $eliminarTriggerSql = "DROP TRIGGER IF EXISTS `$triggerName`";
+            $conexionBD->query($eliminarTriggerSql);
+
+            switch ($accion) {
+                case 'crear':
+                    // Obtener los nombres de las columnas y valores a insertar
+                    $columnas = array();
+                    $valores = array();
+                    $query = "INSERT INTO `$tableName` (";
+                    $result = $conexionBD->query("SHOW COLUMNS FROM `$tableName`");
+                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                        if (strpos($row['Field'], 'id') === 0) {
+                            $columnas[] = "`" . $row['Field'] . "`";
+                        }
+                        $valores[] = ":" . $row['Field'];
+                    }
+                    $query .= implode(",", $columnas) . ") VALUES (" . implode(",", $valores) . ")";
+                    $stmt = $conexionBD->prepare($query);
+
+
+                    // Crear el trigger
+                    $new_value = "CONCAT('{";
+                    foreach ($columnas as $columna) {
+                        $new_value .= "\\\"" . $columna . "\\\":', new." . $columna . ", ',";
+                    }
+                    $new_value = substr($new_value, 0, -1) . "}')";
+
+                    $crearTriggerSql = "CREATE TRIGGER `$triggerName` AFTER INSERT ON `$tableName` FOR EACH ROW INSERT INTO auditoria(tabla, accion, new_value, usuario_id) VALUES ('$tableName', 'INSERT', $new_value, $id)";
+                    $stmt = $conexionBD->prepare($crearTriggerSql);
+                    $stmt->execute();
+
+                    // Actualizar el usuario_id en la última fila de la tabla de auditoría
+                    $ultimoID = $conexionBD->query("SELECT MAX(id) FROM auditoria")->fetchColumn();
+                    $actualizarIDSql = "UPDATE auditoria SET usuario_id='$id' WHERE id=$ultimoID";
+                    $conexionBD->query($actualizarIDSql);
+                    break;
+                case 'editar':
+                    // Obtener los nombres de las columnas y valores a insertar
+                    $columnas = array();
+                    $valores = array();
+                    $query = "INSERT INTO `$tableName` (";
+                    $result = $conexionBD->query("SHOW COLUMNS FROM `$tableName`");
+                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                        if (strpos($row['Field'], 'id') === 0) {
+                            $columnas[] = "`" . $row['Field'] . "`";
+                        }
+                        $valores[] = ":" . $row['Field'];
+                    }
+                    $query .= implode(",", $columnas) . ") VALUES (" . implode(",", $valores) . ")";
+                    $stmt = $conexionBD->prepare($query);
+
+
+
+                    // Crear el trigger
+                    $new_value = "CONCAT('{";
+                    $old_value = "CONCAT('{";
+                    foreach ($columnas as $columna) {
+                        $new_value .= "\\\"" . $columna . "\\\":', new." . $columna . ", ',";
+                        $old_value .= "\\\"" . $columna . "\\\":', old." . $columna . ", ',";
+                    }
+                    $new_value = substr($new_value, 0, -1) . "}')";
+                    $old_value = substr($old_value, 0, -1) . "}')";
+
+
+                    $crearTriggerSql = "CREATE TRIGGER `$triggerName` AFTER UPDATE ON `$tableName` FOR EACH ROW INSERT INTO auditoria(tabla, accion,old_value, new_value, usuario_id) VALUES ('$tableName', 'UPDATE',$old_value, $new_value, $id)";
+                    $stmt = $conexionBD->prepare($crearTriggerSql);
+                    $stmt->execute();
+
+                    // Actualizar el usuario_id en la última fila de la tabla de auditoría
+                    $ultimoID = $conexionBD->query("SELECT MAX(id) FROM auditoria")->fetchColumn();
+                    $actualizarIDSql = "UPDATE auditoria SET usuario_id='$id' WHERE id=$ultimoID";
+                    $conexionBD->query($actualizarIDSql);
+                    break;
+                case 'borrar':
+                    // Obtener los nombres de las columnas y valores a insertar
+                    $columnas = array();
+                    $valores = array();
+                    $query = "INSERT INTO `$tableName` (";
+                    $result = $conexionBD->query("SHOW COLUMNS FROM `$tableName`");
+                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                        if (strpos($row['Field'], 'id') === 0) {
+                            $columnas[] = "`" . $row['Field'] . "`";
+                        }
+                        $valores[] = ":" . $row['Field'];
+                    }
+                    $query .= implode(",", $columnas) . ") VALUES (" . implode(",", $valores) . ")";
+                    $stmt = $conexionBD->prepare($query);
+
+                    // Vincular los valores a los marcadores de posición
+                    // foreach ($valores as $valor) {
+                    //     $stmt->bindValue($valor, $_POST[substr($valor, 1)]);
+                    // }
+
+                    // Crear el trigger
+
+                    $old_value = "CONCAT('{";
+                    foreach ($columnas as $columna) {
+
+                        $old_value .= "\\\"" . $columna . "\\\":', old." . $columna . ", ',";
+                    }
+
+                    $old_value = substr($old_value, 0, -1) . "}')";
+
+
+                    $crearTriggerSql = "CREATE TRIGGER `$triggerName` AFTER DELETE ON `$tableName` FOR EACH ROW INSERT INTO auditoria(tabla, accion,old_value, usuario_id) VALUES ('$tableName', 'DELETE',$old_value, $id)";
+                    $stmt = $conexionBD->prepare($crearTriggerSql);
+                    $stmt->execute();
+
+                    // Actualizar el usuario_id en la última fila de la tabla de auditoría
+                    $ultimoID = $conexionBD->query("SELECT MAX(id) FROM auditoria")->fetchColumn();
+                    $actualizarIDSql = "UPDATE auditoria SET usuario_id='$id' WHERE id=$ultimoID";
+                    $conexionBD->query($actualizarIDSql);
+                    break;
+            }
+
+            BD::confirmarTransaccion();
+        } catch (PDOException $e) {
+            BD::revertirTransaccion();
+            // Manejar el error
+            // throw $e;
+        }
+    }
+    public static function agregarUsuarios($inputUsuario, $inputPasswordtablas1, $selectRoles, $selectTablas)
+    {
+        $conexionBD = BD::crearInstancia();
+        $sql = $conexionBD->prepare("INSERT INTO `usuario_contra`( `usuario`, `contraseña`, `rela_rol_id`, `rela_tablas`)
+                VALUES (?,?,?,?)");
+        $sql->execute(array($inputUsuario, $inputPasswordtablas1, $selectRoles, $selectTablas));
+    }
+    public static function editarUsuariosRoles($usuario, $inputPasswordtablas, $selectRolesEditar, $selectTablasEditar)
+    {
+        $conexionBD = BD::crearInstancia();
+        $sql = $conexionBD->prepare("UPDATE `usuario_contra` SET `contraseña`='$inputPasswordtablas',`rela_rol_id`='$selectRolesEditar',`rela_tablas`='$selectTablasEditar' WHERE id_usuario = $usuario;");
+        $sql->execute();
+    }
+
     public function consultar()
     {
 
         $conexionBD = BD::crearInstancia();
 
         $sql = $conexionBD->query("SELECT `id_deptos_mintur`, dpm.descriDepartamento as descrDepto,
-        per.id_persona,
+        per.id_persona,per.rela_persona_direccion,
         CONCAT(per.nombre_persona, ' ', per.apellido_persona) full_name,
         tp.id_tipo_personal, tp.descri_tipo_personal as descrTP
         FROM `deptos_mintur` dpm
@@ -48,7 +205,7 @@ class PersonalModelo
 
         $sql = $conexionBD->query("SELECT `id_personal`, `rela_area`,a.descriArea,a.id_areas,
         tep.id_tipo_estado_personal, tep.descripcion as tipoestado,
-        pe.id_persona,CONCAT(pe.nombre_persona, ' ', pe.apellido_persona) full_name
+        pe.id_persona,pe.rela_persona_direccion,CONCAT(pe.nombre_persona, ' ', pe.apellido_persona) full_name
         FROM `personales` p
         INNER JOIN areas a on a.id_areas = p.rela_area
         INNER JOIN tipo_estado_personal tep on tep.id_tipo_estado_personal = p.rela_tipo_estado
@@ -129,7 +286,8 @@ class PersonalModelo
         $antiguedad,
         $fechaini,
         $fechafin,
-        $diasrestante
+        $diasrestante,
+        $fechainiArticulo
     ) {
 
         $conexionBD = BD::crearInstancia();
@@ -201,6 +359,15 @@ class PersonalModelo
 
         $lastInsertlicencias = $conexionBD->lastInsertId();
 
+        /*-------- INSERTAMOS LAS ARTICULOS--------*/
+
+        $sqlArticulos = $conexionBD->prepare("INSERT INTO `razon_particular`(`fecha_ini_razonparticular`, `rela_personal`) VALUES (?,?)");
+        $sqlArticulos->execute(array(
+            $fechainiArticulo, $lastInsertIDPersonal
+        ));
+
+        $lastInsertArticulo = $conexionBD->lastInsertId();
+
         /*-------- INSERTAMOS EL TELEFONO CELULAR--------*/
 
         foreach ($telefonoCel as $telefonoAgencia1) {
@@ -225,7 +392,18 @@ class PersonalModelo
                                                     VALUES (?,?,?)");
         $sqlCorreo->execute(array($correo, 1, $lastInsertIDAgencias));
     }
+    public static function borrarPersonal($idlicencia, $id_direccion)
+    {
+        $conexionBD = BD::crearInstancia();
+        $sqlBorrar = $conexionBD->prepare("DELETE usuario_contra FROM personales
+        INNER JOIN persona on personales.rela_persona = persona.id_persona
+        INNER JOIN usuario_contra on usuario_contra.id_usuario = persona.rela_usuario_contra
+        WHERE personales.id_personal = ?");
+        $sqlBorrar->execute(array($idlicencia));
 
+        $sqlDireccionBorrar = $conexionBD->prepare("DELETE FROM direccion WHERE id_direccion =?");
+        $sqlDireccionBorrar->execute(array($id_direccion));
+    }
 
     public static function borrarLicencia($idlicencia)
     {
@@ -233,6 +411,7 @@ class PersonalModelo
         $sqlBorrar = $conexionBD->prepare("DELETE FROM `licencias` WHERE id_licencias =?");
         $sqlBorrar->execute(array($idlicencia));
     }
+
     public static function borrarArticulo($idarticulo)
     {
         $conexionBD = BD::crearInstancia();
@@ -256,6 +435,18 @@ class PersonalModelo
         INNER JOIN tipo_personal tiper on tiper.id_tipo_personal = per.rela_tipo_personal
         INNER JOIN licencias li on li.rela_personal = per.id_personal
         WHERE per.id_personal = $id");
+
+        $sql->execute();
+
+        return $sql->fetch(PDO::FETCH_OBJ);
+    }
+    public function buscarUsuario($id)
+    {
+        $conexionBD = BD::crearInstancia();
+        $sql = $conexionBD->prepare("SELECT * FROM `usuario_contra` u
+        INNER JOIN roles r on r.id_roles = u.rela_rol_id
+        INNER JOIN tablas t on t.id_tablas = u.rela_tablas
+        WHERE u.id_usuario = $id");
 
         $sql->execute();
 
@@ -507,15 +698,12 @@ class PersonalModelo
     }
     public function buscarSelectRol()
     {
-
         $conexionBD = BD::crearInstancia();
 
+        $sql = $conexionBD->query("SELECT `id_roles`, `roles` FROM `roles`");
+        $sql->execute();
 
-        $sqlLocalidad = $conexionBD->query("SELECT `id_roles`, `roles` FROM `roles`");
-
-        $sqlLocalidad->execute();
-
-        return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
+        return $sql->fetchAll(PDO::FETCH_OBJ);
     }
     public function buscarSelectArea()
     {
@@ -558,11 +746,29 @@ class PersonalModelo
 
         return $sqlLocalidad->fetchAll(PDO::FETCH_OBJ);
     }
-    public function buscarCantidadLicencia($idpersonal)
+    public function buscarSelectUsuario()
+    {
+        $conexionBD = BD::crearInstancia();
+
+        $sql = $conexionBD->query("SELECT `id_usuario`, `usuario`, `contraseña`, `rela_rol_id`, `rela_tablas` FROM `usuario_contra`");
+        $sql->execute();
+
+        return $sql->fetchAll(PDO::FETCH_OBJ);
+    }
+    public function buscarSelecttabla()
     {
 
         $conexionBD = BD::crearInstancia();
 
+        $sql = $conexionBD->query("SELECT * FROM `tablas`");
+        $sql->execute();
+
+        return $sql->fetchAll(PDO::FETCH_OBJ);
+    }
+    public function buscarCantidadLicencia($idpersonal)
+    {
+
+        $conexionBD = BD::crearInstancia();
 
         $sqlcantLic = $conexionBD->query("SELECT `id_licencias`, `fecha_ini`, `fecha_fin`, `dias_restante`, `estado`, `rela_personal` 
         FROM `licencias` 
@@ -713,7 +919,7 @@ class ContactosPersonal
     }
     public function consultarLicencias($id)
     {
-        // echo 'este es el id:' . $id;
+
         $conexionBD = BD::crearInstancia();
         $consultalicencia = $conexionBD->query("SELECT `id_licencias`, `fecha_ini`, `fecha_fin`, `dias_restante`, `estado`, `rela_personal` FROM `licencias`
         WHERE `rela_personal`=$id");

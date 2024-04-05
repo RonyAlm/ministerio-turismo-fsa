@@ -14,6 +14,155 @@ class GastronomiaModelo
         $this->listaBuscar = array();
     }
 
+    public function trigger($accion, $id, $controlador1)
+    {
+        $conexionBD = BD::crearInstancia();
+        // $conexionBD->beginTransaction();
+        BD::iniciarTransaccion();
+
+        try {
+            $triggerName = $accion . $controlador1;
+            $tableName = 'gastronomia';
+
+            $sql = "SELECT trigger_name
+                    FROM information_schema.triggers
+                    WHERE trigger_name = :triggerName
+                    AND event_object_table = :tableName";
+
+            $stmt = $conexionBD->prepare($sql);
+            $stmt->bindParam(':triggerName', $triggerName, PDO::PARAM_STR);
+            $stmt->bindParam(':tableName', $tableName, PDO::PARAM_STR);
+            $stmt->execute();
+
+            // Eliminar trigger existente si existe
+            $eliminarTriggerSql = "DROP TRIGGER IF EXISTS `$triggerName`";
+            $conexionBD->query($eliminarTriggerSql);
+
+            switch ($accion) {
+                case 'crear':
+                    // Obtener los nombres de las columnas y valores a insertar
+                    $columnas = array();
+                    $valores = array();
+                    $query = "INSERT INTO `$controlador1` (";
+                    $result = $conexionBD->query("SHOW COLUMNS FROM `$controlador1`");
+                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                        if (strpos($row['Field'], 'id') === 0) {
+                            $columnas[] = "`" . $row['Field'] . "`";
+                        }
+                        $valores[] = ":" . $row['Field'];
+                    }
+                    $query .= implode(",", $columnas) . ") VALUES (" . implode(",", $valores) . ")";
+                    $stmt = $conexionBD->prepare($query);
+
+                    // Vincular los valores a los marcadores de posición
+                    // foreach ($valores as $valor) {
+                    //     $stmt->bindValue($valor, $_POST[substr($valor, 1)]);
+                    // }
+
+                    // Crear el trigger
+                    $new_value = "CONCAT('{";
+                    foreach ($columnas as $columna) {
+                        $new_value .= "\\\"" . $columna . "\\\":', new." . $columna . ", ',";
+                    }
+                    $new_value = substr($new_value, 0, -1) . "}')";
+
+                    $crearTriggerSql = "CREATE TRIGGER `$triggerName` AFTER INSERT ON `$controlador1` FOR EACH ROW INSERT INTO auditoria(tabla, accion, new_value, usuario_id) VALUES ('$controlador1', 'INSERT', $new_value, $id)";
+                    $stmt = $conexionBD->prepare($crearTriggerSql);
+                    $stmt->execute();
+
+                    // Actualizar el usuario_id en la última fila de la tabla de auditoría
+                    $ultimoID = $conexionBD->query("SELECT MAX(id) FROM auditoria")->fetchColumn();
+                    $actualizarIDSql = "UPDATE auditoria SET usuario_id='$id' WHERE id=$ultimoID";
+                    $conexionBD->query($actualizarIDSql);
+                    break;
+                case 'editar':
+                    // Obtener los nombres de las columnas y valores a insertar
+                    $columnas = array();
+                    $valores = array();
+                    $query = "INSERT INTO `$controlador1` (";
+                    $result = $conexionBD->query("SHOW COLUMNS FROM `$controlador1`");
+                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                        if (strpos($row['Field'], 'id') === 0) {
+                            $columnas[] = "`" . $row['Field'] . "`";
+                        }
+                        $valores[] = ":" . $row['Field'];
+                    }
+                    $query .= implode(",", $columnas) . ") VALUES (" . implode(",", $valores) . ")";
+                    $stmt = $conexionBD->prepare($query);
+
+
+
+                    // Crear el trigger
+                    $new_value = "CONCAT('{";
+                    $old_value = "CONCAT('{";
+                    foreach ($columnas as $columna) {
+                        $new_value .= "\\\"" . $columna . "\\\":', new." . $columna . ", ',";
+                        $old_value .= "\\\"" . $columna . "\\\":', old." . $columna . ", ',";
+                    }
+                    $new_value = substr($new_value, 0, -1) . "}')";
+                    $old_value = substr($old_value, 0, -1) . "}')";
+
+
+                    $crearTriggerSql = "CREATE TRIGGER `$triggerName` AFTER UPDATE ON `$controlador1` FOR EACH ROW INSERT INTO auditoria(tabla, accion,old_value, new_value, usuario_id) VALUES ('$controlador1', 'UPDATE',$old_value, $new_value, $id)";
+                    $stmt = $conexionBD->prepare($crearTriggerSql);
+                    $stmt->execute();
+
+                    // Actualizar el usuario_id en la última fila de la tabla de auditoría
+                    $ultimoID = $conexionBD->query("SELECT MAX(id) FROM auditoria")->fetchColumn();
+                    $actualizarIDSql = "UPDATE auditoria SET usuario_id='$id' WHERE id=$ultimoID";
+                    $conexionBD->query($actualizarIDSql);
+                    break;
+                case 'borrar':
+                    // Obtener los nombres de las columnas y valores a insertar
+                    $columnas = array();
+                    $valores = array();
+                    $query = "INSERT INTO `$controlador1` (";
+                    $result = $conexionBD->query("SHOW COLUMNS FROM `$controlador1`");
+                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                        if (strpos($row['Field'], 'id') === 0) {
+                            $columnas[] = "`" . $row['Field'] . "`";
+                        }
+                        $valores[] = ":" . $row['Field'];
+                    }
+                    $query .= implode(",", $columnas) . ") VALUES (" . implode(",", $valores) . ")";
+                    $stmt = $conexionBD->prepare($query);
+
+                    // Vincular los valores a los marcadores de posición
+                    // foreach ($valores as $valor) {
+                    //     $stmt->bindValue($valor, $_POST[substr($valor, 1)]);
+                    // }
+
+                    // Crear el trigger
+
+                    $old_value = "CONCAT('{";
+                    foreach ($columnas as $columna) {
+
+                        $old_value .= "\\\"" . $columna . "\\\":', old." . $columna . ", ',";
+                    }
+
+                    $old_value = substr($old_value, 0, -1) . "}')";
+
+
+                    $crearTriggerSql = "CREATE TRIGGER `$triggerName` AFTER DELETE ON `$controlador1` FOR EACH ROW INSERT INTO auditoria(tabla, accion,old_value, usuario_id) VALUES ('$controlador1', 'DELETE',$old_value, $id)";
+                    $stmt = $conexionBD->prepare($crearTriggerSql);
+                    $stmt->execute();
+
+                    // Actualizar el usuario_id en la última fila de la tabla de auditoría
+                    $ultimoID = $conexionBD->query("SELECT MAX(id) FROM auditoria")->fetchColumn();
+                    $actualizarIDSql = "UPDATE auditoria SET usuario_id='$id' WHERE id=$ultimoID";
+                    $conexionBD->query($actualizarIDSql);
+                    break;
+            }
+
+            BD::confirmarTransaccion();
+        } catch (PDOException $e) {
+            BD::revertirTransaccion();
+            // Manejar el error
+            // throw $e;
+        }
+    }
+
+
     public function consultar()
     {
 
@@ -25,6 +174,60 @@ class GastronomiaModelo
         WHERE gastronomia.id_gastronomia= contacto.rela_gastronomia_contacto
         and contacto.rela_tipo_contacto_cont = 2
         LIMIT 1) descripcion_contacto,
+        localidad.nombre_localidad,direccion.id_direccion,direccion.calle_direccion
+        FROM `gastronomia`
+        INNER JOIN direccion ON gastronomia.rela_direccion_gastro = direccion.id_direccion
+        INNER JOIN localidad on direccion.rela_localidad_direccion = localidad.id_localidad");
+
+        //recuperamos los datos y los retornamos
+
+        while ($filas = $sql->fetch(PDO::FETCH_ASSOC)) {
+            $this->listaAgencia[] = $filas;
+        }
+        return $this->listaAgencia; //este return se va a llamar en el controlador_alojamiento.php clase inicio
+
+    }
+    public function consultarImprimirVarios()
+    {
+
+        $conexionBD = BD::crearInstancia();
+
+        $sql = $conexionBD->query("SELECT `id_gastronomia`, `denominacion_gastro`, `observacion_gastro`, `dias_horarios`, date_updated_gastronomia,
+        (SELECT contacto.descripcion_contacto 
+        FROM contacto 
+        WHERE gastronomia.id_gastronomia= contacto.rela_gastronomia_contacto
+        and contacto.rela_tipo_contacto_cont = 2
+        LIMIT 1) descripcion_contacto,
+        (SELECT contacto.descripcion_contacto 
+        FROM contacto 
+        WHERE gastronomia.id_gastronomia= contacto.rela_gastronomia_contacto
+        and contacto.rela_tipo_contacto_cont = 1
+        LIMIT 1) descripcion_contacto_1,
+        (SELECT contacto.descripcion_contacto 
+        FROM contacto 
+        WHERE gastronomia.id_gastronomia= contacto.rela_gastronomia_contacto
+        and contacto.rela_tipo_contacto_cont = 6
+        LIMIT 1) descripcion_contacto_6,
+        (SELECT contacto.descripcion_contacto 
+        FROM contacto 
+        WHERE gastronomia.id_gastronomia= contacto.rela_gastronomia_contacto
+        and contacto.rela_tipo_contacto_cont = 5
+        LIMIT 1) descripcion_contacto_5,
+        (SELECT contacto.descripcion_contacto 
+        FROM contacto 
+        WHERE gastronomia.id_gastronomia= contacto.rela_gastronomia_contacto
+        and contacto.rela_tipo_contacto_cont = 4
+        LIMIT 1) descripcion_contacto_4,
+        (SELECT contacto.descripcion_contacto 
+        FROM contacto 
+        WHERE gastronomia.id_gastronomia= contacto.rela_gastronomia_contacto
+        and contacto.rela_tipo_contacto_cont = 7
+        LIMIT 1) descripcion_contacto_7,
+        (SELECT contacto.descripcion_contacto 
+        FROM contacto 
+        WHERE gastronomia.id_gastronomia= contacto.rela_gastronomia_contacto
+        and contacto.rela_tipo_contacto_cont = 8
+        LIMIT 1) descripcion_contacto_8,
         localidad.nombre_localidad,direccion.id_direccion,direccion.calle_direccion
         FROM `gastronomia`
         INNER JOIN direccion ON gastronomia.rela_direccion_gastro = direccion.id_direccion
@@ -85,7 +288,6 @@ class GastronomiaModelo
         $sqlDireccion->execute(array($calle_direccion, $rela_localidad_direccion));
 
         $lastInsertIDdireccion = $conexionBD->lastInsertId();
-
 
 
         /*-------- INSERTAMOS LA GASTRONOMIA--------*/

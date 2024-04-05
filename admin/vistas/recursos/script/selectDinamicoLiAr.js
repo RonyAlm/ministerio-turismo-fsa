@@ -1,7 +1,7 @@
 $(document).ready(function () {
   $("#selectPersonal23").change(function () {
     var personal = $("#selectPersonal23").val();
-    // console.log(personal);
+    console.log(personal);
     let checkboxLic = document.getElementById("customCheckbox5"); //se obtiene el id que se encuentra en inicio de personal
     // console.log(checkboxLic);
     // console.log("El valor inicial del checkboxLic es " + checkboxLic.checked);

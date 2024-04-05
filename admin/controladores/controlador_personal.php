@@ -3,9 +3,6 @@
 include_once("modelos/personal.php");
 include_once("conexion.php");
 
-
-
-
 class ControladorPersonal
 {
 
@@ -19,29 +16,33 @@ class ControladorPersonal
         $select_tipo_agencia = new PersonalModelo();
 
         $buscarSelectPersonal = $select_tipo_agencia->buscarSelectPersonal();
+        $buscarSelectUsuario = $select_tipo_agencia->buscarSelectUsuario();
+        $buscarSelectRol = $select_tipo_agencia->buscarSelectRol();
+        $buscarSelecttabla = $select_tipo_agencia->buscarSelecttabla();
 
-        // print_r($_POST);
-
+        // $editarUsuario = $select_tipo_agencia->buscarUsuario($id);
         if ($_POST) {
             // print_r($_POST);
             $insertarModelLic = new PersonalModelo();
 
-            $selectPersonal = $_POST['selectPersonal23'];
-            $fechaIniLicencia = $_POST['fechaIniLicencia'];
-            $fechafinLicencia = $_POST['fechafinLicencia'];
-            $fechaIniArticulo = $_POST['fechaIniArticulo'];
+            $selectPersonal = isset($_POST['selectPersonal23']) ? $_POST['selectPersonal23'] : "";
 
-            $licencia = $_POST['licencia'];
-            $articulo = $_POST['articulo'];
+            $fechaIniLicencia = isset($_POST['fechaIniLicencia']) ? $_POST['fechaIniLicencia'] : "";
 
-            $cantidadlicenciaF = $_POST['lista2'];
-            $CantLicenciaRestante = $_POST['CantLicencia'];
-            // $articulo = $_POST['articulo'];
+            $fechafinLicencia = isset($_POST['fechafinLicencia']) ? $_POST['fechafinLicencia'] : "";
 
+            $fechaIniArticulo = isset($_POST['fechaIniArticulo']) ? $_POST['fechaIniArticulo'] : "";
 
+            $licencia = isset($_POST['licencia']) ? $_POST['licencia'] : "";
+
+            $articulo = isset($_POST['articulo']) ? $_POST['articulo'] : "";
 
 
-            $agregarLiAr = $insertarModelLic->agregarLiAr(
+            $cantidadlicenciaF = isset($_POST['lista2']) ? $_POST['lista2'] : "";
+
+            $CantLicenciaRestante = isset($_POST['CantLicencia']) ? $_POST['CantLicencia'] : "";
+
+            $insertarModelLic->agregarLiAr(
                 $selectPersonal,
                 $fechaIniLicencia,
                 $fechafinLicencia,
@@ -51,6 +52,29 @@ class ControladorPersonal
                 $articulo,
                 $cantidadlicenciaF
             );
+            if (isset($_POST['inputUsuario'])) {
+                // echo "agregar usuario";
+                $agregarusuario = new PersonalModelo();
+                print_r($_POST);
+                $inputUsuario = isset($_POST['inputUsuario']) ? $_POST['inputUsuario'] : "";
+                $inputPasswordtablas1 = isset($_POST['inputPasswordtablas1']) ? $_POST['inputPasswordtablas1'] : "";
+                $selectRoles = isset($_POST['selectRoles']) ? $_POST['selectRoles'] : "";
+                $selectTablas = isset($_POST['selectTablas']) ? $_POST['selectTablas'] : "";
+
+                $agregarusuario->agregarUsuarios($inputUsuario, $inputPasswordtablas1, $selectRoles, $selectTablas);
+                echo "<script>location.href = 'index2.php?controlador=personal&accion=inicio';</script>";
+            }
+            if (isset($_POST['usuario'])) {
+                $editarusuario = new PersonalModelo();
+
+                print_r($_POST);
+                $usuario = isset($_POST['usuario']) ? $_POST['usuario'] : "";
+                $inputPasswordtablas = isset($_POST['inputPasswordtablas']) ? $_POST['inputPasswordtablas'] : "";
+                $selectRolesEditar = isset($_POST['selectRolesEditar']) ? $_POST['selectRolesEditar'] : "";
+                $selectTablasEditar = isset($_POST['selectTablasEditar']) ? $_POST['selectTablasEditar'] : "";
+                $editarusuario->editarUsuariosRoles($usuario, $inputPasswordtablas, $selectRolesEditar, $selectTablasEditar);
+                echo "<script>location.href = 'index2.php?controlador=personal&accion=inicio';</script>";
+            }
         }
 
 
@@ -58,6 +82,13 @@ class ControladorPersonal
     }
     public function crear()
     {
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        // echo '<pre>';
+        // print_r($controlador1);
+        // echo '</pre>';
 
         $select_tipo_agencia = new PersonalModelo();
 
@@ -117,9 +148,15 @@ class ControladorPersonal
             //     $estadoAgencia,
             //     $idoneoAgencia
             // );
+            if ($insertarAgencia) {
+                $insertarAgencia->trigger($accion, $id, $controlador1);
+                // print_r($insertar);
+                // print_r($usuario_crear);
+                echo "<script>location.href='index2.php?controlador=personal&accion=inicio';</script>";
+            }
 
 
-            header("Location:index2.php?controlador=agencias&accion=inicio");
+            header("Location:index2.php?controlador=personal&accion=inicio");
         }
 
 
@@ -127,9 +164,18 @@ class ControladorPersonal
     }
     public function editar()
     {
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
 
-        $id = $_GET["id"];
+
+        // echo '<pre>';
+        // print_r($controlador1);
+        // echo '</pre>';
+
+        $ids = $_GET["id"];
         $idPersona = $_GET["idPersona"];
+
 
         $select_tipo = new PersonalModelo();
 
@@ -140,12 +186,10 @@ class ControladorPersonal
         $buscarSelectRol = $select_tipo->buscarSelectRol();
         $buscarSelectArea = $select_tipo->buscarSelectArea();
         $buscarSelectContrato = $select_tipo->buscarSelectContrato();
-        $consultarCantidLicenciaEditar = $select_tipo->buscarCantidadLicencia($id);
-        $buscarCantidadArticuloEditar = $select_tipo->buscarCantidadArticulo($id);
+        $consultarCantidLicenciaEditar = $select_tipo->buscarCantidadLicencia($ids);
+        $buscarCantidadArticuloEditar = $select_tipo->buscarCantidadArticulo($ids);
+        // $consultarLicencias = $infoPersonal->consultarLicencias($id);
 
-        // print_r($consultarLicencias);
-
-        // //print_r("$idAgencia");
         // /*----------BUSCA LOS POST QUE SE ENCUENTRA EN EDITAR.PHP PARA PODER EDITARLO----------*/
 
         if ($_POST) {
@@ -204,14 +248,9 @@ class ControladorPersonal
 
             // ARTICULO
 
-            $articuloID = $_POST['articuloID'];
-            $fechainiArticulo = $_POST['fechainiArticulo'];
+            $articuloID = isset($_POST['articuloID']) ? $_POST['articuloID'] : "";
 
-
-
-            // var_dump($probando);
-
-
+            $fechainiArticulo = isset($_POST['fechainiArticulo']) ? $_POST['fechainiArticulo'] : "";
 
             $EditarAgencia->editar(
                 $nombre,
@@ -252,10 +291,12 @@ class ControladorPersonal
                 $articuloID,
                 $fechainiArticulo
             );
-
-            // print_r($EditarAgencia);
-
-
+            if ($EditarAgencia) {
+                $EditarAgencia->trigger($accion, $id, $controlador1);
+                // print_r($insertar);
+                // print_r($usuario_crear);
+                echo "<script>location.href='index2.php?controlador=personal&accion=inicio';</script>";
+            }
 
             // header("Location:admin/index2.php?controlador=agencias&accion=inicio");
             echo "<script>location.href = 'index2.php?controlador=personal&accion=inicio';</script>";
@@ -276,20 +317,12 @@ class ControladorPersonal
         $agenciaTwitter = $contactosDeagencia->consultarTwitter($idPersona);
         $agenciaWeb = $contactosDeagencia->consultarWeb($idPersona);
         $agenciaOtro = $contactosDeagencia->consultarOtro($idPersona);
-        $consultarLicencias = $contactosDeagencia->consultarLicencias($id);
-        $consultarArticulo = $contactosDeagencia->consultarArticulo($id);
-
-
-        // if (is_array($consultarLicenciasa) || is_object($consultarLicenciasa)) {
-        //     echo "holaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholahola";
-        // } ESTO VERIFICA SI ES UN ARRAY O UN OBJETO
+        $consultarLicencias = $contactosDeagencia->consultarLicencias($ids);
+        $consultarArticulo = $contactosDeagencia->consultarArticulo($ids);
 
         $buscarID = new PersonalModelo();
 
-        $editar = $buscarID->buscar($id);
-
-
-
+        $editar = $buscarID->buscar($ids);
 
 
         include_once("vistas/personal/editar.php");
@@ -297,19 +330,32 @@ class ControladorPersonal
 
     public function borrar()
     {
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        echo '<pre>';
+        print_r($controlador1);
+        echo '</pre>';
         // print_r($_GET);
 
         $idBorrarLicencia = $_GET["id"];
         $idBorrarArticulo = $_GET["idArticulo"];
-        // $idBorrarPersonal = $_GET["idPersonal"];
+        $idBorrarPersonal = $_GET["idPersonal"];
+        $idBorrarDireccion = $_GET["idDireccion"];
 
 
         $borrar = new PersonalModelo();
 
 
+        $borrar->borrarPersonal($idBorrarPersonal, $idBorrarDireccion);
+        $borrar->borrarLicencia($idBorrarLicencia);
+        $borrar->borrarArticulo($idBorrarArticulo);
+        if ($borrar) {
+            $borrar->trigger($accion, $id, $controlador1);
 
-        $borradoLicencia = $borrar->borrarLicencia($idBorrarLicencia);
-        $borradoArticulo = $borrar->borrarArticulo($idBorrarArticulo);
+            echo "<script>location.href='index2.php?controlador=personal&accion=inicio';</script>";
+        }
 
         header("Location:index2.php?controlador=personal&accion=inicio");
     }
@@ -317,8 +363,6 @@ class ControladorPersonal
     public function info()
     {
         $id = $_GET['id'];
-
-
 
         $Info = new PersonalModelo();
 
@@ -361,6 +405,13 @@ class ControladorPersonal
 
     public function guardar()
     {
+        // ESTÓ ES PARA LA AUDITORÍA
+        global $accion, $controlador1;
+        global $id;
+        //
+        // echo '<pre>';
+        // print_r($controlador1);
+        // echo '</pre>';
         $select_tipo = new PersonalModelo();
 
         $buscarSelectLocalidad = $select_tipo->buscarSelectLocalidad();
@@ -403,6 +454,9 @@ class ControladorPersonal
             $fechafin = $_POST['fechafin'];
             $diasrestante = $_POST['diasrestante'];
 
+            // $fechainiArticulo = $_POST['fechainiArticulo'];
+            $fechainiArticulo = isset($_POST['fechainiArticulo']) ? $_POST['fechainiArticulo'] : "";
+
 
 
             $usuario = $nombre . strtoupper(substr($apellido, 0, 1)) . substr($apellido, 1, 1);
@@ -440,8 +494,14 @@ class ControladorPersonal
                 $antiguedad,
                 $fechaini,
                 $fechafin,
-                $diasrestante
+                $diasrestante,
+                $fechainiArticulo
             );
+            if ($insertar) {
+                $insertar->trigger($accion, $id, $controlador1);
+
+                echo "<script>location.href='index2.php?controlador=personal&accion=inicio';</script>";
+            }
 
 
             // header("Location:index2.php?controlador=personal&accion=inicio");
@@ -456,12 +516,7 @@ class ControladorPersonal
         $conexionBD = BD::crearInstancia();
 
         // print_r($_POST['personal']);
-
         $personal = $_POST['personal'];
-
-
-
-
 
         include_once("vistas/personal/rellenar.php");
     }

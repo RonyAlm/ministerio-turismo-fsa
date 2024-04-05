@@ -1,8 +1,4 @@
 $(function () {
-  // Clona la fila oculta que tiene los campos base, y la agrega al final de la tabla
-  // $("#adicional").on("click", function () {
-  //   $("#celu").clone().appendTo("#celu");
-  // });
   var c = 2;
   $("#adicional").on("click", function () {
     var clonCelu = $("#celu").clone();

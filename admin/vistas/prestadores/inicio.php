@@ -6,6 +6,7 @@ if (!isset($_SESSION['id'])) {
 
 $usuario = $_SESSION['usuarios'];
 $rol_id = $_SESSION['rol_id'];
+$acceso = $_SESSION['tablas_acceso'];
 
 ?>
 
@@ -13,12 +14,12 @@ $rol_id = $_SESSION['rol_id'];
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Prestadores</h1>
+        <h1>Servicios Auxiliares de Turismo</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a class="text-success" href="index2.php?controlador=paginas&accion=inicio">Inicio</a></li>
-          <li class="breadcrumb-item active">Prestadores</li>
+          <li class="breadcrumb-item active">Servicios Auxiliares de Turismo</li>
         </ol>
       </div>
     </div>
@@ -29,7 +30,7 @@ $rol_id = $_SESSION['rol_id'];
 
   <div class="card-header">
 
-    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "ceciliag") : ?>
+    <?php if ($rol_id == 1 || in_array(11, $acceso)) : ?>
 
       <a name="" id="" class="btn btn-success" href="?controlador=prestadores&accion=crear" role="button">Agregar</a>
 
@@ -145,7 +146,7 @@ $rol_id = $_SESSION['rol_id'];
                       <i class="fas fa-folder"></i>
                     </a>
 
-                    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "ceciliag") : ?>
+                    <?php if ($rol_id == 1 || in_array(11, $acceso)) : ?>
 
                       <a title="Editar" href="?controlador=prestadores&accion=editar&id=<?php echo $prestadore["id_prestador"]; ?>" class="btn btn-success btn-sm">
                         <i class="fas fa-pencil-alt"></i>

@@ -18,7 +18,7 @@
   <div class="card-header ">
     <h3 class="card-title text-success">
       <i class="fas fa-edit mr-2"></i>
-      Editar Prestador
+      Editar Servicios Auxiliares de Turismo
     </h3>
   </div>
 

@@ -6,7 +6,7 @@ if (!isset($_SESSION['id'])) {
 
 $usuario = $_SESSION['usuarios'];
 $rol_id = $_SESSION['rol_id'];
-
+$acceso = $_SESSION['tablas_acceso'];
 ?>
 
 <section class="content-header">
@@ -29,7 +29,7 @@ $rol_id = $_SESSION['rol_id'];
 
   <div class="card-header">
 
-    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") : ?>
+    <?php if ($rol_id == 1 || in_array(14, $acceso)) : ?>
 
       <a name="" id="" class="btn btn-success" href="?controlador=servigenerales&accion=crear" role="button">Agregar</a>
 
@@ -135,7 +135,7 @@ $rol_id = $_SESSION['rol_id'];
                     <a title="Más información" id="btn1" href="?controlador=servigenerales&accion=info&id=<?php echo $servigeneral["id_servicios_generales"]; ?>" class="btn btn-primary btn-sm"> <i class="fas fa-folder"></i>
                     </a>
 
-                    <?php if ($rol_id == 1 or $rol_id == 3 and $usuario == "admin") : ?>
+                    <?php if ($rol_id == 1 || in_array(14, $acceso)) : ?>
 
                       <a title="Editar" href="?controlador=servigenerales&accion=editar&id=<?php echo $servigeneral["id_servicios_generales"]; ?>" class="btn btn-success btn-sm">
                         <i class="fas fa-pencil-alt"></i>
